@@ -11,7 +11,7 @@ import SwiftUI
 struct KontestsApp: App {
     var body: some Scene {
         WindowGroup {
-            AllContestsScreen()
+            AllKontestsScreen()
         }
     }
 }

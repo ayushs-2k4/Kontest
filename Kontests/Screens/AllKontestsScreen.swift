@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-struct AllContestsScreen: View {
+struct AllKontestsScreen: View {
     let allKontestsViewModel = AllKontestsViewModel()
 
     var body: some View {
         NavigationStack {
             ZStack {
-                if allKontestsViewModel.allContests.isEmpty {
+                if allKontestsViewModel.allKontests.isEmpty {
                     ProgressView()
                 }
                 else {
                     List {
-                        ForEach(allKontestsViewModel.allContests) { kontest in
+                        ForEach(allKontestsViewModel.allKontests) { kontest in
                             Link(destination: URL(string: kontest.url)!, label: {
                                 SingleKontentView(kontest: kontest)
                             })
@@ -70,10 +70,8 @@ struct SingleKontentView: View {
 
     var body: some View {
         HStack {
-            if kontest.status == "CODING" {
-                BlinkingDot(color: .green)
-                    .frame(width: 10, height: 10)
-            }
+            BlinkingDot(color: kontest.status == "CODING" ? .green : .clear)
+                .frame(width: 10, height: 10)
 
             VStack(alignment: .leading) {
                 Text(kontest.site.uppercased())
@@ -153,7 +151,7 @@ struct SingleKontentView: View {
 }
 
 #Preview {
-    AllContestsScreen()
+    AllKontestsScreen()
 }
 
 #Preview("SingleKontentView") {

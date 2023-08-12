@@ -8,7 +8,7 @@
 import Foundation
 
 struct Kontest: Codable, Identifiable {
-    var id = UUID().uuidString
+    let id = UUID().uuidString
     let name: String
     let url: String
     let start_time, end_time, duration, site: String
