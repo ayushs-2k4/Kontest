@@ -19,10 +19,13 @@ struct AllKontestsScreen: View {
                 else {
                     List {
                         ForEach(allKontestsViewModel.allKontests) { kontest in
-                            Link(destination: URL(string: kontest.url)!, label: {
-                                SingleKontentView(kontest: kontest)
-                            })
-                            .buttonStyle(.plain)
+                            let contestDuration = getFormattedDuration(fromSeconds: kontest.duration)
+                            if !contestDuration.isEmpty {
+                                Link(destination: URL(string: kontest.url)!, label: {
+                                    SingleKontentView(kontest: kontest)
+                                })
+                                .buttonStyle(.plain)
+                            }
                         }
                     }
                 }
@@ -134,20 +137,20 @@ struct SingleKontentView: View {
         outputFormatter.timeStyle = .none // Change this to .short, .medium, or .long
         return outputFormatter.string(from: date)
     }
+}
 
-    private func getFormattedDuration(fromSeconds seconds: String) -> String {
-        guard let totalSecondsInDouble = Double(seconds) else {
-            return "Invalid Duration"
-        }
-
-        let totalSeconds = Int(totalSecondsInDouble)
-
-        let hours = totalSeconds / 3600
-        let minutes = (totalSeconds % 3600) / 60
-        let formattedDuration = hours > 1 ? (minutes > 0 ? "\(hours) hrs \(minutes) mins" : "\(hours) hrs") : "\(minutes) mins"
-
-        return formattedDuration
+func getFormattedDuration(fromSeconds seconds: String) -> String {
+    guard let totalSecondsInDouble = Double(seconds) else {
+        return "Invalid Duration"
     }
+
+    let totalSeconds = Int(totalSecondsInDouble)
+
+    let hours = totalSeconds / 3600
+    let minutes = (totalSeconds % 3600) / 60
+    let formattedDuration = hours >= 1 ? (minutes > 0 ? "\(hours) hrs \(minutes) mins" : "\(hours) hrs") : "\(minutes) mins"
+
+    return hours <= 10 ? formattedDuration : ""
 }
 
 #Preview {
