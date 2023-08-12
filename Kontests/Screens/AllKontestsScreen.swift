@@ -72,12 +72,31 @@ struct SingleKontentView: View {
     }()
 
     var body: some View {
-        HStack {
-            BlinkingDot(color: kontest.status == "CODING" ? .green : .clear)
-                .frame(width: 10, height: 10)
+        let kontestType = KontestType.getKontestType(name: kontest.site)
+        let kontestProperties = getKontestProperties(for: kontestType)
+
+        HStack(alignment: .center) {
+            VStack {
+                AsyncImage(url: URL(string: kontestProperties.logoURL)) { img in
+                    img
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .frame(width: getLogoSize())
+
+                } placeholder: {
+                    Image(systemName: "photo")
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .frame(width: getLogoSize())
+                }
+
+                BlinkingDot(color: kontest.status == "CODING" ? .green : .clear)
+                    .frame(width: 10, height: 10)
+            }
 
             VStack(alignment: .leading) {
                 Text(kontest.site.uppercased())
+                    .foregroundStyle(kontestProperties.prominentColor)
                     .bold()
 
                 Text(kontest.name)
@@ -90,6 +109,8 @@ struct SingleKontentView: View {
                    let endDate = dateFormatter1.date(from: kontest.end_time)
                 {
                     Text("\(getFormattedDateOnly(from: startDate)) - \(getFormattedDateOnly(from: endDate))")
+                        .foregroundStyle(kontestProperties.prominentColor)
+                        .font(.custom("timeFont", fixedSize: getTimeFontSize()))
                         .bold()
 
                     HStack {
@@ -97,13 +118,18 @@ struct SingleKontentView: View {
 
                         Text(getFormattedDuration(fromSeconds: kontest.duration))
                     }
+                    .font(.custom("dateFont", fixedSize: getDateFontSize()))
+                    .padding(.vertical,5)
 
                     Text("\(getFormattedTimeOnly(from: startDate)) - \(getFormattedTimeOnly(from: endDate))")
+                        .font(.custom("dateFont", fixedSize: getDateFontSize()))
                 }
                 else if let startDate = dateFormatter2.date(from: kontest.start_time),
                         let endDate = dateFormatter2.date(from: kontest.end_time)
                 {
                     Text("\(getFormattedDateOnly(from: startDate)) - \(getFormattedDateOnly(from: endDate))")
+                        .foregroundStyle(kontestProperties.prominentColor)
+                        .font(.custom("timeFont", fixedSize: getTimeFontSize()))
                         .bold()
 
                     HStack {
@@ -111,8 +137,11 @@ struct SingleKontentView: View {
 
                         Text(getFormattedDuration(fromSeconds: kontest.duration))
                     }
+                    .font(.custom("dateFont", fixedSize: getDateFontSize()))
+                    .padding(.vertical,5)
 
                     Text("\(getFormattedTimeOnly(from: startDate)) - \(getFormattedTimeOnly(from: endDate))")
+                        .font(.custom("dateFont", fixedSize: getDateFontSize()))
                 }
                 else {
                     Text("No date provided")
@@ -120,6 +149,7 @@ struct SingleKontentView: View {
             }
             .font(.footnote)
         }
+        .padding()
     }
 
     private func getFormattedDateOnly(from date: Date) -> String {
@@ -136,6 +166,30 @@ struct SingleKontentView: View {
         outputFormatter.dateStyle = .medium // Change this to .short, .medium, or .long
         outputFormatter.timeStyle = .none // Change this to .short, .medium, or .long
         return outputFormatter.string(from: date)
+    }
+
+    private func getLogoSize() -> CGFloat {
+        #if os(macOS)
+            return 40
+        #else
+            return 25
+        #endif
+    }
+
+    private func getTimeFontSize() -> CGFloat {
+        #if os(macOS)
+            return 25
+        #else
+            return 15
+        #endif
+    }
+
+    private func getDateFontSize() -> CGFloat {
+        #if os(macOS)
+            return 17
+        #else
+            return 12
+        #endif
     }
 }
 

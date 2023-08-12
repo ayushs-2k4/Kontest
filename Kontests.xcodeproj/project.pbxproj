@@ -14,6 +14,7 @@
 		0760166F2A87CD72007CE9F5 /* AllKontestsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076016692A87CD72007CE9F5 /* AllKontestsScreen.swift */; };
 		076016702A87CD72007CE9F5 /* DownloadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0760166B2A87CD72007CE9F5 /* DownloadData.swift */; };
 		076016712A87CD72007CE9F5 /* AllKontestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0760166D2A87CD72007CE9F5 /* AllKontestsViewModel.swift */; };
+		07ED45982A882485009D158F /* KontestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ED45972A882485009D158F /* KontestType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		076016692A87CD72007CE9F5 /* AllKontestsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllKontestsScreen.swift; sourceTree = "<group>"; };
 		0760166B2A87CD72007CE9F5 /* DownloadData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadData.swift; sourceTree = "<group>"; };
 		0760166D2A87CD72007CE9F5 /* AllKontestsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllKontestsViewModel.swift; sourceTree = "<group>"; };
+		07ED45972A882485009D158F /* KontestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				076016672A87CD72007CE9F5 /* Kontest.swift */,
+				07ED45972A882485009D158F /* KontestType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07ED45982A882485009D158F /* KontestType.swift in Sources */,
 				076016702A87CD72007CE9F5 /* DownloadData.swift in Sources */,
 				076016592A87CD52007CE9F5 /* KontestsApp.swift in Sources */,
 				076016712A87CD72007CE9F5 /* AllKontestsViewModel.swift in Sources */,
