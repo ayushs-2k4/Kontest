@@ -11,6 +11,10 @@
 		0760165B2A87CD52007CE9F5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0760165A2A87CD52007CE9F5 /* ContentView.swift */; };
 		0760165D2A87CD55007CE9F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0760165C2A87CD55007CE9F5 /* Assets.xcassets */; };
 		076016602A87CD55007CE9F5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0760165F2A87CD55007CE9F5 /* Preview Assets.xcassets */; };
+		0760166E2A87CD72007CE9F5 /* Kontest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076016672A87CD72007CE9F5 /* Kontest.swift */; };
+		0760166F2A87CD72007CE9F5 /* AllContestsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076016692A87CD72007CE9F5 /* AllContestsScreen.swift */; };
+		076016702A87CD72007CE9F5 /* DownloadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0760166B2A87CD72007CE9F5 /* DownloadData.swift */; };
+		076016712A87CD72007CE9F5 /* AllKontestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0760166D2A87CD72007CE9F5 /* AllKontestsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +23,10 @@
 		0760165A2A87CD52007CE9F5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0760165C2A87CD55007CE9F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0760165F2A87CD55007CE9F5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		076016672A87CD72007CE9F5 /* Kontest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Kontest.swift; sourceTree = "<group>"; };
+		076016692A87CD72007CE9F5 /* AllContestsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllContestsScreen.swift; sourceTree = "<group>"; };
+		0760166B2A87CD72007CE9F5 /* DownloadData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadData.swift; sourceTree = "<group>"; };
+		0760166D2A87CD72007CE9F5 /* AllKontestsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllKontestsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +61,10 @@
 			children = (
 				076016582A87CD52007CE9F5 /* Coding_KontestApp.swift */,
 				0760165A2A87CD52007CE9F5 /* ContentView.swift */,
+				076016662A87CD72007CE9F5 /* Models */,
+				076016682A87CD72007CE9F5 /* Screens */,
+				0760166C2A87CD72007CE9F5 /* ViewModels */,
+				0760166A2A87CD72007CE9F5 /* Utilities */,
 				0760165C2A87CD55007CE9F5 /* Assets.xcassets */,
 				0760165E2A87CD55007CE9F5 /* Preview Content */,
 			);
@@ -65,6 +77,38 @@
 				0760165F2A87CD55007CE9F5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		076016662A87CD72007CE9F5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				076016672A87CD72007CE9F5 /* Kontest.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		076016682A87CD72007CE9F5 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				076016692A87CD72007CE9F5 /* AllContestsScreen.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		0760166A2A87CD72007CE9F5 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				0760166B2A87CD72007CE9F5 /* DownloadData.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		0760166C2A87CD72007CE9F5 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				0760166D2A87CD72007CE9F5 /* AllKontestsViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,7 +146,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 076016502A87CD52007CE9F5 /* Build configuration list for PBXProject "Coding Kontest" */;
+			buildConfigurationList = 076016502A87CD52007CE9F5 /* Build configuration list for PBXProject "Kontests" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -138,7 +182,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0760165B2A87CD52007CE9F5 /* ContentView.swift in Sources */,
+				076016702A87CD72007CE9F5 /* DownloadData.swift in Sources */,
 				076016592A87CD52007CE9F5 /* Coding_KontestApp.swift in Sources */,
+				076016712A87CD72007CE9F5 /* AllKontestsViewModel.swift in Sources */,
+				0760166F2A87CD72007CE9F5 /* AllContestsScreen.swift in Sources */,
+				0760166E2A87CD72007CE9F5 /* Kontest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +323,7 @@
 				DEVELOPMENT_TEAM = R2Z9FDM5M6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -287,6 +336,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ayushsinghal.Coding-Kontest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -304,6 +355,7 @@
 				DEVELOPMENT_TEAM = R2Z9FDM5M6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -316,6 +368,8 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ayushsinghal.Coding-Kontest";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -325,7 +379,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		076016502A87CD52007CE9F5 /* Build configuration list for PBXProject "Coding Kontest" */ = {
+		076016502A87CD52007CE9F5 /* Build configuration list for PBXProject "Kontests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				076016612A87CD55007CE9F5 /* Debug */,
