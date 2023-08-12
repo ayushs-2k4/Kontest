@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		076016592A87CD52007CE9F5 /* KontestsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076016582A87CD52007CE9F5 /* KontestsApp.swift */; };
-		0760165B2A87CD52007CE9F5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0760165A2A87CD52007CE9F5 /* ContentView.swift */; };
 		0760165D2A87CD55007CE9F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0760165C2A87CD55007CE9F5 /* Assets.xcassets */; };
 		076016602A87CD55007CE9F5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0760165F2A87CD55007CE9F5 /* Preview Assets.xcassets */; };
 		0760166E2A87CD72007CE9F5 /* Kontest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076016672A87CD72007CE9F5 /* Kontest.swift */; };
@@ -20,7 +19,6 @@
 /* Begin PBXFileReference section */
 		076016552A87CD52007CE9F5 /* Kontests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kontests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		076016582A87CD52007CE9F5 /* KontestsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestsApp.swift; sourceTree = "<group>"; };
-		0760165A2A87CD52007CE9F5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0760165C2A87CD55007CE9F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0760165F2A87CD55007CE9F5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		076016672A87CD72007CE9F5 /* Kontest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Kontest.swift; sourceTree = "<group>"; };
@@ -60,7 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				076016582A87CD52007CE9F5 /* KontestsApp.swift */,
-				0760165A2A87CD52007CE9F5 /* ContentView.swift */,
 				076016662A87CD72007CE9F5 /* Models */,
 				076016682A87CD72007CE9F5 /* Screens */,
 				0760166C2A87CD72007CE9F5 /* ViewModels */,
@@ -181,7 +178,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0760165B2A87CD52007CE9F5 /* ContentView.swift in Sources */,
 				076016702A87CD72007CE9F5 /* DownloadData.swift in Sources */,
 				076016592A87CD52007CE9F5 /* KontestsApp.swift in Sources */,
 				076016712A87CD72007CE9F5 /* AllKontestsViewModel.swift in Sources */,
@@ -334,7 +330,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ayushsinghal.Kontest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ayushsinghal.Kontests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
@@ -367,7 +363,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ayushsinghal.Kontest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ayushsinghal.Kontests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;

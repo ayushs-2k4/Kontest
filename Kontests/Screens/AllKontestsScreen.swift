@@ -91,7 +91,11 @@ struct SingleKontentView: View {
                     Text("\(getFormattedDateOnly(from: startDate)) - \(getFormattedDateOnly(from: endDate))")
                         .bold()
 
-                    Text(getFormattedDuration(fromSeconds: kontest.duration))
+                    HStack {
+                        Image(systemName: "clock")
+
+                        Text(getFormattedDuration(fromSeconds: kontest.duration))
+                    }
 
                     Text("\(getFormattedTimeOnly(from: startDate)) - \(getFormattedTimeOnly(from: endDate))")
                 }
@@ -101,7 +105,11 @@ struct SingleKontentView: View {
                     Text("\(getFormattedDateOnly(from: startDate)) - \(getFormattedDateOnly(from: endDate))")
                         .bold()
 
-                    Text(getFormattedDuration(fromSeconds: kontest.duration))
+                    HStack {
+                        Image(systemName: "clock")
+
+                        Text(getFormattedDuration(fromSeconds: kontest.duration))
+                    }
 
                     Text("\(getFormattedTimeOnly(from: startDate)) - \(getFormattedTimeOnly(from: endDate))")
                 }
@@ -138,7 +146,7 @@ struct SingleKontentView: View {
 
         let hours = totalSeconds / 3600
         let minutes = (totalSeconds % 3600) / 60
-        let formattedDuration = "\(hours) hours \(minutes) minutes"
+        let formattedDuration = hours > 1 ? (minutes > 0 ? "\(hours) hrs \(minutes) mins" : "\(hours) hrs") : "\(minutes) mins"
 
         return formattedDuration
     }
