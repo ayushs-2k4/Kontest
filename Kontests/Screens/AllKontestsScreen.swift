@@ -77,21 +77,18 @@ struct SingleKontentView: View {
 
         HStack(alignment: .center) {
             VStack {
-                AsyncImage(url: URL(string: kontestProperties.logoURL)) { img in
-                    img
-                        .resizable()
-                        .aspectRatio(1, contentMode: .fit)
-                        .frame(width: getLogoSize())
+                Image(kontestProperties.logo)
+                    .resizable()
+                    .aspectRatio(1, contentMode: .fit)
+                    .frame(width: getLogoSize())
 
-                } placeholder: {
-                    Image(systemName: "photo")
-                        .resizable()
-                        .aspectRatio(1, contentMode: .fit)
-                        .frame(width: getLogoSize())
+                if kontest.status == "CODING" {
+                    BlinkingDot(color: .green)
+                        .frame(width: 10, height: 10)
                 }
-
-                BlinkingDot(color: kontest.status == "CODING" ? .green : .clear)
-                    .frame(width: 10, height: 10)
+                else {
+                    EmptyView()
+                }
             }
 
             VStack(alignment: .leading) {
@@ -119,7 +116,7 @@ struct SingleKontentView: View {
                         Text(getFormattedDuration(fromSeconds: kontest.duration))
                     }
                     .font(.custom("dateFont", fixedSize: getDateFontSize()))
-                    .padding(.vertical,5)
+                    .padding(.vertical, 5)
 
                     Text("\(getFormattedTimeOnly(from: startDate)) - \(getFormattedTimeOnly(from: endDate))")
                         .font(.custom("dateFont", fixedSize: getDateFontSize()))
@@ -138,7 +135,7 @@ struct SingleKontentView: View {
                         Text(getFormattedDuration(fromSeconds: kontest.duration))
                     }
                     .font(.custom("dateFont", fixedSize: getDateFontSize()))
-                    .padding(.vertical,5)
+                    .padding(.vertical, 5)
 
                     Text("\(getFormattedTimeOnly(from: startDate)) - \(getFormattedTimeOnly(from: endDate))")
                         .font(.custom("dateFont", fixedSize: getDateFontSize()))
@@ -148,6 +145,8 @@ struct SingleKontentView: View {
                 }
             }
             .font(.footnote)
+
+            Image(systemName: "chevron.right")
         }
         .padding()
     }
