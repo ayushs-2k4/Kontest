@@ -1,6 +1,6 @@
 //
 //  AllKontestsViewModel.swift
-//  Coding Contest
+//  Kontests
 //
 //  Created by Ayush Singhal on 12/08/23.
 //

@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Coding Kontest
+//  Kontests
 //
 //  Created by Ayush Singhal on 12/08/23.
 //
