@@ -19,7 +19,7 @@ struct AllKontestsScreen: View {
                 else {
                     List {
                         ForEach(allKontestsViewModel.allKontests) { kontest in
-                            let contestDuration = getFormattedDuration(fromSeconds: kontest.duration)
+                            let contestDuration = getFormattedDuration(fromSeconds: kontest.duration) ?? ""
                             if !contestDuration.isEmpty {
                                 Link(destination: URL(string: kontest.url)!, label: {
                                     SingleKontentView(kontest: kontest)
@@ -87,6 +87,9 @@ struct SingleKontentView: View {
         let kontestType = KontestType.getKontestType(name: kontest.site)
         let kontestProperties = getKontestProperties(for: kontestType)
 
+        let startDate = getDate(date: kontest.start_time)
+        let endDate = getDate(date: kontest.end_time)
+
         HStack(alignment: .center) {
             VStack {
                 Image(kontestProperties.logo)
@@ -94,7 +97,9 @@ struct SingleKontentView: View {
                     .aspectRatio(1, contentMode: .fit)
                     .frame(width: getLogoSize())
 
-                if kontest.status == "CODING" {
+                let isContestRunning = isWithinDateRange(startDate: startDate ?? Date(), endDate: endDate ?? Date()) || kontest.status == "CODING"
+
+                if isContestRunning {
                     BlinkingDot(color: .green)
                         .frame(width: 10, height: 10)
                 }
@@ -114,10 +119,8 @@ struct SingleKontentView: View {
             Spacer()
 
             VStack {
-                if let startDate = getFormattedDate1(date: kontest.start_time),
-                   let endDate = getFormattedDate1(date: kontest.end_time)
-                {
-                    Text("\(startDate.formatted(date: .omitted, time: .shortened)) - \(endDate.formatted(date: .omitted, time: .shortened))")
+                if startDate != nil && endDate != nil {
+                    Text("\(startDate!.formatted(date: .omitted, time: .shortened)) - \(endDate!.formatted(date: .omitted, time: .shortened))")
                         .foregroundStyle(kontestProperties.prominentColor)
                         .font(.custom("timeFont", fixedSize: getTimeFontSize()))
                         .bold()
@@ -125,31 +128,12 @@ struct SingleKontentView: View {
                     HStack {
                         Image(systemName: "clock")
 
-                        Text(getFormattedDuration(fromSeconds: kontest.duration))
+                        Text(getFormattedDuration(fromSeconds: kontest.duration) ?? "")
                     }
                     .font(.custom("dateFont", fixedSize: getDateFontSize()))
                     .padding(.vertical, 5)
 
-                    Text("\(startDate.formatted(date: .abbreviated, time: .omitted)) - \(endDate.formatted(date: .abbreviated, time: .omitted))")
-                        .font(.custom("dateFont", fixedSize: getDateFontSize()))
-                }
-                else if let startDate = getFormattedDate2(date: kontest.start_time),
-                        let endDate = getFormattedDate2(date: kontest.end_time)
-                {
-                    Text("\(startDate.formatted(date: .omitted, time: .shortened)) - \(endDate.formatted(date: .omitted, time: .shortened))")
-                        .foregroundStyle(kontestProperties.prominentColor)
-                        .font(.custom("timeFont", fixedSize: getTimeFontSize()))
-                        .bold()
-
-                    HStack {
-                        Image(systemName: "clock")
-
-                        Text(getFormattedDuration(fromSeconds: kontest.duration))
-                    }
-                    .font(.custom("dateFont", fixedSize: getDateFontSize()))
-                    .padding(.vertical, 5)
-
-                    Text("\(startDate.formatted(date: .abbreviated, time: .omitted)) - \(endDate.formatted(date: .abbreviated, time: .omitted))")
+                    Text("\(startDate!.formatted(date: .abbreviated, time: .omitted)) - \(endDate!.formatted(date: .abbreviated, time: .omitted))")
                         .font(.custom("dateFont", fixedSize: getDateFontSize()))
                 }
                 else {
@@ -161,6 +145,23 @@ struct SingleKontentView: View {
             Image(systemName: "chevron.right")
         }
         .padding()
+    }
+
+    private func isWithinDateRange(startDate: Date, endDate: Date) -> Bool {
+        let currentDate = Date()
+        return currentDate >= startDate && currentDate <= endDate
+    }
+
+    private func getDate(date: String) -> Date? {
+        if let ansDate = getFormattedDate1(date: date) {
+            return ansDate
+        }
+        else if let ansDate = getFormattedDate2(date: date) {
+            return ansDate
+        }
+        else {
+            return nil
+        }
     }
 
     private func getLogoSize() -> CGFloat {
@@ -188,7 +189,7 @@ struct SingleKontentView: View {
     }
 }
 
-func getFormattedDuration(fromSeconds seconds: String) -> String {
+func getFormattedDuration(fromSeconds seconds: String) -> String? {
     guard let totalSecondsInDouble = Double(seconds) else {
         return "Invalid Duration"
     }
@@ -209,7 +210,7 @@ func getFormattedDuration(fromSeconds seconds: String) -> String {
 
     let dateComponents = DateComponents(hour: hours, minute: minutes)
 
-    let ans = dateComponents.hour ?? 1 <= 10 ? (formatter.string(from: dateComponents) ?? "") : ""
+    let ans = dateComponents.hour ?? 1 <= 10 ? formatter.string(from: dateComponents) : nil
     return ans
 }
 
@@ -225,7 +226,7 @@ func getFormattedDuration(fromSeconds seconds: String) -> String {
 
         SingleKontentView(kontest: Kontest(name: "Weekly Contest 358", url: "https://leetcode.com/contest/weekly-contest-358", start_time: "2023-08-13T02:30:00.000Z", end_time: "2023-08-13T04:00:00.000Z", duration: "5400", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE"))
 
-        SingleKontentView(kontest: Kontest(name: "Test Contest", url: "https://leetcode.com/contest/weekly-contest-358", start_time: "2023-08-13T02:30:00.000Z", end_time: "2023-08-13T04:00:00.000Z", duration: "1800", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE"))
+        SingleKontentView(kontest: Kontest(name: "Test Contest", url: "https://leetcode.com/contest/weekly-contest-358", start_time: "2023-08-13T02:30:00.000Z", end_time: "2023-08-13T05:00:00.000Z", duration: "1800", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE"))
 
         SingleKontentView(kontest: Kontest(name: "Starters 100 (Date to be decided)", url: "https://www.codechef.com/START100", start_time: "2023-08-30 14:30:00 UTC", end_time: "2023-08-30 16:30:00 UTC", duration: "7200", site: "CodeChef", in_24_hours: "No", status: "BEFORE"))
     }
