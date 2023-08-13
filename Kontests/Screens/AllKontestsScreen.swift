@@ -40,6 +40,13 @@ struct AllKontestsScreen: View {
 //                    Text("Print all notifs")
 //                }
 
+                Button{
+                    allKontestsViewModel.getAllPendingNotifications()
+                }label: {
+                    Text("Print all notifs")
+                }
+                
+                
                 Button {
                     showNotificationForAllKontestsAlert = true
                     allKontestsViewModel.setNotificationForAllKontests()
