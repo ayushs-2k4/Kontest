@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		074083932A890572009443B7 /* ClipboardUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074083922A890572009443B7 /* ClipboardUtility.swift */; };
+		074083952A8905E4009443B7 /* DateUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074083942A8905E4009443B7 /* DateUtility.swift */; };
+		074083972A89066F009443B7 /* CalendarUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074083962A89066F009443B7 /* CalendarUtility.swift */; };
+		074083992A8906B8009443B7 /* FontUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074083982A8906B8009443B7 /* FontUtility.swift */; };
 		076016592A87CD52007CE9F5 /* KontestsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076016582A87CD52007CE9F5 /* KontestsApp.swift */; };
 		0760165D2A87CD55007CE9F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0760165C2A87CD55007CE9F5 /* Assets.xcassets */; };
 		076016602A87CD55007CE9F5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0760165F2A87CD55007CE9F5 /* Preview Assets.xcassets */; };
@@ -18,6 +22,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		074083922A890572009443B7 /* ClipboardUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardUtility.swift; sourceTree = "<group>"; };
+		074083942A8905E4009443B7 /* DateUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtility.swift; sourceTree = "<group>"; };
+		074083962A89066F009443B7 /* CalendarUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarUtility.swift; sourceTree = "<group>"; };
+		074083982A8906B8009443B7 /* FontUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontUtility.swift; sourceTree = "<group>"; };
 		076016552A87CD52007CE9F5 /* Kontests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kontests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		076016582A87CD52007CE9F5 /* KontestsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestsApp.swift; sourceTree = "<group>"; };
 		0760165C2A87CD55007CE9F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -99,6 +107,10 @@
 			isa = PBXGroup;
 			children = (
 				0760166B2A87CD72007CE9F5 /* DownloadData.swift */,
+				074083922A890572009443B7 /* ClipboardUtility.swift */,
+				074083942A8905E4009443B7 /* DateUtility.swift */,
+				074083962A89066F009443B7 /* CalendarUtility.swift */,
+				074083982A8906B8009443B7 /* FontUtility.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -181,12 +193,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				074083932A890572009443B7 /* ClipboardUtility.swift in Sources */,
+				074083972A89066F009443B7 /* CalendarUtility.swift in Sources */,
 				07ED45982A882485009D158F /* KontestType.swift in Sources */,
+				074083952A8905E4009443B7 /* DateUtility.swift in Sources */,
 				076016702A87CD72007CE9F5 /* DownloadData.swift in Sources */,
 				076016592A87CD52007CE9F5 /* KontestsApp.swift in Sources */,
 				076016712A87CD72007CE9F5 /* AllKontestsViewModel.swift in Sources */,
 				0760166F2A87CD72007CE9F5 /* AllKontestsScreen.swift in Sources */,
 				0760166E2A87CD72007CE9F5 /* Kontest.swift in Sources */,
+				074083992A8906B8009443B7 /* FontUtility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

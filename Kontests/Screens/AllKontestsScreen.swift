@@ -6,11 +6,6 @@
 //
 
 import SwiftUI
-#if os(macOS)
-    import AppKit
-#elseif os(iOS)
-    import UIKit
-#endif
 
 struct AllKontestsScreen: View {
     let allKontestsViewModel = AllKontestsViewModel()
@@ -24,9 +19,9 @@ struct AllKontestsScreen: View {
                 else {
                     List {
                         ForEach(allKontestsViewModel.allKontests) { kontest in
-                            let kontestDuration = getFormattedDuration(fromSeconds: kontest.duration) ?? ""
-                            let kontestEndDate = getDate(date: kontest.end_time)
-                            let isKontestEnded = isKontestOfPast(kontestEndDate: kontestEndDate ?? Date())
+                            let kontestDuration = DateUtility.getFormattedDuration(fromSeconds: kontest.duration) ?? ""
+                            let kontestEndDate = DateUtility.getDate(date: kontest.end_time)
+                            let isKontestEnded = DateUtility.isKontestOfPast(kontestEndDate: kontestEndDate ?? Date())
 
                             if !kontestDuration.isEmpty && !isKontestEnded {
                                 Link(destination: URL(string: kontest.url)!, label: {
@@ -60,66 +55,6 @@ struct BlinkingDot: View {
     }
 }
 
-// DateFormatter for the first format: "2024-07-30T18:30:00.000Z"
-private func getFormattedDate1(date: String) -> Date? {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-    formatter.locale = Locale(identifier: "en_US_POSIX")
-
-    let currentDate = formatter.date(from: date)
-
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "h:mm a"
-
-    return currentDate
-}
-
-// DateFormatter for the second format: "2022-10-10 06:30:00 UTC"
-private func getFormattedDate2(date: String) -> Date? {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz" // 2023-08-30 14:30:00 UTC
-    formatter.locale = Locale(identifier: "en_US_POSIX")
-
-    let currentDate = formatter.date(from: date)
-
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "h:mm a"
-
-    return currentDate
-}
-
-private func getDate(date: String) -> Date? {
-    if let ansDate = getFormattedDate1(date: date) {
-        return ansDate
-    }
-    else if let ansDate = getFormattedDate2(date: date) {
-        return ansDate
-    }
-    else {
-        return nil
-    }
-}
-
-private func isKontestOfPast(kontestEndDate: Date) -> Bool {
-    return kontestEndDate <= Date()
-}
-
-private func isWithinDateRange(startDate: Date, endDate: Date) -> Bool {
-    let currentDate = Date()
-    return currentDate >= startDate && currentDate <= endDate
-}
-
-private func copyToClipBoard(_ text: String) {
-    #if os(macOS)
-        let clipboard = NSPasteboard.general
-        clipboard.clearContents()
-        let success = clipboard.setString(text, forType: .string)
-    #else
-        let clipboard = UIPasteboard.general
-        clipboard.string = text
-    #endif
-}
-
 struct SingleKontentView: View {
     let kontest: Kontest
 
@@ -127,10 +62,10 @@ struct SingleKontentView: View {
         let kontestType = KontestType.getKontestType(name: kontest.site)
         let kontestProperties = getKontestProperties(for: kontestType)
 
-        let startDate = getDate(date: kontest.start_time)
-        let endDate = getDate(date: kontest.end_time)
+        let startDate = DateUtility.getDate(date: kontest.start_time)
+        let endDate = DateUtility.getDate(date: kontest.end_time)
 
-        let calendarURL = generateCalendarURL(startDate: startDate, endDate: endDate)
+//        let calendarURL = CalendarUtility.generateCalendarURL(startDate: startDate, endDate: endDate)
 
         HStack(alignment: .center) {
             VStack {
@@ -142,9 +77,9 @@ struct SingleKontentView: View {
                 Image(kontestProperties.logo)
                     .resizable()
                     .aspectRatio(1, contentMode: .fit)
-                    .frame(width: getLogoSize())
+                    .frame(width: FontUtility.getLogoSize())
 
-                let isContestRunning = isWithinDateRange(startDate: startDate ?? Date(), endDate: endDate ?? Date()) || kontest.status == "CODING"
+                let isContestRunning = DateUtility.isWithinDateRange(startDate: startDate ?? Date(), endDate: endDate ?? Date()) || kontest.status == "CODING"
 
                 if isContestRunning {
                     BlinkingDot(color: .green)
@@ -164,33 +99,33 @@ struct SingleKontentView: View {
             }
 
             #if !os(iOS)
-            Button {
-                copyToClipBoard(kontest.url)
-            } label: {
-                Image(systemName: "link")
-            }
-            .buttonStyle(.borderedProminent)
+                Button {
+                    ClipboardUtility.copyToClipBoard(kontest.url)
+                } label: {
+                    Image(systemName: "link")
+                }
+                .buttonStyle(.borderedProminent)
             #endif
-            
+
             Spacer()
 
             VStack {
                 if startDate != nil && endDate != nil {
                     Text("\(startDate!.formatted(date: .omitted, time: .shortened)) - \(endDate!.formatted(date: .omitted, time: .shortened))")
                         .foregroundStyle(kontestProperties.prominentColor)
-                        .font(.custom("timeFont", fixedSize: getTimeFontSize()))
+                        .font(.custom("timeFont", fixedSize: FontUtility.getTimeFontSize()))
                         .bold()
 
                     HStack {
                         Image(systemName: "clock")
 
-                        Text(getFormattedDuration(fromSeconds: kontest.duration) ?? "")
+                        Text(DateUtility.getFormattedDuration(fromSeconds: kontest.duration) ?? "")
                     }
-                    .font(.custom("dateFont", fixedSize: getDateFontSize()))
+                    .font(.custom("dateFont", fixedSize: FontUtility.getDateFontSize()))
                     .padding(.vertical, 5)
 
                     Text("\(startDate!.formatted(date: .abbreviated, time: .omitted)) - \(endDate!.formatted(date: .abbreviated, time: .omitted))")
-                        .font(.custom("dateFont", fixedSize: getDateFontSize()))
+                        .font(.custom("dateFont", fixedSize: FontUtility.getDateFontSize()))
                 }
                 else {
                     Text("No date provided")
@@ -202,71 +137,6 @@ struct SingleKontentView: View {
         }
         .padding()
     }
-
-    private func generateCalendarURL(startDate: Date?, endDate: Date?) -> String {
-        let utcStartDate = startDate!.addingTimeInterval(-Double(TimeZone.current.secondsFromGMT(for: startDate!)))
-        let utcEndDate = endDate!.addingTimeInterval(-Double(TimeZone.current.secondsFromGMT(for: endDate!)))
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyyMMdd'T'HHmmss'Z'"
-        dateFormatter.timeZone = TimeZone(identifier: "UTC")
-
-        let utcStartString = dateFormatter.string(from: utcStartDate)
-        let utcEndString = dateFormatter.string(from: utcEndDate)
-
-        let calendarURL = "https://www.google.com/calendar/render?action=TEMPLATE&dates=\(utcStartString)%2F\(utcEndString)"
-
-        return calendarURL
-    }
-
-    private func getLogoSize() -> CGFloat {
-        #if os(iOS)
-            return 25
-        #else
-            return 40
-        #endif
-    }
-
-    private func getTimeFontSize() -> CGFloat {
-        #if os(iOS)
-            return 15
-        #else
-            return 25
-        #endif
-    }
-
-    private func getDateFontSize() -> CGFloat {
-        #if os(iOS)
-            return 12
-        #else
-            return 17
-        #endif
-    }
-}
-
-func getFormattedDuration(fromSeconds seconds: String) -> String? {
-    guard let totalSecondsInDouble = Double(seconds) else {
-        return "Invalid Duration"
-    }
-
-    let totalSeconds = Int(totalSecondsInDouble)
-
-    let hours = totalSeconds / 3600
-    let minutes = (totalSeconds % 3600) / 60
-
-    let formatter = DateComponentsFormatter()
-    #if os(iOS)
-        formatter.unitsStyle = .abbreviated
-    #else
-        formatter.unitsStyle = .full
-    #endif
-
-    formatter.allowedUnits = [.hour, .minute, .second]
-
-    let dateComponents = DateComponents(hour: hours, minute: minutes)
-
-    let ans = dateComponents.hour ?? 1 <= 10 ? formatter.string(from: dateComponents) : nil
-    return ans
 }
 
 #Preview {
