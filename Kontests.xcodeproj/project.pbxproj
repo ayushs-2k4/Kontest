@@ -11,6 +11,7 @@
 		074083952A8905E4009443B7 /* DateUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074083942A8905E4009443B7 /* DateUtility.swift */; };
 		074083972A89066F009443B7 /* CalendarUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074083962A89066F009443B7 /* CalendarUtility.swift */; };
 		074083992A8906B8009443B7 /* FontUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074083982A8906B8009443B7 /* FontUtility.swift */; };
+		0740839B2A890754009443B7 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0740839A2A890754009443B7 /* NotificationManager.swift */; };
 		076016592A87CD52007CE9F5 /* KontestsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076016582A87CD52007CE9F5 /* KontestsApp.swift */; };
 		0760165D2A87CD55007CE9F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0760165C2A87CD55007CE9F5 /* Assets.xcassets */; };
 		076016602A87CD55007CE9F5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0760165F2A87CD55007CE9F5 /* Preview Assets.xcassets */; };
@@ -26,6 +27,7 @@
 		074083942A8905E4009443B7 /* DateUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtility.swift; sourceTree = "<group>"; };
 		074083962A89066F009443B7 /* CalendarUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarUtility.swift; sourceTree = "<group>"; };
 		074083982A8906B8009443B7 /* FontUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontUtility.swift; sourceTree = "<group>"; };
+		0740839A2A890754009443B7 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		076016552A87CD52007CE9F5 /* Kontests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kontests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		076016582A87CD52007CE9F5 /* KontestsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestsApp.swift; sourceTree = "<group>"; };
 		0760165C2A87CD55007CE9F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				074083942A8905E4009443B7 /* DateUtility.swift */,
 				074083962A89066F009443B7 /* CalendarUtility.swift */,
 				074083982A8906B8009443B7 /* FontUtility.swift */,
+				0740839A2A890754009443B7 /* NotificationManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				074083972A89066F009443B7 /* CalendarUtility.swift in Sources */,
 				07ED45982A882485009D158F /* KontestType.swift in Sources */,
 				074083952A8905E4009443B7 /* DateUtility.swift in Sources */,
+				0740839B2A890754009443B7 /* NotificationManager.swift in Sources */,
 				076016702A87CD72007CE9F5 /* DownloadData.swift in Sources */,
 				076016592A87CD52007CE9F5 /* KontestsApp.swift in Sources */,
 				076016712A87CD72007CE9F5 /* AllKontestsViewModel.swift in Sources */,

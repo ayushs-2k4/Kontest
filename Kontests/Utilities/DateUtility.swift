@@ -81,4 +81,16 @@ class DateUtility {
         let ans = dateComponents.hour ?? 1 <= 10 ? formatter.string(from: dateComponents) : nil
         return ans
     }
+
+    static func getTimeBefore(originalDate: Date, minutes: Int, hours: Int) -> Date {
+        var components = DateComponents()
+        components.minute = -minutes
+        components.hour = -hours
+
+        if let newDate = Calendar.current.date(byAdding: components, to: originalDate) {
+            return newDate
+        }
+
+        return originalDate
+    }
 }

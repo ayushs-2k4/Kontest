@@ -62,10 +62,10 @@ struct SingleKontentView: View {
         let kontestType = KontestType.getKontestType(name: kontest.site)
         let kontestProperties = getKontestProperties(for: kontestType)
 
-        let startDate = DateUtility.getDate(date: kontest.start_time)
-        let endDate = DateUtility.getDate(date: kontest.end_time)
+        let kontestStartDate = DateUtility.getDate(date: kontest.start_time)
+        let kontestEndDate = DateUtility.getDate(date: kontest.end_time)
 
-//        let calendarURL = CalendarUtility.generateCalendarURL(startDate: startDate, endDate: endDate)
+//        let calendarURL = CalendarUtility.generateCalendarURL(startDate: kontestStartDate, endDate: kontestEndDate)
 
         HStack(alignment: .center) {
             VStack {
@@ -79,7 +79,7 @@ struct SingleKontentView: View {
                     .aspectRatio(1, contentMode: .fit)
                     .frame(width: FontUtility.getLogoSize())
 
-                let isContestRunning = DateUtility.isWithinDateRange(startDate: startDate ?? Date(), endDate: endDate ?? Date()) || kontest.status == "CODING"
+                let isContestRunning = DateUtility.isWithinDateRange(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date()) || kontest.status == "CODING"
 
                 if isContestRunning {
                     BlinkingDot(color: .green)
@@ -107,11 +107,19 @@ struct SingleKontentView: View {
                 .buttonStyle(.borderedProminent)
             #endif
 
+            Button {
+                let notificationDate = DateUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 10, hours: 1)
+                NotificationManager.instance.shecduleCalendarNotifications(title: kontest.name, subtitle: kontest.site, body: "Kontest is on \(kontest.start_time)", date: notificationDate)
+            } label: {
+                Image(systemName: "bell")
+            }
+            .buttonStyle(.borderedProminent)
+
             Spacer()
 
             VStack {
-                if startDate != nil && endDate != nil {
-                    Text("\(startDate!.formatted(date: .omitted, time: .shortened)) - \(endDate!.formatted(date: .omitted, time: .shortened))")
+                if kontestStartDate != nil && kontestEndDate != nil {
+                    Text("\(kontestStartDate!.formatted(date: .omitted, time: .shortened)) - \(kontestEndDate!.formatted(date: .omitted, time: .shortened))")
                         .foregroundStyle(kontestProperties.prominentColor)
                         .font(.custom("timeFont", fixedSize: FontUtility.getTimeFontSize()))
                         .bold()
@@ -124,7 +132,7 @@ struct SingleKontentView: View {
                     .font(.custom("dateFont", fixedSize: FontUtility.getDateFontSize()))
                     .padding(.vertical, 5)
 
-                    Text("\(startDate!.formatted(date: .abbreviated, time: .omitted)) - \(endDate!.formatted(date: .abbreviated, time: .omitted))")
+                    Text("\(kontestStartDate!.formatted(date: .abbreviated, time: .omitted)) - \(kontestEndDate!.formatted(date: .abbreviated, time: .omitted))")
                         .font(.custom("dateFont", fixedSize: FontUtility.getDateFontSize()))
                 }
                 else {
