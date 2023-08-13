@@ -8,5 +8,5 @@
 import Foundation
 
 protocol KontestFetcher{
-    func getAllKontests() async throws -> [Kontest]
+    func getAllKontests() async throws -> [KontestDTO]
 }

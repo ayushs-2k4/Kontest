@@ -34,16 +34,16 @@ struct AllKontestsScreen: View {
                 NotificationManager.instance.setBadgeCountTo0()
             }
             .toolbar {
-//                Button{
+//                Button {
 //                    allKontestsViewModel.getAllPendingNotifications()
-//                }label: {
+//                } label: {
 //                    Text("Print all notifs")
 //                }
 
                 Button {
                     showNotificationForAllKontestsAlert = true
                     allKontestsViewModel.setNotificationForAllKontests()
-                    allKontestsViewModel.getAllPendingNotifications()
+//                    allKontestsViewModel.getAllPendingNotifications()
                 } label: {
                     Image(systemName: "bell.fill")
                 }
@@ -81,14 +81,11 @@ struct BlinkingDot: View {
 }
 
 struct SingleKontentView: View {
-    let kontest: Kontest
+    var kontest: KontestModel
     let allKontestViewModel: AllKontestsViewModel
     @State var showNotificationSetAlert = false
 
     var body: some View {
-        let kontestType = KontestType.getKontestType(name: kontest.site)
-        let kontestProperties = getKontestProperties(for: kontestType)
-
         let kontestStartDate = DateUtility.getDate(date: kontest.start_time)
         let kontestEndDate = DateUtility.getDate(date: kontest.end_time)
 
@@ -101,7 +98,7 @@ struct SingleKontentView: View {
 //                    Text("Add to Calendar")
 //                })
 
-                Image(kontestProperties.logo)
+                Image(KontestModel.getLogo(site: kontest.site))
                     .resizable()
                     .aspectRatio(1, contentMode: .fit)
                     .frame(width: FontUtility.getLogoSize())
@@ -119,7 +116,7 @@ struct SingleKontentView: View {
 
             VStack(alignment: .leading) {
                 Text(kontest.site.uppercased())
-                    .foregroundStyle(kontestProperties.prominentColor)
+                    .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.site))
                     .bold()
 
                 Text(kontest.name)
@@ -136,15 +133,22 @@ struct SingleKontentView: View {
 
             if DateUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) {
                 Button {
-                    allKontestViewModel.setNotification(kontest: kontest)
+                    if kontest.isSetForReminder {
+                        allKontestViewModel.removePendingNotification(kontest: kontest)
+                        allKontestViewModel.updateIsSetForNotification(kontest: kontest, to: false)
+                    }
+                    else {
+                        allKontestViewModel.setNotification(kontest: kontest)
+                        allKontestViewModel.updateIsSetForNotification(kontest: kontest, to: true)
+                    }
 
                     showNotificationSetAlert = true
 
                 } label: {
-                    Image(systemName: "bell")
+                    Image(systemName: kontest.isSetForReminder ? "bell.fill" : "bell")
                 }
                 .help("Set notification for this contest")
-                .alert("Notification set for: \(kontest.name)", isPresented: $showNotificationSetAlert, actions: {})
+                .alert(kontest.isSetForReminder ? "Notification set for: \(kontest.name)" : "Notification cancelled for: \(kontest.name)", isPresented: $showNotificationSetAlert, actions: {})
             }
 
             Spacer()
@@ -152,7 +156,7 @@ struct SingleKontentView: View {
             VStack {
                 if kontestStartDate != nil && kontestEndDate != nil {
                     Text("\(kontestStartDate!.formatted(date: .omitted, time: .shortened)) - \(kontestEndDate!.formatted(date: .omitted, time: .shortened))")
-                        .foregroundStyle(kontestProperties.prominentColor)
+                        .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.site))
                         .font(.custom("timeFont", fixedSize: FontUtility.getTimeFontSize()))
                         .bold()
 
@@ -189,15 +193,15 @@ struct SingleKontentView: View {
     let allKontestViewModel = AllKontestsViewModel.instance
 
     return List {
-        SingleKontentView(kontest: Kontest(name: "ProjectEuler+", url: "https://hackerrank.com/contests/projecteuler", start_time: "2014-07-07T15:38:00.000Z", end_time: "2024-07-30T18:30:00.000Z", duration: "317616720.0", site: "HackerRank", in_24_hours: "No", status: "No"), allKontestViewModel: allKontestViewModel)
+        SingleKontentView(kontest: KontestModel.from(dto: KontestDTO(name: "ProjectEuler+", url: "https://hackerrank.com/contests/projecteuler", start_time: "2014-07-07T15:38:00.000Z", end_time: "2024-07-30T18:30:00.000Z", duration: "317616720.0", site: "HackerRank", in_24_hours: "No", status: "No")), allKontestViewModel: allKontestViewModel)
 
-        SingleKontentView(kontest: Kontest(name: "1v1 Games by CodeChef", url: "https://www.codechef.com/GAMES", start_time: "2022-10-10 06:30:00 UTC", end_time: "2032-10-10 06:30:00 UTC", duration: "315619200.0", site: "CodeChef", in_24_hours: "No", status: "CODING"), allKontestViewModel: allKontestViewModel)
+        SingleKontentView(kontest: KontestModel.from(dto: KontestDTO(name: "1v1 Games by CodeChef", url: "https://www.codechef.com/GAMES", start_time: "2022-10-10 06:30:00 UTC", end_time: "2032-10-10 06:30:00 UTC", duration: "315619200.0", site: "CodeChef", in_24_hours: "No", status: "CODING")), allKontestViewModel: allKontestViewModel)
 
-        SingleKontentView(kontest: Kontest(name: "Weekly Contest 358", url: "https://leetcode.com/contest/weekly-contest-358", start_time: "2023-08-13T02:30:00.000Z", end_time: "2023-08-13T04:00:00.000Z", duration: "5400", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE"), allKontestViewModel: allKontestViewModel)
+        SingleKontentView(kontest: KontestModel.from(dto: KontestDTO(name: "Weekly Contest 358", url: "https://leetcode.com/contest/weekly-contest-358", start_time: "2023-08-13T02:30:00.000Z", end_time: "2023-08-13T04:00:00.000Z", duration: "5400", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE")), allKontestViewModel: allKontestViewModel)
 
-        SingleKontentView(kontest: Kontest(name: "Test Contest", url: "https://leetcode.com/contest/weekly-contest-358", start_time: "2023-08-13T02:30:00.000Z", end_time: "2023-08-13T05:00:00.000Z", duration: "1800", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE"), allKontestViewModel: allKontestViewModel)
+        SingleKontentView(kontest: KontestModel.from(dto: KontestDTO(name: "Test Contest", url: "https://leetcode.com/contest/weekly-contest-358", start_time: "2023-08-13T02:30:00.000Z", end_time: "2023-08-13T05:00:00.000Z", duration: "1800", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE")), allKontestViewModel: allKontestViewModel)
 
-        SingleKontentView(kontest: Kontest(name: "Starters 100 (Date to be decided)", url: "https://www.codechef.com/START100", start_time: "2023-08-30 14:30:00 UTC", end_time: "2023-08-30 16:30:00 UTC", duration: "7200", site: "CodeChef", in_24_hours: "No", status: "BEFORE"), allKontestViewModel: allKontestViewModel)
+        SingleKontentView(kontest: KontestModel.from(dto: KontestDTO(name: "Starters 100 (Date to be decided)", url: "https://www.codechef.com/START100", start_time: "2023-08-30 14:30:00 UTC", end_time: "2023-08-30 16:30:00 UTC", duration: "7200", site: "CodeChef", in_24_hours: "No", status: "BEFORE")), allKontestViewModel: allKontestViewModel)
     }
 }
 

@@ -91,6 +91,10 @@ class NotificationManager {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }
 
+    func removePendingNotification(identifiers: [String]) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+    }
+
     func shecduleCalendarNotifications(notifications: [NotificationContent]) {
         for notification in notifications {
             shecduleCalendarNotification(notificationContent: notification)

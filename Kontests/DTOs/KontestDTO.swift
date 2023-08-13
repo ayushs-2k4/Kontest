@@ -1,5 +1,5 @@
 //
-//  Kontest.swift
+//  KontestDTO.swift
 //  Kontests
 //
 //  Created by Ayush Singhal on 12/08/23.
@@ -8,7 +8,7 @@
 import CryptoKit
 import Foundation
 
-struct Kontest: Codable, Identifiable {
+struct KontestDTO: Codable, Identifiable {
     var id: String { generateUniqueID() }
 
     let name: String
