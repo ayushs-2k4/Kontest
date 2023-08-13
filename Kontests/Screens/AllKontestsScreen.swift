@@ -10,6 +10,7 @@ import SwiftUI
 struct AllKontestsScreen: View {
     let allKontestsViewModel = AllKontestsViewModel()
     @State var showRemoveAllNotificationsAlert = false
+    @State var showNotificationForAllKontestsAlert = false
 
     var body: some View {
         NavigationStack {
@@ -20,16 +21,10 @@ struct AllKontestsScreen: View {
                 else {
                     List {
                         ForEach(allKontestsViewModel.allKontests) { kontest in
-                            let kontestDuration = DateUtility.getFormattedDuration(fromSeconds: kontest.duration) ?? ""
-                            let kontestEndDate = DateUtility.getDate(date: kontest.end_time)
-                            let isKontestEnded = DateUtility.isKontestOfPast(kontestEndDate: kontestEndDate ?? Date())
-
-                            if !kontestDuration.isEmpty && !isKontestEnded {
-                                Link(destination: URL(string: kontest.url)!, label: {
-                                    SingleKontentView(kontest: kontest)
-                                })
-                                .buttonStyle(.plain)
-                            }
+                            Link(destination: URL(string: kontest.url)!, label: {
+                                SingleKontentView(kontest: kontest, allKontestViewModel: allKontestsViewModel)
+                            })
+                            .buttonStyle(.plain)
                         }
                     }
                 }
@@ -40,8 +35,18 @@ struct AllKontestsScreen: View {
             }
             .toolbar {
                 Button {
+                    showNotificationForAllKontestsAlert = true
+                    allKontestsViewModel.setNotificationForAllKontests()
+                    allKontestsViewModel.getAllPendingNotifications()
+                } label: {
+                    Image(systemName: "bell.fill")
+                }
+                .help("Set Notification for all following kontests") // Tooltip text
+                .alert("Notification for all Kontests set.", isPresented: $showNotificationForAllKontestsAlert, actions: {})
+
+                Button {
                     showRemoveAllNotificationsAlert = true
-                    NotificationManager.instance.removeAllPendingNotifications()
+                    allKontestsViewModel.removeAllPendingNotifications()
                 } label: {
                     Image(systemName: "bell.slash")
                 }
@@ -71,6 +76,7 @@ struct BlinkingDot: View {
 
 struct SingleKontentView: View {
     let kontest: Kontest
+    let allKontestViewModel: AllKontestsViewModel
     @State var showNotificationSetAlert = false
 
     var body: some View {
@@ -124,11 +130,7 @@ struct SingleKontentView: View {
 
             if DateUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) {
                 Button {
-                    let notificationDate = DateUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 0, hours: 0)
-
-                    NotificationManager.instance.shecduleCalendarNotifications(title: kontest.name, subtitle: kontest.site, body: "Kontest is on \(kontest.start_time)", date: notificationDate)
-
-                    NotificationManager.instance.getAllPendingNotifications()
+                    allKontestViewModel.setNotification(kontest: kontest)
 
                     showNotificationSetAlert = true
 
@@ -178,16 +180,18 @@ struct SingleKontentView: View {
 }
 
 #Preview("SingleKontentView") {
-    List {
-        SingleKontentView(kontest: Kontest(name: "ProjectEuler+", url: "https://hackerrank.com/contests/projecteuler", start_time: "2014-07-07T15:38:00.000Z", end_time: "2024-07-30T18:30:00.000Z", duration: "317616720.0", site: "HackerRank", in_24_hours: "No", status: "No"))
+    let allKontestViewModel = AllKontestsViewModel()
 
-        SingleKontentView(kontest: Kontest(name: "1v1 Games by CodeChef", url: "https://www.codechef.com/GAMES", start_time: "2022-10-10 06:30:00 UTC", end_time: "2032-10-10 06:30:00 UTC", duration: "315619200.0", site: "CodeChef", in_24_hours: "No", status: "CODING"))
+    return List {
+        SingleKontentView(kontest: Kontest(name: "ProjectEuler+", url: "https://hackerrank.com/contests/projecteuler", start_time: "2014-07-07T15:38:00.000Z", end_time: "2024-07-30T18:30:00.000Z", duration: "317616720.0", site: "HackerRank", in_24_hours: "No", status: "No"), allKontestViewModel: allKontestViewModel)
 
-        SingleKontentView(kontest: Kontest(name: "Weekly Contest 358", url: "https://leetcode.com/contest/weekly-contest-358", start_time: "2023-08-13T02:30:00.000Z", end_time: "2023-08-13T04:00:00.000Z", duration: "5400", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE"))
+        SingleKontentView(kontest: Kontest(name: "1v1 Games by CodeChef", url: "https://www.codechef.com/GAMES", start_time: "2022-10-10 06:30:00 UTC", end_time: "2032-10-10 06:30:00 UTC", duration: "315619200.0", site: "CodeChef", in_24_hours: "No", status: "CODING"), allKontestViewModel: allKontestViewModel)
 
-        SingleKontentView(kontest: Kontest(name: "Test Contest", url: "https://leetcode.com/contest/weekly-contest-358", start_time: "2023-08-13T02:30:00.000Z", end_time: "2023-08-13T05:00:00.000Z", duration: "1800", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE"))
+        SingleKontentView(kontest: Kontest(name: "Weekly Contest 358", url: "https://leetcode.com/contest/weekly-contest-358", start_time: "2023-08-13T02:30:00.000Z", end_time: "2023-08-13T04:00:00.000Z", duration: "5400", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE"), allKontestViewModel: allKontestViewModel)
 
-        SingleKontentView(kontest: Kontest(name: "Starters 100 (Date to be decided)", url: "https://www.codechef.com/START100", start_time: "2023-08-30 14:30:00 UTC", end_time: "2023-08-30 16:30:00 UTC", duration: "7200", site: "CodeChef", in_24_hours: "No", status: "BEFORE"))
+        SingleKontentView(kontest: Kontest(name: "Test Contest", url: "https://leetcode.com/contest/weekly-contest-358", start_time: "2023-08-13T02:30:00.000Z", end_time: "2023-08-13T05:00:00.000Z", duration: "1800", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE"), allKontestViewModel: allKontestViewModel)
+
+        SingleKontentView(kontest: Kontest(name: "Starters 100 (Date to be decided)", url: "https://www.codechef.com/START100", start_time: "2023-08-30 14:30:00 UTC", end_time: "2023-08-30 16:30:00 UTC", duration: "7200", site: "CodeChef", in_24_hours: "No", status: "BEFORE"), allKontestViewModel: allKontestViewModel)
     }
 }
 

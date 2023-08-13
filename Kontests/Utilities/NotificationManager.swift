@@ -22,7 +22,7 @@ class NotificationManager {
         }
     }
 
-    func shecduleIntervalNotifications() {
+    func shecduleIntervalNotification(id: String = UUID().uuidString) {
         let timedNotificationContent = UNMutableNotificationContent()
         timedNotificationContent.title = "This is my Timed notification"
         timedNotificationContent.subtitle = "This was sooo easy!"
@@ -33,28 +33,28 @@ class NotificationManager {
         // time
         let timeTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
 
-        let timeNotificationRequest = UNNotificationRequest(identifier: UUID().uuidString, content: timedNotificationContent, trigger: timeTrigger)
+        let timeNotificationRequest = UNNotificationRequest(identifier: id, content: timedNotificationContent, trigger: timeTrigger)
         print("Scheduled Timed notification of after 5 seconds")
 
         UNUserNotificationCenter.current().add(timeNotificationRequest)
     }
 
-    func shecduleCalendarNotifications(title: String, subtitle: String, body: String, date: Date) {
+    func shecduleCalendarNotification(notificationContent: NotificationContent, id: String = UUID().uuidString) {
         checkNotificationPermissionGranted()
 
         let calendarNotificationContent = UNMutableNotificationContent()
-        calendarNotificationContent.title = title
-        calendarNotificationContent.subtitle = subtitle
-        calendarNotificationContent.body = body
+        calendarNotificationContent.title = notificationContent.title
+        calendarNotificationContent.subtitle = notificationContent.subtitle
+        calendarNotificationContent.body = notificationContent.body
         calendarNotificationContent.badge = 1
 
-        let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: date)
+        let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: notificationContent.date)
 
         let calendarTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
 
-        let calendarNotificationRequest = UNNotificationRequest(identifier: UUID().uuidString, content: calendarNotificationContent, trigger: calendarTrigger)
+        let calendarNotificationRequest = UNNotificationRequest(identifier: id, content: calendarNotificationContent, trigger: calendarTrigger)
 
-        print("Notification setted for: \(date)")
+        print("Notification setted for: \(notificationContent.date)")
 
         UNUserNotificationCenter.current().add(calendarNotificationRequest)
     }
@@ -89,5 +89,18 @@ class NotificationManager {
 
     func removeAllPendingNotifications() {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+    }
+
+    func shecduleCalendarNotifications(notifications: [NotificationContent]) {
+        for notification in notifications {
+            shecduleCalendarNotification(notificationContent: notification)
+        }
+    }
+
+    struct NotificationContent {
+        let title: String
+        let subtitle: String
+        let body: String
+        let date: Date
     }
 }
