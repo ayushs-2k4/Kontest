@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AllKontestsScreen: View {
-    let allKontestsViewModel = AllKontestsViewModel()
+    let allKontestsViewModel = AllKontestsViewModel.instance
     @State var showRemoveAllNotificationsAlert = false
     @State var showNotificationForAllKontestsAlert = false
 
@@ -34,6 +34,13 @@ struct AllKontestsScreen: View {
                 NotificationManager.instance.setBadgeCountTo0()
             }
             .toolbar {
+                Button{
+                    allKontestsViewModel.getAllPendingNotifications()
+                }label: {
+                    Text("Print all notifs")
+                }
+                
+                
                 Button {
                     showNotificationForAllKontestsAlert = true
                     allKontestsViewModel.setNotificationForAllKontests()
@@ -180,7 +187,7 @@ struct SingleKontentView: View {
 }
 
 #Preview("SingleKontentView") {
-    let allKontestViewModel = AllKontestsViewModel()
+    let allKontestViewModel = AllKontestsViewModel.instance
 
     return List {
         SingleKontentView(kontest: Kontest(name: "ProjectEuler+", url: "https://hackerrank.com/contests/projecteuler", start_time: "2014-07-07T15:38:00.000Z", end_time: "2024-07-30T18:30:00.000Z", duration: "317616720.0", site: "HackerRank", in_24_hours: "No", status: "No"), allKontestViewModel: allKontestViewModel)
