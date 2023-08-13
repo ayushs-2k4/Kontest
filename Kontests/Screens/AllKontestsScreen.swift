@@ -6,6 +6,11 @@
 //
 
 import SwiftUI
+#if os(macOS)
+    import AppKit
+#elseif os(iOS)
+    import UIKit
+#endif
 
 struct AllKontestsScreen: View {
     let allKontestsViewModel = AllKontestsViewModel()
@@ -19,8 +24,11 @@ struct AllKontestsScreen: View {
                 else {
                     List {
                         ForEach(allKontestsViewModel.allKontests) { kontest in
-                            let contestDuration = getFormattedDuration(fromSeconds: kontest.duration) ?? ""
-                            if !contestDuration.isEmpty {
+                            let kontestDuration = getFormattedDuration(fromSeconds: kontest.duration) ?? ""
+                            let kontestEndDate = getDate(date: kontest.end_time)
+                            let isKontestEnded = isKontestOfPast(kontestEndDate: kontestEndDate ?? Date())
+
+                            if !kontestDuration.isEmpty && !isKontestEnded {
                                 Link(destination: URL(string: kontest.url)!, label: {
                                     SingleKontentView(kontest: kontest)
                                 })
@@ -52,36 +60,68 @@ struct BlinkingDot: View {
     }
 }
 
+// DateFormatter for the first format: "2024-07-30T18:30:00.000Z"
+private func getFormattedDate1(date: String) -> Date? {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    formatter.locale = Locale(identifier: "en_US_POSIX")
+
+    let currentDate = formatter.date(from: date)
+
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "h:mm a"
+
+    return currentDate
+}
+
+// DateFormatter for the second format: "2022-10-10 06:30:00 UTC"
+private func getFormattedDate2(date: String) -> Date? {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz" // 2023-08-30 14:30:00 UTC
+    formatter.locale = Locale(identifier: "en_US_POSIX")
+
+    let currentDate = formatter.date(from: date)
+
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "h:mm a"
+
+    return currentDate
+}
+
+private func getDate(date: String) -> Date? {
+    if let ansDate = getFormattedDate1(date: date) {
+        return ansDate
+    }
+    else if let ansDate = getFormattedDate2(date: date) {
+        return ansDate
+    }
+    else {
+        return nil
+    }
+}
+
+private func isKontestOfPast(kontestEndDate: Date) -> Bool {
+    return kontestEndDate <= Date()
+}
+
+private func isWithinDateRange(startDate: Date, endDate: Date) -> Bool {
+    let currentDate = Date()
+    return currentDate >= startDate && currentDate <= endDate
+}
+
+private func copyToClipBoard(_ text: String) {
+    #if os(macOS)
+        let clipboard = NSPasteboard.general
+        clipboard.clearContents()
+        let success = clipboard.setString(text, forType: .string)
+    #else
+        let clipboard = UIPasteboard.general
+        clipboard.string = text
+    #endif
+}
+
 struct SingleKontentView: View {
     let kontest: Kontest
-
-    // DateFormatter for the first format: "2024-07-30T18:30:00.000Z"
-    private func getFormattedDate1(date: String) -> Date? {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-
-        let currentDate = formatter.date(from: date)
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "h:mm a"
-
-        return currentDate
-    }
-
-    // DateFormatter for the second format: "2022-10-10 06:30:00 UTC"
-    private func getFormattedDate2(date: String) -> Date? {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz" // 2023-08-30 14:30:00 UTC
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-
-        let currentDate = formatter.date(from: date)
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "h:mm a"
-
-        return currentDate
-    }
 
     var body: some View {
         let kontestType = KontestType.getKontestType(name: kontest.site)
@@ -90,8 +130,15 @@ struct SingleKontentView: View {
         let startDate = getDate(date: kontest.start_time)
         let endDate = getDate(date: kontest.end_time)
 
+        let calendarURL = generateCalendarURL(startDate: startDate, endDate: endDate)
+
         HStack(alignment: .center) {
             VStack {
+//                Text(calendarURL)
+//                Link(destination: URL(string: calendarURL)!, label: {
+//                    Text("Add to Calendar")
+//                })
+
                 Image(kontestProperties.logo)
                     .resizable()
                     .aspectRatio(1, contentMode: .fit)
@@ -116,6 +163,15 @@ struct SingleKontentView: View {
                 Text(kontest.name)
             }
 
+            #if !os(iOS)
+            Button {
+                copyToClipBoard(kontest.url)
+            } label: {
+                Image(systemName: "link")
+            }
+            .buttonStyle(.borderedProminent)
+            #endif
+            
             Spacer()
 
             VStack {
@@ -147,21 +203,20 @@ struct SingleKontentView: View {
         .padding()
     }
 
-    private func isWithinDateRange(startDate: Date, endDate: Date) -> Bool {
-        let currentDate = Date()
-        return currentDate >= startDate && currentDate <= endDate
-    }
+    private func generateCalendarURL(startDate: Date?, endDate: Date?) -> String {
+        let utcStartDate = startDate!.addingTimeInterval(-Double(TimeZone.current.secondsFromGMT(for: startDate!)))
+        let utcEndDate = endDate!.addingTimeInterval(-Double(TimeZone.current.secondsFromGMT(for: endDate!)))
 
-    private func getDate(date: String) -> Date? {
-        if let ansDate = getFormattedDate1(date: date) {
-            return ansDate
-        }
-        else if let ansDate = getFormattedDate2(date: date) {
-            return ansDate
-        }
-        else {
-            return nil
-        }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd'T'HHmmss'Z'"
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+
+        let utcStartString = dateFormatter.string(from: utcStartDate)
+        let utcEndString = dateFormatter.string(from: utcEndDate)
+
+        let calendarURL = "https://www.google.com/calendar/render?action=TEMPLATE&dates=\(utcStartString)%2F\(utcEndString)"
+
+        return calendarURL
     }
 
     private func getLogoSize() -> CGFloat {
