@@ -10,6 +10,7 @@ import SwiftUI
 @Observable
 class AllKontestsViewModel {
     var allKontests: [Kontest] = []
+    let repository = KontestRepository()
 
     init() {
         Task {
@@ -18,20 +19,14 @@ class AllKontestsViewModel {
     }
 
     func getAllKontests() async {
-        guard let url = URL(string: "https://kontests.net/api/v1/all") else {
-            print("Error in making url")
-            return
-        }
-
         do {
-            let data = try await downloadDataWithAsyncAwait(url: url)
-            let allFetchedKontests = try JSONDecoder().decode([Kontest].self, from: data)
+            let fetchedKontests = try await repository.getAllKontests()
 
             await MainActor.run {
-                self.allKontests = allFetchedKontests
+                self.allKontests = fetchedKontests
             }
         } catch {
-            print("error in downloading all Kontests async await: \(error)")
+            print("error in fetching all Kontests: \(error)")
         }
     }
 }

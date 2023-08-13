@@ -22,7 +22,26 @@ class NotificationManager {
         }
     }
 
+    func shecduleIntervalNotifications() {
+        let timedNotificationContent = UNMutableNotificationContent()
+        timedNotificationContent.title = "This is my Timed notification"
+        timedNotificationContent.subtitle = "This was sooo easy!"
+        timedNotificationContent.body = "This is notification body"
+        timedNotificationContent.sound = .default
+        timedNotificationContent.badge = 1
+
+        // time
+        let timeTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+        let timeNotificationRequest = UNNotificationRequest(identifier: UUID().uuidString, content: timedNotificationContent, trigger: timeTrigger)
+        print("Scheduled Timed notification of after 5 seconds")
+
+        UNUserNotificationCenter.current().add(timeNotificationRequest)
+    }
+
     func shecduleCalendarNotifications(title: String, subtitle: String, body: String, date: Date) {
+        checkNotificationPermissionGranted()
+
         let calendarNotificationContent = UNMutableNotificationContent()
         calendarNotificationContent.title = title
         calendarNotificationContent.subtitle = subtitle
@@ -35,6 +54,40 @@ class NotificationManager {
 
         let calendarNotificationRequest = UNNotificationRequest(identifier: UUID().uuidString, content: calendarNotificationContent, trigger: calendarTrigger)
 
+        print("Notification setted for: \(date)")
+
         UNUserNotificationCenter.current().add(calendarNotificationRequest)
+    }
+
+    func checkNotificationPermissionGranted() {
+        let center = UNUserNotificationCenter.current()
+        center.getNotificationSettings { settings in
+            if settings.authorizationStatus != .authorized {
+                self.requestAuthorization()
+            }
+        }
+    }
+
+    func setBadgeCountTo0() {
+        UNUserNotificationCenter.current().setBadgeCount(0)
+    }
+
+    func getAllPendingNotifications() {
+        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+            for request in requests {
+                print("Identifier: \(request.identifier)")
+                print("Title: \(request.content.title)")
+                print("Body: \(request.content.body)")
+                if let trigger = request.trigger as? UNCalendarNotificationTrigger {
+                    let date = trigger.nextTriggerDate()
+                    print("Next Trigger Date: \(date ?? Date())")
+                }
+                print("-------")
+            }
+        }
+    }
+
+    func removeAllPendingNotifications() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
     }
 }

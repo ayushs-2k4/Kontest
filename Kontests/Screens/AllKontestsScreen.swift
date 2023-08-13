@@ -34,6 +34,17 @@ struct AllKontestsScreen: View {
                 }
             }
             .navigationTitle("Kontests")
+            .onAppear {
+                NotificationManager.instance.setBadgeCountTo0()
+            }
+            .toolbar {
+                Button {
+                    NotificationManager.instance.removeAllPendingNotifications()
+                } label: {
+                    Image(systemName: "bell.slash")
+                }
+                .help("Remove All Notifications") // Tooltip text
+            }
         }
     }
 }
@@ -105,15 +116,22 @@ struct SingleKontentView: View {
                     Image(systemName: "link")
                 }
                 .buttonStyle(.borderedProminent)
+                .help("Copy link")
             #endif
 
             Button {
-                let notificationDate = DateUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 10, hours: 1)
+                let notificationDate = DateUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 0, hours: 0)
+
                 NotificationManager.instance.shecduleCalendarNotifications(title: kontest.name, subtitle: kontest.site, body: "Kontest is on \(kontest.start_time)", date: notificationDate)
+
+                NotificationManager.instance.getAllPendingNotifications()
+
+//                NotificationManager.instance.shecduleIntervalNotifications()
             } label: {
                 Image(systemName: "bell")
             }
             .buttonStyle(.borderedProminent)
+            .help("Set notification for this contest")
 
             Spacer()
 
