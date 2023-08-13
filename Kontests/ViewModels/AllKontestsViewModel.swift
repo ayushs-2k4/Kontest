@@ -12,7 +12,9 @@ class AllKontestsViewModel {
     var allKontests: [Kontest] = []
     let repository = KontestRepository()
 
-    init() {
+    static let instance = AllKontestsViewModel() // Singleton instance
+
+    private init() {
         Task {
             await getAllKontests()
         }
