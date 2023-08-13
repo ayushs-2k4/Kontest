@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AllKontestsScreen: View {
     let allKontestsViewModel = AllKontestsViewModel()
+    @State var showRemoveAllNotificationsAlert = false
 
     var body: some View {
         NavigationStack {
@@ -39,11 +40,13 @@ struct AllKontestsScreen: View {
             }
             .toolbar {
                 Button {
+                    showRemoveAllNotificationsAlert = true
                     NotificationManager.instance.removeAllPendingNotifications()
                 } label: {
                     Image(systemName: "bell.slash")
                 }
                 .help("Remove All Notifications") // Tooltip text
+                .alert("All Notifications Removed", isPresented: $showRemoveAllNotificationsAlert, actions: {})
             }
         }
     }
@@ -68,6 +71,7 @@ struct BlinkingDot: View {
 
 struct SingleKontentView: View {
     let kontest: Kontest
+    @State var showNotificationSetAlert = false
 
     var body: some View {
         let kontestType = KontestType.getKontestType(name: kontest.site)
@@ -126,12 +130,15 @@ struct SingleKontentView: View {
 
                 NotificationManager.instance.getAllPendingNotifications()
 
+                showNotificationSetAlert = true
+
 //                NotificationManager.instance.shecduleIntervalNotifications()
             } label: {
                 Image(systemName: "bell")
             }
             .buttonStyle(.borderedProminent)
             .help("Set notification for this contest")
+            .alert("Notification set for: \(kontest.name)", isPresented: $showNotificationSetAlert, actions: {})
 
             Spacer()
 
