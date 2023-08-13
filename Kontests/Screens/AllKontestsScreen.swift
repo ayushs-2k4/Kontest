@@ -119,26 +119,25 @@ struct SingleKontentView: View {
                 } label: {
                     Image(systemName: "link")
                 }
-                .buttonStyle(.borderedProminent)
                 .help("Copy link")
             #endif
 
-            Button {
-                let notificationDate = DateUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 0, hours: 0)
+            if DateUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) {
+                Button {
+                    let notificationDate = DateUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 0, hours: 0)
 
-                NotificationManager.instance.shecduleCalendarNotifications(title: kontest.name, subtitle: kontest.site, body: "Kontest is on \(kontest.start_time)", date: notificationDate)
+                    NotificationManager.instance.shecduleCalendarNotifications(title: kontest.name, subtitle: kontest.site, body: "Kontest is on \(kontest.start_time)", date: notificationDate)
 
-                NotificationManager.instance.getAllPendingNotifications()
+                    NotificationManager.instance.getAllPendingNotifications()
 
-                showNotificationSetAlert = true
+                    showNotificationSetAlert = true
 
-//                NotificationManager.instance.shecduleIntervalNotifications()
-            } label: {
-                Image(systemName: "bell")
+                } label: {
+                    Image(systemName: "bell")
+                }
+                .help("Set notification for this contest")
+                .alert("Notification set for: \(kontest.name)", isPresented: $showNotificationSetAlert, actions: {})
             }
-            .buttonStyle(.borderedProminent)
-            .help("Set notification for this contest")
-            .alert("Notification set for: \(kontest.name)", isPresented: $showNotificationSetAlert, actions: {})
 
             Spacer()
 
@@ -168,7 +167,9 @@ struct SingleKontentView: View {
 
             Image(systemName: "chevron.right")
         }
+        #if os(macOS)
         .padding()
+        #endif
     }
 }
 

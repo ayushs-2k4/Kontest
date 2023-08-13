@@ -52,6 +52,10 @@ class DateUtility {
         return kontestEndDate <= Date()
     }
 
+    static func isKontestOfFuture(kontestStartDate: Date) -> Bool {
+        return Date() <= kontestStartDate
+    }
+
     static func isWithinDateRange(startDate: Date, endDate: Date) -> Bool {
         let currentDate = Date()
         return currentDate >= startDate && currentDate <= endDate
