@@ -8,7 +8,8 @@
 import CryptoKit
 import SwiftUI
 
-struct KontestModel: Decodable, Identifiable, Equatable {
+@Observable
+class KontestModel: Decodable, Identifiable, Hashable {
     let id: String
     let name: String
     let url: String
@@ -16,6 +17,30 @@ struct KontestModel: Decodable, Identifiable, Equatable {
     var status: KontestStatus
     var isSetForReminder: Bool
     let logo: String
+
+    init(id: String, name: String, url: String, start_time: String, end_time: String, duration: String, site: String, in_24_hours: String, status: KontestStatus, isSetForReminder: Bool, logo: String) {
+        self.id = id
+        self.name = name
+        self.url = url
+        self.start_time = start_time
+        self.end_time = end_time
+        self.duration = duration
+        self.site = site
+        self.in_24_hours = in_24_hours
+        self.status = status
+        self.isSetForReminder = isSetForReminder
+        self.logo = logo
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}
+
+extension KontestModel: Equatable {
+    static func == (lhs: KontestModel, rhs: KontestModel) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
 
 extension KontestModel {
@@ -59,28 +84,28 @@ extension KontestModel {
     static func getColorForIdentifier(site: String) -> Color {
         switch site {
         case "CodeForces":
-            .red
+            .pink
 
         case "CodeForces::Gym":
             .red
 
         case "AtCoder":
-            .brown
+            Color(red: 187/255, green: 181/255, blue: 181/255)
 
         case "CS Academy":
             .red
 
         case "CodeChef":
-            .brown
+            Color(red: 250/255, green: 155/255, blue: 101/255)
 
         case "HackerRank":
             .green
 
         case "HackerEarth":
-            Color(red: 40, green: 44, blue: 67)
+            Color(red: 101/255, green: 125/255, blue: 251/255)
 
         case "LeetCode":
-            .yellow
+            Color(red: 250/255, green: 217/255, blue: 101/255)
 
         case "Toph":
             .blue
@@ -130,7 +155,7 @@ extension KontestModel {
     }
 
     // Load reminder status from UserDefaults
-    mutating func loadReminderStatus() {
+    func loadReminderStatus() {
         isSetForReminder = UserDefaults.standard.bool(forKey: id)
     }
 

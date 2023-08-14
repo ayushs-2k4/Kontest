@@ -10,7 +10,7 @@ import SwiftUI
 
 @Observable
 class AllKontestsViewModel {
-    let repository = AllKontestsFakeRepository()
+    let repository = KontestRepository()
 
     private var timer: AnyCancellable?
 
@@ -74,7 +74,7 @@ class AllKontestsViewModel {
 
     func setNotification(kontest: KontestModel) {
         let kontestStartDate = DateUtility.getDate(date: kontest.start_time)
-        let notificationDate = DateUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 10, hours: 0)
+        let notificationDate = DateUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 0, hours: 0)
 
         NotificationManager.instance.scheduleCalendarNotification(notificationContent: NotificationManager.NotificationContent(title: kontest.name, subtitle: kontest.site, body: "Kontest is on \(kontest.start_time)", date: notificationDate), id: kontest.id)
 

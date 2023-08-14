@@ -49,16 +49,18 @@ class DateUtility {
     }
 
     static func isKontestOfPast(kontestEndDate: Date) -> Bool {
-        return kontestEndDate <= Date()
+        let currentDate = Date()
+        let ans = kontestEndDate <= currentDate
+        return ans
     }
 
     static func isKontestOfFuture(kontestStartDate: Date) -> Bool {
         return Date() <= kontestStartDate
     }
 
-    static func isWithinDateRange(startDate: Date, endDate: Date) -> Bool {
+    static func isKontestRunning(kontestStartDate: Date, kontestEndDate: Date) -> Bool {
         let currentDate = Date()
-        return currentDate >= startDate && currentDate <= endDate
+        return currentDate >= kontestStartDate && currentDate <= kontestEndDate
     }
 
     static func getFormattedDuration(fromSeconds seconds: String) -> String? {
@@ -82,7 +84,7 @@ class DateUtility {
 
         let dateComponents = DateComponents(hour: hours, minute: minutes)
 
-        let ans = dateComponents.hour ?? 1 <= 10 ? formatter.string(from: dateComponents) : nil
+        let ans = dateComponents.hour ?? 1 <= 360 ? formatter.string(from: dateComponents) : nil
         return ans
     }
 
@@ -98,11 +100,19 @@ class DateUtility {
         return originalDate
     }
 
-    static func getKontestDate(kontestStartDate: Date, kontestEndDate: Date) -> String {
+    static func getNumericKontestDate(date: Date) -> String {
         #if os(iOS)
-            "\(kontestStartDate.formatted(date: .numeric, time: .omitted)) - \(kontestEndDate.formatted(date: .numeric, time: .omitted))"
+            "\(date.formatted(date: .numeric, time: .omitted))"
         #else
-            "\(kontestStartDate.formatted(date: .abbreviated, time: .omitted)) - \(kontestEndDate.formatted(date: .abbreviated, time: .omitted))"
+            "\(date.formatted(date: .abbreviated, time: .omitted))"
+        #endif
+    }
+
+    static func getKontestDate(date: Date) -> String {
+        #if os(iOS)
+            "\(date.formatted(date: .abbreviated, time: .omitted))"
+        #else
+            "\(date.formatted(date: .abbreviated, time: .omitted))"
         #endif
     }
 }
