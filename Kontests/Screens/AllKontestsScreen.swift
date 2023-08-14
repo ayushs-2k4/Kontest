@@ -92,7 +92,6 @@ struct BlinkingDot: View {
 struct SingleKontentView: View {
     var kontest: KontestModel
     let allKontestViewModel: AllKontestsViewModel
-    @State var showNotificationSetAlert = false
 
     var body: some View {
         let kontestStartDate = DateUtility.getDate(date: kontest.start_time)
@@ -144,20 +143,15 @@ struct SingleKontentView: View {
                 Button {
                     if kontest.isSetForReminder {
                         allKontestViewModel.removePendingNotification(kontest: kontest)
-                        allKontestViewModel.updateIsSetForNotification(kontest: kontest, to: false)
                     }
                     else {
                         allKontestViewModel.setNotification(kontest: kontest)
-                        allKontestViewModel.updateIsSetForNotification(kontest: kontest, to: true)
                     }
-
-                    showNotificationSetAlert = true
 
                 } label: {
                     Image(systemName: kontest.isSetForReminder ? "bell.fill" : "bell")
                 }
                 .help(kontest.isSetForReminder ? "Remove notification for this contest" : "Set notification for this contest")
-                .alert(kontest.isSetForReminder ? "Notification set for: \(kontest.name)" : "Notification cancelled for: \(kontest.name)", isPresented: $showNotificationSetAlert, actions: {})
             }
 
             Spacer()

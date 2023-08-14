@@ -10,7 +10,7 @@ import SwiftUI
 
 @Observable
 class AllKontestsViewModel {
-    let repository = AllKontestsFakeRepository()
+    let repository = KontestRepository()
 
     private var timer: AnyCancellable?
 
@@ -79,6 +79,8 @@ class AllKontestsViewModel {
         let notificationDate = DateUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 0, hours: 0)
 
         NotificationManager.instance.shecduleCalendarNotification(notificationContent: NotificationManager.NotificationContent(title: kontest.name, subtitle: kontest.site, body: "Kontest is on \(kontest.start_time)", date: notificationDate), id: kontest.id)
+
+        updateIsSetForNotification(kontest: kontest, to: true)
     }
 
     func setNotificationForAllKontests() {
@@ -98,6 +100,7 @@ class AllKontestsViewModel {
 
     func removePendingNotification(kontest: KontestModel) {
         NotificationManager.instance.removePendingNotification(identifiers: [kontest.id])
+        updateIsSetForNotification(kontest: kontest, to: false)
     }
 
     func getAllPendingNotifications() {
@@ -148,7 +151,7 @@ class AllKontestsViewModel {
                 indices.append(i)
             }
         }
-        
+
         let indexSet = IndexSet(indices)
         allKontests.remove(atOffsets: indexSet)
     }
