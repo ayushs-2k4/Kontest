@@ -16,6 +16,7 @@ enum ClipboardUtility {
         #if os(macOS)
             let clipboard = NSPasteboard.general
             clipboard.clearContents()
+            clipboard.setString(text, forType: .string)
         #else
             let clipboard = UIPasteboard.general
             clipboard.string = text
