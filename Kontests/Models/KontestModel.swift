@@ -12,8 +12,8 @@ struct KontestModel: Decodable, Identifiable, Equatable {
     let id: String
     let name: String
     let url: String
-    let start_time, end_time, duration, site: String
-    let in_24_hours, status: String
+    let start_time, end_time, duration, site, in_24_hours: String
+    var status: KontestStatus
     var isSetForReminder: Bool
     let logo: String
 }
@@ -22,6 +22,13 @@ extension KontestModel {
     static func from(dto: KontestDTO) -> KontestModel {
         let id = generateUniqueID(dto: dto)
         let isSetForReminder = false
+
+        var status: KontestStatus {
+            let kontestStartDate = DateUtility.getDate(date: dto.start_time)
+            let kontestEndDate = DateUtility.getDate(date: dto.end_time)
+
+            return getKontestStatus(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date())
+        }
 
         return KontestModel(
             id: id,
@@ -32,7 +39,7 @@ extension KontestModel {
             duration: dto.duration,
             site: dto.site,
             in_24_hours: dto.in_24_hours,
-            status: dto.status,
+            status: status,
             isSetForReminder: isSetForReminder,
             logo: getLogo(site: dto.site)
         )
@@ -129,5 +136,28 @@ extension KontestModel {
 
     func removeReminderStatusFromUserDefaults() {
         UserDefaults.standard.removeObject(forKey: id)
+    }
+
+    static func getKontestStatus(kontestStartDate: Date, kontestEndDate: Date) -> KontestStatus {
+        if DateUtility.isKontestOfFuture(kontestStartDate: kontestStartDate) {
+            .Upcoming
+        } else if DateUtility.isKontestOfPast(kontestEndDate: kontestEndDate) {
+            .Ended
+        } else {
+            .Running
+        }
+    }
+
+    func updateKontestStatus() -> KontestStatus {
+        let kontestStartDate = DateUtility.getDate(date: start_time) ?? Date()
+        let kontestEndDate = DateUtility.getDate(date: end_time) ?? Date()
+
+        if DateUtility.isKontestOfFuture(kontestStartDate: kontestStartDate) {
+            return .Upcoming
+        } else if DateUtility.isKontestOfPast(kontestEndDate: kontestEndDate) {
+            return .Ended
+        } else {
+            return .Running
+        }
     }
 }

@@ -11,12 +11,16 @@ struct AllKontestsScreen: View {
     @Bindable var allKontestsViewModel = AllKontestsViewModel.instance
     @State var showRemoveAllNotificationsAlert = false
     @State var showNotificationForAllKontestsAlert = false
+    let isInDevelopmentMode = false
 
     var body: some View {
         NavigationStack {
             ZStack {
                 if allKontestsViewModel.isLoading {
                     ProgressView()
+                }
+                else if allKontestsViewModel.allKontests.isEmpty {
+                    NoKontestsScreen()
                 }
                 else {
                     List {
@@ -35,30 +39,34 @@ struct AllKontestsScreen: View {
                 NotificationManager.instance.setBadgeCountTo0()
             }
             .toolbar {
-                Button {
-                    allKontestsViewModel.getAllPendingNotifications()
-                } label: {
-                    Text("Print all notifs")
+                if isInDevelopmentMode{
+                    Button {
+                        allKontestsViewModel.getAllPendingNotifications()
+                    } label: {
+                        Text("Print all notifs")
+                    }
                 }
 
-                Button {
-                    showNotificationForAllKontestsAlert = true
-                    allKontestsViewModel.setNotificationForAllKontests()
-//                    allKontestsViewModel.getAllPendingNotifications()
-                } label: {
-                    Image(systemName: "bell.fill")
-                }
-                .help("Set Notification for all following kontests") // Tooltip text
-                .alert("Notification for all Kontests set.", isPresented: $showNotificationForAllKontestsAlert, actions: {})
+                if !allKontestsViewModel.allKontests.isEmpty {
+                    Button {
+                        showNotificationForAllKontestsAlert = true
+                        allKontestsViewModel.setNotificationForAllKontests()
+                        //                    allKontestsViewModel.getAllPendingNotifications()
+                    } label: {
+                        Image(systemName: "bell.fill")
+                    }
+                    .help("Set Notification for all following kontests") // Tooltip text
+                    .alert("Notification for all Kontests set.", isPresented: $showNotificationForAllKontestsAlert, actions: {})
 
-                Button {
-                    showRemoveAllNotificationsAlert = true
-                    allKontestsViewModel.removeAllPendingNotifications()
-                } label: {
-                    Image(systemName: "bell.slash")
+                    Button {
+                        showRemoveAllNotificationsAlert = true
+                        allKontestsViewModel.removeAllPendingNotifications()
+                    } label: {
+                        Image(systemName: "bell.slash")
+                    }
+                    .help("Remove All Notifications") // Tooltip text
+                    .alert("All Notifications Removed", isPresented: $showRemoveAllNotificationsAlert, actions: {})
                 }
-                .help("Remove All Notifications") // Tooltip text
-                .alert("All Notifications Removed", isPresented: $showRemoveAllNotificationsAlert, actions: {})
             }
         }
     }
@@ -104,7 +112,7 @@ struct SingleKontentView: View {
                     .aspectRatio(1, contentMode: .fit)
                     .frame(width: FontUtility.getLogoSize())
 
-                let isContestRunning = DateUtility.isWithinDateRange(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date()) || kontest.status == "CODING"
+                let isContestRunning = DateUtility.isWithinDateRange(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date()) || kontest.status == .Running
 
                 if isContestRunning {
                     BlinkingDot(color: .green)

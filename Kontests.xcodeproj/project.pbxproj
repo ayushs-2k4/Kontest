@@ -14,8 +14,10 @@
 		0740839B2A890754009443B7 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0740839A2A890754009443B7 /* NotificationManager.swift */; };
 		0740839E2A890C40009443B7 /* KontestFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0740839D2A890C40009443B7 /* KontestFetcher.swift */; };
 		074083A22A890C79009443B7 /* KontestRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074083A12A890C79009443B7 /* KontestRepository.swift */; };
-		074083A42A890DB3009443B7 /* FakeAllKontestsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074083A32A890DB3009443B7 /* FakeAllKontestsRepository.swift */; };
+		074083A42A890DB3009443B7 /* AllKontestsFakeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074083A32A890DB3009443B7 /* AllKontestsFakeRepository.swift */; };
 		076013B72A89650E008F4085 /* KontestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076013B62A89650E008F4085 /* KontestModel.swift */; };
+		076013B92A8A1A78008F4085 /* KontestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076013B82A8A1A78008F4085 /* KontestStatus.swift */; };
+		076013BB2A8A2376008F4085 /* NoKontestsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076013BA2A8A2376008F4085 /* NoKontestsScreen.swift */; };
 		076016592A87CD52007CE9F5 /* KontestsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076016582A87CD52007CE9F5 /* KontestsApp.swift */; };
 		0760165D2A87CD55007CE9F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0760165C2A87CD55007CE9F5 /* Assets.xcassets */; };
 		076016602A87CD55007CE9F5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0760165F2A87CD55007CE9F5 /* Preview Assets.xcassets */; };
@@ -33,8 +35,10 @@
 		0740839A2A890754009443B7 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		0740839D2A890C40009443B7 /* KontestFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestFetcher.swift; sourceTree = "<group>"; };
 		074083A12A890C79009443B7 /* KontestRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestRepository.swift; sourceTree = "<group>"; };
-		074083A32A890DB3009443B7 /* FakeAllKontestsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeAllKontestsRepository.swift; sourceTree = "<group>"; };
+		074083A32A890DB3009443B7 /* AllKontestsFakeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllKontestsFakeRepository.swift; sourceTree = "<group>"; };
 		076013B62A89650E008F4085 /* KontestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestModel.swift; sourceTree = "<group>"; };
+		076013B82A8A1A78008F4085 /* KontestStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestStatus.swift; sourceTree = "<group>"; };
+		076013BA2A8A2376008F4085 /* NoKontestsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoKontestsScreen.swift; sourceTree = "<group>"; };
 		076016552A87CD52007CE9F5 /* Kontests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kontests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		076016582A87CD52007CE9F5 /* KontestsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestsApp.swift; sourceTree = "<group>"; };
 		0760165C2A87CD55007CE9F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -68,7 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				074083A12A890C79009443B7 /* KontestRepository.swift */,
-				074083A32A890DB3009443B7 /* FakeAllKontestsRepository.swift */,
+				074083A32A890DB3009443B7 /* AllKontestsFakeRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -77,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				076013B62A89650E008F4085 /* KontestModel.swift */,
+				076013B82A8A1A78008F4085 /* KontestStatus.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -134,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				076016692A87CD72007CE9F5 /* AllKontestsScreen.swift */,
+				076013BA2A8A2376008F4085 /* NoKontestsScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -230,7 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0740839E2A890C40009443B7 /* KontestFetcher.swift in Sources */,
-				074083A42A890DB3009443B7 /* FakeAllKontestsRepository.swift in Sources */,
+				074083A42A890DB3009443B7 /* AllKontestsFakeRepository.swift in Sources */,
 				074083932A890572009443B7 /* ClipboardUtility.swift in Sources */,
 				074083972A89066F009443B7 /* CalendarUtility.swift in Sources */,
 				074083A22A890C79009443B7 /* KontestRepository.swift in Sources */,
@@ -238,9 +244,11 @@
 				0740839B2A890754009443B7 /* NotificationManager.swift in Sources */,
 				076016702A87CD72007CE9F5 /* DownloadData.swift in Sources */,
 				076016592A87CD52007CE9F5 /* KontestsApp.swift in Sources */,
+				076013BB2A8A2376008F4085 /* NoKontestsScreen.swift in Sources */,
 				076016712A87CD72007CE9F5 /* AllKontestsViewModel.swift in Sources */,
 				0760166F2A87CD72007CE9F5 /* AllKontestsScreen.swift in Sources */,
 				076013B72A89650E008F4085 /* KontestModel.swift in Sources */,
+				076013B92A8A1A78008F4085 /* KontestStatus.swift in Sources */,
 				0760166E2A87CD72007CE9F5 /* KontestDTO.swift in Sources */,
 				074083992A8906B8009443B7 /* FontUtility.swift in Sources */,
 			);

@@ -5,10 +5,15 @@
 //  Created by Ayush Singhal on 12/08/23.
 //
 
+import Combine
 import SwiftUI
 
 @Observable
 class AllKontestsViewModel {
+    let repository = AllKontestsFakeRepository()
+
+    private var timer: AnyCancellable?
+
     var allKontests: [KontestModel] = []
     var searchText: String = "" {
         didSet {
@@ -20,8 +25,6 @@ class AllKontestsViewModel {
 
     private var backupKontests: [KontestModel] = []
 
-    let repository = KontestRepository()
-
     static let instance = AllKontestsViewModel() // Singleton instance
 
     private init() {
@@ -31,6 +34,12 @@ class AllKontestsViewModel {
             isLoading = false
             backupKontests = allKontests
             removeReminderStatusFromUserDefaults()
+
+            self.timer = Timer.publish(every: 10, on: .main, in: .default)
+                .autoconnect()
+                .sink { [weak self] _ in
+                    self?.updateKontestStatus()
+                }
         }
     }
 
@@ -128,5 +137,19 @@ class AllKontestsViewModel {
         }
 
         return true
+    }
+
+    private func updateKontestStatus() {
+        var indices: [Int] = []
+        for i in 0 ..< allKontests.count {
+            allKontests[i].status = allKontests[i].updateKontestStatus()
+
+            if allKontests[i].status == .Ended {
+                indices.append(i)
+            }
+        }
+        
+        let indexSet = IndexSet(indices)
+        allKontests.remove(atOffsets: indexSet)
     }
 }
