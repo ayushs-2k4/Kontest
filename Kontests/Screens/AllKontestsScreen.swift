@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct AllKontestsScreen: View {
-    let allKontestsViewModel = AllKontestsViewModel.instance
+    @Bindable var allKontestsViewModel = AllKontestsViewModel.instance
     @State var showRemoveAllNotificationsAlert = false
     @State var showNotificationForAllKontestsAlert = false
 
     var body: some View {
         NavigationStack {
             ZStack {
-                if allKontestsViewModel.allKontests.isEmpty {
+                if allKontestsViewModel.isLoading {
                     ProgressView()
                 }
                 else {
@@ -27,6 +27,7 @@ struct AllKontestsScreen: View {
                             .buttonStyle(.plain)
                         }
                     }
+//                    .searchable(text: $allKontestsViewModel.searchText)
                 }
             }
             .navigationTitle("Kontests")
@@ -34,11 +35,11 @@ struct AllKontestsScreen: View {
                 NotificationManager.instance.setBadgeCountTo0()
             }
             .toolbar {
-//                Button {
-//                    allKontestsViewModel.getAllPendingNotifications()
-//                } label: {
-//                    Text("Print all notifs")
-//                }
+                Button {
+                    allKontestsViewModel.getAllPendingNotifications()
+                } label: {
+                    Text("Print all notifs")
+                }
 
                 Button {
                     showNotificationForAllKontestsAlert = true
@@ -147,7 +148,7 @@ struct SingleKontentView: View {
                 } label: {
                     Image(systemName: kontest.isSetForReminder ? "bell.fill" : "bell")
                 }
-                .help("Set notification for this contest")
+                .help(kontest.isSetForReminder ? "Remove notification for this contest" : "Set notification for this contest")
                 .alert(kontest.isSetForReminder ? "Notification set for: \(kontest.name)" : "Notification cancelled for: \(kontest.name)", isPresented: $showNotificationSetAlert, actions: {})
             }
 

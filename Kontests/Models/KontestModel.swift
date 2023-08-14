@@ -117,7 +117,17 @@ extension KontestModel {
         }
     }
 
-    mutating func toggleIsSetForReminder() {
-        isSetForReminder.toggle()
+    // Save reminder status to UserDefaults
+    func saveReminderStatus() {
+        UserDefaults.standard.set(isSetForReminder, forKey: id)
+    }
+
+    // Load reminder status from UserDefaults
+    mutating func loadReminderStatus() {
+        isSetForReminder = UserDefaults.standard.bool(forKey: id)
+    }
+
+    func removeReminderStatusFromUserDefaults() {
+        UserDefaults.standard.removeObject(forKey: id)
     }
 }

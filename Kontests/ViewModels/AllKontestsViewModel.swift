@@ -10,13 +10,27 @@ import SwiftUI
 @Observable
 class AllKontestsViewModel {
     var allKontests: [KontestModel] = []
+    var searchText: String = "" {
+        didSet {
+            updateFilteredKontests()
+        }
+    }
+
+    var isLoading = false
+
+    private var backupKontests: [KontestModel] = []
+
     let repository = KontestRepository()
 
     static let instance = AllKontestsViewModel() // Singleton instance
 
     private init() {
+        isLoading = true
         Task {
             await getAllKontests()
+            isLoading = false
+            backupKontests = allKontests
+            removeReminderStatusFromUserDefaults()
         }
     }
 
@@ -27,7 +41,10 @@ class AllKontestsViewModel {
             await MainActor.run {
                 self.allKontests = fetchedKontests
                     .map { dto in
-                        KontestModel.from(dto: dto)
+                        var kontest = KontestModel.from(dto: dto)
+                        // Load Reminder status
+                        kontest.loadReminderStatus()
+                        return kontest
                     }
                     .filter { kontest in
                         let kontestDuration = DateUtility.getFormattedDuration(fromSeconds: kontest.duration) ?? ""
@@ -50,7 +67,7 @@ class AllKontestsViewModel {
 
     func setNotification(kontest: KontestModel) {
         let kontestStartDate = DateUtility.getDate(date: kontest.start_time)
-        let notificationDate = DateUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 10, hours: 0)
+        let notificationDate = DateUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 0, hours: 0)
 
         NotificationManager.instance.shecduleCalendarNotification(notificationContent: NotificationManager.NotificationContent(title: kontest.name, subtitle: kontest.site, body: "Kontest is on \(kontest.start_time)", date: notificationDate), id: kontest.id)
     }
@@ -81,6 +98,35 @@ class AllKontestsViewModel {
     func updateIsSetForNotification(kontest: KontestModel, to: Bool) {
         if let index = allKontests.firstIndex(where: { $0 == kontest }) {
             allKontests[index].isSetForReminder = to
+            allKontests[index].saveReminderStatus()
         }
+    }
+
+    private func updateFilteredKontests() {
+        let filteredKontests = backupKontests
+            .filter { kontest in
+                kontest.name.localizedCaseInsensitiveContains(searchText) || kontest.site.localizedCaseInsensitiveContains(searchText) || kontest.url.localizedCaseInsensitiveContains(searchText)
+            }
+
+        // Update the filtered kontests
+        allKontests = searchText.isEmpty ? backupKontests : filteredKontests
+    }
+
+    private func removeReminderStatusFromUserDefaults() {
+        for kontest in allKontests {
+            if isKontestEnded(kontestEndDate: kontest.end_time) {
+                kontest.removeReminderStatusFromUserDefaults()
+                print("kontest with id: \(kontest.id)'s notification is deleted as kontest is ended.")
+            }
+        }
+    }
+
+    private func isKontestEnded(kontestEndDate: String) -> Bool {
+        let currentDate = Date()
+        if let formattedKontestEndDate = DateUtility.getDate(date: kontestEndDate) {
+            return formattedKontestEndDate < currentDate
+        }
+
+        return true
     }
 }
