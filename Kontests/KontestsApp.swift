@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct KontestsApp: App {
+    
+    @State private var allKontestsViewModel = AllKontestsViewModel()
+    
     var body: some Scene {
         WindowGroup {
             AllKontestsScreen()
+                .environment(allKontestsViewModel)
         }
     }
 }

@@ -25,9 +25,7 @@ class AllKontestsViewModel {
 
     private var backupKontests: [KontestModel] = []
 
-    static let instance = AllKontestsViewModel() // Singleton instance
-
-    private init() {
+    init() {
         isLoading = true
         Task {
             await getAllKontests()
@@ -71,14 +69,14 @@ class AllKontestsViewModel {
     func setNotification(title: String, subtitle: String, body: String, kontestStartDate: Date?) {
         let notificationDate = DateUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 10, hours: 0)
 
-        NotificationManager.instance.shecduleCalendarNotification(notificationContent: NotificationManager.NotificationContent(title: title, subtitle: subtitle, body: body, date: notificationDate))
+        NotificationManager.instance.scheduleCalendarNotification(notificationContent: NotificationManager.NotificationContent(title: title, subtitle: subtitle, body: body, date: notificationDate))
     }
 
     func setNotification(kontest: KontestModel) {
         let kontestStartDate = DateUtility.getDate(date: kontest.start_time)
-        let notificationDate = DateUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 0, hours: 0)
+        let notificationDate = DateUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 10, hours: 0)
 
-        NotificationManager.instance.shecduleCalendarNotification(notificationContent: NotificationManager.NotificationContent(title: kontest.name, subtitle: kontest.site, body: "Kontest is on \(kontest.start_time)", date: notificationDate), id: kontest.id)
+        NotificationManager.instance.scheduleCalendarNotification(notificationContent: NotificationManager.NotificationContent(title: kontest.name, subtitle: kontest.site, body: "Kontest is on \(kontest.start_time)", date: notificationDate), id: kontest.id)
 
         updateIsSetForNotification(kontest: kontest, to: true)
     }

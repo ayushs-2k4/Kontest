@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AllKontestsScreen: View {
-    @Bindable var allKontestsViewModel = AllKontestsViewModel.instance
+    @Environment(AllKontestsViewModel.self) private var allKontestsViewModel
     @State var showRemoveAllNotificationsAlert = false
     @State var showNotificationForAllKontestsAlert = false
     let isInDevelopmentMode = false
@@ -28,10 +28,10 @@ struct AllKontestsScreen: View {
                             Link(destination: URL(string: kontest.url)!, label: {
                                 SingleKontentView(kontest: kontest, allKontestViewModel: allKontestsViewModel)
                             })
-                            .buttonStyle(.plain)
+                            .buttonStyle(.automatic)
                         }
                     }
-//                    .searchable(text: $allKontestsViewModel.searchText)
+//                    .searchable(text: Bindable(allKontestsViewModel).searchText)
                 }
             }
             .navigationTitle("Kontests")
@@ -39,11 +39,17 @@ struct AllKontestsScreen: View {
                 NotificationManager.instance.setBadgeCountTo0()
             }
             .toolbar {
-                if isInDevelopmentMode{
+                if isInDevelopmentMode {
                     Button {
                         allKontestsViewModel.getAllPendingNotifications()
                     } label: {
                         Text("Print all notifs")
+                    }
+
+                    Button {
+                        NotificationManager.instance.scheduleIntervalNotification()
+                    } label: {
+                        Text("Schedule 5 seconds Notification")
                     }
                 }
 
@@ -93,6 +99,8 @@ struct SingleKontentView: View {
     var kontest: KontestModel
     let allKontestViewModel: AllKontestsViewModel
 
+    @Environment(\.colorScheme) private var colorScheme
+
     var body: some View {
         let kontestStartDate = DateUtility.getDate(date: kontest.start_time)
         let kontestEndDate = DateUtility.getDate(date: kontest.end_time)
@@ -121,6 +129,7 @@ struct SingleKontentView: View {
                     EmptyView()
                 }
             }
+            .foregroundStyle(colorScheme == .light ? .black : .white)
 
             VStack(alignment: .leading) {
                 Text(kontest.site.uppercased())
@@ -129,6 +138,7 @@ struct SingleKontentView: View {
 
                 Text(kontest.name)
             }
+            .foregroundStyle(colorScheme == .light ? .black : .white)
 
             #if !os(iOS)
                 Button {
@@ -178,6 +188,7 @@ struct SingleKontentView: View {
                     Text("No date provided")
                 }
             }
+            .foregroundStyle(colorScheme == .light ? .black : .white)
             .font(.footnote)
 
             Image(systemName: "chevron.right")
@@ -190,10 +201,11 @@ struct SingleKontentView: View {
 
 #Preview {
     AllKontestsScreen()
+        .environment(AllKontestsViewModel())
 }
 
 #Preview("SingleKontentView") {
-    let allKontestViewModel = AllKontestsViewModel.instance
+    let allKontestViewModel = AllKontestsViewModel()
 
     return List {
         SingleKontentView(kontest: KontestModel.from(dto: KontestDTO(name: "ProjectEuler+", url: "https://hackerrank.com/contests/projecteuler", start_time: "2014-07-07T15:38:00.000Z", end_time: "2024-07-30T18:30:00.000Z", duration: "317616720.0", site: "HackerRank", in_24_hours: "No", status: "No")), allKontestViewModel: allKontestViewModel)

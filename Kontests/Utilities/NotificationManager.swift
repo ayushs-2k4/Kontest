@@ -22,7 +22,7 @@ class NotificationManager {
         }
     }
 
-    func shecduleIntervalNotification(id: String = UUID().uuidString) {
+    func scheduleIntervalNotification(id: String = UUID().uuidString) {
         let timedNotificationContent = UNMutableNotificationContent()
         timedNotificationContent.title = "This is my Timed notification"
         timedNotificationContent.subtitle = "This was sooo easy!"
@@ -39,13 +39,14 @@ class NotificationManager {
         UNUserNotificationCenter.current().add(timeNotificationRequest)
     }
 
-    func shecduleCalendarNotification(notificationContent: NotificationContent, id: String = UUID().uuidString) {
+    func scheduleCalendarNotification(notificationContent: NotificationContent, id: String = UUID().uuidString) {
         checkNotificationPermissionGranted()
 
         let calendarNotificationContent = UNMutableNotificationContent()
         calendarNotificationContent.title = notificationContent.title
         calendarNotificationContent.subtitle = notificationContent.subtitle
         calendarNotificationContent.body = notificationContent.body
+        calendarNotificationContent.sound = .default
         calendarNotificationContent.badge = 1
 
         let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: notificationContent.date)
@@ -97,7 +98,7 @@ class NotificationManager {
 
     func shecduleCalendarNotifications(notifications: [NotificationContent]) {
         for notification in notifications {
-            shecduleCalendarNotification(notificationContent: notification)
+            scheduleCalendarNotification(notificationContent: notification)
         }
     }
 
