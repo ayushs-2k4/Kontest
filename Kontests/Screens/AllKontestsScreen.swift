@@ -114,10 +114,12 @@ struct SingleKontentView: View {
 //                    Text("Add to Calendar")
 //                })
 
+                #if os(macOS)
                 Image(KontestModel.getLogo(site: kontest.site))
                     .resizable()
                     .aspectRatio(1, contentMode: .fit)
                     .frame(width: FontUtility.getLogoSize())
+                #endif
 
                 let isContestRunning = DateUtility.isWithinDateRange(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date()) || kontest.status == .Running
 
@@ -126,7 +128,12 @@ struct SingleKontentView: View {
                         .frame(width: 10, height: 10)
                 }
                 else {
+                    #if os(macOS)
                     EmptyView()
+                    #else
+                    BlinkingDot(color: .clear)
+                        .frame(width: 10, height: 10)
+                    #endif
                 }
             }
             .foregroundStyle(colorScheme == .light ? .black : .white)
@@ -135,18 +142,23 @@ struct SingleKontentView: View {
                 Text(kontest.site.uppercased())
                     .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.site))
                     .bold()
+                    .font(FontUtility.getSiteFontSize())
 
                 Text(kontest.name)
+                    .font(FontUtility.getNameFontSize())
+                #if os(iOS)
+                    .padding(.top, 1)
+                #endif
             }
             .foregroundStyle(colorScheme == .light ? .black : .white)
 
             #if !os(iOS)
-                Button {
-                    ClipboardUtility.copyToClipBoard(kontest.url)
-                } label: {
-                    Image(systemName: "link")
-                }
-                .help("Copy link")
+            Button {
+                ClipboardUtility.copyToClipBoard(kontest.url)
+            } label: {
+                Image(systemName: "link")
+            }
+            .help("Copy link")
             #endif
 
             if DateUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) {
@@ -170,7 +182,7 @@ struct SingleKontentView: View {
                 if kontestStartDate != nil && kontestEndDate != nil {
                     Text("\(kontestStartDate!.formatted(date: .omitted, time: .shortened)) - \(kontestEndDate!.formatted(date: .omitted, time: .shortened))")
                         .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.site))
-                        .font(.custom("timeFont", fixedSize: FontUtility.getTimeFontSize()))
+                        .font(FontUtility.getTimeFontSize())
                         .bold()
 
                     HStack {
@@ -178,11 +190,11 @@ struct SingleKontentView: View {
 
                         Text(DateUtility.getFormattedDuration(fromSeconds: kontest.duration) ?? "")
                     }
-                    .font(.custom("dateFont", fixedSize: FontUtility.getDateFontSize()))
+                    .font(FontUtility.getDateFontSize())
                     .padding(.vertical, 5)
 
-                    Text("\(kontestStartDate!.formatted(date: .abbreviated, time: .omitted)) - \(kontestEndDate!.formatted(date: .abbreviated, time: .omitted))")
-                        .font(.custom("dateFont", fixedSize: FontUtility.getDateFontSize()))
+                    Text(DateUtility.getKontestDate(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date()))
+                        .font(FontUtility.getDateFontSize())
                 }
                 else {
                     Text("No date provided")

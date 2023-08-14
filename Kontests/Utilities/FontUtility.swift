@@ -6,29 +6,62 @@
 //
 
 import Foundation
+import SwiftUI
 
 class FontUtility {
     static func getLogoSize() -> CGFloat {
         #if os(iOS)
-            return 25
+        return 25
         #else
-            return 40
+        return 40
         #endif
     }
 
-    static func getTimeFontSize() -> CGFloat {
+    static func getSiteFontSize() -> Font {
         #if os(iOS)
-            return 15
+        return Font.title3
         #else
-            return 25
+        return Font.title
         #endif
     }
 
-    static func getDateFontSize() -> CGFloat {
+    static func getNameFontSize() -> Font {
         #if os(iOS)
-            return 12
+        return .caption2
         #else
-            return 17
+        return .body
+        #endif
+    }
+
+//    static func getTimeFontSize() -> CGFloat {
+//        #if os(iOS)
+//            return 15
+//        #else
+//            return 25
+//        #endif
+//    }
+
+    static func getTimeFontSize() -> Font {
+        #if os(iOS)
+        return Font.caption
+        #else
+        return Font.title2
+        #endif
+    }
+
+//    static func getDateFontSize() -> CGFloat {
+//        #if os(iOS)
+//            return 12
+//        #else
+//            return 17
+//        #endif
+//    }
+
+    static func getDateFontSize() -> Font {
+        #if os(iOS)
+        return .caption2
+        #else
+        return .body
         #endif
     }
 }

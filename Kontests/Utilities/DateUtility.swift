@@ -97,4 +97,12 @@ class DateUtility {
 
         return originalDate
     }
+
+    static func getKontestDate(kontestStartDate: Date, kontestEndDate: Date) -> String {
+        #if os(iOS)
+            "\(kontestStartDate.formatted(date: .numeric, time: .omitted)) - \(kontestEndDate.formatted(date: .numeric, time: .omitted))"
+        #else
+            "\(kontestStartDate.formatted(date: .abbreviated, time: .omitted)) - \(kontestEndDate.formatted(date: .abbreviated, time: .omitted))"
+        #endif
+    }
 }
