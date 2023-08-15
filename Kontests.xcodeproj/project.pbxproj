@@ -25,7 +25,7 @@
 		0760166F2A87CD72007CE9F5 /* AllKontestsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076016692A87CD72007CE9F5 /* AllKontestsScreen.swift */; };
 		076016702A87CD72007CE9F5 /* DownloadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0760166B2A87CD72007CE9F5 /* DownloadData.swift */; };
 		076016712A87CD72007CE9F5 /* AllKontestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0760166D2A87CD72007CE9F5 /* AllKontestsViewModel.swift */; };
-		076A1E7F2A8A8F7B00FBBB4C /* SingleKontentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A1E7E2A8A8F7B00FBBB4C /* SingleKontentView.swift */; };
+		076A1E7F2A8A8F7B00FBBB4C /* SingleKontestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A1E7E2A8A8F7B00FBBB4C /* SingleKontestView.swift */; };
 		076A1E812A8AA36300FBBB4C /* BlinkingDotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A1E802A8AA36300FBBB4C /* BlinkingDotView.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,7 +49,7 @@
 		076016692A87CD72007CE9F5 /* AllKontestsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllKontestsScreen.swift; sourceTree = "<group>"; };
 		0760166B2A87CD72007CE9F5 /* DownloadData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadData.swift; sourceTree = "<group>"; };
 		0760166D2A87CD72007CE9F5 /* AllKontestsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllKontestsViewModel.swift; sourceTree = "<group>"; };
-		076A1E7E2A8A8F7B00FBBB4C /* SingleKontentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleKontentView.swift; sourceTree = "<group>"; };
+		076A1E7E2A8A8F7B00FBBB4C /* SingleKontestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleKontestView.swift; sourceTree = "<group>"; };
 		076A1E802A8AA36300FBBB4C /* BlinkingDotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlinkingDotView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,7 +145,7 @@
 				076016692A87CD72007CE9F5 /* AllKontestsScreen.swift */,
 				076013BA2A8A2376008F4085 /* NoKontestsScreen.swift */,
 				074774DC2A8A748800B44A29 /* KontestDetailsView.swift */,
-				076A1E7E2A8A8F7B00FBBB4C /* SingleKontentView.swift */,
+				076A1E7E2A8A8F7B00FBBB4C /* SingleKontestView.swift */,
 				076A1E802A8AA36300FBBB4C /* BlinkingDotView.swift */,
 			);
 			path = Screens;
@@ -252,7 +252,7 @@
 				076016592A87CD52007CE9F5 /* KontestsApp.swift in Sources */,
 				076013BB2A8A2376008F4085 /* NoKontestsScreen.swift in Sources */,
 				076016712A87CD72007CE9F5 /* AllKontestsViewModel.swift in Sources */,
-				076A1E7F2A8A8F7B00FBBB4C /* SingleKontentView.swift in Sources */,
+				076A1E7F2A8A8F7B00FBBB4C /* SingleKontestView.swift in Sources */,
 				0760166F2A87CD72007CE9F5 /* AllKontestsScreen.swift in Sources */,
 				076A1E812A8AA36300FBBB4C /* BlinkingDotView.swift in Sources */,
 				076013B72A89650E008F4085 /* KontestModel.swift in Sources */,

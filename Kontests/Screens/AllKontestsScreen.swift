@@ -26,7 +26,7 @@ struct AllKontestsScreen: View {
                         let tomorrow = CalendarUtility.getTomorrow()
                         let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
 
-                        let ongoingKontests = allKontestsViewModel.allKontests.filter { CalendarUtility.getDate(date: $0.start_time) ?? Date() <= today && CalendarUtility.getDate(date: $0.end_time) ?? Date() >= today }
+                        let ongoingKontests = allKontestsViewModel.allKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? Date(), kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? Date()) }
 
                         let laterTodayKontests = allKontestsViewModel.allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? Date() < tomorrow) && !(ongoingKontests.contains($0)) }
 
@@ -111,11 +111,11 @@ struct AllKontestsScreen: View {
             ForEach(kontests) { kontest in
                 #if os(macOS)
                     Link(destination: URL(string: kontest.url)!, label: {
-                        SingleKontentView(kontest: kontest, allKontestsViewModel: allKontestsViewModel)
+                        SingleKontestView(kontest: kontest, allKontestsViewModel: allKontestsViewModel)
                     })
                 #else
                     NavigationLink(value: kontest) {
-                        SingleKontentView(kontest: kontest, allKontestsViewModel: allKontestsViewModel)
+                        SingleKontestView(kontest: kontest, allKontestsViewModel: allKontestsViewModel)
                     }
                 #endif
             }
