@@ -69,7 +69,7 @@ class AllKontestsViewModel {
     func setNotification(title: String, subtitle: String, body: String, kontestStartDate: Date?) {
         let notificationDate = DateUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 10, hours: 0)
 
-        NotificationManager.instance.scheduleCalendarNotification(notificationContent: NotificationManager.NotificationContent(title: title, subtitle: subtitle, body: body, date: notificationDate))
+        LocalNotificationManager.instance.scheduleCalendarNotification(notificationContent: LocalNotificationManager.NotificationContent(title: title, subtitle: subtitle, body: body, date: notificationDate))
     }
 
     func setNotification(kontest: KontestModel) {
@@ -77,7 +77,7 @@ class AllKontestsViewModel {
         let notificationDate = DateUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 10, hours: 0)
         let formattedKontestStartDate = kontestStartDate?.formatted(date: .abbreviated, time: .shortened) ?? Date().formatted(date: .abbreviated, time: .shortened)
 
-        NotificationManager.instance.scheduleCalendarNotification(notificationContent: NotificationManager.NotificationContent(title: kontest.name, subtitle: kontest.site, body: "\(kontest.name) is on \(formattedKontestStartDate)", date: notificationDate), id: kontest.id)
+        LocalNotificationManager.instance.scheduleCalendarNotification(notificationContent: LocalNotificationManager.NotificationContent(title: kontest.name, subtitle: kontest.site, body: "\(kontest.name) is on \(formattedKontestStartDate)", date: notificationDate), id: kontest.id)
 
         updateIsSetForNotification(kontest: kontest, to: true)
     }
@@ -91,19 +91,19 @@ class AllKontestsViewModel {
     }
 
     func removeAllPendingNotifications() {
-        NotificationManager.instance.removeAllPendingNotifications()
+        LocalNotificationManager.instance.removeAllPendingNotifications()
         for i in 0 ..< allKontests.count {
             updateIsSetForNotification(kontest: allKontests[i], to: false)
         }
     }
 
     func removePendingNotification(kontest: KontestModel) {
-        NotificationManager.instance.removePendingNotification(identifiers: [kontest.id])
+        LocalNotificationManager.instance.removePendingNotification(identifiers: [kontest.id])
         updateIsSetForNotification(kontest: kontest, to: false)
     }
 
     func getAllPendingNotifications() {
-        NotificationManager.instance.getAllPendingNotifications()
+        LocalNotificationManager.instance.getAllPendingNotifications()
     }
 
     func updateIsSetForNotification(kontest: KontestModel, to: Bool) {

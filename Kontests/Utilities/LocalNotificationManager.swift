@@ -7,13 +7,32 @@
 
 import UserNotifications
 
-class NotificationManager {
-    static let instance = NotificationManager() // singleton
-    private init() {}
+class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        print(userInfo)
+        NSLog("NSLOG: UserInfo: \(userInfo)")
+
+        completionHandler()
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner, .sound, .badge])
+    }
+}
+
+class LocalNotificationManager {
+    static let instance = LocalNotificationManager() // singleton
+    let center = UNUserNotificationCenter.current()
+    private var delegate: NotificationDelegate = .init()
+
+    private init() {
+        center.delegate = delegate
+    }
 
     func requestAuthorization() {
         let options: UNAuthorizationOptions = [.alert, .sound, .badge]
-        UNUserNotificationCenter.current().requestAuthorization(options: options) { _, error in
+        center.requestAuthorization(options: options) { _, error in
             if let error {
                 print("ERROR: \(error)")
             } else {
@@ -29,6 +48,9 @@ class NotificationManager {
         timedNotificationContent.body = "This is notification body"
         timedNotificationContent.sound = .default
         timedNotificationContent.badge = 1
+        timedNotificationContent.userInfo = ["nextViewInterval": "loadingViewInterval"]
+
+//        let userInfo: [AnyHashable: Any] = ["nextViewInterval": "loadingViewInterval"]
 
         // time
         let timeTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
@@ -36,7 +58,7 @@ class NotificationManager {
         let timeNotificationRequest = UNNotificationRequest(identifier: id, content: timedNotificationContent, trigger: timeTrigger)
         print("Scheduled Timed notification of after 5 seconds")
 
-        UNUserNotificationCenter.current().add(timeNotificationRequest)
+        center.add(timeNotificationRequest)
     }
 
     func scheduleCalendarNotification(notificationContent: NotificationContent, id: String = UUID().uuidString) {
@@ -51,17 +73,20 @@ class NotificationManager {
 
         let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: notificationContent.date)
 
+//        let calendarNotificationContentAction = UNNotificationAction(identifier: id, title: "View Contest")
+        let userInfo: [AnyHashable: Any] = ["nextView": "loadingView"]
+        calendarNotificationContent.userInfo = userInfo
+
         let calendarTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
 
         let calendarNotificationRequest = UNNotificationRequest(identifier: id, content: calendarNotificationContent, trigger: calendarTrigger)
 
         print("Notification setted for: \(notificationContent.date)")
 
-        UNUserNotificationCenter.current().add(calendarNotificationRequest)
+        center.add(calendarNotificationRequest)
     }
 
     func checkNotificationPermissionGranted() {
-        let center = UNUserNotificationCenter.current()
         center.getNotificationSettings { settings in
             if settings.authorizationStatus != .authorized {
                 self.requestAuthorization()
@@ -70,11 +95,11 @@ class NotificationManager {
     }
 
     func setBadgeCountTo0() {
-        UNUserNotificationCenter.current().setBadgeCount(0)
+        center.setBadgeCount(0)
     }
 
     func getAllPendingNotifications() {
-        UNUserNotificationCenter.current().getPendingNotificationRequests { requests in
+        center.getPendingNotificationRequests { requests in
             for request in requests {
                 print("Identifier: \(request.identifier)")
                 print("Title: \(request.content.title)")
@@ -89,11 +114,11 @@ class NotificationManager {
     }
 
     func removeAllPendingNotifications() {
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        center.removeAllPendingNotificationRequests()
     }
 
     func removePendingNotification(identifiers: [String]) {
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: identifiers)
+        center.removePendingNotificationRequests(withIdentifiers: identifiers)
     }
 
     func shecduleCalendarNotifications(notifications: [NotificationContent]) {

@@ -14,7 +14,7 @@ class AllKontestsFakeRepository: KontestFetcher {
 //        let startTime = "2023-08-14 17:42:00 UTC"
 //        let endTime = "2023-08-17 17:43:00 UTC"
         
-        let startTime = "2023-08-15 5:39:00 UTC"
+        let startTime = "2023-08-15 6:2:00 UTC"
         let endTime = "2023-08-17 17:43:00 UTC"
 
         let allKontests: [KontestDTO] = [

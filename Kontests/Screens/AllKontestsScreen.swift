@@ -42,7 +42,7 @@ struct AllKontestsScreen: View {
             }
             .navigationTitle("Kontests")
             .onAppear {
-                NotificationManager.instance.setBadgeCountTo0()
+                LocalNotificationManager.instance.setBadgeCountTo0()
             }
             .toolbar {
                 if isInDevelopmentMode {
@@ -56,7 +56,7 @@ struct AllKontestsScreen: View {
 
                     ToolbarItem(placement: .automatic) { // change the placement here!
                         Button {
-                            NotificationManager.instance.scheduleIntervalNotification()
+                            LocalNotificationManager.instance.scheduleIntervalNotification()
                         } label: {
                             Text("Schedule 5 seconds Notification")
                         }
