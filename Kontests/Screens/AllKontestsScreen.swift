@@ -26,13 +26,13 @@ struct AllKontestsScreen: View {
                         let tomorrow = CalendarUtility.getTomorrow()
                         let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
 
-                        let ongoingKontests = allKontestsViewModel.allKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? Date(), kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? Date()) }
+                        let ongoingKontests = allKontestsViewModel.allKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? today, kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? today) }
 
-                        let laterTodayKontests = allKontestsViewModel.allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? Date() < tomorrow) && !(ongoingKontests.contains($0)) }
+                        let laterTodayKontests = allKontestsViewModel.allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? today < tomorrow) && !(ongoingKontests.contains($0)) }
 
-                        let tomorrowKontests = allKontestsViewModel.allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? Date() >= tomorrow) && (CalendarUtility.getDate(date: $0.start_time) ?? Date() < dayAfterTomorrow) }
+                        let tomorrowKontests = allKontestsViewModel.allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? today >= tomorrow) && (CalendarUtility.getDate(date: $0.start_time) ?? today < dayAfterTomorrow) }
 
-                        let laterKontests = allKontestsViewModel.allKontests.filter { CalendarUtility.getDate(date: $0.start_time) ?? Date() >= dayAfterTomorrow }
+                        let laterKontests = allKontestsViewModel.allKontests.filter { CalendarUtility.getDate(date: $0.start_time) ?? today >= dayAfterTomorrow }
 
                         if ongoingKontests.count > 0 {
                             createSection(title: "Live Now", kontests: ongoingKontests)
