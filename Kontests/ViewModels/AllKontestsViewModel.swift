@@ -75,8 +75,9 @@ class AllKontestsViewModel {
     func setNotification(kontest: KontestModel) {
         let kontestStartDate = DateUtility.getDate(date: kontest.start_time)
         let notificationDate = DateUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 10, hours: 0)
+        let formattedKontestStartDate = kontestStartDate?.formatted(date: .abbreviated, time: .shortened) ?? Date().formatted(date: .abbreviated, time: .shortened)
 
-        NotificationManager.instance.scheduleCalendarNotification(notificationContent: NotificationManager.NotificationContent(title: kontest.name, subtitle: kontest.site, body: "Kontest is on \(kontest.start_time)", date: notificationDate), id: kontest.id)
+        NotificationManager.instance.scheduleCalendarNotification(notificationContent: NotificationManager.NotificationContent(title: kontest.name, subtitle: kontest.site, body: "\(kontest.name) is on \(formattedKontestStartDate)", date: notificationDate), id: kontest.id)
 
         updateIsSetForNotification(kontest: kontest, to: true)
     }
