@@ -23,8 +23,8 @@ struct AllKontestsScreen: View {
                 } else {
                     List {
                         let today = Date()
-                        let tomorrow = getTomorrow()
-                        let dayAfterTomorrow = getDayAfterTomorrow()
+                        let tomorrow = CalendarUtility.getTomorrow()
+                        let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
 
                         let ongoingKontests = allKontestsViewModel.allKontests.filter { CalendarUtility.getDate(date: $0.start_time) ?? Date() <= today && CalendarUtility.getDate(date: $0.end_time) ?? Date() >= today }
 
@@ -122,19 +122,6 @@ struct AllKontestsScreen: View {
         } header: {
             Text(title)
         }
-    }
-
-    func getTomorrow() -> Date {
-        let today = Date()
-        let tomorrow = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: today)!
-        return tomorrow
-    }
-    
-    func getDayAfterTomorrow() -> Date {
-        let today = Date()
-        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
-        let dayAfterTomorrow = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: tomorrow)!
-        return dayAfterTomorrow
     }
 }
 
