@@ -49,8 +49,8 @@ extension KontestModel {
         let isSetForReminder = false
 
         var status: KontestStatus {
-            let kontestStartDate = DateUtility.getDate(date: dto.start_time)
-            let kontestEndDate = DateUtility.getDate(date: dto.end_time)
+            let kontestStartDate = CalendarUtility.getDate(date: dto.start_time)
+            let kontestEndDate = CalendarUtility.getDate(date: dto.end_time)
 
             return getKontestStatus(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date())
         }
@@ -164,9 +164,9 @@ extension KontestModel {
     }
 
     static func getKontestStatus(kontestStartDate: Date, kontestEndDate: Date) -> KontestStatus {
-        if DateUtility.isKontestOfFuture(kontestStartDate: kontestStartDate) {
+        if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate) {
             .Upcoming
-        } else if DateUtility.isKontestOfPast(kontestEndDate: kontestEndDate) {
+        } else if CalendarUtility.isKontestOfPast(kontestEndDate: kontestEndDate) {
             .Ended
         } else {
             .Running
@@ -174,12 +174,12 @@ extension KontestModel {
     }
 
     func updateKontestStatus() -> KontestStatus {
-        let kontestStartDate = DateUtility.getDate(date: start_time) ?? Date()
-        let kontestEndDate = DateUtility.getDate(date: end_time) ?? Date()
+        let kontestStartDate = CalendarUtility.getDate(date: start_time) ?? Date()
+        let kontestEndDate = CalendarUtility.getDate(date: end_time) ?? Date()
 
-        if DateUtility.isKontestOfFuture(kontestStartDate: kontestStartDate) {
+        if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate) {
             return .Upcoming
-        } else if DateUtility.isKontestOfPast(kontestEndDate: kontestEndDate) {
+        } else if CalendarUtility.isKontestOfPast(kontestEndDate: kontestEndDate) {
             return .Ended
         } else {
             return .Running

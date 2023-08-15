@@ -14,8 +14,8 @@ struct KontestDetailsView: View {
     var kontest: KontestModel
 
     var body: some View {
-        let kontestStartDate = DateUtility.getDate(date: kontest.start_time)
-        let kontestEndDate = DateUtility.getDate(date: kontest.end_time)
+        let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
+        let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
 
         VStack {
             VStack {
@@ -28,7 +28,7 @@ struct KontestDetailsView: View {
 
                 VStack {
                     HStack {
-                        if DateUtility.isKontestRunning(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date()) {
+                        if CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date()) {
 //                            BlinkingDotView(color: .green)
 //                                .frame(width: 10, height: 10)
                         }
@@ -50,7 +50,7 @@ struct KontestDetailsView: View {
             .ignoresSafeArea()
 
             VStack {
-                if DateUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) {
+                if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) {
                     Button {
                         if kontest.isSetForReminder {
                             allKontestsViewModel.removePendingNotification(kontest: kontest)
@@ -126,7 +126,7 @@ struct TopCardView: View {
             TopCard(color: color)
 
             HStack(alignment: .top) {
-                TimeView(day: getWeekdayNameFromDate(date: kontestStartDate), time: kontestStartDate.formatted(date: .omitted, time: .shortened), date: DateUtility.getKontestDate(date: kontestStartDate), horizontalAlignment: .leading)
+                TimeView(day: getWeekdayNameFromDate(date: kontestStartDate), time: kontestStartDate.formatted(date: .omitted, time: .shortened), date: CalendarUtility.getKontestDate(date: kontestStartDate), horizontalAlignment: .leading)
                     .padding(.leading)
                 Spacer()
 
@@ -135,7 +135,7 @@ struct TopCardView: View {
 
                 Spacer()
 
-                TimeView(day: getWeekdayNameFromDate(date: kontestEndDate), time: kontestEndDate.formatted(date: .omitted, time: .shortened), date: DateUtility.getKontestDate(date: kontestEndDate), horizontalAlignment: .trailing)
+                TimeView(day: getWeekdayNameFromDate(date: kontestEndDate), time: kontestEndDate.formatted(date: .omitted, time: .shortened), date: CalendarUtility.getKontestDate(date: kontestEndDate), horizontalAlignment: .trailing)
                     .padding(.trailing)
             }
         }

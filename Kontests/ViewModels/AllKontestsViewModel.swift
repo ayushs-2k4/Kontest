@@ -54,9 +54,9 @@ class AllKontestsViewModel {
                         return kontest
                     }
                     .filter { kontest in
-                        let kontestDuration = DateUtility.getFormattedDuration(fromSeconds: kontest.duration) ?? ""
-                        let kontestEndDate = DateUtility.getDate(date: kontest.end_time)
-                        let isKontestEnded = DateUtility.isKontestOfPast(kontestEndDate: kontestEndDate ?? Date())
+                        let kontestDuration = CalendarUtility.getFormattedDuration(fromSeconds: kontest.duration) ?? ""
+                        let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
+                        let isKontestEnded = CalendarUtility.isKontestOfPast(kontestEndDate: kontestEndDate ?? Date())
 
                         return !kontestDuration.isEmpty && !isKontestEnded
                     }
@@ -67,14 +67,14 @@ class AllKontestsViewModel {
     }
 
     func setNotification(title: String, subtitle: String, body: String, kontestStartDate: Date?) {
-        let notificationDate = DateUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 10, hours: 0)
+        let notificationDate = CalendarUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 10, hours: 0)
 
         LocalNotificationManager.instance.scheduleCalendarNotification(notificationContent: LocalNotificationManager.NotificationContent(title: title, subtitle: subtitle, body: body, date: notificationDate))
     }
 
     func setNotification(kontest: KontestModel) {
-        let kontestStartDate = DateUtility.getDate(date: kontest.start_time)
-        let notificationDate = DateUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 10, hours: 0)
+        let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
+        let notificationDate = CalendarUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 10, hours: 0)
         let formattedKontestStartDate = kontestStartDate?.formatted(date: .abbreviated, time: .shortened) ?? Date().formatted(date: .abbreviated, time: .shortened)
 
         LocalNotificationManager.instance.scheduleCalendarNotification(notificationContent: LocalNotificationManager.NotificationContent(title: kontest.name, subtitle: kontest.site, body: "\(kontest.name) is on \(formattedKontestStartDate)", date: notificationDate), id: kontest.id)
@@ -134,7 +134,7 @@ class AllKontestsViewModel {
 
     private func isKontestEnded(kontestEndDate: String) -> Bool {
         let currentDate = Date()
-        if let formattedKontestEndDate = DateUtility.getDate(date: kontestEndDate) {
+        if let formattedKontestEndDate = CalendarUtility.getDate(date: kontestEndDate) {
             return formattedKontestEndDate < currentDate
         }
 

@@ -14,8 +14,8 @@ struct SingleKontentView: View {
     @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
-        let kontestStartDate = DateUtility.getDate(date: kontest.start_time)
-        let kontestEndDate = DateUtility.getDate(date: kontest.end_time)
+        let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
+        let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
 
         HStack(alignment: .center) {
             VStack {
@@ -26,7 +26,7 @@ struct SingleKontentView: View {
                     .frame(width: FontUtility.getLogoSize())
                 #endif
 
-                let isContestRunning = DateUtility.isKontestRunning(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date()) || kontest.status == .Running
+                let isContestRunning = CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date()) || kontest.status == .Running
 
                 if isContestRunning {
                     BlinkingDotView(color: .green)
@@ -70,7 +70,7 @@ struct SingleKontentView: View {
             #endif
 
             #if os(macOS)
-            if DateUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) {
+            if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) {
                 Button {
                     if kontest.isSetForReminder {
                         allKontestsViewModel.removePendingNotification(kontest: kontest)
@@ -98,12 +98,12 @@ struct SingleKontentView: View {
                     HStack {
                         Image(systemName: "clock")
 
-                        Text(DateUtility.getFormattedDuration(fromSeconds: kontest.duration) ?? "")
+                        Text(CalendarUtility.getFormattedDuration(fromSeconds: kontest.duration) ?? "")
                     }
                     .font(FontUtility.getDateFontSize())
                     .padding(.vertical, 5)
 
-                    Text("\(DateUtility.getNumericKontestDate(date: kontestStartDate ?? Date())) - \(DateUtility.getNumericKontestDate(date: kontestEndDate ?? Date()))")
+                    Text("\(CalendarUtility.getNumericKontestDate(date: kontestStartDate ?? Date())) - \(CalendarUtility.getNumericKontestDate(date: kontestEndDate ?? Date()))")
                         .font(FontUtility.getDateFontSize())
                 }
                 else {

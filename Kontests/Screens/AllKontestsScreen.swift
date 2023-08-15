@@ -18,23 +18,36 @@ struct AllKontestsScreen: View {
             ZStack {
                 if allKontestsViewModel.isLoading {
                     ProgressView()
-                }
-                else if allKontestsViewModel.backupKontests.isEmpty {
+                } else if allKontestsViewModel.backupKontests.isEmpty {
                     NoKontestsScreen()
-                }
-                else {
+                } else {
                     List {
-                        ForEach(allKontestsViewModel.allKontests) { kontest in
+                        let today = Date()
+                        let tomorrow = getTomorrow()
+                        let dayAfterTomorrow = getDayAfterTomorrow()
 
-                            #if os(macOS)
-                            Link(destination: URL(string: kontest.url)!, label: {
-                                SingleKontentView(kontest: kontest, allKontestsViewModel: allKontestsViewModel)
-                            })
-                            #else
-                            NavigationLink(value: kontest) {
-                                SingleKontentView(kontest: kontest, allKontestsViewModel: allKontestsViewModel)
-                            }
-                            #endif
+                        let ongoingKontests = allKontestsViewModel.allKontests.filter { CalendarUtility.getDate(date: $0.start_time) ?? Date() <= today && CalendarUtility.getDate(date: $0.end_time) ?? Date() >= today }
+
+                        let laterTodayKontests = allKontestsViewModel.allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? Date() < tomorrow) && !(ongoingKontests.contains($0)) }
+
+                        let tomorrowKontests = allKontestsViewModel.allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? Date() >= tomorrow) && (CalendarUtility.getDate(date: $0.start_time) ?? Date() < dayAfterTomorrow) }
+
+                        let laterKontests = allKontestsViewModel.allKontests.filter { CalendarUtility.getDate(date: $0.start_time) ?? Date() >= dayAfterTomorrow }
+
+                        if ongoingKontests.count > 0 {
+                            createSection(title: "Live Now", kontests: ongoingKontests)
+                        }
+
+                        if laterTodayKontests.count > 0 {
+                            createSection(title: "Later Today", kontests: laterTodayKontests)
+                        }
+
+                        if tomorrowKontests.count > 0 {
+                            createSection(title: "Tomorrow", kontests: tomorrowKontests)
+                        }
+
+                        if laterKontests.count > 0 {
+                            createSection(title: "Upcoming", kontests: laterKontests)
                         }
                     }
                     .searchable(text: Bindable(allKontestsViewModel).searchText)
@@ -91,6 +104,37 @@ struct AllKontestsScreen: View {
                 KontestDetailsView(kontest: kontest)
             }
         }
+    }
+
+    func createSection(title: String, kontests: [KontestModel]) -> some View {
+        Section {
+            ForEach(kontests) { kontest in
+                #if os(macOS)
+                    Link(destination: URL(string: kontest.url)!, label: {
+                        SingleKontentView(kontest: kontest, allKontestsViewModel: allKontestsViewModel)
+                    })
+                #else
+                    NavigationLink(value: kontest) {
+                        SingleKontentView(kontest: kontest, allKontestsViewModel: allKontestsViewModel)
+                    }
+                #endif
+            }
+        } header: {
+            Text(title)
+        }
+    }
+
+    func getTomorrow() -> Date {
+        let today = Date()
+        let tomorrow = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: today)!
+        return tomorrow
+    }
+    
+    func getDayAfterTomorrow() -> Date {
+        let today = Date()
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
+        let dayAfterTomorrow = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: tomorrow)!
+        return dayAfterTomorrow
     }
 }
 
