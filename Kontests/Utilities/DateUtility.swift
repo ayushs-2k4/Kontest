@@ -80,7 +80,7 @@ class DateUtility {
             formatter.unitsStyle = .full
         #endif
 
-        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.allowedUnits = [.day, .hour, .minute, .second]
 
         let dateComponents = DateComponents(hour: hours, minute: minutes)
 

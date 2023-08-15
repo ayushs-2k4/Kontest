@@ -23,7 +23,7 @@ class AllKontestsViewModel {
 
     var isLoading = false
 
-    private var backupKontests: [KontestModel] = []
+    private(set) var backupKontests: [KontestModel] = []
 
     init() {
         isLoading = true
@@ -48,7 +48,7 @@ class AllKontestsViewModel {
             await MainActor.run {
                 self.allKontests = fetchedKontests
                     .map { dto in
-                        var kontest = KontestModel.from(dto: dto)
+                        let kontest = KontestModel.from(dto: dto)
                         // Load Reminder status
                         kontest.loadReminderStatus()
                         return kontest
@@ -74,7 +74,7 @@ class AllKontestsViewModel {
 
     func setNotification(kontest: KontestModel) {
         let kontestStartDate = DateUtility.getDate(date: kontest.start_time)
-        let notificationDate = DateUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 0, hours: 0)
+        let notificationDate = DateUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 10, hours: 0)
 
         NotificationManager.instance.scheduleCalendarNotification(notificationContent: NotificationManager.NotificationContent(title: kontest.name, subtitle: kontest.site, body: "Kontest is on \(kontest.start_time)", date: notificationDate), id: kontest.id)
 

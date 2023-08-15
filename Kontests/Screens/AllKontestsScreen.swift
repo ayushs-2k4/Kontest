@@ -19,7 +19,7 @@ struct AllKontestsScreen: View {
                 if allKontestsViewModel.isLoading {
                     ProgressView()
                 }
-                else if allKontestsViewModel.allKontests.isEmpty {
+                else if allKontestsViewModel.backupKontests.isEmpty {
                     NoKontestsScreen()
                 }
                 else {
@@ -37,7 +37,7 @@ struct AllKontestsScreen: View {
                             #endif
                         }
                     }
-//                    .searchable(text: Bindable(allKontestsViewModel).searchText)
+                    .searchable(text: Bindable(allKontestsViewModel).searchText)
                 }
             }
             .navigationTitle("Kontests")
