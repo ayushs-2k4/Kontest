@@ -84,15 +84,15 @@ struct AllKontestsScreen: View {
                     }
                 }
 
-                ToolbarItem(placement: .automatic) {
-                    Button {
-                        navigationPath.append(Screens.SettingsScreen)
-                    } label: {
-                        Image(systemName: "gear")
-                    }
-                }
-
                 if !allKontestsViewModel.allKontests.isEmpty {
+                    ToolbarItem(placement: .automatic) {
+                        Button {
+                            navigationPath.append(Screens.SettingsScreen)
+                        } label: {
+                            Image(systemName: "gear")
+                        }
+                    }
+
                     ToolbarItem(placement: .automatic) { // change the placement here!
                         Button {
                             showNotificationForAllKontestsAlert = true
@@ -126,6 +126,7 @@ struct AllKontestsScreen: View {
                 }
             }
         }
+        .searchable(text: Bindable(allKontestsViewModel).searchText)
     }
 
     func createSection(title: String, kontests: [KontestModel]) -> some View {

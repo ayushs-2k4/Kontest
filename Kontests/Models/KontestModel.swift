@@ -116,7 +116,7 @@ extension KontestModel {
     }
 
     static func getLogo(site: String) -> String {
-        switch site {
+        return switch site {
         case "CodeForces":
             "CodeForces Logo"
 
@@ -139,7 +139,7 @@ extension KontestModel {
             "HackerEarth Logo"
 
         case "LeetCode":
-            "LeetCode Logo"
+            "LeetCode Dark Logo"
 
         case "Toph":
             "Toph Logo"

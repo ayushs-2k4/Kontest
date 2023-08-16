@@ -74,7 +74,7 @@ struct LeetcodeProfileView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
 
                     VStack {
-                        Text("I N V A L I D   U S E R N A M E")
+                        Text("INVALID USERNAME")
                             .fontDesign(.monospaced)
                             .bold()
 
