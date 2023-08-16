@@ -30,6 +30,8 @@ struct CodeForcesView: View {
     let isLoading: Bool
     let error: Error?
 
+    @Environment(\.openURL) private var openURL
+
     var body: some View {
         ZStack {
             bgColor
@@ -94,6 +96,12 @@ struct CodeForcesView: View {
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 }
+            }
+        }
+        .onTapGesture {
+            if codeForcesProfile != nil {
+                guard let url = URL(string: "https://codeforces.com/profile/\(username)") else { return }
+                openURL(url)
             }
         }
         .multilineTextAlignment(.center)

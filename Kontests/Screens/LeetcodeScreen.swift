@@ -33,6 +33,8 @@ struct LeetcodeProfileView: View {
     let status: String?
     let error: Error?
 
+    @Environment(\.openURL) private var openURL
+
     var body: some View {
         ZStack {
             bgColor
@@ -54,8 +56,6 @@ struct LeetcodeProfileView: View {
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
 
-                
-
                 if status != nil, status != "error", let leetcodeProfile {
                     VStack {
                         Text("Total Solved: \(leetcodeProfile.totalSolved)")
@@ -72,9 +72,8 @@ struct LeetcodeProfileView: View {
                     Text("LastRank 0")
                         .padding()
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-                    
+
                     VStack {
-                        
                         Text("I N V A L I D   U S E R N A M E")
                             .fontDesign(.monospaced)
                             .bold()
@@ -87,11 +86,16 @@ struct LeetcodeProfileView: View {
                 }
             }
         }
+        .onTapGesture {
+            if status != nil, status != "error" {
+                guard let url = URL(string: "https://leetcode.com/ayushs_2k4") else { return }
+                openURL(url)
+            }
+        }
         .multilineTextAlignment(.center)
         .foregroundStyle(.white)
     }
 }
-
 
 #Preview {
     VStack {
