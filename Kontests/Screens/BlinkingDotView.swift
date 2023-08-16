@@ -16,10 +16,10 @@ struct BlinkingDotView: View {
         Circle()
             .foregroundStyle(color)
             .opacity(isFaded ? 0.2 : 1)
+            .scaleEffect(isFaded ? 0.4 : 1)
+            .animation(Animation.linear(duration: 1).repeatForever(), value: isFaded)
             .onAppear {
-                withAnimation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true)) {
-                    isFaded = true
-                }
+                isFaded = true
             }
     }
 }

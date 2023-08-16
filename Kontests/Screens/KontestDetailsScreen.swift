@@ -1,5 +1,5 @@
 //
-//  KontestDetailsView.swift
+//  KontestDetailsScreen.swift
 //  Kontests
 //
 //  Created by Ayush Singhal on 14/08/23.
@@ -7,9 +7,11 @@
 
 import SwiftUI
 
-struct KontestDetailsView: View {
+struct KontestDetailsScreen: View {
     @Environment(AllKontestsViewModel.self) private var allKontestsViewModel
     @Environment(\.colorScheme) private var colorScheme
+
+    @State private var isFaded = false
 
     var kontest: KontestModel
 
@@ -19,7 +21,7 @@ struct KontestDetailsView: View {
 
         VStack {
             VStack {
-                let p = getTimeDifferenceString(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date())
+                let p = CalendarUtility.getTimeDifferenceString(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date())
 
                 TopCardView(color: KontestModel.getColorForIdentifier(site: kontest.site), kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date(), boxText: p)
                     .frame(height: 300)
@@ -29,8 +31,8 @@ struct KontestDetailsView: View {
                 VStack {
                     HStack {
                         if CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date()) {
-//                            BlinkingDotView(color: .green)
-//                                .frame(width: 10, height: 10)
+                            BlinkingDotView(color: .green)
+                                .frame(width: 10, height: 10)
                         }
 
                         Text(kontest.site.uppercased())
@@ -47,56 +49,48 @@ struct KontestDetailsView: View {
                 Spacer()
             }
             .multilineTextAlignment(.center)
-            .ignoresSafeArea()
+            .ignoresSafeArea(edges: .top)
 
-            VStack {
-                if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) {
-                    Button {
-                        if kontest.isSetForReminder {
-                            allKontestsViewModel.removePendingNotification(kontest: kontest)
-                        } else {
-                            allKontestsViewModel.setNotification(kontest: kontest)
-                        }
-                    } label: {
-                        Text(kontest.isSetForReminder ? "Remove in-app Reminder" : "Add in-app Reminder")
-                            .frame(maxWidth: .infinity)
-                    }
-                }
-
-                Link(destination: URL(string: kontest.url)!, label: {
-                    Text("Contest Registration Page")
-                        .frame(maxWidth: .infinity)
-                })
-            }
-            .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.site))
-            .buttonStyle(.bordered)
-            .padding()
+            ButtonsView(kontest: kontest, allKontestsViewModel: allKontestsViewModel)
         }
         .frame(maxHeight: .infinity)
     }
+}
 
-    private func getTimeDifferenceString(startDate: Date, endDate: Date) -> String {
-        let components = Calendar.current.dateComponents([.day, .hour, .minute], from: startDate, to: endDate)
+struct ButtonsView: View {
+    let kontest: KontestModel
+    let allKontestsViewModel: AllKontestsViewModel
+    let kontestStartDate: Date?
 
-        var formattedTime = ""
+    init(kontest: KontestModel, allKontestsViewModel: AllKontestsViewModel) {
+        self.kontest = kontest
+        self.allKontestsViewModel = allKontestsViewModel
+        kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
+    }
 
-        if let days = components.day, days > 0 {
-            formattedTime.append("\(days)D")
-        } else {
-            if let minutes = components.minute, minutes > 0 {
-                if let hours = components.hour, hours > 0 {
-                    formattedTime.append("\(hours)H \(minutes)M")
-                } else {
-                    formattedTime.append("\(minutes)M")
-                }
-            } else {
-                if let hours = components.hour, hours > 0 {
-                    formattedTime.append("\(hours)H")
+    var body: some View {
+        VStack {
+            if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) {
+                Button {
+                    if kontest.isSetForReminder {
+                        allKontestsViewModel.removePendingNotification(kontest: kontest)
+                    } else {
+                        allKontestsViewModel.setNotification(kontest: kontest)
+                    }
+                } label: {
+                    Text(kontest.isSetForReminder ? "Remove in-app Reminder" : "Add in-app Reminder")
+                        .frame(maxWidth: .infinity)
                 }
             }
-        }
 
-        return formattedTime.isEmpty ? "0H" : formattedTime
+            Link(destination: URL(string: kontest.url)!, label: {
+                Text("Contest Registration Page")
+                    .frame(maxWidth: .infinity)
+            })
+        }
+        .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.site))
+        .buttonStyle(.bordered)
+        .padding()
     }
 }
 
@@ -126,7 +120,7 @@ struct TopCardView: View {
             TopCard(color: color)
 
             HStack(alignment: .top) {
-                TimeView(day: getWeekdayNameFromDate(date: kontestStartDate), time: kontestStartDate.formatted(date: .omitted, time: .shortened), date: CalendarUtility.getKontestDate(date: kontestStartDate), horizontalAlignment: .leading)
+                TimeView(day: CalendarUtility.getWeekdayNameFromDate(date: kontestStartDate), time: kontestStartDate.formatted(date: .omitted, time: .shortened), date: CalendarUtility.getKontestDate(date: kontestStartDate), horizontalAlignment: .leading)
                     .padding(.leading)
                 Spacer()
 
@@ -135,29 +129,17 @@ struct TopCardView: View {
 
                 Spacer()
 
-                TimeView(day: getWeekdayNameFromDate(date: kontestEndDate), time: kontestEndDate.formatted(date: .omitted, time: .shortened), date: CalendarUtility.getKontestDate(date: kontestEndDate), horizontalAlignment: .trailing)
+                TimeView(day: CalendarUtility.getWeekdayNameFromDate(date: kontestEndDate), time: kontestEndDate.formatted(date: .omitted, time: .shortened), date: CalendarUtility.getKontestDate(date: kontestEndDate), horizontalAlignment: .trailing)
                     .padding(.trailing)
             }
         }
-    }
-
-    func getWeekdayNameFromDate(date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "E"
-        return dateFormatter.string(from: date).uppercased()
-    }
-
-    func getTimeFromDate(date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        return dateFormatter.string(from: date)
     }
 }
 
 struct TopCard: View {
     let color: Color
     var body: some View {
-        RoundedRectangle(cornerRadius: 40)
+        UnevenRoundedRectangle(bottomLeadingRadius: 40, bottomTrailingRadius: 40)
             .foregroundStyle(color)
     }
 }
@@ -218,9 +200,9 @@ struct TimeView: View {
 //    let endTime = "2023-08-21 17:43:00 UTC"
 
     let startTime = "2023-08-15 00:00:00 UTC"
-    let endTime = "2023-08-15 23:59:00 UTC"
+    let endTime = "2023-08-18 23:59:00 UTC"
 
-    return KontestDetailsView(kontest: KontestModel.from(dto: KontestDTO(name: "ProjectEuler+", url: "https://hackerrank.com/contests/projecteuler", start_time: startTime, end_time: endTime, duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "CODING")))
+    return KontestDetailsScreen(kontest: KontestModel.from(dto: KontestDTO(name: "ProjectEuler+", url: "https://hackerrank.com/contests/projecteuler", start_time: startTime, end_time: endTime, duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "CODING")))
         .environment(AllKontestsViewModel())
 }
 
@@ -236,6 +218,6 @@ struct TimeView: View {
 //    BlockView(blockColor: .black, textColor: .pink, text: "2HR")
 // }
 
-#Preview("TimeView") {
-    TimeView(horizontalAlignment: .leading)
-}
+// #Preview("TimeView") {
+//    TimeView(horizontalAlignment: .leading)
+// }

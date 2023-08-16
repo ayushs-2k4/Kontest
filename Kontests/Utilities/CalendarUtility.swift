@@ -55,11 +55,9 @@ class CalendarUtility {
     static func getDate(date: String) -> Date? {
         if let ansDate = getFormattedDate1(date: date) {
             return ansDate
-        }
-        else if let ansDate = getFormattedDate2(date: date) {
+        } else if let ansDate = getFormattedDate2(date: date) {
             return ansDate
-        }
-        else {
+        } else {
             return nil
         }
     }
@@ -149,5 +147,41 @@ class CalendarUtility {
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
         let dayAfterTomorrow = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: tomorrow)!
         return dayAfterTomorrow
+    }
+
+    static func getTimeDifferenceString(startDate: Date, endDate: Date) -> String {
+        let components = Calendar.current.dateComponents([.day, .hour, .minute], from: startDate, to: endDate)
+
+        var formattedTime = ""
+
+        if let days = components.day, days > 0 {
+            formattedTime.append("\(days)D")
+        } else {
+            if let minutes = components.minute, minutes > 0 {
+                if let hours = components.hour, hours > 0 {
+                    formattedTime.append("\(hours)H \(minutes)M")
+                } else {
+                    formattedTime.append("\(minutes)M")
+                }
+            } else {
+                if let hours = components.hour, hours > 0 {
+                    formattedTime.append("\(hours)H")
+                }
+            }
+        }
+
+        return formattedTime.isEmpty ? "0H" : formattedTime
+    }
+
+    static func getWeekdayNameFromDate(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "E"
+        return dateFormatter.string(from: date).uppercased()
+    }
+
+    static func getTimeFromDate(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter.string(from: date)
     }
 }

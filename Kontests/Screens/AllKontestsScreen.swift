@@ -101,7 +101,7 @@ struct AllKontestsScreen: View {
                 }
             }
             .navigationDestination(for: KontestModel.self) { kontest in
-                KontestDetailsView(kontest: kontest)
+                KontestDetailsScreen(kontest: kontest)
             }
         }
     }
