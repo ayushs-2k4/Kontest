@@ -21,33 +21,38 @@ struct AllKontestsScreen: View {
                 } else if allKontestsViewModel.backupKontests.isEmpty {
                     NoKontestsScreen()
                 } else {
-                    List {
-                        let today = Date()
-                        let tomorrow = CalendarUtility.getTomorrow()
-                        let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
+                    VStack {
+                        RatingsView(codeForcesUsername: "ayushsinghals", leetCodeUsername: "ayushs_2k4")
+                        
 
-                        let ongoingKontests = allKontestsViewModel.allKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? today, kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? today) }
+                        List {
+                            let today = Date()
+                            let tomorrow = CalendarUtility.getTomorrow()
+                            let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
 
-                        let laterTodayKontests = allKontestsViewModel.allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? today < tomorrow) && !(ongoingKontests.contains($0)) }
+                            let ongoingKontests = allKontestsViewModel.allKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? today, kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? today) }
 
-                        let tomorrowKontests = allKontestsViewModel.allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? today >= tomorrow) && (CalendarUtility.getDate(date: $0.start_time) ?? today < dayAfterTomorrow) }
+                            let laterTodayKontests = allKontestsViewModel.allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? today < tomorrow) && !(ongoingKontests.contains($0)) }
 
-                        let laterKontests = allKontestsViewModel.allKontests.filter { CalendarUtility.getDate(date: $0.start_time) ?? today >= dayAfterTomorrow }
+                            let tomorrowKontests = allKontestsViewModel.allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? today >= tomorrow) && (CalendarUtility.getDate(date: $0.start_time) ?? today < dayAfterTomorrow) }
 
-                        if ongoingKontests.count > 0 {
-                            createSection(title: "Live Now", kontests: ongoingKontests)
-                        }
+                            let laterKontests = allKontestsViewModel.allKontests.filter { CalendarUtility.getDate(date: $0.start_time) ?? today >= dayAfterTomorrow }
 
-                        if laterTodayKontests.count > 0 {
-                            createSection(title: "Later Today", kontests: laterTodayKontests)
-                        }
+                            if ongoingKontests.count > 0 {
+                                createSection(title: "Live Now", kontests: ongoingKontests)
+                            }
 
-                        if tomorrowKontests.count > 0 {
-                            createSection(title: "Tomorrow", kontests: tomorrowKontests)
-                        }
+                            if laterTodayKontests.count > 0 {
+                                createSection(title: "Later Today", kontests: laterTodayKontests)
+                            }
 
-                        if laterKontests.count > 0 {
-                            createSection(title: "Upcoming", kontests: laterKontests)
+                            if tomorrowKontests.count > 0 {
+                                createSection(title: "Tomorrow", kontests: tomorrowKontests)
+                            }
+
+                            if laterKontests.count > 0 {
+                                createSection(title: "Upcoming", kontests: laterKontests)
+                            }
                         }
                     }
                     .searchable(text: Bindable(allKontestsViewModel).searchText)

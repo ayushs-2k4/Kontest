@@ -15,34 +15,42 @@ struct RatingsView: View {
 
     var body: some View {
         ScrollView(.horizontal) {
-            LazyHStack(spacing: 0) {
+            LazyHStack(spacing: hSpacing) {
                 CodeForcesScreen(username: codeForcesUsername, bgColor: .green)
                     .clipShape(.rect(cornerRadius: 20.0))
-                    .padding()
-                    .frame(minWidth: 200, minHeight: 200)
-                    .aspectRatio(contentMode: .fit)
+                    .aspectRatio(heroRatio, contentMode: .fit)
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
-                    .scrollTargetLayout()
 
                 LeetcodeScreen(username: leetCodeUsername, bgColor: .cyan)
                     .clipShape(.rect(cornerRadius: 20.0))
-                    .padding()
-                    .frame(minWidth: 200, minHeight: 200)
-                    .aspectRatio(contentMode: .fit)
-                    .containerRelativeFrame(.horizontal, count: 1, spacing: 10)
-                    .scrollTargetLayout()
+                    .aspectRatio(heroRatio, contentMode: .fit)
+                    .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
             }
+            .scrollTargetLayout()
         }
-        .scrollTargetBehavior(.paging)
+        .contentMargins(.horizontal, hMargin)
         .scrollIndicators(.hidden)
+        .scrollTargetBehavior(.viewAligned)
     }
 
     private var columns: Int {
         sizeClass == .compact ? 1 : regularCount
     }
 
+    var hMargin: CGFloat {
+        20.0
+    }
+
+    var hSpacing: CGFloat {
+        10.0
+    }
+
     var regularCount: Int {
-        1
+        2
+    }
+
+    var heroRatio: CGFloat {
+        16.0 / 9.0
     }
 }
 
