@@ -14,7 +14,7 @@ struct SettingsScreen: View {
     @State private var codeForcesUsername: String = ""
 
     @Environment(\.colorScheme) var colorScheme
-    
+
     init() {
         _leetcodeUsername = State(initialValue: settingsViewModel.leetcodeUsername)
         _codeForcesUsername = State(initialValue: settingsViewModel.codeForcesUsername)
@@ -32,6 +32,9 @@ struct SettingsScreen: View {
 
                 TextField("Enter CodeForces Username", text: $codeForcesUsername)
                     .textFieldStyle(.roundedBorder)
+                #if os(iOS)
+                    .textInputAutocapitalization(.never)
+                #endif
             }
 
             HStack {
@@ -41,6 +44,9 @@ struct SettingsScreen: View {
 
                 TextField("Enter Leetcode Username", text: $leetcodeUsername)
                     .textFieldStyle(.roundedBorder)
+                #if os(iOS)
+                    .textInputAutocapitalization(.never)
+                #endif
             }
 
             Button("Save") {
