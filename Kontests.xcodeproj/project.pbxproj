@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		071916952A8CDDBA00172270 /* CodeForcesAPIDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071916942A8CDDBA00172270 /* CodeForcesAPIDTO.swift */; };
+		072A0F752A8D378C0038C8CE /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072A0F742A8D378C0038C8CE /* SettingsViewModel.swift */; };
+		072A0F772A8D38390038C8CE /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072A0F762A8D38390038C8CE /* SettingsScreen.swift */; };
+		072A0F792A8D3D3C0038C8CE /* Screens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072A0F782A8D3D3C0038C8CE /* Screens.swift */; };
 		074083932A890572009443B7 /* ClipboardUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074083922A890572009443B7 /* ClipboardUtility.swift */; };
 		074083972A89066F009443B7 /* CalendarUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074083962A89066F009443B7 /* CalendarUtility.swift */; };
 		074083992A8906B8009443B7 /* FontUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074083982A8906B8009443B7 /* FontUtility.swift */; };
@@ -45,6 +48,9 @@
 
 /* Begin PBXFileReference section */
 		071916942A8CDDBA00172270 /* CodeForcesAPIDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeForcesAPIDTO.swift; sourceTree = "<group>"; };
+		072A0F742A8D378C0038C8CE /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		072A0F762A8D38390038C8CE /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
+		072A0F782A8D3D3C0038C8CE /* Screens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens.swift; sourceTree = "<group>"; };
 		074083922A890572009443B7 /* ClipboardUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardUtility.swift; sourceTree = "<group>"; };
 		074083962A89066F009443B7 /* CalendarUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarUtility.swift; sourceTree = "<group>"; };
 		074083982A8906B8009443B7 /* FontUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontUtility.swift; sourceTree = "<group>"; };
@@ -210,6 +216,7 @@
 				0753BA292A8C9D0600C69AD6 /* LeetcodeScreen.swift */,
 				0753BA2B2A8CA24B00C69AD6 /* RatingsView.swift */,
 				0753BA472A8CCA6800C69AD6 /* CodeForcesScreen.swift */,
+				072A0F762A8D38390038C8CE /* SettingsScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -223,6 +230,7 @@
 				074083982A8906B8009443B7 /* FontUtility.swift */,
 				0740839A2A890754009443B7 /* LocalNotificationManager.swift */,
 				074EC8242A8BC5F300C51514 /* Constants.swift */,
+				072A0F782A8D3D3C0038C8CE /* Screens.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -233,6 +241,7 @@
 				0760166D2A87CD72007CE9F5 /* AllKontestsViewModel.swift */,
 				0753BA272A8C9B8800C69AD6 /* LeetcodeViewModel.swift */,
 				0753BA432A8CC92300C69AD6 /* CodeForcesViewModel.swift */,
+				072A0F742A8D378C0038C8CE /* SettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -315,8 +324,10 @@
 				074EC8252A8BC5F300C51514 /* Constants.swift in Sources */,
 				0753BA282A8C9B8800C69AD6 /* LeetcodeViewModel.swift in Sources */,
 				074083A42A890DB3009443B7 /* AllKontestsFakeRepository.swift in Sources */,
+				072A0F752A8D378C0038C8CE /* SettingsViewModel.swift in Sources */,
 				0753BA242A8C9A7A00C69AD6 /* LeetcodeFetcher.swift in Sources */,
 				074083932A890572009443B7 /* ClipboardUtility.swift in Sources */,
+				072A0F792A8D3D3C0038C8CE /* Screens.swift in Sources */,
 				074083972A89066F009443B7 /* CalendarUtility.swift in Sources */,
 				0753BA1E2A8C99EA00C69AD6 /* LeetcodeAPIModel.swift in Sources */,
 				074774DD2A8A748800B44A29 /* KontestDetailsScreen.swift in Sources */,
@@ -334,6 +345,7 @@
 				0753BA482A8CCA6800C69AD6 /* CodeForcesScreen.swift in Sources */,
 				076A1E812A8AA36300FBBB4C /* BlinkingDotView.swift in Sources */,
 				076013B72A89650E008F4085 /* KontestModel.swift in Sources */,
+				072A0F772A8D38390038C8CE /* SettingsScreen.swift in Sources */,
 				0753BA2A2A8C9D0600C69AD6 /* LeetcodeScreen.swift in Sources */,
 				076013B92A8A1A78008F4085 /* KontestStatus.swift in Sources */,
 				0753BA3D2A8CC78A00C69AD6 /* CodeForcesAPIModel.swift in Sources */,

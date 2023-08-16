@@ -40,11 +40,11 @@ struct LeetcodeProfileView: View {
                 ProgressView()
             } else {
                 HStack {
-                    Image(.leetCodeLogo)
+                    Image(.leetCodeDarkLogo)
                         .resizable()
                         .frame(width: 25, height: 25)
 
-                    Text("CodeForces")
+                    Text("LeetCode")
                 }
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

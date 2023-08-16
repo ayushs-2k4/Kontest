@@ -10,7 +10,7 @@ import SwiftUI
 
 @Observable
 class AllKontestsViewModel {
-    let repository = AllKontestsFakeRepository()
+    let repository = KontestRepository()
 
     private var timer: AnyCancellable?
 

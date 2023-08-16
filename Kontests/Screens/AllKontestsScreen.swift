@@ -13,8 +13,12 @@ struct AllKontestsScreen: View {
     @State var showNotificationForAllKontestsAlert = false
     let isInDevelopmentMode = false
 
+    let settingsViewModel = SettingsViewModel.instance
+
+    @State var navigationPath: NavigationPath = .init()
+
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationPath) {
             ZStack {
                 if allKontestsViewModel.isLoading {
                     ProgressView()
@@ -22,8 +26,7 @@ struct AllKontestsScreen: View {
                     NoKontestsScreen()
                 } else {
                     VStack {
-                        RatingsView(codeForcesUsername: "ayushsinghals", leetCodeUsername: "ayushs_2k4")
-                        
+                        RatingsView(codeForcesUsername: settingsViewModel.codeForcesUsername, leetCodeUsername: settingsViewModel.leetcodeUsername)
 
                         List {
                             let today = Date()
@@ -81,6 +84,14 @@ struct AllKontestsScreen: View {
                     }
                 }
 
+                ToolbarItem(placement: .automatic) {
+                    Button {
+                        navigationPath.append(Screens.SettingsScreen)
+                    } label: {
+                        Image(systemName: "gear")
+                    }
+                }
+
                 if !allKontestsViewModel.allKontests.isEmpty {
                     ToolbarItem(placement: .automatic) { // change the placement here!
                         Button {
@@ -108,6 +119,12 @@ struct AllKontestsScreen: View {
             .navigationDestination(for: KontestModel.self) { kontest in
                 KontestDetailsScreen(kontest: kontest)
             }
+            .navigationDestination(for: Screens.self) { screen in
+                switch screen {
+                case Screens.SettingsScreen:
+                    SettingsScreen()
+                }
+            }
         }
     }
 
@@ -116,11 +133,11 @@ struct AllKontestsScreen: View {
             ForEach(kontests) { kontest in
                 #if os(macOS)
                     Link(destination: URL(string: kontest.url)!, label: {
-                        SingleKontestView(kontest: kontest, allKontestsViewModel: allKontestsViewModel)
+                        SingleKontestView(kontest: kontest)
                     })
                 #else
                     NavigationLink(value: kontest) {
-                        SingleKontestView(kontest: kontest, allKontestsViewModel: allKontestsViewModel)
+                        SingleKontestView(kontest: kontest)
                     }
                 #endif
             }
