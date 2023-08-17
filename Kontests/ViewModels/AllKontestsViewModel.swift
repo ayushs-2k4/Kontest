@@ -101,8 +101,8 @@ class AllKontestsViewModel {
         updateIsSetForNotification(kontest: kontest, to: false)
     }
 
-    func getAllPendingNotifications() {
-        LocalNotificationManager.instance.getAllPendingNotifications()
+    func printAllPendingNotifications() {
+        LocalNotificationManager.instance.printAllPendingNotifications()
     }
 
     func updateIsSetForNotification(kontest: KontestModel, to: Bool) {

@@ -9,4 +9,5 @@ import Foundation
 
 enum Screens: String {
     case SettingsScreen
+    case PendingNotificationsScreen
 }

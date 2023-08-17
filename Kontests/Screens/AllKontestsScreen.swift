@@ -77,7 +77,15 @@ struct AllKontestsScreen: View {
                 if isInDevelopmentMode {
                     ToolbarItem(placement: .automatic) { // change the placement here!
                         Button {
-                            allKontestsViewModel.getAllPendingNotifications()
+                            navigationPath.append(Screens.PendingNotificationsScreen)
+                        } label: {
+                            Text("All Pending Notifications")
+                        }
+                    }
+                    
+                    ToolbarItem(placement: .automatic) { // change the placement here!
+                        Button {
+                            allKontestsViewModel.printAllPendingNotifications()
                         } label: {
                             Text("Print all notifs")
                         }
@@ -131,6 +139,9 @@ struct AllKontestsScreen: View {
                 switch screen {
                 case Screens.SettingsScreen:
                     SettingsScreen()
+                    
+                case .PendingNotificationsScreen:
+                    PendingNotificationsScreen()
                 }
             }
         }

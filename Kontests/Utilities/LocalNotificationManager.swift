@@ -71,7 +71,7 @@ class LocalNotificationManager {
         calendarNotificationContent.sound = .default
         calendarNotificationContent.badge = 1
 
-        let dateComponents = Calendar.current.dateComponents([.hour, .minute], from: notificationContent.date)
+        let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .timeZone, .hour, .minute], from: notificationContent.date)
 
 //        let calendarNotificationContentAction = UNNotificationAction(identifier: id, title: "View Contest")
         let userInfo: [AnyHashable: Any] = ["nextView": "loadingView"]
@@ -98,8 +98,10 @@ class LocalNotificationManager {
         center.setBadgeCount(0)
     }
 
-    func getAllPendingNotifications() {
+    func printAllPendingNotifications() {
+        print("printing notifs")
         center.getPendingNotificationRequests { requests in
+            print("requests.count: \(requests.count)")
             for request in requests {
                 print("Identifier: \(request.identifier)")
                 print("Title: \(request.content.title)")
@@ -110,6 +112,16 @@ class LocalNotificationManager {
                 }
                 print("-------")
             }
+        }
+    }
+
+    func getAllPendingNotifications(completion: @escaping ([UNNotificationRequest]) -> Void) {
+        var ans: [UNNotificationRequest] = []
+        center.getPendingNotificationRequests { requests in
+            print("requests.count2: \(requests.count)")
+            ans.append(contentsOf: requests)
+            print("ans.count: \(ans.count)")
+            completion(ans)
         }
     }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0705F8DE2A8DD45100594C3D /* PendingNotificationsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0705F8DD2A8DD45100594C3D /* PendingNotificationsScreen.swift */; };
+		0705F8E02A8DD45E00594C3D /* PendingNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0705F8DF2A8DD45E00594C3D /* PendingNotificationsViewModel.swift */; };
 		071916952A8CDDBA00172270 /* CodeForcesAPIDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071916942A8CDDBA00172270 /* CodeForcesAPIDTO.swift */; };
 		072A0F752A8D378C0038C8CE /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072A0F742A8D378C0038C8CE /* SettingsViewModel.swift */; };
 		072A0F772A8D38390038C8CE /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072A0F762A8D38390038C8CE /* SettingsScreen.swift */; };
@@ -47,6 +49,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0705F8DD2A8DD45100594C3D /* PendingNotificationsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingNotificationsScreen.swift; sourceTree = "<group>"; };
+		0705F8DF2A8DD45E00594C3D /* PendingNotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingNotificationsViewModel.swift; sourceTree = "<group>"; };
 		071916942A8CDDBA00172270 /* CodeForcesAPIDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeForcesAPIDTO.swift; sourceTree = "<group>"; };
 		072A0F742A8D378C0038C8CE /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		072A0F762A8D38390038C8CE /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
@@ -217,6 +221,7 @@
 				0753BA2B2A8CA24B00C69AD6 /* RatingsView.swift */,
 				0753BA472A8CCA6800C69AD6 /* CodeForcesScreen.swift */,
 				072A0F762A8D38390038C8CE /* SettingsScreen.swift */,
+				0705F8DD2A8DD45100594C3D /* PendingNotificationsScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -242,6 +247,7 @@
 				0753BA272A8C9B8800C69AD6 /* LeetcodeViewModel.swift */,
 				0753BA432A8CC92300C69AD6 /* CodeForcesViewModel.swift */,
 				072A0F742A8D378C0038C8CE /* SettingsViewModel.swift */,
+				0705F8DF2A8DD45E00594C3D /* PendingNotificationsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -327,6 +333,7 @@
 				072A0F752A8D378C0038C8CE /* SettingsViewModel.swift in Sources */,
 				0753BA242A8C9A7A00C69AD6 /* LeetcodeFetcher.swift in Sources */,
 				074083932A890572009443B7 /* ClipboardUtility.swift in Sources */,
+				0705F8E02A8DD45E00594C3D /* PendingNotificationsViewModel.swift in Sources */,
 				072A0F792A8D3D3C0038C8CE /* Screens.swift in Sources */,
 				074083972A89066F009443B7 /* CalendarUtility.swift in Sources */,
 				0753BA1E2A8C99EA00C69AD6 /* LeetcodeAPIModel.swift in Sources */,
@@ -336,6 +343,7 @@
 				071916952A8CDDBA00172270 /* CodeForcesAPIDTO.swift in Sources */,
 				076016702A87CD72007CE9F5 /* DownloadData.swift in Sources */,
 				0753BA3F2A8CC86F00C69AD6 /* CodeForcesFetcher.swift in Sources */,
+				0705F8DE2A8DD45100594C3D /* PendingNotificationsScreen.swift in Sources */,
 				076016592A87CD52007CE9F5 /* KontestsApp.swift in Sources */,
 				0753BA4C2A8CDC2F00C69AD6 /* LeetcodeAPIDTO.swift in Sources */,
 				076013BB2A8A2376008F4085 /* NoKontestsScreen.swift in Sources */,
