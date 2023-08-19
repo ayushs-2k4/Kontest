@@ -70,24 +70,22 @@ class AllKontestsViewModel {
         }
     }
 
-    func setNotification(title: String, subtitle: String, body: String, kontestStartDate: Date?) {
-        let notificationDate = CalendarUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: 10, hours: 0)
-
-        LocalNotificationManager.instance.scheduleCalendarNotification(notificationContent: LocalNotificationManager.NotificationContent(title: title, subtitle: subtitle, body: body, date: notificationDate))
-    }
-
-    func setNotification(kontest: KontestModel) {
+    private func setNotification(kontest: KontestModel, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0) {
         let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
-        let notificationDate = CalendarUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: Constants.minutesToBeReminderBefore, hours: 0)
+        let notificationDate = CalendarUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: minutesBefore, hours: hoursBefore, days: daysBefore)
 
         LocalNotificationManager.instance.scheduleCalendarNotification(notificationContent: LocalNotificationManager.NotificationContent(title: kontest.name, subtitle: kontest.site, body: "\(kontest.name) is starting in \(Constants.minutesToBeReminderBefore) minutes.", date: notificationDate), id: kontest.id)
 
         updateIsSetForNotification(kontest: kontest, to: true)
     }
 
+    func setNotificationForKontest(kontest: KontestModel, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0) {
+        setNotification(kontest: kontest, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
+    }
+
     func setNotificationForAllKontests() {
         for i in 0 ..< allKontests.count {
-            setNotification(kontest: allKontests[i])
+            setNotification(kontest: allKontests[i], minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
 
             allKontests[i].isSetForReminder = true
         }

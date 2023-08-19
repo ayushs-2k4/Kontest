@@ -102,10 +102,11 @@ class CalendarUtility {
         return ans
     }
 
-    static func getTimeBefore(originalDate: Date, minutes: Int, hours: Int) -> Date {
+    static func getTimeBefore(originalDate: Date, minutes: Int, hours: Int, days: Int) -> Date {
         var components = DateComponents()
         components.minute = -minutes
         components.hour = -hours
+        components.day = -days
 
         if let newDate = Calendar.current.date(byAdding: components, to: originalDate) {
             return newDate

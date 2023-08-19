@@ -76,7 +76,7 @@ struct SingleKontestView: View {
                         allKontestsViewModel.removePendingNotification(kontest: kontest)
                     }
                     else {
-                        allKontestsViewModel.setNotification(kontest: kontest)
+                        allKontestsViewModel.setNotificationForKontest(kontest: kontest)
                     }
 
                 } label: {

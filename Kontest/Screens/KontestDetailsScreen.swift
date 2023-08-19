@@ -75,7 +75,7 @@ struct ButtonsView: View {
                     if kontest.isSetForReminder {
                         allKontestsViewModel.removePendingNotification(kontest: kontest)
                     } else {
-                        allKontestsViewModel.setNotification(kontest: kontest)
+                        allKontestsViewModel.setNotificationForKontest(kontest: kontest)
                     }
                 } label: {
                     Text(kontest.isSetForReminder ? "Remove in-app Reminder" : "Add in-app Reminder")
