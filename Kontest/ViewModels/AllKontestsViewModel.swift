@@ -26,6 +26,10 @@ class AllKontestsViewModel {
     private(set) var backupKontests: [KontestModel] = []
 
     init() {
+        fetchAllKontests()
+    }
+
+    func fetchAllKontests() {
         isLoading = true
         Task {
             await getAllKontests()
@@ -41,7 +45,7 @@ class AllKontestsViewModel {
         }
     }
 
-    func getAllKontests() async {
+    private func getAllKontests() async {
         do {
             let fetchedKontests = try await repository.getAllKontests()
 
