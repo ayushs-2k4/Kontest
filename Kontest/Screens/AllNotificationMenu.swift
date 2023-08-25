@@ -20,7 +20,7 @@ struct AllNotificationMenu: View {
 
                 setNotificationForAllKontestsAtAllTimes()
             }
-            .help("Set Notification for all the following kontests 10 minutes before") // Tooltip text
+            .help("Set Notification for all the following kontests 10 mins, 30 mins, 1 hr, 6 hrs before") // Tooltip text
 
             Button("Set notification for 10 minutes before") {
                 showNotificationForAllKontestsAlert = true

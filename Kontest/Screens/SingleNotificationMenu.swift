@@ -21,6 +21,7 @@ struct SingleNotificationMenu: View {
                     Image(systemName: "bell")
                     Text("Set notification for 10 mins, 30 mins, 1 hr, 6 hrs before")
                 }
+                .help("Set Notification for this kontest 10 mins, 30 mins, 1 hr, 6 hrs before")
             }
 
             if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 10, hours: 0, days: 0) {
@@ -34,7 +35,7 @@ struct SingleNotificationMenu: View {
                     Image(systemName: kontest.isSetForReminder10MiutesBefore ? "bell.fill" : "bell")
                     Text(kontest.isSetForReminder10MiutesBefore ? "Remove 10 minutes before notification" : "Set notification for 10 minutes before")
                 }
-                .help("Set Notification for all the following kontests 10 minutes before") // Tooltip text
+                .help(kontest.isSetForReminder10MiutesBefore ? "Remove Notification for this kontest 10 minutes before" : "Set Notification for this kontest 10 minutes before") // Tooltip text
             }
 
             if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 30, hours: 0, days: 0) {
@@ -48,7 +49,7 @@ struct SingleNotificationMenu: View {
                     Image(systemName: kontest.isSetForReminder30MiutesBefore ? "bell.fill" : "bell")
                     Text(kontest.isSetForReminder30MiutesBefore ? "Remove 30 minutes before notification" : "Set notification for 30 minutes before")
                 }
-                .help("Set Notification for all the following kontests 30 minutes before") // Tooltip text
+                .help(kontest.isSetForReminder30MiutesBefore ? "Remove Notification for this kontest 30 minutes before" : "Set Notification for this kontest 30 minutes before") // Tooltip text
             }
 
             if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 0, hours: 1, days: 0) {
@@ -62,7 +63,7 @@ struct SingleNotificationMenu: View {
                     Image(systemName: kontest.isSetForReminder1HourBefore ? "bell.fill" : "bell")
                     Text(kontest.isSetForReminder1HourBefore ? "Remove 1 hour before notification" : "Set notification for 1 hour before")
                 }
-                .help("Set Notification for all the following kontests 1 hour before") // Tooltip text
+                .help(kontest.isSetForReminder1HourBefore ? "Remove Notification for this kontest 1 hour before" : "Set Notification for this kontest 1 hour before") // Tooltip text
             }
 
             if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 0, hours: 6, days: 0) {
@@ -76,7 +77,7 @@ struct SingleNotificationMenu: View {
                     Image(systemName: kontest.isSetForReminder6HoursBefore ? "bell.fill" : "bell")
                     Text(kontest.isSetForReminder6HoursBefore ? "Remove 6 hours before notification" : "Set notification for 6 hours before")
                 }
-                .help("Set Notification for all the following kontests 6 hours before") // Tooltip text
+                .help(kontest.isSetForReminder6HoursBefore ? "Remove Notification for this kontest 6 hours before" : "Set Notification for this kontest 6 hours before") // Tooltip text
             }
         } label: {
             let imageName = isSetForAllNotifications(kontest: kontest) ? "bell.fill" : "bell"
