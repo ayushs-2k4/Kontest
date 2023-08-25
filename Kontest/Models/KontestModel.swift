@@ -109,7 +109,7 @@ extension KontestModel {
             Color(red: 101/255, green: 125/255, blue: 251/255)
 
         case "LeetCode":
-            Color(red: 250/255, green: 217/255, blue: 101/255)
+            Color(red: 235/255, green: 162/255, blue: 64/255)
 
         case "Toph":
             .blue

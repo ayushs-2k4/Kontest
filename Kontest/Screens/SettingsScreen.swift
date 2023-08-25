@@ -32,11 +32,16 @@ struct SettingsScreen: View {
                     .frame(width: 30, height: 30)
 
                 TextField("Enter CodeForces Username", text: $codeForcesUsername)
-                    .textFieldStyle(.roundedBorder)
+                    .textFieldStyle(.plain)
                 #if os(iOS)
                     .textInputAutocapitalization(.never)
                 #endif
             }
+            .padding(5)
+            .overlay( /// apply a rounded border
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke(KontestModel.getColorForIdentifier(site: "CodeForces"), lineWidth: 1)
+            )
             .frame(maxWidth: 400)
 
             HStack {
@@ -45,11 +50,16 @@ struct SettingsScreen: View {
                     .frame(width: 30, height: 30)
 
                 TextField("Enter Leetcode Username", text: Bindable(settingsViewModel).leetcodeUsername)
-                    .textFieldStyle(.roundedBorder)
+                    .textFieldStyle(.plain)
                 #if os(iOS)
                     .textInputAutocapitalization(.never)
                 #endif
             }
+            .padding(.vertical, 5)
+            .overlay( // apply a rounded border
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke(KontestModel.getColorForIdentifier(site: "LeetCode"), lineWidth: 1)
+            )
             .frame(maxWidth: 400)
 
             Button("Save") {
