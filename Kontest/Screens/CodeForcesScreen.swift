@@ -19,16 +19,24 @@ struct CodeForcesScreen: View {
     }
 
     var body: some View {
-        CodeForcesView(codeForcesProfile: codeForcesViewModel.codeForcesProfile, username: username, bgColor: bgColor, isLoading: codeForcesViewModel.isLoading, error: codeForcesViewModel.error)
+        CodeForcesView(codeForcesViewModel: codeForcesViewModel, username: username, bgColor: bgColor, isLoading: codeForcesViewModel.isLoading, error: codeForcesViewModel.error)
     }
 }
 
 struct CodeForcesView: View {
-    let codeForcesProfile: CodeForcesAPIModel?
+    let codeForcesViewModel: CodeForcesViewModel
     let username: String
     let bgColor: Color
     let isLoading: Bool
     let error: Error?
+
+    init(codeForcesViewModel: CodeForcesViewModel, username: String, bgColor: Color, isLoading: Bool, error: Error?) {
+        self.codeForcesViewModel = codeForcesViewModel
+        self.username = username
+        self.bgColor = bgColor
+        self.isLoading = isLoading
+        self.error = error
+    }
 
     @Environment(\.openURL) private var openURL
     @Environment(Router.self) private var router
@@ -55,7 +63,7 @@ struct CodeForcesView: View {
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
 
-                if let codeForcesProfile {
+                if let codeForcesProfile = codeForcesViewModel.codeForcesProfile {
                     if codeForcesProfile.result.isEmpty {
                         Text("LastRank 0")
                             .padding()
@@ -70,11 +78,17 @@ struct CodeForcesView: View {
                     else {
                         let latestResult = codeForcesProfile.result[codeForcesProfile.result.count - 1]
 
-                        Text("Current Rating: \("\(latestResult.newRating)")")
-                            .fontDesign(.monospaced)
-                            .bold()
-                            .padding()
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                        let rating = codeForcesViewModel.getRatingsTitle()
+                        VStack(spacing: 0) {
+                            Text(rating.title)
+                                .fontDesign(.monospaced)
+                                .bold()
+
+                            Text("with a current rating of \(latestResult.newRating) [\((latestResult.newRating - latestResult.oldRating) >= 0 ? "+" : "")\(latestResult.newRating - latestResult.oldRating)]")
+                                .font(.caption)
+                        }
+                        .foregroundStyle(rating.color)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
 
                         Text("LastRank \(latestResult.rank)")
                             .padding()
@@ -100,7 +114,7 @@ struct CodeForcesView: View {
             }
         }
         .onTapGesture {
-            if codeForcesProfile != nil {
+            if codeForcesViewModel.codeForcesProfile != nil {
                 guard let url = URL(string: "https://codeforces.com/profile/\(username)") else { return }
                 openURL(url)
             }
@@ -115,9 +129,10 @@ struct CodeForcesView: View {
 
 #Preview {
     VStack {
-        CodeForcesScreen(username: "Fefer_Ivan", bgColor: .red)
-        CodeForcesScreen(username: "ayushsinghals", bgColor: .red)
-        CodeForcesScreen(username: "ayushsinghals02", bgColor: .red)
+        CodeForcesScreen(username: "Fefer_Ivan", bgColor: .green)
+        CodeForcesScreen(username: "ayushsinghals", bgColor: .green)
+        CodeForcesScreen(username: "ayushsinghals02", bgColor: .green)
+        CodeForcesScreen(username: "yermak0v", bgColor: .green)
     }
     .environment(Router.instance)
 }

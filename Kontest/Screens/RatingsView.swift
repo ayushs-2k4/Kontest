@@ -56,4 +56,5 @@ struct RatingsView: View {
 
 #Preview {
     RatingsView(codeForcesUsername: "ayushsinghals", leetCodeUsername: "ayushs_2k4")
+        .environment(Router.instance)
 }
