@@ -11,7 +11,7 @@ struct AllKontestsScreen: View {
     @Environment(AllKontestsViewModel.self) private var allKontestsViewModel
     @State var showRemoveAllNotificationsAlert = false
     @State var showNotificationForAllKontestsAlert = false
-    let isInDevelopmentMode = false
+    let isInDevelopmentMode = true
 
     let settingsViewModel = SettingsViewModel.instance
 
@@ -34,7 +34,7 @@ struct AllKontestsScreen: View {
                             #if os(macOS)
                             RatingsView(codeForcesUsername: settingsViewModel.codeForcesUsername, leetCodeUsername: settingsViewModel.leetcodeUsername)
                             #endif
-                            
+
                             let today = Date()
                             let tomorrow = CalendarUtility.getTomorrow()
                             let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
@@ -82,7 +82,7 @@ struct AllKontestsScreen: View {
                             Text("All Pending Notifications")
                         }
                     }
-                    
+
                     ToolbarItem(placement: .automatic) { // change the placement here!
                         Button {
                             allKontestsViewModel.printAllPendingNotifications()
@@ -108,16 +108,9 @@ struct AllKontestsScreen: View {
                             Image(systemName: "gear")
                         }
                     }
-
-                    ToolbarItem(placement: .automatic) { // change the placement here!
-                        Button {
-                            showNotificationForAllKontestsAlert = true
-                            allKontestsViewModel.setNotificationForAllKontests()
-                        } label: {
-                            Image(systemName: "bell.fill")
-                        }
-                        .help("Set Notification for all following kontests") // Tooltip text
-                        .alert("Notification for all Kontests set", isPresented: $showNotificationForAllKontestsAlert, actions: {})
+                    
+                    ToolbarItem(placement: .automatic) {
+                        AllNotificationMenu()
                     }
 
                     ToolbarItem(placement: .automatic) { // change the placement here!
@@ -139,7 +132,7 @@ struct AllKontestsScreen: View {
                 switch screen {
                 case Screens.SettingsScreen:
                     SettingsScreen()
-                    
+
                 case .PendingNotificationsScreen:
                     PendingNotificationsScreen()
                 }

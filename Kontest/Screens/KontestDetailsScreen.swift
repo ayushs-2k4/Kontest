@@ -71,16 +71,7 @@ struct ButtonsView: View {
     var body: some View {
         VStack {
             if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) {
-                Button {
-                    if kontest.isSetForReminder {
-                        allKontestsViewModel.removePendingNotification(kontest: kontest)
-                    } else {
-                        allKontestsViewModel.setNotificationForKontest(kontest: kontest)
-                    }
-                } label: {
-                    Text(kontest.isSetForReminder ? "Remove in-app Reminder" : "Add in-app Reminder")
-                        .frame(maxWidth: .infinity)
-                }
+                SingleNotificationMenu(kontest: kontest)
             }
 
             Link(destination: URL(string: kontest.url)!, label: {
@@ -199,8 +190,8 @@ struct TimeView: View {
 //    let startTime = "2023-08-14 17:42:00 UTC"
 //    let endTime = "2023-08-21 17:43:00 UTC"
 
-    let startTime = "2023-08-15 00:00:00 UTC"
-    let endTime = "2023-08-18 23:59:00 UTC"
+    let startTime = "2023-08-30 00:00:00 UTC"
+    let endTime = "2023-08-30 23:59:00 UTC"
 
     return KontestDetailsScreen(kontest: KontestModel.from(dto: KontestDTO(name: "ProjectEuler+", url: "https://hackerrank.com/contests/projecteuler", start_time: startTime, end_time: endTime, duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "CODING")))
         .environment(AllKontestsViewModel())

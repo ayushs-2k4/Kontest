@@ -185,4 +185,18 @@ class CalendarUtility {
         dateFormatter.dateFormat = "HH:mm"
         return dateFormatter.string(from: date)
     }
+
+    static func isRemainingTimeGreaterThanGivenTime(date: Date?, minutes: Int = 0, hours: Int = 0, days: Int = 0) -> Bool {
+        let calendar = Calendar.current
+        let currentDate = Date()
+
+        guard let date, let targetDate = calendar.date(byAdding: .minute, value: minutes, to: currentDate),
+              let targetDateWithHours = calendar.date(byAdding: .hour, value: hours, to: targetDate),
+              let targetDateWithDays = calendar.date(byAdding: .day, value: days, to: targetDateWithHours)
+        else {
+            return false
+        }
+
+        return targetDateWithDays < date
+    }
 }

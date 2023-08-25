@@ -32,11 +32,13 @@ struct SingleNotificationView: View {
         VStack {
             Text("Title: \(notificationRequest.content.title)")
                 .bold()
-            
+
             Text("SubTitle: \(notificationRequest.content.subtitle)")
                 .italic()
-            
+
             Text("Body: \(notificationRequest.content.body)")
+
+            Text("ID: \(notificationRequest.identifier)")
             Spacer()
             if let trigger = notificationRequest.trigger as? UNCalendarNotificationTrigger {
                 let triggerTime = trigger.nextTriggerDate()
@@ -54,10 +56,10 @@ struct SingleNotificationView: View {
 }
 
 #Preview("SingleNotificationView") {
-    let content = UNMutableNotificationContent()
-    content.title = "Toyota Programming Contest Final"
-    content.subtitle = "AtCoder"
-    content.body = "RECRUIT Nihonbashi Half Marathon 2023 Summer (AtCoder Heuristic Contest 022)"
+    let kontent = UNMutableNotificationContent()
+    kontent.title = "Toyota Programming Contest Final"
+    kontent.subtitle = "AtCoder"
+    kontent.body = "RECRUIT Nihonbashi Half Marathon 2023 Summer (AtCoder Heuristic Contest 022)"
 
     var dateComponents = DateComponents()
     dateComponents.year = 2023
@@ -70,7 +72,7 @@ struct SingleNotificationView: View {
 
     let mockRequest = UNNotificationRequest(
         identifier: "mockIdentifier",
-        content: content,
+        content: kontent,
         trigger: calendarTrigger
     )
 

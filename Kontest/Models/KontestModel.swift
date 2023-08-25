@@ -15,10 +15,13 @@ class KontestModel: Decodable, Identifiable, Hashable {
     let url: String
     let start_time, end_time, duration, site, in_24_hours: String
     var status: KontestStatus
-    var isSetForReminder: Bool
+    var isSetForReminder10MiutesBefore: Bool
+    var isSetForReminder30MiutesBefore: Bool
+    var isSetForReminder1HourBefore: Bool
+    var isSetForReminder6HoursBefore: Bool
     let logo: String
 
-    init(id: String, name: String, url: String, start_time: String, end_time: String, duration: String, site: String, in_24_hours: String, status: KontestStatus, isSetForReminder: Bool, logo: String) {
+    init(id: String, name: String, url: String, start_time: String, end_time: String, duration: String, site: String, in_24_hours: String, status: KontestStatus, logo: String) {
         self.id = id
         self.name = name
         self.url = url
@@ -28,7 +31,10 @@ class KontestModel: Decodable, Identifiable, Hashable {
         self.site = site
         self.in_24_hours = in_24_hours
         self.status = status
-        self.isSetForReminder = isSetForReminder
+        self.isSetForReminder10MiutesBefore = false
+        self.isSetForReminder30MiutesBefore = false
+        self.isSetForReminder1HourBefore = false
+        self.isSetForReminder6HoursBefore = false
         self.logo = logo
     }
 
@@ -46,7 +52,6 @@ extension KontestModel: Equatable {
 extension KontestModel {
     static func from(dto: KontestDTO) -> KontestModel {
         let id = generateUniqueID(dto: dto)
-        let isSetForReminder = false
 
         var status: KontestStatus {
             let kontestStartDate = CalendarUtility.getDate(date: dto.start_time)
@@ -65,7 +70,6 @@ extension KontestModel {
             site: dto.site,
             in_24_hours: dto.in_24_hours,
             status: status,
-            isSetForReminder: isSetForReminder,
             logo: getLogo(site: dto.site)
         )
     }
@@ -150,13 +154,33 @@ extension KontestModel {
     }
 
     // Save reminder status to UserDefaults
-    func saveReminderStatus() {
-        UserDefaults.standard.set(isSetForReminder, forKey: id)
+    func saveReminderStatus(minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0) {
+        let userDefaultsID = id + "\(minutesBefore)\(hoursBefore)\(daysBefore)"
+
+        if minutesBefore == 10 {
+            UserDefaults.standard.set(isSetForReminder10MiutesBefore, forKey: userDefaultsID)
+        } else if minutesBefore == 30 {
+            UserDefaults.standard.set(isSetForReminder30MiutesBefore, forKey: userDefaultsID)
+        } else if hoursBefore == 1 {
+            UserDefaults.standard.set(isSetForReminder1HourBefore, forKey: userDefaultsID)
+        } else {
+            UserDefaults.standard.set(isSetForReminder6HoursBefore, forKey: userDefaultsID)
+        }
     }
 
     // Load reminder status from UserDefaults
     func loadReminderStatus() {
-        isSetForReminder = UserDefaults.standard.bool(forKey: id)
+        var userDefaultsID = id + "10" + "0" + "0"
+        isSetForReminder10MiutesBefore = UserDefaults.standard.bool(forKey: userDefaultsID)
+
+        userDefaultsID = id + "30" + "0" + "0"
+        isSetForReminder30MiutesBefore = UserDefaults.standard.bool(forKey: userDefaultsID)
+
+        userDefaultsID = id + "0" + "1" + "0"
+        isSetForReminder1HourBefore = UserDefaults.standard.bool(forKey: userDefaultsID)
+
+        userDefaultsID = id + "0" + "6" + "0"
+        isSetForReminder6HoursBefore = UserDefaults.standard.bool(forKey: userDefaultsID)
     }
 
     func removeReminderStatusFromUserDefaults() {

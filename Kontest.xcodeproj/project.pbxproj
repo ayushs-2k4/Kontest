@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		070029752A95C313006E6B2F /* AllNotificationMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070029742A95C313006E6B2F /* AllNotificationMenu.swift */; };
+		070029772A95CB5A006E6B2F /* SingleNotificationMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070029762A95CB5A006E6B2F /* SingleNotificationMenu.swift */; };
 		0705F8DE2A8DD45100594C3D /* PendingNotificationsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0705F8DD2A8DD45100594C3D /* PendingNotificationsScreen.swift */; };
 		0705F8E02A8DD45E00594C3D /* PendingNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0705F8DF2A8DD45E00594C3D /* PendingNotificationsViewModel.swift */; };
 		071916952A8CDDBA00172270 /* CodeForcesAPIDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071916942A8CDDBA00172270 /* CodeForcesAPIDTO.swift */; };
@@ -49,6 +51,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		070029742A95C313006E6B2F /* AllNotificationMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllNotificationMenu.swift; sourceTree = "<group>"; };
+		070029762A95CB5A006E6B2F /* SingleNotificationMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleNotificationMenu.swift; sourceTree = "<group>"; };
 		0705F8DD2A8DD45100594C3D /* PendingNotificationsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingNotificationsScreen.swift; sourceTree = "<group>"; };
 		0705F8DF2A8DD45E00594C3D /* PendingNotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingNotificationsViewModel.swift; sourceTree = "<group>"; };
 		071916942A8CDDBA00172270 /* CodeForcesAPIDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeForcesAPIDTO.swift; sourceTree = "<group>"; };
@@ -222,6 +226,8 @@
 				0753BA472A8CCA6800C69AD6 /* CodeForcesScreen.swift */,
 				072A0F762A8D38390038C8CE /* SettingsScreen.swift */,
 				0705F8DD2A8DD45100594C3D /* PendingNotificationsScreen.swift */,
+				070029742A95C313006E6B2F /* AllNotificationMenu.swift */,
+				070029762A95CB5A006E6B2F /* SingleNotificationMenu.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -335,6 +341,7 @@
 				074083932A890572009443B7 /* ClipboardUtility.swift in Sources */,
 				0705F8E02A8DD45E00594C3D /* PendingNotificationsViewModel.swift in Sources */,
 				072A0F792A8D3D3C0038C8CE /* Screens.swift in Sources */,
+				070029752A95C313006E6B2F /* AllNotificationMenu.swift in Sources */,
 				074083972A89066F009443B7 /* CalendarUtility.swift in Sources */,
 				0753BA1E2A8C99EA00C69AD6 /* LeetcodeAPIModel.swift in Sources */,
 				074774DD2A8A748800B44A29 /* KontestDetailsScreen.swift in Sources */,
@@ -358,6 +365,7 @@
 				076013B92A8A1A78008F4085 /* KontestStatus.swift in Sources */,
 				0753BA3D2A8CC78A00C69AD6 /* CodeForcesAPIModel.swift in Sources */,
 				0760166E2A87CD72007CE9F5 /* KontestDTO.swift in Sources */,
+				070029772A95CB5A006E6B2F /* SingleNotificationMenu.swift in Sources */,
 				074083992A8906B8009443B7 /* FontUtility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

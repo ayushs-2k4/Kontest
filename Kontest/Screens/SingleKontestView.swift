@@ -70,19 +70,9 @@ struct SingleKontestView: View {
             #endif
 
             #if os(macOS)
-            if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) {
-                Button {
-                    if kontest.isSetForReminder {
-                        allKontestsViewModel.removePendingNotification(kontest: kontest)
-                    }
-                    else {
-                        allKontestsViewModel.setNotificationForKontest(kontest: kontest)
-                    }
-
-                } label: {
-                    Image(systemName: kontest.isSetForReminder ? "bell.fill" : "bell")
-                }
-                .help(kontest.isSetForReminder ? "Remove notification for this contest" : "Set notification for this contest")
+            if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()), numberOfOptions(kontest: kontest) > 0 {
+                SingleNotificationMenu(kontest: kontest)
+                    .help(kontest.isSetForReminder10MiutesBefore ? "Remove notification for this contest" : "Set notification for this contest")
             }
             #endif
 
@@ -124,6 +114,32 @@ struct SingleKontestView: View {
     }
 }
 
+private func numberOfOptions(kontest: KontestModel) -> Int {
+    var ans = 0
+    let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
+    if kontestStartDate == nil {
+        return 4
+    }
+
+    if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 10, hours: 0, days: 0) {
+        ans += 1
+    }
+
+    if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 30, hours: 0, days: 0) {
+        ans += 1
+    }
+
+    if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 0, hours: 1, days: 0) {
+        ans += 1
+    }
+
+    if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 0, hours: 6, days: 0) {
+        ans += 1
+    }
+
+    return ans
+}
+
 #Preview("SingleKontentView") {
     let allKontestsViewModel = AllKontestsViewModel()
 
@@ -132,7 +148,7 @@ struct SingleKontestView: View {
 
         SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "1v1 Games by CodeChef", url: "https://www.codechef.com/GAMES", start_time: "2022-10-10 06:30:00 UTC", end_time: "2032-10-10 06:30:00 UTC", duration: "315619200.0", site: "CodeChef", in_24_hours: "No", status: "CODING")))
 
-        SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "Weekly Contest 358", url: "https://leetcode.com/contest/weekly-contest-358", start_time: "2023-08-13T02:30:00.000Z", end_time: "2023-08-13T04:00:00.000Z", duration: "5400", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE")))
+        SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "Weekly Contest 358", url: "https://leetcode.com/contest/weekly-contest-358", start_time: "2023-08-25T02:30:00.000Z", end_time: "2023-08-25T04:00:00.000Z", duration: "5400", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE")))
 
         SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "Test Contest", url: "https://leetcode.com/contest/weekly-contest-358", start_time: "2023-08-13T02:30:00.000Z", end_time: "2023-08-13T05:00:00.000Z", duration: "1800", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE")))
         SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "Starters 100 (Date to be decided)", url: "https://www.codechef.com/START100", start_time: "2023-08-30 14:30:00 UTC", end_time: "2023-08-30 16:30:00 UTC", duration: "7200", site: "CodeChef", in_24_hours: "No", status: "BEFORE")))

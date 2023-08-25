@@ -70,27 +70,39 @@ class AllKontestsViewModel {
         }
     }
 
-    private func setNotification(kontest: KontestModel, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0) {
+    private func setNotification(kontest: KontestModel, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String, kontestSubTitle: String, kontestBody: String) {
         let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
         let notificationDate = CalendarUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: minutesBefore, hours: hoursBefore, days: daysBefore)
+        let notificationID = kontest.id + CalendarUtility.getKontestDate(date: notificationDate) + CalendarUtility.getTimeFromDate(date: notificationDate)
 
-        LocalNotificationManager.instance.scheduleCalendarNotification(notificationContent: LocalNotificationManager.NotificationContent(title: kontest.name, subtitle: kontest.site, body: "\(kontest.name) is starting in \(Constants.minutesToBeReminderBefore) minutes.", date: notificationDate), id: kontest.id)
+        LocalNotificationManager.instance.scheduleCalendarNotification(notificationContent: LocalNotificationManager.NotificationContent(title: kontestTitle, subtitle: kontestSubTitle, body: kontestBody, date: notificationDate), id: notificationID)
 
-        updateIsSetForNotification(kontest: kontest, to: true)
+        updateIsSetForNotification(kontest: kontest, to: true, minutesBefore: minutesBefore, hoursBefore: hoursBefore)
     }
 
-    func setNotificationForKontest(kontest: KontestModel, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0) {
-        setNotification(kontest: kontest, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
+    func setNotificationForKontest(kontest: KontestModel, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String = "", kontestSubTitle: String = "", kontestBody: String = "") {
+        let title = kontestTitle == "" ? kontest.name : kontestTitle
+        let subTitle = kontestSubTitle == "" ? kontest.site : kontestSubTitle
+        var body = ""
+        if hoursBefore > 0 {
+            if hoursBefore == 1 {
+                body = kontestBody == "" ? "\(kontest.name) is starting in \(hoursBefore) hour." : kontestBody
+            } else {
+                body = kontestBody == "" ? "\(kontest.name) is starting in \(hoursBefore) hours." : kontestBody
+            }
+        } else {
+            body = kontestBody == "" ? "\(kontest.name) is starting in \(minutesBefore) minutes." : kontestBody
+        }
+
+        setNotification(kontest: kontest, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore, kontestTitle: title, kontestSubTitle: subTitle, kontestBody: body)
     }
 
-    func setNotificationForAllKontests() {
+    func setNotificationForAllKontests(minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String = "", kontestSubTitle: String = "", kontestBody: String = "") {
         for i in 0 ..< allKontests.count {
             let kontest = allKontests[i]
             let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
             if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) {
-                setNotification(kontest: kontest, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
-
-                kontest.isSetForReminder = true
+                setNotificationForKontest(kontest: kontest, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore, kontestTitle: kontestTitle, kontestSubTitle: kontestSubTitle, kontestBody: kontestBody)
             }
         }
     }
@@ -98,23 +110,62 @@ class AllKontestsViewModel {
     func removeAllPendingNotifications() {
         LocalNotificationManager.instance.removeAllPendingNotifications()
         for i in 0 ..< allKontests.count {
-            updateIsSetForNotification(kontest: allKontests[i], to: false)
+            updateIsSetForNotification(kontest: allKontests[i], to: false, removeAll: true)
         }
     }
 
-    func removePendingNotification(kontest: KontestModel) {
-        LocalNotificationManager.instance.removePendingNotification(identifiers: [kontest.id])
-        updateIsSetForNotification(kontest: kontest, to: false)
+    func removePendingNotification(kontest: KontestModel, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0) {
+        let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
+        let notificationDate = CalendarUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: minutesBefore, hours: hoursBefore, days: daysBefore)
+        let notificationID = kontest.id + CalendarUtility.getKontestDate(date: notificationDate) + CalendarUtility.getTimeFromDate(date: notificationDate)
+        LocalNotificationManager.instance.removePendingNotification(identifiers: [notificationID])
+        updateIsSetForNotification(kontest: kontest, to: false, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
     }
 
     func printAllPendingNotifications() {
         LocalNotificationManager.instance.printAllPendingNotifications()
     }
 
-    func updateIsSetForNotification(kontest: KontestModel, to: Bool) {
-        if let index = allKontests.firstIndex(where: { $0 == kontest }) {
-            allKontests[index].isSetForReminder = to
-            allKontests[index].saveReminderStatus()
+    func updateIsSetForNotification(kontest: KontestModel, to: Bool, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, removeAll: Bool = false) {
+        if to == false {
+            if removeAll == true {
+                if let index = allKontests.firstIndex(where: { $0 == kontest }) {
+                    allKontests[index].isSetForReminder10MiutesBefore = false
+                    allKontests[index].isSetForReminder30MiutesBefore = false
+                    allKontests[index].isSetForReminder1HourBefore = false
+                    allKontests[index].isSetForReminder6HoursBefore = false
+
+                    allKontests[index].saveReminderStatus(minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
+                }
+            } else {
+                if let index = allKontests.firstIndex(where: { $0 == kontest }) {
+                    if minutesBefore == 10 {
+                        allKontests[index].isSetForReminder10MiutesBefore = to
+                    } else if minutesBefore == 30 {
+                        allKontests[index].isSetForReminder30MiutesBefore = to
+                    } else if hoursBefore == 1 {
+                        allKontests[index].isSetForReminder1HourBefore = to
+                    } else {
+                        allKontests[index].isSetForReminder6HoursBefore = to
+                    }
+
+                    allKontests[index].saveReminderStatus(minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
+                }
+            }
+        } else {
+            if let index = allKontests.firstIndex(where: { $0 == kontest }) {
+                if minutesBefore == 10 {
+                    allKontests[index].isSetForReminder10MiutesBefore = to
+                } else if minutesBefore == 30 {
+                    allKontests[index].isSetForReminder30MiutesBefore = to
+                } else if hoursBefore == 1 {
+                    allKontests[index].isSetForReminder1HourBefore = to
+                } else {
+                    allKontests[index].isSetForReminder6HoursBefore = to
+                }
+
+                allKontests[index].saveReminderStatus(minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
+            }
         }
     }
 
