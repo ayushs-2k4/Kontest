@@ -34,6 +34,7 @@ struct LeetcodeProfileView: View {
     let error: Error?
 
     @Environment(\.openURL) private var openURL
+    @Environment(Router.self) private var router
 
     var body: some View {
         ZStack {
@@ -90,6 +91,8 @@ struct LeetcodeProfileView: View {
             if status != nil, status != "error" {
                 guard let url = URL(string: "https://leetcode.com/ayushs_2k4") else { return }
                 openURL(url)
+            } else {
+                router.path.append(Screens.SettingsScreen)
             }
         }
         .multilineTextAlignment(.center)
@@ -102,4 +105,5 @@ struct LeetcodeProfileView: View {
         LeetcodeScreen(username: "ayushs_2k4")
         LeetcodeScreen(username: "ayushs  _2k4")
     }
+    .environment(Router.instance)
 }

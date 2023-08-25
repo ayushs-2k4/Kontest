@@ -15,10 +15,10 @@ struct AllKontestsScreen: View {
 
     let settingsViewModel = SettingsViewModel.instance
 
-    @State var navigationPath: NavigationPath = .init()
+    @Environment(Router.self) private var router
 
     var body: some View {
-        NavigationStack(path: $navigationPath) {
+        NavigationStack(path: Bindable(router).path) {
             ZStack {
                 if allKontestsViewModel.isLoading {
                     ProgressView()
@@ -77,7 +77,7 @@ struct AllKontestsScreen: View {
                 if isInDevelopmentMode {
                     ToolbarItem(placement: .automatic) { // change the placement here!
                         Button {
-                            navigationPath.append(Screens.PendingNotificationsScreen)
+                            router.path.append(Screens.PendingNotificationsScreen)
                         } label: {
                             Text("All Pending Notifications")
                         }
@@ -103,13 +103,13 @@ struct AllKontestsScreen: View {
                 if !allKontestsViewModel.allKontests.isEmpty {
                     ToolbarItem(placement: .automatic) {
                         Button {
-                            navigationPath.append(Screens.SettingsScreen)
+                            router.path.append(Screens.SettingsScreen)
                         } label: {
                             Image(systemName: "gear")
                         }
                         .keyboardShortcut(",")
                     }
-                    
+
                     ToolbarItem(placement: .automatic) {
                         AllNotificationMenu()
                     }
@@ -166,4 +166,5 @@ struct AllKontestsScreen: View {
 #Preview {
     AllKontestsScreen()
         .environment(AllKontestsViewModel())
+        .environment(Router.instance)
 }

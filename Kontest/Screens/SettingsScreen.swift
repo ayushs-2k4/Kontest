@@ -38,7 +38,7 @@ struct SettingsScreen: View {
                 #endif
             }
             .padding(5)
-            .overlay( /// apply a rounded border
+            .overlay( // apply a rounded border
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(KontestModel.getColorForIdentifier(site: "CodeForces"), lineWidth: 1)
             )

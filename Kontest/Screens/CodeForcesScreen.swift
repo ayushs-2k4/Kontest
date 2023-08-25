@@ -31,6 +31,7 @@ struct CodeForcesView: View {
     let error: Error?
 
     @Environment(\.openURL) private var openURL
+    @Environment(Router.self) private var router
 
     var body: some View {
         ZStack {
@@ -103,6 +104,9 @@ struct CodeForcesView: View {
                 guard let url = URL(string: "https://codeforces.com/profile/\(username)") else { return }
                 openURL(url)
             }
+            else {
+                router.path.append(Screens.SettingsScreen)
+            }
         }
         .multilineTextAlignment(.center)
         .foregroundStyle(.white)
@@ -115,4 +119,5 @@ struct CodeForcesView: View {
         CodeForcesScreen(username: "ayushsinghals", bgColor: .red)
         CodeForcesScreen(username: "ayushsinghals02", bgColor: .red)
     }
+    .environment(Router.instance)
 }
