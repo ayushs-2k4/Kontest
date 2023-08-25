@@ -107,6 +107,7 @@ struct AllKontestsScreen: View {
                         } label: {
                             Image(systemName: "gear")
                         }
+                        .keyboardShortcut(",")
                     }
                     
                     ToolbarItem(placement: .automatic) {
