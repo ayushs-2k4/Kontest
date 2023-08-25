@@ -36,6 +36,7 @@ struct SettingsScreen: View {
                     .textInputAutocapitalization(.never)
                 #endif
             }
+            .frame(maxWidth: 400)
 
             HStack {
                 Image(colorScheme == .light ? .leetCodeDarkLogo : .leetCodeWhiteLogo)
@@ -48,12 +49,14 @@ struct SettingsScreen: View {
                     .textInputAutocapitalization(.never)
                 #endif
             }
+            .frame(maxWidth: 400)
 
             Button("Save") {
                 settingsViewModel.setCodeForcesUsername(newCodeForcesUsername: codeForcesUsername)
                 settingsViewModel.setLeetcodeUsername(newLeetcodeUsername: leetcodeUsername)
             }
         }
+        .padding()
     }
 }
 
