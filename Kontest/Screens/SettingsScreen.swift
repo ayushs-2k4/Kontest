@@ -23,7 +23,7 @@ struct SettingsScreen: View {
 
     var body: some View {
 //        TextField("Enter CodeForces Username", text: Bindable(settingsViewModel).codeForcesUsername)
-//        TextField("Enter Leetcode Username", text: $leetcodeUsername)
+//        TextField("Enter Leetcode Username", text: Bindable(settingsViewModel).leetcodeUsername)
 
         VStack {
             HStack {
@@ -49,7 +49,7 @@ struct SettingsScreen: View {
                     .resizable()
                     .frame(width: 30, height: 30)
 
-                TextField("Enter Leetcode Username", text: Bindable(settingsViewModel).leetcodeUsername)
+                TextField("Enter Leetcode Username", text: $leetcodeUsername)
                     .textFieldStyle(.plain)
                 #if os(iOS)
                     .textInputAutocapitalization(.never)
@@ -64,8 +64,7 @@ struct SettingsScreen: View {
 
             Button("Save") {
                 settingsViewModel.setCodeForcesUsername(newCodeForcesUsername: codeForcesUsername)
-//                settingsViewModel.setLeetcodeUsername(newLeetcodeUsername: leetcodeUsername)
-                settingsViewModel.setLeetcodeUsername(newLeetcodeUsername: settingsViewModel.leetcodeUsername)
+                settingsViewModel.setLeetcodeUsername(newLeetcodeUsername: leetcodeUsername)
                 dismiss()
             }
             .keyboardShortcut(.return)
