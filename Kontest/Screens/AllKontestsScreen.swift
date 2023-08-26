@@ -26,14 +26,8 @@ struct AllKontestsScreen: View {
                     NoKontestsScreen()
                 } else {
                     VStack {
-                        #if !os(macOS)
-                        RatingsView(codeForcesUsername: settingsViewModel.codeForcesUsername, leetCodeUsername: settingsViewModel.leetcodeUsername)
-                        #endif
-
                         List {
-                            #if os(macOS)
                             RatingsView(codeForcesUsername: settingsViewModel.codeForcesUsername, leetCodeUsername: settingsViewModel.leetcodeUsername)
-                            #endif
 
                             let today = Date()
                             let tomorrow = CalendarUtility.getTomorrow()
@@ -63,6 +57,7 @@ struct AllKontestsScreen: View {
                                 createSection(title: "Upcoming", kontests: laterKontests)
                             }
                         }
+                        .listStyle(.plain)
                     }
                     #if os(macOS)
                     .searchable(text: Bindable(allKontestsViewModel).searchText)
