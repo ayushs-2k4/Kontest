@@ -19,12 +19,17 @@ struct SingleKontestView: View {
     let kontestStartDate: Date?
     let kontestEndDate: Date?
 
-    @State var remainingTime: String = "--:--:--"
+    @State var remainingTimeInStartingOfFutureKontest: String = "--:--:--"
+    @State var remainingTimeInEndingOfRunningKontest: String = "--:--:--"
+    let isKontestRunning: Bool
+    let isKontestOfFuture: Bool
 
     init(kontest: KontestModel) {
         self.kontest = kontest
         kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
         kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
+        isKontestRunning = CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date()) || kontest.status == .Running
+        isKontestOfFuture = CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) && kontestStartDate ?? Date() < CalendarUtility.getTomorrow()
     }
 
     var body: some View {
@@ -37,9 +42,7 @@ struct SingleKontestView: View {
                     .frame(width: FontUtility.getLogoSize())
                 #endif
 
-                let isContestRunning = CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date()) || kontest.status == .Running
-
-                if isContestRunning {
+                if isKontestRunning {
                     BlinkingDotView(color: .green)
                         .frame(width: 10, height: 10)
                 }
@@ -96,13 +99,22 @@ struct SingleKontestView: View {
                         .font(FontUtility.getTimeFontSize())
                         .bold()
 
-                    if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) && kontestStartDate ?? Date() < CalendarUtility.getTomorrow() {
-                        Text(remainingTime)
+                    if isKontestRunning {
+                        Text("Ends in \(remainingTimeInEndingOfRunningKontest)")
                             .font(FontUtility.getRemainingTimeFontSize())
                             .onReceive(timer) { time in
-                                let p = kontestStartDate!.timeIntervalSince(time)
-                                remainingTime = CalendarUtility.formattedTimeFrom(seconds: Int(p))
-                                print("remainingTime: \(remainingTime)")
+                                let seconds = (kontestEndDate ?? Date()).timeIntervalSince(time)
+                                remainingTimeInEndingOfRunningKontest = (Int(seconds) >= 0) ? CalendarUtility.formattedTimeFrom(seconds: Int(seconds)) : "00:00:00"
+                            }
+                            .padding(.top, 5)
+                    }
+
+                    if isKontestOfFuture {
+                        Text("Starting in \(remainingTimeInStartingOfFutureKontest)")
+                            .font(FontUtility.getRemainingTimeFontSize())
+                            .onReceive(timer) { time in
+                                let seconds = (kontestStartDate ?? Date()).timeIntervalSince(time)
+                                remainingTimeInStartingOfFutureKontest = (Int(seconds) >= 0) ? CalendarUtility.formattedTimeFrom(seconds: Int(seconds)) : "00:00:00"
                             }
                             .padding(.top, 5)
                     }
