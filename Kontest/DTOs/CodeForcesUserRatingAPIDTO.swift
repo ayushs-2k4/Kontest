@@ -1,5 +1,5 @@
 //
-//  CodeForcesAPIDTO.swift
+//  CodeForcesUserRatingAPIDTO.swift
 //  Kontest
 //
 //  Created by Ayush Singhal on 16/08/23.
@@ -7,14 +7,14 @@
 
 import Foundation
 
-// MARK: - CodeForcesAPIDTO
-struct CodeForcesAPIDTO: Codable {
+// MARK: - CodeForcesUserRatingAPIDTO
+struct CodeForcesUserRatingAPIDTO: Codable {
     let status: String
-    let result: [CodeForcesResultDTO]
+    let result: [CodeForcesUserRatingAPIResultDTO]
 }
 
-// MARK: - Result
-struct CodeForcesResultDTO: Codable {
+// MARK: - CodeForcesUserRatingAPIResultDTO
+struct CodeForcesUserRatingAPIResultDTO: Codable {
     let contestId: Int
     let contestName: String
     let handle: String

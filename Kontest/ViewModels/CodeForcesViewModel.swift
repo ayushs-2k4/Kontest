@@ -11,7 +11,8 @@ import SwiftUI
 class CodeForcesViewModel {
     let codeForcesAPIRepository = CodeForcesAPIRepository()
     
-    var codeForcesProfile: CodeForcesAPIModel?
+    var codeForcesRatings: CodeForcesUserRatingAPIModel?
+    var codeForcesUserInfos: CodeForcesUserInfoAPIModel?
     
     var isLoading = false
     
@@ -20,27 +21,28 @@ class CodeForcesViewModel {
     init(username: String) {
         self.isLoading = true
         Task {
-            await self.getCodeForcesProfile(username: username)
+            await self.getCodeForcesRatings(username: username)
+            await self.getCodeForcesUserInfo(username: username)
             self.isLoading = false
         }
     }
     
-    func getCodeForcesProfile(username: String) async {
+    func getCodeForcesRatings(username: String) async {
         do {
-            let fetchedCodeForcesProfile = try await codeForcesAPIRepository.getUserData(username: username)
-            print(fetchedCodeForcesProfile)
+            let fetchedCodeForcesRatings = try await codeForcesAPIRepository.getUserRating(username: username)
+            print(fetchedCodeForcesRatings)
             
-            self.codeForcesProfile = CodeForcesAPIModel.from(dto: fetchedCodeForcesProfile)
+            self.codeForcesRatings = CodeForcesUserRatingAPIModel.from(dto: fetchedCodeForcesRatings)
         } catch {
             self.error = error
-            print("error in fetching CodeForces Profile: \(error)")
+            print("error in fetching CodeForces Rating: \(error)")
         }
     }
     
     func getRatingsTitle() -> (title: String, color: Color) {
-        guard let codeForcesProfile else { return ("U n r a t e d".uppercased(), .black) }
+        guard let codeForcesRatings else { return ("U n r a t e d".uppercased(), .black) }
         
-        let newRating = codeForcesProfile.result[codeForcesProfile.result.count - 1].newRating
+        let newRating = codeForcesRatings.result[codeForcesRatings.result.count - 1].newRating
 
         return if newRating <= 1199 {
             ("N e w b i e".uppercased(), .white)
@@ -62,6 +64,18 @@ class CodeForcesViewModel {
             ("International Grandmaster".uppercased(), .red)
         } else {
             ("Legendary Grandmaster".uppercased(), .red)
+        }
+    }
+    
+    func getCodeForcesUserInfo(username: String) async {
+        do {
+            let fetchedCodeForcesUserInfo = try await codeForcesAPIRepository.getUserInfo(username: username)
+            print(fetchedCodeForcesUserInfo)
+            
+            self.codeForcesUserInfos = CodeForcesUserInfoAPIModel.from(dto: fetchedCodeForcesUserInfo)
+        } catch {
+            self.error = error
+            print("error in fetching CodeForces User Info: \(error)")
         }
     }
 }

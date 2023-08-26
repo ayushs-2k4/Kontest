@@ -63,8 +63,8 @@ struct CodeForcesView: View {
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
 
-                if let codeForcesProfile = codeForcesViewModel.codeForcesProfile {
-                    if codeForcesProfile.result.isEmpty {
+                if let codeForcesRatings = codeForcesViewModel.codeForcesRatings {
+                    if codeForcesRatings.result.isEmpty {
                         Text("LastRank 0")
                             .padding()
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
@@ -76,7 +76,15 @@ struct CodeForcesView: View {
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     }
                     else {
-                        let latestResult = codeForcesProfile.result[codeForcesProfile.result.count - 1]
+                        let latestCodeForcesRatings = codeForcesRatings.result[codeForcesRatings.result.count - 1]
+
+                        let latestCodeForcesuserInfo = codeForcesViewModel.codeForcesUserInfos?.result.first
+
+                        if let latestCodeForcesuserInfo {
+                            Text("maxRating: \(latestCodeForcesuserInfo.maxRating)")
+                                .padding()
+                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                        }
 
                         let rating = codeForcesViewModel.getRatingsTitle()
                         VStack(spacing: 0) {
@@ -84,13 +92,13 @@ struct CodeForcesView: View {
                                 .fontDesign(.monospaced)
                                 .bold()
 
-                            Text("with a current rating of \(latestResult.newRating) [\((latestResult.newRating - latestResult.oldRating) >= 0 ? "+" : "")\(latestResult.newRating - latestResult.oldRating)]")
+                            Text("with a current rating of \(latestCodeForcesRatings.newRating) [\((latestCodeForcesRatings.newRating - latestCodeForcesRatings.oldRating) >= 0 ? "+" : "")\(latestCodeForcesRatings.newRating - latestCodeForcesRatings.oldRating)]")
                                 .font(.caption)
                         }
                         .foregroundStyle(rating.color)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
 
-                        Text("LastRank \(latestResult.rank)")
+                        Text("LastRank \(latestCodeForcesRatings.rank)")
                             .padding()
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                     }
@@ -114,7 +122,7 @@ struct CodeForcesView: View {
             }
         }
         .onTapGesture {
-            if codeForcesViewModel.codeForcesProfile != nil {
+            if codeForcesViewModel.codeForcesRatings != nil {
                 guard let url = URL(string: "https://codeforces.com/profile/\(username)") else { return }
                 openURL(url)
             }

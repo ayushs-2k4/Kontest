@@ -8,5 +8,6 @@
 import Foundation
 
 protocol CodeForcesFetcher {
-    func getUserData(username: String) async throws -> CodeForcesAPIDTO
+    func getUserRating(username: String) async throws -> CodeForcesUserRatingAPIDTO
+    func getUserInfo(username: String) async throws -> CodeForcesUserInfoAPIDTO
 }
