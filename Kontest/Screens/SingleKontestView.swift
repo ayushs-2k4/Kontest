@@ -5,6 +5,7 @@
 //  Created by Ayush Singhal on 14/08/23.
 //
 
+import Combine
 import SwiftUI
 
 struct SingleKontestView: View {
@@ -13,10 +14,20 @@ struct SingleKontestView: View {
 
     @Environment(\.colorScheme) private var colorScheme
 
-    var body: some View {
-        let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
-        let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
+    let kontestStartDate: Date?
+    let kontestEndDate: Date?
+
+    @State var remainingTime: String = "--:--:--"
+
+    init(kontest: KontestModel) {
+        self.kontest = kontest
+        kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
+        kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
+    }
+
+    var body: some View {
         HStack(alignment: .center) {
             VStack {
                 #if os(macOS)
@@ -85,13 +96,24 @@ struct SingleKontestView: View {
                         .font(FontUtility.getTimeFontSize())
                         .bold()
 
+                    if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) && kontestStartDate ?? Date() < CalendarUtility.getTomorrow() {
+                        Text(remainingTime)
+                            .font(FontUtility.getRemainingTimeFontSize())
+                            .onReceive(timer) { time in
+                                let p = kontestStartDate!.timeIntervalSince(time)
+                                remainingTime = CalendarUtility.formattedTimeFrom(seconds: Int(p))
+                                print("remainingTime: \(remainingTime)")
+                            }
+                            .padding(.top, 5)
+                    }
+
                     HStack {
                         Image(systemName: "clock")
 
                         Text(CalendarUtility.getFormattedDuration(fromSeconds: kontest.duration) ?? "")
                     }
                     .font(FontUtility.getDateFontSize())
-                    .padding(.vertical, 5)
+                    .padding(.bottom, 5)
 
                     Text("\(CalendarUtility.getNumericKontestDate(date: kontestStartDate ?? Date())) - \(CalendarUtility.getNumericKontestDate(date: kontestEndDate ?? Date()))")
                         .font(FontUtility.getDateFontSize())

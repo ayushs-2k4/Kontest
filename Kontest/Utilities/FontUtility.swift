@@ -33,14 +33,6 @@ class FontUtility {
         #endif
     }
 
-//    static func getTimeFontSize() -> CGFloat {
-//        #if os(iOS)
-//            return 15
-//        #else
-//            return 25
-//        #endif
-//    }
-
     static func getTimeFontSize() -> Font {
         #if os(iOS)
         return Font.caption
@@ -49,15 +41,15 @@ class FontUtility {
         #endif
     }
 
-//    static func getDateFontSize() -> CGFloat {
-//        #if os(iOS)
-//            return 12
-//        #else
-//            return 17
-//        #endif
-//    }
-
     static func getDateFontSize() -> Font {
+        #if os(iOS)
+        return .caption2
+        #else
+        return .body
+        #endif
+    }
+    
+    static func getRemainingTimeFontSize() -> Font {
         #if os(iOS)
         return .caption2
         #else
