@@ -41,20 +41,25 @@ struct AllKontestsScreen: View {
 
                             let laterKontests = allKontestsViewModel.allKontests.filter { CalendarUtility.getDate(date: $0.start_time) ?? today >= dayAfterTomorrow }
 
-                            if ongoingKontests.count > 0 {
-                                createSection(title: "Live Now", kontests: ongoingKontests)
-                            }
+                            if allKontestsViewModel.allKontests.isEmpty && !allKontestsViewModel.searchText.isEmpty {
+                                Text("Please try some different search term")
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                            } else {
+                                if ongoingKontests.count > 0 {
+                                    createSection(title: "Live Now", kontests: ongoingKontests)
+                                }
 
-                            if laterTodayKontests.count > 0 {
-                                createSection(title: "Later Today", kontests: laterTodayKontests)
-                            }
+                                if laterTodayKontests.count > 0 {
+                                    createSection(title: "Later Today", kontests: laterTodayKontests)
+                                }
 
-                            if tomorrowKontests.count > 0 {
-                                createSection(title: "Tomorrow", kontests: tomorrowKontests)
-                            }
+                                if tomorrowKontests.count > 0 {
+                                    createSection(title: "Tomorrow", kontests: tomorrowKontests)
+                                }
 
-                            if laterKontests.count > 0 {
-                                createSection(title: "Upcoming", kontests: laterKontests)
+                                if laterKontests.count > 0 {
+                                    createSection(title: "Upcoming", kontests: laterKontests)
+                                }
                             }
                         }
                         .listStyle(.plain)
@@ -95,7 +100,7 @@ struct AllKontestsScreen: View {
                     }
                 }
 
-                if !allKontestsViewModel.allKontests.isEmpty {
+                if !allKontestsViewModel.allKontests.isEmpty || !allKontestsViewModel.searchText.isEmpty {
                     ToolbarItem(placement: .automatic) {
                         Button {
                             router.path.append(Screens.SettingsScreen)
