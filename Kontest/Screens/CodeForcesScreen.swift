@@ -81,7 +81,7 @@ struct CodeForcesView: View {
                         let latestCodeForcesuserInfo = codeForcesViewModel.codeForcesUserInfos?.result.first
 
                         if let latestCodeForcesuserInfo {
-                            Text("maxRating: \(latestCodeForcesuserInfo.maxRating)")
+                            Text("Max Rating: \(latestCodeForcesuserInfo.maxRating)")
                                 .padding()
                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                         }
