@@ -27,7 +27,7 @@ class CodeForcesViewModel {
         }
     }
     
-    func getCodeForcesRatings(username: String) async {
+    private func getCodeForcesRatings(username: String) async {
         do {
             let fetchedCodeForcesRatings = try await codeForcesAPIRepository.getUserRating(username: username)
             print(fetchedCodeForcesRatings)
@@ -67,7 +67,7 @@ class CodeForcesViewModel {
         }
     }
     
-    func getCodeForcesUserInfo(username: String) async {
+    private func getCodeForcesUserInfo(username: String) async {
         do {
             let fetchedCodeForcesUserInfo = try await codeForcesAPIRepository.getUserInfo(username: username)
             print(fetchedCodeForcesUserInfo)

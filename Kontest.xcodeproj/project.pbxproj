@@ -15,6 +15,12 @@
 		072A0F752A8D378C0038C8CE /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072A0F742A8D378C0038C8CE /* SettingsViewModel.swift */; };
 		072A0F772A8D38390038C8CE /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072A0F762A8D38390038C8CE /* SettingsScreen.swift */; };
 		072A0F792A8D3D3C0038C8CE /* Screens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072A0F782A8D3D3C0038C8CE /* Screens.swift */; };
+		073145022A9AFE9300150EE5 /* CodeChefAPIDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073145012A9AFE9300150EE5 /* CodeChefAPIDTO.swift */; };
+		073145042A9AFEF200150EE5 /* CodeChefAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073145032A9AFEF200150EE5 /* CodeChefAPIModel.swift */; };
+		073145062A9AFFAD00150EE5 /* CodeChefFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073145052A9AFFAD00150EE5 /* CodeChefFetcher.swift */; };
+		073145092A9B002200150EE5 /* CodeChefAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073145082A9B002200150EE5 /* CodeChefAPIRepository.swift */; };
+		0731450B2A9B00DE00150EE5 /* CodeChefViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0731450A2A9B00DE00150EE5 /* CodeChefViewModel.swift */; };
+		0731450F2A9B025300150EE5 /* CodeChefView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0731450E2A9B025300150EE5 /* CodeChefView.swift */; };
 		074083932A890572009443B7 /* ClipboardUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074083922A890572009443B7 /* ClipboardUtility.swift */; };
 		074083972A89066F009443B7 /* CalendarUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074083962A89066F009443B7 /* CalendarUtility.swift */; };
 		074083992A8906B8009443B7 /* FontUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074083982A8906B8009443B7 /* FontUtility.swift */; };
@@ -62,6 +68,12 @@
 		072A0F742A8D378C0038C8CE /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		072A0F762A8D38390038C8CE /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		072A0F782A8D3D3C0038C8CE /* Screens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens.swift; sourceTree = "<group>"; };
+		073145012A9AFE9300150EE5 /* CodeChefAPIDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefAPIDTO.swift; sourceTree = "<group>"; };
+		073145032A9AFEF200150EE5 /* CodeChefAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefAPIModel.swift; sourceTree = "<group>"; };
+		073145052A9AFFAD00150EE5 /* CodeChefFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefFetcher.swift; sourceTree = "<group>"; };
+		073145082A9B002200150EE5 /* CodeChefAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefAPIRepository.swift; sourceTree = "<group>"; };
+		0731450A2A9B00DE00150EE5 /* CodeChefViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefViewModel.swift; sourceTree = "<group>"; };
+		0731450E2A9B025300150EE5 /* CodeChefView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefView.swift; sourceTree = "<group>"; };
 		074083922A890572009443B7 /* ClipboardUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardUtility.swift; sourceTree = "<group>"; };
 		074083962A89066F009443B7 /* CalendarUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarUtility.swift; sourceTree = "<group>"; };
 		074083982A8906B8009443B7 /* FontUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontUtility.swift; sourceTree = "<group>"; };
@@ -112,12 +124,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		073145072A9B000F00150EE5 /* CodeChefRepository */ = {
+			isa = PBXGroup;
+			children = (
+				073145082A9B002200150EE5 /* CodeChefAPIRepository.swift */,
+			);
+			path = CodeChefRepository;
+			sourceTree = "<group>";
+		};
 		0740839C2A890C34009443B7 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				0740839D2A890C40009443B7 /* KontestFetcher.swift */,
 				0753BA232A8C9A7A00C69AD6 /* LeetcodeFetcher.swift */,
 				0753BA3E2A8CC86F00C69AD6 /* CodeForcesFetcher.swift */,
+				073145052A9AFFAD00150EE5 /* CodeChefFetcher.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -125,6 +146,7 @@
 		074083A02A890C68009443B7 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				073145072A9B000F00150EE5 /* CodeChefRepository */,
 				0753BA402A8CC8AA00C69AD6 /* CodeForcesRepository */,
 				0753BA222A8C9A4000C69AD6 /* LeetcodeRepository */,
 				0753BA212A8C9A2E00C69AD6 /* KontestRepository */,
@@ -165,6 +187,7 @@
 				0753BA1D2A8C99EA00C69AD6 /* LeetcodeAPIModel.swift */,
 				0753BA3C2A8CC78A00C69AD6 /* CodeForcesUserRatingAPIModel.swift */,
 				0748108C2A9A0E7000A1CF55 /* CodeForcesUserInfoAPIModel.swift */,
+				073145032A9AFEF200150EE5 /* CodeChefAPIModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -217,6 +240,7 @@
 				0753BA4B2A8CDC2F00C69AD6 /* LeetcodeAPIDTO.swift */,
 				071916942A8CDDBA00172270 /* CodeForcesUserRatingAPIDTO.swift */,
 				0748108A2A9A0C7A00A1CF55 /* CodeForcesUserInfoAPIDTO.swift */,
+				073145012A9AFE9300150EE5 /* CodeChefAPIDTO.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -236,6 +260,7 @@
 				0705F8DD2A8DD45100594C3D /* PendingNotificationsScreen.swift */,
 				070029742A95C313006E6B2F /* AllNotificationMenu.swift */,
 				070029762A95CB5A006E6B2F /* SingleNotificationMenu.swift */,
+				0731450E2A9B025300150EE5 /* CodeChefView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -261,6 +286,7 @@
 				0760166D2A87CD72007CE9F5 /* AllKontestsViewModel.swift */,
 				0753BA272A8C9B8800C69AD6 /* LeetcodeViewModel.swift */,
 				0753BA432A8CC92300C69AD6 /* CodeForcesViewModel.swift */,
+				0731450A2A9B00DE00150EE5 /* CodeChefViewModel.swift */,
 				072A0F742A8D378C0038C8CE /* SettingsViewModel.swift */,
 				0705F8DF2A8DD45E00594C3D /* PendingNotificationsViewModel.swift */,
 			);
@@ -353,13 +379,16 @@
 				070029752A95C313006E6B2F /* AllNotificationMenu.swift in Sources */,
 				074083972A89066F009443B7 /* CalendarUtility.swift in Sources */,
 				0753BA1E2A8C99EA00C69AD6 /* LeetcodeAPIModel.swift in Sources */,
+				073145062A9AFFAD00150EE5 /* CodeChefFetcher.swift in Sources */,
 				074774DD2A8A748800B44A29 /* KontestDetailsScreen.swift in Sources */,
 				074083A22A890C79009443B7 /* KontestRepository.swift in Sources */,
 				0740839B2A890754009443B7 /* LocalNotificationManager.swift in Sources */,
 				071916952A8CDDBA00172270 /* CodeForcesUserRatingAPIDTO.swift in Sources */,
+				073145092A9B002200150EE5 /* CodeChefAPIRepository.swift in Sources */,
 				076016702A87CD72007CE9F5 /* DownloadData.swift in Sources */,
 				0753BA3F2A8CC86F00C69AD6 /* CodeForcesFetcher.swift in Sources */,
 				0705F8DE2A8DD45100594C3D /* PendingNotificationsScreen.swift in Sources */,
+				0731450F2A9B025300150EE5 /* CodeChefView.swift in Sources */,
 				076016592A87CD52007CE9F5 /* KontestApp.swift in Sources */,
 				0748108D2A9A0E7000A1CF55 /* CodeForcesUserInfoAPIModel.swift in Sources */,
 				0753BA4C2A8CDC2F00C69AD6 /* LeetcodeAPIDTO.swift in Sources */,
@@ -370,12 +399,15 @@
 				0748108B2A9A0C7A00A1CF55 /* CodeForcesUserInfoAPIDTO.swift in Sources */,
 				0753BA482A8CCA6800C69AD6 /* CodeForcesScreen.swift in Sources */,
 				076A1E812A8AA36300FBBB4C /* BlinkingDotView.swift in Sources */,
+				073145042A9AFEF200150EE5 /* CodeChefAPIModel.swift in Sources */,
 				076013B72A89650E008F4085 /* KontestModel.swift in Sources */,
 				074518702A99046900FB7560 /* Router.swift in Sources */,
 				072A0F772A8D38390038C8CE /* SettingsScreen.swift in Sources */,
 				0753BA2A2A8C9D0600C69AD6 /* LeetcodeScreen.swift in Sources */,
 				076013B92A8A1A78008F4085 /* KontestStatus.swift in Sources */,
+				0731450B2A9B00DE00150EE5 /* CodeChefViewModel.swift in Sources */,
 				0753BA3D2A8CC78A00C69AD6 /* CodeForcesUserRatingAPIModel.swift in Sources */,
+				073145022A9AFE9300150EE5 /* CodeChefAPIDTO.swift in Sources */,
 				0760166E2A87CD72007CE9F5 /* KontestDTO.swift in Sources */,
 				070029772A95CB5A006E6B2F /* SingleNotificationMenu.swift in Sources */,
 				074083992A8906B8009443B7 /* FontUtility.swift in Sources */,

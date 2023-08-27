@@ -10,6 +10,7 @@ import SwiftUI
 struct RatingsView: View {
     let codeForcesUsername: String
     let leetCodeUsername: String
+    let codeChefUsername: String
 
     @Environment(\.horizontalSizeClass) private var sizeClass
 
@@ -22,6 +23,11 @@ struct RatingsView: View {
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
 
                 LeetcodeScreen(username: leetCodeUsername, bgColor: .cyan)
+                    .clipShape(.rect(cornerRadius: 20.0))
+                    .aspectRatio(heroRatio, contentMode: .fit)
+                    .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
+
+                CodeChefView(username: codeChefUsername, bgColor: .mint)
                     .clipShape(.rect(cornerRadius: 20.0))
                     .aspectRatio(heroRatio, contentMode: .fit)
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
@@ -55,6 +61,6 @@ struct RatingsView: View {
 }
 
 #Preview {
-    RatingsView(codeForcesUsername: "ayushsinghals", leetCodeUsername: "ayushs_2k4")
+    RatingsView(codeForcesUsername: "ayushsinghals", leetCodeUsername: "ayushs_2k4", codeChefUsername: "ayushs_2k4")
         .environment(Router.instance)
 }

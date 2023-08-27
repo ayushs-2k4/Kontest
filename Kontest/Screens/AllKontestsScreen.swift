@@ -27,7 +27,7 @@ struct AllKontestsScreen: View {
                 } else {
                     VStack {
                         List {
-                            RatingsView(codeForcesUsername: settingsViewModel.codeForcesUsername, leetCodeUsername: settingsViewModel.leetcodeUsername)
+                            RatingsView(codeForcesUsername: settingsViewModel.codeForcesUsername, leetCodeUsername: settingsViewModel.leetcodeUsername, codeChefUsername: settingsViewModel.codeChefUsername)
 
                             let today = Date()
                             let tomorrow = CalendarUtility.getTomorrow()

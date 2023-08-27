@@ -65,6 +65,7 @@ struct LeetcodeProfileView: View {
                         Text("Total Medium: \(leetcodeProfile.mediumSolved)")
                         Text("Total Hard: \(leetcodeProfile.hardSolved)")
                     }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
 
                     Text("Ranking \(leetcodeProfile.ranking)")
                         .padding()

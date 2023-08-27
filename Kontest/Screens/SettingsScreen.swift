@@ -12,6 +12,7 @@ struct SettingsScreen: View {
 
     @State private var leetcodeUsername: String = ""
     @State private var codeForcesUsername: String = ""
+    @State private var codeChefUsername: String = ""
 
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
@@ -19,6 +20,7 @@ struct SettingsScreen: View {
     init() {
         _leetcodeUsername = State(initialValue: settingsViewModel.leetcodeUsername)
         _codeForcesUsername = State(initialValue: settingsViewModel.codeForcesUsername)
+        _codeChefUsername = State(initialValue: settingsViewModel.codeChefUsername)
     }
 
     var body: some View {
@@ -26,50 +28,50 @@ struct SettingsScreen: View {
 //        TextField("Enter Leetcode Username", text: Bindable(settingsViewModel).leetcodeUsername)
 
         VStack {
-            HStack {
-                Image(.codeForcesLogo)
-                    .resizable()
-                    .frame(width: 30, height: 30)
+            SettingsTextFieldView(lightModeImage: .codeForcesLogo, darkModeImage: .codeForcesLogo, title: "Enter CodeForces Username", boundryColor: KontestModel.getColorForIdentifier(site: "CodeForces"), usernameBinding: $codeForcesUsername)
 
-                TextField("Enter CodeForces Username", text: $codeForcesUsername)
-                    .textFieldStyle(.plain)
-                #if os(iOS)
-                    .textInputAutocapitalization(.never)
-                #endif
-            }
-            .padding(5)
-            .overlay( // apply a rounded border
-                RoundedRectangle(cornerRadius: 5)
-                    .stroke(KontestModel.getColorForIdentifier(site: "CodeForces"), lineWidth: 1)
-            )
-            .frame(maxWidth: 400)
-
-            HStack {
-                Image(colorScheme == .light ? .leetCodeDarkLogo : .leetCodeWhiteLogo)
-                    .resizable()
-                    .frame(width: 30, height: 30)
-
-                TextField("Enter Leetcode Username", text: $leetcodeUsername)
-                    .textFieldStyle(.plain)
-                #if os(iOS)
-                    .textInputAutocapitalization(.never)
-                #endif
-            }
-            .padding(.vertical, 5)
-            .overlay( // apply a rounded border
-                RoundedRectangle(cornerRadius: 5)
-                    .stroke(KontestModel.getColorForIdentifier(site: "LeetCode"), lineWidth: 1)
-            )
-            .frame(maxWidth: 400)
+            SettingsTextFieldView(lightModeImage: .leetCodeDarkLogo, darkModeImage: .leetCodeWhiteLogo, title: "Enter LeetCode Username", boundryColor: KontestModel.getColorForIdentifier(site: "LeetCode"), usernameBinding: $leetcodeUsername)
+            
+            SettingsTextFieldView(lightModeImage: .codeChefLogo, darkModeImage: .codeChefLogo, title: "Enter CodeChef Username", boundryColor: KontestModel.getColorForIdentifier(site: "CodeChef"), usernameBinding: $codeChefUsername)
 
             Button("Save") {
                 settingsViewModel.setCodeForcesUsername(newCodeForcesUsername: codeForcesUsername)
                 settingsViewModel.setLeetcodeUsername(newLeetcodeUsername: leetcodeUsername)
+                settingsViewModel.setCodeChefUsername(newCodeChefUsername: codeChefUsername)
                 dismiss()
             }
             .keyboardShortcut(.return)
         }
         .padding()
+    }
+}
+
+struct SettingsTextFieldView: View {
+    let lightModeImage: ImageResource
+    let darkModeImage: ImageResource
+    let title: String
+    let boundryColor: Color
+    @Binding var usernameBinding: String
+    @Environment(\.colorScheme) var colorScheme
+
+    var body: some View {
+        HStack {
+            Image(colorScheme == .light ? lightModeImage : darkModeImage)
+                .resizable()
+                .frame(width: 30, height: 30)
+
+            TextField(title, text: $usernameBinding)
+                .textFieldStyle(.plain)
+            #if os(iOS)
+                .textInputAutocapitalization(.never)
+            #endif
+        }
+        .padding(5)
+        .overlay( // apply a rounded border
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(boundryColor, lineWidth: 1)
+        )
+        .frame(maxWidth: 400)
     }
 }
 

@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - LeetcodeAPIDTO
+
 struct LeetcodeAPIDTO: Codable {
     let status, message: String
     let totalSolved, totalQuestions, easySolved, totalEasy: Int

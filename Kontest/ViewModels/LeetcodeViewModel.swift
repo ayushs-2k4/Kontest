@@ -27,7 +27,7 @@ class LeetcodeViewModel {
         }
     }
 
-    func getLeetcodeProfile(username: String) async {
+    private func getLeetcodeProfile(username: String) async {
         do {
             let fetchedLeetcodeProfile = try await leetcodeAPIRepository.getUserData(username: username)
 
