@@ -81,20 +81,26 @@ class AllKontestsViewModel {
     }
 
     func setNotificationForKontest(kontest: KontestModel, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String = "", kontestSubTitle: String = "", kontestBody: String = "") {
-        let title = kontestTitle == "" ? kontest.name : kontestTitle
-        let subTitle = kontestSubTitle == "" ? kontest.site : kontestSubTitle
-        var body = ""
-        if hoursBefore > 0 {
-            if hoursBefore == 1 {
-                body = kontestBody == "" ? "\(kontest.name) is starting in \(hoursBefore) hour." : kontestBody
+        
+        let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
+        
+        // Checking if we actually have given time in starting of kontest; like if given 6 hours, then checking if we actually have 6 hours or not in starting of kontest.
+        if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: minutesBefore, hours: hoursBefore, days: daysBefore) {
+            let title = kontestTitle == "" ? kontest.name : kontestTitle
+            let subTitle = kontestSubTitle == "" ? kontest.site : kontestSubTitle
+            var body = ""
+            if hoursBefore > 0 {
+                if hoursBefore == 1 {
+                    body = kontestBody == "" ? "\(kontest.name) is starting in \(hoursBefore) hour." : kontestBody
+                } else {
+                    body = kontestBody == "" ? "\(kontest.name) is starting in \(hoursBefore) hours." : kontestBody
+                }
             } else {
-                body = kontestBody == "" ? "\(kontest.name) is starting in \(hoursBefore) hours." : kontestBody
+                body = kontestBody == "" ? "\(kontest.name) is starting in \(minutesBefore) minutes." : kontestBody
             }
-        } else {
-            body = kontestBody == "" ? "\(kontest.name) is starting in \(minutesBefore) minutes." : kontestBody
-        }
 
-        setNotification(kontest: kontest, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore, kontestTitle: title, kontestSubTitle: subTitle, kontestBody: body)
+            setNotification(kontest: kontest, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore, kontestTitle: title, kontestSubTitle: subTitle, kontestBody: body)
+        }
     }
 
     func setNotificationForAllKontests(minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String = "", kontestSubTitle: String = "", kontestBody: String = "") {
@@ -102,7 +108,7 @@ class AllKontestsViewModel {
             let kontest = allKontests[i]
             let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
 
-            if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: minutesBefore, hours: hoursBefore, days: daysBefore) {
+            if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) {
                 setNotificationForKontest(kontest: kontest, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore, kontestTitle: kontestTitle, kontestSubTitle: kontestSubTitle, kontestBody: kontestBody)
             }
         }
