@@ -42,18 +42,15 @@ struct SingleKontestView: View {
                     .frame(width: FontUtility.getLogoSize())
                 #endif
 
+                #if !os(iOS)
                 if isKontestRunning {
                     BlinkingDotView(color: .green)
                         .frame(width: 10, height: 10)
                 }
                 else {
-                    #if os(macOS)
                     EmptyView()
-                    #else
-                    BlinkingDotView(color: .clear)
-                        .frame(width: 10, height: 10)
-                    #endif
                 }
+                #endif
             }
             .foregroundStyle(colorScheme == .light ? .black : .white)
 
@@ -63,14 +60,23 @@ struct SingleKontestView: View {
                     .bold()
                     .font(FontUtility.getSiteFontSize())
 
-                Text(kontest.name)
-                    .font(FontUtility.getNameFontSize())
-                #if os(iOS)
-                    .padding(.top, 1)
-                    .lineLimit(1)
-                #else
-                    .multilineTextAlignment(.leading)
-                #endif
+                HStack {
+                    Text(kontest.name)
+                        .font(FontUtility.getNameFontSize())
+                    #if os(iOS)
+                        .padding(.top, 1)
+                        .lineLimit(1)
+                    #else
+                        .multilineTextAlignment(.leading)
+                    #endif
+
+                    #if os(iOS)
+                    if isKontestRunning {
+                        BlinkingDotView(color: .green)
+                            .frame(width: 10, height: 10)
+                    }
+                    #endif
+                }
             }
             .foregroundStyle(colorScheme == .light ? .black : .white)
 

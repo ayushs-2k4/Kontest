@@ -18,17 +18,17 @@ struct RatingsView: View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: hSpacing) {
                 CodeForcesView(username: codeForcesUsername, bgColor: .green)
-                    .clipShape(.rect(cornerRadius: 20.0))
+                    .clipShape(.rect(cornerRadius: cornerRadius))
                     .aspectRatio(heroRatio, contentMode: .fit)
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
 
                 LeetcodeView(username: leetCodeUsername, bgColor: .cyan)
-                    .clipShape(.rect(cornerRadius: 20.0))
+                    .clipShape(.rect(cornerRadius: cornerRadius))
                     .aspectRatio(heroRatio, contentMode: .fit)
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
 
-                CodeChefView(username: codeChefUsername, bgColor: .mint)
-                    .clipShape(.rect(cornerRadius: 20.0))
+                CodeChefView(username: codeChefUsername, bgColor: .teal)
+                    .clipShape(.rect(cornerRadius: cornerRadius))
                     .aspectRatio(heroRatio, contentMode: .fit)
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
             }
@@ -43,8 +43,16 @@ struct RatingsView: View {
         sizeClass == .compact ? 1 : regularCount
     }
 
+    private var cornerRadius: CGFloat {
+        10
+    }
+
     var hMargin: CGFloat {
-        20.0
+        #if os(macOS)
+            20
+        #else
+            0
+        #endif
     }
 
     var hSpacing: CGFloat {

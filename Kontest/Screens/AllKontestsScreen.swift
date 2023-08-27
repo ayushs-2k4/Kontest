@@ -28,6 +28,8 @@ struct AllKontestsScreen: View {
                     VStack {
                         List {
                             RatingsView(codeForcesUsername: settingsViewModel.codeForcesUsername, leetCodeUsername: settingsViewModel.leetcodeUsername, codeChefUsername: settingsViewModel.codeChefUsername)
+                                .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                                .listRowSeparator(.hidden)
 
                             let today = Date()
                             let tomorrow = CalendarUtility.getTomorrow()
@@ -62,7 +64,6 @@ struct AllKontestsScreen: View {
                                 }
                             }
                         }
-                        .listStyle(.plain)
                     }
                     #if os(macOS)
                     .searchable(text: Bindable(allKontestsViewModel).searchText)
