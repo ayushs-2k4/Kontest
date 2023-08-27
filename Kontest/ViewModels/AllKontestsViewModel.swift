@@ -101,7 +101,8 @@ class AllKontestsViewModel {
         for i in 0 ..< allKontests.count {
             let kontest = allKontests[i]
             let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
-            if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) {
+
+            if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: minutesBefore, hours: hoursBefore, days: daysBefore) {
                 setNotificationForKontest(kontest: kontest, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore, kontestTitle: kontestTitle, kontestSubTitle: kontestSubTitle, kontestBody: kontestBody)
             }
         }
