@@ -1,5 +1,5 @@
 //
-//  LeetcodeScreen.swift
+//  LeetcodeView.swift
 //  Kontest
 //
 //  Created by Ayush Singhal on 16/08/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LeetcodeScreen: View {
+struct LeetcodeView: View {
     let username: String
     let leetcodeViewModel: LeetcodeViewModel
     let bgColor: Color
@@ -103,8 +103,8 @@ struct LeetcodeProfileView: View {
 
 #Preview {
     VStack {
-        LeetcodeScreen(username: "ayushs_2k4")
-        LeetcodeScreen(username: "ayushs  _2k4")
+        LeetcodeView(username: "ayushs_2k4")
+        LeetcodeView(username: "ayushs  _2k4")
     }
     .environment(Router.instance)
 }

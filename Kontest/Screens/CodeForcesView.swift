@@ -1,5 +1,5 @@
 //
-//  CodeForcesScreen.swift
+//  CodeForcesView.swift
 //  Kontest
 //
 //  Created by Ayush Singhal on 16/08/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CodeForcesScreen: View {
+struct CodeForcesView: View {
     let username: String
     let codeForcesViewModel: CodeForcesViewModel
     let bgColor: Color
@@ -19,11 +19,11 @@ struct CodeForcesScreen: View {
     }
 
     var body: some View {
-        CodeForcesView(codeForcesViewModel: codeForcesViewModel, username: username, bgColor: bgColor, isLoading: codeForcesViewModel.isLoading, error: codeForcesViewModel.error)
+        CodeForcesProfileView(codeForcesViewModel: codeForcesViewModel, username: username, bgColor: bgColor, isLoading: codeForcesViewModel.isLoading, error: codeForcesViewModel.error)
     }
 }
 
-struct CodeForcesView: View {
+struct CodeForcesProfileView: View {
     let codeForcesViewModel: CodeForcesViewModel
     let username: String
     let bgColor: Color
@@ -137,10 +137,10 @@ struct CodeForcesView: View {
 
 #Preview {
     VStack {
-        CodeForcesScreen(username: "Fefer_Ivan", bgColor: .green)
-        CodeForcesScreen(username: "ayushsinghals", bgColor: .green)
-        CodeForcesScreen(username: "ayushsinghals02", bgColor: .green)
-        CodeForcesScreen(username: "yermak0v", bgColor: .green)
+        CodeForcesView(username: "Fefer_Ivan", bgColor: .green)
+        CodeForcesView(username: "ayushsinghals", bgColor: .green)
+        CodeForcesView(username: "ayushsinghals02", bgColor: .green)
+        CodeForcesView(username: "yermak0v", bgColor: .green)
     }
     .environment(Router.instance)
 }

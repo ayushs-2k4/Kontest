@@ -17,12 +17,12 @@ struct RatingsView: View {
     var body: some View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: hSpacing) {
-                CodeForcesScreen(username: codeForcesUsername, bgColor: .green)
+                CodeForcesView(username: codeForcesUsername, bgColor: .green)
                     .clipShape(.rect(cornerRadius: 20.0))
                     .aspectRatio(heroRatio, contentMode: .fit)
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
 
-                LeetcodeScreen(username: leetCodeUsername, bgColor: .cyan)
+                LeetcodeView(username: leetCodeUsername, bgColor: .cyan)
                     .clipShape(.rect(cornerRadius: 20.0))
                     .aspectRatio(heroRatio, contentMode: .fit)
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
