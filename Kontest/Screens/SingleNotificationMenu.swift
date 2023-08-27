@@ -16,7 +16,7 @@ struct SingleNotificationMenu: View {
         Menu {
             if !isSetForAllNotifications(kontest: kontest) {
                 Button {
-                    setNotificationForAKontestAtAllTimes()
+                    setNotificationForAKontestAtAllTimes(kontest: kontest)
                 } label: {
                     Image(systemName: "bell")
                     Text("Set notification for 10 mins, 30 mins, 1 hr, 6 hrs before")
@@ -88,7 +88,7 @@ struct SingleNotificationMenu: View {
 }
 
 extension SingleNotificationMenu {
-    func setNotificationForAKontestAtAllTimes() {
+    func setNotificationForAKontestAtAllTimes(kontest: KontestModel) {
         allKontestsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
 
         allKontestsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
