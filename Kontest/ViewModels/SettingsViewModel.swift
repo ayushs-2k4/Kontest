@@ -34,17 +34,17 @@ class SettingsViewModel {
     }
 
     func setLeetcodeUsername(newLeetcodeUsername: String) {
-        leetcodeUsername = newLeetcodeUsername.trimmingCharacters(in: .whitespacesAndNewlines)
+        leetcodeUsername = newLeetcodeUsername.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
         UserDefaults.standard.set(leetcodeUsername, forKey: leetcodeUsernameKey)
     }
         
     func setCodeForcesUsername(newCodeForcesUsername: String) {
-        codeForcesUsername = newCodeForcesUsername.trimmingCharacters(in: .whitespacesAndNewlines)
+        codeForcesUsername = newCodeForcesUsername.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
         UserDefaults.standard.set(codeForcesUsername, forKey: codeForcesUsernameKey)
     }
     
     func setCodeChefUsername(newCodeChefUsername: String) {
-        codeChefUsername = newCodeChefUsername.trimmingCharacters(in: .whitespacesAndNewlines)
+        codeChefUsername = newCodeChefUsername.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
         UserDefaults.standard.set(codeChefUsername, forKey: codeChefUsernameKey)
     }
 }
