@@ -105,33 +105,33 @@ struct SingleKontestView: View {
                         .font(FontUtility.getTimeFontSize())
                         .bold()
 
-                    if isKontestRunning {
-                        Text("Ends in \(remainingTimeInEndingOfRunningKontest)")
-                            .font(FontUtility.getRemainingTimeFontSize())
-                            .onReceive(timer) { time in
-                                let seconds = (kontestEndDate ?? Date()).timeIntervalSince(time)
-                                remainingTimeInEndingOfRunningKontest = (Int(seconds) >= 0) ? CalendarUtility.formattedTimeFrom(seconds: Int(seconds)) : "00:00:00"
-                            }
-                            .padding(.top, 5)
-                    }
+                    VStack {
+                        if isKontestRunning {
+                            Text("Ends in \(remainingTimeInEndingOfRunningKontest)")
+                                .font(FontUtility.getRemainingTimeFontSize())
+                                .onReceive(timer) { time in
+                                    let seconds = (kontestEndDate ?? Date()).timeIntervalSince(time)
+                                    remainingTimeInEndingOfRunningKontest = (Int(seconds) >= 0) ? CalendarUtility.formattedTimeFrom(seconds: Int(seconds)) : "00:00:00"
+                                }
+                        }
 
-                    if isKontestOfFuture {
-                        Text("Starting in \(remainingTimeInStartingOfFutureKontest)")
-                            .font(FontUtility.getRemainingTimeFontSize())
-                            .onReceive(timer) { time in
-                                let seconds = (kontestStartDate ?? Date()).timeIntervalSince(time)
-                                remainingTimeInStartingOfFutureKontest = (Int(seconds) >= 0) ? CalendarUtility.formattedTimeFrom(seconds: Int(seconds)) : "00:00:00"
-                            }
-                            .padding(.top, 5)
-                    }
+                        if isKontestOfFuture {
+                            Text("Starting in \(remainingTimeInStartingOfFutureKontest)")
+                                .font(FontUtility.getRemainingTimeFontSize())
+                                .onReceive(timer) { time in
+                                    let seconds = (kontestStartDate ?? Date()).timeIntervalSince(time)
+                                    remainingTimeInStartingOfFutureKontest = (Int(seconds) >= 0) ? CalendarUtility.formattedTimeFrom(seconds: Int(seconds)) : "00:00:00"
+                                }
+                        }
 
-                    HStack {
-                        Image(systemName: "clock")
+                        HStack {
+                            Image(systemName: "clock")
 
-                        Text(CalendarUtility.getFormattedDuration(fromSeconds: kontest.duration) ?? "")
+                            Text(CalendarUtility.getFormattedDuration(fromSeconds: kontest.duration) ?? "")
+                        }
+                        .font(FontUtility.getDateFontSize())
                     }
-                    .font(FontUtility.getDateFontSize())
-                    .padding(.bottom, 5)
+                    .padding(.vertical, 5)
 
                     Text("\(CalendarUtility.getNumericKontestDate(date: kontestStartDate ?? Date())) - \(CalendarUtility.getNumericKontestDate(date: kontestEndDate ?? Date()))")
                         .font(FontUtility.getDateFontSize())
@@ -142,11 +142,6 @@ struct SingleKontestView: View {
             }
             .foregroundStyle(colorScheme == .light ? .black : .white)
             .font(.footnote)
-
-            #if os(macOS)
-            Image(systemName: "chevron.right")
-                .foregroundStyle(.gray)
-            #endif
         }
         #if os(macOS)
         .padding()
@@ -186,7 +181,7 @@ private func numberOfOptions(kontest: KontestModel) -> Int {
     return List {
         SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "ProjectEuler+", url: "https://hackerrank.com/contests/projecteuler", start_time: "2014-07-07T15:38:00.000Z", end_time: "2024-07-30T18:30:00.000Z", duration: "317616720.0", site: "HackerRank", in_24_hours: "No", status: "BEFORE")))
 
-        SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "1v1 Games by CodeChef", url: "https://www.codechef.com/GAMES", start_time: "2023-11-10 06:30:00 UTC", end_time: "2032-11-10 06:30:00 UTC", duration: "315619200.0", site: "CodeChef", in_24_hours: "No", status: "CODING")))
+        SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "1v1 Games by CodeChef", url: "https://www.codechef.com/GAMES", start_time: "2023-8-27 12:30:00 UTC", end_time: "2032-11-10 06:30:00 UTC", duration: "315619200.0", site: "CodeChef", in_24_hours: "No", status: "CODING")))
 
         SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "Weekly Contest 358", url: "https://leetcode.com/contest/weekly-contest-358", start_time: "2023-08-25T02:30:00.000Z", end_time: "2023-08-25T04:00:00.000Z", duration: "5400", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE")))
 
