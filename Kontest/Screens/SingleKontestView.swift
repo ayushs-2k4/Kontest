@@ -22,14 +22,16 @@ struct SingleKontestView: View {
     @State var remainingTimeInStartingOfFutureKontest: String = "--:--:--"
     @State var remainingTimeInEndingOfRunningKontest: String = "--:--:--"
     let isKontestRunning: Bool
-    let isKontestOfFuture: Bool
+    let isKontestOfFutureAndStartingInLessThan24Hours: Bool
 
     init(kontest: KontestModel) {
         self.kontest = kontest
         kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
         kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
         isKontestRunning = CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date()) || kontest.status == .Running
-        isKontestOfFuture = CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) && kontestStartDate ?? Date() < CalendarUtility.getTomorrow()
+        let isKontestOfFuture = CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date())
+        let isKontestStartingTimeLessThanADay = !(CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 0, hours: 0, days: 1))
+        isKontestOfFutureAndStartingInLessThan24Hours = isKontestOfFuture && isKontestStartingTimeLessThanADay
     }
 
     var body: some View {
@@ -115,7 +117,7 @@ struct SingleKontestView: View {
                                 }
                         }
 
-                        if isKontestOfFuture {
+                        if isKontestOfFutureAndStartingInLessThan24Hours {
                             Text("Starting in \(remainingTimeInStartingOfFutureKontest)")
                                 .font(FontUtility.getRemainingTimeFontSize())
                                 .onReceive(timer) { time in
