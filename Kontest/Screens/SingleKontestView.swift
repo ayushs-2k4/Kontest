@@ -135,8 +135,12 @@ struct SingleKontestView: View {
                     }
                     .padding(.vertical, 5)
 
-                    Text("\(CalendarUtility.getNumericKontestDate(date: kontestStartDate ?? Date())) - \(CalendarUtility.getNumericKontestDate(date: kontestEndDate ?? Date()))")
+                    #if os(macOS)
+                    Text("\(CalendarUtility.getNumericKontestDate(date: kontestStartDate ?? Date())) (\(CalendarUtility.getWeekdayNameFromDate(date: kontestStartDate ?? Date()))) - \(CalendarUtility.getNumericKontestDate(date: kontestEndDate ?? Date())) (\(CalendarUtility.getWeekdayNameFromDate(date: kontestEndDate ?? Date())))")
                         .font(FontUtility.getDateFontSize())
+                    #else
+                    Text("\(CalendarUtility.getNumericKontestDate(date: kontestStartDate ?? Date())) - \(CalendarUtility.getNumericKontestDate(date: kontestEndDate ?? Date()))")
+                    #endif
                 }
                 else {
                     Text("No date provided")
