@@ -14,14 +14,24 @@ struct SingleNotificationMenu: View {
     var body: some View {
         let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
         Menu {
-            if !isSetForAllNotifications(kontest: kontest) {
+            if getNumberOfNotificationForAKontest(kontest: kontest) <= 2 {
                 Button {
                     setNotificationForAKontestAtAllTimes(kontest: kontest)
                 } label: {
                     Image(systemName: "bell")
-                    Text("Set notification for 10 mins, 30 mins, 1 hr, 6 hrs before")
+                    Text("Set all notifications for this kontest")
                 }
                 .help("Set Notification for this kontest 10 mins, 30 mins, 1 hr, 6 hrs before")
+            }
+
+            if getNumberOfNotificationForAKontest(kontest: kontest) >= 2 {
+                Button {
+                    removeAllNotificationForAKontest(kontest: kontest)
+                } label: {
+                    Image(systemName: "bell.slash")
+                    Text("Remove all notification for this kontest")
+                }
+                .help("Remove All Notification for this kontest")
             }
 
             if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 10, hours: 0, days: 0) {
@@ -104,6 +114,36 @@ extension SingleNotificationMenu {
 
         if (CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 10) && !kontest.isSetForReminder10MiutesBefore) || (CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 30) && !kontest.isSetForReminder30MiutesBefore) || (CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, hours: 1) && !kontest.isSetForReminder1HourBefore) || (CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, hours: 6) && !kontest.isSetForReminder6HoursBefore) {
             ans = false
+        }
+
+        return ans
+    }
+
+    func removeAllNotificationForAKontest(kontest: KontestModel) {
+        allKontestsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
+        allKontestsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
+        allKontestsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
+        allKontestsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
+    }
+
+    func getNumberOfNotificationForAKontest(kontest: KontestModel) -> Int {
+        var ans = 0
+        let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
+
+        if !(CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 10) && !kontest.isSetForReminder10MiutesBefore) {
+            ans += 1
+        }
+
+        if !(CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 30) && !kontest.isSetForReminder30MiutesBefore) {
+            ans += 1
+        }
+
+        if !(CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, hours: 1) && !kontest.isSetForReminder1HourBefore) {
+            ans += 1
+        }
+
+        if !(CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, hours: 6) && !kontest.isSetForReminder6HoursBefore) {
+            ans += 1
         }
 
         return ans
