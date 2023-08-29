@@ -21,16 +21,16 @@ struct KontestDetailsScreen: View {
 
         VStack {
             VStack {
-                let p = CalendarUtility.getTimeDifferenceString(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date())
+                let timeDifferenceString = CalendarUtility.getTimeDifferenceString(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date())
 
-                TopCardView(color: KontestModel.getColorForIdentifier(site: kontest.site), kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date(), boxText: p)
+                TopCardView(color: KontestModel.getColorForIdentifier(site: kontest.site), kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date(), boxText: timeDifferenceString)
                     .frame(height: 300)
 
                 Spacer()
 
                 VStack {
                     HStack {
-                        if CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date()) {
+                        if CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date()) || kontest.status == .Running {
                             BlinkingDotView(color: .green)
                                 .frame(width: 10, height: 10)
                         }
@@ -96,7 +96,7 @@ struct TopCardView: View {
     var startDateComponenets: DateComponents
     var endDateComponenets: DateComponents
 
-    init(color: Color, kontestStartDate: Date, kontestEndDate: Date, boxText: String = "2HR") {
+    init(color: Color, kontestStartDate: Date, kontestEndDate: Date, boxText: String) {
         self.color = color
         self.kontestStartDate = kontestStartDate
         self.kontestEndDate = kontestEndDate
@@ -154,9 +154,9 @@ struct BoxView: View {
 
 struct TimeView: View {
     @Environment(\.colorScheme) var colorScheme
-    var day: String = "FRI"
-    var time: String = "08:30"
-    var date: String = "11 Aug, 2023"
+    var day: String
+    var time: String
+    var date: String
     let horizontalAlignment: HorizontalAlignment
 
     var body: some View {
@@ -180,7 +180,6 @@ struct TimeView: View {
                 .frame(alignment: .leading)
         }
         .foregroundStyle(colorScheme == .light ? .white : .black)
-//        .background(.red)
     }
 }
 
