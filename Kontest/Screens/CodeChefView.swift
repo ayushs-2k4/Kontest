@@ -104,11 +104,13 @@ struct CodeChefProfileView: View {
             }
         }
         .onTapGesture {
-            if error == nil {
-                guard let url = URL(string: "https://www.codechef.com/users/\(username)") else { return }
-                openURL(url)
-            } else {
-                router.path.append(Screens.SettingsScreen)
+            if !isLoading {
+                if error == nil {
+                    guard let url = URL(string: "https://www.codechef.com/users/\(username)") else { return }
+                    openURL(url)
+                } else {
+                    router.path.append(Screens.SettingsScreen)
+                }
             }
         }
         .multilineTextAlignment(.center)

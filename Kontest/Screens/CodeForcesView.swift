@@ -122,12 +122,14 @@ struct CodeForcesProfileView: View {
             }
         }
         .onTapGesture {
-            if codeForcesViewModel.codeForcesRatings != nil {
-                guard let url = URL(string: "https://codeforces.com/profile/\(username)") else { return }
-                openURL(url)
-            }
-            else {
-                router.path.append(Screens.SettingsScreen)
+            if !isLoading {
+                if codeForcesViewModel.codeForcesRatings != nil {
+                    guard let url = URL(string: "https://codeforces.com/profile/\(username)") else { return }
+                    openURL(url)
+                }
+                else {
+                    router.path.append(Screens.SettingsScreen)
+                }
             }
         }
         .multilineTextAlignment(.center)
