@@ -26,42 +26,44 @@ struct AllKontestsScreen: View {
                 } else if allKontestsViewModel.backupKontests.isEmpty {
                     NoKontestsScreen()
                 } else {
-                    VStack {
-                        List {
-                            RatingsView(codeForcesUsername: settingsViewModel.codeForcesUsername, leetCodeUsername: settingsViewModel.leetcodeUsername, codeChefUsername: settingsViewModel.codeChefUsername)
-                                .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-                                .listRowSeparator(.hidden)
+                    TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
+                        VStack {
+                            List {
+                                RatingsView(codeForcesUsername: settingsViewModel.codeForcesUsername, leetCodeUsername: settingsViewModel.leetcodeUsername, codeChefUsername: settingsViewModel.codeChefUsername)
+                                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                                    .listRowSeparator(.hidden)
 
-                            let today = Date()
-                            let tomorrow = CalendarUtility.getTomorrow()
-                            let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
+                                let today = Date()
+                                let tomorrow = CalendarUtility.getTomorrow()
+                                let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
 
-                            let ongoingKontests = allKontestsViewModel.allKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? today, kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? today) }
+                                let ongoingKontests = allKontestsViewModel.allKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? today, kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? today) }
 
-                            let laterTodayKontests = allKontestsViewModel.allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? today < tomorrow) && !(ongoingKontests.contains($0)) }
+                                let laterTodayKontests = allKontestsViewModel.allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? today < tomorrow) && !(ongoingKontests.contains($0)) }
 
-                            let tomorrowKontests = allKontestsViewModel.allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? today >= tomorrow) && (CalendarUtility.getDate(date: $0.start_time) ?? today < dayAfterTomorrow) }
+                                let tomorrowKontests = allKontestsViewModel.allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? today >= tomorrow) && (CalendarUtility.getDate(date: $0.start_time) ?? today < dayAfterTomorrow) }
 
-                            let laterKontests = allKontestsViewModel.allKontests.filter { CalendarUtility.getDate(date: $0.start_time) ?? today >= dayAfterTomorrow }
+                                let laterKontests = allKontestsViewModel.allKontests.filter { CalendarUtility.getDate(date: $0.start_time) ?? today >= dayAfterTomorrow }
 
-                            if allKontestsViewModel.allKontests.isEmpty && !allKontestsViewModel.searchText.isEmpty {
-                                Text("Please try some different search term")
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                            } else {
-                                if ongoingKontests.count > 0 {
-                                    createSection(title: "Live Now", kontests: ongoingKontests)
-                                }
+                                if allKontestsViewModel.allKontests.isEmpty && !allKontestsViewModel.searchText.isEmpty {
+                                    Text("Please try some different search term")
+                                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                                } else {
+                                    if ongoingKontests.count > 0 {
+                                        createSection(title: "Live Now", kontests: ongoingKontests, timelineViewDefaultContext: timelineViewDefaultContext)
+                                    }
 
-                                if laterTodayKontests.count > 0 {
-                                    createSection(title: "Later Today", kontests: laterTodayKontests)
-                                }
+                                    if laterTodayKontests.count > 0 {
+                                        createSection(title: "Later Today", kontests: laterTodayKontests, timelineViewDefaultContext: timelineViewDefaultContext)
+                                    }
 
-                                if tomorrowKontests.count > 0 {
-                                    createSection(title: "Tomorrow", kontests: tomorrowKontests)
-                                }
+                                    if tomorrowKontests.count > 0 {
+                                        createSection(title: "Tomorrow", kontests: tomorrowKontests, timelineViewDefaultContext: timelineViewDefaultContext)
+                                    }
 
-                                if laterKontests.count > 0 {
-                                    createSection(title: "Upcoming", kontests: laterKontests)
+                                    if laterKontests.count > 0 {
+                                        createSection(title: "Upcoming", kontests: laterKontests, timelineViewDefaultContext: timelineViewDefaultContext)
+                                    }
                                 }
                             }
                         }
@@ -123,7 +125,7 @@ struct AllKontestsScreen: View {
                             withTransaction(transaction) {
                                 isNoNotificationIconAnimating = false
                             }
-                            
+
                             allKontestsViewModel.removeAllPendingNotifications()
                         } label: {
                             Image(systemName: "bell.slash")
@@ -148,7 +150,7 @@ struct AllKontestsScreen: View {
 
                 case .PendingNotificationsScreen:
                     PendingNotificationsScreen()
-                    
+
                 case .AllKontestScreen:
                     AllKontestsScreen()
                 }
@@ -159,16 +161,16 @@ struct AllKontestsScreen: View {
         #endif
     }
 
-    func createSection(title: String, kontests: [KontestModel]) -> some View {
+    func createSection(title: String, kontests: [KontestModel], timelineViewDefaultContext: TimelineViewDefaultContext) -> some View {
         Section {
             ForEach(kontests) { kontest in
                 #if os(macOS)
                 Link(destination: URL(string: kontest.url)!, label: {
-                    SingleKontestView(kontest: kontest)
+                    SingleKontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
                 })
                 #else
                 NavigationLink(value: kontest) {
-                    SingleKontestView(kontest: kontest)
+                    SingleKontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
                 }
                 #endif
             }
