@@ -30,14 +30,14 @@ struct KontestDetailsScreen: View {
 
                 VStack {
                     HStack {
+                        Text(kontest.site.uppercased())
+                            .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.site))
+                            .padding(.horizontal)
+                        
                         if CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date()) || kontest.status == .Running {
                             BlinkingDotView(color: .green)
                                 .frame(width: 10, height: 10)
                         }
-
-                        Text(kontest.site.uppercased())
-                            .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.site))
-                            .padding(.horizontal)
                     }
 
                     Text(kontest.name)
@@ -192,7 +192,10 @@ struct TimeView: View {
     let startTime = "2023-08-30 00:00:00 UTC"
     let endTime = "2023-10-30 23:59:00 UTC"
 
-    return KontestDetailsScreen(kontest: KontestModel.from(dto: KontestDTO(name: "ProjectEuler+", url: "https://hackerrank.com/contests/projecteuler", start_time: startTime, end_time: endTime, duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "CODING")))
+//    return KontestDetailsScreen(kontest: KontestModel.from(dto: KontestDTO(name: "ProjectEuler+", url: "https://hackerrank.com/contests/projecteuler", start_time: startTime, end_time: endTime, duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "CODING")))
+//        .environment(AllKontestsViewModel())
+    
+    return KontestDetailsScreen(kontest: KontestModel.from(dto: KontestDTO(name: "THIRD PROGRAMMING CONTEST 2023 ALGO (AtCoder Beginner Contest 318)", url: "https://hackerrank.com/contests/projecteuler", start_time: startTime, end_time: endTime, duration: "1020.0", site: "AtCoder", in_24_hours: "No", status: "CODING")))
         .environment(AllKontestsViewModel())
 }
 

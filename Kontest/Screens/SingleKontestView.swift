@@ -57,20 +57,11 @@ struct SingleKontestView: View {
             .foregroundStyle(colorScheme == .light ? .black : .white)
 
             VStack(alignment: .leading) {
-                Text(kontest.site.uppercased())
-                    .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.site))
-                    .bold()
-                    .font(FontUtility.getSiteFontSize())
-
                 HStack {
-                    Text(kontest.name)
-                        .font(FontUtility.getNameFontSize())
-                    #if os(iOS)
-                        .padding(.top, 1)
-                        .lineLimit(1)
-                    #else
-                        .multilineTextAlignment(.leading)
-                    #endif
+                    Text(kontest.site.uppercased())
+                        .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.site))
+                        .bold()
+                        .font(FontUtility.getSiteFontSize())
 
                     #if os(iOS)
                     if isKontestRunning {
@@ -79,6 +70,15 @@ struct SingleKontestView: View {
                     }
                     #endif
                 }
+
+                Text(kontest.name)
+                    .font(FontUtility.getNameFontSize())
+                #if os(iOS)
+                    .padding(.top, 1)
+                    .lineLimit(1)
+                #else
+                    .multilineTextAlignment(.leading)
+                #endif
             }
             .foregroundStyle(colorScheme == .light ? .black : .white)
 
