@@ -128,7 +128,7 @@ struct CodeForcesProfileView: View {
                     openURL(url)
                 }
                 else {
-                    router.path.append(Screens.SettingsScreen)
+                    router.appendScreen(screen: .SettingsScreen)
                 }
             }
         }

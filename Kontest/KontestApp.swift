@@ -11,12 +11,15 @@ import SwiftUI
 struct KontestApp: App {
     @State private var allKontestsViewModel = AllKontestsViewModel()
     @State private var router = Router.instance
-    
+
     var body: some Scene {
         WindowGroup {
             AllKontestsScreen()
                 .environment(allKontestsViewModel)
                 .environment(router)
+        }
+        .commands {
+            MyMenu(router: $router)
         }
     }
 }

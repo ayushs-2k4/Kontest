@@ -57,6 +57,7 @@
 		076016712A87CD72007CE9F5 /* AllKontestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0760166D2A87CD72007CE9F5 /* AllKontestsViewModel.swift */; };
 		076A1E7F2A8A8F7B00FBBB4C /* SingleKontestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A1E7E2A8A8F7B00FBBB4C /* SingleKontestView.swift */; };
 		076A1E812A8AA36300FBBB4C /* BlinkingDotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076A1E802A8AA36300FBBB4C /* BlinkingDotView.swift */; };
+		078B07752AA1E1A3005EF33A /* MyMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078B07742AA1E1A3005EF33A /* MyMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +112,7 @@
 		0760166D2A87CD72007CE9F5 /* AllKontestsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllKontestsViewModel.swift; sourceTree = "<group>"; };
 		076A1E7E2A8A8F7B00FBBB4C /* SingleKontestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleKontestView.swift; sourceTree = "<group>"; };
 		076A1E802A8AA36300FBBB4C /* BlinkingDotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlinkingDotView.swift; sourceTree = "<group>"; };
+		078B07742AA1E1A3005EF33A /* MyMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,6 +278,7 @@
 				074EC8242A8BC5F300C51514 /* Constants.swift */,
 				072A0F782A8D3D3C0038C8CE /* Screens.swift */,
 				0745186F2A99046900FB7560 /* Router.swift */,
+				078B07742AA1E1A3005EF33A /* MyMenu.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0740839E2A890C40009443B7 /* KontestFetcher.swift in Sources */,
+				078B07752AA1E1A3005EF33A /* MyMenu.swift in Sources */,
 				0753BA442A8CC92300C69AD6 /* CodeForcesViewModel.swift in Sources */,
 				0753BA422A8CC8BA00C69AD6 /* CodeForcesAPIRepository.swift in Sources */,
 				0753BA202A8C9A2400C69AD6 /* LeetcodeAPIRepository.swift in Sources */,

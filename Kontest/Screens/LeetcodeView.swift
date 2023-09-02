@@ -94,7 +94,7 @@ struct LeetcodeProfileView: View {
                     guard let url = URL(string: "https://leetcode.com/ayushs_2k4") else { return }
                     openURL(url)
                 } else {
-                    router.path.append(Screens.SettingsScreen)
+                    router.appendScreen(screen: .SettingsScreen)
                 }
             }
         }

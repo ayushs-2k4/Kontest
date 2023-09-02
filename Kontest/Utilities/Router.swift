@@ -9,8 +9,19 @@ import SwiftUI
 
 @Observable
 class Router {
-    var path: NavigationPath = .init()
+    var path: NavigationPath = .init() {
+        didSet {
+            currentScreen = .AllKontestScreen
+        }
+    }
+
+    var currentScreen: Screens = .AllKontestScreen
     private init() {}
 
-    static let instance: Router = Router()
+    func appendScreen(screen: Screens) {
+        currentScreen = screen
+        path.append(screen)
+    }
+
+    static let instance: Router = .init()
 }

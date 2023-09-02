@@ -8,6 +8,7 @@
 import Foundation
 
 enum Screens: String {
+    case AllKontestScreen
     case SettingsScreen
     case PendingNotificationsScreen
 }

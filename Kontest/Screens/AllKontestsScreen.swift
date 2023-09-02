@@ -12,6 +12,7 @@ struct AllKontestsScreen: View {
     @State var showRemoveAllNotificationsAlert = false
     @State var showNotificationForAllKontestsAlert = false
     let isInDevelopmentMode = false
+    @State private var isNoNotificationIconAnimating = false
 
     let settingsViewModel = SettingsViewModel.instance
 
@@ -78,7 +79,7 @@ struct AllKontestsScreen: View {
                 if isInDevelopmentMode {
                     ToolbarItem(placement: .automatic) { // change the placement here!
                         Button {
-                            router.path.append(Screens.PendingNotificationsScreen)
+                            router.appendScreen(screen: .PendingNotificationsScreen)
                         } label: {
                             Text("All Pending Notifications")
                         }
@@ -104,11 +105,10 @@ struct AllKontestsScreen: View {
                 if !allKontestsViewModel.allKontests.isEmpty || !allKontestsViewModel.searchText.isEmpty {
                     ToolbarItem(placement: .automatic) {
                         Button {
-                            router.path.append(Screens.SettingsScreen)
+                            router.appendScreen(screen: .SettingsScreen)
                         } label: {
                             Image(systemName: "gear")
                         }
-                        .keyboardShortcut(",")
                     }
 
                     ToolbarItem(placement: .automatic) {
@@ -118,12 +118,23 @@ struct AllKontestsScreen: View {
                     ToolbarItem(placement: .automatic) { // change the placement here!
                         Button {
                             showRemoveAllNotificationsAlert = true
+                            var transaction = Transaction()
+                            transaction.disablesAnimations = true
+                            withTransaction(transaction) {
+                                isNoNotificationIconAnimating = false
+                            }
+                            
                             allKontestsViewModel.removeAllPendingNotifications()
                         } label: {
                             Image(systemName: "bell.slash")
+                                .symbolEffect(.bounce.up.byLayer, value: isNoNotificationIconAnimating)
                         }
                         .help("Remove All Notifications") // Tooltip text
-                        .alert("All Notifications Removed", isPresented: $showRemoveAllNotificationsAlert, actions: {})
+                        .alert("All Notifications Removed", isPresented: $showRemoveAllNotificationsAlert, actions: {
+                            Button("OK") {
+                                isNoNotificationIconAnimating = true
+                            }
+                        })
                     }
                 }
             }
@@ -137,6 +148,9 @@ struct AllKontestsScreen: View {
 
                 case .PendingNotificationsScreen:
                     PendingNotificationsScreen()
+                    
+                case .AllKontestScreen:
+                    AllKontestsScreen()
                 }
             }
         }
