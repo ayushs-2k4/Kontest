@@ -125,15 +125,14 @@ struct AllKontestsScreen: View {
                             withTransaction(transaction) {
                                 isNoNotificationIconAnimating = false
                             }
-
-                            allKontestsViewModel.removeAllPendingNotifications()
                         } label: {
                             Image(systemName: "bell.slash")
                                 .symbolEffect(.bounce.up.byLayer, value: isNoNotificationIconAnimating)
                         }
-                        .help("Remove All Notifications") // Tooltip text
-                        .alert("All Notifications Removed", isPresented: $showRemoveAllNotificationsAlert, actions: {
-                            Button("OK") {
+                        .help("Remove all Notification") // Tooltip text
+                        .alert("Remove all Notification", isPresented: $showRemoveAllNotificationsAlert, actions: {
+                            Button("Remove all", role: .destructive) {
+                                allKontestsViewModel.removeAllPendingNotifications()
                                 isNoNotificationIconAnimating = true
                             }
                         })
