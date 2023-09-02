@@ -116,6 +116,8 @@ struct SingleKontestView: View {
 
                             Text("Ends in \(remainingTimeInEndingOfRunningKontest)")
                                 .font(FontUtility.getRemainingTimeFontSize())
+                                .contentTransition(.numericText())
+                                .animation(.easeInOut, value: remainingTimeInEndingOfRunningKontest)
                         }
 
                         if isKontestOfFutureAndStartingInLessThan24Hours {
@@ -126,6 +128,8 @@ struct SingleKontestView: View {
 
                             Text("Starting in \(remainingTimeInStartingOfFutureKontest)")
                                 .font(FontUtility.getRemainingTimeFontSize())
+                                .contentTransition(.numericText())
+                                .animation(.easeInOut, value: remainingTimeInStartingOfFutureKontest)
                         }
 
                         HStack {
