@@ -140,19 +140,22 @@ struct AllKontestsScreen: View {
                     }
                 }
             }
-            .navigationDestination(for: KontestModel.self) { kontest in
-                KontestDetailsScreen(kontest: kontest)
-            }
-            .navigationDestination(for: Screens.self) { screen in
-                switch screen {
-                case Screens.SettingsScreen:
-                    SettingsScreen()
+            .navigationDestination(for: SelectionState.self) { state in
+                switch state {
+                case .screen(let screen):
+                    switch screen {
+                    case .AllKontestScreen:
+                        AllKontestsScreen()
 
-                case .PendingNotificationsScreen:
-                    PendingNotificationsScreen()
+                    case Screen.SettingsScreen:
+                        SettingsScreen()
 
-                case .AllKontestScreen:
-                    AllKontestsScreen()
+                    case .PendingNotificationsScreen:
+                        PendingNotificationsScreen()
+                    }
+
+                case .kontestModel(let kontest):
+                    KontestDetailsScreen(kontest: kontest)
                 }
             }
         }
@@ -169,7 +172,7 @@ struct AllKontestsScreen: View {
                     SingleKontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
                 })
                 #else
-                NavigationLink(value: kontest) {
+                NavigationLink(value: SelectionState.kontestModel(kontest)) {
                     SingleKontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
                 }
                 #endif

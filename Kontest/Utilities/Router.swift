@@ -7,20 +7,28 @@
 
 import SwiftUI
 
+enum SelectionState: Hashable {
+    case screen(Screen)
+    case kontestModel(KontestModel)
+}
+
 @Observable
 class Router {
-    var path: NavigationPath = .init() {
+    var path = [SelectionState]() {
         didSet {
-            currentScreen = .AllKontestScreen
+            currentSelectionState = path.last ?? .screen(.AllKontestScreen)
+            print("path: \(path)")
+            print("currentSelectionState: \(currentSelectionState)")
         }
     }
 
-    var currentScreen: Screens = .AllKontestScreen
+    var currentSelectionState: SelectionState = .screen(.AllKontestScreen)
     private init() {}
 
-    func appendScreen(screen: Screens) {
-        currentScreen = screen
-        path.append(screen)
+    func appendScreen(screen: Screen) {
+        if currentSelectionState != .screen(.SettingsScreen) {
+            path.append(SelectionState.screen(screen))
+        }
     }
 
     static let instance: Router = .init()

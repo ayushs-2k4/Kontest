@@ -13,9 +13,7 @@ struct MyMenu: Commands {
     var body: some Commands {
         CommandGroup(after: .appSettings) {
             Button("Settings...") {
-                if router.currentScreen != .SettingsScreen {
-                    router.appendScreen(screen: .SettingsScreen)
-                }
+                router.appendScreen(screen: .SettingsScreen)
             }
             .keyboardShortcut(KeyEquivalent(","), modifiers: .command)
         }

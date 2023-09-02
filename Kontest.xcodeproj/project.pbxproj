@@ -14,7 +14,7 @@
 		071916952A8CDDBA00172270 /* CodeForcesUserRatingAPIDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071916942A8CDDBA00172270 /* CodeForcesUserRatingAPIDTO.swift */; };
 		072A0F752A8D378C0038C8CE /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072A0F742A8D378C0038C8CE /* SettingsViewModel.swift */; };
 		072A0F772A8D38390038C8CE /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072A0F762A8D38390038C8CE /* SettingsScreen.swift */; };
-		072A0F792A8D3D3C0038C8CE /* Screens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072A0F782A8D3D3C0038C8CE /* Screens.swift */; };
+		072A0F792A8D3D3C0038C8CE /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072A0F782A8D3D3C0038C8CE /* Screen.swift */; };
 		073145022A9AFE9300150EE5 /* CodeChefAPIDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073145012A9AFE9300150EE5 /* CodeChefAPIDTO.swift */; };
 		073145042A9AFEF200150EE5 /* CodeChefAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073145032A9AFEF200150EE5 /* CodeChefAPIModel.swift */; };
 		073145062A9AFFAD00150EE5 /* CodeChefFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073145052A9AFFAD00150EE5 /* CodeChefFetcher.swift */; };
@@ -68,7 +68,7 @@
 		071916942A8CDDBA00172270 /* CodeForcesUserRatingAPIDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeForcesUserRatingAPIDTO.swift; sourceTree = "<group>"; };
 		072A0F742A8D378C0038C8CE /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		072A0F762A8D38390038C8CE /* SettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
-		072A0F782A8D3D3C0038C8CE /* Screens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screens.swift; sourceTree = "<group>"; };
+		072A0F782A8D3D3C0038C8CE /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		073145012A9AFE9300150EE5 /* CodeChefAPIDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefAPIDTO.swift; sourceTree = "<group>"; };
 		073145032A9AFEF200150EE5 /* CodeChefAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefAPIModel.swift; sourceTree = "<group>"; };
 		073145052A9AFFAD00150EE5 /* CodeChefFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefFetcher.swift; sourceTree = "<group>"; };
@@ -276,7 +276,7 @@
 				074083982A8906B8009443B7 /* FontUtility.swift */,
 				0740839A2A890754009443B7 /* LocalNotificationManager.swift */,
 				074EC8242A8BC5F300C51514 /* Constants.swift */,
-				072A0F782A8D3D3C0038C8CE /* Screens.swift */,
+				072A0F782A8D3D3C0038C8CE /* Screen.swift */,
 				0745186F2A99046900FB7560 /* Router.swift */,
 				078B07742AA1E1A3005EF33A /* MyMenu.swift */,
 			);
@@ -379,7 +379,7 @@
 				0753BA242A8C9A7A00C69AD6 /* LeetcodeFetcher.swift in Sources */,
 				074083932A890572009443B7 /* ClipboardUtility.swift in Sources */,
 				0705F8E02A8DD45E00594C3D /* PendingNotificationsViewModel.swift in Sources */,
-				072A0F792A8D3D3C0038C8CE /* Screens.swift in Sources */,
+				072A0F792A8D3D3C0038C8CE /* Screen.swift in Sources */,
 				070029752A95C313006E6B2F /* AllNotificationMenu.swift in Sources */,
 				074083972A89066F009443B7 /* CalendarUtility.swift in Sources */,
 				0753BA1E2A8C99EA00C69AD6 /* LeetcodeAPIModel.swift in Sources */,

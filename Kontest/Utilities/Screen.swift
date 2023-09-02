@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Screens: String {
+enum Screen: String {
     case AllKontestScreen
     case SettingsScreen
     case PendingNotificationsScreen
