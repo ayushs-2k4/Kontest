@@ -15,6 +15,21 @@ struct KontestDetailsScreen: View {
 
     var kontest: KontestModel
 
+    let isKontestRunning: Bool
+    let isKontestOfFutureAndStartingInLessThan24Hours: Bool
+
+    init(kontest: KontestModel) {
+        self.kontest = kontest
+
+        let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
+        let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
+        isKontestRunning = CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date()) || kontest.status == .Running
+
+        let isKontestOfFuture = CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date())
+        let isKontestStartingTimeLessThanADay = !(CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 0, hours: 0, days: 1))
+        isKontestOfFutureAndStartingInLessThan24Hours = isKontestOfFuture && isKontestStartingTimeLessThanADay
+    }
+
     var body: some View {
         let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
         let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
@@ -33,7 +48,7 @@ struct KontestDetailsScreen: View {
                         Text(kontest.site.uppercased())
                             .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.site))
                             .padding(.horizontal)
-                        
+
                         if CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date()) || kontest.status == .Running {
                             BlinkingDotView(color: .green)
                                 .frame(width: 10, height: 10)
@@ -41,6 +56,36 @@ struct KontestDetailsScreen: View {
                     }
 
                     Text(kontest.name)
+
+//                    if isKontestRunning {
+//                        TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
+//                            let date = timelineViewDefaultContext.date
+//                            let seconds = (kontestEndDate ?? Date()).timeIntervalSince(date)
+//
+//                            let remainingTimeInEndingOfRunningKontest = CalendarUtility.formattedTimeFrom(seconds: Int(seconds))
+//
+//                            Text("Ends in \(remainingTimeInEndingOfRunningKontest)")
+//                                .font(Font.title.monospacedDigit())
+//                                .contentTransition(.numericText())
+//                                .animation(.easeInOut, value: remainingTimeInEndingOfRunningKontest)
+//                        }
+//                    }
+//
+//                    if isKontestOfFutureAndStartingInLessThan24Hours {
+//                        TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
+//                            let date = timelineViewDefaultContext.date
+//                            let seconds = (kontestStartDate ?? Date()).timeIntervalSince(date)
+//
+//                            let remainingTimeInStartingOfFutureKontest = CalendarUtility.formattedTimeFrom(seconds: Int(seconds))
+//
+//                            Text("Starting in \(remainingTimeInStartingOfFutureKontest)")
+//                                .font(Font.title.monospacedDigit())
+//                                .contentTransition(.numericText())
+//                                .animation(.easeInOut, value: remainingTimeInStartingOfFutureKontest)
+//                        }
+//                    }
+                    RemainingTimeView(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date(), isKontestRunning: isKontestRunning, isKontestOfFutureAndStartingInLessThan24Hours: isKontestOfFutureAndStartingInLessThan24Hours)
+                        .padding()
                 }
 
                 Spacer()
@@ -183,6 +228,43 @@ struct TimeView: View {
     }
 }
 
+struct RemainingTimeView: View {
+    let kontestStartDate: Date
+    let kontestEndDate: Date
+    let isKontestRunning: Bool
+    let isKontestOfFutureAndStartingInLessThan24Hours: Bool
+
+    var body: some View {
+        if isKontestRunning {
+            TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
+                let date = timelineViewDefaultContext.date
+                let seconds = kontestEndDate.timeIntervalSince(date)
+
+                let remainingTimeInEndingOfRunningKontest = CalendarUtility.formattedTimeFrom(seconds: Int(seconds))
+
+                Text("Ends in \(remainingTimeInEndingOfRunningKontest)")
+                    .font(Font.title2.monospacedDigit())
+                    .contentTransition(.numericText())
+                    .animation(.easeInOut, value: remainingTimeInEndingOfRunningKontest)
+            }
+        }
+
+        if isKontestOfFutureAndStartingInLessThan24Hours {
+            TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
+                let date = timelineViewDefaultContext.date
+                let seconds = kontestStartDate.timeIntervalSince(date)
+
+                let remainingTimeInStartingOfFutureKontest = CalendarUtility.formattedTimeFrom(seconds: Int(seconds))
+
+                Text("Starting in \(remainingTimeInStartingOfFutureKontest)")
+                    .font(Font.title2.monospacedDigit())
+                    .contentTransition(.numericText())
+                    .animation(.easeInOut, value: remainingTimeInStartingOfFutureKontest)
+            }
+        }
+    }
+}
+
 #Preview {
 //    KontestDetailsView(kontest: KontestModel.from(dto: KontestDTO(name: "Starters 100 (Date to be decided)", url: "https://www.codechef.com/START100", start_time: "2023-08-30 14:30:00 UTC", end_time: "2023-08-30 16:30:00 UTC", duration: "7200", site: "CodeChef", in_24_hours: "No", status: "BEFORE")))
 
@@ -194,7 +276,7 @@ struct TimeView: View {
 
 //    return KontestDetailsScreen(kontest: KontestModel.from(dto: KontestDTO(name: "ProjectEuler+", url: "https://hackerrank.com/contests/projecteuler", start_time: startTime, end_time: endTime, duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "CODING")))
 //        .environment(AllKontestsViewModel())
-    
+
     return KontestDetailsScreen(kontest: KontestModel.from(dto: KontestDTO(name: "THIRD PROGRAMMING CONTEST 2023 ALGO (AtCoder Beginner Contest 318)", url: "https://hackerrank.com/contests/projecteuler", start_time: startTime, end_time: endTime, duration: "1020.0", site: "AtCoder", in_24_hours: "No", status: "CODING")))
         .environment(AllKontestsViewModel())
 }
