@@ -79,7 +79,22 @@ struct CodeChefProfileView: View {
                         HStack {
                             let imageURL = URL(string: codeChefProfile.countryFlag)
                             if let imageURL {
-                                AsyncImage(url: imageURL)
+                                AsyncImage(url: imageURL) { phase in
+                                    if let image = phase.image {
+                                        image
+                                            .frame(width: 24, height: 19)
+                                    } else if phase.error != nil {
+                                        // Error
+                                        Image(.placeholderFlag)
+                                            .resizable()
+                                            .frame(width: 24, height: 19)
+                                    } else {
+                                        // PlaceHolder
+                                        Image(.placeholderFlag)
+                                            .resizable()
+                                            .frame(width: 24, height: 19)
+                                    }
+                                }
                             } else {
                                 Text("Country Rank")
                             }

@@ -44,6 +44,7 @@ struct CodeForcesProfileView: View {
     var body: some View {
         ZStack {
             bgColor
+            
             if isLoading && error == nil {
                 ProgressView()
             }
