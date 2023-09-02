@@ -115,7 +115,7 @@ struct SingleKontestView: View {
                             let remainingTimeInEndingOfRunningKontest = CalendarUtility.formattedTimeFrom(seconds: Int(seconds))
 
                             Text("Ends in \(remainingTimeInEndingOfRunningKontest)")
-                                .font(FontUtility.getRemainingTimeFontSize())
+                                .font(FontUtility.getRemainingTimeFontSize().monospacedDigit())
                                 .contentTransition(.numericText())
                                 .animation(.easeInOut, value: remainingTimeInEndingOfRunningKontest)
                         }
@@ -127,7 +127,7 @@ struct SingleKontestView: View {
                             let remainingTimeInStartingOfFutureKontest = CalendarUtility.formattedTimeFrom(seconds: Int(seconds))
 
                             Text("Starting in \(remainingTimeInStartingOfFutureKontest)")
-                                .font(FontUtility.getRemainingTimeFontSize())
+                                .font(FontUtility.getRemainingTimeFontSize().monospacedDigit())
                                 .contentTransition(.numericText())
                                 .animation(.easeInOut, value: remainingTimeInStartingOfFutureKontest)
                         }
