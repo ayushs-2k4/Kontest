@@ -19,8 +19,6 @@ struct SingleKontestView: View {
     let kontestStartDate: Date?
     let kontestEndDate: Date?
 
-    @State var remainingTimeInStartingOfFutureKontest: String = "--:--:--"
-    @State var remainingTimeInEndingOfRunningKontest: String = "--:--:--"
     let isKontestRunning: Bool
     let isKontestOfFutureAndStartingInLessThan24Hours: Bool
 
@@ -109,21 +107,27 @@ struct SingleKontestView: View {
 
                     VStack {
                         if isKontestRunning {
-                            Text("Ends in \(remainingTimeInEndingOfRunningKontest)")
-                                .font(FontUtility.getRemainingTimeFontSize())
-                                .onReceive(timer) { time in
-                                    let seconds = (kontestEndDate ?? Date()).timeIntervalSince(time)
-                                    remainingTimeInEndingOfRunningKontest = (Int(seconds) >= 0) ? CalendarUtility.formattedTimeFrom(seconds: Int(seconds)) : "00:00:00"
-                                }
+                            TimelineView(.periodic(from: .now, by: 1)) { context in
+                                let date = context.date
+                                let seconds = (kontestEndDate ?? Date()).timeIntervalSince(date)
+
+                                let remainingTimeInEndingOfRunningKontest = CalendarUtility.formattedTimeFrom(seconds: Int(seconds))
+
+                                Text("Ends in \(remainingTimeInEndingOfRunningKontest)")
+                                    .font(FontUtility.getRemainingTimeFontSize())
+                            }
                         }
 
                         if isKontestOfFutureAndStartingInLessThan24Hours {
-                            Text("Starting in \(remainingTimeInStartingOfFutureKontest)")
-                                .font(FontUtility.getRemainingTimeFontSize())
-                                .onReceive(timer) { time in
-                                    let seconds = (kontestStartDate ?? Date()).timeIntervalSince(time)
-                                    remainingTimeInStartingOfFutureKontest = (Int(seconds) >= 0) ? CalendarUtility.formattedTimeFrom(seconds: Int(seconds)) : "00:00:00"
-                                }
+                            TimelineView(.periodic(from: .now, by: 1)) { context in
+                                let date = context.date
+                                let seconds = (kontestStartDate ?? Date()).timeIntervalSince(date)
+
+                                let remainingTimeInStartingOfFutureKontest = CalendarUtility.formattedTimeFrom(seconds: Int(seconds))
+                                
+                                Text("Starting in \(remainingTimeInStartingOfFutureKontest)")
+                                    .font(FontUtility.getRemainingTimeFontSize())
+                            }
                         }
 
                         HStack {
@@ -189,7 +193,7 @@ private func numberOfOptions(kontest: KontestModel) -> Int {
 
         SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "1v1 Games by CodeChef", url: "https://www.codechef.com/GAMES", start_time: "2023-8-27 12:30:00 UTC", end_time: "2032-11-10 06:30:00 UTC", duration: "315619200.0", site: "CodeChef", in_24_hours: "No", status: "CODING")))
 
-        SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "Weekly Contest 358", url: "https://leetcode.com/contest/weekly-contest-358", start_time: "2023-08-25T02:30:00.000Z", end_time: "2023-08-25T04:00:00.000Z", duration: "5400", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE")))
+        SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "Weekly Contest 358", url: "https://leetcode.com/contest/weekly-contest-358", start_time: "2023-09-03T02:30:00.000Z", end_time: "2023-10-25T04:00:00.000Z", duration: "5400", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE")))
 
         SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "Test Contest", url: "https://leetcode.com/contest/weekly-contest-358", start_time: "2023-08-13T02:30:00.000Z", end_time: "2023-08-13T05:00:00.000Z", duration: "1800", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE")))
         SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "Starters 100 (Date to be decided)", url: "https://www.codechef.com/START100", start_time: "2023-08-30 14:30:00 UTC", end_time: "2023-08-30 16:30:00 UTC", duration: "7200", site: "CodeChef", in_24_hours: "No", status: "BEFORE")))
