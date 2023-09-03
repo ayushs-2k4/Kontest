@@ -11,17 +11,26 @@ struct LeetcodeView: View {
     let username: String
     let leetcodeViewModel: LeetcodeViewModel
     let bgColor: Color
+    @State var isHovering = false
+    let hoveringScaleValue: CGFloat
 
-    init(username: String, bgColor: Color = .red) {
+    init(username: String, bgColor: Color = .red, hoveringScaleValue: CGFloat) {
         self.bgColor = bgColor
         self.username = username
         self.leetcodeViewModel = LeetcodeViewModel(username: username)
+        self.hoveringScaleValue = hoveringScaleValue
     }
 
     var body: some View {
         let leetcodeProfile = leetcodeViewModel.leetcodeProfile
 
         LeetcodeProfileView(leetcodeProfile: leetcodeProfile, username: username, bgColor: bgColor, isLoading: leetcodeViewModel.isLoading, status: leetcodeViewModel.status, error: leetcodeViewModel.error)
+            .onHover(perform: { hovering in
+                withAnimation {
+                    isHovering = hovering
+                }
+            })
+            .scaleEffect(isHovering && !leetcodeViewModel.isLoading && leetcodeViewModel.status != nil && leetcodeViewModel.status != "error" ? hoveringScaleValue : 1)
     }
 }
 
@@ -105,8 +114,8 @@ struct LeetcodeProfileView: View {
 
 #Preview {
     VStack {
-        LeetcodeView(username: "ayushs_2k4")
-        LeetcodeView(username: "ayushs  _2k4")
+        LeetcodeView(username: "ayushs_2k4",hoveringScaleValue: 1.05)
+        LeetcodeView(username: "ayushs  _2k4",hoveringScaleValue: 1.05)
     }
     .environment(Router.instance)
 }

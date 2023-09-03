@@ -11,15 +11,24 @@ struct CodeChefView: View {
     let username: String
     let codeChefViewModel: CodeChefViewModel
     let bgColor: Color
+    @State var isHovering = false
+    let hoveringScaleValue: CGFloat
     
-    init(username: String, bgColor: Color) {
+    init(username: String, bgColor: Color, hoveringScaleValue: CGFloat) {
         self.username = username
         self.bgColor = bgColor
         self.codeChefViewModel = CodeChefViewModel(username: username)
+        self.hoveringScaleValue = hoveringScaleValue
     }
     
     var body: some View {
         CodeChefProfileView(codeChefProfile: codeChefViewModel.codeChefProfile, username: username, bgColor: bgColor, isLoading: codeChefViewModel.isLoading, error: codeChefViewModel.error)
+            .onHover(perform: { hovering in
+                withAnimation {
+                    isHovering = hovering
+                }
+            })
+            .scaleEffect(isHovering && !codeChefViewModel.isLoading && codeChefViewModel.error == nil ? hoveringScaleValue : 1)
     }
 }
 
@@ -135,8 +144,8 @@ struct CodeChefProfileView: View {
 
 #Preview {
     VStack {
-        CodeChefView(username: "ayushs_2k4", bgColor: .red)
-        CodeChefView(username: "ayush_2k4", bgColor: .red)
+        CodeChefView(username: "ayushs_2k4", bgColor: .red,hoveringScaleValue: 1.05)
+        CodeChefView(username: "ayush_2k4", bgColor: .red,hoveringScaleValue: 1.05)
     }
     .environment(Router.instance)
 }

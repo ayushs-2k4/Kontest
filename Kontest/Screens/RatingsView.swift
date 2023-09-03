@@ -11,23 +11,24 @@ struct RatingsView: View {
     let codeForcesUsername: String
     let leetCodeUsername: String
     let codeChefUsername: String
+    let hoveringScaleValue = 1.04
 
     @Environment(\.horizontalSizeClass) private var sizeClass
 
     var body: some View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: hSpacing) {
-                CodeForcesView(username: codeForcesUsername, bgColor: .green)
+                CodeForcesView(username: codeForcesUsername, bgColor: .green,hoveringScaleValue: hoveringScaleValue)
                     .clipShape(.rect(cornerRadius: cornerRadius))
                     .aspectRatio(heroRatio, contentMode: .fit)
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
 
-                LeetcodeView(username: leetCodeUsername, bgColor: .cyan)
+                LeetcodeView(username: leetCodeUsername, bgColor: .cyan,hoveringScaleValue: hoveringScaleValue)
                     .clipShape(.rect(cornerRadius: cornerRadius))
                     .aspectRatio(heroRatio, contentMode: .fit)
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
 
-                CodeChefView(username: codeChefUsername, bgColor: .teal)
+                CodeChefView(username: codeChefUsername, bgColor: .teal,hoveringScaleValue: hoveringScaleValue)
                     .clipShape(.rect(cornerRadius: cornerRadius))
                     .aspectRatio(heroRatio, contentMode: .fit)
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)

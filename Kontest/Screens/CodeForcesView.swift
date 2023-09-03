@@ -11,15 +11,24 @@ struct CodeForcesView: View {
     let username: String
     let codeForcesViewModel: CodeForcesViewModel
     let bgColor: Color
+    @State var isHovering = false
+    let hoveringScaleValue: CGFloat
 
-    init(username: String, bgColor: Color) {
+    init(username: String, bgColor: Color, hoveringScaleValue: CGFloat) {
         self.username = username
         self.codeForcesViewModel = CodeForcesViewModel(username: username)
         self.bgColor = bgColor
+        self.hoveringScaleValue = hoveringScaleValue
     }
 
     var body: some View {
         CodeForcesProfileView(codeForcesViewModel: codeForcesViewModel, username: username, bgColor: bgColor, isLoading: codeForcesViewModel.isLoading, error: codeForcesViewModel.error)
+            .onHover(perform: { hovering in
+                withAnimation {
+                    isHovering = hovering
+                }
+            })
+            .scaleEffect(isHovering && !codeForcesViewModel.isLoading && codeForcesViewModel.error == nil ? hoveringScaleValue : 1)
     }
 }
 
@@ -44,7 +53,7 @@ struct CodeForcesProfileView: View {
     var body: some View {
         ZStack {
             bgColor
-            
+
             if isLoading && error == nil {
                 ProgressView()
             }
@@ -140,10 +149,10 @@ struct CodeForcesProfileView: View {
 
 #Preview {
     VStack {
-        CodeForcesView(username: "Fefer_Ivan", bgColor: .green)
-        CodeForcesView(username: "ayushsinghals", bgColor: .green)
-        CodeForcesView(username: "ayushsinghals02", bgColor: .green)
-        CodeForcesView(username: "yermak0v", bgColor: .green)
+        CodeForcesView(username: "Fefer_Ivan", bgColor: .green, hoveringScaleValue: 1.05)
+        CodeForcesView(username: "ayushsinghals", bgColor: .green, hoveringScaleValue: 1.05)
+        CodeForcesView(username: "ayushsinghals02", bgColor: .green, hoveringScaleValue: 1.05)
+        CodeForcesView(username: "yermak0v", bgColor: .green, hoveringScaleValue: 1.05)
     }
     .environment(Router.instance)
 }
