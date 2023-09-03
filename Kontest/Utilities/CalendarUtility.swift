@@ -209,9 +209,9 @@ class CalendarUtility {
         return if days > 0 {
             String(format: "%d days and %02d:%02d:%02d", days, hours, minutes, remainingSeconds)
         } else if hours > 0 {
-            String(format: "%02d:%02d", minutes, remainingSeconds)
-        } else {
             String(format: "%02d:%02d:%02d", hours, minutes, remainingSeconds)
+        } else {
+            String(format: "%02d:%02d", minutes, remainingSeconds)
         }
     }
     
@@ -224,9 +224,9 @@ class CalendarUtility {
         return if days > 0 {
             String(format: "%dd, %02d:%02d:%02d", days, hours, minutes, remainingSeconds)
         } else if hours > 0 {
-            String(format: "%02d:%02d", minutes, remainingSeconds)
-        } else {
             String(format: "%02d:%02d:%02d", hours, minutes, remainingSeconds)
+        } else {
+            String(format: "%02d:%02d", minutes, remainingSeconds)
         }
     }
 }
