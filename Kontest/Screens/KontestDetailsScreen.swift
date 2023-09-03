@@ -57,33 +57,6 @@ struct KontestDetailsScreen: View {
 
                     Text(kontest.name)
 
-//                    if isKontestRunning {
-//                        TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
-//                            let date = timelineViewDefaultContext.date
-//                            let seconds = (kontestEndDate ?? Date()).timeIntervalSince(date)
-//
-//                            let remainingTimeInEndingOfRunningKontest = CalendarUtility.formattedTimeFrom(seconds: Int(seconds))
-//
-//                            Text("Ends in \(remainingTimeInEndingOfRunningKontest)")
-//                                .font(Font.title.monospacedDigit())
-//                                .contentTransition(.numericText())
-//                                .animation(.easeInOut, value: remainingTimeInEndingOfRunningKontest)
-//                        }
-//                    }
-//
-//                    if isKontestOfFutureAndStartingInLessThan24Hours {
-//                        TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
-//                            let date = timelineViewDefaultContext.date
-//                            let seconds = (kontestStartDate ?? Date()).timeIntervalSince(date)
-//
-//                            let remainingTimeInStartingOfFutureKontest = CalendarUtility.formattedTimeFrom(seconds: Int(seconds))
-//
-//                            Text("Starting in \(remainingTimeInStartingOfFutureKontest)")
-//                                .font(Font.title.monospacedDigit())
-//                                .contentTransition(.numericText())
-//                                .animation(.easeInOut, value: remainingTimeInStartingOfFutureKontest)
-//                        }
-//                    }
                     RemainingTimeView(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date(), isKontestRunning: isKontestRunning, isKontestOfFutureAndStartingInLessThan24Hours: isKontestOfFutureAndStartingInLessThan24Hours)
                         .padding()
                 }

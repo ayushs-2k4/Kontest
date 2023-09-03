@@ -112,8 +112,12 @@ struct SingleKontestView: View {
                             let date = timelineViewDefaultContext.date
                             let seconds = (kontestEndDate ?? Date()).timeIntervalSince(date)
 
+                            #if os(iOS)
+                            let remainingTimeInEndingOfRunningKontest = CalendarUtility.shortenedFormattedTimeFrom(seconds: Int(seconds))
+                            #else
                             let remainingTimeInEndingOfRunningKontest = CalendarUtility.formattedTimeFrom(seconds: Int(seconds))
-
+                            #endif
+                            
                             Text("Ends in \(remainingTimeInEndingOfRunningKontest)")
                                 .font(FontUtility.getRemainingTimeFontSize().monospacedDigit())
                                 .contentTransition(.numericText())
