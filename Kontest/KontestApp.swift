@@ -14,11 +14,8 @@ struct KontestApp: App {
 
     var body: some Scene {
         WindowGroup {
-//            AllKontestsScreen()
-//                .environment(allKontestsViewModel)
-//                .environment(router)
-
-            LeetCodeGraphQLScreen()
+            AllKontestsScreen()
+                .environment(allKontestsViewModel)
                 .environment(router)
         }
         .commands {

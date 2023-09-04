@@ -61,7 +61,7 @@ struct ProblemSolvedBeatsStatsDTO: Codable {
 }
 
 struct SubmitStatsGlobalDTO: Codable {
-    let acSubmissionDTO: [ACSubmissionNumDTO?]?
+    let acSubmissionDTOs: [ACSubmissionNumDTO?]?
 }
 
 struct ACSubmissionNumDTO: Codable {
@@ -141,7 +141,7 @@ extension SubmitStatsGlobalDTO {
             ACSubmissionNumDTO.from(acSubmissionNum: o)
         }
 
-        return SubmitStatsGlobalDTO(acSubmissionDTO: p)
+        return SubmitStatsGlobalDTO(acSubmissionDTOs: p)
     }
 }
 

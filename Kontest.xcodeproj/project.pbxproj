@@ -32,7 +32,7 @@
 		07ECFB962AA58259008513C6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07ECFB542AA58259008513C6 /* Preview Assets.xcassets */; };
 		07ECFB972AA58259008513C6 /* CodeChefView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB562AA58259008513C6 /* CodeChefView.swift */; };
 		07ECFB982AA58259008513C6 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB572AA58259008513C6 /* SettingsScreen.swift */; };
-		07ECFB992AA58259008513C6 /* LeetCodeGraphQLScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB582AA58259008513C6 /* LeetCodeGraphQLScreen.swift */; };
+		07ECFB992AA58259008513C6 /* LeetCodeGraphQLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB582AA58259008513C6 /* LeetCodeGraphQLView.swift */; };
 		07ECFB9A2AA58259008513C6 /* RatingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB592AA58259008513C6 /* RatingsView.swift */; };
 		07ECFB9B2AA58259008513C6 /* NoKontestsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB5A2AA58259008513C6 /* NoKontestsScreen.swift */; };
 		07ECFB9C2AA58259008513C6 /* AllKontestsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB5B2AA58259008513C6 /* AllKontestsScreen.swift */; };
@@ -101,7 +101,7 @@
 		07ECFB542AA58259008513C6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		07ECFB562AA58259008513C6 /* CodeChefView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeChefView.swift; sourceTree = "<group>"; };
 		07ECFB572AA58259008513C6 /* SettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
-		07ECFB582AA58259008513C6 /* LeetCodeGraphQLScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeetCodeGraphQLScreen.swift; sourceTree = "<group>"; };
+		07ECFB582AA58259008513C6 /* LeetCodeGraphQLView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeetCodeGraphQLView.swift; sourceTree = "<group>"; };
 		07ECFB592AA58259008513C6 /* RatingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsView.swift; sourceTree = "<group>"; };
 		07ECFB5A2AA58259008513C6 /* NoKontestsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoKontestsScreen.swift; sourceTree = "<group>"; };
 		07ECFB5B2AA58259008513C6 /* AllKontestsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllKontestsScreen.swift; sourceTree = "<group>"; };
@@ -277,7 +277,7 @@
 			children = (
 				07ECFB562AA58259008513C6 /* CodeChefView.swift */,
 				07ECFB572AA58259008513C6 /* SettingsScreen.swift */,
-				07ECFB582AA58259008513C6 /* LeetCodeGraphQLScreen.swift */,
+				07ECFB582AA58259008513C6 /* LeetCodeGraphQLView.swift */,
 				07ECFB592AA58259008513C6 /* RatingsView.swift */,
 				07ECFB5A2AA58259008513C6 /* NoKontestsScreen.swift */,
 				07ECFB5B2AA58259008513C6 /* AllKontestsScreen.swift */,
@@ -481,7 +481,7 @@
 				07ECFBB22AA58259008513C6 /* LeetCodeUserProfileGraphQLAPIDTO.swift in Sources */,
 				07ECFBA82AA58259008513C6 /* LocalNotificationManager.swift in Sources */,
 				07ECFB932AA58259008513C6 /* LeetcodeAPIModel.swift in Sources */,
-				07ECFB992AA58259008513C6 /* LeetCodeGraphQLScreen.swift in Sources */,
+				07ECFB992AA58259008513C6 /* LeetCodeGraphQLView.swift in Sources */,
 				07ECFB9B2AA58259008513C6 /* NoKontestsScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

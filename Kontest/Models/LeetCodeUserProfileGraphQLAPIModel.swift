@@ -60,7 +60,7 @@ struct ProblemSolvedBeatsStatsModel: Codable, Hashable {
 }
 
 struct SubmitStatsGlobalModel: Codable, Hashable, Equatable {
-    let acSubmissionNum: [ACSubmissionNumModel?]?
+    let acSubmissionNums: [ACSubmissionNumModel?]?
 }
 
 struct ACSubmissionNumModel: Codable, Hashable, Equatable {
@@ -119,11 +119,11 @@ extension SubmitStatsGlobalModel {
     static func from(submitStatsGlobalDTO: SubmitStatsGlobalDTO?) -> SubmitStatsGlobalModel? {
         guard let submitStatsGlobalDTO else { return nil }
 
-        let k = submitStatsGlobalDTO.acSubmissionDTO?.map { acSubmissionDTO in
+        let k = submitStatsGlobalDTO.acSubmissionDTOs?.map { acSubmissionDTO in
             ACSubmissionNumModel.from(acSubmissionNumDTO: acSubmissionDTO)
         }
         
-        return SubmitStatsGlobalModel(acSubmissionNum: k)
+        return SubmitStatsGlobalModel(acSubmissionNums: k)
     }
 }
 
