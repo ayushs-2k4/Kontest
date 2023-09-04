@@ -18,17 +18,17 @@ struct RatingsView: View {
     var body: some View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: hSpacing) {
-                CodeForcesView(username: codeForcesUsername, bgColor: .green,hoveringScaleValue: hoveringScaleValue)
+                CodeForcesView(username: codeForcesUsername, bgColor: .green, hoveringScaleValue: hoveringScaleValue)
                     .clipShape(.rect(cornerRadius: cornerRadius))
                     .aspectRatio(heroRatio, contentMode: .fit)
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
 
-                LeetcodeView(username: leetCodeUsername, bgColor: .cyan,hoveringScaleValue: hoveringScaleValue)
+                LeetCodeGraphQLView(username: leetCodeUsername, bgColor: .cyan, hoveringScaleValue: hoveringScaleValue)
                     .clipShape(.rect(cornerRadius: cornerRadius))
                     .aspectRatio(heroRatio, contentMode: .fit)
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
 
-                CodeChefView(username: codeChefUsername, bgColor: .teal,hoveringScaleValue: hoveringScaleValue)
+                CodeChefView(username: codeChefUsername, bgColor: .teal, hoveringScaleValue: hoveringScaleValue)
                     .clipShape(.rect(cornerRadius: cornerRadius))
                     .aspectRatio(heroRatio, contentMode: .fit)
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
