@@ -14,19 +14,16 @@
 		07ECFB842AA58259008513C6 /* CodeChefViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB3B2AA58259008513C6 /* CodeChefViewModel.swift */; };
 		07ECFB852AA58259008513C6 /* CodeForcesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB3C2AA58259008513C6 /* CodeForcesViewModel.swift */; };
 		07ECFB862AA58259008513C6 /* PendingNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB3D2AA58259008513C6 /* PendingNotificationsViewModel.swift */; };
-		07ECFB872AA58259008513C6 /* LeetcodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB3E2AA58259008513C6 /* LeetcodeViewModel.swift */; };
 		07ECFB882AA58259008513C6 /* KontestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB3F2AA58259008513C6 /* KontestApp.swift */; };
 		07ECFB892AA58259008513C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07ECFB402AA58259008513C6 /* Assets.xcassets */; };
 		07ECFB8A2AA58259008513C6 /* CodeChefAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB432AA58259008513C6 /* CodeChefAPIRepository.swift */; };
 		07ECFB8B2AA58259008513C6 /* AllKontestsFakeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB452AA58259008513C6 /* AllKontestsFakeRepository.swift */; };
 		07ECFB8C2AA58259008513C6 /* KontestRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB462AA58259008513C6 /* KontestRepository.swift */; };
 		07ECFB8D2AA58259008513C6 /* LeetCodeAPIGraphQLRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB482AA58259008513C6 /* LeetCodeAPIGraphQLRepository.swift */; };
-		07ECFB8E2AA58259008513C6 /* LeetcodeAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB492AA58259008513C6 /* LeetcodeAPIRepository.swift */; };
 		07ECFB8F2AA58259008513C6 /* CodeForcesAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB4B2AA58259008513C6 /* CodeForcesAPIRepository.swift */; };
 		07ECFB902AA58259008513C6 /* KontestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB4D2AA58259008513C6 /* KontestStatus.swift */; };
 		07ECFB912AA58259008513C6 /* CodeForcesUserRatingAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB4E2AA58259008513C6 /* CodeForcesUserRatingAPIModel.swift */; };
 		07ECFB922AA58259008513C6 /* CodeForcesUserInfoAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB4F2AA58259008513C6 /* CodeForcesUserInfoAPIModel.swift */; };
-		07ECFB932AA58259008513C6 /* LeetcodeAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB502AA58259008513C6 /* LeetcodeAPIModel.swift */; };
 		07ECFB942AA58259008513C6 /* CodeChefAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB512AA58259008513C6 /* CodeChefAPIModel.swift */; };
 		07ECFB952AA58259008513C6 /* KontestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB522AA58259008513C6 /* KontestModel.swift */; };
 		07ECFB962AA58259008513C6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07ECFB542AA58259008513C6 /* Preview Assets.xcassets */; };
@@ -36,7 +33,6 @@
 		07ECFB9A2AA58259008513C6 /* RatingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB592AA58259008513C6 /* RatingsView.swift */; };
 		07ECFB9B2AA58259008513C6 /* NoKontestsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB5A2AA58259008513C6 /* NoKontestsScreen.swift */; };
 		07ECFB9C2AA58259008513C6 /* AllKontestsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB5B2AA58259008513C6 /* AllKontestsScreen.swift */; };
-		07ECFB9D2AA58259008513C6 /* LeetcodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB5C2AA58259008513C6 /* LeetcodeView.swift */; };
 		07ECFB9E2AA58259008513C6 /* BlinkingDotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB5D2AA58259008513C6 /* BlinkingDotView.swift */; };
 		07ECFB9F2AA58259008513C6 /* CodeForcesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB5E2AA58259008513C6 /* CodeForcesView.swift */; };
 		07ECFBA02AA58259008513C6 /* KontestDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB5F2AA58259008513C6 /* KontestDetailsScreen.swift */; };
@@ -56,7 +52,6 @@
 		07ECFBAE2AA58259008513C6 /* CodeForcesUserInfoAPIDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB6F2AA58259008513C6 /* CodeForcesUserInfoAPIDTO.swift */; };
 		07ECFBAF2AA58259008513C6 /* CodeChefAPIDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB702AA58259008513C6 /* CodeChefAPIDTO.swift */; };
 		07ECFBB02AA58259008513C6 /* CodeForcesUserRatingAPIDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB712AA58259008513C6 /* CodeForcesUserRatingAPIDTO.swift */; };
-		07ECFBB12AA58259008513C6 /* LeetcodeAPIDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB722AA58259008513C6 /* LeetcodeAPIDTO.swift */; };
 		07ECFBB22AA58259008513C6 /* LeetCodeUserProfileGraphQLAPIDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB732AA58259008513C6 /* LeetCodeUserProfileGraphQLAPIDTO.swift */; };
 		07ECFBB32AA58259008513C6 /* KontestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB742AA58259008513C6 /* KontestDTO.swift */; };
 		07ECFBB42AA58259008513C6 /* schema.graphqls in Resources */ = {isa = PBXBuildFile; fileRef = 07ECFB762AA58259008513C6 /* schema.graphqls */; };
@@ -64,7 +59,6 @@
 		07ECFBB62AA58259008513C6 /* KontestFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB792AA58259008513C6 /* KontestFetcher.swift */; };
 		07ECFBB72AA58259008513C6 /* CodeChefFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB7A2AA58259008513C6 /* CodeChefFetcher.swift */; };
 		07ECFBB82AA58259008513C6 /* CodeForcesFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB7B2AA58259008513C6 /* CodeForcesFetcher.swift */; };
-		07ECFBB92AA58259008513C6 /* LeetcodeFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB7C2AA58259008513C6 /* LeetcodeFetcher.swift */; };
 		07ECFBBA2AA58259008513C6 /* LeetCodeGraphQLAPIFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB7D2AA58259008513C6 /* LeetCodeGraphQLAPIFetcher.swift */; };
 		07ECFBBC2AA58259008513C6 /* apollo-codegen-config.json in Resources */ = {isa = PBXBuildFile; fileRef = 07ECFB7F2AA58259008513C6 /* apollo-codegen-config.json */; };
 		07ECFBBF2AA582D2008513C6 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 07ECFBBE2AA582D2008513C6 /* Apollo */; };
@@ -83,19 +77,16 @@
 		07ECFB3B2AA58259008513C6 /* CodeChefViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeChefViewModel.swift; sourceTree = "<group>"; };
 		07ECFB3C2AA58259008513C6 /* CodeForcesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeForcesViewModel.swift; sourceTree = "<group>"; };
 		07ECFB3D2AA58259008513C6 /* PendingNotificationsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingNotificationsViewModel.swift; sourceTree = "<group>"; };
-		07ECFB3E2AA58259008513C6 /* LeetcodeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeetcodeViewModel.swift; sourceTree = "<group>"; };
 		07ECFB3F2AA58259008513C6 /* KontestApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KontestApp.swift; sourceTree = "<group>"; };
 		07ECFB402AA58259008513C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		07ECFB432AA58259008513C6 /* CodeChefAPIRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeChefAPIRepository.swift; sourceTree = "<group>"; };
 		07ECFB452AA58259008513C6 /* AllKontestsFakeRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllKontestsFakeRepository.swift; sourceTree = "<group>"; };
 		07ECFB462AA58259008513C6 /* KontestRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KontestRepository.swift; sourceTree = "<group>"; };
 		07ECFB482AA58259008513C6 /* LeetCodeAPIGraphQLRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeetCodeAPIGraphQLRepository.swift; sourceTree = "<group>"; };
-		07ECFB492AA58259008513C6 /* LeetcodeAPIRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeetcodeAPIRepository.swift; sourceTree = "<group>"; };
 		07ECFB4B2AA58259008513C6 /* CodeForcesAPIRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeForcesAPIRepository.swift; sourceTree = "<group>"; };
 		07ECFB4D2AA58259008513C6 /* KontestStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KontestStatus.swift; sourceTree = "<group>"; };
 		07ECFB4E2AA58259008513C6 /* CodeForcesUserRatingAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeForcesUserRatingAPIModel.swift; sourceTree = "<group>"; };
 		07ECFB4F2AA58259008513C6 /* CodeForcesUserInfoAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeForcesUserInfoAPIModel.swift; sourceTree = "<group>"; };
-		07ECFB502AA58259008513C6 /* LeetcodeAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeetcodeAPIModel.swift; sourceTree = "<group>"; };
 		07ECFB512AA58259008513C6 /* CodeChefAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeChefAPIModel.swift; sourceTree = "<group>"; };
 		07ECFB522AA58259008513C6 /* KontestModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KontestModel.swift; sourceTree = "<group>"; };
 		07ECFB542AA58259008513C6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -105,7 +96,6 @@
 		07ECFB592AA58259008513C6 /* RatingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingsView.swift; sourceTree = "<group>"; };
 		07ECFB5A2AA58259008513C6 /* NoKontestsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoKontestsScreen.swift; sourceTree = "<group>"; };
 		07ECFB5B2AA58259008513C6 /* AllKontestsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllKontestsScreen.swift; sourceTree = "<group>"; };
-		07ECFB5C2AA58259008513C6 /* LeetcodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeetcodeView.swift; sourceTree = "<group>"; };
 		07ECFB5D2AA58259008513C6 /* BlinkingDotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlinkingDotView.swift; sourceTree = "<group>"; };
 		07ECFB5E2AA58259008513C6 /* CodeForcesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeForcesView.swift; sourceTree = "<group>"; };
 		07ECFB5F2AA58259008513C6 /* KontestDetailsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KontestDetailsScreen.swift; sourceTree = "<group>"; };
@@ -125,7 +115,6 @@
 		07ECFB6F2AA58259008513C6 /* CodeForcesUserInfoAPIDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeForcesUserInfoAPIDTO.swift; sourceTree = "<group>"; };
 		07ECFB702AA58259008513C6 /* CodeChefAPIDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeChefAPIDTO.swift; sourceTree = "<group>"; };
 		07ECFB712AA58259008513C6 /* CodeForcesUserRatingAPIDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeForcesUserRatingAPIDTO.swift; sourceTree = "<group>"; };
-		07ECFB722AA58259008513C6 /* LeetcodeAPIDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeetcodeAPIDTO.swift; sourceTree = "<group>"; };
 		07ECFB732AA58259008513C6 /* LeetCodeUserProfileGraphQLAPIDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeetCodeUserProfileGraphQLAPIDTO.swift; sourceTree = "<group>"; };
 		07ECFB742AA58259008513C6 /* KontestDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KontestDTO.swift; sourceTree = "<group>"; };
 		07ECFB762AA58259008513C6 /* schema.graphqls */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema.graphqls; sourceTree = "<group>"; };
@@ -133,7 +122,6 @@
 		07ECFB792AA58259008513C6 /* KontestFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KontestFetcher.swift; sourceTree = "<group>"; };
 		07ECFB7A2AA58259008513C6 /* CodeChefFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeChefFetcher.swift; sourceTree = "<group>"; };
 		07ECFB7B2AA58259008513C6 /* CodeForcesFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeForcesFetcher.swift; sourceTree = "<group>"; };
-		07ECFB7C2AA58259008513C6 /* LeetcodeFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeetcodeFetcher.swift; sourceTree = "<group>"; };
 		07ECFB7D2AA58259008513C6 /* LeetCodeGraphQLAPIFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeetCodeGraphQLAPIFetcher.swift; sourceTree = "<group>"; };
 		07ECFB7F2AA58259008513C6 /* apollo-codegen-config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "apollo-codegen-config.json"; sourceTree = "<group>"; };
 		07ECFBC32AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeUserProfileGraphQLAPIModel.swift; sourceTree = "<group>"; };
@@ -199,7 +187,6 @@
 				07ECFB3B2AA58259008513C6 /* CodeChefViewModel.swift */,
 				07ECFB3C2AA58259008513C6 /* CodeForcesViewModel.swift */,
 				07ECFB3D2AA58259008513C6 /* PendingNotificationsViewModel.swift */,
-				07ECFB3E2AA58259008513C6 /* LeetcodeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -236,7 +223,6 @@
 			isa = PBXGroup;
 			children = (
 				07ECFB482AA58259008513C6 /* LeetCodeAPIGraphQLRepository.swift */,
-				07ECFB492AA58259008513C6 /* LeetcodeAPIRepository.swift */,
 			);
 			path = LeetcodeRepository;
 			sourceTree = "<group>";
@@ -255,7 +241,6 @@
 				07ECFB4D2AA58259008513C6 /* KontestStatus.swift */,
 				07ECFB4E2AA58259008513C6 /* CodeForcesUserRatingAPIModel.swift */,
 				07ECFB4F2AA58259008513C6 /* CodeForcesUserInfoAPIModel.swift */,
-				07ECFB502AA58259008513C6 /* LeetcodeAPIModel.swift */,
 				07ECFB512AA58259008513C6 /* CodeChefAPIModel.swift */,
 				07ECFB522AA58259008513C6 /* KontestModel.swift */,
 				07ECFBC32AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift */,
@@ -281,7 +266,6 @@
 				07ECFB592AA58259008513C6 /* RatingsView.swift */,
 				07ECFB5A2AA58259008513C6 /* NoKontestsScreen.swift */,
 				07ECFB5B2AA58259008513C6 /* AllKontestsScreen.swift */,
-				07ECFB5C2AA58259008513C6 /* LeetcodeView.swift */,
 				07ECFB5D2AA58259008513C6 /* BlinkingDotView.swift */,
 				07ECFB5E2AA58259008513C6 /* CodeForcesView.swift */,
 				07ECFB5F2AA58259008513C6 /* KontestDetailsScreen.swift */,
@@ -315,7 +299,6 @@
 				07ECFB6F2AA58259008513C6 /* CodeForcesUserInfoAPIDTO.swift */,
 				07ECFB702AA58259008513C6 /* CodeChefAPIDTO.swift */,
 				07ECFB712AA58259008513C6 /* CodeForcesUserRatingAPIDTO.swift */,
-				07ECFB722AA58259008513C6 /* LeetcodeAPIDTO.swift */,
 				07ECFB732AA58259008513C6 /* LeetCodeUserProfileGraphQLAPIDTO.swift */,
 				07ECFB742AA58259008513C6 /* KontestDTO.swift */,
 				07ECFBC72AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift */,
@@ -338,7 +321,6 @@
 				07ECFB792AA58259008513C6 /* KontestFetcher.swift */,
 				07ECFB7A2AA58259008513C6 /* CodeChefFetcher.swift */,
 				07ECFB7B2AA58259008513C6 /* CodeForcesFetcher.swift */,
-				07ECFB7C2AA58259008513C6 /* LeetcodeFetcher.swift */,
 				07ECFB7D2AA58259008513C6 /* LeetCodeGraphQLAPIFetcher.swift */,
 			);
 			path = Protocols;
@@ -426,18 +408,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07ECFB872AA58259008513C6 /* LeetcodeViewModel.swift in Sources */,
 				07ECFBB32AA58259008513C6 /* KontestDTO.swift in Sources */,
 				07ECFB832AA58259008513C6 /* AllKontestsViewModel.swift in Sources */,
 				07ECFBC82AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift in Sources */,
 				07ECFB952AA58259008513C6 /* KontestModel.swift in Sources */,
 				07ECFB812AA58259008513C6 /* SettingsViewModel.swift in Sources */,
 				07ECFBB02AA58259008513C6 /* CodeForcesUserRatingAPIDTO.swift in Sources */,
-				07ECFB8E2AA58259008513C6 /* LeetcodeAPIRepository.swift in Sources */,
 				07ECFB822AA58259008513C6 /* LeetCodeGraphQLViewModel.swift in Sources */,
-				07ECFBB92AA58259008513C6 /* LeetcodeFetcher.swift in Sources */,
 				07ECFB882AA58259008513C6 /* KontestApp.swift in Sources */,
-				07ECFB9D2AA58259008513C6 /* LeetcodeView.swift in Sources */,
 				07ECFBB72AA58259008513C6 /* CodeChefFetcher.swift in Sources */,
 				07ECFBA12AA58259008513C6 /* SingleNotificationMenu.swift in Sources */,
 				07ECFB9E2AA58259008513C6 /* BlinkingDotView.swift in Sources */,
@@ -458,7 +436,6 @@
 				07ECFB922AA58259008513C6 /* CodeForcesUserInfoAPIModel.swift in Sources */,
 				07ECFBA32AA58259008513C6 /* PendingNotificationsScreen.swift in Sources */,
 				07ECFB9C2AA58259008513C6 /* AllKontestsScreen.swift in Sources */,
-				07ECFBB12AA58259008513C6 /* LeetcodeAPIDTO.swift in Sources */,
 				07ECFB972AA58259008513C6 /* CodeChefView.swift in Sources */,
 				07ECFBAD2AA58259008513C6 /* MyMenu.swift in Sources */,
 				07ECFB902AA58259008513C6 /* KontestStatus.swift in Sources */,
@@ -480,7 +457,6 @@
 				07ECFB942AA58259008513C6 /* CodeChefAPIModel.swift in Sources */,
 				07ECFBB22AA58259008513C6 /* LeetCodeUserProfileGraphQLAPIDTO.swift in Sources */,
 				07ECFBA82AA58259008513C6 /* LocalNotificationManager.swift in Sources */,
-				07ECFB932AA58259008513C6 /* LeetcodeAPIModel.swift in Sources */,
 				07ECFB992AA58259008513C6 /* LeetCodeGraphQLView.swift in Sources */,
 				07ECFB9B2AA58259008513C6 /* NoKontestsScreen.swift in Sources */,
 			);
