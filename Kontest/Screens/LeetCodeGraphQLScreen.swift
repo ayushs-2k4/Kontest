@@ -10,14 +10,16 @@ import SwiftUI
 struct LeetCodeGraphQLScreen: View {
     let leetCodeGraphQLViewModel = LeetCodeGraphQLViewModel(username: "ayushs_2k4")
     var body: some View {
-        Text(leetCodeGraphQLViewModel.leetCodeGraphQLAPIModel?.githubUrl ?? "NO GITHUB")
+        Text(leetCodeGraphQLViewModel.leetCodeUserProfileGraphQLAPIModel?.githubUrl ?? "NO GITHUB")
 
-        LeetcodeProfileViewGraphQL(leetCodeGraphQLAPIModel: leetCodeGraphQLViewModel.leetCodeGraphQLAPIModel, username: "ayushs_2k4", bgColor: .cyan, isLoading: leetCodeGraphQLViewModel.isLoading)
+        LeetcodeProfileViewGraphQL(LeetCodeUserProfileGraphQLAPIModel: leetCodeGraphQLViewModel.leetCodeUserProfileGraphQLAPIModel, userContestRanking: leetCodeGraphQLViewModel.userContestRanking, userContestRankingHistory: leetCodeGraphQLViewModel.userContestRankingHistory, username: "ayushs_2k4", bgColor: .cyan, isLoading: leetCodeGraphQLViewModel.isLoading)
     }
 }
 
 struct LeetcodeProfileViewGraphQL: View {
-    let leetCodeGraphQLAPIModel: LeetCodeUserProfileGraphQLAPIModel?
+    let LeetCodeUserProfileGraphQLAPIModel: LeetCodeUserProfileGraphQLAPIModel?
+    let userContestRanking: LeetCodeUserRankingGraphQLAPIModel?
+    let userContestRankingHistory: [LeetCodeUserRankingHistoryGraphQLAPIModel?]?
     let username: String
     let bgColor: Color
     let isLoading: Bool
@@ -46,7 +48,7 @@ struct LeetcodeProfileViewGraphQL: View {
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
 
-                if let leetCodeGraphQLAPIModel {
+                if let LeetCodeUserProfileGraphQLAPIModel {
                     VStack {
 //                        Text("Total Solved: \(leetcodeProfile.totalSolved)")
 //                            .bold()
@@ -56,9 +58,12 @@ struct LeetcodeProfileViewGraphQL: View {
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
 
-                    Text("Ranking \(leetCodeGraphQLAPIModel.profileModel?.ranking ?? -1)")
-                        .padding()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                    VStack {
+                        Text("Ranking \(LeetCodeUserProfileGraphQLAPIModel.profileModel?.ranking ?? -1)")
+                        Text("daan: \(userContestRanking?.rating ?? -1)")
+                    }
+                    .padding()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                 } else {
                     Text("LastRank 0")
                         .padding()

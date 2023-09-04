@@ -71,6 +71,8 @@
 		07ECFBBF2AA582D2008513C6 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 07ECFBBE2AA582D2008513C6 /* Apollo */; };
 		07ECFBC22AA582E3008513C6 /* LeetCodeSchema in Frameworks */ = {isa = PBXBuildFile; productRef = 07ECFBC12AA582E3008513C6 /* LeetCodeSchema */; };
 		07ECFBC42AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFBC32AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift */; };
+		07ECFBC62AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFBC52AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift */; };
+		07ECFBC82AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFBC72AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -137,6 +139,8 @@
 		07ECFB7E2AA58259008513C6 /* LeetCodeSchema */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = LeetCodeSchema; sourceTree = "<group>"; };
 		07ECFB7F2AA58259008513C6 /* apollo-codegen-config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "apollo-codegen-config.json"; sourceTree = "<group>"; };
 		07ECFBC32AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeUserProfileGraphQLAPIModel.swift; sourceTree = "<group>"; };
+		07ECFBC52AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeUserRankingsGraphQLAPIModel.swift; sourceTree = "<group>"; };
+		07ECFBC72AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeUserRankingsGraphQLAPIDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +262,7 @@
 				07ECFB512AA58259008513C6 /* CodeChefAPIModel.swift */,
 				07ECFB522AA58259008513C6 /* KontestModel.swift */,
 				07ECFBC32AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift */,
+				07ECFBC52AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -316,6 +321,7 @@
 				07ECFB722AA58259008513C6 /* LeetcodeAPIDTO.swift */,
 				07ECFB732AA58259008513C6 /* LeetCodeUserProfileGraphQLAPIDTO.swift */,
 				07ECFB742AA58259008513C6 /* KontestDTO.swift */,
+				07ECFBC72AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -427,6 +433,7 @@
 				07ECFB872AA58259008513C6 /* LeetcodeViewModel.swift in Sources */,
 				07ECFBB32AA58259008513C6 /* KontestDTO.swift in Sources */,
 				07ECFB832AA58259008513C6 /* AllKontestsViewModel.swift in Sources */,
+				07ECFBC82AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift in Sources */,
 				07ECFB952AA58259008513C6 /* KontestModel.swift in Sources */,
 				07ECFB812AA58259008513C6 /* SettingsViewModel.swift in Sources */,
 				07ECFBB02AA58259008513C6 /* CodeForcesUserRatingAPIDTO.swift in Sources */,
@@ -439,6 +446,7 @@
 				07ECFBA12AA58259008513C6 /* SingleNotificationMenu.swift in Sources */,
 				07ECFB9E2AA58259008513C6 /* BlinkingDotView.swift in Sources */,
 				07ECFBA62AA58259008513C6 /* CalendarUtility.swift in Sources */,
+				07ECFBC62AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift in Sources */,
 				07ECFB9A2AA58259008513C6 /* RatingsView.swift in Sources */,
 				07ECFB842AA58259008513C6 /* CodeChefViewModel.swift in Sources */,
 				07ECFB852AA58259008513C6 /* CodeForcesViewModel.swift in Sources */,

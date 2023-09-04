@@ -33,10 +33,29 @@ class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
                     completion(nil)
                 }
             case .failure(let error):
-                print("Error in LeetAPIGraphQLRepository: \(error)")
+                print("Error in LeetCodeAPIGraphQLRepository - getUserData: \(error)")
+                completion(nil)
+            }
+        }
+    }
+
+    func getUserRankingInfo(username: String, completion: @escaping (LeetCodeUserRankingsGraphQLAPIDTO?) -> Void) {
+        let query = UserContestRankingInfoQuery(username: username)
+
+        DownloadData.shared.apollo.fetch(query: query) { result in
+            switch result {
+            case .success(let value):
+                let userContestRanking = value.data?.userContestRanking
+                let userContestRankingHistory = value.data?.userContestRankingHistory
+
+                let leetCodeUserRankingsGraphQLAPIDTO = LeetCodeUserRankingsGraphQLAPIDTO(leetCodeUserRankingGraphQLAPIDTO: LeetCodeUserRankingGraphQLAPIDTO.from(userContestRanking: userContestRanking), leetCodeUserRankingHistoryGraphQLAPIDTO: LeetCodeUserRankingHistoryGraphQLAPIDTO.from(leetCodeUserRankingHistoryGraphQLAPIDTOs: userContestRankingHistory))
+                
+                completion(leetCodeUserRankingsGraphQLAPIDTO)
+
+            case .failure(let error):
+                print("Error in LeetCodeAPIGraphQLRepository - getUserRankingInfo: \(error)")
                 completion(nil)
             }
         }
     }
 }
-
