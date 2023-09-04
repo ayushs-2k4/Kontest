@@ -17,11 +17,14 @@ class LeetCodeGraphQLViewModel {
     var error: Error?
 
     var isLoading: Bool = false
+    var isFetchingUserData: Bool = false
+    var isFetchingUserRankings: Bool = false
 
     init(username: String) {
-        isLoading = true
+        self.isFetchingUserData = true
+        self.isFetchingUserRankings = true
+        self.isLoading = true
         fetchUserData(username: username)
-        isLoading = true
         fetchUserRankings(username: username)
     }
 
@@ -37,7 +40,8 @@ class LeetCodeGraphQLViewModel {
                 print("Failed to fetchUserData.")
                 self?.error = URLError(.badURL)
             }
-            self?.isLoading = false
+            self?.isFetchingUserData = false
+            self?.isLoading = (self?.isFetchingUserData ?? false) || (self?.isFetchingUserRankings ?? false)
         }
     }
 
@@ -53,7 +57,8 @@ class LeetCodeGraphQLViewModel {
                 print("Failed to fetchUserRankings.")
                 self?.error = URLError(.badURL)
             }
-            self?.isLoading = false
+            self?.isFetchingUserRankings = false
+            self?.isLoading = (self?.isFetchingUserData ?? false) || (self?.isFetchingUserRankings ?? false)
         }
     }
 }
