@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Apollo
 import Foundation
 
 
@@ -19,4 +20,12 @@ func downloadDataWithAsyncAwait(url: URL) async throws -> Data {
     }
 
     return data
+}
+
+class DownloadData {
+    static let shared = DownloadData()
+
+    private(set) var apollo = ApolloClient(url: URL(string: "https://leetcode.com/graphql?query=")!)
+
+    private init() {}
 }

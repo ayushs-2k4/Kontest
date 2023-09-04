@@ -1,0 +1,106 @@
+type DailyCodingChallengeQuestion {
+  date: String
+  userStatus: String
+  link: String
+  question: Question
+}
+
+type Question {
+  acRate: Float
+  difficulty: String
+  freqBar: String
+  questionFrontendId: String
+  isFavor: Boolean
+  isPaidOnly: Boolean
+  status: String
+  title: String
+  titleSlug: String
+  hasVideoSolution: Boolean
+  hasSolution: Boolean
+  topicTags: [TopicTag]
+}
+
+type TopicTag {
+  name: String
+  id: String
+  slug: String
+}
+
+type UserContestRanking {
+  attendedContestsCount: Int
+  rating: Float
+  globalRanking: Int
+  totalParticipants: Int
+  topPercentage: Float
+  badge: Badge
+}
+
+type Badge {
+  name: String
+}
+
+type UserContestRankingHistory {
+  attended: Boolean
+  trendDirection: String
+  problemsSolved: Int
+  totalProblems: Int
+  finishTimeInSeconds: Int
+  rating: Float
+  ranking: Int
+  contest: Contest
+}
+
+type Contest {
+  title: String
+  startTime: String
+}
+
+type MatchedUser {
+    languageProblemCount: [LanguageProblemCount]
+    contestBadge: ContestBadge
+    username: String
+    githubUrl: String
+    twitterUrl: String
+    linkedinUrl: String
+    profile: UserProfile
+}
+
+type LanguageProblemCount {
+    languageName: String
+    problemsSolved: Int
+}
+
+type ContestBadge {
+    name: String
+    expired: Boolean
+    hoverText: String
+    icon: String
+}
+
+type UserProfile {
+    ranking: Int
+    userAvatar: String
+    realName: String
+    aboutMe: String
+    school: String
+    websites: [String]
+    countryName: String
+    company: String
+    jobTitle: String
+    skillTags: [String]
+    postViewCount: Int
+    postViewCountDiff: Int
+    reputation: Int
+    reputationDiff: Int
+    solutionCount: Int
+    solutionCountDiff: Int
+    categoryDiscussCount: Int
+    categoryDiscussCountDiff: Int
+}
+
+type Query {
+    activeDailyCodingChallengeQuestion: DailyCodingChallengeQuestion
+    userContestRanking(username: String!): UserContestRanking
+    userContestRankingHistory(username: String!): [UserContestRankingHistory]
+    matchedUser(username: String!): MatchedUser
+}
