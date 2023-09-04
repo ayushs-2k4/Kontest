@@ -10,7 +10,7 @@ import Foundation
 @Observable
 class LeetCodeGraphQLViewModel {
     let repository = LeetCodeAPIGraphQLRepository()
-    var leetCodeGraphQLAPIDTO: LeetCodeGraphQLAPIDTO?
+    var leetCodeGraphQLAPIModel: LeetCodeUserProfileGraphQLAPIModel?
     var isLoading: Bool = false
 
     init(username: String) {
@@ -19,11 +19,11 @@ class LeetCodeGraphQLViewModel {
     }
 
     func fetchUserData(username: String) {
-        repository.getUserData(username: username) { [weak self] leetCodeGraphQLAPIDTO in
-            if let data = leetCodeGraphQLAPIDTO {
+        repository.getUserData(username: username) { [weak self] leetCodeUserProfileGraphQLAPIDTO in
+            if let leetCodeUserProfileGraphQLAPIDTO {
                 // Handle the data here when the GraphQL query succeeds.
-                print("Received data: \(data)")
-                self?.leetCodeGraphQLAPIDTO = data
+                print("Received data: \(leetCodeUserProfileGraphQLAPIDTO)")
+                self?.leetCodeGraphQLAPIModel = LeetCodeUserProfileGraphQLAPIModel.from(leetCodeUserProfileGraphQLAPIDTO: leetCodeUserProfileGraphQLAPIDTO)
                 self?.isLoading = false
             } else {
                 // Handle the case when the GraphQL query fails or returns nil data.

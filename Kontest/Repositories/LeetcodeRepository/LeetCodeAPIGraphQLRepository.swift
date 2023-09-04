@@ -9,7 +9,7 @@ import Foundation
 import LeetCodeSchema
 
 class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
-    func getUserData(username: String, completion: @escaping (LeetCodeGraphQLAPIDTO?) -> Void) {
+    func getUserData(username: String, completion: @escaping (LeetCodeUserProfileGraphQLAPIDTO?) -> Void) {
         let query = UserPublicProfileQuery(username: username)
 
         DownloadData.shared.apollo.fetch(query: query) { result in
@@ -18,14 +18,14 @@ class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
                 let p = value.data?.matchedUser
 
                 if let p {
-                    let leetCodeGraphQLAPIDTO = LeetCodeGraphQLAPIDTO(
-                        languageProblemCount: LanguageProblemCount.from(languageProblemCounts: p.languageProblemCount),
-                        contestBadge: ContestBadge.from(contestBadge: p.contestBadge),
+                    let leetCodeGraphQLAPIDTO = LeetCodeUserProfileGraphQLAPIDTO(
+                        languageProblemCount: LanguageProblemCountDTO.from(languageProblemCounts: p.languageProblemCount),
+                        contestBadge: ContestBadgeDTO.from(contestBadge: p.contestBadge),
                         username: p.username,
                         githubUrl: p.githubUrl,
                         twitterUrl: p.twitterUrl,
                         linkedinUrl: p.linkedinUrl!,
-                        profile: UserProfile.from(graphQLUserProfile: p.profile)
+                        profile: UserProfileDTO.from(graphQLUserProfile: p.profile)
                     )
 
                     completion(leetCodeGraphQLAPIDTO)

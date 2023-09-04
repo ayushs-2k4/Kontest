@@ -8,5 +8,5 @@
 import Foundation
 
 protocol LeetCodeGraphQLAPIFetcher {
-    func getUserData(username: String, completion: @escaping (LeetCodeGraphQLAPIDTO?) -> Void)
+    func getUserData(username: String, completion: @escaping (LeetCodeUserProfileGraphQLAPIDTO?) -> Void)
 }

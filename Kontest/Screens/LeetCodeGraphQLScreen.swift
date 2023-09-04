@@ -10,14 +10,14 @@ import SwiftUI
 struct LeetCodeGraphQLScreen: View {
     let leetCodeGraphQLViewModel = LeetCodeGraphQLViewModel(username: "ayushs_2k4")
     var body: some View {
-        Text(leetCodeGraphQLViewModel.leetCodeGraphQLAPIDTO?.githubUrl ?? "NO GITHUB")
+        Text(leetCodeGraphQLViewModel.leetCodeGraphQLAPIModel?.githubUrl ?? "NO GITHUB")
 
-        LeetcodeProfileViewGraphQL(leetCodeGraphQLAPIDTO: leetCodeGraphQLViewModel.leetCodeGraphQLAPIDTO, username: "ayushs_2k4", bgColor: .cyan, isLoading: leetCodeGraphQLViewModel.isLoading)
+        LeetcodeProfileViewGraphQL(leetCodeGraphQLAPIModel: leetCodeGraphQLViewModel.leetCodeGraphQLAPIModel, username: "ayushs_2k4", bgColor: .cyan, isLoading: leetCodeGraphQLViewModel.isLoading)
     }
 }
 
 struct LeetcodeProfileViewGraphQL: View {
-    let leetCodeGraphQLAPIDTO: LeetCodeGraphQLAPIDTO?
+    let leetCodeGraphQLAPIModel: LeetCodeUserProfileGraphQLAPIModel?
     let username: String
     let bgColor: Color
     let isLoading: Bool
@@ -46,7 +46,7 @@ struct LeetcodeProfileViewGraphQL: View {
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
 
-                if let leetCodeGraphQLAPIDTO {
+                if let leetCodeGraphQLAPIModel {
                     VStack {
 //                        Text("Total Solved: \(leetcodeProfile.totalSolved)")
 //                            .bold()
@@ -56,7 +56,7 @@ struct LeetcodeProfileViewGraphQL: View {
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
 
-                    Text("Ranking \(leetCodeGraphQLAPIDTO.profile?.ranking ?? -1)")
+                    Text("Ranking \(leetCodeGraphQLAPIModel.profileModel?.ranking ?? -1)")
                         .padding()
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                 } else {

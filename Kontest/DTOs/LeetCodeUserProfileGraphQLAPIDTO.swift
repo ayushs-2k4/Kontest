@@ -10,29 +10,29 @@ import LeetCodeSchema
 
 // MARK: - LeetCodeGraphQLAPIDTO
 
-struct LeetCodeGraphQLAPIDTO: Codable {
-    let languageProblemCount: [LanguageProblemCount?]?
-    let contestBadge: ContestBadge?
+struct LeetCodeUserProfileGraphQLAPIDTO: Codable {
+    let languageProblemCount: [LanguageProblemCountDTO?]?
+    let contestBadge: ContestBadgeDTO?
     let username: String?
     let githubUrl: String?
     let twitterUrl: String?
     let linkedinUrl: String?
-    let profile: UserProfile?
+    let profile: UserProfileDTO?
 }
 
-struct LanguageProblemCount: Codable {
+struct LanguageProblemCountDTO: Codable {
     let languageName: String?
     let problemsSolved: Int?
 }
 
-struct ContestBadge: Codable {
+struct ContestBadgeDTO: Codable {
     let name: String?
     let expired: Bool?
     let hoverText: String?
     let icon: String?
 }
 
-struct UserProfile: Codable {
+struct UserProfileDTO: Codable {
     let ranking: Int?
     let userAvatar: String?
     let realName: String?
@@ -53,13 +53,13 @@ struct UserProfile: Codable {
     let categoryDiscussCountDiff: Int?
 }
 
-extension UserProfile {
-    static func from(graphQLUserProfile: UserPublicProfileQuery.Data.MatchedUser.Profile?) -> UserProfile? {
+extension UserProfileDTO {
+    static func from(graphQLUserProfile: UserPublicProfileQuery.Data.MatchedUser.Profile?) -> UserProfileDTO? {
         guard let profileData = graphQLUserProfile else {
             return nil
         }
 
-        return UserProfile(
+        return UserProfileDTO(
             ranking: profileData.ranking,
             userAvatar: profileData.userAvatar,
             realName: profileData.realName,
@@ -82,26 +82,26 @@ extension UserProfile {
     }
 }
 
-extension ContestBadge {
-    static func from(contestBadge: UserPublicProfileQuery.Data.MatchedUser.ContestBadge?) -> ContestBadge? {
+extension ContestBadgeDTO {
+    static func from(contestBadge: UserPublicProfileQuery.Data.MatchedUser.ContestBadge?) -> ContestBadgeDTO? {
         guard let contestBadge = contestBadge else {
             return nil
         }
 
-        return ContestBadge(name: contestBadge.name, expired: contestBadge.expired, hoverText: contestBadge.hoverText, icon: contestBadge.icon)
+        return ContestBadgeDTO(name: contestBadge.name, expired: contestBadge.expired, hoverText: contestBadge.hoverText, icon: contestBadge.icon)
     }
 }
 
-extension LanguageProblemCount {
-    static func from(languageProblemCount: UserPublicProfileQuery.Data.MatchedUser.LanguageProblemCount?) -> LanguageProblemCount? {
+extension LanguageProblemCountDTO {
+    static func from(languageProblemCount: UserPublicProfileQuery.Data.MatchedUser.LanguageProblemCount?) -> LanguageProblemCountDTO? {
         guard let languageProblemCount = languageProblemCount else {
             return nil
         }
 
-        return LanguageProblemCount(languageName: languageProblemCount.languageName, problemsSolved: languageProblemCount.problemsSolved)
+        return LanguageProblemCountDTO(languageName: languageProblemCount.languageName, problemsSolved: languageProblemCount.problemsSolved)
     }
 
-    static func from(languageProblemCounts: [UserPublicProfileQuery.Data.MatchedUser.LanguageProblemCount?]?) -> [LanguageProblemCount?]? {
+    static func from(languageProblemCounts: [UserPublicProfileQuery.Data.MatchedUser.LanguageProblemCount?]?) -> [LanguageProblemCountDTO?]? {
         guard let languageProblemCounts else { return nil }
 
         return languageProblemCounts.map { languageProblemCount in
