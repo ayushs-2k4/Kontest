@@ -17,6 +17,8 @@ struct LeetCodeUserProfileGraphQLAPIModel: Codable {
     let twitterUrl: String?
     let linkedinUrl: String?
     let profileModel: UserProfileModel?
+    let problemsSolvedBeatsStats: [ProblemSolvedBeatsStatsModel?]?
+    let submitStatsGlobal: SubmitStatsGlobalModel?
 }
 
 struct LanguageProblemCountModel: Codable {
@@ -52,9 +54,25 @@ struct UserProfileModel: Codable {
     let categoryDiscussCountDiff: Int?
 }
 
+struct ProblemSolvedBeatsStatsModel: Codable, Hashable {
+    let difficulty: String?
+    let percentage: Double?
+}
+
+struct SubmitStatsGlobalModel: Codable, Hashable, Equatable {
+    let acSubmissionNum: [ACSubmissionNumModel?]?
+}
+
+struct ACSubmissionNumModel: Codable, Hashable, Equatable {
+    let difficulty: String?
+    let count: Int?
+}
+
 extension LeetCodeUserProfileGraphQLAPIModel {
-   static func from(leetCodeUserProfileGraphQLAPIDTO: LeetCodeUserProfileGraphQLAPIDTO) -> LeetCodeUserProfileGraphQLAPIModel {
-        return LeetCodeUserProfileGraphQLAPIModel(languageProblemCountModel: LanguageProblemCountModel.from(languageProblemCountDTOs: leetCodeUserProfileGraphQLAPIDTO.languageProblemCount), contestBadgeModel: ContestBadgeModel.from(contestBadgeDTO: leetCodeUserProfileGraphQLAPIDTO.contestBadge), username: leetCodeUserProfileGraphQLAPIDTO.username, githubUrl: leetCodeUserProfileGraphQLAPIDTO.githubUrl, twitterUrl: leetCodeUserProfileGraphQLAPIDTO.twitterUrl, linkedinUrl: leetCodeUserProfileGraphQLAPIDTO.linkedinUrl, profileModel: UserProfileModel.from(userProfileDTO: leetCodeUserProfileGraphQLAPIDTO.profile))
+    static func from(leetCodeUserProfileGraphQLAPIDTO: LeetCodeUserProfileGraphQLAPIDTO) -> LeetCodeUserProfileGraphQLAPIModel {
+        return LeetCodeUserProfileGraphQLAPIModel(languageProblemCountModel: LanguageProblemCountModel.from(languageProblemCountDTOs: leetCodeUserProfileGraphQLAPIDTO.languageProblemCount), contestBadgeModel: ContestBadgeModel.from(contestBadgeDTO: leetCodeUserProfileGraphQLAPIDTO.contestBadge), username: leetCodeUserProfileGraphQLAPIDTO.username, githubUrl: leetCodeUserProfileGraphQLAPIDTO.githubUrl, twitterUrl: leetCodeUserProfileGraphQLAPIDTO.twitterUrl, linkedinUrl: leetCodeUserProfileGraphQLAPIDTO.linkedinUrl, profileModel: UserProfileModel.from(userProfileDTO: leetCodeUserProfileGraphQLAPIDTO.profile),
+                                                  problemsSolvedBeatsStats: ProblemSolvedBeatsStatsModel.from(problemsSolvedBeatsStatsDTO: leetCodeUserProfileGraphQLAPIDTO.problemsSolvedBeatsStats),
+                                                  submitStatsGlobal: SubmitStatsGlobalModel.from(submitStatsGlobalDTO: leetCodeUserProfileGraphQLAPIDTO.submitStatsGlobal))
     }
 }
 
@@ -86,6 +104,41 @@ extension UserProfileModel {
             UserProfileModel(ranking: userProfileDTO.ranking, userAvatar: userProfileDTO.userAvatar, realName: userProfileDTO.realName, aboutMe: userProfileDTO.aboutMe, school: userProfileDTO.school, websites: userProfileDTO.websites, countryName: userProfileDTO.countryName, company: userProfileDTO.company, jobTitle: userProfileDTO.jobTitle, skillTags: userProfileDTO.skillTags, postViewCount: userProfileDTO.postViewCount, postViewCountDiff: userProfileDTO.postViewCountDiff, reputation: userProfileDTO.reputation, reputationDiff: userProfileDTO.reputationDiff, solutionCount: userProfileDTO.solutionCount, solutionCountDiff: userProfileDTO.solutionCountDiff, categoryDiscussCount: userProfileDTO.categoryDiscussCount, categoryDiscussCountDiff: userProfileDTO.categoryDiscussCountDiff)
         } else {
             nil
+        }
+    }
+}
+
+extension ACSubmissionNumModel {
+    static func from(acSubmissionNumDTO: ACSubmissionNumDTO?) -> ACSubmissionNumModel? {
+        guard let acSubmissionNumDTO else { return nil }
+        return ACSubmissionNumModel(difficulty: acSubmissionNumDTO.difficulty, count: acSubmissionNumDTO.count)
+    }
+}
+
+extension SubmitStatsGlobalModel {
+    static func from(submitStatsGlobalDTO: SubmitStatsGlobalDTO?) -> SubmitStatsGlobalModel? {
+        guard let submitStatsGlobalDTO else { return nil }
+
+        let k = submitStatsGlobalDTO.acSubmissionDTO?.map { acSubmissionDTO in
+            ACSubmissionNumModel.from(acSubmissionNumDTO: acSubmissionDTO)
+        }
+        
+        return SubmitStatsGlobalModel(acSubmissionNum: k)
+    }
+}
+
+extension ProblemSolvedBeatsStatsModel {
+    static func from(problemsSolvedBeatsStatsDTO: ProblemSolvedBeatsStatsDTO?) -> ProblemSolvedBeatsStatsModel? {
+        guard let problemsSolvedBeatsStatsDTO else { return nil }
+
+        return ProblemSolvedBeatsStatsModel(difficulty: problemsSolvedBeatsStatsDTO.difficulty, percentage: problemsSolvedBeatsStatsDTO.percentage)
+    }
+
+    static func from(problemsSolvedBeatsStatsDTO: [ProblemSolvedBeatsStatsDTO?]?) -> [ProblemSolvedBeatsStatsModel?]? {
+        guard let problemsSolvedBeatsStatsDTO else { return nil }
+
+        return problemsSolvedBeatsStatsDTO.map { stats in
+            from(problemsSolvedBeatsStatsDTO: stats)
         }
     }
 }

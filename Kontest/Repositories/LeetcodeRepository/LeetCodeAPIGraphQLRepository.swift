@@ -25,7 +25,9 @@ class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
                         githubUrl: p.githubUrl,
                         twitterUrl: p.twitterUrl,
                         linkedinUrl: p.linkedinUrl!,
-                        profile: UserProfileDTO.from(graphQLUserProfile: p.profile)
+                        profile: UserProfileDTO.from(graphQLUserProfile: p.profile),
+                        problemsSolvedBeatsStats: ProblemSolvedBeatsStatsDTO.from(problemsSolvedBeatsStats: p.problemsSolvedBeatsStats),
+                        submitStatsGlobal: SubmitStatsGlobalDTO.from(submitStatsGlobal: p.submitStatsGlobal)
                     )
 
                     completion(leetCodeGraphQLAPIDTO)
@@ -49,7 +51,7 @@ class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
                 let userContestRankingHistory = value.data?.userContestRankingHistory
 
                 let leetCodeUserRankingsGraphQLAPIDTO = LeetCodeUserRankingsGraphQLAPIDTO(leetCodeUserRankingGraphQLAPIDTO: LeetCodeUserRankingGraphQLAPIDTO.from(userContestRanking: userContestRanking), leetCodeUserRankingHistoryGraphQLAPIDTO: LeetCodeUserRankingHistoryGraphQLAPIDTO.from(leetCodeUserRankingHistoryGraphQLAPIDTOs: userContestRankingHistory))
-                
+
                 completion(leetCodeUserRankingsGraphQLAPIDTO)
 
             case .failure(let error):

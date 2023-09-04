@@ -7,7 +7,7 @@ public class UserPublicProfileQuery: GraphQLQuery {
   public static let operationName: String = "userPublicProfile"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query userPublicProfile($username: String!) { matchedUser(username: $username) { __typename languageProblemCount { __typename languageName problemsSolved } contestBadge { __typename name expired hoverText icon } username githubUrl twitterUrl linkedinUrl profile { __typename ranking userAvatar realName aboutMe school websites countryName company jobTitle skillTags postViewCount postViewCountDiff reputation reputationDiff solutionCount solutionCountDiff categoryDiscussCount categoryDiscussCountDiff } } }"#
+      #"query userPublicProfile($username: String!) { matchedUser(username: $username) { __typename languageProblemCount { __typename languageName problemsSolved } contestBadge { __typename name expired hoverText icon } username githubUrl twitterUrl linkedinUrl profile { __typename ranking userAvatar realName aboutMe school websites countryName company jobTitle skillTags postViewCount postViewCountDiff reputation reputationDiff solutionCount solutionCountDiff categoryDiscussCount categoryDiscussCountDiff } problemsSolvedBeatsStats { __typename difficulty percentage } submitStatsGlobal { __typename acSubmissionNum { __typename difficulty count } } } }"#
     ))
 
   public var username: String
@@ -46,6 +46,8 @@ public class UserPublicProfileQuery: GraphQLQuery {
         .field("twitterUrl", String?.self),
         .field("linkedinUrl", String?.self),
         .field("profile", Profile?.self),
+        .field("problemsSolvedBeatsStats", [ProblemsSolvedBeatsStat?]?.self),
+        .field("submitStatsGlobal", SubmitStatsGlobal?.self),
       ] }
 
       public var languageProblemCount: [LanguageProblemCount?]? { __data["languageProblemCount"] }
@@ -55,6 +57,8 @@ public class UserPublicProfileQuery: GraphQLQuery {
       public var twitterUrl: String? { __data["twitterUrl"] }
       public var linkedinUrl: String? { __data["linkedinUrl"] }
       public var profile: Profile? { __data["profile"] }
+      public var problemsSolvedBeatsStats: [ProblemsSolvedBeatsStat?]? { __data["problemsSolvedBeatsStats"] }
+      public var submitStatsGlobal: SubmitStatsGlobal? { __data["submitStatsGlobal"] }
 
       /// MatchedUser.LanguageProblemCount
       ///
@@ -144,6 +148,58 @@ public class UserPublicProfileQuery: GraphQLQuery {
         public var solutionCountDiff: Int? { __data["solutionCountDiff"] }
         public var categoryDiscussCount: Int? { __data["categoryDiscussCount"] }
         public var categoryDiscussCountDiff: Int? { __data["categoryDiscussCountDiff"] }
+      }
+
+      /// MatchedUser.ProblemsSolvedBeatsStat
+      ///
+      /// Parent Type: `ProblemSolvedBeatsStats`
+      public struct ProblemsSolvedBeatsStat: LeetCodeSchema.SelectionSet {
+        public let __data: DataDict
+        public init(_dataDict: DataDict) { __data = _dataDict }
+
+        public static var __parentType: ApolloAPI.ParentType { LeetCodeSchema.Objects.ProblemSolvedBeatsStats }
+        public static var __selections: [ApolloAPI.Selection] { [
+          .field("__typename", String.self),
+          .field("difficulty", String?.self),
+          .field("percentage", Double?.self),
+        ] }
+
+        public var difficulty: String? { __data["difficulty"] }
+        public var percentage: Double? { __data["percentage"] }
+      }
+
+      /// MatchedUser.SubmitStatsGlobal
+      ///
+      /// Parent Type: `SubmitStatsGlobal`
+      public struct SubmitStatsGlobal: LeetCodeSchema.SelectionSet {
+        public let __data: DataDict
+        public init(_dataDict: DataDict) { __data = _dataDict }
+
+        public static var __parentType: ApolloAPI.ParentType { LeetCodeSchema.Objects.SubmitStatsGlobal }
+        public static var __selections: [ApolloAPI.Selection] { [
+          .field("__typename", String.self),
+          .field("acSubmissionNum", [AcSubmissionNum?]?.self),
+        ] }
+
+        public var acSubmissionNum: [AcSubmissionNum?]? { __data["acSubmissionNum"] }
+
+        /// MatchedUser.SubmitStatsGlobal.AcSubmissionNum
+        ///
+        /// Parent Type: `ACSubmissionNum`
+        public struct AcSubmissionNum: LeetCodeSchema.SelectionSet {
+          public let __data: DataDict
+          public init(_dataDict: DataDict) { __data = _dataDict }
+
+          public static var __parentType: ApolloAPI.ParentType { LeetCodeSchema.Objects.ACSubmissionNum }
+          public static var __selections: [ApolloAPI.Selection] { [
+            .field("__typename", String.self),
+            .field("difficulty", String?.self),
+            .field("count", Int?.self),
+          ] }
+
+          public var difficulty: String? { __data["difficulty"] }
+          public var count: Int? { __data["count"] }
+        }
       }
     }
   }

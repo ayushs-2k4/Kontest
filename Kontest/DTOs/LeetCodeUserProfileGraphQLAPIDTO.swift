@@ -18,6 +18,8 @@ struct LeetCodeUserProfileGraphQLAPIDTO: Codable {
     let twitterUrl: String?
     let linkedinUrl: String?
     let profile: UserProfileDTO?
+    let problemsSolvedBeatsStats: [ProblemSolvedBeatsStatsDTO?]?
+    let submitStatsGlobal: SubmitStatsGlobalDTO?
 }
 
 struct LanguageProblemCountDTO: Codable {
@@ -51,6 +53,20 @@ struct UserProfileDTO: Codable {
     let solutionCountDiff: Int?
     let categoryDiscussCount: Int?
     let categoryDiscussCountDiff: Int?
+}
+
+struct ProblemSolvedBeatsStatsDTO: Codable {
+    let difficulty: String?
+    let percentage: Double?
+}
+
+struct SubmitStatsGlobalDTO: Codable {
+    let acSubmissionDTO: [ACSubmissionNumDTO?]?
+}
+
+struct ACSubmissionNumDTO: Codable {
+    let difficulty: String?
+    let count: Int?
 }
 
 extension UserProfileDTO {
@@ -106,6 +122,41 @@ extension LanguageProblemCountDTO {
 
         return languageProblemCounts.map { languageProblemCount in
             from(languageProblemCount: languageProblemCount)
+        }
+    }
+}
+
+extension ACSubmissionNumDTO {
+    static func from(acSubmissionNum: UserPublicProfileQuery.Data.MatchedUser.SubmitStatsGlobal.AcSubmissionNum?) -> ACSubmissionNumDTO? {
+        guard let acSubmissionNum else { return nil }
+        return ACSubmissionNumDTO(difficulty: acSubmissionNum.difficulty, count: acSubmissionNum.count)
+    }
+}
+
+extension SubmitStatsGlobalDTO {
+    static func from(submitStatsGlobal: UserPublicProfileQuery.Data.MatchedUser.SubmitStatsGlobal?) -> SubmitStatsGlobalDTO? {
+        guard let submitStatsGlobal else { return nil }
+
+        let p = submitStatsGlobal.acSubmissionNum?.map { o in
+            ACSubmissionNumDTO.from(acSubmissionNum: o)
+        }
+
+        return SubmitStatsGlobalDTO(acSubmissionDTO: p)
+    }
+}
+
+extension ProblemSolvedBeatsStatsDTO {
+    static func from(problemsSolvedBeatsStats: UserPublicProfileQuery.Data.MatchedUser.ProblemsSolvedBeatsStat?) -> ProblemSolvedBeatsStatsDTO? {
+        guard let problemsSolvedBeatsStats else { return nil }
+
+        return ProblemSolvedBeatsStatsDTO(difficulty: problemsSolvedBeatsStats.difficulty, percentage: problemsSolvedBeatsStats.percentage)
+    }
+
+    static func from(problemsSolvedBeatsStats: [UserPublicProfileQuery.Data.MatchedUser.ProblemsSolvedBeatsStat?]?) -> [ProblemSolvedBeatsStatsDTO?]? {
+        guard let problemsSolvedBeatsStats else { return nil }
+
+        return problemsSolvedBeatsStats.map { stats in
+            from(problemsSolvedBeatsStats: stats)
         }
     }
 }

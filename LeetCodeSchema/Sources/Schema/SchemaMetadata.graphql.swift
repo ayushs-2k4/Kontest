@@ -34,6 +34,9 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "LanguageProblemCount": return LeetCodeSchema.Objects.LanguageProblemCount
     case "ContestBadge": return LeetCodeSchema.Objects.ContestBadge
     case "UserProfile": return LeetCodeSchema.Objects.UserProfile
+    case "ProblemSolvedBeatsStats": return LeetCodeSchema.Objects.ProblemSolvedBeatsStats
+    case "SubmitStatsGlobal": return LeetCodeSchema.Objects.SubmitStatsGlobal
+    case "ACSubmissionNum": return LeetCodeSchema.Objects.ACSubmissionNum
     default: return nil
     }
   }

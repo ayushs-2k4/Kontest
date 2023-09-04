@@ -63,6 +63,8 @@ type MatchedUser {
     twitterUrl: String
     linkedinUrl: String
     profile: UserProfile
+    problemsSolvedBeatsStats: [ProblemSolvedBeatsStats]
+    submitStatsGlobal: SubmitStatsGlobal
 }
 
 type LanguageProblemCount {
@@ -96,6 +98,20 @@ type UserProfile {
     solutionCountDiff: Int
     categoryDiscussCount: Int
     categoryDiscussCountDiff: Int
+}
+
+type ProblemSolvedBeatsStats {
+  difficulty: String
+  percentage: Float
+}
+
+type SubmitStatsGlobal {
+  acSubmissionNum: [ACSubmissionNum]
+}
+
+type ACSubmissionNum {
+  difficulty: String
+  count: Int
 }
 
 type Query {

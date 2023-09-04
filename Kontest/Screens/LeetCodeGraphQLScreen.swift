@@ -12,12 +12,12 @@ struct LeetCodeGraphQLScreen: View {
     var body: some View {
         Text(leetCodeGraphQLViewModel.leetCodeUserProfileGraphQLAPIModel?.githubUrl ?? "NO GITHUB")
 
-        LeetcodeProfileViewGraphQL(LeetCodeUserProfileGraphQLAPIModel: leetCodeGraphQLViewModel.leetCodeUserProfileGraphQLAPIModel, userContestRanking: leetCodeGraphQLViewModel.userContestRanking, userContestRankingHistory: leetCodeGraphQLViewModel.userContestRankingHistory, username: "ayushs_2k4", bgColor: .cyan, isLoading: leetCodeGraphQLViewModel.isLoading)
+        LeetcodeProfileViewGraphQL(leetCodeUserProfileGraphQLAPIModel: leetCodeGraphQLViewModel.leetCodeUserProfileGraphQLAPIModel, userContestRanking: leetCodeGraphQLViewModel.userContestRanking, userContestRankingHistory: leetCodeGraphQLViewModel.userContestRankingHistory, username: "ayushs_2k4", bgColor: .cyan, isLoading: leetCodeGraphQLViewModel.isLoading)
     }
 }
 
 struct LeetcodeProfileViewGraphQL: View {
-    let LeetCodeUserProfileGraphQLAPIModel: LeetCodeUserProfileGraphQLAPIModel?
+    let leetCodeUserProfileGraphQLAPIModel: LeetCodeUserProfileGraphQLAPIModel?
     let userContestRanking: LeetCodeUserRankingGraphQLAPIModel?
     let userContestRankingHistory: [LeetCodeUserRankingHistoryGraphQLAPIModel?]?
     let username: String
@@ -48,7 +48,7 @@ struct LeetcodeProfileViewGraphQL: View {
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
 
-                if let LeetCodeUserProfileGraphQLAPIModel {
+                if let leetCodeUserProfileGraphQLAPIModel {
                     VStack {
 //                        Text("Total Solved: \(leetcodeProfile.totalSolved)")
 //                            .bold()
@@ -59,8 +59,17 @@ struct LeetcodeProfileViewGraphQL: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
 
                     VStack {
-                        Text("Ranking \(LeetCodeUserProfileGraphQLAPIModel.profileModel?.ranking ?? -1)")
+                        Text("Ranking \(leetCodeUserProfileGraphQLAPIModel.profileModel?.ranking ?? -1)")
                         Text("daan: \(userContestRanking?.rating ?? -1)")
+                        Text("daan2: \(leetCodeUserProfileGraphQLAPIModel.profileModel?.solutionCount ?? -1)")
+                        let p = leetCodeUserProfileGraphQLAPIModel.submitStatsGlobal?.acSubmissionNum
+                        if let p {
+                            ForEach(p, id: \.self) { k in
+                                Text((k?.difficulty)!)
+                                let o = k?.count
+                                Text("\(o ?? -1)")
+                            }
+                        }
                     }
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)

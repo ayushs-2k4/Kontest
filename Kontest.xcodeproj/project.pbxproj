@@ -66,7 +66,6 @@
 		07ECFBB82AA58259008513C6 /* CodeForcesFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB7B2AA58259008513C6 /* CodeForcesFetcher.swift */; };
 		07ECFBB92AA58259008513C6 /* LeetcodeFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB7C2AA58259008513C6 /* LeetcodeFetcher.swift */; };
 		07ECFBBA2AA58259008513C6 /* LeetCodeGraphQLAPIFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB7D2AA58259008513C6 /* LeetCodeGraphQLAPIFetcher.swift */; };
-		07ECFBBB2AA58259008513C6 /* LeetCodeSchema in Resources */ = {isa = PBXBuildFile; fileRef = 07ECFB7E2AA58259008513C6 /* LeetCodeSchema */; };
 		07ECFBBC2AA58259008513C6 /* apollo-codegen-config.json in Resources */ = {isa = PBXBuildFile; fileRef = 07ECFB7F2AA58259008513C6 /* apollo-codegen-config.json */; };
 		07ECFBBF2AA582D2008513C6 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 07ECFBBE2AA582D2008513C6 /* Apollo */; };
 		07ECFBC22AA582E3008513C6 /* LeetCodeSchema in Frameworks */ = {isa = PBXBuildFile; productRef = 07ECFBC12AA582E3008513C6 /* LeetCodeSchema */; };
@@ -136,7 +135,6 @@
 		07ECFB7B2AA58259008513C6 /* CodeForcesFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeForcesFetcher.swift; sourceTree = "<group>"; };
 		07ECFB7C2AA58259008513C6 /* LeetcodeFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeetcodeFetcher.swift; sourceTree = "<group>"; };
 		07ECFB7D2AA58259008513C6 /* LeetCodeGraphQLAPIFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeetCodeGraphQLAPIFetcher.swift; sourceTree = "<group>"; };
-		07ECFB7E2AA58259008513C6 /* LeetCodeSchema */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = LeetCodeSchema; sourceTree = "<group>"; };
 		07ECFB7F2AA58259008513C6 /* apollo-codegen-config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "apollo-codegen-config.json"; sourceTree = "<group>"; };
 		07ECFBC32AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeUserProfileGraphQLAPIModel.swift; sourceTree = "<group>"; };
 		07ECFBC52AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeUserRankingsGraphQLAPIModel.swift; sourceTree = "<group>"; };
@@ -161,7 +159,6 @@
 			children = (
 				07ECFB7F2AA58259008513C6 /* apollo-codegen-config.json */,
 				07ECFB362AA58259008513C6 /* Kontest */,
-				07ECFB7E2AA58259008513C6 /* LeetCodeSchema */,
 				07ECFB352AA58259008513C6 /* README.md */,
 				076016562A87CD52007CE9F5 /* Products */,
 			);
@@ -418,7 +415,6 @@
 				07ECFBBC2AA58259008513C6 /* apollo-codegen-config.json in Resources */,
 				07ECFB892AA58259008513C6 /* Assets.xcassets in Resources */,
 				07ECFB962AA58259008513C6 /* Preview Assets.xcassets in Resources */,
-				07ECFBBB2AA58259008513C6 /* LeetCodeSchema in Resources */,
 				07ECFB802AA58259008513C6 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

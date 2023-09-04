@@ -88,5 +88,15 @@ query userPublicProfile($username: String!) {
           categoryDiscussCount
           categoryDiscussCountDiff
       }
+      problemsSolvedBeatsStats {
+      difficulty
+      percentage
+    }
+    submitStatsGlobal {
+      acSubmissionNum {
+        difficulty
+        count
+      }
+    }
   }
 }
