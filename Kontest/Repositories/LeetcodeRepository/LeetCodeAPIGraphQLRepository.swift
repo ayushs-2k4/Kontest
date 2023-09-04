@@ -9,7 +9,7 @@ import Foundation
 import LeetCodeSchema
 
 class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
-    func getUserData(username: String, completion: @escaping (LeetCodeUserProfileGraphQLAPIDTO?) -> Void) {
+    func getUserData(username: String, completion: @escaping (LeetCodeUserProfileGraphQLAPIDTO?, Error?) -> Void) {
         let query = UserPublicProfileQuery(username: username)
 
         DownloadData.shared.apollo.fetch(query: query) { result in
@@ -30,18 +30,18 @@ class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
                         submitStatsGlobal: SubmitStatsGlobalDTO.from(submitStatsGlobal: p.submitStatsGlobal)
                     )
 
-                    completion(leetCodeGraphQLAPIDTO)
+                    completion(leetCodeGraphQLAPIDTO, nil)
                 } else {
-                    completion(nil)
+                    completion(nil, AppError(description: "Data not found in  LeetCodeAPIGraphQLRepository - getUserData"))
                 }
             case .failure(let error):
                 print("Error in LeetCodeAPIGraphQLRepository - getUserData: \(error)")
-                completion(nil)
+                completion(nil, error)
             }
         }
     }
 
-    func getUserRankingInfo(username: String, completion: @escaping (LeetCodeUserRankingsGraphQLAPIDTO?) -> Void) {
+    func getUserRankingInfo(username: String, completion: @escaping (LeetCodeUserRankingsGraphQLAPIDTO?, Error?) -> Void) {
         let query = UserContestRankingInfoQuery(username: username)
 
         DownloadData.shared.apollo.fetch(query: query) { result in
@@ -52,11 +52,11 @@ class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
 
                 let leetCodeUserRankingsGraphQLAPIDTO = LeetCodeUserRankingsGraphQLAPIDTO(leetCodeUserRankingGraphQLAPIDTO: LeetCodeUserRankingGraphQLAPIDTO.from(userContestRanking: userContestRanking), leetCodeUserRankingHistoryGraphQLAPIDTO: LeetCodeUserRankingHistoryGraphQLAPIDTO.from(leetCodeUserRankingHistoryGraphQLAPIDTOs: userContestRankingHistory))
 
-                completion(leetCodeUserRankingsGraphQLAPIDTO)
+                completion(leetCodeUserRankingsGraphQLAPIDTO, nil)
 
             case .failure(let error):
                 print("Error in LeetCodeAPIGraphQLRepository - getUserRankingInfo: \(error)")
-                completion(nil)
+                completion(nil, error)
             }
         }
     }
