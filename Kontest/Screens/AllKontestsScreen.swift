@@ -32,7 +32,7 @@ struct AllKontestsScreen: View {
                                 RatingsView(codeForcesUsername: settingsViewModel.codeForcesUsername, leetCodeUsername: settingsViewModel.leetcodeUsername, codeChefUsername: settingsViewModel.codeChefUsername)
                                     .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                                     .listRowSeparator(.hidden)
-                                
+
                                 let ongoingKontests = allKontestsViewModel.ongoingKontests
 
                                 let laterTodayKontests = allKontestsViewModel.laterTodayKontests

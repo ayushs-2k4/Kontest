@@ -9,7 +9,8 @@ import SwiftUI
 import UserNotifications
 
 struct PendingNotificationsScreen: View {
-    let pendingNotificationsViewModel = PendingNotificationsViewModel()
+    let pendingNotificationsViewModel = PendingNotificationsViewModel.instance
+    
     var body: some View {
         VStack {
             List {

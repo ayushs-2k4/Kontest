@@ -13,6 +13,8 @@ struct SingleKontestView: View {
     let timelineViewDefaultContext: TimelineViewDefaultContext
     @Environment(AllKontestsViewModel.self) private var allKontestsViewModel
 
+    let pendingNotificationsViewModel: PendingNotificationsViewModel
+
     @Environment(\.colorScheme) private var colorScheme
 
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -32,6 +34,8 @@ struct SingleKontestView: View {
         let isKontestOfFuture = CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date())
         let isKontestStartingTimeLessThanADay = !(CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 0, hours: 0, days: 1))
         isKontestOfFutureAndStartingInLessThan24Hours = isKontestOfFuture && isKontestStartingTimeLessThanADay
+
+        pendingNotificationsViewModel = PendingNotificationsViewModel.instance
     }
 
     var body: some View {
@@ -92,7 +96,7 @@ struct SingleKontestView: View {
             #endif
 
             #if os(macOS)
-            if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()), numberOfOptions(kontest: kontest) > 0 {
+            if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()), pendingNotificationsViewModel.numberOfOptions(kontest: kontest) > 0 {
                 SingleNotificationMenu(kontest: kontest)
                     .frame(width: 45)
             }
@@ -117,7 +121,7 @@ struct SingleKontestView: View {
                             #else
                             let remainingTimeInEndingOfRunningKontest = CalendarUtility.formattedTimeFrom(seconds: Int(seconds))
                             #endif
-                            
+
                             Text("Ends in \(remainingTimeInEndingOfRunningKontest)")
                                 .font(FontUtility.getRemainingTimeFontSize().monospacedDigit())
                                 .contentTransition(.numericText())
@@ -163,32 +167,6 @@ struct SingleKontestView: View {
         .padding()
         #endif
     }
-}
-
-private func numberOfOptions(kontest: KontestModel) -> Int {
-    var ans = 0
-    let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
-    if kontestStartDate == nil {
-        return 4
-    }
-
-    if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 10, hours: 0, days: 0) {
-        ans += 1
-    }
-
-    if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 30, hours: 0, days: 0) {
-        ans += 1
-    }
-
-    if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 0, hours: 1, days: 0) {
-        ans += 1
-    }
-
-    if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 0, hours: 6, days: 0) {
-        ans += 1
-    }
-
-    return ans
 }
 
 #Preview("SingleKontentView") {
