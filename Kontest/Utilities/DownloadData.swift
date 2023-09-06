@@ -5,10 +5,17 @@
 //  Created by Ayush Singhal on 12/08/23.
 //
 
-import Combine
 import Apollo
+import Combine
 import Foundation
 
+class DownloadDataWithApollo {
+    static let shared = DownloadDataWithApollo()
+
+    private(set) var apollo = ApolloClient(url: URL(string: "https://leetcode.com/graphql?query=")!)
+
+    private init() {}
+}
 
 func downloadDataWithAsyncAwait(url: URL) async throws -> Data {
     let (data, response) = try await URLSession.shared.data(from: url)
@@ -20,12 +27,4 @@ func downloadDataWithAsyncAwait(url: URL) async throws -> Data {
     }
 
     return data
-}
-
-class DownloadData {
-    static let shared = DownloadData()
-
-    private(set) var apollo = ApolloClient(url: URL(string: "https://leetcode.com/graphql?query=")!)
-
-    private init() {}
 }

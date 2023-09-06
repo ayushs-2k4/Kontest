@@ -11,14 +11,14 @@ class AllKontestsFakeRepository: KontestFetcher {
     func getAllKontests() async throws -> [KontestDTO] {
         var kontests: [KontestDTO] = []
 
-        let startTime = "2023-08-26 18:29:00 UTC"
-        let endTime = "2023-08-26 17:43:00 UTC"
+        let startTime = "2023-09-6 07:38:00 UTC"
+        let endTime = "2023-09-6 07:45:00 UTC"
         
 //        let startTime = "2023-08-15 6:2:00 UTC"
 //        let endTime = "2023-08-17 17:43:00 UTC"
         
-        let startTime2 = "2023-08-16 17:19:00 UTC"
-        let endTime2 = "2023-08-18 17:43:00 UTC"
+        let startTime2 =  "2023-09-6 07:50:00 UTC"
+        let endTime2 = "2023-09-6 07:51:00 UTC"
         
 //        let startTime3 = "2023-08-15 17:25:00 UTC"
 //        let endTime3 = "2023-08-18 17:43:00 UTC"

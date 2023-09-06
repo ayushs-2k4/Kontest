@@ -32,18 +32,14 @@ struct AllKontestsScreen: View {
                                 RatingsView(codeForcesUsername: settingsViewModel.codeForcesUsername, leetCodeUsername: settingsViewModel.leetcodeUsername, codeChefUsername: settingsViewModel.codeChefUsername)
                                     .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                                     .listRowSeparator(.hidden)
+                                
+                                let ongoingKontests = allKontestsViewModel.ongoingKontests
 
-                                let today = Date()
-                                let tomorrow = CalendarUtility.getTomorrow()
-                                let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
+                                let laterTodayKontests = allKontestsViewModel.laterTodayKontests
 
-                                let ongoingKontests = allKontestsViewModel.allKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? today, kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? today) }
+                                let tomorrowKontests = allKontestsViewModel.tomorrowKontests
 
-                                let laterTodayKontests = allKontestsViewModel.allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? today < tomorrow) && !(ongoingKontests.contains($0)) }
-
-                                let tomorrowKontests = allKontestsViewModel.allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? today >= tomorrow) && (CalendarUtility.getDate(date: $0.start_time) ?? today < dayAfterTomorrow) }
-
-                                let laterKontests = allKontestsViewModel.allKontests.filter { CalendarUtility.getDate(date: $0.start_time) ?? today >= dayAfterTomorrow }
+                                let laterKontests = allKontestsViewModel.laterKontests
 
                                 if allKontestsViewModel.allKontests.isEmpty && !allKontestsViewModel.searchText.isEmpty {
                                     Text("Please try some different search term")

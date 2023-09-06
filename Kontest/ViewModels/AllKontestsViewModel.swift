@@ -10,11 +10,16 @@ import SwiftUI
 
 @Observable
 class AllKontestsViewModel {
-    let repository = KontestRepository()
+    let repository = AllKontestsFakeRepository()
 
     private var timer: AnyCancellable?
 
     var allKontests: [KontestModel] = []
+    var ongoingKontests: [KontestModel] = []
+    var laterTodayKontests: [KontestModel] = []
+    var tomorrowKontests: [KontestModel] = []
+    var laterKontests: [KontestModel] = []
+
     var searchText: String = "" {
         didSet {
             updateFilteredKontests()
@@ -33,14 +38,15 @@ class AllKontestsViewModel {
         isLoading = true
         Task {
             await getAllKontests()
+            filterKontests()
             isLoading = false
             backupKontests = allKontests
             removeReminderStatusFromUserDefaults()
 
-            self.timer = Timer.publish(every: 10, on: .main, in: .default)
+            self.timer = Timer.publish(every: 1, on: .main, in: .default)
                 .autoconnect()
                 .sink { [weak self] _ in
-                    self?.updateKontestStatus()
+                    self?.filterKontests()
                 }
         }
     }
@@ -81,9 +87,8 @@ class AllKontestsViewModel {
     }
 
     func setNotificationForKontest(kontest: KontestModel, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String = "", kontestSubTitle: String = "", kontestBody: String = "") {
-        
         let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
-        
+
         // Checking if we actually have given time in starting of kontest; like if given 6 hours, then checking if we actually have 6 hours or not in starting of kontest.
         if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: minutesBefore, hours: hoursBefore, days: daysBefore) {
             let title = kontestTitle == "" ? kontest.name : kontestTitle
@@ -204,17 +209,30 @@ class AllKontestsViewModel {
         return true
     }
 
-    private func updateKontestStatus() {
-        var indices: [Int] = []
-        for i in 0 ..< allKontests.count {
-            allKontests[i].status = allKontests[i].updateKontestStatus()
+    func filterKontests() {
+        let today = Date()
+        let tomorrow = CalendarUtility.getTomorrow()
+        let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
+        withAnimation {
+            allKontests = allKontests.filter {
+                !CalendarUtility.isKontestOfPast(kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? Date())
+            }
 
-            if allKontests[i].status == .Ended {
-                indices.append(i)
+            ongoingKontests = allKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? today, kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? today) }
+
+            laterTodayKontests = allKontests.filter {
+                let startDate = CalendarUtility.getDate(date: $0.start_time) ?? today
+                let bool1 = startDate < tomorrow
+                let bool2 = ongoingKontests.contains($0)
+                let k = bool1 && !bool2
+                return k
+            }
+
+            tomorrowKontests = allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? today >= tomorrow) && (CalendarUtility.getDate(date: $0.start_time) ?? today < dayAfterTomorrow) }
+
+            laterKontests = allKontests.filter {
+                CalendarUtility.getDate(date: $0.start_time) ?? today >= dayAfterTomorrow
             }
         }
-
-        let indexSet = IndexSet(indices)
-        allKontests.remove(atOffsets: indexSet)
     }
 }
