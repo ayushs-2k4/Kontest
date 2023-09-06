@@ -117,11 +117,7 @@ class AllKontestsViewModel {
         ongoingKontests = allKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? today, kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? today) }
 
         laterTodayKontests = allKontests.filter {
-            let startDate = CalendarUtility.getDate(date: $0.start_time) ?? today
-            let bool1 = startDate < tomorrow
-            let bool2 = ongoingKontests.contains($0)
-            let k = bool1 && !bool2
-            return k
+            CalendarUtility.getDate(date: $0.start_time) ?? today < tomorrow && !(ongoingKontests.contains($0))
         }
 
         tomorrowKontests = allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? today >= tomorrow) && (CalendarUtility.getDate(date: $0.start_time) ?? today < dayAfterTomorrow) }
