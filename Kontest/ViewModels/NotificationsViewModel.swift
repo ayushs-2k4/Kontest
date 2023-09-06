@@ -1,5 +1,5 @@
 //
-//  PendingNotificationsViewModel.swift
+//  NotificationsViewModel.swift
 //  Kontest
 //
 //  Created by Ayush Singhal on 17/08/23.
@@ -9,10 +9,10 @@ import SwiftUI
 import UserNotifications
 
 @Observable
-class PendingNotificationsViewModel {
+class NotificationsViewModel {
     var pendingNotifications: [UNNotificationRequest] = []
 
-    static let instance: PendingNotificationsViewModel = .init()
+    static let instance: NotificationsViewModel = .init()
 
     private init() {
         getAllPendingNotifications()
@@ -33,7 +33,7 @@ class PendingNotificationsViewModel {
         })
     }
 
-    func numberOfOptions(kontest: KontestModel) -> Int {
+    func getNumberOfNotificationsWhichCanBeSettedForAKontest(kontest: KontestModel) -> Int {
         var ans = 0
         let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
         if kontestStartDate == nil {
@@ -53,6 +53,29 @@ class PendingNotificationsViewModel {
         }
 
         if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 0, hours: 6, days: 0) {
+            ans += 1
+        }
+
+        return ans
+    }
+    
+    func getNumberOfSettedNotificationForAKontest(kontest: KontestModel) -> Int {
+        var ans = 0
+        let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
+
+        if !(CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 10) && !kontest.isSetForReminder10MiutesBefore) {
+            ans += 1
+        }
+
+        if !(CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 30) && !kontest.isSetForReminder30MiutesBefore) {
+            ans += 1
+        }
+
+        if !(CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, hours: 1) && !kontest.isSetForReminder1HourBefore) {
+            ans += 1
+        }
+
+        if !(CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, hours: 6) && !kontest.isSetForReminder6HoursBefore) {
             ans += 1
         }
 

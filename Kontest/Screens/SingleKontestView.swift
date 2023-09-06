@@ -13,7 +13,7 @@ struct SingleKontestView: View {
     let timelineViewDefaultContext: TimelineViewDefaultContext
     @Environment(AllKontestsViewModel.self) private var allKontestsViewModel
 
-    let pendingNotificationsViewModel: PendingNotificationsViewModel
+    let notificationsViewModel: NotificationsViewModel
 
     @Environment(\.colorScheme) private var colorScheme
 
@@ -35,7 +35,7 @@ struct SingleKontestView: View {
         let isKontestStartingTimeLessThanADay = !(CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 0, hours: 0, days: 1))
         isKontestOfFutureAndStartingInLessThan24Hours = isKontestOfFuture && isKontestStartingTimeLessThanADay
 
-        pendingNotificationsViewModel = PendingNotificationsViewModel.instance
+        notificationsViewModel = NotificationsViewModel.instance
     }
 
     var body: some View {
@@ -96,7 +96,7 @@ struct SingleKontestView: View {
             #endif
 
             #if os(macOS)
-            if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()), pendingNotificationsViewModel.numberOfOptions(kontest: kontest) > 0 {
+            if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()), notificationsViewModel.getNumberOfNotificationsWhichCanBeSettedForAKontest(kontest: kontest) > 0 {
                 SingleNotificationMenu(kontest: kontest)
                     .frame(width: 45)
             }

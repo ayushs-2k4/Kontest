@@ -9,13 +9,13 @@ import SwiftUI
 import UserNotifications
 
 struct PendingNotificationsScreen: View {
-    let pendingNotificationsViewModel = PendingNotificationsViewModel.instance
+    let notificationsViewModel = NotificationsViewModel.instance
     
     var body: some View {
         VStack {
             List {
-                Text("Total Notifications: \(pendingNotificationsViewModel.pendingNotifications.count)")
-                ForEach(pendingNotificationsViewModel.pendingNotifications, id: \.self) { notificationRequest in
+                Text("Total Notifications: \(notificationsViewModel.pendingNotifications.count)")
+                ForEach(notificationsViewModel.pendingNotifications, id: \.self) { notificationRequest in
                     HStack {
                         Spacer()
                         SingleNotificationView(notificationRequest: notificationRequest)

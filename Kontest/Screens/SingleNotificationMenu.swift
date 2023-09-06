@@ -10,11 +10,12 @@ import SwiftUI
 struct SingleNotificationMenu: View {
     var kontest: KontestModel
     @Environment(AllKontestsViewModel.self) private var allKontestsViewModel
+    let notificationsViewModel = NotificationsViewModel.instance
 
     var body: some View {
         let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
         Menu {
-            if getNumberOfNotificationForAKontest(kontest: kontest) <= 2 {
+            if notificationsViewModel.getNumberOfSettedNotificationForAKontest(kontest: kontest) <= 2 {
                 Button {
                     setNotificationForAKontestAtAllTimes(kontest: kontest)
                 } label: {
@@ -24,7 +25,7 @@ struct SingleNotificationMenu: View {
                 .help("Set Notification for this kontest 10 mins, 30 mins, 1 hr, 6 hrs before")
             }
 
-            if getNumberOfNotificationForAKontest(kontest: kontest) >= 2 {
+            if notificationsViewModel.getNumberOfSettedNotificationForAKontest(kontest: kontest) >= 2 {
                 Button {
                     removeAllNotificationForAKontest(kontest: kontest)
                 } label: {
@@ -124,29 +125,6 @@ extension SingleNotificationMenu {
         allKontestsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
         allKontestsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
         allKontestsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
-    }
-
-    func getNumberOfNotificationForAKontest(kontest: KontestModel) -> Int {
-        var ans = 0
-        let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
-
-        if !(CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 10) && !kontest.isSetForReminder10MiutesBefore) {
-            ans += 1
-        }
-
-        if !(CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 30) && !kontest.isSetForReminder30MiutesBefore) {
-            ans += 1
-        }
-
-        if !(CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, hours: 1) && !kontest.isSetForReminder1HourBefore) {
-            ans += 1
-        }
-
-        if !(CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, hours: 6) && !kontest.isSetForReminder6HoursBefore) {
-            ans += 1
-        }
-
-        return ans
     }
 }
 

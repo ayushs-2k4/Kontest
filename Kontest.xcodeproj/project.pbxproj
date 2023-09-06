@@ -15,7 +15,7 @@
 		07ECFB832AA58259008513C6 /* AllKontestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB3A2AA58259008513C6 /* AllKontestsViewModel.swift */; };
 		07ECFB842AA58259008513C6 /* CodeChefViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB3B2AA58259008513C6 /* CodeChefViewModel.swift */; };
 		07ECFB852AA58259008513C6 /* CodeForcesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB3C2AA58259008513C6 /* CodeForcesViewModel.swift */; };
-		07ECFB862AA58259008513C6 /* PendingNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB3D2AA58259008513C6 /* PendingNotificationsViewModel.swift */; };
+		07ECFB862AA58259008513C6 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB3D2AA58259008513C6 /* NotificationsViewModel.swift */; };
 		07ECFB882AA58259008513C6 /* KontestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB3F2AA58259008513C6 /* KontestApp.swift */; };
 		07ECFB892AA58259008513C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07ECFB402AA58259008513C6 /* Assets.xcassets */; };
 		07ECFB8A2AA58259008513C6 /* CodeChefAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB432AA58259008513C6 /* CodeChefAPIRepository.swift */; };
@@ -80,7 +80,7 @@
 		07ECFB3A2AA58259008513C6 /* AllKontestsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllKontestsViewModel.swift; sourceTree = "<group>"; };
 		07ECFB3B2AA58259008513C6 /* CodeChefViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeChefViewModel.swift; sourceTree = "<group>"; };
 		07ECFB3C2AA58259008513C6 /* CodeForcesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeForcesViewModel.swift; sourceTree = "<group>"; };
-		07ECFB3D2AA58259008513C6 /* PendingNotificationsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingNotificationsViewModel.swift; sourceTree = "<group>"; };
+		07ECFB3D2AA58259008513C6 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
 		07ECFB3F2AA58259008513C6 /* KontestApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KontestApp.swift; sourceTree = "<group>"; };
 		07ECFB402AA58259008513C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		07ECFB432AA58259008513C6 /* CodeChefAPIRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeChefAPIRepository.swift; sourceTree = "<group>"; };
@@ -190,7 +190,7 @@
 				07ECFB3A2AA58259008513C6 /* AllKontestsViewModel.swift */,
 				07ECFB3B2AA58259008513C6 /* CodeChefViewModel.swift */,
 				07ECFB3C2AA58259008513C6 /* CodeForcesViewModel.swift */,
-				07ECFB3D2AA58259008513C6 /* PendingNotificationsViewModel.swift */,
+				07ECFB3D2AA58259008513C6 /* NotificationsViewModel.swift */,
 				076134CE2AA86AC300946B02 /* KontestDetailViewModel.swift */,
 			);
 			path = ViewModels;
@@ -461,7 +461,7 @@
 				07ECFBA02AA58259008513C6 /* KontestDetailsScreen.swift in Sources */,
 				07ECFBAA2AA58259008513C6 /* Router.swift in Sources */,
 				07ECFB982AA58259008513C6 /* SettingsScreen.swift in Sources */,
-				07ECFB862AA58259008513C6 /* PendingNotificationsViewModel.swift in Sources */,
+				07ECFB862AA58259008513C6 /* NotificationsViewModel.swift in Sources */,
 				07ECFB942AA58259008513C6 /* CodeChefAPIModel.swift in Sources */,
 				07ECFBB22AA58259008513C6 /* LeetCodeUserProfileGraphQLAPIDTO.swift in Sources */,
 				07ECFBA82AA58259008513C6 /* LocalNotificationManager.swift in Sources */,

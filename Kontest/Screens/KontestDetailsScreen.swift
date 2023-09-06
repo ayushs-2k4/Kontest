@@ -79,17 +79,17 @@ struct ButtonsView: View {
     let kontest: KontestModel
     let kontestStartDate: Date?
 
-    let pendingNotificationsViewModel: PendingNotificationsViewModel
+    let notificationsViewModel: NotificationsViewModel
 
     init(kontest: KontestModel) {
         self.kontest = kontest
         kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
-        pendingNotificationsViewModel = PendingNotificationsViewModel.instance
+        notificationsViewModel = NotificationsViewModel.instance
     }
 
     var body: some View {
         VStack {
-            if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()), pendingNotificationsViewModel.numberOfOptions(kontest: kontest) > 0 {
+            if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()), notificationsViewModel.getNumberOfNotificationsWhichCanBeSettedForAKontest(kontest: kontest) > 0 {
                 SingleNotificationMenu(kontest: kontest)
             }
 
