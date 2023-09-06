@@ -17,7 +17,7 @@ struct KontestDTO: Codable, Identifiable {
     let in_24_hours, status: String
 
     private func generateUniqueID() -> String {
-        let combinedString = "\(name)\(url)\(start_time)\(end_time)\(duration)\(site)\(in_24_hours)\(status)"
+        let combinedString = "\(name)\(url)\(start_time)\(end_time)\(duration)\(site)"
 
         if let data = combinedString.data(using: .utf8) {
             let hash = SHA256.hash(data: data)
