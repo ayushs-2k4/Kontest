@@ -11,7 +11,7 @@ struct AllKontestsScreen: View {
     @Environment(AllKontestsViewModel.self) private var allKontestsViewModel
     @State var showRemoveAllNotificationsAlert = false
     @State var showNotificationForAllKontestsAlert = false
-    let isInDevelopmentMode = true
+    let isInDevelopmentMode = false
     @State private var isNoNotificationIconAnimating = false
     let notificationsViewModel = NotificationsViewModel.instance
 

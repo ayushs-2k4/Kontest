@@ -5,7 +5,7 @@
 //  Created by Ayush Singhal on 16/08/23.
 //
 
-import SwiftUI
+import Foundation
 
 @Observable
 class SettingsViewModel {

@@ -5,7 +5,7 @@
 //  Created by Ayush Singhal on 25/08/23.
 //
 
-import SwiftUI
+import Foundation
 
 enum SelectionState: Hashable {
     case screen(Screen)

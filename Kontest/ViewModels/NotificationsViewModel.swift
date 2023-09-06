@@ -5,7 +5,7 @@
 //  Created by Ayush Singhal on 17/08/23.
 //
 
-import SwiftUI
+import Foundation
 import UserNotifications
 
 @Observable
@@ -84,7 +84,7 @@ class NotificationsViewModel {
 
         return ans
     }
-    
+
     private func setNotification(kontest: KontestModel, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String, kontestSubTitle: String, kontestBody: String) {
         let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
         let notificationDate = CalendarUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: minutesBefore, hours: hoursBefore, days: daysBefore)
@@ -94,7 +94,7 @@ class NotificationsViewModel {
 
         updateIsSetForNotification(kontest: kontest, to: true, minutesBefore: minutesBefore, hoursBefore: hoursBefore)
     }
-    
+
     func setNotificationForKontest(kontest: KontestModel, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String = "", kontestSubTitle: String = "", kontestBody: String = "") {
         let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
 

@@ -5,7 +5,7 @@
 //  Created by Ayush Singhal on 27/08/23.
 //
 
-import SwiftUI
+import Foundation
 
 @Observable
 class CodeChefViewModel {
