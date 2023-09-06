@@ -11,8 +11,9 @@ struct AllKontestsScreen: View {
     @Environment(AllKontestsViewModel.self) private var allKontestsViewModel
     @State var showRemoveAllNotificationsAlert = false
     @State var showNotificationForAllKontestsAlert = false
-    let isInDevelopmentMode = false
+    let isInDevelopmentMode = true
     @State private var isNoNotificationIconAnimating = false
+    let notificationsViewModel = NotificationsViewModel.instance
 
     let settingsViewModel = SettingsViewModel.instance
 
@@ -85,7 +86,7 @@ struct AllKontestsScreen: View {
 
                     ToolbarItem(placement: .automatic) { // change the placement here!
                         Button {
-                            allKontestsViewModel.printAllPendingNotifications()
+                            notificationsViewModel.printAllPendingNotifications()
                         } label: {
                             Text("Print all notifs")
                         }
@@ -128,7 +129,7 @@ struct AllKontestsScreen: View {
                         .help("Remove all Notification") // Tooltip text
                         .alert("Remove all Notification", isPresented: $showRemoveAllNotificationsAlert, actions: {
                             Button("Remove all", role: .destructive) {
-                                allKontestsViewModel.removeAllPendingNotifications()
+                                notificationsViewModel.removeAllPendingNotifications()
                                 isNoNotificationIconAnimating = true
                             }
                         })
@@ -180,6 +181,6 @@ struct AllKontestsScreen: View {
 
 #Preview {
     AllKontestsScreen()
-        .environment(AllKontestsViewModel())
+        .environment(AllKontestsViewModel.instance)
         .environment(Router.instance)
 }

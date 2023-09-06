@@ -15,9 +15,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "229"
-            endingLineNumber = "229"
-            landmarkName = "filterKontests()"
-            landmarkType = "7">
+            endingLineNumber = "229">
             <Locations>
                <Location
                   uuid = "EAFD2F2F-158B-40F3-B91D-4CF2019D1F4B - ade6759af951b575"
@@ -78,9 +76,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "230"
-            endingLineNumber = "230"
-            landmarkName = "filterKontests()"
-            landmarkType = "7">
+            endingLineNumber = "230">
             <Locations>
                <Location
                   uuid = "E3BBCDAA-5BF5-43BF-BFAA-66FE1744BBCB - ade6759af951b4e8"

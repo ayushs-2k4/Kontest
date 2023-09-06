@@ -38,9 +38,9 @@ struct SingleNotificationMenu: View {
             if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 10, hours: 0, days: 0) {
                 Button {
                     if kontest.isSetForReminder10MiutesBefore {
-                        allKontestsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
+                        notificationsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
                     } else {
-                        allKontestsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
+                        notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
                     }
                 } label: {
                     Image(systemName: kontest.isSetForReminder10MiutesBefore ? "bell.fill" : "bell")
@@ -52,9 +52,9 @@ struct SingleNotificationMenu: View {
             if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 30, hours: 0, days: 0) {
                 Button {
                     if kontest.isSetForReminder30MiutesBefore {
-                        allKontestsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
+                        notificationsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
                     } else {
-                        allKontestsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
+                        notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
                     }
                 } label: {
                     Image(systemName: kontest.isSetForReminder30MiutesBefore ? "bell.fill" : "bell")
@@ -66,9 +66,9 @@ struct SingleNotificationMenu: View {
             if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 0, hours: 1, days: 0) {
                 Button {
                     if kontest.isSetForReminder1HourBefore {
-                        allKontestsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
+                        notificationsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
                     } else {
-                        allKontestsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
+                        notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
                     }
                 } label: {
                     Image(systemName: kontest.isSetForReminder1HourBefore ? "bell.fill" : "bell")
@@ -80,9 +80,9 @@ struct SingleNotificationMenu: View {
             if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 0, hours: 6, days: 0) {
                 Button {
                     if kontest.isSetForReminder6HoursBefore {
-                        allKontestsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
+                        notificationsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
                     } else {
-                        allKontestsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
+                        notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
                     }
                 } label: {
                     Image(systemName: kontest.isSetForReminder6HoursBefore ? "bell.fill" : "bell")
@@ -100,13 +100,13 @@ struct SingleNotificationMenu: View {
 
 extension SingleNotificationMenu {
     func setNotificationForAKontestAtAllTimes(kontest: KontestModel) {
-        allKontestsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
+        notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
 
-        allKontestsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
+        notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
 
-        allKontestsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
+        notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
 
-        allKontestsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
+        notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
     }
 
     func isSetForAllNotifications(kontest: KontestModel) -> Bool {
@@ -121,14 +121,14 @@ extension SingleNotificationMenu {
     }
 
     func removeAllNotificationForAKontest(kontest: KontestModel) {
-        allKontestsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
-        allKontestsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
-        allKontestsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
-        allKontestsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
+        notificationsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
+        notificationsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
+        notificationsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
+        notificationsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
     }
 }
 
 #Preview {
     SingleNotificationMenu(kontest: KontestModel.from(dto: KontestDTO(name: "ProjectEuler+1", url: "https://hackerrank.com/contests/projecteuler", start_time: "2023-08-15 18:29:00 UTC", end_time: "2023-08-18 17:43:00 UTC", duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "BEFORE")))
-        .environment(AllKontestsViewModel())
+        .environment(AllKontestsViewModel.instance)
 }

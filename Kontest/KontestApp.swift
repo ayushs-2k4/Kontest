@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct KontestApp: App {
-    @State private var allKontestsViewModel = AllKontestsViewModel()
+    @State private var allKontestsViewModel = AllKontestsViewModel.instance
     @State private var router = Router.instance
 
     var body: some Scene {

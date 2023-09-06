@@ -249,7 +249,7 @@ struct RemainingTimeView: View {
 //        .environment(AllKontestsViewModel())
 
     return KontestDetailsScreen(kontest: KontestModel.from(dto: KontestDTO(name: "THIRD PROGRAMMING CONTEST 2023 ALGO (AtCoder Beginner Contest 318)", url: "https://hackerrank.com/contests/projecteuler", start_time: startTime, end_time: endTime, duration: "1020.0", site: "AtCoder", in_24_hours: "No", status: "CODING")))
-        .environment(AllKontestsViewModel())
+        .environment(AllKontestsViewModel.instance)
 }
 
 // #Preview("TopCardView") {

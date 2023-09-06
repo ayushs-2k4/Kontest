@@ -34,5 +34,5 @@ struct NoKontestsScreen: View {
 
 #Preview {
     NoKontestsScreen()
-        .environment(AllKontestsViewModel())
+        .environment(AllKontestsViewModel.instance)
 }

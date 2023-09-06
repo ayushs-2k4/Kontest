@@ -170,7 +170,7 @@ struct SingleKontestView: View {
 }
 
 #Preview("SingleKontentView") {
-    let allKontestsViewModel = AllKontestsViewModel()
+    let allKontestsViewModel = AllKontestsViewModel.instance
 
     return List {
         TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
