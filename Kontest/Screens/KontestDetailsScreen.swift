@@ -8,26 +8,18 @@
 import SwiftUI
 
 struct KontestDetailsScreen: View {
-    @Environment(AllKontestsViewModel.self) private var allKontestsViewModel
     @Environment(\.colorScheme) private var colorScheme
 
     @State private var isFaded = false
 
     var kontest: KontestModel
 
-    let isKontestRunning: Bool
-    let isKontestOfFutureAndStartingInLessThan24Hours: Bool
+    let kontestDetailViewModel: KontestDetailViewModel
 
     init(kontest: KontestModel) {
         self.kontest = kontest
 
-        let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
-        let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
-        isKontestRunning = CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date()) || kontest.status == .Running
-
-        let isKontestOfFuture = CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date())
-        let isKontestStartingTimeLessThanADay = !(CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 0, hours: 0, days: 1))
-        isKontestOfFutureAndStartingInLessThan24Hours = isKontestOfFuture && isKontestStartingTimeLessThanADay
+        kontestDetailViewModel = KontestDetailViewModel(kontest: kontest)
     }
 
     var body: some View {
@@ -49,7 +41,7 @@ struct KontestDetailsScreen: View {
                             .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.site))
                             .padding(.horizontal)
 
-                        if CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date()) || kontest.status == .Running {
+                        if kontestDetailViewModel.isKontestRunning {
                             BlinkingDotView(color: .green)
                                 .frame(width: 10, height: 10)
                         }
@@ -57,8 +49,16 @@ struct KontestDetailsScreen: View {
 
                     Text(kontest.name)
 
-                    RemainingTimeView(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date(), isKontestRunning: isKontestRunning, isKontestOfFutureAndStartingInLessThan24Hours: isKontestOfFutureAndStartingInLessThan24Hours)
-                        .padding()
+                    if kontestDetailViewModel.isKontestRunning || kontestDetailViewModel.isKontestOfFutureAndStartingInLessThan24Hours {
+                        TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
+                            RemainingTimeView(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date(), isKontestRunning: kontestDetailViewModel.isKontestRunning, isKontestOfFutureAndStartingInLessThan24Hours: kontestDetailViewModel.isKontestOfFutureAndStartingInLessThan24Hours, timelineViewDefaultContext: timelineViewDefaultContext)
+                                .padding()
+                        }
+                    } else if !kontestDetailViewModel.isKontestRunning, kontestDetailViewModel.wasKontestRunning {
+                        Text("Kontest has Ended")
+                            .font(Font.title2)
+                            .padding()
+                    }
                 }
 
                 Spacer()
@@ -69,7 +69,7 @@ struct KontestDetailsScreen: View {
             .multilineTextAlignment(.center)
             .ignoresSafeArea(edges: .top)
 
-            ButtonsView(kontest: kontest, allKontestsViewModel: allKontestsViewModel)
+            ButtonsView(kontest: kontest)
         }
         .frame(maxHeight: .infinity)
     }
@@ -77,12 +77,10 @@ struct KontestDetailsScreen: View {
 
 struct ButtonsView: View {
     let kontest: KontestModel
-    let allKontestsViewModel: AllKontestsViewModel
     let kontestStartDate: Date?
 
-    init(kontest: KontestModel, allKontestsViewModel: AllKontestsViewModel) {
+    init(kontest: KontestModel) {
         self.kontest = kontest
-        self.allKontestsViewModel = allKontestsViewModel
         kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
     }
 
@@ -206,34 +204,31 @@ struct RemainingTimeView: View {
     let kontestEndDate: Date
     let isKontestRunning: Bool
     let isKontestOfFutureAndStartingInLessThan24Hours: Bool
+    let timelineViewDefaultContext: TimelineViewDefaultContext
 
     var body: some View {
         if isKontestRunning {
-            TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
-                let date = timelineViewDefaultContext.date
-                let seconds = kontestEndDate.timeIntervalSince(date)
+            let date = timelineViewDefaultContext.date
+            let timeInterval = kontestEndDate.timeIntervalSince(date)
+            let seconds = timeInterval >= 0 ? timeInterval : 0
+            let remainingTimeInEndingOfRunningKontest = CalendarUtility.formattedTimeFrom(seconds: Int(seconds))
 
-                let remainingTimeInEndingOfRunningKontest = CalendarUtility.formattedTimeFrom(seconds: Int(seconds))
-
-                Text("Ends in \(remainingTimeInEndingOfRunningKontest)")
-                    .font(Font.title2.monospacedDigit())
-                    .contentTransition(.numericText())
-                    .animation(.easeInOut, value: remainingTimeInEndingOfRunningKontest)
-            }
+            Text("Ends in \(remainingTimeInEndingOfRunningKontest)")
+                .font(Font.title2.monospacedDigit())
+                .contentTransition(.numericText())
+                .animation(.easeInOut, value: remainingTimeInEndingOfRunningKontest)
         }
 
         if isKontestOfFutureAndStartingInLessThan24Hours {
-            TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
-                let date = timelineViewDefaultContext.date
-                let seconds = kontestStartDate.timeIntervalSince(date)
+            let date = timelineViewDefaultContext.date
+            let seconds = kontestStartDate.timeIntervalSince(date)
 
-                let remainingTimeInStartingOfFutureKontest = CalendarUtility.formattedTimeFrom(seconds: Int(seconds))
+            let remainingTimeInStartingOfFutureKontest = CalendarUtility.formattedTimeFrom(seconds: Int(seconds))
 
-                Text("Starting in \(remainingTimeInStartingOfFutureKontest)")
-                    .font(Font.title2.monospacedDigit())
-                    .contentTransition(.numericText())
-                    .animation(.easeInOut, value: remainingTimeInStartingOfFutureKontest)
-            }
+            Text("Starting in \(remainingTimeInStartingOfFutureKontest)")
+                .font(Font.title2.monospacedDigit())
+                .contentTransition(.numericText())
+                .animation(.easeInOut, value: remainingTimeInStartingOfFutureKontest)
         }
     }
 }

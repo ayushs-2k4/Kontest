@@ -14,11 +14,11 @@ class AllKontestsViewModel {
 
     private var timer: AnyCancellable?
 
-    var allKontests: [KontestModel] = []
-    var ongoingKontests: [KontestModel] = []
-    var laterTodayKontests: [KontestModel] = []
-    var tomorrowKontests: [KontestModel] = []
-    var laterKontests: [KontestModel] = []
+    private(set) var allKontests: [KontestModel] = []
+    private(set) var ongoingKontests: [KontestModel] = []
+    private(set) var laterTodayKontests: [KontestModel] = []
+    private(set) var tomorrowKontests: [KontestModel] = []
+    private(set) var laterKontests: [KontestModel] = []
 
     var searchText: String = "" {
         didSet {
