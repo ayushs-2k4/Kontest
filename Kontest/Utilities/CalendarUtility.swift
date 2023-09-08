@@ -207,14 +207,18 @@ class CalendarUtility {
         let remainingSeconds = seconds % 60
 
         return if days > 0 {
-            String(format: "%d days and %02d:%02d:%02d", days, hours, minutes, remainingSeconds)
+            if days == 1 {
+                String(format: "%d day and %02d:%02d:%02d", days, hours, minutes, remainingSeconds)
+            } else {
+                String(format: "%d days and %02d:%02d:%02d", days, hours, minutes, remainingSeconds)
+            }
         } else if hours > 0 {
             String(format: "%02d:%02d:%02d", hours, minutes, remainingSeconds)
         } else {
             String(format: "%02d:%02d", minutes, remainingSeconds)
         }
     }
-    
+
     static func shortenedFormattedTimeFrom(seconds: Int) -> String {
         let days = seconds / 86400 // 86400 seconds in a day
         let hours = (seconds % 86400) / 3600
