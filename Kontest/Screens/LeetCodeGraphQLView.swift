@@ -57,10 +57,12 @@ struct LeetcodeProfileGraphQLView: View {
 
                     Text("LeetCode")
                 }
+                .font(FontUtility.getCardCornerSideFont())
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
 
                 Text(username)
+                    .font(FontUtility.getCardCornerSideFont())
                     .bold()
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
@@ -86,21 +88,27 @@ struct LeetcodeProfileGraphQLView: View {
                                 .foregroundStyle(.red)
                         }
                     }
+                    #if os(iOS)
+                    .font(.footnote)
+                    #endif
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
 
                     VStack {
                         Text("Rating: \(Int(userContestRanking?.rating ?? -1))")
                     }
+                    .font(FontUtility.getCardCornerSideFont())
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
 
                     VStack {
                         Text("Ranking: \(leetCodeUserProfileGraphQLAPIModel.profileModel?.ranking ?? -1)")
                     }
+                    .font(FontUtility.getCardCornerSideFont())
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                 } else {
-                    Text("LastRank 0")
+                    Text("Ranking 0")
+                        .font(FontUtility.getCardCornerSideFont())
                         .padding()
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
 

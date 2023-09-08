@@ -56,4 +56,12 @@ class FontUtility {
         return .body
         #endif
     }
+    
+    static func getCardCornerSideFont()->Font{
+        #if os(iOS)
+        return .caption
+        #else
+        return Font.body
+        #endif
+    }
 }

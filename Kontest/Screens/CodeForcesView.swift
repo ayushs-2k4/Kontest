@@ -65,17 +65,20 @@ struct CodeForcesProfileView: View {
 
                     Text("CodeForces")
                 }
+                .font(FontUtility.getCardCornerSideFont())
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
 
                 Text(username)
                     .bold()
+                    .font(FontUtility.getCardCornerSideFont())
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
 
                 if let codeForcesRatings = codeForcesViewModel.codeForcesRatings {
                     if codeForcesRatings.result.isEmpty {
                         Text("LastRank 0")
+                            .font(FontUtility.getCardCornerSideFont())
                             .padding()
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
 
@@ -92,6 +95,7 @@ struct CodeForcesProfileView: View {
 
                         if let latestCodeForcesuserInfo {
                             Text("Max Rating: \(latestCodeForcesuserInfo.maxRating)")
+                                .font(FontUtility.getCardCornerSideFont())
                                 .padding()
                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                         }
@@ -109,6 +113,7 @@ struct CodeForcesProfileView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
 
                         Text("LastRank \(latestCodeForcesRatings.rank)")
+                            .font(FontUtility.getCardCornerSideFont())
                             .padding()
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                     }

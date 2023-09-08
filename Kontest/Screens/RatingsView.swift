@@ -67,7 +67,7 @@ struct RatingsView: View {
     }
 
     var heroRatio: CGFloat {
-        16.0/9.0
+        18.0/9.0
     }
 }
 

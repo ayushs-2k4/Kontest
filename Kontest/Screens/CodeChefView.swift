@@ -56,10 +56,12 @@ struct CodeChefProfileView: View {
 
                     Text("CodeChef")
                 }
+                .font(FontUtility.getCardCornerSideFont())
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 
                 Text(username)
+                    .font(FontUtility.getCardCornerSideFont())
                     .bold()
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
@@ -69,11 +71,15 @@ struct CodeChefProfileView: View {
                         Text("Current Rating \(codeChefProfile.currentRating)")
                         Text(codeChefProfile.stars)
                     }
+                    #if os(iOS)
+                    .font(.footnote)
+                    #endif
                     .bold()
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     
                     Text("Max Rating: \(codeChefProfile.highestRating)")
+                        .font(FontUtility.getCardCornerSideFont())
                         .padding()
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                     
@@ -91,17 +97,18 @@ struct CodeChefProfileView: View {
                                 AsyncImage(url: imageURL) { phase in
                                     if let image = phase.image {
                                         image
-                                            .frame(width: 24, height: 19)
+                                            .resizable()
+                                            .frame(width: 17.68, height: 14)
                                     } else if phase.error != nil {
                                         // Error
                                         Image(.placeholderFlag)
                                             .resizable()
-                                            .frame(width: 24, height: 19)
+                                            .frame(width: 17.68, height: 14)
                                     } else {
                                         // PlaceHolder
                                         Image(.placeholderFlag)
                                             .resizable()
-                                            .frame(width: 24, height: 19)
+                                            .frame(width: 17.68, height: 14)
                                     }
                                 }
                             } else {
@@ -111,6 +118,7 @@ struct CodeChefProfileView: View {
                             Text("\(codeChefProfile.countryRank)")
                         }
                     }
+                    .font(FontUtility.getCardCornerSideFont())
                     .padding()
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                     
