@@ -10,19 +10,19 @@ import SwiftUI
 struct CodeForcesView: View {
     let username: String
     let codeForcesViewModel: CodeForcesViewModel
-    let bgColor: Color
+    let bgGradient: RadialGradient 
     @State var isHovering = false
     let hoveringScaleValue: CGFloat
 
-    init(username: String, bgColor: Color, hoveringScaleValue: CGFloat) {
+    init(username: String, bgGradient: RadialGradient, hoveringScaleValue: CGFloat) {
         self.username = username
         self.codeForcesViewModel = CodeForcesViewModel(username: username)
-        self.bgColor = bgColor
+        self.bgGradient = bgGradient
         self.hoveringScaleValue = hoveringScaleValue
     }
 
     var body: some View {
-        CodeForcesProfileView(codeForcesViewModel: codeForcesViewModel, username: username, bgColor: bgColor, isLoading: codeForcesViewModel.isLoading, error: codeForcesViewModel.error)
+        CodeForcesProfileView(codeForcesViewModel: codeForcesViewModel, username: username, bgGradient: bgGradient, isLoading: codeForcesViewModel.isLoading, error: codeForcesViewModel.error)
             .onHover(perform: { hovering in
                 withAnimation {
                     isHovering = hovering
@@ -35,14 +35,14 @@ struct CodeForcesView: View {
 struct CodeForcesProfileView: View {
     let codeForcesViewModel: CodeForcesViewModel
     let username: String
-    let bgColor: Color
+    let bgGradient: RadialGradient
     let isLoading: Bool
     let error: Error?
 
-    init(codeForcesViewModel: CodeForcesViewModel, username: String, bgColor: Color, isLoading: Bool, error: Error?) {
+    init(codeForcesViewModel: CodeForcesViewModel, username: String, bgGradient: RadialGradient, isLoading: Bool, error: Error?) {
         self.codeForcesViewModel = codeForcesViewModel
         self.username = username
-        self.bgColor = bgColor
+        self.bgGradient = bgGradient
         self.isLoading = isLoading
         self.error = error
     }
@@ -52,7 +52,7 @@ struct CodeForcesProfileView: View {
 
     var body: some View {
         ZStack {
-            bgColor
+           bgGradient
 
             if isLoading && error == nil {
                 ProgressView()
@@ -143,16 +143,18 @@ struct CodeForcesProfileView: View {
             }
         }
         .multilineTextAlignment(.center)
-        .foregroundStyle(.white)
+        .foregroundStyle(.black)
     }
 }
 
 #Preview {
-    VStack {
-        CodeForcesView(username: "Fefer_Ivan", bgColor: .green, hoveringScaleValue: 1.05)
-        CodeForcesView(username: "ayushsinghals", bgColor: .green, hoveringScaleValue: 1.05)
-        CodeForcesView(username: "ayushsinghals02", bgColor: .green, hoveringScaleValue: 1.05)
-        CodeForcesView(username: "yermak0v", bgColor: .green, hoveringScaleValue: 1.05)
+    let bgGradient: RadialGradient = .init(gradient: Gradient(stops: [.init(color: Color(red: 159/255, green: 150/255, blue: 137/255), location: 0.0), .init(color: Color(red: 209/255, green: 204/255, blue: 198/255), location: 0.5)]), center: .center, startRadius: 10, endRadius: 500)
+
+    return VStack {
+        CodeForcesView(username: "Fefer_Ivan", bgGradient: bgGradient, hoveringScaleValue: 1.05)
+        CodeForcesView(username: "ayushsinghals", bgGradient: bgGradient, hoveringScaleValue: 1.05)
+        CodeForcesView(username: "ayushsinghals02", bgGradient: bgGradient, hoveringScaleValue: 1.05)
+        CodeForcesView(username: "yermak0v", bgGradient: bgGradient, hoveringScaleValue: 1.05)
     }
     .environment(Router.instance)
 }

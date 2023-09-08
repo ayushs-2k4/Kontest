@@ -13,22 +13,24 @@ struct RatingsView: View {
     let codeChefUsername: String
     let hoveringScaleValue = 1.04
 
+    let bgGradient = RadialGradient(gradient: Gradient(stops: [.init(color: Color(red: 159/255, green: 150/255, blue: 137/255), location: 0.0), .init(color: Color(red: 209/255, green: 204/255, blue: 198/255), location: 0.5)]), center: .center, startRadius: 10, endRadius: 500)
+
     @Environment(\.horizontalSizeClass) private var sizeClass
 
     var body: some View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: hSpacing) {
-                CodeForcesView(username: codeForcesUsername, bgColor: .green, hoveringScaleValue: hoveringScaleValue)
+                CodeForcesView(username: codeForcesUsername, bgGradient: bgGradient, hoveringScaleValue: hoveringScaleValue)
                     .clipShape(.rect(cornerRadius: cornerRadius))
                     .aspectRatio(heroRatio, contentMode: .fit)
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
 
-                LeetCodeGraphQLView(username: leetCodeUsername, bgColor: .cyan, hoveringScaleValue: hoveringScaleValue)
+                LeetCodeGraphQLView(username: leetCodeUsername, bgColor: Color(red: 40/255, green: 40/255, blue: 40/255), hoveringScaleValue: hoveringScaleValue)
                     .clipShape(.rect(cornerRadius: cornerRadius))
                     .aspectRatio(heroRatio, contentMode: .fit)
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
 
-                CodeChefView(username: codeChefUsername, bgColor: .teal, hoveringScaleValue: hoveringScaleValue)
+                CodeChefView(username: codeChefUsername, bgColor: .brown, hoveringScaleValue: hoveringScaleValue)
                     .clipShape(.rect(cornerRadius: cornerRadius))
                     .aspectRatio(heroRatio, contentMode: .fit)
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
@@ -65,7 +67,7 @@ struct RatingsView: View {
     }
 
     var heroRatio: CGFloat {
-        16.0 / 9.0
+        16.0/9.0
     }
 }
 
