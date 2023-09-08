@@ -1,6 +1,9 @@
 # Kontest
 Introducing Kontest: Your Comprehensive Contest Companion
 
+![Final Design](https://github.com/ayushs-2k4/Kontest/assets/63922782/26ac8051-abdb-4142-9f44-e2d3d99a04cd)
+
+
 Discover a Seamless Contest Experience with Kontest, an application meticulously designed for iOS, iPadOS, and macOS platforms. With a user-centric approach, Kontest provides an array of features tailored to enhance your contest participation and tracking:
 
 1. **Comprehensive Contest Information**: Stay updated on ongoing and upcoming contests across various competitive programming platforms. Kontest aggregates contest details from Codeforces, LeetCode, and more, ensuring you never miss out on an opportunity.
