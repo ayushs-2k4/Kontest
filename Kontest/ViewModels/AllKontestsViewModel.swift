@@ -27,7 +27,7 @@ class AllKontestsViewModel {
 
     var searchText: String = "" {
         didSet {
-            updateFilteredKontests()
+            filterKontestsUsingSearchText()
         }
     }
 
@@ -43,8 +43,8 @@ class AllKontestsViewModel {
         isLoading = true
         Task {
             await getAllKontests()
-            backupKontests = allKontests
             filterKontests()
+            backupKontests = toShowKontests
             isLoading = false
             removeReminderStatusFromUserDefaultsOfKontestsWhichAreEnded()
 
@@ -54,7 +54,7 @@ class AllKontestsViewModel {
                     guard let self else { return }
 
                     if self.searchText.isEmpty {
-                        self.filterKontests()
+                        self.splitKontestsIntoDifferentCategories()
                     }
                 }
         }
@@ -85,7 +85,7 @@ class AllKontestsViewModel {
         }
     }
 
-    private func updateFilteredKontests() {
+    private func filterKontestsUsingSearchText() {
         let filteredKontests = backupKontests
             .filter { kontest in
                 kontest.name.localizedCaseInsensitiveContains(searchText) || kontest.site.localizedCaseInsensitiveContains(searchText) || kontest.url.localizedCaseInsensitiveContains(searchText)
@@ -116,7 +116,7 @@ class AllKontestsViewModel {
     }
 
     func filterKontests() {
-        toShowKontests = backupKontests.filter {
+        toShowKontests = allKontests.filter {
             let isKontestWebsiteInAllowedWebsites = allowedWebsites.contains($0.site)
 
             return isKontestWebsiteInAllowedWebsites
