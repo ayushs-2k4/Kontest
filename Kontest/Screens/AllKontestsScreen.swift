@@ -42,7 +42,7 @@ struct AllKontestsScreen: View {
 
                                 let laterKontests = allKontestsViewModel.laterKontests
 
-                                if allKontestsViewModel.allKontests.isEmpty && !allKontestsViewModel.searchText.isEmpty {
+                                if allKontestsViewModel.toShowKontests.isEmpty && !allKontestsViewModel.searchText.isEmpty {
                                     Text("Please try some different search term")
                                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                                 } else {
@@ -101,13 +101,13 @@ struct AllKontestsScreen: View {
                     }
                 }
 
-                    ToolbarItem(placement: .automatic) {
-                        Button {
-                            router.appendScreen(screen: .SettingsScreen)
-                        } label: {
-                            Image(systemName: "gear")
-                        }
+                ToolbarItem(placement: .automatic) {
+                    Button {
+                        router.appendScreen(screen: .SettingsScreen)
+                    } label: {
+                        Image(systemName: "gear")
                     }
+                }
 
                 if !allKontestsViewModel.allKontests.isEmpty || !allKontestsViewModel.searchText.isEmpty {
                     ToolbarItem(placement: .automatic) {
@@ -153,7 +153,7 @@ struct AllKontestsScreen: View {
                         switch settingsScreenType {
                         case .ChangeUserNamesScreen:
                             ChangeUsernameScreen()
-                            
+
                         case .FilterWebsitesScreen:
                             FilterWebsitesScreen()
                         }

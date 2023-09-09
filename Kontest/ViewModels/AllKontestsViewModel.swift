@@ -44,7 +44,6 @@ class AllKontestsViewModel {
         Task {
             await getAllKontests()
             filterKontests()
-            backupKontests = toShowKontests
             isLoading = false
             removeReminderStatusFromUserDefaultsOfKontestsWhichAreEnded()
 
@@ -121,7 +120,7 @@ class AllKontestsViewModel {
 
             return isKontestWebsiteInAllowedWebsites
         }
-
+        backupKontests = toShowKontests
         splitKontestsIntoDifferentCategories()
     }
 
