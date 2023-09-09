@@ -33,16 +33,18 @@ class AllKontestsViewModel {
     private(set) var backupKontests: [KontestModel] = []
 
     private init() {
+        setDefaultValuesForFilterWebsiteKeysToTrue()
+        addAllowedWebsites()
         fetchAllKontests()
     }
 
     func fetchAllKontests() {
         isLoading = true
+        filterKontests()
         Task {
             await getAllKontests()
-            filterKontests()
-            isLoading = false
             backupKontests = allKontests
+            isLoading = false
             removeReminderStatusFromUserDefaultsOfKontestsWhichAreEnded()
 
             self.timer = Timer.publish(every: 1, on: .main, in: .default)
@@ -110,8 +112,10 @@ class AllKontestsViewModel {
         let today = Date()
         let tomorrow = CalendarUtility.getTomorrow()
         let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
-        allKontests = allKontests.filter {
-            !CalendarUtility.isKontestOfPast(kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? Date())
+        allKontests = backupKontests.filter {
+            let isKontestWebsiteInAllowedWebsites = allowedWebsites.contains($0.site)
+
+            return isKontestWebsiteInAllowedWebsites
         }
 
         ongoingKontests = allKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? today, kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? today) }
@@ -124,6 +128,46 @@ class AllKontestsViewModel {
 
         laterKontests = allKontests.filter {
             CalendarUtility.getDate(date: $0.start_time) ?? today >= dayAfterTomorrow
+        }
+    }
+
+    private var allowedWebsites: [String] = []
+
+     func addAllowedWebsites() {
+        allowedWebsites.removeAll()
+        
+        print("Ran addAllowedWebsites()")
+        
+        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.codeForcesKey.rawValue) {
+            allowedWebsites.append("CodeForces")
+        }
+
+        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.atCoderKey.rawValue) {
+            allowedWebsites.append("AtCoder")
+        }
+
+        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.cSAcademyKey.rawValue) {
+            allowedWebsites.append("CS Academy")
+        }
+
+        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.codeChefKey.rawValue) {
+            allowedWebsites.append("CodeChef")
+        }
+
+        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.hackerRankKey.rawValue) {
+            allowedWebsites.append("HackerRank")
+        }
+
+        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.hackerEarthKey.rawValue) {
+            allowedWebsites.append("HackerEarth")
+        }
+
+        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.leetCodeKey.rawValue) {
+            allowedWebsites.append("LeetCode")
+        }
+
+        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.tophKey.rawValue) {
+            allowedWebsites.append("Toph")
         }
     }
 }

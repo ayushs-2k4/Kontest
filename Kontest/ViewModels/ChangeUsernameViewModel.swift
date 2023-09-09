@@ -1,5 +1,5 @@
 //
-//  SettingsViewModel.swift
+//  ChangeUsernameViewModel.swift
 //  Kontest
 //
 //  Created by Ayush Singhal on 16/08/23.
@@ -8,18 +8,18 @@
 import Foundation
 
 @Observable
-class SettingsViewModel {
+class ChangeUsernameViewModel {
     var leetcodeUsername: String = ""
     var codeForcesUsername: String = ""
     var codeChefUsername: String = ""
     
-    static let instance = SettingsViewModel()
+    static let instance = ChangeUsernameViewModel()
     
     private let leetcodeUsernameKey = "leetcodeUsername"
     private let codeForcesUsernameKey = "codeForcesUsername"
     private let codeChefUsernameKey = "codeChefUsername"
     
-    init() {
+    private init() {
         if let leetcodeUsername = UserDefaults.standard.string(forKey: leetcodeUsernameKey) {
             self.leetcodeUsername = leetcodeUsername
         }

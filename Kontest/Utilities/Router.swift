@@ -26,7 +26,8 @@ class Router {
     private init() {}
 
     func appendScreen(screen: Screen) {
-        if currentSelectionState != .screen(.SettingsScreen) {
+        if (path.contains(.screen(.SettingsScreen)) || path.contains(.screen(.SettingsScreenType(.ChangeUserNamesScreen))) || path.contains(.screen(.SettingsScreenType(.FilterWebsitesScreen)))), screen == .SettingsScreen {
+        } else {
             path.append(SelectionState.screen(screen))
         }
     }

@@ -7,8 +7,14 @@
 
 import Foundation
 
-enum Screen: String {
+enum Screen: Hashable {
     case AllKontestScreen
     case SettingsScreen
+    case SettingsScreenType(SettingsScreens)
     case PendingNotificationsScreen
+}
+
+enum SettingsScreens {
+    case ChangeUserNamesScreen
+    case FilterWebsitesScreen
 }

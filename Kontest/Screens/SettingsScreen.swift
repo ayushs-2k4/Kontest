@@ -8,74 +8,56 @@
 import SwiftUI
 
 struct SettingsScreen: View {
-    let settingsViewModel = SettingsViewModel.instance
-
-    @State private var leetcodeUsername: String = ""
-    @State private var codeForcesUsername: String = ""
-    @State private var codeChefUsername: String = ""
-
-    @Environment(\.colorScheme) var colorScheme
-    @Environment(\.dismiss) var dismiss
-
-    init() {
-        _leetcodeUsername = State(initialValue: settingsViewModel.leetcodeUsername)
-        _codeForcesUsername = State(initialValue: settingsViewModel.codeForcesUsername)
-        _codeChefUsername = State(initialValue: settingsViewModel.codeChefUsername)
-    }
-
-    var body: some View {
-//        TextField("Enter CodeForces Username", text: Bindable(settingsViewModel).codeForcesUsername)
-//        TextField("Enter Leetcode Username", text: Bindable(settingsViewModel).leetcodeUsername)
-
-        VStack {
-            SettingsTextFieldView(lightModeImage: .codeForcesLogo, darkModeImage: .codeForcesLogo, title: "Enter CodeForces Username", boundryColor: KontestModel.getColorForIdentifier(site: "CodeForces"), usernameBinding: $codeForcesUsername)
-
-            SettingsTextFieldView(lightModeImage: .leetCodeDarkLogo, darkModeImage: .leetCodeWhiteLogo, title: "Enter LeetCode Username", boundryColor: KontestModel.getColorForIdentifier(site: "LeetCode"), usernameBinding: $leetcodeUsername)
-            
-            SettingsTextFieldView(lightModeImage: .codeChefLogo, darkModeImage: .codeChefLogo, title: "Enter CodeChef Username", boundryColor: KontestModel.getColorForIdentifier(site: "CodeChef"), usernameBinding: $codeChefUsername)
-
-            Button("Save") {
-                settingsViewModel.setCodeForcesUsername(newCodeForcesUsername: codeForcesUsername)
-                settingsViewModel.setLeetcodeUsername(newLeetcodeUsername: leetcodeUsername)
-                settingsViewModel.setCodeChefUsername(newCodeChefUsername: codeChefUsername)
-                dismiss()
-            }
-            .keyboardShortcut(.return)
-        }
-        .padding()
-    }
-}
-
-struct SettingsTextFieldView: View {
-    let lightModeImage: ImageResource
-    let darkModeImage: ImageResource
-    let title: String
-    let boundryColor: Color
-    @Binding var usernameBinding: String
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(Router.self) private var router
 
     var body: some View {
         HStack {
-            Image(colorScheme == .light ? lightModeImage : darkModeImage)
-                .resizable()
-                .frame(width: 30, height: 30)
+//            SingleSettingsTileView(title: "Change Usernames") {
+//                router.appendScreen(screen: Screen.SettingsScreenType(.ChangeUserNamesScreen))
+//            }
 
-            TextField(title, text: $usernameBinding)
-                .textFieldStyle(.plain)
-            #if os(iOS)
-                .textInputAutocapitalization(.never)
-            #endif
+            Button("Change Usernames") {
+                router.appendScreen(screen: Screen.SettingsScreenType(.ChangeUserNamesScreen))
+            }
+
+            Button("Filter Websites") {
+                router.appendScreen(screen: Screen.SettingsScreenType(.FilterWebsitesScreen))
+            }
+
+//            SingleSettingsTileView(title: "Filter Websites") {
+//                router.appendScreen(screen: Screen.SettingsScreenType(.FilterWebsitesScreen))
+//            }
         }
-        .padding(5)
-        .overlay( // apply a rounded border
-            RoundedRectangle(cornerRadius: 5)
-                .stroke(boundryColor, lineWidth: 1)
-        )
-        .frame(maxWidth: 400)
+        .navigationTitle("Settings")
+    }
+}
+
+struct SingleSettingsTileView: View {
+    let title: String
+    let backgroundColor: Color = .yellow
+    let onTapGesture: () -> ()
+
+    var body: some View {
+        ZStack {
+//            backgroundColor
+
+            Text(title)
+        }
+        .onTapGesture {
+            print("Tapped on: \(title)")
+            onTapGesture()
+        }
     }
 }
 
 #Preview {
-    SettingsScreen()
-        .environment(SettingsViewModel.instance)
+    NavigationStack {
+        SettingsScreen()
+    }
+    .environment(ChangeUsernameViewModel.instance)
+    .environment(Router.instance)
+}
+
+#Preview("SingleSettingsTileView") {
+    SingleSettingsTileView(title: "Change Usernames", onTapGesture: {})
 }

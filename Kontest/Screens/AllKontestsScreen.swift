@@ -11,11 +11,11 @@ struct AllKontestsScreen: View {
     @Environment(AllKontestsViewModel.self) private var allKontestsViewModel
     @State var showRemoveAllNotificationsAlert = false
     @State var showNotificationForAllKontestsAlert = false
-    let isInDevelopmentMode = false
+    let isInDevelopmentMode = true
     @State private var isNoNotificationIconAnimating = false
     let notificationsViewModel = NotificationsViewModel.instance
 
-    let settingsViewModel = SettingsViewModel.instance
+    let changeUsernameViewModel = ChangeUsernameViewModel.instance
 
     @Environment(Router.self) private var router
 
@@ -30,7 +30,7 @@ struct AllKontestsScreen: View {
                     TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
                         VStack {
                             List {
-                                RatingsView(codeForcesUsername: settingsViewModel.codeForcesUsername, leetCodeUsername: settingsViewModel.leetcodeUsername, codeChefUsername: settingsViewModel.codeChefUsername)
+                                RatingsView(codeForcesUsername: changeUsernameViewModel.codeForcesUsername, leetCodeUsername: changeUsernameViewModel.leetcodeUsername, codeChefUsername: changeUsernameViewModel.codeChefUsername)
                                     .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                                     .listRowSeparator(.hidden)
 
@@ -101,7 +101,6 @@ struct AllKontestsScreen: View {
                     }
                 }
 
-                if !allKontestsViewModel.allKontests.isEmpty || !allKontestsViewModel.searchText.isEmpty {
                     ToolbarItem(placement: .automatic) {
                         Button {
                             router.appendScreen(screen: .SettingsScreen)
@@ -110,6 +109,7 @@ struct AllKontestsScreen: View {
                         }
                     }
 
+                if !allKontestsViewModel.allKontests.isEmpty || !allKontestsViewModel.searchText.isEmpty {
                     ToolbarItem(placement: .automatic) {
                         AllNotificationMenu()
                     }
@@ -148,6 +148,15 @@ struct AllKontestsScreen: View {
 
                     case .PendingNotificationsScreen:
                         PendingNotificationsScreen()
+
+                    case .SettingsScreenType(let settingsScreenType):
+                        switch settingsScreenType {
+                        case .ChangeUserNamesScreen:
+                            ChangeUsernameScreen()
+                            
+                        case .FilterWebsitesScreen:
+                            FilterWebsitesScreen()
+                        }
                     }
 
                 case .kontestModel(let kontest):
