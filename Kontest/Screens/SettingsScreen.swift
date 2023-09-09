@@ -16,17 +16,20 @@ struct SettingsScreen: View {
 //                router.appendScreen(screen: Screen.SettingsScreenType(.ChangeUserNamesScreen))
 //            }
 
-            Button("Change Usernames") {
-                router.appendScreen(screen: Screen.SettingsScreenType(.ChangeUserNamesScreen))
-            }
+            VStack {
+                Button("Change Usernames") {
+                    router.appendScreen(screen: Screen.SettingsScreenType(.ChangeUserNamesScreen))
+                }
+                .buttonStyle(.bordered)
 
-            Button("Filter Websites") {
-                router.appendScreen(screen: Screen.SettingsScreenType(.FilterWebsitesScreen))
+                Button("Filter Websites") {
+                    router.appendScreen(screen: Screen.SettingsScreenType(.FilterWebsitesScreen))
+                }
+                .buttonStyle(.bordered)
             }
-
 //            SingleSettingsTileView(title: "Filter Websites") {
 //                router.appendScreen(screen: Screen.SettingsScreenType(.FilterWebsitesScreen))
-//            }
+//            }r
         }
         .navigationTitle("Settings")
     }

@@ -8,13 +8,28 @@
 import SwiftUI
 
 struct ChangeUsernameScreen: View {
+    var body: some View {
+        #if os(macOS)
+            VStack {
+                MainChangeUsernameView()
+            }
+        #else
+            Form {
+                MainChangeUsernameView()
+            }
+        #endif
+    }
+}
+
+struct MainChangeUsernameView: View {
     let changeUsernameViewModel = ChangeUsernameViewModel.instance
 
     @State private var leetcodeUsername: String = ""
     @State private var codeForcesUsername: String = ""
     @State private var codeChefUsername: String = ""
 
-    @Environment(\.colorScheme) var colorScheme
+    @FocusState private var focusedField: SettingsTextField?
+
     @Environment(\.dismiss) var dismiss
 
     init() {
@@ -27,22 +42,23 @@ struct ChangeUsernameScreen: View {
         //        TextField("Enter CodeForces Username", text: Bindable(changeUsernameViewModel).codeForcesUsername)
         //        TextField("Enter Leetcode Username", text: Bindable(changeUsernameViewModel).leetcodeUsername)
 
-        VStack {
-            SettingsTextFieldView(lightModeImage: .codeForcesLogo, darkModeImage: .codeForcesLogo, title: "Enter CodeForces Username", boundryColor: KontestModel.getColorForIdentifier(site: "CodeForces"), usernameBinding: $codeForcesUsername)
+        SettingsTextFieldView(lightModeImage: .codeForcesLogo, darkModeImage: .codeForcesLogo, title: "Enter CodeForces Username", boundryColor: KontestModel.getColorForIdentifier(site: "CodeForces"), submitLabel: .next, usernameBinding: $codeForcesUsername, focusedField: _focusedField, currentField: .CodeForces, onPressingNext: {})
 
-            SettingsTextFieldView(lightModeImage: .leetCodeDarkLogo, darkModeImage: .leetCodeWhiteLogo, title: "Enter LeetCode Username", boundryColor: KontestModel.getColorForIdentifier(site: "LeetCode"), usernameBinding: $leetcodeUsername)
+        SettingsTextFieldView(lightModeImage: .leetCodeDarkLogo, darkModeImage: .leetCodeWhiteLogo, title: "Enter LeetCode Username", boundryColor: KontestModel.getColorForIdentifier(site: "LeetCode"), submitLabel: .next, usernameBinding: $leetcodeUsername, focusedField: _focusedField, currentField: .LeetCode, onPressingNext: {})
 
-            SettingsTextFieldView(lightModeImage: .codeChefLogo, darkModeImage: .codeChefLogo, title: "Enter CodeChef Username", boundryColor: KontestModel.getColorForIdentifier(site: "CodeChef"), usernameBinding: $codeChefUsername)
+        SettingsTextFieldView(lightModeImage: .codeChefLogo, darkModeImage: .codeChefLogo, title: "Enter CodeChef Username", boundryColor: KontestModel.getColorForIdentifier(site: "CodeChef"), submitLabel: .return, usernameBinding: $codeChefUsername, focusedField: _focusedField, currentField: .CodeChef, onPressingNext: { completeForm() })
 
-            Button("Save") {
-                changeUsernameViewModel.setCodeForcesUsername(newCodeForcesUsername: codeForcesUsername)
-                changeUsernameViewModel.setLeetcodeUsername(newLeetcodeUsername: leetcodeUsername)
-                changeUsernameViewModel.setCodeChefUsername(newCodeChefUsername: codeChefUsername)
-                dismiss()
-            }
-            .keyboardShortcut(.return)
+        Button("Save") {
+            completeForm()
         }
-        .padding()
+        .keyboardShortcut(.return)
+    }
+
+    func completeForm() {
+        changeUsernameViewModel.setCodeForcesUsername(newCodeForcesUsername: codeForcesUsername)
+        changeUsernameViewModel.setLeetcodeUsername(newLeetcodeUsername: leetcodeUsername)
+        changeUsernameViewModel.setCodeChefUsername(newCodeChefUsername: codeChefUsername)
+        dismiss()
     }
 }
 
@@ -51,7 +67,24 @@ struct SettingsTextFieldView: View {
     let darkModeImage: ImageResource
     let title: String
     let boundryColor: Color
+    let submitLabel: SubmitLabel
     @Binding var usernameBinding: String
+    @FocusState private var focusedField: SettingsTextField?
+    let currentField: SettingsTextField
+    let onPressingNext: () -> ()
+
+    init(lightModeImage: ImageResource, darkModeImage: ImageResource, title: String, boundryColor: Color, submitLabel: SubmitLabel, usernameBinding: Binding<String>, focusedField: FocusState<SettingsTextField?>, currentField: SettingsTextField, onPressingNext: @escaping () -> ()) {
+        self.lightModeImage = lightModeImage
+        self.darkModeImage = darkModeImage
+        self.title = title
+        self.boundryColor = boundryColor
+        self.submitLabel = submitLabel
+        self._usernameBinding = usernameBinding
+        self._focusedField = focusedField
+        self.currentField = currentField
+        self.onPressingNext = onPressingNext
+    }
+
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
@@ -62,6 +95,8 @@ struct SettingsTextFieldView: View {
 
             TextField(title, text: $usernameBinding)
                 .textFieldStyle(.plain)
+                .submitLabel(submitLabel)
+                .focused($focusedField, equals: currentField)
             #if os(iOS)
                 .textInputAutocapitalization(.never)
             #endif
@@ -71,8 +106,27 @@ struct SettingsTextFieldView: View {
             RoundedRectangle(cornerRadius: 5)
                 .stroke(boundryColor, lineWidth: 1)
         )
+        #if os(macOS)
         .frame(maxWidth: 400)
+        #endif
+        .onSubmit {
+            onPressingNext()
+            switch currentField {
+            case .CodeForces:
+                focusedField = .LeetCode
+            case .LeetCode:
+                focusedField = .CodeChef
+            case .CodeChef:
+                focusedField = nil
+            }
+        }
     }
+}
+
+enum SettingsTextField {
+    case CodeForces
+    case LeetCode
+    case CodeChef
 }
 
 #Preview {
