@@ -130,6 +130,13 @@ class AllKontestsViewModel {
         let tomorrow = CalendarUtility.getTomorrow()
         let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
 
+        toShowKontests = toShowKontests.filter {
+            let kontestEndDate = CalendarUtility.getDate(date: $0.end_time)
+            let isKontestEnded = CalendarUtility.isKontestOfPast(kontestEndDate: kontestEndDate ?? Date())
+
+            return !isKontestEnded
+        }
+
         ongoingKontests = toShowKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? today, kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? today) }
 
         laterTodayKontests = toShowKontests.filter {
