@@ -17,6 +17,9 @@ class AllKontestsViewModel {
     private var timer: AnyCancellable?
 
     private(set) var allKontests: [KontestModel] = []
+    private(set) var toShowKontests: [KontestModel] = []
+    private(set) var backupKontests: [KontestModel] = []
+
     private(set) var ongoingKontests: [KontestModel] = []
     private(set) var laterTodayKontests: [KontestModel] = []
     private(set) var tomorrowKontests: [KontestModel] = []
@@ -30,8 +33,6 @@ class AllKontestsViewModel {
 
     var isLoading = false
 
-    private(set) var backupKontests: [KontestModel] = []
-
     private init() {
         setDefaultValuesForFilterWebsiteKeysToTrue()
         addAllowedWebsites()
@@ -40,17 +41,21 @@ class AllKontestsViewModel {
 
     func fetchAllKontests() {
         isLoading = true
-        filterKontests()
         Task {
             await getAllKontests()
             backupKontests = allKontests
+            filterKontests()
             isLoading = false
             removeReminderStatusFromUserDefaultsOfKontestsWhichAreEnded()
 
             self.timer = Timer.publish(every: 1, on: .main, in: .default)
                 .autoconnect()
                 .sink { [weak self] _ in
-                    self?.filterKontests()
+                    guard let self else { return }
+
+                    if self.searchText.isEmpty {
+                        self.filterKontests()
+                    }
                 }
         }
     }
@@ -87,11 +92,13 @@ class AllKontestsViewModel {
             }
 
         // Update the filtered kontests
-        allKontests = searchText.isEmpty ? backupKontests : filteredKontests
+        toShowKontests = searchText.isEmpty ? backupKontests : filteredKontests
+
+        splitKontestsIntoDifferentCategories()
     }
 
     private func removeReminderStatusFromUserDefaultsOfKontestsWhichAreEnded() {
-        for kontest in allKontests {
+        for kontest in toShowKontests {
             if isKontestEnded(kontestEndDate: kontest.end_time) {
                 kontest.removeReminderStatusFromUserDefaults()
                 print("kontest with id: \(kontest.id)'s notification is deleted as kontest is ended.")
@@ -109,35 +116,40 @@ class AllKontestsViewModel {
     }
 
     func filterKontests() {
-        let today = Date()
-        let tomorrow = CalendarUtility.getTomorrow()
-        let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
-        allKontests = backupKontests.filter {
+        toShowKontests = backupKontests.filter {
             let isKontestWebsiteInAllowedWebsites = allowedWebsites.contains($0.site)
 
             return isKontestWebsiteInAllowedWebsites
         }
 
-        ongoingKontests = allKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? today, kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? today) }
+        splitKontestsIntoDifferentCategories()
+    }
 
-        laterTodayKontests = allKontests.filter {
+    private func splitKontestsIntoDifferentCategories() {
+        let today = Date()
+        let tomorrow = CalendarUtility.getTomorrow()
+        let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
+
+        ongoingKontests = toShowKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? today, kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? today) }
+
+        laterTodayKontests = toShowKontests.filter {
             CalendarUtility.getDate(date: $0.start_time) ?? today < tomorrow && !(ongoingKontests.contains($0))
         }
 
-        tomorrowKontests = allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? today >= tomorrow) && (CalendarUtility.getDate(date: $0.start_time) ?? today < dayAfterTomorrow) }
+        tomorrowKontests = toShowKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? today >= tomorrow) && (CalendarUtility.getDate(date: $0.start_time) ?? today < dayAfterTomorrow) }
 
-        laterKontests = allKontests.filter {
+        laterKontests = toShowKontests.filter {
             CalendarUtility.getDate(date: $0.start_time) ?? today >= dayAfterTomorrow
         }
     }
 
     private var allowedWebsites: [String] = []
 
-     func addAllowedWebsites() {
+    func addAllowedWebsites() {
         allowedWebsites.removeAll()
-        
+
         print("Ran addAllowedWebsites()")
-        
+
         if UserDefaults.standard.bool(forKey: FilterWebsiteKey.codeForcesKey.rawValue) {
             allowedWebsites.append("CodeForces")
         }
