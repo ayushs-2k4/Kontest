@@ -143,7 +143,7 @@ struct CodeForcesProfileView: View {
                     openURL(url)
                 }
                 else {
-                    router.appendScreen(screen: .SettingsScreen)
+                    router.appendScreen(screen: .SettingsScreenType(.ChangeUserNamesScreen))
                 }
             }
         }

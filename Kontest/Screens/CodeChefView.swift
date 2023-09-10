@@ -141,7 +141,7 @@ struct CodeChefProfileView: View {
                     guard let url = URL(string: "https://www.codechef.com/users/\(username)") else { return }
                     openURL(url)
                 } else {
-                    router.appendScreen(screen: .SettingsScreen)
+                    router.appendScreen(screen: .SettingsScreenType(.ChangeUserNamesScreen))
                 }
             }
         }

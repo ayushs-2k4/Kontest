@@ -131,7 +131,7 @@ struct LeetcodeProfileGraphQLView: View {
                     guard let url = URL(string: "https://leetcode.com/\(username)") else { return }
                     openURL(url)
                 } else {
-                    router.appendScreen(screen: .SettingsScreen)
+                    router.appendScreen(screen: .SettingsScreenType(.ChangeUserNamesScreen))
                 }
             }
         }

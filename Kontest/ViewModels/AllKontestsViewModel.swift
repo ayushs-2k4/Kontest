@@ -17,6 +17,9 @@ class AllKontestsViewModel {
     private var timer: AnyCancellable?
 
     private(set) var allKontests: [KontestModel] = []
+    private(set) var toShowKontests: [KontestModel] = []
+    private(set) var backupKontests: [KontestModel] = []
+
     private(set) var ongoingKontests: [KontestModel] = []
     private(set) var laterTodayKontests: [KontestModel] = []
     private(set) var tomorrowKontests: [KontestModel] = []
@@ -24,15 +27,15 @@ class AllKontestsViewModel {
 
     var searchText: String = "" {
         didSet {
-            updateFilteredKontests()
+            filterKontestsUsingSearchText()
         }
     }
 
     var isLoading = false
 
-    private(set) var backupKontests: [KontestModel] = []
-
     private init() {
+        setDefaultValuesForFilterWebsiteKeysToTrue()
+        addAllowedWebsites()
         fetchAllKontests()
     }
 
@@ -42,13 +45,16 @@ class AllKontestsViewModel {
             await getAllKontests()
             filterKontests()
             isLoading = false
-            backupKontests = allKontests
             removeReminderStatusFromUserDefaultsOfKontestsWhichAreEnded()
 
             self.timer = Timer.publish(every: 1, on: .main, in: .default)
                 .autoconnect()
                 .sink { [weak self] _ in
-                    self?.filterKontests()
+                    guard let self else { return }
+
+                    if self.searchText.isEmpty {
+                        self.splitKontestsIntoDifferentCategories()
+                    }
                 }
         }
     }
@@ -78,18 +84,20 @@ class AllKontestsViewModel {
         }
     }
 
-    private func updateFilteredKontests() {
+    private func filterKontestsUsingSearchText() {
         let filteredKontests = backupKontests
             .filter { kontest in
                 kontest.name.localizedCaseInsensitiveContains(searchText) || kontest.site.localizedCaseInsensitiveContains(searchText) || kontest.url.localizedCaseInsensitiveContains(searchText)
             }
 
         // Update the filtered kontests
-        allKontests = searchText.isEmpty ? backupKontests : filteredKontests
+        toShowKontests = searchText.isEmpty ? backupKontests : filteredKontests
+
+        splitKontestsIntoDifferentCategories()
     }
 
     private func removeReminderStatusFromUserDefaultsOfKontestsWhichAreEnded() {
-        for kontest in allKontests {
+        for kontest in toShowKontests {
             if isKontestEnded(kontestEndDate: kontest.end_time) {
                 kontest.removeReminderStatusFromUserDefaults()
                 print("kontest with id: \(kontest.id)'s notification is deleted as kontest is ended.")
@@ -107,23 +115,77 @@ class AllKontestsViewModel {
     }
 
     func filterKontests() {
+        toShowKontests = allKontests.filter {
+            let isKontestWebsiteInAllowedWebsites = allowedWebsites.contains($0.site)
+
+            return isKontestWebsiteInAllowedWebsites
+        }
+        backupKontests = toShowKontests
+        splitKontestsIntoDifferentCategories()
+    }
+
+    private func splitKontestsIntoDifferentCategories() {
         let today = Date()
         let tomorrow = CalendarUtility.getTomorrow()
         let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
-        allKontests = allKontests.filter {
-            !CalendarUtility.isKontestOfPast(kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? Date())
+
+        toShowKontests = toShowKontests.filter {
+            let kontestEndDate = CalendarUtility.getDate(date: $0.end_time)
+            let isKontestEnded = CalendarUtility.isKontestOfPast(kontestEndDate: kontestEndDate ?? Date())
+
+            return !isKontestEnded
         }
 
-        ongoingKontests = allKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? today, kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? today) }
+        ongoingKontests = toShowKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? today, kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? today) }
 
-        laterTodayKontests = allKontests.filter {
+        laterTodayKontests = toShowKontests.filter {
             CalendarUtility.getDate(date: $0.start_time) ?? today < tomorrow && !(ongoingKontests.contains($0))
         }
 
-        tomorrowKontests = allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? today >= tomorrow) && (CalendarUtility.getDate(date: $0.start_time) ?? today < dayAfterTomorrow) }
+        tomorrowKontests = toShowKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? today >= tomorrow) && (CalendarUtility.getDate(date: $0.start_time) ?? today < dayAfterTomorrow) }
 
-        laterKontests = allKontests.filter {
+        laterKontests = toShowKontests.filter {
             CalendarUtility.getDate(date: $0.start_time) ?? today >= dayAfterTomorrow
+        }
+    }
+
+    private var allowedWebsites: [String] = []
+
+    func addAllowedWebsites() {
+        allowedWebsites.removeAll()
+
+        print("Ran addAllowedWebsites()")
+
+        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.codeForcesKey.rawValue) {
+            allowedWebsites.append("CodeForces")
+        }
+
+        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.atCoderKey.rawValue) {
+            allowedWebsites.append("AtCoder")
+        }
+
+        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.cSAcademyKey.rawValue) {
+            allowedWebsites.append("CS Academy")
+        }
+
+        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.codeChefKey.rawValue) {
+            allowedWebsites.append("CodeChef")
+        }
+
+        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.hackerRankKey.rawValue) {
+            allowedWebsites.append("HackerRank")
+        }
+
+        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.hackerEarthKey.rawValue) {
+            allowedWebsites.append("HackerEarth")
+        }
+
+        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.leetCodeKey.rawValue) {
+            allowedWebsites.append("LeetCode")
+        }
+
+        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.tophKey.rawValue) {
+            allowedWebsites.append("Toph")
         }
     }
 }

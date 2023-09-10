@@ -118,8 +118,9 @@ class NotificationsViewModel {
     }
 
     func setNotificationForAllKontests(minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String = "", kontestSubTitle: String = "", kontestBody: String = "") {
-        for i in 0 ..< allKontestsViewModel.allKontests.count {
-            let kontest = allKontestsViewModel.allKontests[i]
+        print("count: \(allKontestsViewModel.toShowKontests.count)")
+        for i in 0 ..< allKontestsViewModel.toShowKontests.count {
+            let kontest = allKontestsViewModel.toShowKontests[i]
             let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
 
             if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) {
