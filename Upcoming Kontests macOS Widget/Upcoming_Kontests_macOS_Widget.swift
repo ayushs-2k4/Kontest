@@ -35,7 +35,7 @@ struct Provider: TimelineProvider {
 
             myEntries.append(entry)
 
-            let timeline = Timeline(entries: myEntries, policy: .atEnd)
+            let timeline = Timeline(entries: myEntries, policy: .after(.now.advanced(by: 1 * 60 * 60)))
             completion(timeline)
         }
     }
