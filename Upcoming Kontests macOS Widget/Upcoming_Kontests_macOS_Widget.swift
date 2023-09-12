@@ -29,13 +29,15 @@ struct Provider: TimelineProvider {
         Task {
             let kontestsDividedInCategories = await GetKontests.getKontestsDividedIncategories()
 
+            let nextDateToRefresh = CalendarUtility.getNextDateToRefresh(ongoingKontests: kontestsDividedInCategories.ongoingKontests, laterTodayKontests: kontestsDividedInCategories.laterTodayKontests, tomorrowKontests: kontestsDividedInCategories.tomorrowKontests, laterKontests: kontestsDividedInCategories.laterKontests)
+
             var myEntries: [SimpleEntry] = []
 
             let entry = SimpleEntry(date: Date(), error: kontestsDividedInCategories.error, ongoingKontests: kontestsDividedInCategories.ongoingKontests, laterTodayKontests: kontestsDividedInCategories.laterTodayKontests, tomorrowKontests: kontestsDividedInCategories.tomorrowKontests, laterKontests: kontestsDividedInCategories.laterKontests)
 
             myEntries.append(entry)
 
-            let timeline = Timeline(entries: myEntries, policy: .after(.now.advanced(by: 1 * 60 * 60)))
+            let timeline = Timeline(entries: myEntries, policy: .after(nextDateToRefresh))
             completion(timeline)
         }
     }

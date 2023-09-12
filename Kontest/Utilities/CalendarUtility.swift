@@ -233,4 +233,42 @@ class CalendarUtility {
             String(format: "%02d:%02d", minutes, remainingSeconds)
         }
     }
+
+    static func getNextDateToRefresh(ongoingKontests: [KontestModel], laterTodayKontests: [KontestModel], tomorrowKontests: [KontestModel], laterKontests: [KontestModel]) -> Date {
+        var nextDateToRefresh = Date.now.advanced(by: 1 * 60 * 60)
+
+        if !ongoingKontests.isEmpty {
+            let startTime = CalendarUtility.getDate(date: ongoingKontests.first!.start_time) ?? Date.now.advanced(by: 1 * 60 * 60)
+
+            let endTime = CalendarUtility.getDate(date: ongoingKontests.first!.end_time) ?? Date.now.advanced(by: 1 * 60 * 60)
+
+            nextDateToRefresh = min(nextDateToRefresh, startTime, endTime)
+        }
+
+        if !laterTodayKontests.isEmpty {
+            let startTime = CalendarUtility.getDate(date: laterTodayKontests.first!.start_time) ?? Date.now.advanced(by: 1 * 60 * 60)
+
+            let endTime = CalendarUtility.getDate(date: laterTodayKontests.first!.end_time) ?? Date.now.advanced(by: 1 * 60 * 60)
+
+            nextDateToRefresh = min(nextDateToRefresh, startTime, endTime)
+        }
+
+        if !tomorrowKontests.isEmpty {
+            let startTime = CalendarUtility.getDate(date: tomorrowKontests.first!.start_time) ?? Date.now.advanced(by: 1 * 60 * 60)
+
+            let endTime = CalendarUtility.getDate(date: tomorrowKontests.first!.end_time) ?? Date.now.advanced(by: 1 * 60 * 60)
+
+            nextDateToRefresh = min(nextDateToRefresh, startTime, endTime)
+        }
+
+        if !laterKontests.isEmpty {
+            let startTime = CalendarUtility.getDate(date: laterKontests.first!.start_time) ?? Date.now.advanced(by: 1 * 60 * 60)
+
+            let endTime = CalendarUtility.getDate(date: laterKontests.first!.end_time) ?? Date.now.advanced(by: 1 * 60 * 60)
+
+            nextDateToRefresh = min(nextDateToRefresh, startTime, endTime)
+        }
+
+        return nextDateToRefresh
+    }
 }
