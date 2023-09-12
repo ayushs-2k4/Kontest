@@ -18,8 +18,6 @@ struct CreateSectionView: View {
             Text(title)
                 .bold()
 
-            let size = kontests.count
-
             ForEach(kontests.indices) { index in
                 createSingleKontestView(kontest: kontests[index], toShowDate: toShowDate, toShowTime: toShowTime)
                 if index != kontests.count - 1 {
