@@ -14,6 +14,8 @@
 		076134CF2AA86AC300946B02 /* KontestDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076134CE2AA86AC300946B02 /* KontestDetailViewModel.swift */; };
 		07A31F002AAC818D00EBC296 /* FilterWebsiteKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A31EFF2AAC818D00EBC296 /* FilterWebsiteKey.swift */; };
 		07A31F022AAC831300EBC296 /* FilterWebsitesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A31F012AAC831300EBC296 /* FilterWebsitesViewModel.swift */; };
+		07B74E742AB06CBB001D08CE /* AllKontestsFakeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB452AA58259008513C6 /* AllKontestsFakeRepository.swift */; };
+		07B74E752AB06CBC001D08CE /* AllKontestsFakeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB452AA58259008513C6 /* AllKontestsFakeRepository.swift */; };
 		07CFEBA42AB02DCB00291484 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CFEBA32AB02DCB00291484 /* WidgetKit.framework */; };
 		07CFEBA62AB02DCB00291484 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CFEBA52AB02DCB00291484 /* SwiftUI.framework */; };
 		07CFEBA92AB02DCB00291484 /* Upcoming_Kontests_iOS_WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CFEBA82AB02DCB00291484 /* Upcoming_Kontests_iOS_WidgetBundle.swift */; };
@@ -714,6 +716,7 @@
 				07CFEBBC2AB02EDF00291484 /* DownloadData.swift in Sources */,
 				07CFEBBB2AB02ED700291484 /* KontestRepository.swift in Sources */,
 				07CFEBBA2AB02E1A00291484 /* CalendarUtility.swift in Sources */,
+				07B74E742AB06CBB001D08CE /* AllKontestsFakeRepository.swift in Sources */,
 				07CFEBB82AB02E0C00291484 /* KontestDTO.swift in Sources */,
 				07CFEBBD2AB02EE300291484 /* KontestFetcher.swift in Sources */,
 				07CFEC0E2AB0436100291484 /* GetKontests.swift in Sources */,
@@ -733,6 +736,7 @@
 				07CFEC082AB0430D00291484 /* CalendarUtility.swift in Sources */,
 				07CFEC062AB042F500291484 /* CreateSectionView.swift in Sources */,
 				07CFEC102AB0436800291484 /* KontestRepository.swift in Sources */,
+				07B74E752AB06CBC001D08CE /* AllKontestsFakeRepository.swift in Sources */,
 				07CFEC072AB0430500291484 /* KontestModel.swift in Sources */,
 				07CFEC092AB0431300291484 /* KontestDTO.swift in Sources */,
 				07CFEBF32AB042A500291484 /* Upcoming_Kontests_macOS_WidgetBundle.swift in Sources */,

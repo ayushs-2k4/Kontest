@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct AllKontestsScreen: View {
     @Environment(AllKontestsViewModel.self) private var allKontestsViewModel
@@ -73,6 +74,7 @@ struct AllKontestsScreen: View {
             .navigationTitle("Kontest")
             .onAppear {
                 LocalNotificationManager.instance.setBadgeCountTo0()
+                WidgetCenter.shared.reloadAllTimelines()
             }
             .toolbar {
                 if isInDevelopmentMode {

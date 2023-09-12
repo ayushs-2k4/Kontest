@@ -33,7 +33,7 @@ struct Provider: TimelineProvider {
 
             var myEntries: [SimpleEntry] = []
 
-            let entry = SimpleEntry(date: Date(), error: kontestsDividedInCategories.error, ongoingKontests: kontestsDividedInCategories.ongoingKontests, laterTodayKontests: kontestsDividedInCategories.laterTodayKontests, tomorrowKontests: kontestsDividedInCategories.tomorrowKontests, laterKontests: kontestsDividedInCategories.laterKontests)
+            let entry = SimpleEntry(date: nextDateToRefresh, error: kontestsDividedInCategories.error, ongoingKontests: kontestsDividedInCategories.ongoingKontests, laterTodayKontests: kontestsDividedInCategories.laterTodayKontests, tomorrowKontests: kontestsDividedInCategories.tomorrowKontests, laterKontests: kontestsDividedInCategories.laterKontests)
 
             myEntries.append(entry)
 
