@@ -270,6 +270,12 @@ class CalendarUtility {
             }
         }
 
+        if let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date()) {
+            if let tomorrowAtMidnight = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: tomorrow) {
+                nextDateToRefresh = min(nextDateToRefresh, tomorrowAtMidnight)
+            }
+        }
+
         return nextDateToRefresh
     }
 }
