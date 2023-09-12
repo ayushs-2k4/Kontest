@@ -60,20 +60,24 @@ struct Upcoming_Kontests_iOS_WidgetEntryView: View {
             if let error = entry.error {
                 Text("Error: \(error.localizedDescription)")
             } else {
-                if !entry.ongoingKontests.isEmpty {
-                    CreateSectionView(title: "On Going Kontests", kontests: entry.ongoingKontests, toShowDate: false, toShowTime: false)
-                }
+                if entry.ongoingKontests.isEmpty && entry.laterTodayKontests.isEmpty && entry.tomorrowKontests.isEmpty && entry.laterKontests.isEmpty {
+                    Text("No Kontests Scheduled")
+                } else {
+                    if !entry.ongoingKontests.isEmpty {
+                        CreateSectionView(title: "On Going Kontests", kontests: entry.ongoingKontests, toShowDate: false, toShowTime: false)
+                    }
 
-                if !entry.laterTodayKontests.isEmpty {
-                    CreateSectionView(title: "Later Today Kontests", kontests: entry.laterTodayKontests, toShowDate: false, toShowTime: true)
-                }
+                    if !entry.laterTodayKontests.isEmpty {
+                        CreateSectionView(title: "Later Today Kontests", kontests: entry.laterTodayKontests, toShowDate: false, toShowTime: true)
+                    }
 
-                if !entry.tomorrowKontests.isEmpty {
-                    CreateSectionView(title: "Tomorrow Kontests", kontests: entry.tomorrowKontests, toShowDate: false, toShowTime: true)
-                }
+                    if !entry.tomorrowKontests.isEmpty {
+                        CreateSectionView(title: "Tomorrow Kontests", kontests: entry.tomorrowKontests, toShowDate: false, toShowTime: true)
+                    }
 
-                if !entry.laterKontests.isEmpty {
-                    CreateSectionView(title: "Later Kontests", kontests: entry.laterKontests, toShowDate: true, toShowTime: false)
+                    if !entry.laterKontests.isEmpty {
+                        CreateSectionView(title: "Later Kontests", kontests: entry.laterKontests, toShowDate: true, toShowTime: false)
+                    }
                 }
             }
         }
