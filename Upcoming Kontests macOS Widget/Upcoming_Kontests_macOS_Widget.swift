@@ -54,6 +54,7 @@ struct SimpleEntry: TimelineEntry {
 
 struct Upcoming_Kontests_macOS_WidgetEntryView: View {
     var entry: Provider.Entry
+    @Environment(\.widgetFamily) private var widgetFamily
 
     var body: some View {
         VStack {
@@ -64,19 +65,19 @@ struct Upcoming_Kontests_macOS_WidgetEntryView: View {
                     Text("No Kontests Scheduled")
                 } else {
                     if !entry.ongoingKontests.isEmpty {
-                        CreateSectionView(title: "On Going Kontests", kontests: entry.ongoingKontests, toShowDate: false, toShowTime: false)
+                        CreateSectionView(title: "On Going Kontests", kontests: entry.ongoingKontests, toShowDate: false, toShowTime: false, widgetFamily: widgetFamily)
                     }
 
                     if !entry.laterTodayKontests.isEmpty {
-                        CreateSectionView(title: "Later Today Kontests", kontests: entry.laterTodayKontests, toShowDate: false, toShowTime: true)
+                        CreateSectionView(title: "Later Today Kontests", kontests: entry.laterTodayKontests, toShowDate: false, toShowTime: true, widgetFamily: widgetFamily)
                     }
 
                     if !entry.tomorrowKontests.isEmpty {
-                        CreateSectionView(title: "Tomorrow Kontests", kontests: entry.tomorrowKontests, toShowDate: false, toShowTime: true)
+                        CreateSectionView(title: "Tomorrow Kontests", kontests: entry.tomorrowKontests, toShowDate: false, toShowTime: true, widgetFamily: widgetFamily)
                     }
 
                     if !entry.laterKontests.isEmpty {
-                        CreateSectionView(title: "Later Kontests", kontests: entry.laterKontests, toShowDate: true, toShowTime: false)
+                        CreateSectionView(title: "Later Kontests", kontests: entry.laterKontests, toShowDate: true, toShowTime: false, widgetFamily: widgetFamily)
                     }
                 }
             }

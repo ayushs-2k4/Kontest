@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct CreateSectionView: View {
     let title: String
     let kontests: [KontestModel]
     let toShowDate: Bool
     let toShowTime: Bool
+    let widgetFamily: WidgetFamily
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -19,7 +21,7 @@ struct CreateSectionView: View {
                 .bold()
 
             ForEach(kontests.indices) { index in
-                createSingleKontestView(kontest: kontests[index], toShowDate: toShowDate, toShowTime: toShowTime)
+                createSingleKontestView(kontest: kontests[index], toShowDate: toShowDate, toShowTime: toShowTime, widgetFamily: widgetFamily)
                 if index != kontests.count - 1 {
                     Divider()
                 }
@@ -36,6 +38,7 @@ struct createSingleKontestView: View {
     let kontest: KontestModel
     let toShowDate: Bool
     let toShowTime: Bool
+    let widgetFamily: WidgetFamily
 
     var body: some View {
         let startDate = CalendarUtility.getDate(date: kontest.start_time)
@@ -50,6 +53,10 @@ struct createSingleKontestView: View {
                 }
 
                 if toShowDate {
+                    if widgetFamily == .systemExtraLarge {
+                        let p = CalendarUtility.getWeekdayNameFromDate(date: startDate)
+                        Text("(\(p))")
+                    }
                     Text(CalendarUtility.getKontestDate(date: startDate))
                 }
             }
