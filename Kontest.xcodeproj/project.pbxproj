@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		071915642AB1695E00E1CB56 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071915632AB1695E00E1CB56 /* NetworkMonitor.swift */; };
 		071915672AB169D300E1CB56 /* NoInternetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071915662AB169D300E1CB56 /* NoInternetScreen.swift */; };
+		071915682AB16CE300E1CB56 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071915632AB1695E00E1CB56 /* NetworkMonitor.swift */; };
+		071915692AB16CE400E1CB56 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071915632AB1695E00E1CB56 /* NetworkMonitor.swift */; };
+		0719156A2AB1BCC100E1CB56 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074DD4512AA61570005C16A5 /* AppError.swift */; };
+		0719156B2AB1BCC200E1CB56 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074DD4512AA61570005C16A5 /* AppError.swift */; };
 		0723B73E2AB074C200CF5312 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07ECFB402AA58259008513C6 /* Assets.xcassets */; };
 		0723B73F2AB074C300CF5312 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07ECFB402AA58259008513C6 /* Assets.xcassets */; };
 		073269E82AAC42350028476D /* FilterWebsitesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073269E72AAC42350028476D /* FilterWebsitesView.swift */; };
@@ -725,6 +729,7 @@
 			files = (
 				07CFEBB62AB02DE100291484 /* KontestModel.swift in Sources */,
 				07CFEBAB2AB02DCB00291484 /* Upcoming_Kontests_iOS_Widget.swift in Sources */,
+				0719156A2AB1BCC100E1CB56 /* AppError.swift in Sources */,
 				07CFEBBC2AB02EDF00291484 /* DownloadData.swift in Sources */,
 				07CFEBBB2AB02ED700291484 /* KontestRepository.swift in Sources */,
 				07CFEBBA2AB02E1A00291484 /* CalendarUtility.swift in Sources */,
@@ -736,6 +741,7 @@
 				07CFEBA92AB02DCB00291484 /* Upcoming_Kontests_iOS_WidgetBundle.swift in Sources */,
 				07CFEBB92AB02E1000291484 /* Constants.swift in Sources */,
 				07CFEC052AB042F500291484 /* CreateSectionView.swift in Sources */,
+				071915682AB16CE300E1CB56 /* NetworkMonitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -745,6 +751,7 @@
 			files = (
 				07CFEBF52AB042A500291484 /* Upcoming_Kontests_macOS_Widget.swift in Sources */,
 				07CFEC0F2AB0436200291484 /* GetKontests.swift in Sources */,
+				0719156B2AB1BCC200E1CB56 /* AppError.swift in Sources */,
 				07CFEC082AB0430D00291484 /* CalendarUtility.swift in Sources */,
 				07CFEC062AB042F500291484 /* CreateSectionView.swift in Sources */,
 				07CFEC102AB0436800291484 /* KontestRepository.swift in Sources */,
@@ -756,6 +763,7 @@
 				07CFEC112AB0436D00291484 /* KontestFetcher.swift in Sources */,
 				07CFEC0B2AB0432200291484 /* Constants.swift in Sources */,
 				07CFEC122AB0437300291484 /* DownloadData.swift in Sources */,
+				071915692AB16CE400E1CB56 /* NetworkMonitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -103,6 +103,14 @@ struct AllKontestsScreen: View {
                                 Text("Schedule 5 seconds Notification")
                             }
                         }
+                        
+                        ToolbarItem(placement: .automatic) { // change the placement here!
+                            Button {
+                                WidgetCenter.shared.reloadAllTimelines()
+                            } label: {
+                                Text("Reload all widgets")
+                            }
+                        }
                     }
 
                     ToolbarItem(placement: .automatic) {
@@ -173,6 +181,7 @@ struct AllKontestsScreen: View {
         }
         .onChange(of: networkMonitor.currentStatus) {
             if networkMonitor.currentStatus == .satisfied {
+                WidgetCenter.shared.reloadAllTimelines()
                 allKontestsViewModel.fetchAllKontests()
             }
         }
