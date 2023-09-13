@@ -22,6 +22,8 @@
 		076134CF2AA86AC300946B02 /* KontestDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076134CE2AA86AC300946B02 /* KontestDetailViewModel.swift */; };
 		07A31F002AAC818D00EBC296 /* FilterWebsiteKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A31EFF2AAC818D00EBC296 /* FilterWebsiteKey.swift */; };
 		07A31F022AAC831300EBC296 /* FilterWebsitesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A31F012AAC831300EBC296 /* FilterWebsitesViewModel.swift */; };
+		07ADFEFE2AB213F8000BF59C /* BlinkingDotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB5D2AA58259008513C6 /* BlinkingDotView.swift */; };
+		07ADFEFF2AB213F8000BF59C /* BlinkingDotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB5D2AA58259008513C6 /* BlinkingDotView.swift */; };
 		07B74E742AB06CBB001D08CE /* AllKontestsFakeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB452AA58259008513C6 /* AllKontestsFakeRepository.swift */; };
 		07B74E752AB06CBC001D08CE /* AllKontestsFakeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB452AA58259008513C6 /* AllKontestsFakeRepository.swift */; };
 		07CFEBA42AB02DCB00291484 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CFEBA32AB02DCB00291484 /* WidgetKit.framework */; };
@@ -46,8 +48,8 @@
 		07CFEBF72AB042A700291484 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07CFEBF62AB042A700291484 /* Assets.xcassets */; };
 		07CFEBFC2AB042A700291484 /* Upcoming Kontests macOS WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 07CFEBEE2AB042A500291484 /* Upcoming Kontests macOS WidgetExtension.appex */; platformFilters = (macos, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		07CFEC012AB042B400291484 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 07CFEC002AB042B400291484 /* Apollo */; };
-		07CFEC052AB042F500291484 /* CreateSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CFEC042AB042F500291484 /* CreateSectionView.swift */; };
-		07CFEC062AB042F500291484 /* CreateSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CFEC042AB042F500291484 /* CreateSectionView.swift */; };
+		07CFEC052AB042F500291484 /* UpcomingWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CFEC042AB042F500291484 /* UpcomingWidgetView.swift */; };
+		07CFEC062AB042F500291484 /* UpcomingWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CFEC042AB042F500291484 /* UpcomingWidgetView.swift */; };
 		07CFEC072AB0430500291484 /* KontestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB522AA58259008513C6 /* KontestModel.swift */; };
 		07CFEC082AB0430D00291484 /* CalendarUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB662AA58259008513C6 /* CalendarUtility.swift */; };
 		07CFEC092AB0431300291484 /* KontestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB742AA58259008513C6 /* KontestDTO.swift */; };
@@ -175,7 +177,7 @@
 		07CFEBF62AB042A700291484 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		07CFEBF82AB042A700291484 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		07CFEBF92AB042A700291484 /* Upcoming_Kontests_macOS_Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Upcoming_Kontests_macOS_Widget.entitlements; sourceTree = "<group>"; };
-		07CFEC042AB042F500291484 /* CreateSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSectionView.swift; sourceTree = "<group>"; };
+		07CFEC042AB042F500291484 /* UpcomingWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingWidgetView.swift; sourceTree = "<group>"; };
 		07CFEC0C2AB0435200291484 /* GetKontests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetKontests.swift; sourceTree = "<group>"; };
 		07ECFB352AA58259008513C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		07ECFB382AA58259008513C6 /* ChangeUsernameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeUsernameViewModel.swift; sourceTree = "<group>"; };
@@ -327,7 +329,7 @@
 		07CFEC032AB042E400291484 /* WidgetScreens */ = {
 			isa = PBXGroup;
 			children = (
-				07CFEC042AB042F500291484 /* CreateSectionView.swift */,
+				07CFEC042AB042F500291484 /* UpcomingWidgetView.swift */,
 			);
 			path = WidgetScreens;
 			sourceTree = "<group>";
@@ -727,6 +729,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07ADFEFE2AB213F8000BF59C /* BlinkingDotView.swift in Sources */,
 				07CFEBB62AB02DE100291484 /* KontestModel.swift in Sources */,
 				07CFEBAB2AB02DCB00291484 /* Upcoming_Kontests_iOS_Widget.swift in Sources */,
 				0719156A2AB1BCC100E1CB56 /* AppError.swift in Sources */,
@@ -740,7 +743,7 @@
 				07CFEBB72AB02E0800291484 /* KontestStatus.swift in Sources */,
 				07CFEBA92AB02DCB00291484 /* Upcoming_Kontests_iOS_WidgetBundle.swift in Sources */,
 				07CFEBB92AB02E1000291484 /* Constants.swift in Sources */,
-				07CFEC052AB042F500291484 /* CreateSectionView.swift in Sources */,
+				07CFEC052AB042F500291484 /* UpcomingWidgetView.swift in Sources */,
 				071915682AB16CE300E1CB56 /* NetworkMonitor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -749,11 +752,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07ADFEFF2AB213F8000BF59C /* BlinkingDotView.swift in Sources */,
 				07CFEBF52AB042A500291484 /* Upcoming_Kontests_macOS_Widget.swift in Sources */,
 				07CFEC0F2AB0436200291484 /* GetKontests.swift in Sources */,
 				0719156B2AB1BCC200E1CB56 /* AppError.swift in Sources */,
 				07CFEC082AB0430D00291484 /* CalendarUtility.swift in Sources */,
-				07CFEC062AB042F500291484 /* CreateSectionView.swift in Sources */,
+				07CFEC062AB042F500291484 /* UpcomingWidgetView.swift in Sources */,
 				07CFEC102AB0436800291484 /* KontestRepository.swift in Sources */,
 				07B74E752AB06CBC001D08CE /* AllKontestsFakeRepository.swift in Sources */,
 				07CFEC072AB0430500291484 /* KontestModel.swift in Sources */,

@@ -134,38 +134,9 @@ struct SimpleEntry: TimelineEntry {
 
 struct Upcoming_Kontests_iOS_WidgetEntryView: View {
     var entry: Provider.Entry
-    @Environment(\.widgetFamily) private var widgetFamily
 
     var body: some View {
-        VStack {
-            if let error = entry.error {
-                if let appError = error as? AppError {
-                    Text("Error: \(appError.description)")
-                } else {
-                    Text("Error: \(error.localizedDescription)")
-                }
-            } else {
-                if entry.ongoingKontests.isEmpty && entry.laterTodayKontests.isEmpty && entry.tomorrowKontests.isEmpty && entry.laterKontests.isEmpty {
-                    Text("No Kontests Scheduled")
-                } else {
-                    if !entry.ongoingKontests.isEmpty {
-                        CreateSectionView(title: "On Going Kontests", kontests: entry.ongoingKontests, toShowDate: false, toShowTime: false, widgetFamily: widgetFamily)
-                    }
-
-                    if !entry.laterTodayKontests.isEmpty {
-                        CreateSectionView(title: "Later Today Kontests", kontests: entry.laterTodayKontests, toShowDate: false, toShowTime: true, widgetFamily: widgetFamily)
-                    }
-
-                    if !entry.tomorrowKontests.isEmpty {
-                        CreateSectionView(title: "Tomorrow Kontests", kontests: entry.tomorrowKontests, toShowDate: false, toShowTime: true, widgetFamily: widgetFamily)
-                    }
-
-                    if !entry.laterKontests.isEmpty {
-                        CreateSectionView(title: "Later Kontests", kontests: entry.laterKontests, toShowDate: true, toShowTime: false, widgetFamily: widgetFamily)
-                    }
-                }
-            }
-        }
+        UpcomingWidgetView(error: entry.error, ongoingKontests: entry.ongoingKontests, laterTodayKontests: entry.laterTodayKontests, tomorrowKontests: entry.tomorrowKontests, laterKontests: entry.laterKontests)
     }
 }
 

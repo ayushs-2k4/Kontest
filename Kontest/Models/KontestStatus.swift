@@ -8,7 +8,8 @@
 import Foundation
 
 enum KontestStatus: Decodable {
-    case Ended
-    case Running
-    case Upcoming
+    case OnGoing
+    case LaterToday
+    case Tomorrow
+    case Later
 }

@@ -188,25 +188,14 @@ extension KontestModel {
     }
 
     static func getKontestStatus(kontestStartDate: Date, kontestEndDate: Date) -> KontestStatus {
-        if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate) {
-            .Upcoming
-        } else if CalendarUtility.isKontestOfPast(kontestEndDate: kontestEndDate) {
-            .Ended
+        if CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate, kontestEndDate: kontestEndDate) {
+            .OnGoing
+        } else if CalendarUtility.isKontestLaterToday(kontestStartDate: kontestStartDate) {
+            .LaterToday
+        } else if CalendarUtility.isKontestTomorrow(kontestStartDate: kontestStartDate) {
+            .Tomorrow
         } else {
-            .Running
-        }
-    }
-
-    func updateKontestStatus() -> KontestStatus {
-        let kontestStartDate = CalendarUtility.getDate(date: start_time) ?? Date()
-        let kontestEndDate = CalendarUtility.getDate(date: end_time) ?? Date()
-
-        if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate) {
-            return .Upcoming
-        } else if CalendarUtility.isKontestOfPast(kontestEndDate: kontestEndDate) {
-            return .Ended
-        } else {
-            return .Running
+            .Later
         }
     }
 }
