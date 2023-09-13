@@ -11,12 +11,18 @@ import SwiftUI
 struct KontestApp: App {
     @State private var allKontestsViewModel = AllKontestsViewModel.instance
     @State private var router = Router.instance
+    let networkMonitor = NetworkMonitor.shared
+    
+    init(){
+        networkMonitor.start()
+    }
 
     var body: some Scene {
         WindowGroup {
             AllKontestsScreen()
                 .environment(allKontestsViewModel)
                 .environment(router)
+                .environment(networkMonitor)
         }
         .commands {
             MyMenu(router: $router)
