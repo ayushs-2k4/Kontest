@@ -184,8 +184,8 @@ struct Upcoming_Kontests_iOS_Widget: Widget {
             }
         }
         .supportedFamilies([.systemLarge, .systemExtraLarge])
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Kontest")
+        .description("Get information about ongoing and upcoming kontests.")
     }
 }
 
