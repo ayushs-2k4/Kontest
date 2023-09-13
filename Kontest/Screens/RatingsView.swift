@@ -25,7 +25,7 @@ struct RatingsView: View {
                     .aspectRatio(heroRatio, contentMode: .fit)
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
 
-                LeetCodeGraphQLView(username: leetCodeUsername, bgColor: Color(red: 40/255, green: 40/255, blue: 40/255), hoveringScaleValue: hoveringScaleValue)
+                LeetCodeGraphQLView(username: leetCodeUsername, bgColor: Color(red: 34/255, green: 34/255, blue: 34/255), hoveringScaleValue: hoveringScaleValue)
                     .clipShape(.rect(cornerRadius: cornerRadius))
                     .aspectRatio(heroRatio, contentMode: .fit)
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
