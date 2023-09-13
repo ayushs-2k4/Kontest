@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NoKontestsScreen: View {
+struct NoKontestsDownloadedScreen: View {
     @Environment(AllKontestsViewModel.self) private var allKontestsViewModel
     
     var body: some View {
@@ -33,6 +33,6 @@ struct NoKontestsScreen: View {
 }
 
 #Preview {
-    NoKontestsScreen()
+    NoKontestsDownloadedScreen()
         .environment(AllKontestsViewModel.instance)
 }

@@ -27,8 +27,8 @@ struct AllKontestsScreen: View {
                 ZStack {
                     if allKontestsViewModel.isLoading {
                         ProgressView()
-                    } else if allKontestsViewModel.backupKontests.isEmpty {
-                        NoKontestsScreen()
+                    } else if allKontestsViewModel.allKontests.isEmpty { // No Kontests Downloaded
+                        NoKontestsDownloadedScreen()
                     } else {
                         TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
                             VStack {
@@ -37,32 +37,36 @@ struct AllKontestsScreen: View {
                                         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                                         .listRowSeparator(.hidden)
 
-                                    let ongoingKontests = allKontestsViewModel.ongoingKontests
-
-                                    let laterTodayKontests = allKontestsViewModel.laterTodayKontests
-
-                                    let tomorrowKontests = allKontestsViewModel.tomorrowKontests
-
-                                    let laterKontests = allKontestsViewModel.laterKontests
-
-                                    if allKontestsViewModel.toShowKontests.isEmpty && !allKontestsViewModel.searchText.isEmpty {
-                                        Text("Please try some different search term")
-                                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                                    if allKontestsViewModel.backupKontests.isEmpty { // There are some kontests but they are hidden due to KontestFilters
+                                        NoKontestsDueToFiltersScreen()
                                     } else {
-                                        if ongoingKontests.count > 0 {
-                                            createSection(title: "Live Now", kontests: ongoingKontests, timelineViewDefaultContext: timelineViewDefaultContext)
-                                        }
+                                        let ongoingKontests = allKontestsViewModel.ongoingKontests
 
-                                        if laterTodayKontests.count > 0 {
-                                            createSection(title: "Later Today", kontests: laterTodayKontests, timelineViewDefaultContext: timelineViewDefaultContext)
-                                        }
+                                        let laterTodayKontests = allKontestsViewModel.laterTodayKontests
 
-                                        if tomorrowKontests.count > 0 {
-                                            createSection(title: "Tomorrow", kontests: tomorrowKontests, timelineViewDefaultContext: timelineViewDefaultContext)
-                                        }
+                                        let tomorrowKontests = allKontestsViewModel.tomorrowKontests
 
-                                        if laterKontests.count > 0 {
-                                            createSection(title: "Upcoming", kontests: laterKontests, timelineViewDefaultContext: timelineViewDefaultContext)
+                                        let laterKontests = allKontestsViewModel.laterKontests
+
+                                        if allKontestsViewModel.toShowKontests.isEmpty && !allKontestsViewModel.searchText.isEmpty {
+                                            Text("Please try some different search term")
+                                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                                        } else {
+                                            if ongoingKontests.count > 0 {
+                                                createSection(title: "Live Now", kontests: ongoingKontests, timelineViewDefaultContext: timelineViewDefaultContext)
+                                            }
+
+                                            if laterTodayKontests.count > 0 {
+                                                createSection(title: "Later Today", kontests: laterTodayKontests, timelineViewDefaultContext: timelineViewDefaultContext)
+                                            }
+
+                                            if tomorrowKontests.count > 0 {
+                                                createSection(title: "Tomorrow", kontests: tomorrowKontests, timelineViewDefaultContext: timelineViewDefaultContext)
+                                            }
+
+                                            if laterKontests.count > 0 {
+                                                createSection(title: "Upcoming", kontests: laterKontests, timelineViewDefaultContext: timelineViewDefaultContext)
+                                            }
                                         }
                                     }
                                 }
@@ -103,7 +107,7 @@ struct AllKontestsScreen: View {
                                 Text("Schedule 5 seconds Notification")
                             }
                         }
-                        
+
                         ToolbarItem(placement: .automatic) { // change the placement here!
                             Button {
                                 WidgetCenter.shared.reloadAllTimelines()
@@ -210,7 +214,10 @@ struct AllKontestsScreen: View {
 }
 
 #Preview {
-    AllKontestsScreen()
+    let networkMonitor = NetworkMonitor.shared
+
+    return AllKontestsScreen()
+        .environment(networkMonitor)
         .environment(AllKontestsViewModel.instance)
         .environment(Router.instance)
 }
