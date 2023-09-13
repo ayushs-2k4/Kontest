@@ -60,7 +60,7 @@ struct CreateSectionView: View {
             Text(title)
                 .bold()
 
-            ForEach(kontests.indices) { index in
+            ForEach(kontests.indices, id: \.self) { index in
                 createSingleKontestView(kontest: kontests[index], widgetFamily: widgetFamily, kontestStatus: kontestStatus)
                 if index != kontests.count - 1 {
                     Divider()
@@ -86,6 +86,7 @@ struct createSingleKontestView: View {
         if let startDate, let endDate {
             HStack {
                 Text(kontest.name)
+                    .foregroundStyle(kontest.site == "AtCoder" ? Color.gray : KontestModel.getColorForIdentifier(site: kontest.site))
 
                 Spacer()
 
