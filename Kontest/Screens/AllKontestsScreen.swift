@@ -117,14 +117,6 @@ struct AllKontestsScreen: View {
                         }
                     }
 
-                    ToolbarItem(placement: .automatic) {
-                        Button {
-                            router.appendScreen(screen: .SettingsScreen)
-                        } label: {
-                            Image(systemName: "gear")
-                        }
-                    }
-
                     if !allKontestsViewModel.allKontests.isEmpty || !allKontestsViewModel.searchText.isEmpty {
                         ToolbarItem(placement: .automatic) {
                             AllNotificationMenu()
@@ -149,6 +141,14 @@ struct AllKontestsScreen: View {
                                     isNoNotificationIconAnimating = true
                                 }
                             })
+                        }
+                    }
+
+                    ToolbarItem(placement: .automatic) {
+                        Button {
+                            router.appendScreen(screen: .SettingsScreen)
+                        } label: {
+                            Image(systemName: "gear")
                         }
                     }
                 }
