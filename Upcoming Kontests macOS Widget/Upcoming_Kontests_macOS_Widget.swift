@@ -174,7 +174,7 @@ struct Upcoming_Kontests_macOS_Widget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             if #available(macOS 14.0, *) {
                 Upcoming_Kontests_macOS_WidgetEntryView(entry: entry)
-                    .containerBackground(.fill.tertiary, for: .widget)
+                    .containerBackground(Color.widgetBackground, for: .widget)
             } else {
                 Upcoming_Kontests_macOS_WidgetEntryView(entry: entry)
                     .padding()

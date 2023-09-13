@@ -176,7 +176,7 @@ struct Upcoming_Kontests_iOS_Widget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             if #available(iOS 17.0, *) {
                 Upcoming_Kontests_iOS_WidgetEntryView(entry: entry)
-                    .containerBackground(.fill.secondary, for: .widget)
+                    .containerBackground(Color.widgetBackground, for: .widget)
             } else {
                 Upcoming_Kontests_iOS_WidgetEntryView(entry: entry)
                     .padding()
