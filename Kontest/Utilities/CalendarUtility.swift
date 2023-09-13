@@ -77,6 +77,25 @@ class CalendarUtility {
         return currentDate >= kontestStartDate && currentDate <= kontestEndDate
     }
 
+    static func isKontestLaterToday(kontestStartDate: Date) -> Bool {
+        let currentDate = Date()
+        let tomorrow = CalendarUtility.getTomorrow()
+        return kontestStartDate > currentDate && kontestStartDate < tomorrow
+    }
+
+    static func isKontestTomorrow(kontestStartDate: Date) -> Bool {
+        let tomorrow = CalendarUtility.getTomorrow()
+        let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
+
+        return kontestStartDate > tomorrow && kontestStartDate < dayAfterTomorrow
+    }
+
+    static func isKontestLater(kontestStartDate: Date) -> Bool {
+        let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
+
+        return kontestStartDate > dayAfterTomorrow
+    }
+
     static func getFormattedDuration(fromSeconds seconds: String) -> String? {
         guard let totalSecondsInDouble = Double(seconds) else {
             return "Invalid Duration"
@@ -139,14 +158,15 @@ class CalendarUtility {
 
     static func getTomorrow() -> Date {
         let today = Date()
-        let tomorrow = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: today)!
+        let calendar = Calendar.current
+        let tomorrow = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: today))!
         return tomorrow
     }
 
     static func getDayAfterTomorrow() -> Date {
         let today = Date()
-        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
-        let dayAfterTomorrow = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: tomorrow)!
+        let calendar = Calendar.current
+        let dayAfterTomorrow = calendar.date(byAdding: .day, value: 2, to: calendar.startOfDay(for: today))!
         return dayAfterTomorrow
     }
 
@@ -232,5 +252,50 @@ class CalendarUtility {
         } else {
             String(format: "%02d:%02d", minutes, remainingSeconds)
         }
+    }
+
+    static func getNextDateToRefresh(ongoingKontests: [KontestModel], laterTodayKontests: [KontestModel], tomorrowKontests: [KontestModel], laterKontests: [KontestModel]) -> Date {
+        let maxNextDateToRefresh = Date.now.advanced(by: 0.5 * 60 * 60)
+        var nextDateToRefresh = maxNextDateToRefresh
+
+        if !ongoingKontests.isEmpty {
+            let endTime = CalendarUtility.getDate(date: ongoingKontests.first!.end_time) ?? maxNextDateToRefresh
+
+            if endTime > .now {
+                nextDateToRefresh = min(nextDateToRefresh, endTime)
+            }
+        }
+
+        if !laterTodayKontests.isEmpty {
+            let startTime = CalendarUtility.getDate(date: laterTodayKontests.first!.start_time) ?? maxNextDateToRefresh
+
+            if startTime > .now {
+                nextDateToRefresh = min(nextDateToRefresh, startTime)
+            }
+        }
+
+        if !tomorrowKontests.isEmpty {
+            let startTime = CalendarUtility.getDate(date: tomorrowKontests.first!.start_time) ?? maxNextDateToRefresh
+
+            if startTime > .now {
+                nextDateToRefresh = min(nextDateToRefresh, startTime)
+            }
+        }
+
+        if !laterKontests.isEmpty {
+            let startTime = CalendarUtility.getDate(date: laterKontests.first!.start_time) ?? maxNextDateToRefresh
+
+            if startTime > .now {
+                nextDateToRefresh = min(nextDateToRefresh, startTime)
+            }
+        }
+
+        if let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date()) {
+            if let tomorrowAtMidnight = Calendar.current.date(bySettingHour: 0, minute: 0, second: 0, of: tomorrow) {
+                nextDateToRefresh = min(nextDateToRefresh, tomorrowAtMidnight)
+            }
+        }
+
+        return nextDateToRefresh
     }
 }
