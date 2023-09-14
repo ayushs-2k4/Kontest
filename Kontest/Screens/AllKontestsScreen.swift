@@ -185,8 +185,8 @@ struct AllKontestsScreen: View {
         }
         .onChange(of: networkMonitor.currentStatus) {
             if networkMonitor.currentStatus == .satisfied {
-                WidgetCenter.shared.reloadAllTimelines()
                 allKontestsViewModel.fetchAllKontests()
+                WidgetCenter.shared.reloadAllTimelines()
             }
         }
         #if !os(macOS)
