@@ -9,6 +9,8 @@ import EventKit
 import Foundation
 
 class CalendarUtility {
+    private static let store = EKEventStore()
+
     static func generateCalendarURL(startDate: Date?, endDate: Date?) -> String {
         let utcStartDate = startDate!.addingTimeInterval(-Double(TimeZone.current.secondsFromGMT(for: startDate!)))
         let utcEndDate = endDate!.addingTimeInterval(-Double(TimeZone.current.secondsFromGMT(for: endDate!)))
@@ -301,10 +303,6 @@ class CalendarUtility {
     }
 
     private static func requestFullAccessToReminders() async throws -> Bool {
-        let store = EKEventStore()
-
-//        var isPermissionGranted = false
-
         do {
             try await store.requestFullAccessToEvents()
         } catch {
@@ -313,12 +311,9 @@ class CalendarUtility {
 
         let ans = EKEventStore.authorizationStatus(for: EKEntityType.event) == .fullAccess
         return ans
-//        return isPermissionGranted
     }
 
     static func addEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?) {
-        let store = EKEventStore()
-
         print("Yes")
 
         store.requestWriteOnlyAccessToEvents { isGranted, error in
@@ -346,9 +341,7 @@ class CalendarUtility {
         }
     }
 
-    private static func getAllEvents() async -> [EKEvent]? {
-        let store = EKEventStore()
-
+    static func getAllEvents() async -> [EKEvent]? {
         print("FullAccessYes")
 
         do {
@@ -363,7 +356,7 @@ class CalendarUtility {
             return nil
         }
 
-        guard let interval = Calendar.current.dateInterval(of: .hour, for: Date()) else { return nil }
+        guard let interval = Calendar.current.dateInterval(of: .month, for: Date()) else { return nil }
 
         let predicate = store.predicateForEvents(withStart: interval.start, end: interval.end, calendars: nil)
 
@@ -379,13 +372,21 @@ class CalendarUtility {
         let allEvents = await getAllEvents()
 
         let events = allEvents?.filter { event in
-            event.startDate == startDate && event.endDate == endDate && event.title == title && event.notes == notes
+            event.startDate == startDate && event.endDate == endDate && event.title == title && event.url == url
         }
 
-        if let events, events.count == 1 {
-            let store = EKEventStore()
+        if let events, !events.isEmpty {
+            do {
+                try store.remove(events[0], span: .thisEvent)
+            } catch {
+                print("Error in removing event: \(error)")
+            }
+        }
+    }
 
-            try? store.remove(events[0], span: .thisEvent)
+    static func isEventPresentInCalendar(allEventsOfCalendar: [EKEvent], startDate: Date, endDate: Date, title: String, notes: String, url: URL?) -> Bool {
+        return allEventsOfCalendar.contains { event in
+            event.startDate == startDate && event.endDate == endDate && event.title == title && event.url == url
         }
     }
 }

@@ -94,14 +94,28 @@ struct SingleKontestView: View {
             }
             .help("Copy link")
 
-//            .help("Copy link")
             Button {
-//                CalendarUtility.addEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
+                if kontest.isCalendarEventAdded {
+                    Task {
+                        await CalendarUtility.removeEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
+                        
+                        kontest.isCalendarEventAdded = false
+                        kontest.saveCalendarStatus()
+                    }
+                }
+                else {
+                    CalendarUtility.addEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
+                    
+                    kontest.isCalendarEventAdded = true
+                    kontest.saveCalendarStatus()
+                }
                 
-                CalendarUtility.getAllEvents()
             } label: {
-                Image(systemName: "calendar")
+                Image(systemName: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus")
+                    .contentTransition(.symbolEffect(.replace))
+                    .frame(width: 20)
             }
+            .help(kontest.isCalendarEventAdded ? "Remove from Calendar" : "Add to Calendar")
 
             #endif
 

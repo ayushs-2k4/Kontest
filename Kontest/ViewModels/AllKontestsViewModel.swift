@@ -62,6 +62,7 @@ class AllKontestsViewModel {
     private func getAllKontests() async {
         do {
             let fetchedKontests = try await repository.getAllKontests()
+            let allEvents = await CalendarUtility.getAllEvents()
 
             await MainActor.run {
                 self.allKontests = fetchedKontests
@@ -69,6 +70,10 @@ class AllKontestsViewModel {
                         let kontest = KontestModel.from(dto: dto)
                         // Load Reminder status
                         kontest.loadReminderStatus()
+                        
+                        // Load Calendar status
+                        kontest.loadCalendarStatus()
+                        
                         return kontest
                     }
                     .filter { kontest in

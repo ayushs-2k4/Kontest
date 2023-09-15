@@ -20,6 +20,7 @@ class KontestModel: Decodable, Identifiable, Hashable {
     var isSetForReminder1HourBefore: Bool
     var isSetForReminder6HoursBefore: Bool
     let logo: String
+    var isCalendarEventAdded: Bool
 
     init(id: String, name: String, url: String, start_time: String, end_time: String, duration: String, site: String, in_24_hours: String, status: KontestStatus, logo: String) {
         self.id = id
@@ -36,6 +37,7 @@ class KontestModel: Decodable, Identifiable, Hashable {
         self.isSetForReminder1HourBefore = false
         self.isSetForReminder6HoursBefore = false
         self.logo = logo
+        self.isCalendarEventAdded = false
     }
 
     func hash(into hasher: inout Hasher) {
@@ -197,5 +199,17 @@ extension KontestModel {
         } else {
             .Later
         }
+    }
+
+    func saveCalendarStatus() {
+        let calendarEventID = id
+
+        UserDefaults.standard.setValue(isCalendarEventAdded, forKey: calendarEventID)
+    }
+
+    func loadCalendarStatus() {
+        let calendarEventID = id
+
+        isCalendarEventAdded = UserDefaults.standard.bool(forKey: calendarEventID)
     }
 }

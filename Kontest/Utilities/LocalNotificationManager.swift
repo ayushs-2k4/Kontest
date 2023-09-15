@@ -118,9 +118,7 @@ class LocalNotificationManager {
     func getAllPendingNotifications(completion: @escaping ([UNNotificationRequest]) -> Void) {
         var ans: [UNNotificationRequest] = []
         center.getPendingNotificationRequests { requests in
-            print("requests.count2: \(requests.count)")
             ans.append(contentsOf: requests)
-            print("ans.count: \(ans.count)")
             completion(ans)
         }
     }
