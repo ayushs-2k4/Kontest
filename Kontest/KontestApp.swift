@@ -13,6 +13,8 @@ struct KontestApp: App {
     @State private var router = Router.instance
     let networkMonitor = NetworkMonitor.shared
     
+    @AppStorage("shouldFetchAllEventsFromCalendar") var shouldFetchAllEventsFromCalendar: Bool = false
+    
     init(){
         networkMonitor.start()
     }

@@ -25,6 +25,8 @@ class AllKontestsViewModel {
     private(set) var tomorrowKontests: [KontestModel] = []
     private(set) var laterKontests: [KontestModel] = []
 
+    private let shouldFetchAllEventsFromCalendar: Bool
+
     var searchText: String = "" {
         didSet {
             filterKontestsUsingSearchText()
@@ -34,6 +36,7 @@ class AllKontestsViewModel {
     var isLoading = false
 
     private init() {
+        shouldFetchAllEventsFromCalendar = UserDefaults.standard.bool(forKey: "shouldFetchAllEventsFromCalendar")
         setDefaultValuesForFilterWebsiteKeysToTrue()
         addAllowedWebsites()
         fetchAllKontests()
@@ -63,7 +66,7 @@ class AllKontestsViewModel {
         do {
             let fetchedKontests = try await repository.getAllKontests()
 
-            let allEvents = await CalendarUtility.getAllEvents()
+            let allEvents = shouldFetchAllEventsFromCalendar ? await CalendarUtility.getAllEvents() : []
 
             await MainActor.run {
                 self.allKontests = fetchedKontests
