@@ -103,15 +103,17 @@ struct ButtonsView: View {
                             kontest.saveCalendarStatus()
                         }
                     } else {
-                        CalendarUtility.addEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
-
-                        kontest.isCalendarEventAdded = true
-                        kontest.saveCalendarStatus()
+                        Task {
+                            if await CalendarUtility.addEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url)) {
+                                kontest.isCalendarEventAdded = true
+                                kontest.saveCalendarStatus()
+                            }
+                        }
                     }
-                    
+
                 } label: {
-                    Image(systemName: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus")
-                        .contentTransition(.symbolEffect(.replace))
+                    Text(kontest.isCalendarEventAdded ? "Remove from Calendar" : "Add to Calendar")
+                        .frame(maxWidth: .infinity)
                 }
             }
 

@@ -309,21 +309,38 @@ class CalendarUtility {
             throw error
         }
 
-        let ans = EKEventStore.authorizationStatus(for: EKEntityType.event) == .fullAccess
-        return ans
+        let isGranted = EKEventStore.authorizationStatus(for: EKEntityType.event) == .fullAccess
+        return isGranted
     }
 
-    static func addEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?) {
-        print("Yes")
+    static func addEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?) async -> Bool {
+        // Check the authorization status for calendar events
+        let authorizationStatus = EKEventStore.authorizationStatus(for: EKEntityType.event)
 
-        store.requestWriteOnlyAccessToEvents { isGranted, error in
-            if let error {
-                print("Error: \(error)")
+        if authorizationStatus != .fullAccess {
+            // If not authorized, request permission asynchronously
+            do {
+                let isGranted = try await requestFullAccessToReminders()
+
+                if isGranted {
+                    // Permission granted, continue to create and save the event
+                    return createAndSaveEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url)
+                }
+
+                return false
+            } catch {
+                print("Error in addEvent: \(error)")
+                return false
             }
 
-            print("isGranted: \(isGranted)")
+        } else {
+            // If already authorized, create and save the event
+            return createAndSaveEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url)
         }
+    }
 
+    // Function to create and save the event
+    private static func createAndSaveEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?) -> Bool {
         let event = EKEvent(eventStore: store)
         event.calendar = store.defaultCalendarForNewEvents
         event.title = title
@@ -336,24 +353,28 @@ class CalendarUtility {
             try store.save(event, span: .thisEvent)
             print("Event saved")
             print(event)
+            return true
         } catch {
             print("Error in saving event: \(error)")
+            return false
         }
     }
 
     static func getAllEvents() async -> [EKEvent]? {
         print("FullAccessYes")
 
-        do {
-            let isGranted = try await requestFullAccessToReminders()
+        if EKEventStore.authorizationStatus(for: EKEntityType.event) != .fullAccess {
+            do {
+                let isGranted = try await requestFullAccessToReminders()
 
-            if !isGranted {
-                print("Full Access To Reminders not Granted")
+                if !isGranted {
+                    print("Full Access To Reminders not Granted")
+                    return nil
+                }
+            } catch {
+                print("Error in requesting Full Access To Reminders")
                 return nil
             }
-        } catch {
-            print("Error in requesting Full Access To Reminders")
-            return nil
         }
 
         guard let interval = Calendar.current.dateInterval(of: .month, for: Date()) else { return nil }

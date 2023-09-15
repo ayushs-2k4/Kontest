@@ -62,7 +62,6 @@ class AllKontestsViewModel {
     private func getAllKontests() async {
         do {
             let fetchedKontests = try await repository.getAllKontests()
-            let allEvents = await CalendarUtility.getAllEvents()
 
             await MainActor.run {
                 self.allKontests = fetchedKontests
