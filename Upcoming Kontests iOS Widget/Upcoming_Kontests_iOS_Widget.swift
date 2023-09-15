@@ -56,7 +56,7 @@ struct Provider: TimelineProvider {
         } else {
             let entry = SimpleEntry(
                 date: Date(),
-                error: AppError(description: "No Internet Connection"),
+                error: AppError(title: "No Internet Connection", description: "Connect to Internet"),
                 ongoingKontests: [],
                 laterTodayKontests: [],
                 tomorrowKontests: [],
@@ -105,9 +105,7 @@ struct Provider: TimelineProvider {
             var myEntries: [SimpleEntry] = []
             let entry = SimpleEntry(
                 date: Date(),
-                error: AppError(
-                    description: "No Internet Connection"
-                ),
+                error: AppError(title: "No Internet Connection", description: "Connect to Internet"),
                 ongoingKontests: [],
                 laterTodayKontests: [],
                 tomorrowKontests: [],

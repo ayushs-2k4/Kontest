@@ -27,8 +27,20 @@ struct ErrorView: View {
             Text(errorWrapper.guidance)
                 .font(.caption)
 
-            Button("Dismiss") {
-                dismiss()
+            HStack {
+                Button("Dismiss") {
+                    dismiss()
+                }
+
+                if errorWrapper.error is AppError {
+                    let appError = errorWrapper.error as! AppError
+
+                    if let action = appError.action {
+                        Button(appError.actionLabel) {
+                            action()
+                        }
+                    }
+                }
             }
         }
         .multilineTextAlignment(.center)
