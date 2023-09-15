@@ -163,6 +163,7 @@
 		074DD4512AA61570005C16A5 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		076016552A87CD52007CE9F5 /* Kontest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kontest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		076134CE2AA86AC300946B02 /* KontestDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestDetailViewModel.swift; sourceTree = "<group>"; };
+		07710E842AB46220008DE1D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		07A31EFF2AAC818D00EBC296 /* FilterWebsiteKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsiteKey.swift; sourceTree = "<group>"; };
 		07A31F012AAC831300EBC296 /* FilterWebsitesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesViewModel.swift; sourceTree = "<group>"; };
 		07A7501F2AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoKontestsDueToFiltersScreen.swift; sourceTree = "<group>"; };
@@ -339,6 +340,7 @@
 		07ECFB362AA58259008513C6 /* Kontest */ = {
 			isa = PBXGroup;
 			children = (
+				07710E842AB46220008DE1D6 /* Info.plist */,
 				07ECFB6E2AA58259008513C6 /* DTOs */,
 				07ECFB4C2AA58259008513C6 /* Models */,
 				07ECFB372AA58259008513C6 /* ViewModels */,
@@ -926,6 +928,7 @@
 				DEVELOPMENT_TEAM = R2Z9FDM5M6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Kontest/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -960,6 +963,7 @@
 				DEVELOPMENT_TEAM = R2Z9FDM5M6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Kontest/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

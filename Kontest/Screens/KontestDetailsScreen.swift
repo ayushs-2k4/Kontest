@@ -78,12 +78,14 @@ struct KontestDetailsScreen: View {
 struct ButtonsView: View {
     let kontest: KontestModel
     let kontestStartDate: Date?
+    let kontestEndDate: Date?
 
     let notificationsViewModel: NotificationsViewModel
 
     init(kontest: KontestModel) {
         self.kontest = kontest
         kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
+        kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
         notificationsViewModel = NotificationsViewModel.instance
     }
 
@@ -91,6 +93,13 @@ struct ButtonsView: View {
         VStack {
             if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()), notificationsViewModel.getNumberOfNotificationsWhichCanBeSettedForAKontest(kontest: kontest) > 0 {
                 SingleNotificationMenu(kontest: kontest)
+
+                Button {
+//                    CalendarUtility.addEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
+
+                } label: {
+                    Image(systemName: "calendar")
+                }
             }
 
             Link(destination: URL(string: kontest.url)!, label: {

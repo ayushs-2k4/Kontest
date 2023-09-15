@@ -5,6 +5,7 @@
 //  Created by Ayush Singhal on 13/08/23.
 //
 
+import EventKit
 import Foundation
 
 class CalendarUtility {
@@ -297,5 +298,94 @@ class CalendarUtility {
         }
 
         return nextDateToRefresh
+    }
+
+    private static func requestFullAccessToReminders() async throws -> Bool {
+        let store = EKEventStore()
+
+//        var isPermissionGranted = false
+
+        do {
+            try await store.requestFullAccessToEvents()
+        } catch {
+            throw error
+        }
+
+        let ans = EKEventStore.authorizationStatus(for: EKEntityType.event) == .fullAccess
+        return ans
+//        return isPermissionGranted
+    }
+
+    static func addEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?) {
+        let store = EKEventStore()
+
+        print("Yes")
+
+        store.requestWriteOnlyAccessToEvents { isGranted, error in
+            if let error {
+                print("Error: \(error)")
+            }
+
+            print("isGranted: \(isGranted)")
+        }
+
+        let event = EKEvent(eventStore: store)
+        event.calendar = store.defaultCalendarForNewEvents
+        event.title = title
+        event.startDate = startDate
+        event.endDate = endDate
+        event.notes = notes
+        event.url = url
+
+        do {
+            try store.save(event, span: .thisEvent)
+            print("Event saved")
+            print(event)
+        } catch {
+            print("Error in saving event: \(error)")
+        }
+    }
+
+    private static func getAllEvents() async -> [EKEvent]? {
+        let store = EKEventStore()
+
+        print("FullAccessYes")
+
+        do {
+            let isGranted = try await requestFullAccessToReminders()
+
+            if !isGranted {
+                print("Full Access To Reminders not Granted")
+                return nil
+            }
+        } catch {
+            print("Error in requesting Full Access To Reminders")
+            return nil
+        }
+
+        guard let interval = Calendar.current.dateInterval(of: .hour, for: Date()) else { return nil }
+
+        let predicate = store.predicateForEvents(withStart: interval.start, end: interval.end, calendars: nil)
+
+        let events = store.events(matching: predicate)
+
+        print("FullAccessinterval: \(interval)")
+        print("FullAccess Events: \(events)")
+
+        return events
+    }
+
+    static func removeEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?) async {
+        let allEvents = await getAllEvents()
+
+        let events = allEvents?.filter { event in
+            event.startDate == startDate && event.endDate == endDate && event.title == title && event.notes == notes
+        }
+
+        if let events, events.count == 1 {
+            let store = EKEventStore()
+
+            try? store.remove(events[0], span: .thisEvent)
+        }
     }
 }

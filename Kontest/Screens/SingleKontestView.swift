@@ -93,6 +93,16 @@ struct SingleKontestView: View {
                 Image(systemName: "link")
             }
             .help("Copy link")
+
+//            .help("Copy link")
+            Button {
+//                CalendarUtility.addEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
+                
+                CalendarUtility.getAllEvents()
+            } label: {
+                Image(systemName: "calendar")
+            }
+
             #endif
 
             #if os(macOS)
