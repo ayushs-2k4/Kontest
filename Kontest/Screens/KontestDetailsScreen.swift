@@ -100,13 +100,11 @@ struct ButtonsView: View {
                             await CalendarUtility.removeEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
 
                             kontest.isCalendarEventAdded = false
-                            kontest.saveCalendarStatus()
                         }
                     } else {
                         Task {
                             if await CalendarUtility.addEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url)) {
                                 kontest.isCalendarEventAdded = true
-                                kontest.saveCalendarStatus()
                             }
                         }
                     }

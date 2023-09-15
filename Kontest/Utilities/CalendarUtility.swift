@@ -405,7 +405,7 @@ class CalendarUtility {
         }
     }
 
-    static func isEventPresentInCalendar(allEventsOfCalendar: [EKEvent], startDate: Date, endDate: Date, title: String, notes: String, url: URL?) -> Bool {
+    static func isEventPresentInCalendar(allEventsOfCalendar: [EKEvent], startDate: Date, endDate: Date, title: String, url: URL?) -> Bool {
         return allEventsOfCalendar.contains { event in
             event.startDate == startDate && event.endDate == endDate && event.title == title && event.url == url
         }

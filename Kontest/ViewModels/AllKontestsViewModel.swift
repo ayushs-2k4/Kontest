@@ -63,16 +63,18 @@ class AllKontestsViewModel {
         do {
             let fetchedKontests = try await repository.getAllKontests()
 
+            let allEvents = await CalendarUtility.getAllEvents()
+
             await MainActor.run {
                 self.allKontests = fetchedKontests
                     .map { dto in
                         let kontest = KontestModel.from(dto: dto)
                         // Load Reminder status
                         kontest.loadReminderStatus()
-                        
+
                         // Load Calendar status
-                        kontest.loadCalendarStatus()
-                        
+                        kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+
                         return kontest
                     }
                     .filter { kontest in

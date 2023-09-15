@@ -6,6 +6,7 @@
 //
 
 import CryptoKit
+import EventKit
 import SwiftUI
 
 @Observable
@@ -201,15 +202,7 @@ extension KontestModel {
         }
     }
 
-    func saveCalendarStatus() {
-        let calendarEventID = id
-
-        UserDefaults.standard.setValue(isCalendarEventAdded, forKey: calendarEventID)
-    }
-
-    func loadCalendarStatus() {
-        let calendarEventID = id
-
-        isCalendarEventAdded = UserDefaults.standard.bool(forKey: calendarEventID)
+    func loadCalendarStatus(allEvents: [EKEvent]) {
+        isCalendarEventAdded = CalendarUtility.isEventPresentInCalendar(allEventsOfCalendar: allEvents, startDate: CalendarUtility.getDate(date: start_time) ?? Date(), endDate: CalendarUtility.getDate(date: end_time) ?? Date(), title: name, url: URL(string: url))
     }
 }
