@@ -32,7 +32,7 @@ class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
 
                     completion(leetCodeGraphQLAPIDTO, nil)
                 } else {
-                    completion(nil, AppError(description: "Data not found in  LeetCodeAPIGraphQLRepository - getUserData"))
+                    completion(nil, AppError(title: "Data not found", description: "Data not found in  LeetCodeAPIGraphQLRepository - getUserData"))
                 }
             case .failure(let error):
                 print("Error in LeetCodeAPIGraphQLRepository - getUserData: \(error)")

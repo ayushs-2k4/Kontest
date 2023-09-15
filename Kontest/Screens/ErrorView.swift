@@ -18,11 +18,12 @@ struct ErrorView: View {
 
     var body: some View {
         VStack {
-            Text("Error has occured")
+            Text(errorWrapper.error is AppError ? (errorWrapper.error as! AppError).title : "Error has occurred")
                 .font(.headline)
                 .padding(.bottom)
 
             Text(errorWrapper.error.localizedDescription)
+
             Text(errorWrapper.guidance)
                 .font(.caption)
 
