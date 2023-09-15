@@ -331,7 +331,7 @@ class CalendarUtility {
                     }
                 }
 
-                return false
+                throw AppError(description: "Full Access To Reminders not Granted, please provide full access to Calendar in order to add and delete events.")
             } catch {
                 print("Error in addEvent: \(error)")
                 throw error

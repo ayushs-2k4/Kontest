@@ -7,6 +7,8 @@
 
 import Foundation
 
-struct AppError: Error {
+struct AppError: Error, LocalizedError {
     let description: String
+
+    var errorDescription: String? { description }
 }
