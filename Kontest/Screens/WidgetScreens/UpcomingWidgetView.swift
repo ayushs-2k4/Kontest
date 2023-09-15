@@ -20,7 +20,7 @@ struct UpcomingWidgetView: View {
         VStack {
             if let error = error {
                 if let appError = error as? AppError {
-                    Text("Error: \(appError.description)")
+                    Text("Error: \(appError.title)")
                 } else {
                     Text("Error: \(error.localizedDescription)")
                 }
