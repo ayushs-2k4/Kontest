@@ -6,11 +6,14 @@
 //
 
 import Foundation
+import OSLog
 
 class CodeChefAPIRepository: CodeChefFetcher {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "CodeChefAPIRepository")
+    
     func getUserData(username: String) async throws -> CodeChefAPIDTO {
         guard let url = URL(string: "https://codechef-api.vercel.app/\(username)") else {
-            print("Error in making CodeChef url")
+            logger.error("Error in making CodeChef url")
             throw URLError(.badURL)
         }
 
@@ -20,7 +23,7 @@ class CodeChefAPIRepository: CodeChefFetcher {
 
             return fetchedCodeChefProfile
         } catch {
-            print("error in downloading CodeChef profile async await: \(error)")
+            logger.error("error in downloading CodeChef profile async await: \(error)")
             throw error
         }
     }

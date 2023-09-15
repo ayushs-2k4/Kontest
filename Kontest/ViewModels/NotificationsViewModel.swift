@@ -7,9 +7,12 @@
 
 import Foundation
 import UserNotifications
+import OSLog
 
 @Observable
 class NotificationsViewModel {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "NotificationsViewModel")
+    
     var pendingNotifications: [UNNotificationRequest] = []
 
     static let instance: NotificationsViewModel = .init()
@@ -22,7 +25,6 @@ class NotificationsViewModel {
     }
 
     func getAllPendingNotifications() {
-        print("ran")
         LocalNotificationManager.instance.getAllPendingNotifications(completion: { notifications in
             self.pendingNotifications = notifications.sorted(by: { firstNotificationRequest, secondNotificationRequest in
                 let firstTrigger = firstNotificationRequest.trigger as? UNCalendarNotificationTrigger
@@ -118,7 +120,7 @@ class NotificationsViewModel {
     }
 
     func setNotificationForAllKontests(minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String = "", kontestSubTitle: String = "", kontestBody: String = "") {
-        print("count: \(allKontestsViewModel.toShowKontests.count)")
+        logger.info("count: \("\(allKontestsViewModel.toShowKontests.count)")")
         for i in 0 ..< allKontestsViewModel.toShowKontests.count {
             let kontest = allKontestsViewModel.toShowKontests[i]
             let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)

@@ -7,6 +7,7 @@
 
 import Foundation
 import Network
+import OSLog
 
 extension NWInterface.InterfaceType: CaseIterable {
     public static var allCases: [NWInterface.InterfaceType] = [.other, .wifi, .cellular, .loopback, .wiredEthernet]
@@ -18,6 +19,7 @@ extension NWPath.Status: CaseIterable {
 
 @Observable
 class NetworkMonitor {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "NetworkMonitor")
     static let shared = NetworkMonitor()
     private let monitor: NWPathMonitor
     private let queue = DispatchQueue(label: "NetworkMonitorQueue")
@@ -32,16 +34,15 @@ class NetworkMonitor {
     func start() {
         monitor.start(queue: queue)
         monitor.pathUpdateHandler = { [weak self] path in
-            
+
             guard let interface = NWInterface.InterfaceType.allCases.filter({ path.usesInterfaceType($0) }).first else { return }
 
             self?.currentInterface = interface
-            
+
             self?.currentStatus = path.status
-            
-            print("Status: \(path.status)")
-            print("Interface: \(interface)")
-            print("")
+
+            self?.logger.info("Status: \("\(path.status)")")
+            self?.logger.info("Interface: \("\(interface)")")
         }
     }
 

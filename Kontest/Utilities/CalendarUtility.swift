@@ -7,8 +7,11 @@
 
 import EventKit
 import Foundation
+import OSLog
 
 class CalendarUtility {
+    private static let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "CalendarUtility")
+    
     private static let store = EKEventStore()
 
     static func generateCalendarURL(startDate: Date?, endDate: Date?) -> String {
@@ -333,7 +336,7 @@ class CalendarUtility {
 
                 throw AppError(title: "Permission not Granted", description: "Full Access To Reminders not Granted, please provide full access to Calendar in order to add and delete events.")
             } catch {
-                print("Error in addEvent: \(error)")
+                logger.error("Error in addEvent: \(error)")
                 throw error
             }
 
@@ -360,28 +363,27 @@ class CalendarUtility {
 
         do {
             try store.save(event, span: .thisEvent)
-            print("Event saved")
-            print(event)
+            logger.info("Event saved: \(event)")
             return true
         } catch {
-            print("Error in saving event: \(error)")
+            logger.error("Error in saving event: \(error)")
             throw error
         }
     }
 
     static func getAllEvents() async throws -> [EKEvent]? {
-        print("FullAccessYes")
+        logger.info("FullAccessYes")
 
         if EKEventStore.authorizationStatus(for: EKEntityType.event) != .fullAccess {
             do {
                 let isGranted = try await requestFullAccessToReminders()
 
                 if !isGranted {
-                    print("Full Access To Reminders not Granted")
+                    logger.info("Full Access To Reminders not Granted")
                     return nil
                 }
             } catch {
-                print("Error in requesting Full Access To Reminders")
+                logger.info("Error in requesting Full Access To Reminders")
                 throw error
             }
         }
@@ -392,8 +394,8 @@ class CalendarUtility {
 
         let events = store.events(matching: predicate)
 
-        print("FullAccessinterval: \(interval)")
-        print("FullAccess Events: \(events)")
+        logger.info("FullAccessinterval: \(interval)")
+        logger.info("FullAccess Events: \(events)")
 
         return events
     }
@@ -410,7 +412,7 @@ class CalendarUtility {
                 do {
                     try store.remove(events[0], span: .thisEvent)
                 } catch {
-                    print("Error in removing event: \(error)")
+                    logger.error("Error in removing event: \(error)")
                 }
             }
         } catch {

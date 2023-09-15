@@ -6,12 +6,15 @@
 //
 
 import Foundation
+import OSLog
 
 class FilterWebsitesViewModel {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "FilterWebsitesViewModel")
+    
     func getAllowedWebsites() -> [String] {
         var allowedWebsites: [String] = []
 
-        print("Ran addAllowedWebsites()")
+        logger.info("Ran addAllowedWebsites()")
 
         if UserDefaults.standard.bool(forKey: FilterWebsiteKey.codeForcesKey.rawValue) {
             allowedWebsites.append("CodeForces")

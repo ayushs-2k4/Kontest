@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import OSLog
 
 enum SelectionState: Hashable {
     case screen(Screen)
@@ -14,11 +15,13 @@ enum SelectionState: Hashable {
 
 @Observable
 class Router {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "Router")
+
     var path = [SelectionState]() {
         didSet {
             currentSelectionState = path.last ?? .screen(.AllKontestScreen)
-            print("path: \(path)")
-            print("currentSelectionState: \(currentSelectionState)")
+            logger.info("path: \(self.path)")
+            logger.info("currentSelectionState: \("\(self.currentSelectionState)")")
         }
     }
 
@@ -26,7 +29,7 @@ class Router {
     private init() {}
 
     func appendScreen(screen: Screen) {
-        if (path.contains(.screen(.SettingsScreen)) || path.contains(.screen(.SettingsScreenType(.ChangeUserNamesScreen))) || path.contains(.screen(.SettingsScreenType(.FilterWebsitesScreen)))), screen == .SettingsScreen {
+        if path.contains(.screen(.SettingsScreen)) || path.contains(.screen(.SettingsScreenType(.ChangeUserNamesScreen))) || path.contains(.screen(.SettingsScreenType(.FilterWebsitesScreen))), screen == .SettingsScreen {
         } else {
             path.append(SelectionState.screen(screen))
         }

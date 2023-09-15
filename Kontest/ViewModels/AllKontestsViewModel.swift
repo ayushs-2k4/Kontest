@@ -7,9 +7,12 @@
 
 import Combine
 import Foundation
+import OSLog
 
 @Observable
 class AllKontestsViewModel {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "AllKontestsViewModel")
+    
     let repository = KontestRepository()
 
     static let instance = AllKontestsViewModel()
@@ -92,7 +95,7 @@ class AllKontestsViewModel {
                     }
             }
         } catch {
-            print("error in fetching all Kontests: \(error)")
+            logger.error("error in fetching all Kontests: \(error)")
         }
     }
 
@@ -112,7 +115,7 @@ class AllKontestsViewModel {
         for kontest in toShowKontests {
             if isKontestEnded(kontestEndDate: kontest.end_time) {
                 kontest.removeReminderStatusFromUserDefaults()
-                print("kontest with id: \(kontest.id)'s notification is deleted as kontest is ended.")
+                logger.info("kontest with id: \(kontest.id)'s notification is deleted as kontest is ended.")
             }
         }
     }
@@ -166,7 +169,7 @@ class AllKontestsViewModel {
     func addAllowedWebsites() {
         allowedWebsites.removeAll()
 
-        print("Ran addAllowedWebsites()")
+        logger.info("Ran addAllowedWebsites()")
 
         if UserDefaults.standard.bool(forKey: FilterWebsiteKey.codeForcesKey.rawValue) {
             allowedWebsites.append("CodeForces")

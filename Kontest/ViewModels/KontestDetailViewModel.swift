@@ -38,7 +38,6 @@ class KontestDetailViewModel {
     }
 
     private func updateKontestStatus() {
-        print("Running ")
         let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
         let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
         isKontestRunning = CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date())
