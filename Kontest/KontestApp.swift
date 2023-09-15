@@ -30,6 +30,9 @@ struct KontestApp: App {
                 .environment(errorState)
                 .sheet(item: $errorState.errorWrapper) { errorWrapper in
                     ErrorView(errorWrapper: errorWrapper)
+                    #if os(macOS)
+                        .fixedSize()
+                    #endif
                 }
         }
         .commands {
