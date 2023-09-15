@@ -11,11 +11,13 @@ import SwiftUI
 struct KontestApp: App {
     @State private var allKontestsViewModel = AllKontestsViewModel.instance
     @State private var router = Router.instance
+    @State private var errorState = ErrorState()
+
     let networkMonitor = NetworkMonitor.shared
-    
+
     @AppStorage("shouldFetchAllEventsFromCalendar") var shouldFetchAllEventsFromCalendar: Bool = false
-    
-    init(){
+
+    init() {
         networkMonitor.start()
     }
 
@@ -25,6 +27,10 @@ struct KontestApp: App {
                 .environment(allKontestsViewModel)
                 .environment(router)
                 .environment(networkMonitor)
+                .environment(errorState)
+                .sheet(item: $errorState.errorWrapper) { errorWrapper in
+                    ErrorView(errorWrapper: errorWrapper)
+                }
         }
         .commands {
             MyMenu(router: $router)

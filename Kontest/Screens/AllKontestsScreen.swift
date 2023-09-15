@@ -19,6 +19,8 @@ struct AllKontestsScreen: View {
 
     let changeUsernameViewModel = ChangeUsernameViewModel.instance
 
+    @Environment(ErrorState.self) private var errorState
+
     @Environment(Router.self) private var router
 
     var body: some View {
@@ -179,7 +181,8 @@ struct AllKontestsScreen: View {
                         KontestDetailsScreen(kontest: kontest)
                     }
                 }
-            } else {
+            } 
+            else {
                 NoInternetScreen()
             }
         }
@@ -187,6 +190,11 @@ struct AllKontestsScreen: View {
             if networkMonitor.currentStatus == .satisfied {
                 allKontestsViewModel.fetchAllKontests()
                 WidgetCenter.shared.reloadAllTimelines()
+            }
+        }
+        .onChange(of: allKontestsViewModel.errorWrapper) { _, newValue in
+            if let newValue {
+                errorState.errorWrapper = newValue
             }
         }
         #if !os(macOS)

@@ -79,6 +79,7 @@ struct ButtonsView: View {
     let kontest: KontestModel
     let kontestStartDate: Date?
     let kontestEndDate: Date?
+    @Environment(ErrorState.self) private var errorState
 
     let notificationsViewModel: NotificationsViewModel
 
@@ -97,14 +98,22 @@ struct ButtonsView: View {
                 Button {
                     if kontest.isCalendarEventAdded {
                         Task {
-                            await CalendarUtility.removeEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
+                            do {
+                                try await CalendarUtility.removeEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
 
-                            kontest.isCalendarEventAdded = false
+                                kontest.isCalendarEventAdded = false
+                            } catch {
+                                errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Check that you have given Kontest the Calendar Permission (Full Access)")
+                            }
                         }
                     } else {
                         Task {
-                            if await CalendarUtility.addEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url)) {
-                                kontest.isCalendarEventAdded = true
+                            do {
+                                if try await CalendarUtility.addEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url)) {
+                                    kontest.isCalendarEventAdded = true
+                                }
+                            } catch {
+                                errorState.errorWrapper = ErrorWrapper(error: error, guidance: "")
                             }
                         }
                     }

@@ -313,7 +313,7 @@ class CalendarUtility {
         return isGranted
     }
 
-    static func addEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?) async -> Bool {
+    static func addEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?) async throws -> Bool {
         // Check the authorization status for calendar events
         let authorizationStatus = EKEventStore.authorizationStatus(for: EKEntityType.event)
 
@@ -324,23 +324,31 @@ class CalendarUtility {
 
                 if isGranted {
                     // Permission granted, continue to create and save the event
-                    return createAndSaveEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url)
+                    do {
+                        return try createAndSaveEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url)
+                    } catch {
+                        throw error
+                    }
                 }
 
                 return false
             } catch {
                 print("Error in addEvent: \(error)")
-                return false
+                throw error
             }
 
         } else {
             // If already authorized, create and save the event
-            return createAndSaveEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url)
+            do {
+                return try createAndSaveEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url)
+            } catch {
+                throw error
+            }
         }
     }
 
     // Function to create and save the event
-    private static func createAndSaveEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?) -> Bool {
+    private static func createAndSaveEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?) throws -> Bool {
         UserDefaults.standard.set(true, forKey: "shouldFetchAllEventsFromCalendar")
         let event = EKEvent(eventStore: store)
         event.calendar = store.defaultCalendarForNewEvents
@@ -357,11 +365,11 @@ class CalendarUtility {
             return true
         } catch {
             print("Error in saving event: \(error)")
-            return false
+            throw error
         }
     }
 
-    static func getAllEvents() async -> [EKEvent]? {
+    static func getAllEvents() async throws -> [EKEvent]? {
         print("FullAccessYes")
 
         if EKEventStore.authorizationStatus(for: EKEntityType.event) != .fullAccess {
@@ -374,7 +382,7 @@ class CalendarUtility {
                 }
             } catch {
                 print("Error in requesting Full Access To Reminders")
-                return nil
+                throw error
             }
         }
 
@@ -390,19 +398,23 @@ class CalendarUtility {
         return events
     }
 
-    static func removeEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?) async {
-        let allEvents = await getAllEvents()
+    static func removeEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?) async throws {
+        do {
+            let allEvents = try await getAllEvents()
 
-        let events = allEvents?.filter { event in
-            event.startDate == startDate && event.endDate == endDate && event.title == title && event.url == url
-        }
-
-        if let events, !events.isEmpty {
-            do {
-                try store.remove(events[0], span: .thisEvent)
-            } catch {
-                print("Error in removing event: \(error)")
+            let events = allEvents?.filter { event in
+                event.startDate == startDate && event.endDate == endDate && event.title == title && event.url == url
             }
+
+            if let events, !events.isEmpty {
+                do {
+                    try store.remove(events[0], span: .thisEvent)
+                } catch {
+                    print("Error in removing event: \(error)")
+                }
+            }
+        } catch {
+            throw error
         }
     }
 

@@ -12,10 +12,10 @@ struct SingleKontestView: View {
     let kontest: KontestModel
     let timelineViewDefaultContext: TimelineViewDefaultContext
     @Environment(AllKontestsViewModel.self) private var allKontestsViewModel
+    @Environment(ErrorState.self) private var errorState
+    @Environment(\.colorScheme) private var colorScheme
 
     let notificationsViewModel: NotificationsViewModel
-
-    @Environment(\.colorScheme) private var colorScheme
 
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
@@ -97,15 +97,25 @@ struct SingleKontestView: View {
             Button {
                 if kontest.isCalendarEventAdded {
                     Task {
-                        await CalendarUtility.removeEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
+                        do {
+                            try await CalendarUtility.removeEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
 
-                        kontest.isCalendarEventAdded = false
+                            kontest.isCalendarEventAdded = false
+                        }
+                        catch {
+                            errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Check that you have given Kontest the Calendar Permission (Full Access)")
+                        }
                     }
                 }
                 else {
                     Task {
-                        if await CalendarUtility.addEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url)) {
-                            kontest.isCalendarEventAdded = true
+                        do {
+                            if try await CalendarUtility.addEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url)) {
+                                kontest.isCalendarEventAdded = true
+                            }
+                        }
+                        catch {
+                            errorState.errorWrapper = ErrorWrapper(error: error, guidance: "")
                         }
                     }
                 }

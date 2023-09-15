@@ -16,6 +16,8 @@ class AllKontestsViewModel {
 
     private var timer: AnyCancellable?
 
+    var errorWrapper: ErrorWrapper?
+
     private(set) var allKontests: [KontestModel] = []
     private(set) var toShowKontests: [KontestModel] = []
     private(set) var backupKontests: [KontestModel] = []
@@ -66,7 +68,8 @@ class AllKontestsViewModel {
         do {
             let fetchedKontests = try await repository.getAllKontests()
 
-            let allEvents = shouldFetchAllEventsFromCalendar ? await CalendarUtility.getAllEvents() : []
+            let allEvents = shouldFetchAllEventsFromCalendar ? try await CalendarUtility.getAllEvents() : []
+            
 
             await MainActor.run {
                 self.allKontests = fetchedKontests
@@ -89,6 +92,7 @@ class AllKontestsViewModel {
                     }
             }
         } catch {
+            errorWrapper = ErrorWrapper(error: error, guidance: "Connect to Internet")
             print("error in fetching all Kontests: \(error)")
         }
     }

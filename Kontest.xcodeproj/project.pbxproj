@@ -20,6 +20,9 @@
 		073269EF2AAC4B0C0028476D /* ChangeUsernameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */; };
 		074DD4522AA61570005C16A5 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074DD4512AA61570005C16A5 /* AppError.swift */; };
 		076134CF2AA86AC300946B02 /* KontestDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076134CE2AA86AC300946B02 /* KontestDetailViewModel.swift */; };
+		077E6EAD2AB4B1D10003E897 /* ErrorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EAC2AB4B1D10003E897 /* ErrorWrapper.swift */; };
+		077E6EAF2AB4B2120003E897 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EAE2AB4B2120003E897 /* ErrorView.swift */; };
+		077E6EB12AB4B3220003E897 /* ErrorState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EB02AB4B3220003E897 /* ErrorState.swift */; };
 		07A31F002AAC818D00EBC296 /* FilterWebsiteKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A31EFF2AAC818D00EBC296 /* FilterWebsiteKey.swift */; };
 		07A31F022AAC831300EBC296 /* FilterWebsitesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A31F012AAC831300EBC296 /* FilterWebsitesViewModel.swift */; };
 		07A750202AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A7501F2AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift */; };
@@ -164,6 +167,9 @@
 		076016552A87CD52007CE9F5 /* Kontest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kontest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		076134CE2AA86AC300946B02 /* KontestDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestDetailViewModel.swift; sourceTree = "<group>"; };
 		07710E842AB46220008DE1D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		077E6EAC2AB4B1D10003E897 /* ErrorWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorWrapper.swift; sourceTree = "<group>"; };
+		077E6EAE2AB4B2120003E897 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		077E6EB02AB4B3220003E897 /* ErrorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorState.swift; sourceTree = "<group>"; };
 		07A31EFF2AAC818D00EBC296 /* FilterWebsiteKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsiteKey.swift; sourceTree = "<group>"; };
 		07A31F012AAC831300EBC296 /* FilterWebsitesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesViewModel.swift; sourceTree = "<group>"; };
 		07A7501F2AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoKontestsDueToFiltersScreen.swift; sourceTree = "<group>"; };
@@ -459,6 +465,7 @@
 				073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */,
 				071915662AB169D300E1CB56 /* NoInternetScreen.swift */,
 				07A7501F2AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift */,
+				077E6EAE2AB4B2120003E897 /* ErrorView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -479,6 +486,8 @@
 				074DD4512AA61570005C16A5 /* AppError.swift */,
 				07CFEC0C2AB0435200291484 /* GetKontests.swift */,
 				071915632AB1695E00E1CB56 /* NetworkMonitor.swift */,
+				077E6EAC2AB4B1D10003E897 /* ErrorWrapper.swift */,
+				077E6EB02AB4B3220003E897 /* ErrorState.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -692,9 +701,11 @@
 				07ECFBA72AA58259008513C6 /* ClipboardUtility.swift in Sources */,
 				07ECFBBA2AA58259008513C6 /* LeetCodeGraphQLAPIFetcher.swift in Sources */,
 				07ECFB8F2AA58259008513C6 /* CodeForcesAPIRepository.swift in Sources */,
+				077E6EAF2AB4B2120003E897 /* ErrorView.swift in Sources */,
 				07ECFBA42AA58259008513C6 /* AllNotificationMenu.swift in Sources */,
 				07ECFBAF2AA58259008513C6 /* CodeChefAPIDTO.swift in Sources */,
 				07ECFB8C2AA58259008513C6 /* KontestRepository.swift in Sources */,
+				077E6EAD2AB4B1D10003E897 /* ErrorWrapper.swift in Sources */,
 				074DD4522AA61570005C16A5 /* AppError.swift in Sources */,
 				07ECFBAC2AA58259008513C6 /* FontUtility.swift in Sources */,
 				07ECFB922AA58259008513C6 /* CodeForcesUserInfoAPIModel.swift in Sources */,
@@ -719,6 +730,7 @@
 				07ECFB9F2AA58259008513C6 /* CodeForcesView.swift in Sources */,
 				07ECFBAB2AA58259008513C6 /* DownloadData.swift in Sources */,
 				07ECFBA02AA58259008513C6 /* KontestDetailsScreen.swift in Sources */,
+				077E6EB12AB4B3220003E897 /* ErrorState.swift in Sources */,
 				07ECFBAA2AA58259008513C6 /* Router.swift in Sources */,
 				073269E82AAC42350028476D /* FilterWebsitesView.swift in Sources */,
 				07ECFB982AA58259008513C6 /* SettingsScreen.swift in Sources */,
