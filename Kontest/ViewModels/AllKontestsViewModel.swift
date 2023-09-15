@@ -92,7 +92,6 @@ class AllKontestsViewModel {
                     }
             }
         } catch {
-            errorWrapper = ErrorWrapper(error: error, guidance: "Connect to Internet")
             print("error in fetching all Kontests: \(error)")
         }
     }
