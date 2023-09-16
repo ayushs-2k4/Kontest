@@ -6,11 +6,14 @@
 //
 
 import Foundation
+import OSLog
 
 class CodeForcesAPIRepository: CodeForcesFetcher {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "CodeForcesAPIRepository")
+    
     func getUserRating(username: String) async throws -> CodeForcesUserRatingAPIDTO {
         guard let url = URL(string: "https://codeforces.com/api/user.rating?handle=\(username)") else {
-            print("Error in making CodeForces ratings url")
+            logger.error("Error in making CodeForces ratings url")
             throw URLError(.badURL)
         }
 
@@ -20,14 +23,14 @@ class CodeForcesAPIRepository: CodeForcesFetcher {
 
             return fetchedCodeForcesRatings
         } catch {
-            print("error in downloading CodeForces ratings async await: \(error)")
+            logger.error("error in downloading CodeForces ratings async await: \(error)")
             throw error
         }
     }
 
     func getUserInfo(username: String) async throws -> CodeForcesUserInfoAPIDTO {
         guard let url = URL(string: "https://codeforces.com/api/user.info?handles=\(username)") else {
-            print("Error in making CodeForces profile url")
+            logger.error("Error in making CodeForces profile url")
             throw URLError(.badURL)
         }
 
@@ -37,7 +40,7 @@ class CodeForcesAPIRepository: CodeForcesFetcher {
 
             return fetchedCodeForcesProfile
         } catch {
-            print("error in downloading CodeForces User Info async await: \(error)")
+            logger.error("error in downloading CodeForces User Info async await: \(error)")
             throw error
         }
     }

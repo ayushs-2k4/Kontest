@@ -7,14 +7,19 @@
 
 import Combine
 import Foundation
+import OSLog
 
 @Observable
 class AllKontestsViewModel {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "AllKontestsViewModel")
+    
     let repository = KontestRepository()
 
     static let instance = AllKontestsViewModel()
 
     private var timer: AnyCancellable?
+
+    var errorWrapper: ErrorWrapper?
 
     private(set) var allKontests: [KontestModel] = []
     private(set) var toShowKontests: [KontestModel] = []
@@ -25,6 +30,8 @@ class AllKontestsViewModel {
     private(set) var tomorrowKontests: [KontestModel] = []
     private(set) var laterKontests: [KontestModel] = []
 
+    private let shouldFetchAllEventsFromCalendar: Bool
+
     var searchText: String = "" {
         didSet {
             filterKontestsUsingSearchText()
@@ -34,6 +41,7 @@ class AllKontestsViewModel {
     var isLoading = false
 
     private init() {
+        shouldFetchAllEventsFromCalendar = UserDefaults.standard.bool(forKey: "shouldFetchAllEventsFromCalendar")
         setDefaultValuesForFilterWebsiteKeysToTrue()
         addAllowedWebsites()
         fetchAllKontests()
@@ -63,12 +71,19 @@ class AllKontestsViewModel {
         do {
             let fetchedKontests = try await repository.getAllKontests()
 
+            let allEvents = shouldFetchAllEventsFromCalendar ? try await CalendarUtility.getAllEvents() : []
+            
+
             await MainActor.run {
                 self.allKontests = fetchedKontests
                     .map { dto in
                         let kontest = KontestModel.from(dto: dto)
                         // Load Reminder status
                         kontest.loadReminderStatus()
+
+                        // Load Calendar status
+                        kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+
                         return kontest
                     }
                     .filter { kontest in
@@ -80,7 +95,7 @@ class AllKontestsViewModel {
                     }
             }
         } catch {
-            print("error in fetching all Kontests: \(error)")
+            logger.error("error in fetching all Kontests: \(error)")
         }
     }
 
@@ -100,7 +115,7 @@ class AllKontestsViewModel {
         for kontest in toShowKontests {
             if isKontestEnded(kontestEndDate: kontest.end_time) {
                 kontest.removeReminderStatusFromUserDefaults()
-                print("kontest with id: \(kontest.id)'s notification is deleted as kontest is ended.")
+                logger.info("kontest with id: \(kontest.id)'s notification is deleted as kontest is ended.")
             }
         }
     }
@@ -154,7 +169,7 @@ class AllKontestsViewModel {
     func addAllowedWebsites() {
         allowedWebsites.removeAll()
 
-        print("Ran addAllowedWebsites()")
+        logger.info("Ran addAllowedWebsites()")
 
         if UserDefaults.standard.bool(forKey: FilterWebsiteKey.codeForcesKey.rawValue) {
             allowedWebsites.append("CodeForces")

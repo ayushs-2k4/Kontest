@@ -5,13 +5,15 @@
 //  Created by Ayush Singhal on 13/08/23.
 //
 
+import OSLog
 import UserNotifications
 
 class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "NotificationDelegate")
+
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
-        print(userInfo)
-        NSLog("NSLOG: UserInfo: \(userInfo)")
+        logger.info("\(userInfo)")
 
         completionHandler()
     }
@@ -22,6 +24,8 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
 }
 
 class LocalNotificationManager {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "LocalNotificationManager")
+
     static let instance = LocalNotificationManager() // singleton
     let center = UNUserNotificationCenter.current()
     private var delegate: NotificationDelegate = .init()
@@ -32,11 +36,11 @@ class LocalNotificationManager {
 
     func requestAuthorization() {
         let options: UNAuthorizationOptions = [.alert, .sound, .badge]
-        center.requestAuthorization(options: options) { _, error in
+        center.requestAuthorization(options: options) { [weak self] _, error in
             if let error {
-                print("ERROR: \(error)")
+                self?.logger.error("ERROR: \(error)")
             } else {
-                print("Success")
+                self?.logger.info("Success")
             }
         }
     }
@@ -56,7 +60,7 @@ class LocalNotificationManager {
         let timeTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
 
         let timeNotificationRequest = UNNotificationRequest(identifier: id, content: timedNotificationContent, trigger: timeTrigger)
-        print("Scheduled Timed notification of after 5 seconds")
+        logger.info("Scheduled Timed notification of after 5 seconds")
 
         center.add(timeNotificationRequest)
     }
@@ -81,7 +85,7 @@ class LocalNotificationManager {
 
         let calendarNotificationRequest = UNNotificationRequest(identifier: id, content: calendarNotificationContent, trigger: calendarTrigger)
 
-        print("Notification setted for: \(notificationContent.date)")
+        logger.info("Notification setted for: \(notificationContent.date)")
 
         center.add(calendarNotificationRequest)
     }
@@ -99,18 +103,18 @@ class LocalNotificationManager {
     }
 
     func printAllPendingNotifications() {
-        print("printing notifs")
-        center.getPendingNotificationRequests { requests in
-            print("requests.count: \(requests.count)")
+        logger.info("printing notifs")
+        center.getPendingNotificationRequests { [weak self] requests in
+            self?.logger.info("requests.count: \(requests.count)")
             for request in requests {
-                print("Identifier: \(request.identifier)")
-                print("Title: \(request.content.title)")
-                print("Body: \(request.content.body)")
+                self?.logger.info("Identifier: \(request.identifier)")
+                self?.logger.info("Title: \(request.content.title)")
+                self?.logger.info("Body: \(request.content.body)")
                 if let trigger = request.trigger as? UNCalendarNotificationTrigger {
                     let date = trigger.nextTriggerDate()
-                    print("Next Trigger Date: \(date ?? Date())")
+                    self?.logger.info("Next Trigger Date: \(date ?? Date())")
                 }
-                print("-------")
+                self?.logger.info("-------")
             }
         }
     }
@@ -118,9 +122,7 @@ class LocalNotificationManager {
     func getAllPendingNotifications(completion: @escaping ([UNNotificationRequest]) -> Void) {
         var ans: [UNNotificationRequest] = []
         center.getPendingNotificationRequests { requests in
-            print("requests.count2: \(requests.count)")
             ans.append(contentsOf: requests)
-            print("ans.count: \(ans.count)")
             completion(ans)
         }
     }

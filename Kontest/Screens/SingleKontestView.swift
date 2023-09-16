@@ -12,10 +12,10 @@ struct SingleKontestView: View {
     let kontest: KontestModel
     let timelineViewDefaultContext: TimelineViewDefaultContext
     @Environment(AllKontestsViewModel.self) private var allKontestsViewModel
+    @Environment(ErrorState.self) private var errorState
+    @Environment(\.colorScheme) private var colorScheme
 
     let notificationsViewModel: NotificationsViewModel
-
-    @Environment(\.colorScheme) private var colorScheme
 
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
@@ -93,6 +93,40 @@ struct SingleKontestView: View {
                 Image(systemName: "link")
             }
             .help("Copy link")
+
+            Button {
+                if kontest.isCalendarEventAdded {
+                    Task {
+                        do {
+                            try await CalendarUtility.removeEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
+
+                            kontest.isCalendarEventAdded = false
+                        }
+                        catch {
+                            errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Check that you have given Kontest the Calendar Permission (Full Access)")
+                        }
+                    }
+                }
+                else {
+                    Task {
+                        do {
+                            if try await CalendarUtility.addEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url)) {
+                                kontest.isCalendarEventAdded = true
+                            }
+                        }
+                        catch {
+                            errorState.errorWrapper = ErrorWrapper(error: error, guidance: "")
+                        }
+                    }
+                }
+
+            } label: {
+                Image(systemName: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus")
+                    .contentTransition(.symbolEffect(.replace))
+                    .frame(width: 20)
+            }
+            .help(kontest.isCalendarEventAdded ? "Remove from Calendar" : "Add to Calendar")
+
             #endif
 
             #if os(macOS)

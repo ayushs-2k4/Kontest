@@ -47,7 +47,6 @@ struct SingleSettingsTileView: View {
             Text(title)
         }
         .onTapGesture {
-            print("Tapped on: \(title)")
             onTapGesture()
         }
     }

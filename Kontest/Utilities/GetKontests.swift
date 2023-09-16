@@ -6,8 +6,11 @@
 //
 
 import Foundation
+import OSLog
 
 class GetKontests {
+    private static let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "GetKontests")
+    
     static func getKontests() async -> (fetchedKontests: [KontestModel], error: Error?) {
         let repository = KontestRepository()
 
@@ -29,7 +32,7 @@ class GetKontests {
                     return !kontestDuration.isEmpty && !isKontestEnded
                 }, nil)
         } catch {
-            print("error in fetching all Kontests: \(error)")
+            logger.info("error in fetching all Kontests: \(error)")
             return ([], error)
         }
     }

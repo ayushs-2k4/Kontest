@@ -78,12 +78,15 @@ struct KontestDetailsScreen: View {
 struct ButtonsView: View {
     let kontest: KontestModel
     let kontestStartDate: Date?
+    let kontestEndDate: Date?
+    @Environment(ErrorState.self) private var errorState
 
     let notificationsViewModel: NotificationsViewModel
 
     init(kontest: KontestModel) {
         self.kontest = kontest
         kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
+        kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
         notificationsViewModel = NotificationsViewModel.instance
     }
 
@@ -91,6 +94,34 @@ struct ButtonsView: View {
         VStack {
             if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()), notificationsViewModel.getNumberOfNotificationsWhichCanBeSettedForAKontest(kontest: kontest) > 0 {
                 SingleNotificationMenu(kontest: kontest)
+
+                Button {
+                    if kontest.isCalendarEventAdded {
+                        Task {
+                            do {
+                                try await CalendarUtility.removeEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
+
+                                kontest.isCalendarEventAdded = false
+                            } catch {
+                                errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Check that you have given Kontest the Calendar Permission (Full Access)")
+                            }
+                        }
+                    } else {
+                        Task {
+                            do {
+                                if try await CalendarUtility.addEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url)) {
+                                    kontest.isCalendarEventAdded = true
+                                }
+                            } catch {
+                                errorState.errorWrapper = ErrorWrapper(error: error, guidance: "")
+                            }
+                        }
+                    }
+
+                } label: {
+                    Text(kontest.isCalendarEventAdded ? "Remove from Calendar" : "Add to Calendar")
+                        .frame(maxWidth: .infinity)
+                }
             }
 
             Link(destination: URL(string: kontest.url)!, label: {

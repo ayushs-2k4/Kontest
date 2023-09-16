@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import OSLog
 
 @Observable
 class CodeForcesViewModel {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "CodeForcesViewModel")
+    
     let codeForcesAPIRepository = CodeForcesAPIRepository()
     
     var codeForcesRatings: CodeForcesUserRatingAPIModel?
@@ -30,12 +33,12 @@ class CodeForcesViewModel {
     private func getCodeForcesRatings(username: String) async {
         do {
             let fetchedCodeForcesRatings = try await codeForcesAPIRepository.getUserRating(username: username)
-            print(fetchedCodeForcesRatings)
+            logger.info("\("\(fetchedCodeForcesRatings)")")
             
             self.codeForcesRatings = CodeForcesUserRatingAPIModel.from(dto: fetchedCodeForcesRatings)
         } catch {
             self.error = error
-            print("error in fetching CodeForces Rating: \(error)")
+            logger.error("error in fetching CodeForces Rating: \(error)")
         }
     }
     
@@ -70,12 +73,12 @@ class CodeForcesViewModel {
     private func getCodeForcesUserInfo(username: String) async {
         do {
             let fetchedCodeForcesUserInfo = try await codeForcesAPIRepository.getUserInfo(username: username)
-            print(fetchedCodeForcesUserInfo)
+            logger.info("\("\(fetchedCodeForcesUserInfo)")")
             
             self.codeForcesUserInfos = CodeForcesUserInfoAPIModel.from(dto: fetchedCodeForcesUserInfo)
         } catch {
             self.error = error
-            print("error in fetching CodeForces User Info: \(error)")
+            logger.error("error in fetching CodeForces User Info: \(error)")
         }
     }
 }

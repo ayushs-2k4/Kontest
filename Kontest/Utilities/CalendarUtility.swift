@@ -5,9 +5,15 @@
 //  Created by Ayush Singhal on 13/08/23.
 //
 
+import EventKit
 import Foundation
+import OSLog
 
 class CalendarUtility {
+    private static let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "CalendarUtility")
+    
+    private static let store = EKEventStore()
+
     static func generateCalendarURL(startDate: Date?, endDate: Date?) -> String {
         let utcStartDate = startDate!.addingTimeInterval(-Double(TimeZone.current.secondsFromGMT(for: startDate!)))
         let utcEndDate = endDate!.addingTimeInterval(-Double(TimeZone.current.secondsFromGMT(for: endDate!)))
@@ -297,5 +303,126 @@ class CalendarUtility {
         }
 
         return nextDateToRefresh
+    }
+
+    private static func requestFullAccessToReminders() async throws -> Bool {
+        do {
+            try await store.requestFullAccessToEvents()
+        } catch {
+            throw error
+        }
+
+        let isGranted = EKEventStore.authorizationStatus(for: EKEntityType.event) == .fullAccess
+        return isGranted
+    }
+
+    static func addEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?) async throws -> Bool {
+        // Check the authorization status for calendar events
+        let authorizationStatus = EKEventStore.authorizationStatus(for: EKEntityType.event)
+
+        if authorizationStatus != .fullAccess {
+            // If not authorized, request permission asynchronously
+            do {
+                let isGranted = try await requestFullAccessToReminders()
+
+                if isGranted {
+                    // Permission granted, continue to create and save the event
+                    do {
+                        return try createAndSaveEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url)
+                    } catch {
+                        throw error
+                    }
+                }
+
+                throw AppError(title: "Permission not Granted", description: "Full Access To Reminders not Granted, please provide full access to Calendar in order to add and delete events.")
+            } catch {
+                logger.error("Error in addEvent: \(error)")
+                throw error
+            }
+
+        } else {
+            // If already authorized, create and save the event
+            do {
+                return try createAndSaveEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url)
+            } catch {
+                throw error
+            }
+        }
+    }
+
+    // Function to create and save the event
+    private static func createAndSaveEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?) throws -> Bool {
+        UserDefaults.standard.set(true, forKey: "shouldFetchAllEventsFromCalendar")
+        let event = EKEvent(eventStore: store)
+        event.calendar = store.defaultCalendarForNewEvents
+        event.title = title
+        event.startDate = startDate
+        event.endDate = endDate
+        event.notes = notes
+        event.url = url
+
+        do {
+            try store.save(event, span: .thisEvent)
+            logger.info("Event saved: \(event)")
+            return true
+        } catch {
+            logger.error("Error in saving event: \(error)")
+            throw error
+        }
+    }
+
+    static func getAllEvents() async throws -> [EKEvent]? {
+        logger.info("FullAccessYes")
+
+        if EKEventStore.authorizationStatus(for: EKEntityType.event) != .fullAccess {
+            do {
+                let isGranted = try await requestFullAccessToReminders()
+
+                if !isGranted {
+                    logger.info("Full Access To Reminders not Granted")
+                    return nil
+                }
+            } catch {
+                logger.info("Error in requesting Full Access To Reminders")
+                throw error
+            }
+        }
+
+        guard let interval = Calendar.current.dateInterval(of: .month, for: Date()) else { return nil }
+
+        let predicate = store.predicateForEvents(withStart: interval.start, end: interval.end, calendars: nil)
+
+        let events = store.events(matching: predicate)
+
+        logger.info("FullAccessinterval: \(interval)")
+        logger.info("FullAccess Events: \(events)")
+
+        return events
+    }
+
+    static func removeEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?) async throws {
+        do {
+            let allEvents = try await getAllEvents()
+
+            let events = allEvents?.filter { event in
+                event.startDate == startDate && event.endDate == endDate && event.title == title && event.url == url
+            }
+
+            if let events, !events.isEmpty {
+                do {
+                    try store.remove(events[0], span: .thisEvent)
+                } catch {
+                    logger.error("Error in removing event: \(error)")
+                }
+            }
+        } catch {
+            throw error
+        }
+    }
+
+    static func isEventPresentInCalendar(allEventsOfCalendar: [EKEvent], startDate: Date, endDate: Date, title: String, url: URL?) -> Bool {
+        return allEventsOfCalendar.contains { event in
+            event.startDate == startDate && event.endDate == endDate && event.title == title && event.url == url
+        }
     }
 }
