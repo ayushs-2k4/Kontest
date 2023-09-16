@@ -90,28 +90,30 @@ struct createSingleKontestView: View {
 
                 Spacer()
 
-                Button(intent: AddToCalendarIntent(kontest: KontestWidgetModel.from(kontestModel: kontest))) {
-                    Image(systemName: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus")
-                }
-
-                if kontestStatus == .OnGoing || kontestStatus == .LaterToday || kontestStatus == .Tomorrow {
-                    if widgetFamily == .systemExtraLarge {
-                        HStack {
+                Group {
+                    if kontestStatus == .OnGoing || kontestStatus == .LaterToday || kontestStatus == .Tomorrow {
+                        if widgetFamily == .systemExtraLarge {
+                            HStack {
+                                Text(startDate.formatted(date: .omitted, time: .shortened))
+                                Text(" - ")
+                                Text(endDate.formatted(date: .omitted, time: .shortened))
+                            }
+                        } else {
                             Text(startDate.formatted(date: .omitted, time: .shortened))
-                            Text(" - ")
-                            Text(endDate.formatted(date: .omitted, time: .shortened))
                         }
-                    } else {
-                        Text(startDate.formatted(date: .omitted, time: .shortened))
+                    }
+
+                    if kontestStatus == .Later {
+                        if widgetFamily == .systemExtraLarge {
+                            let p = CalendarUtility.getWeekdayNameFromDate(date: startDate)
+                            Text("(\(p))")
+                        }
+                        Text(CalendarUtility.getKontestDate(date: startDate))
                     }
                 }
 
-                if kontestStatus == .Later {
-                    if widgetFamily == .systemExtraLarge {
-                        let p = CalendarUtility.getWeekdayNameFromDate(date: startDate)
-                        Text("(\(p))")
-                    }
-                    Text(CalendarUtility.getKontestDate(date: startDate))
+                Button(intent: AddToCalendarIntent(title: kontest.name, notes: "", startDate: startDate, endDate: endDate, url: URL(string: kontest.url), toRemove: kontest.isCalendarEventAdded)) {
+                    Image(systemName: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus")
                 }
             }
         }
