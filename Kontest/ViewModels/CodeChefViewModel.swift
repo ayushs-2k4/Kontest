@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import OSLog
 
 @Observable
 class CodeChefViewModel {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "CodeChefViewModel")
+    
     let codeChefAPIRepository = CodeChefAPIRepository()
 
     var codeChefProfile: CodeChefAPIModel?
@@ -33,7 +36,7 @@ class CodeChefViewModel {
             self.codeChefProfile = CodeChefAPIModel.from(codeChefAPIDTO: fetchedCodeChefProfile)
         } catch {
             self.error = error
-            print("error in fetching CodeChef Profile: \(error)")
+            logger.error("error in fetching CodeChef Profile: \(error)")
         }
     }
 }

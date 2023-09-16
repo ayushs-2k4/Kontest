@@ -37,7 +37,6 @@ struct Provider: TimelineProvider {
         let networkMonitor = NetworkMonitor.shared
         networkMonitor.start()
 
-        print("statusssss getSnapshot: \(networkMonitor.currentStatus)")
         if networkMonitor.currentStatus == .satisfied {
             Task {
                 let kontestsDividedInCategories = await GetKontests.getKontestsDividedIncategories()
@@ -73,7 +72,6 @@ struct Provider: TimelineProvider {
         let networkMonitor = NetworkMonitor.shared
         networkMonitor.start()
 
-        print("statusssss getTimeline: \(networkMonitor.currentStatus)")
         if networkMonitor.currentStatus == .satisfied {
             Task {
                 let kontestsDividedInCategories = await GetKontests.getKontestsDividedIncategories()

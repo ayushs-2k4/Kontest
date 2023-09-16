@@ -6,21 +6,24 @@
 //
 
 import Foundation
+import OSLog
 
 class KontestRepository: KontestFetcher {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "KontestRepository")
+
     func getAllKontests() async throws -> [KontestDTO] {
         guard let url = URL(string: "https://kontests.net/api/v1/all") else {
-            print("Error in making url")
+            logger.error("Error in making url")
             throw URLError(.badURL)
         }
 
         do {
             let data = try await downloadDataWithAsyncAwait(url: url)
             let allFetchedKontests = try JSONDecoder().decode([KontestDTO].self, from: data)
-            
+
             return allFetchedKontests
         } catch {
-            print("error in downloading all Kontests async await: \(error)")
+            logger.error("error in downloading all Kontests async await: \(error)")
             throw error
         }
     }

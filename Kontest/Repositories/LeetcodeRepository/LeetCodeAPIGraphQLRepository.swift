@@ -7,12 +7,15 @@
 
 import Foundation
 import LeetCodeSchema
+import OSLog
 
 class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "LeetCodeAPIGraphQLRepository")
+
     func getUserData(username: String, completion: @escaping (LeetCodeUserProfileGraphQLAPIDTO?, Error?) -> Void) {
         let query = UserPublicProfileQuery(username: username)
 
-        DownloadDataWithApollo.shared.apollo.fetch(query: query) { result in
+        DownloadDataWithApollo.shared.apollo.fetch(query: query) {[weak self] result in
             switch result {
             case .success(let value):
                 let p = value.data?.matchedUser
@@ -35,7 +38,7 @@ class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
                     completion(nil, AppError(title: "Data not found", description: "Data not found in  LeetCodeAPIGraphQLRepository - getUserData"))
                 }
             case .failure(let error):
-                print("Error in LeetCodeAPIGraphQLRepository - getUserData: \(error)")
+                self?.logger.error("Error in LeetCodeAPIGraphQLRepository - getUserData: \(error)")
                 completion(nil, error)
             }
         }
@@ -44,7 +47,7 @@ class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
     func getUserRankingInfo(username: String, completion: @escaping (LeetCodeUserRankingsGraphQLAPIDTO?, Error?) -> Void) {
         let query = UserContestRankingInfoQuery(username: username)
 
-        DownloadDataWithApollo.shared.apollo.fetch(query: query) { result in
+        DownloadDataWithApollo.shared.apollo.fetch(query: query) {[weak self] result in
             switch result {
             case .success(let value):
                 let userContestRanking = value.data?.userContestRanking
@@ -55,7 +58,7 @@ class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
                 completion(leetCodeUserRankingsGraphQLAPIDTO, nil)
 
             case .failure(let error):
-                print("Error in LeetCodeAPIGraphQLRepository - getUserRankingInfo: \(error)")
+                self?.logger.error("Error in LeetCodeAPIGraphQLRepository - getUserRankingInfo: \(error)")
                 completion(nil, error)
             }
         }

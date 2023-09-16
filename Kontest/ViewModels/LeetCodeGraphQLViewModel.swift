@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import OSLog
 
 @Observable
 class LeetCodeGraphQLViewModel {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "FilterWebsitesViewModel")
+
     let repository = LeetCodeAPIGraphQLRepository()
 
     var leetCodeUserProfileGraphQLAPIModel: LeetCodeUserProfileGraphQLAPIModel?
@@ -31,17 +34,18 @@ class LeetCodeGraphQLViewModel {
     func fetchUserData(username: String) {
         repository.getUserData(username: username) { [weak self] leetCodeUserProfileGraphQLAPIDTO, error in
             if error != nil {
-                print(error as Any)
+                self?.logger.error("\(error)")
                 self?.error = error
             } else {
                 if let leetCodeUserProfileGraphQLAPIDTO {
                     // Handle the data here when the GraphQL query succeeds.
-                    print("Received data: \(leetCodeUserProfileGraphQLAPIDTO)")
+                    self?.logger.info("-------\("\(leetCodeUserProfileGraphQLAPIDTO)")----------")
+
                     self?.leetCodeUserProfileGraphQLAPIModel = LeetCodeUserProfileGraphQLAPIModel.from(leetCodeUserProfileGraphQLAPIDTO: leetCodeUserProfileGraphQLAPIDTO)
                     self?.error = nil
                 } else {
                     // Handle the case when the GraphQL query fails or returns nil data.
-                    print("Failed to fetchUserData.")
+                    self?.logger.error("Failed to fetchUserData.")
                     self?.error = URLError(.badURL)
                 }
             }
@@ -54,7 +58,7 @@ class LeetCodeGraphQLViewModel {
     func fetchUserRankings(username: String) {
         repository.getUserRankingInfo(username: username) { [weak self] leetCodeUserRankingsGraphQLAPIDTO, error in
             if error != nil {
-                print(error as Any)
+                self?.logger.error("\(error)")
                 self?.error = error
             } else {
                 if let leetCodeUserRankingsGraphQLAPIDTO, let userContestRanking = LeetCodeUserRankingGraphQLAPIModel.from(leetCodeUserRankingGraphQLAPIDTO: leetCodeUserRankingsGraphQLAPIDTO.leetCodeUserRankingGraphQLAPIDTO), let userContestRankingHistory = LeetCodeUserRankingHistoryGraphQLAPIModel.from(leetCodeUserRankingHistoryGraphQLAPIDTOs: leetCodeUserRankingsGraphQLAPIDTO.leetCodeUserRankingHistoryGraphQLAPIDTO) {
@@ -64,7 +68,7 @@ class LeetCodeGraphQLViewModel {
 
                     self?.error = nil
                 } else {
-                    print("Failed to fetchUserRankings.")
+                    self?.logger.error("Failed to fetchUserRankings.")
                     self?.error = URLError(.badURL)
                 }
             }
