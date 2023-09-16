@@ -194,6 +194,8 @@
 		07CFEBF92AB042A700291484 /* Upcoming_Kontests_macOS_Widget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Upcoming_Kontests_macOS_Widget.entitlements; sourceTree = "<group>"; };
 		07CFEC042AB042F500291484 /* UpcomingWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingWidgetView.swift; sourceTree = "<group>"; };
 		07CFEC0C2AB0435200291484 /* GetKontests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetKontests.swift; sourceTree = "<group>"; };
+		07EA6F482AB6405A00CD932E /* Kontest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kontest.entitlements; sourceTree = "<group>"; };
+		07EA6F492AB6405F00CD932E /* Upcoming Kontests iOS WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Upcoming Kontests iOS WidgetExtension.entitlements"; sourceTree = "<group>"; };
 		07ECFB352AA58259008513C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		07ECFB382AA58259008513C6 /* ChangeUsernameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeUsernameViewModel.swift; sourceTree = "<group>"; };
 		07ECFB392AA58259008513C6 /* LeetCodeGraphQLViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeetCodeGraphQLViewModel.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 		0760164C2A87CD52007CE9F5 = {
 			isa = PBXGroup;
 			children = (
+				07EA6F492AB6405F00CD932E /* Upcoming Kontests iOS WidgetExtension.entitlements */,
 				07ECFB7F2AA58259008513C6 /* apollo-codegen-config.json */,
 				07ECFB362AA58259008513C6 /* Kontest */,
 				07ECFB352AA58259008513C6 /* README.md */,
@@ -360,6 +363,7 @@
 		07ECFB362AA58259008513C6 /* Kontest */ = {
 			isa = PBXGroup;
 			children = (
+				07EA6F482AB6405A00CD932E /* Kontest.entitlements */,
 				0784292C2AB5EF520078D836 /* Intents */,
 				07710E842AB46220008DE1D6 /* Info.plist */,
 				07ECFB6E2AA58259008513C6 /* DTOs */,
@@ -954,6 +958,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Kontest/Kontest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Kontest/Preview Content\"";
@@ -989,6 +994,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Kontest/Kontest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Kontest/Preview Content\"";
@@ -1023,6 +1029,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "Upcoming Kontests iOS WidgetExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R2Z9FDM5M6;
@@ -1050,6 +1057,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "Upcoming Kontests iOS WidgetExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R2Z9FDM5M6;
