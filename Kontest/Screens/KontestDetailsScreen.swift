@@ -103,7 +103,7 @@ struct ButtonsView: View {
 
                                 kontest.isCalendarEventAdded = false
                             } catch {
-                                errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Check that you have given Kontest the Calendar Permission (Full Access)")
+                                errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Please provide full access to Calendar in order to add and delete events.")
                             }
                         }
                     } else {
@@ -113,7 +113,7 @@ struct ButtonsView: View {
                                     kontest.isCalendarEventAdded = true
                                 }
                             } catch {
-                                errorState.errorWrapper = ErrorWrapper(error: error, guidance: "")
+                                errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Please provide full access to Calendar in order to add and delete events.")
                             }
                         }
                     }

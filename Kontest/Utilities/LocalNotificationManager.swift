@@ -57,7 +57,7 @@ class LocalNotificationManager {
 //        let userInfo: [AnyHashable: Any] = ["nextViewInterval": "loadingViewInterval"]
 
         // time
-        let timeTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let timeTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
 
         let timeNotificationRequest = UNNotificationRequest(identifier: id, content: timedNotificationContent, trigger: timeTrigger)
         logger.info("Scheduled Timed notification of after 5 seconds")
@@ -77,7 +77,6 @@ class LocalNotificationManager {
 
         let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .timeZone, .hour, .minute], from: notificationContent.date)
 
-//        let calendarNotificationContentAction = UNNotificationAction(identifier: id, title: "View Contest")
         let userInfo: [AnyHashable: Any] = ["nextView": "loadingView"]
         calendarNotificationContent.userInfo = userInfo
 
@@ -90,12 +89,22 @@ class LocalNotificationManager {
         center.add(calendarNotificationRequest)
     }
 
-    func checkNotificationPermissionGranted() {
+    private func checkNotificationPermissionGranted() {
         center.getNotificationSettings { settings in
             if settings.authorizationStatus != .authorized {
                 self.requestAuthorization()
             }
         }
+    }
+
+    func getNotificationsAuthorizationLevel() async -> UNNotificationSettings {
+        let settings = await withUnsafeContinuation { continuation in
+            center.getNotificationSettings { settings in
+                continuation.resume(returning: settings)
+            }
+        }
+
+        return settings
     }
 
     func setBadgeCountTo0() {
@@ -107,14 +116,12 @@ class LocalNotificationManager {
         center.getPendingNotificationRequests { [weak self] requests in
             self?.logger.info("requests.count: \(requests.count)")
             for request in requests {
-                self?.logger.info("Identifier: \(request.identifier)")
-                self?.logger.info("Title: \(request.content.title)")
-                self?.logger.info("Body: \(request.content.body)")
                 if let trigger = request.trigger as? UNCalendarNotificationTrigger {
                     let date = trigger.nextTriggerDate()
-                    self?.logger.info("Next Trigger Date: \(date ?? Date())")
+                    self?.logger.info("Identifier: \(request.identifier)\nTitle: \(request.content.title)\nBody: \(request.content.body)\nNext Trigger Date: \(date ?? Date())")
+                } else {
+                    self?.logger.info("Identifier: \(request.identifier)\nTitle: \(request.content.title)\nBody: \(request.content.body)")
                 }
-                self?.logger.info("-------")
             }
         }
     }

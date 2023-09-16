@@ -11,6 +11,7 @@ struct SingleNotificationMenu: View {
     var kontest: KontestModel
     @Environment(AllKontestsViewModel.self) private var allKontestsViewModel
     let notificationsViewModel = NotificationsViewModel.instance
+    @Environment(ErrorState.self) private var errorState
 
     var body: some View {
         let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
@@ -40,7 +41,7 @@ struct SingleNotificationMenu: View {
                     if kontest.isSetForReminder10MiutesBefore {
                         notificationsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
                     } else {
-                        notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
+                        setNotificationForKontest(kontest: kontest, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
                     }
                 } label: {
                     Image(systemName: kontest.isSetForReminder10MiutesBefore ? "bell.fill" : "bell")
@@ -54,7 +55,7 @@ struct SingleNotificationMenu: View {
                     if kontest.isSetForReminder30MiutesBefore {
                         notificationsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
                     } else {
-                        notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
+                        setNotificationForKontest(kontest: kontest, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
                     }
                 } label: {
                     Image(systemName: kontest.isSetForReminder30MiutesBefore ? "bell.fill" : "bell")
@@ -68,7 +69,7 @@ struct SingleNotificationMenu: View {
                     if kontest.isSetForReminder1HourBefore {
                         notificationsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
                     } else {
-                        notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
+                        setNotificationForKontest(kontest: kontest, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
                     }
                 } label: {
                     Image(systemName: kontest.isSetForReminder1HourBefore ? "bell.fill" : "bell")
@@ -82,7 +83,7 @@ struct SingleNotificationMenu: View {
                     if kontest.isSetForReminder6HoursBefore {
                         notificationsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
                     } else {
-                        notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
+                        setNotificationForKontest(kontest: kontest, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
                     }
                 } label: {
                     Image(systemName: kontest.isSetForReminder6HoursBefore ? "bell.fill" : "bell")
@@ -100,13 +101,19 @@ struct SingleNotificationMenu: View {
 
 extension SingleNotificationMenu {
     func setNotificationForAKontestAtAllTimes(kontest: KontestModel) {
-        notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
+        Task {
+            do {
+                try await notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
 
-        notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
+                try await notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
 
-        notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
+                try await notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
 
-        notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
+                try await notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
+            } catch {
+                errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Please provide Notification Permission in order to set notifications")
+            }
+        }
     }
 
     func isSetForAllNotifications(kontest: KontestModel) -> Bool {
@@ -125,6 +132,19 @@ extension SingleNotificationMenu {
         notificationsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
         notificationsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
         notificationsViewModel.removePendingNotification(kontest: kontest, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
+    }
+}
+
+extension SingleNotificationMenu {
+    func setNotificationForKontest(kontest: KontestModel, minutesBefore: Int, hoursBefore: Int, daysBefore: Int) {
+        Task {
+            do {
+                try await notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
+
+            } catch {
+                errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Please provide Notification Permission in order to set notifications")
+            }
+        }
     }
 }
 

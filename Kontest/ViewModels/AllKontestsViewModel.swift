@@ -12,7 +12,7 @@ import OSLog
 @Observable
 class AllKontestsViewModel {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "AllKontestsViewModel")
-    
+
     let repository = KontestRepository()
 
     static let instance = AllKontestsViewModel()
@@ -51,6 +51,7 @@ class AllKontestsViewModel {
         isLoading = true
         Task {
             await getAllKontests()
+            checkNotificationAuthorization()
             filterKontests()
             isLoading = false
             removeReminderStatusFromUserDefaultsOfKontestsWhichAreEnded()
@@ -72,7 +73,6 @@ class AllKontestsViewModel {
             let fetchedKontests = try await repository.getAllKontests()
 
             let allEvents = shouldFetchAllEventsFromCalendar ? try await CalendarUtility.getAllEvents() : []
-            
 
             await MainActor.run {
                 self.allKontests = fetchedKontests
@@ -201,6 +201,23 @@ class AllKontestsViewModel {
 
         if UserDefaults.standard.bool(forKey: FilterWebsiteKey.tophKey.rawValue) {
             allowedWebsites.append("Toph")
+        }
+    }
+
+    private func checkNotificationAuthorization() {
+        Task {
+            let numberOfNotifications = NotificationsViewModel.instance.pendingNotifications.count
+            if numberOfNotifications > 0 {
+                let notificationsAuthorizationLevel = await LocalNotificationManager.instance.getNotificationsAuthorizationLevel()
+
+                if notificationsAuthorizationLevel.authorizationStatus == .denied {
+                    logger.info("notificationsAuthorizationLevel.authorizationStatus: \("\(notificationsAuthorizationLevel.authorizationStatus)")")
+
+                    errorWrapper = ErrorWrapper(error: AppError(title: "Permission not Granted", description: "You have set some notifications, but notification permission is not granted"), guidance: "Please provide Notification Permission in order to get notifications")
+
+                    logger.info("errorWrapper: \("\(String(describing: errorWrapper))")")
+                }
+            }
         }
     }
 }
