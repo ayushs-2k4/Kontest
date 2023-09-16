@@ -90,44 +90,30 @@ struct createSingleKontestView: View {
 
                 Spacer()
 
-//                Button(intent: AddToCalendarIntent()) {
-//                    Image(systemName: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus")
-//                }
-
-//                Button(intent: AddToCalendarIntent(kontest: KontestWidgetModel.from(kontestModel: kontest))) {
-//                    Image(systemName: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus")
-//                }
-
-//                Button(intent: AddToCalendarIntent(kontest: "AYshu")) {
-//                    Image(systemName: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus")
-//                }
-
-                Button(intent: AddToCalendarIntent(title: kontest.name, notes: "Notes of Cal", startDate: startDate, endDate: endDate, url: URL(string: kontest.url))) {
-                    Image(systemName: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus")
-                }
-
-//                Text(UserDefaults.standard.string(forKey: "leetcodeUsername") ?? "Default Value")
-//                Text(UserDefaults(suiteName: "group.com.ayushsinghal.kontest")?.string(forKey: "leetcodeUsername") ?? "Default Value")
-                Text(UserDefaults(suiteName: "group.com.ayushsinghal.kontest")!.string(forKey: "myCustomKeysAyush") ?? "Default value")
-
-                if kontestStatus == .OnGoing || kontestStatus == .LaterToday || kontestStatus == .Tomorrow {
-                    if widgetFamily == .systemExtraLarge {
-                        HStack {
+                Group {
+                    if kontestStatus == .OnGoing || kontestStatus == .LaterToday || kontestStatus == .Tomorrow {
+                        if widgetFamily == .systemExtraLarge {
+                            HStack {
+                                Text(startDate.formatted(date: .omitted, time: .shortened))
+                                Text(" - ")
+                                Text(endDate.formatted(date: .omitted, time: .shortened))
+                            }
+                        } else {
                             Text(startDate.formatted(date: .omitted, time: .shortened))
-                            Text(" - ")
-                            Text(endDate.formatted(date: .omitted, time: .shortened))
                         }
-                    } else {
-                        Text(startDate.formatted(date: .omitted, time: .shortened))
+                    }
+
+                    if kontestStatus == .Later {
+                        if widgetFamily == .systemExtraLarge {
+                            let p = CalendarUtility.getWeekdayNameFromDate(date: startDate)
+                            Text("(\(p))")
+                        }
+                        Text(CalendarUtility.getKontestDate(date: startDate))
                     }
                 }
 
-                if kontestStatus == .Later {
-                    if widgetFamily == .systemExtraLarge {
-                        let p = CalendarUtility.getWeekdayNameFromDate(date: startDate)
-                        Text("(\(p))")
-                    }
-                    Text(CalendarUtility.getKontestDate(date: startDate))
+                Button(intent: AddToCalendarIntent(title: kontest.name, notes: "", startDate: startDate, endDate: endDate, url: URL(string: kontest.url), toRemove: kontest.isCalendarEventAdded)) {
+                    Image(systemName: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus")
                 }
             }
         }

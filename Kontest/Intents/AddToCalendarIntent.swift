@@ -13,8 +13,6 @@ import WidgetKit
 struct AddToCalendarIntent: AppIntent {
     init() {}
 
-    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "AddToCalendarIntent")
-
     static var title: LocalizedStringResource = "Add to Calendar"
 
     @Parameter(title: "title")
@@ -32,29 +30,27 @@ struct AddToCalendarIntent: AppIntent {
     @Parameter(title: "url")
     var url: URL?
 
-    init(title: String, notes: String, startDate: Date, endDate: Date, url: URL?) {
+    @Parameter(title: "toRemove")
+    var toRemove: Bool
+
+    init(title: String, notes: String, startDate: Date, endDate: Date, url: URL?, toRemove: Bool) {
         self.title = title
         self.notes = notes
         self.startDate = startDate
         self.endDate = endDate
         self.url = url
+        self.toRemove = toRemove
     }
 
-
     func perform() async throws -> some IntentResult {
-        print("A")
-        logger.info("A")
-        UserDefaults(suiteName: "group.com.ayushsinghal.kontest")!.set("Value from Intent 2", forKey: "myCustomKeysAyush")
-        UserDefaults(suiteName: "group.com.ayushsinghal.kontest")!.synchronize()
-        WidgetCenter.shared.reloadAllTimelines()
-
         Task {
-            if try await CalendarUtility.addEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url) {
-                print("Succesfully setted")
+            if toRemove {
+                try await CalendarUtility.removeEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url)
+            } else {
+                if try await CalendarUtility.addEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url) {
+                    print("Event Successfully added.")
+                }
             }
-//
-            print("B")
-            logger.info("B")
         }
 
         return .result()
