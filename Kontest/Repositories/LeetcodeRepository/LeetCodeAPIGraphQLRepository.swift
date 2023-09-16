@@ -27,7 +27,7 @@ class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
                         username: p.username,
                         githubUrl: p.githubUrl,
                         twitterUrl: p.twitterUrl,
-                        linkedinUrl: p.linkedinUrl!,
+                        linkedinUrl: p.linkedinUrl,
                         profile: UserProfileDTO.from(graphQLUserProfile: p.profile),
                         problemsSolvedBeatsStats: ProblemSolvedBeatsStatsDTO.from(problemsSolvedBeatsStats: p.problemsSolvedBeatsStats),
                         submitStatsGlobal: SubmitStatsGlobalDTO.from(submitStatsGlobal: p.submitStatsGlobal)

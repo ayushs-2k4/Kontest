@@ -23,17 +23,17 @@ struct AddToCalendarIntent: AppIntent {
     }
 
     func perform() async throws -> some IntentResult {
-        print("A")
-        logger.info("A")
+//        print("A")
+//        logger.info("A")
 
         UserDefaults.standard.setValue("aysuhsmdws", forKey: "leetcodeUsername")
 
-        Task {
-            try await CalendarUtility.addEvent(startDate: Date().addingTimeInterval(86400), endDate: Date().addingTimeInterval(86400 * 2), title: "Title", notes: "Notes", url: URL(string: "https://www.youtube.com/watch?v=_a5Zcqgq_GQ"))
-
-            print("B")
-            logger.info("B")
-        }
+//        Task {
+//            if try await CalendarUtility.addEvent(startDate: Date().addingTimeInterval(86400), endDate: Date().addingTimeInterval(86400 * 2), title: "Title", notes: "Notes", url: URL(string: "https://www.youtube.com/watch?v=_a5Zcqgq_GQ")) {}
+//
+//            print("B")
+//            logger.info("B")
+//        }
 
         return .result()
     }

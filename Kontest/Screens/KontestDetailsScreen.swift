@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct KontestDetailsScreen: View {
     @Environment(\.colorScheme) private var colorScheme
@@ -117,6 +118,8 @@ struct ButtonsView: View {
                             }
                         }
                     }
+                    
+                    WidgetCenter.shared.reloadAllTimelines()
 
                 } label: {
                     Text(kontest.isCalendarEventAdded ? "Remove from Calendar" : "Add to Calendar")
