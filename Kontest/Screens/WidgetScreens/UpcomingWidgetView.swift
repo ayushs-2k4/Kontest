@@ -112,9 +112,28 @@ struct createSingleKontestView: View {
                     }
                 }
 
-                Button(intent: AddToCalendarIntent(title: kontest.name, notes: "", startDate: startDate, endDate: endDate, url: URL(string: kontest.url), toRemove: kontest.isCalendarEventAdded)) {
-                    Image(systemName: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus")
-                }
+                Toggle(isOn: kontest.isCalendarEventAdded, intent: AddToCalendarIntent(title: kontest.name, notes: "", startDate: startDate, endDate: endDate, url: URL(string: kontest.url), toRemove: kontest.isCalendarEventAdded)) {}
+                    .toggleStyle(MyCustomToggleStyle(systemImage: "airplane", activeColor: .purple))
+            }
+        }
+    }
+}
+
+struct MyCustomToggleStyle: ToggleStyle {
+    var systemImage: String = "checkmark"
+    var activeColor: Color = .green
+
+    func makeBody(configuration: Configuration) -> some View {
+        HStack {
+            configuration.label
+
+            ZStack {
+                RoundedRectangle(cornerRadius: 25.0)
+                    .frame(width: 50, height: 30)
+                    .foregroundStyle(Color.accentColor.opacity(0.25))
+
+                Image(systemName: configuration.isOn ? "calendar.badge.minus" : "calendar.badge.plus")
+                    .foregroundStyle(Color.accentColor.opacity(1))
             }
         }
     }
