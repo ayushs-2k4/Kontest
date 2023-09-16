@@ -90,6 +90,10 @@ struct createSingleKontestView: View {
 
                 Spacer()
 
+                Button(intent: AddToCalendarIntent(kontest: KontestWidgetModel.from(kontestModel: kontest))) {
+                    Image(systemName: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus")
+                }
+
                 if kontestStatus == .OnGoing || kontestStatus == .LaterToday || kontestStatus == .Tomorrow {
                     if widgetFamily == .systemExtraLarge {
                         HStack {

@@ -23,6 +23,10 @@
 		077E6EAD2AB4B1D10003E897 /* ErrorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EAC2AB4B1D10003E897 /* ErrorWrapper.swift */; };
 		077E6EAF2AB4B2120003E897 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EAE2AB4B2120003E897 /* ErrorView.swift */; };
 		077E6EB12AB4B3220003E897 /* ErrorState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EB02AB4B3220003E897 /* ErrorState.swift */; };
+		0784292F2AB5EFB40078D836 /* AddToCalendarIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0784292D2AB5EF660078D836 /* AddToCalendarIntent.swift */; };
+		078429302AB5EFB40078D836 /* AddToCalendarIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0784292D2AB5EF660078D836 /* AddToCalendarIntent.swift */; };
+		078429332AB604E60078D836 /* KontestWidgetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078429312AB603FB0078D836 /* KontestWidgetModel.swift */; };
+		078429342AB604E70078D836 /* KontestWidgetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078429312AB603FB0078D836 /* KontestWidgetModel.swift */; };
 		07A31F002AAC818D00EBC296 /* FilterWebsiteKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A31EFF2AAC818D00EBC296 /* FilterWebsiteKey.swift */; };
 		07A31F022AAC831300EBC296 /* FilterWebsitesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A31F012AAC831300EBC296 /* FilterWebsitesViewModel.swift */; };
 		07A750202AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A7501F2AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift */; };
@@ -170,6 +174,8 @@
 		077E6EAC2AB4B1D10003E897 /* ErrorWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorWrapper.swift; sourceTree = "<group>"; };
 		077E6EAE2AB4B2120003E897 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		077E6EB02AB4B3220003E897 /* ErrorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorState.swift; sourceTree = "<group>"; };
+		0784292D2AB5EF660078D836 /* AddToCalendarIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCalendarIntent.swift; sourceTree = "<group>"; };
+		078429312AB603FB0078D836 /* KontestWidgetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestWidgetModel.swift; sourceTree = "<group>"; };
 		07A31EFF2AAC818D00EBC296 /* FilterWebsiteKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsiteKey.swift; sourceTree = "<group>"; };
 		07A31F012AAC831300EBC296 /* FilterWebsitesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesViewModel.swift; sourceTree = "<group>"; };
 		07A7501F2AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoKontestsDueToFiltersScreen.swift; sourceTree = "<group>"; };
@@ -303,6 +309,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		0784292C2AB5EF520078D836 /* Intents */ = {
+			isa = PBXGroup;
+			children = (
+				0784292D2AB5EF660078D836 /* AddToCalendarIntent.swift */,
+			);
+			path = Intents;
+			sourceTree = "<group>";
+		};
 		07CFEBA22AB02DCB00291484 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,6 +360,7 @@
 		07ECFB362AA58259008513C6 /* Kontest */ = {
 			isa = PBXGroup;
 			children = (
+				0784292C2AB5EF520078D836 /* Intents */,
 				07710E842AB46220008DE1D6 /* Info.plist */,
 				07ECFB6E2AA58259008513C6 /* DTOs */,
 				07ECFB4C2AA58259008513C6 /* Models */,
@@ -431,6 +446,7 @@
 				07ECFB522AA58259008513C6 /* KontestModel.swift */,
 				07ECFBC32AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift */,
 				07ECFBC52AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift */,
+				078429312AB603FB0078D836 /* KontestWidgetModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -753,6 +769,7 @@
 				0719156A2AB1BCC100E1CB56 /* AppError.swift in Sources */,
 				07CFEBBC2AB02EDF00291484 /* DownloadData.swift in Sources */,
 				07CFEBBB2AB02ED700291484 /* KontestRepository.swift in Sources */,
+				0784292F2AB5EFB40078D836 /* AddToCalendarIntent.swift in Sources */,
 				07CFEBBA2AB02E1A00291484 /* CalendarUtility.swift in Sources */,
 				07B74E742AB06CBB001D08CE /* AllKontestsFakeRepository.swift in Sources */,
 				07CFEBB82AB02E0C00291484 /* KontestDTO.swift in Sources */,
@@ -760,6 +777,7 @@
 				07CFEC0E2AB0436100291484 /* GetKontests.swift in Sources */,
 				07CFEBB72AB02E0800291484 /* KontestStatus.swift in Sources */,
 				07CFEBA92AB02DCB00291484 /* Upcoming_Kontests_iOS_WidgetBundle.swift in Sources */,
+				078429332AB604E60078D836 /* KontestWidgetModel.swift in Sources */,
 				07CFEBB92AB02E1000291484 /* Constants.swift in Sources */,
 				07CFEC052AB042F500291484 /* UpcomingWidgetView.swift in Sources */,
 				071915682AB16CE300E1CB56 /* NetworkMonitor.swift in Sources */,
@@ -776,6 +794,7 @@
 				0719156B2AB1BCC200E1CB56 /* AppError.swift in Sources */,
 				07CFEC082AB0430D00291484 /* CalendarUtility.swift in Sources */,
 				07CFEC062AB042F500291484 /* UpcomingWidgetView.swift in Sources */,
+				078429302AB5EFB40078D836 /* AddToCalendarIntent.swift in Sources */,
 				07CFEC102AB0436800291484 /* KontestRepository.swift in Sources */,
 				07B74E752AB06CBC001D08CE /* AllKontestsFakeRepository.swift in Sources */,
 				07CFEC072AB0430500291484 /* KontestModel.swift in Sources */,
@@ -783,6 +802,7 @@
 				07CFEBF32AB042A500291484 /* Upcoming_Kontests_macOS_WidgetBundle.swift in Sources */,
 				07CFEC0A2AB0431700291484 /* KontestStatus.swift in Sources */,
 				07CFEC112AB0436D00291484 /* KontestFetcher.swift in Sources */,
+				078429342AB604E70078D836 /* KontestWidgetModel.swift in Sources */,
 				07CFEC0B2AB0432200291484 /* Constants.swift in Sources */,
 				07CFEC122AB0437300291484 /* DownloadData.swift in Sources */,
 				071915692AB16CE400E1CB56 /* NetworkMonitor.swift in Sources */,

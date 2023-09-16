@@ -69,7 +69,7 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 		<key>Tools for plug-in “Install CLI”.xcscheme</key>
 		<dict>
@@ -92,6 +92,16 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>076016542A87CD52007CE9F5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>07CFEBA02AB02DCB00291484</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>07CFEBED2AB042A500291484</key>
 		<dict>
 			<key>primary</key>
 			<true/>
