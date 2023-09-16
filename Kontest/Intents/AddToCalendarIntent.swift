@@ -13,6 +13,8 @@ struct AddToCalendarIntent: AppIntent {
     init() {}
 
     static var title: LocalizedStringResource = "Add to Calendar"
+    
+    static var isDiscoverable: Bool = false
 
     @Parameter(title: "title")
     var title: String
