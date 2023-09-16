@@ -79,6 +79,7 @@ struct ButtonsView: View {
     let kontest: KontestModel
     let kontestStartDate: Date?
     let kontestEndDate: Date?
+    let isKontestRunning: Bool
     @Environment(ErrorState.self) private var errorState
 
     let notificationsViewModel: NotificationsViewModel
@@ -88,6 +89,7 @@ struct ButtonsView: View {
         kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
         kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
         notificationsViewModel = NotificationsViewModel.instance
+        isKontestRunning = CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date()) || kontest.status == .OnGoing
     }
 
     var body: some View {
@@ -95,32 +97,34 @@ struct ButtonsView: View {
             if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()), notificationsViewModel.getNumberOfNotificationsWhichCanBeSettedForAKontest(kontest: kontest) > 0 {
                 SingleNotificationMenu(kontest: kontest)
 
-                Button {
-                    if kontest.isCalendarEventAdded {
-                        Task {
-                            do {
-                                try await CalendarUtility.removeEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
+                if !isKontestRunning {
+                    Button {
+                        if kontest.isCalendarEventAdded {
+                            Task {
+                                do {
+                                    try await CalendarUtility.removeEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
 
-                                kontest.isCalendarEventAdded = false
-                            } catch {
-                                errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Please provide full access to Calendar in order to add and delete events.")
-                            }
-                        }
-                    } else {
-                        Task {
-                            do {
-                                if try await CalendarUtility.addEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url)) {
-                                    kontest.isCalendarEventAdded = true
+                                    kontest.isCalendarEventAdded = false
+                                } catch {
+                                    errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Please provide full access to Calendar in order to add and delete events.")
                                 }
-                            } catch {
-                                errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Please provide full access to Calendar in order to add and delete events.")
+                            }
+                        } else {
+                            Task {
+                                do {
+                                    if try await CalendarUtility.addEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url)) {
+                                        kontest.isCalendarEventAdded = true
+                                    }
+                                } catch {
+                                    errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Please provide full access to Calendar in order to add and delete events.")
+                                }
                             }
                         }
-                    }
 
-                } label: {
-                    Text(kontest.isCalendarEventAdded ? "Remove from Calendar" : "Add to Calendar")
-                        .frame(maxWidth: .infinity)
+                    } label: {
+                        Text(kontest.isCalendarEventAdded ? "Remove from Calendar" : "Add to Calendar")
+                            .frame(maxWidth: .infinity)
+                    }
                 }
             }
 
