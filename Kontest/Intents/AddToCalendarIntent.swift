@@ -8,32 +8,54 @@
 import AppIntents
 import Foundation
 import OSLog
+import WidgetKit
 
 struct AddToCalendarIntent: AppIntent {
-    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "AddToCalendarIntent")
     init() {}
+
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "AddToCalendarIntent")
 
     static var title: LocalizedStringResource = "Add to Calendar"
 
-    @Parameter(title: "Kontest")
-    var kontest: KontestWidgetModel
+    @Parameter(title: "title")
+    var title: String
 
-    init(kontest: KontestWidgetModel) {
-        self.kontest = kontest
+    @Parameter(title: "notes")
+    var notes: String
+
+    @Parameter(title: "startDate")
+    var startDate: Date
+
+    @Parameter(title: "endDate")
+    var endDate: Date
+
+    @Parameter(title: "url")
+    var url: URL?
+
+    init(title: String, notes: String, startDate: Date, endDate: Date, url: URL?) {
+        self.title = title
+        self.notes = notes
+        self.startDate = startDate
+        self.endDate = endDate
+        self.url = url
     }
 
+
     func perform() async throws -> some IntentResult {
-//        print("A")
-//        logger.info("A")
+        print("A")
+        logger.info("A")
+        UserDefaults(suiteName: "group.com.ayushsinghal.kontest")!.set("Value from Intent 2", forKey: "myCustomKeysAyush")
+        UserDefaults(suiteName: "group.com.ayushsinghal.kontest")!.synchronize()
+        WidgetCenter.shared.reloadAllTimelines()
 
-        UserDefaults.standard.setValue("aysuhsmdws", forKey: "leetcodeUsername")
-
-//        Task {
-//            if try await CalendarUtility.addEvent(startDate: Date().addingTimeInterval(86400), endDate: Date().addingTimeInterval(86400 * 2), title: "Title", notes: "Notes", url: URL(string: "https://www.youtube.com/watch?v=_a5Zcqgq_GQ")) {}
+        Task {
+            if try await CalendarUtility.addEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url) {
+                print("Succesfully setted")
+            }
 //
-//            print("B")
-//            logger.info("B")
-//        }
+            print("B")
+            logger.info("B")
+        }
 
         return .result()
     }

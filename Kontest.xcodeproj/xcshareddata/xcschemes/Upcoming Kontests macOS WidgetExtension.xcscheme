@@ -56,8 +56,19 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "1"
+         BundleIdentifier = "com.apple.widgetkit.simulator"
+         RemotePath = "/System/Library/CoreServices/WidgetKit Simulator.app/Contents/MacOS/WidgetKit Simulator">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "07CFEBED2AB042A500291484"
+            BuildableName = "Upcoming Kontests macOS WidgetExtension.appex"
+            BlueprintName = "Upcoming Kontests macOS WidgetExtension"
+            ReferencedContainer = "container:Kontest.xcodeproj">
+         </BuildableReference>
+      </RemoteRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "076016542A87CD52007CE9F5"
@@ -65,7 +76,7 @@
             BlueprintName = "Kontest"
             ReferencedContainer = "container:Kontest.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "_XCWidgetKind"
@@ -79,7 +90,7 @@
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "_XCWidgetFamily"
-            value = "systemMedium"
+            value = "systemExtraLarge"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>

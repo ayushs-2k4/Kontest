@@ -89,7 +89,7 @@
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "_XCWidgetFamily"
-            value = "systemMedium"
+            value = "systemExtraLarge"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
