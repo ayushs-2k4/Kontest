@@ -2,10 +2,10 @@ name: iOS workflow
 
 on:
   push:
-    branches:  
+    branches:
     - '*'
   pull_request:
-    branches:  
+    branches:
     - '*'
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         run: sudo xcode-select -s /Applications/Xcode_15.0.app/Contents/Developer
 
       - name: Build
-        run: xcodebuild build -project "Bhagavad Gita.xcodeproj" -scheme "Bhagavad Gita" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild build -project "Kontest.xcodeproj" -scheme "Kontest" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
 
       - name: Test
-        run: xcodebuild test -project "Bhagavad Gita.xcodeproj" -scheme "Bhagavad Gita" -destination "platform=iOS Simulator,name=iPhone 14 Pro" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+        run: xcodebuild test -project "Kontest.xcodeproj" -scheme "Kontest" -destination "platform=iOS Simulator,name=iPhone 14 Pro" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
