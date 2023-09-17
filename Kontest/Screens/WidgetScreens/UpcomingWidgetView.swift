@@ -79,6 +79,15 @@ struct createSingleKontestView: View {
     let widgetFamily: WidgetFamily
     let kontestStatus: KontestStatus
 
+    @Environment(\.widgetRenderingMode) var widgetRenderingMode
+
+    static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "HH:mm"
+        return formatter
+    }()
+
     var body: some View {
         let startDate = CalendarUtility.getDate(date: kontest.start_time)
         let endDate = CalendarUtility.getDate(date: kontest.end_time)
@@ -92,14 +101,36 @@ struct createSingleKontestView: View {
 
                 Group {
                     if kontestStatus == .OnGoing || kontestStatus == .LaterToday || kontestStatus == .Tomorrow {
-                        if widgetFamily == .systemExtraLarge {
-                            HStack {
+                        HStack {
+                            if widgetFamily == .systemExtraLarge {
+                                if widgetRenderingMode == .fullColor {
+                                    if kontestStatus == .OnGoing {
+                                        let seconds = endDate.timeIntervalSince(Date())
+                                        let futureDate = Calendar.current.date(byAdding: .second, value: Int(seconds), to: Date())!
+
+                                        Text("Ends in: \(futureDate, style: .timer)")
+                                            .font(.callout.monospacedDigit())
+                                            .multilineTextAlignment(.trailing)
+                                    } else if kontestStatus == .LaterToday {
+                                        let seconds = startDate.timeIntervalSince(Date())
+                                        let futureDate = Calendar.current.date(byAdding: .second, value: Int(seconds), to: Date())!
+
+                                        Text("Starting in: \(futureDate, style: .timer)")
+                                            .font(.callout.monospacedDigit())
+                                            .multilineTextAlignment(.trailing)
+                                    }
+                                } else {
+                                    Text("")
+                                }
+
+                                HStack {
+                                    Text(startDate.formatted(date: .omitted, time: .shortened))
+                                    Text(" - ")
+                                    Text(endDate.formatted(date: .omitted, time: .shortened))
+                                }
+                            } else {
                                 Text(startDate.formatted(date: .omitted, time: .shortened))
-                                Text(" - ")
-                                Text(endDate.formatted(date: .omitted, time: .shortened))
                             }
-                        } else {
-                            Text(startDate.formatted(date: .omitted, time: .shortened))
                         }
                     }
 
@@ -113,15 +144,15 @@ struct createSingleKontestView: View {
                 }
 
                 Toggle(isOn: kontest.isCalendarEventAdded, intent: AddToCalendarIntent(title: kontest.name, notes: "", startDate: startDate, endDate: endDate, url: URL(string: kontest.url), toRemove: kontest.isCalendarEventAdded)) {}
-                    .toggleStyle(MyCustomToggleStyle(systemImage: "airplane", activeColor: .purple))
+                    .toggleStyle(MyCustomToggleStyle(onColor: .green, offColor: .blue))
             }
         }
     }
 }
 
 struct MyCustomToggleStyle: ToggleStyle {
-    var systemImage: String = "checkmark"
-    var activeColor: Color = .green
+    var onColor: Color = .green
+    var offColor: Color = .green
 
     func makeBody(configuration: Configuration) -> some View {
         HStack {
@@ -130,10 +161,10 @@ struct MyCustomToggleStyle: ToggleStyle {
             ZStack {
                 RoundedRectangle(cornerRadius: 25.0)
                     .frame(width: 50, height: 30)
-                    .foregroundStyle(Color.accentColor.opacity(0.25))
+                    .foregroundStyle(configuration.isOn ? onColor.opacity(0.25) : offColor.opacity(0.25))
 
                 Image(systemName: configuration.isOn ? "calendar.badge.minus" : "calendar.badge.plus")
-                    .foregroundStyle(Color.accentColor.opacity(1))
+                    .foregroundStyle(configuration.isOn ? onColor : offColor)
             }
         }
     }
