@@ -11,7 +11,7 @@ import OSLog
 
 class CalendarUtility {
     private static let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "CalendarUtility")
-    
+
     private static let store = EKEventStore()
 
     static func generateCalendarURL(startDate: Date?, endDate: Date?) -> String {
@@ -334,7 +334,7 @@ class CalendarUtility {
                     }
                 }
 
-                throw AppError(title: "Permission not Granted", description: "Full Access To Reminders not Granted, please provide full access to Calendar in order to add and delete events.")
+                throw AppError(title: "Permission not Granted", description: "Calendar Permission is not granted.")
             } catch {
                 logger.error("Error in addEvent: \(error)")
                 throw error

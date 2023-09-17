@@ -7,6 +7,7 @@
 
 import Combine
 import SwiftUI
+import WidgetKit
 
 struct SingleKontestView: View {
     let kontest: KontestModel
@@ -120,6 +121,7 @@ struct SingleKontestView: View {
                     }
                 }
 
+                WidgetCenter.shared.reloadAllTimelines()
             } label: {
                 Image(systemName: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus")
                     .contentTransition(.symbolEffect(.replace))
