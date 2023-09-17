@@ -90,25 +90,50 @@ struct createSingleKontestView: View {
 
                 Spacer()
 
-                if kontestStatus == .OnGoing || kontestStatus == .LaterToday || kontestStatus == .Tomorrow {
-                    if widgetFamily == .systemExtraLarge {
-                        HStack {
+                Group {
+                    if kontestStatus == .OnGoing || kontestStatus == .LaterToday || kontestStatus == .Tomorrow {
+                        if widgetFamily == .systemExtraLarge {
+                            HStack {
+                                Text(startDate.formatted(date: .omitted, time: .shortened))
+                                Text(" - ")
+                                Text(endDate.formatted(date: .omitted, time: .shortened))
+                            }
+                        } else {
                             Text(startDate.formatted(date: .omitted, time: .shortened))
-                            Text(" - ")
-                            Text(endDate.formatted(date: .omitted, time: .shortened))
                         }
-                    } else {
-                        Text(startDate.formatted(date: .omitted, time: .shortened))
+                    }
+
+                    if kontestStatus == .Later {
+                        if widgetFamily == .systemExtraLarge {
+                            let p = CalendarUtility.getWeekdayNameFromDate(date: startDate)
+                            Text("(\(p))")
+                        }
+                        Text(CalendarUtility.getKontestDate(date: startDate))
                     }
                 }
 
-                if kontestStatus == .Later {
-                    if widgetFamily == .systemExtraLarge {
-                        let p = CalendarUtility.getWeekdayNameFromDate(date: startDate)
-                        Text("(\(p))")
-                    }
-                    Text(CalendarUtility.getKontestDate(date: startDate))
-                }
+                Toggle(isOn: kontest.isCalendarEventAdded, intent: AddToCalendarIntent(title: kontest.name, notes: "", startDate: startDate, endDate: endDate, url: URL(string: kontest.url), toRemove: kontest.isCalendarEventAdded)) {}
+                    .toggleStyle(MyCustomToggleStyle(systemImage: "airplane", activeColor: .purple))
+            }
+        }
+    }
+}
+
+struct MyCustomToggleStyle: ToggleStyle {
+    var systemImage: String = "checkmark"
+    var activeColor: Color = .green
+
+    func makeBody(configuration: Configuration) -> some View {
+        HStack {
+            configuration.label
+
+            ZStack {
+                RoundedRectangle(cornerRadius: 25.0)
+                    .frame(width: 50, height: 30)
+                    .foregroundStyle(Color.accentColor.opacity(0.25))
+
+                Image(systemName: configuration.isOn ? "calendar.badge.minus" : "calendar.badge.plus")
+                    .foregroundStyle(Color.accentColor.opacity(1))
             }
         }
     }

@@ -23,17 +23,22 @@ struct KontestApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AllKontestsScreen()
-                .environment(allKontestsViewModel)
-                .environment(router)
-                .environment(networkMonitor)
-                .environment(errorState)
-                .sheet(item: $errorState.errorWrapper) { errorWrapper in
-                    ErrorView(errorWrapper: errorWrapper)
-                    #if os(macOS)
-                        .fixedSize()
-                    #endif
-                }
+            if let defaults = UserDefaults(suiteName: "group.com.ayushsinghal.kontest") {
+                AllKontestsScreen()
+                    .environment(allKontestsViewModel)
+                    .environment(router)
+                    .environment(networkMonitor)
+                    .environment(errorState)
+                    .sheet(item: $errorState.errorWrapper) { errorWrapper in
+                        ErrorView(errorWrapper: errorWrapper)
+                        #if os(macOS)
+                            .fixedSize()
+                        #endif
+                    }
+                    .defaultAppStorage(defaults)
+            } else {
+                Text("Failed to load user defaults")
+            }
         }
         .commands {
             MyMenu(router: $router)

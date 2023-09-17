@@ -16,12 +16,14 @@ class GetKontests {
 
         do {
             let fetchedKontests = try await repository.getAllKontests()
+            let allEvents = try await CalendarUtility.getAllEvents()
 
             return (fetchedKontests
                 .map { dto in
                     let kontest = KontestModel.from(dto: dto)
                     // Load Reminder status
                     kontest.loadReminderStatus()
+                    kontest.loadCalendarStatus(allEvents: allEvents ?? [])
                     return kontest
                 }
                 .filter { kontest in
