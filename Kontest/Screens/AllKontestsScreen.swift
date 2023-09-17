@@ -117,6 +117,14 @@ struct AllKontestsScreen: View {
                                 Text("Reload all widgets")
                             }
                         }
+
+                        ToolbarItem(placement: .automatic) { // change the placement here!
+                            Button {
+                                allKontestsViewModel.errorWrapper = ErrorWrapper(error: AppError(title: "Fake Error Title", description: "Fake Error Description"), guidance: "Fake Error Guidance")
+                            } label: {
+                                Text("Invoke Error Wrapper")
+                            }
+                        }
                     }
 
                     if !allKontestsViewModel.allKontests.isEmpty || !allKontestsViewModel.searchText.isEmpty {
@@ -181,8 +189,7 @@ struct AllKontestsScreen: View {
                         KontestDetailsScreen(kontest: kontest)
                     }
                 }
-            } 
-            else {
+            } else {
                 NoInternetScreen()
             }
         }
