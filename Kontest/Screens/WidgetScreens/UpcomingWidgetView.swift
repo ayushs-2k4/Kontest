@@ -144,15 +144,15 @@ struct createSingleKontestView: View {
                 }
 
                 Toggle(isOn: kontest.isCalendarEventAdded, intent: AddToCalendarIntent(title: kontest.name, notes: "", startDate: startDate, endDate: endDate, url: URL(string: kontest.url), toRemove: kontest.isCalendarEventAdded)) {}
-                    .toggleStyle(MyCustomToggleStyle(systemImage: "airplane", activeColor: .purple))
+                    .toggleStyle(MyCustomToggleStyle(onColor: .green, offColor: .blue))
             }
         }
     }
 }
 
 struct MyCustomToggleStyle: ToggleStyle {
-    var systemImage: String = "checkmark"
-    var activeColor: Color = .green
+    var onColor: Color = .green
+    var offColor: Color = .green
 
     func makeBody(configuration: Configuration) -> some View {
         HStack {
@@ -161,10 +161,10 @@ struct MyCustomToggleStyle: ToggleStyle {
             ZStack {
                 RoundedRectangle(cornerRadius: 25.0)
                     .frame(width: 50, height: 30)
-                    .foregroundStyle(Color.accentColor.opacity(0.25))
+                    .foregroundStyle(configuration.isOn ? onColor.opacity(0.25) : offColor.opacity(0.25))
 
                 Image(systemName: configuration.isOn ? "calendar.badge.minus" : "calendar.badge.plus")
-                    .foregroundStyle(Color.accentColor.opacity(1))
+                    .foregroundStyle(configuration.isOn ? onColor : offColor)
             }
         }
     }
