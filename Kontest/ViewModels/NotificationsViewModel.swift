@@ -6,13 +6,13 @@
 //
 
 import Foundation
-import UserNotifications
 import OSLog
+import UserNotifications
 
 @Observable
 class NotificationsViewModel {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "NotificationsViewModel")
-    
+
     var pendingNotifications: [UNNotificationRequest] = []
 
     static let instance: NotificationsViewModel = .init()
@@ -87,7 +87,13 @@ class NotificationsViewModel {
         return ans
     }
 
-    private func setNotification(kontest: KontestModel, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String, kontestSubTitle: String, kontestBody: String) {
+    private func setNotification(kontest: KontestModel, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String, kontestSubTitle: String, kontestBody: String) async throws {
+        let notificationsAuthorizationLevel = await LocalNotificationManager.instance.getNotificationsAuthorizationLevel()
+
+        if notificationsAuthorizationLevel.authorizationStatus == .denied {
+            throw AppError(title: "Permission not Granted", description: "Notification permission is not granted")
+        }
+
         let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
         let notificationDate = CalendarUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: minutesBefore, hours: hoursBefore, days: daysBefore)
         let notificationID = kontest.id + CalendarUtility.getKontestDate(date: notificationDate) + CalendarUtility.getTimeFromDate(date: notificationDate)
@@ -97,36 +103,34 @@ class NotificationsViewModel {
         updateIsSetForNotification(kontest: kontest, to: true, minutesBefore: minutesBefore, hoursBefore: hoursBefore)
     }
 
-    func setNotificationForKontest(kontest: KontestModel, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String = "", kontestSubTitle: String = "", kontestBody: String = "") {
+    func setNotificationForKontest(kontest: KontestModel, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String = "", kontestSubTitle: String = "", kontestBody: String = "") async throws {
         let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
 
         // Checking if we actually have given time in starting of kontest; like if given 6 hours, then checking if we actually have 6 hours or not in starting of kontest.
         if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: minutesBefore, hours: hoursBefore, days: daysBefore) {
             let title = kontestTitle == "" ? kontest.name : kontestTitle
             let subTitle = kontestSubTitle == "" ? kontest.site : kontestSubTitle
-            var body = ""
-            if hoursBefore > 0 {
+            let body = if hoursBefore > 0 {
                 if hoursBefore == 1 {
-                    body = kontestBody == "" ? "\(kontest.name) is starting in \(hoursBefore) hour." : kontestBody
+                    kontestBody == "" ? "\(kontest.name) is starting in \(hoursBefore) hour." : kontestBody
                 } else {
-                    body = kontestBody == "" ? "\(kontest.name) is starting in \(hoursBefore) hours." : kontestBody
+                    kontestBody == "" ? "\(kontest.name) is starting in \(hoursBefore) hours." : kontestBody
                 }
             } else {
-                body = kontestBody == "" ? "\(kontest.name) is starting in \(minutesBefore) minutes." : kontestBody
+                kontestBody == "" ? "\(kontest.name) is starting in \(minutesBefore) minutes." : kontestBody
             }
-
-            setNotification(kontest: kontest, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore, kontestTitle: title, kontestSubTitle: subTitle, kontestBody: body)
+                try await setNotification(kontest: kontest, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore, kontestTitle: title, kontestSubTitle: subTitle, kontestBody: body)
         }
     }
 
-    func setNotificationForAllKontests(minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String = "", kontestSubTitle: String = "", kontestBody: String = "") {
+    func setNotificationForAllKontests(minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String = "", kontestSubTitle: String = "", kontestBody: String = "") async throws {
         logger.info("count: \("\(allKontestsViewModel.toShowKontests.count)")")
         for i in 0 ..< allKontestsViewModel.toShowKontests.count {
             let kontest = allKontestsViewModel.toShowKontests[i]
             let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
 
             if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) {
-                setNotificationForKontest(kontest: kontest, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore, kontestTitle: kontestTitle, kontestSubTitle: kontestSubTitle, kontestBody: kontestBody)
+                    try await setNotificationForKontest(kontest: kontest, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore, kontestTitle: kontestTitle, kontestSubTitle: kontestSubTitle, kontestBody: kontestBody)
             }
         }
     }
