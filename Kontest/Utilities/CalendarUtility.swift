@@ -11,7 +11,7 @@ import OSLog
 
 class CalendarUtility {
     private static let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "CalendarUtility")
-    
+
     private static let store = EKEventStore()
 
     static func generateCalendarURL(startDate: Date?, endDate: Date?) -> String {
