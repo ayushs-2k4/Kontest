@@ -15,7 +15,7 @@ struct KontestApp: App {
 
     let networkMonitor = NetworkMonitor.shared
 
-    @AppStorage("shouldFetchAllEventsFromCalendar") var shouldFetchAllEventsFromCalendar: Bool = false
+    @AppStorage("shouldFetchAllEventsFromCalendar", store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var shouldFetchAllEventsFromCalendar: Bool = false
 
     init() {
         networkMonitor.start()

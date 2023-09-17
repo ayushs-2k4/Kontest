@@ -352,7 +352,7 @@ class CalendarUtility {
 
     // Function to create and save the event
     private static func createAndSaveEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?) throws -> Bool {
-        UserDefaults.standard.set(true, forKey: "shouldFetchAllEventsFromCalendar")
+        UserDefaults(suiteName: Constants.userDefaultsGroupID)!.set(true, forKey: "shouldFetchAllEventsFromCalendar")
         let event = EKEvent(eventStore: store)
         event.calendar = store.defaultCalendarForNewEvents
         event.title = title

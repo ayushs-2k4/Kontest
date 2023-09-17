@@ -12,10 +12,6 @@ struct SettingsScreen: View {
 
     var body: some View {
         HStack {
-//            SingleSettingsTileView(title: "Change Usernames") {
-//                router.appendScreen(screen: Screen.SettingsScreenType(.ChangeUserNamesScreen))
-//            }
-
             VStack {
                 Button("Change Usernames") {
                     router.appendScreen(screen: Screen.SettingsScreenType(.ChangeUserNamesScreen))
@@ -27,9 +23,6 @@ struct SettingsScreen: View {
                 }
                 .buttonStyle(.bordered)
             }
-//            SingleSettingsTileView(title: "Filter Websites") {
-//                router.appendScreen(screen: Screen.SettingsScreenType(.FilterWebsitesScreen))
-//            }r
         }
         .navigationTitle("Settings")
     }
@@ -42,8 +35,6 @@ struct SingleSettingsTileView: View {
 
     var body: some View {
         ZStack {
-//            backgroundColor
-
             Text(title)
         }
         .onTapGesture {

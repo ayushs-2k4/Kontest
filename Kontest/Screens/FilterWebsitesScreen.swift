@@ -10,14 +10,14 @@ import SwiftUI
 struct FilterWebsitesScreen: View {
     let allKontestsViewModel = AllKontestsViewModel.instance
 
-    @AppStorage(FilterWebsiteKey.codeForcesKey.rawValue) var codeForcesKey = true
-    @AppStorage(FilterWebsiteKey.atCoderKey.rawValue) var atCoderKey = true
-    @AppStorage(FilterWebsiteKey.cSAcademyKey.rawValue) var cSAcademyKey = true
-    @AppStorage(FilterWebsiteKey.codeChefKey.rawValue) var codeChefKey = true
-    @AppStorage(FilterWebsiteKey.hackerRankKey.rawValue) var hackerRankKey = true
-    @AppStorage(FilterWebsiteKey.hackerEarthKey.rawValue) var hackerEarthKey = true
-    @AppStorage(FilterWebsiteKey.leetCodeKey.rawValue) var leetCodeKey = true
-    @AppStorage(FilterWebsiteKey.tophKey.rawValue) var tophKey = true
+    @AppStorage(FilterWebsiteKey.codeForcesKey.rawValue,store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var codeForcesKey = true
+    @AppStorage(FilterWebsiteKey.atCoderKey.rawValue,store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var atCoderKey = true
+    @AppStorage(FilterWebsiteKey.cSAcademyKey.rawValue,store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var cSAcademyKey = true
+    @AppStorage(FilterWebsiteKey.codeChefKey.rawValue,store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var codeChefKey = true
+    @AppStorage(FilterWebsiteKey.hackerRankKey.rawValue,store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var hackerRankKey = true
+    @AppStorage(FilterWebsiteKey.hackerEarthKey.rawValue,store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var hackerEarthKey = true
+    @AppStorage(FilterWebsiteKey.leetCodeKey.rawValue,store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var leetCodeKey = true
+    @AppStorage(FilterWebsiteKey.tophKey.rawValue,store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var tophKey = true
 
     @Environment(\.colorScheme) private var colorScheme
 

@@ -161,33 +161,33 @@ extension KontestModel {
         let userDefaultsID = id + "\(minutesBefore)\(hoursBefore)\(daysBefore)"
 
         if minutesBefore == 10 {
-            UserDefaults.standard.set(isSetForReminder10MiutesBefore, forKey: userDefaultsID)
+            UserDefaults(suiteName: Constants.userDefaultsGroupID)!.set(isSetForReminder10MiutesBefore, forKey: userDefaultsID)
         } else if minutesBefore == 30 {
-            UserDefaults.standard.set(isSetForReminder30MiutesBefore, forKey: userDefaultsID)
+            UserDefaults(suiteName: Constants.userDefaultsGroupID)!.set(isSetForReminder30MiutesBefore, forKey: userDefaultsID)
         } else if hoursBefore == 1 {
-            UserDefaults.standard.set(isSetForReminder1HourBefore, forKey: userDefaultsID)
+            UserDefaults(suiteName: Constants.userDefaultsGroupID)!.set(isSetForReminder1HourBefore, forKey: userDefaultsID)
         } else {
-            UserDefaults.standard.set(isSetForReminder6HoursBefore, forKey: userDefaultsID)
+            UserDefaults(suiteName: Constants.userDefaultsGroupID)!.set(isSetForReminder6HoursBefore, forKey: userDefaultsID)
         }
     }
 
     // Load reminder status from UserDefaults
     func loadReminderStatus() {
         var userDefaultsID = id + "10" + "0" + "0"
-        isSetForReminder10MiutesBefore = UserDefaults.standard.bool(forKey: userDefaultsID)
+        isSetForReminder10MiutesBefore = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.bool(forKey: userDefaultsID)
 
         userDefaultsID = id + "30" + "0" + "0"
-        isSetForReminder30MiutesBefore = UserDefaults.standard.bool(forKey: userDefaultsID)
+        isSetForReminder30MiutesBefore = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.bool(forKey: userDefaultsID)
 
         userDefaultsID = id + "0" + "1" + "0"
-        isSetForReminder1HourBefore = UserDefaults.standard.bool(forKey: userDefaultsID)
+        isSetForReminder1HourBefore = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.bool(forKey: userDefaultsID)
 
         userDefaultsID = id + "0" + "6" + "0"
-        isSetForReminder6HoursBefore = UserDefaults.standard.bool(forKey: userDefaultsID)
+        isSetForReminder6HoursBefore = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.bool(forKey: userDefaultsID)
     }
 
     func removeReminderStatusFromUserDefaults() {
-        UserDefaults.standard.removeObject(forKey: id)
+        UserDefaults(suiteName: Constants.userDefaultsGroupID)!.removeObject(forKey: id)
     }
 
     static func getKontestStatus(kontestStartDate: Date, kontestEndDate: Date) -> KontestStatus {

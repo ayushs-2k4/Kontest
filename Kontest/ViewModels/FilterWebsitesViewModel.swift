@@ -10,44 +10,50 @@ import OSLog
 
 class FilterWebsitesViewModel {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "FilterWebsitesViewModel")
-    
+
+    private init() {}
+
+    static let instance = FilterWebsitesViewModel()
+
     func getAllowedWebsites() -> [String] {
         var allowedWebsites: [String] = []
 
         logger.info("Ran addAllowedWebsites()")
 
-        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.codeForcesKey.rawValue) {
+        let userDefaults = UserDefaults(suiteName: Constants.userDefaultsGroupID)!
+
+        if userDefaults.bool(forKey: FilterWebsiteKey.codeForcesKey.rawValue) {
             allowedWebsites.append("CodeForces")
         }
 
-        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.atCoderKey.rawValue) {
+        if userDefaults.bool(forKey: FilterWebsiteKey.atCoderKey.rawValue) {
             allowedWebsites.append("AtCoder")
         }
 
-        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.cSAcademyKey.rawValue) {
+        if userDefaults.bool(forKey: FilterWebsiteKey.cSAcademyKey.rawValue) {
             allowedWebsites.append("CS Academy")
         }
 
-        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.codeChefKey.rawValue) {
+        if userDefaults.bool(forKey: FilterWebsiteKey.codeChefKey.rawValue) {
             allowedWebsites.append("CodeChef")
         }
 
-        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.hackerRankKey.rawValue) {
+        if userDefaults.bool(forKey: FilterWebsiteKey.hackerRankKey.rawValue) {
             allowedWebsites.append("HackerRank")
         }
 
-        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.hackerEarthKey.rawValue) {
+        if userDefaults.bool(forKey: FilterWebsiteKey.hackerEarthKey.rawValue) {
             allowedWebsites.append("HackerEarth")
         }
 
-        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.leetCodeKey.rawValue) {
+        if userDefaults.bool(forKey: FilterWebsiteKey.leetCodeKey.rawValue) {
             allowedWebsites.append("LeetCode")
         }
 
-        if UserDefaults.standard.bool(forKey: FilterWebsiteKey.tophKey.rawValue) {
+        if userDefaults.bool(forKey: FilterWebsiteKey.tophKey.rawValue) {
             allowedWebsites.append("Toph")
         }
-        
+
         return allowedWebsites
     }
 }

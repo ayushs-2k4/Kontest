@@ -19,7 +19,7 @@ enum FilterWebsiteKey: String, CaseIterable {
 }
 
 func setDefaultValuesForFilterWebsiteKeysToTrue() {
-    let userDefaults = UserDefaults.standard
+    let userDefaults = UserDefaults(suiteName: Constants.userDefaultsGroupID)!
 
     FilterWebsiteKey.allCases.forEach { filterWebsiteKey in
         userDefaults.register(defaults: [filterWebsiteKey.rawValue: true])
