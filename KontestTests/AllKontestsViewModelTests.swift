@@ -9,23 +9,23 @@
 import XCTest
 
 class AllKontestsViewModelTests: XCTestCase {
-    var viewModel: AllKontestsViewModel! = AllKontestsViewModel(
-        notificationsViewModel: MockNotificationsViewModel(),
-        filterWebsitesViewModel: MockFilterWebsitesViewModel(),
-        repository: KontestsTestFakeRepository()
-    )
+    var viewModel: AllKontestsViewModel!
 
-    override class func setUp() {
-        super.setUp()
+    override func setUp() async throws {
+        viewModel = AllKontestsViewModel(
+            notificationsViewModel: MockNotificationsViewModel(),
+            filterWebsitesViewModel: MockFilterWebsitesViewModel(),
+            repository: KontestsTestFakeRepository()
+        )
     }
 
-    override class func tearDown() {
-        super.tearDown()
+    override func tearDown() {
+        viewModel = nil
     }
 
     func testFilterKontestsUsingSearchText() {
         let expectation = XCTNSPredicateExpectation(predicate: NSPredicate(block: { [weak self] _, _ in
-            return self?.viewModel.allKontests.count == 2
+            self?.viewModel.allKontests.count == 2
         }), object: nil)
         wait(for: [expectation], timeout: 2)
     }

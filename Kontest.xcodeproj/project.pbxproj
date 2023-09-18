@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		07183EA52AB85633006C92AD /* KontestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EA42AB85633006C92AD /* KontestTests.swift */; };
 		07183EAC2AB857C6006C92AD /* AllKontestsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EAB2AB857C6006C92AD /* AllKontestsViewModelTests.swift */; };
 		07183EB22AB8587A006C92AD /* MockNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EB12AB8587A006C92AD /* MockNotificationsViewModel.swift */; };
 		07183EB42AB858AE006C92AD /* MockFilterWebsitesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EB32AB858AE006C92AD /* MockFilterWebsitesViewModel.swift */; };
@@ -178,10 +177,10 @@
 
 /* Begin PBXFileReference section */
 		07183EA22AB85633006C92AD /* KontestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KontestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		07183EA42AB85633006C92AD /* KontestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestTests.swift; sourceTree = "<group>"; };
 		07183EAB2AB857C6006C92AD /* AllKontestsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllKontestsViewModelTests.swift; sourceTree = "<group>"; };
 		07183EB12AB8587A006C92AD /* MockNotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNotificationsViewModel.swift; sourceTree = "<group>"; };
 		07183EB32AB858AE006C92AD /* MockFilterWebsitesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFilterWebsitesViewModel.swift; sourceTree = "<group>"; };
+		07183EB52AB86A53006C92AD /* KontestTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = KontestTestPlan.xctestplan; sourceTree = "<group>"; };
 		071915632AB1695E00E1CB56 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		071915662AB169D300E1CB56 /* NoInternetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetScreen.swift; sourceTree = "<group>"; };
 		073269E72AAC42350028476D /* FilterWebsitesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesView.swift; sourceTree = "<group>"; };
@@ -321,7 +320,6 @@
 		07183EA32AB85633006C92AD /* KontestTests */ = {
 			isa = PBXGroup;
 			children = (
-				07183EA42AB85633006C92AD /* KontestTests.swift */,
 				07183EAB2AB857C6006C92AD /* AllKontestsViewModelTests.swift */,
 			);
 			path = KontestTests;
@@ -339,6 +337,7 @@
 		0760164C2A87CD52007CE9F5 = {
 			isa = PBXGroup;
 			children = (
+				07183EB52AB86A53006C92AD /* KontestTestPlan.xctestplan */,
 				07EA6F492AB6405F00CD932E /* Upcoming Kontests iOS WidgetExtension.entitlements */,
 				07ECFB7F2AA58259008513C6 /* apollo-codegen-config.json */,
 				07ECFB362AA58259008513C6 /* Kontest */,
@@ -788,7 +787,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07183EA52AB85633006C92AD /* KontestTests.swift in Sources */,
 				07183EAC2AB857C6006C92AD /* AllKontestsViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
