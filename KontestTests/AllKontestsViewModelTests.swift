@@ -40,7 +40,13 @@ class AllKontestsViewModelTests: XCTestCase {
             self?.viewModel.searchText = "HackerEarth"
             return self?.viewModel.toShowKontests.count == 1
         }), object: nil)
-        wait(for: [expectation1, expectation2], timeout: 2)
+
+        let expectation3 = XCTNSPredicateExpectation(predicate: NSPredicate(block: { [weak self] _, _ in
+            self?.viewModel.searchText = "CodeForces"
+            return self?.viewModel.toShowKontests.count == 1
+        }), object: nil)
+
+        wait(for: [expectation1, expectation2, expectation3], timeout: 2)
     }
 }
 

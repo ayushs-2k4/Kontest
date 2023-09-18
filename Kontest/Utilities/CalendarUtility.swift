@@ -14,22 +14,6 @@ class CalendarUtility {
 
     private static let store = EKEventStore()
 
-    static func generateCalendarURL(startDate: Date?, endDate: Date?) -> String {
-        let utcStartDate = startDate!.addingTimeInterval(-Double(TimeZone.current.secondsFromGMT(for: startDate!)))
-        let utcEndDate = endDate!.addingTimeInterval(-Double(TimeZone.current.secondsFromGMT(for: endDate!)))
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyyMMdd'T'HHmmss'Z'"
-        dateFormatter.timeZone = TimeZone(identifier: "UTC")
-
-        let utcStartString = dateFormatter.string(from: utcStartDate)
-        let utcEndString = dateFormatter.string(from: utcEndDate)
-
-        let calendarURL = "https://www.google.com/calendar/render?action=TEMPLATE&dates=\(utcStartString)%2F\(utcEndString)"
-
-        return calendarURL
-    }
-
     // DateFormatter for the first format: "2024-07-30T18:30:00.000Z"
     static func getFormattedDate1(date: String) -> Date? {
         let formatter = DateFormatter()
