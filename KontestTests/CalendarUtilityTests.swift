@@ -94,4 +94,129 @@ class CalendarUtilityTests: XCTestCase {
 
         XCTAssertFalse(CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate, kontestEndDate: kontestEndDate))
     }
+
+    func test_isKontestLaterToday_PastDate_False() {
+        let kontestStartDate = Date(timeIntervalSinceNow: -100)
+
+        XCTAssertFalse(CalendarUtility.isKontestLaterToday(kontestStartDate: kontestStartDate))
+    }
+
+    func test_isKontestLaterToday_LaterTodayDate_True() {
+        let kontestStartDate = Date(timeIntervalSinceNow: 100)
+
+        XCTAssertTrue(CalendarUtility.isKontestLaterToday(kontestStartDate: kontestStartDate))
+    }
+
+    func test_isKontestLaterToday_Tomorrow_False() {
+        let today = Date()
+        let calendar = Calendar.current
+        let tomorrow = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: today))!
+        let tomorrow2 = calendar.date(bySetting: .hour, value: 3, of: tomorrow)!
+
+        XCTAssertFalse(CalendarUtility.isKontestLaterToday(kontestStartDate: tomorrow2))
+    }
+
+    func test_isKontestLaterToday_LaterDate_False() {
+        let kontestStartDate = Date().addingTimeInterval(86400 * 1.5)
+
+        XCTAssertFalse(CalendarUtility.isKontestLaterToday(kontestStartDate: kontestStartDate))
+    }
+
+    func test_isKontestTomorrow_PastDate_False() {
+        let kontestStartDate = Date(timeIntervalSinceNow: -86400 * 1.5)
+
+        XCTAssertFalse(CalendarUtility.isKontestTomorrow(kontestStartDate: kontestStartDate))
+    }
+
+    func test_isKontestTomorrow_PresentDate_False() {
+        let kontestStartDate = Date()
+
+        XCTAssertFalse(CalendarUtility.isKontestTomorrow(kontestStartDate: kontestStartDate))
+    }
+
+    func test_isKontestTomorrow_LaterTodayDate_False() {
+        let kontestStartDate = Date(timeIntervalSinceNow: 200)
+
+        XCTAssertFalse(CalendarUtility.isKontestTomorrow(kontestStartDate: kontestStartDate))
+    }
+
+    func test_isKontestTomorrow_TomorrowDate_True() {
+        let today = Date()
+        let calendar = Calendar.current
+        let tomorrow = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: today))!
+        let tomorrow2 = calendar.date(bySetting: .hour, value: 3, of: tomorrow)!
+
+        XCTAssertTrue(CalendarUtility.isKontestTomorrow(kontestStartDate: tomorrow2))
+    }
+
+    func test_isKontestTomorrow_Later_False() {
+        let kontestStartDate = Date().addingTimeInterval(86400 * 3)
+
+        XCTAssertFalse(CalendarUtility.isKontestTomorrow(kontestStartDate: kontestStartDate))
+    }
+
+    func test_isKontestLater_PastDate_False() {
+        let kontestStartDate = Date(timeIntervalSinceNow: -100)
+
+        XCTAssertFalse(CalendarUtility.isKontestLater(kontestStartDate: kontestStartDate))
+    }
+
+    func test_isKontestLater_PresentDate_False() {
+        let kontestStartDate = Date()
+
+        XCTAssertFalse(CalendarUtility.isKontestLater(kontestStartDate: kontestStartDate))
+    }
+
+    func test_isKontestLater_LaterTodayDate_False() {
+        let kontestStartDate = Date(timeIntervalSinceNow: 200)
+
+        XCTAssertFalse(CalendarUtility.isKontestLater(kontestStartDate: kontestStartDate))
+    }
+
+    func test_isKontestLater_TomorrowDate_False() {
+        let today = Date()
+        let calendar = Calendar.current
+        let tomorrow = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: today))!
+        let tomorrow2 = calendar.date(bySetting: .hour, value: 3, of: tomorrow)!
+
+        XCTAssertFalse(CalendarUtility.isKontestLater(kontestStartDate: tomorrow2))
+    }
+
+    func test_isKontestLater_LaterDate_True() {
+        let kontestStartDate = Date().addingTimeInterval(86400 * 3)
+
+        XCTAssertTrue(CalendarUtility.isKontestLater(kontestStartDate: kontestStartDate))
+    }
+
+    func test_getFormattedDuration_1Hour_1h() {
+        XCTAssertEqual(CalendarUtility.getFormattedDuration(fromSeconds: "3600"), "1h")
+    }
+
+    func test_getFormattedDuration_2Hours_2h() {
+        XCTAssertEqual(CalendarUtility.getFormattedDuration(fromSeconds: "7200"), "2h")
+    }
+
+    func test_getFormattedDuration_1Hour30Minutes_1h30m() {
+        XCTAssertEqual(CalendarUtility.getFormattedDuration(fromSeconds: "5400"), "1h 30m")
+    }
+
+    func test_getFormattedDuration_1Day12Hours_1d12h() {
+        XCTAssertEqual(CalendarUtility.getFormattedDuration(fromSeconds: "129600"), "1d 12h")
+    }
+
+    func test_getFormattedDuratiosn_1Day4Hours48Minutes_1d4h48m() {
+        XCTAssertEqual(CalendarUtility.getFormattedDuration(fromSeconds: "103680"), "1d 4h 48m")
+    }
+
+    func test_getFormattedDuratiosn_1Day4Hours48Minutes2Seconds_1d4h48m() {
+        XCTAssertEqual(CalendarUtility.getFormattedDuration(fromSeconds: "103682"), "1d 4h 48m")
+    }
+
+    func test_getFormattedDuratiosn_16Days_1d4h48m() {
+        XCTAssertNil(CalendarUtility.getFormattedDuration(fromSeconds: "1382400"))
+    }
+
+    func test_getFormattedDuration_Invalid_InvalidDuration() {
+        XCTAssertEqual(CalendarUtility.getFormattedDuration(fromSeconds: "1,29,600"), "Invalid Duration")
+    }
 }
