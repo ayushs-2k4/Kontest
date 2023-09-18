@@ -53,7 +53,12 @@ class AllKontestsViewModel {
     func fetchAllKontests() {
         isLoading = true
         Task {
-            await getAllKontests()
+            let allKontests = await getAllKontests()
+
+            await MainActor.run {
+                self.allKontests = allKontests
+            }
+
             checkNotificationAuthorization()
             filterKontests()
             isLoading = false
@@ -71,34 +76,33 @@ class AllKontestsViewModel {
         }
     }
 
-    private func getAllKontests() async {
+    private func getAllKontests() async -> [KontestModel] {
         do {
             let fetchedKontests = try await repository.getAllKontests()
 
             let allEvents = shouldFetchAllEventsFromCalendar ? try await CalendarUtility.getAllEvents() : []
 
-            await MainActor.run {
-                self.allKontests = fetchedKontests
-                    .map { dto in
-                        let kontest = KontestModel.from(dto: dto)
-                        // Load Reminder status
-                        kontest.loadReminderStatus()
+            return fetchedKontests
+                .map { dto in
+                    let kontest = KontestModel.from(dto: dto)
+                    // Load Reminder status
+                    kontest.loadReminderStatus()
 
-                        // Load Calendar status
-                        kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+                    // Load Calendar status
+                    kontest.loadCalendarStatus(allEvents: allEvents ?? [])
 
-                        return kontest
-                    }
-                    .filter { kontest in
-                        let kontestDuration = CalendarUtility.getFormattedDuration(fromSeconds: kontest.duration) ?? ""
-                        let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
-                        let isKontestEnded = CalendarUtility.isKontestOfPast(kontestEndDate: kontestEndDate ?? Date())
+                    return kontest
+                }
+                .filter { kontest in
+                    let kontestDuration = CalendarUtility.getFormattedDuration(fromSeconds: kontest.duration) ?? ""
+                    let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
+                    let isKontestEnded = CalendarUtility.isKontestOfPast(kontestEndDate: kontestEndDate ?? Date())
 
-                        return !kontestDuration.isEmpty && !isKontestEnded
-                    }
-            }
+                    return !kontestDuration.isEmpty && !isKontestEnded
+                }
         } catch {
             logger.error("error in fetching all Kontests: \(error)")
+            return []
         }
     }
 
