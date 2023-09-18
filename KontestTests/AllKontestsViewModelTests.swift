@@ -23,9 +23,9 @@ class AllKontestsViewModelTests: XCTestCase {
         viewModel = nil
     }
 
-    func testFilterKontestsUsingSearchText() {
+    func testInitialization() {
         let expectation = XCTNSPredicateExpectation(predicate: NSPredicate(block: { [weak self] _, _ in
-            self?.viewModel.allKontests.count == 2
+            self?.viewModel.allKontests.count == 2 && self?.viewModel.toShowKontests.count == 1
         }), object: nil)
         wait(for: [expectation], timeout: 2)
     }
