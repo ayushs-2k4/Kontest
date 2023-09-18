@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07183EA52AB85633006C92AD /* KontestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EA42AB85633006C92AD /* KontestTests.swift */; };
+		07183EAC2AB857C6006C92AD /* AllKontestsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EAB2AB857C6006C92AD /* AllKontestsViewModelTests.swift */; };
+		07183EB22AB8587A006C92AD /* MockNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EB12AB8587A006C92AD /* MockNotificationsViewModel.swift */; };
+		07183EB42AB858AE006C92AD /* MockFilterWebsitesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EB32AB858AE006C92AD /* MockFilterWebsitesViewModel.swift */; };
 		071915642AB1695E00E1CB56 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071915632AB1695E00E1CB56 /* NetworkMonitor.swift */; };
 		071915672AB169D300E1CB56 /* NoInternetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071915662AB169D300E1CB56 /* NoInternetScreen.swift */; };
 		071915682AB16CE300E1CB56 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071915632AB1695E00E1CB56 /* NetworkMonitor.swift */; };
@@ -134,6 +138,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		07183EA62AB85633006C92AD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0760164D2A87CD52007CE9F5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 076016542A87CD52007CE9F5;
+			remoteInfo = Kontest;
+		};
 		07CFEBAF2AB02DCC00291484 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0760164D2A87CD52007CE9F5 /* Project object */;
@@ -166,6 +177,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		07183EA22AB85633006C92AD /* KontestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KontestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		07183EA42AB85633006C92AD /* KontestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestTests.swift; sourceTree = "<group>"; };
+		07183EAB2AB857C6006C92AD /* AllKontestsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllKontestsViewModelTests.swift; sourceTree = "<group>"; };
+		07183EB12AB8587A006C92AD /* MockNotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNotificationsViewModel.swift; sourceTree = "<group>"; };
+		07183EB32AB858AE006C92AD /* MockFilterWebsitesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFilterWebsitesViewModel.swift; sourceTree = "<group>"; };
 		071915632AB1695E00E1CB56 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		071915662AB169D300E1CB56 /* NoInternetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetScreen.swift; sourceTree = "<group>"; };
 		073269E72AAC42350028476D /* FilterWebsitesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesView.swift; sourceTree = "<group>"; };
@@ -263,6 +279,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		07183E9F2AB85633006C92AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		076016522A87CD52007CE9F5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -295,6 +318,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07183EA32AB85633006C92AD /* KontestTests */ = {
+			isa = PBXGroup;
+			children = (
+				07183EA42AB85633006C92AD /* KontestTests.swift */,
+				07183EAB2AB857C6006C92AD /* AllKontestsViewModelTests.swift */,
+			);
+			path = KontestTests;
+			sourceTree = "<group>";
+		};
+		07183EB02AB8586F006C92AD /* MockViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				07183EB12AB8587A006C92AD /* MockNotificationsViewModel.swift */,
+				07183EB32AB858AE006C92AD /* MockFilterWebsitesViewModel.swift */,
+			);
+			path = MockViewModels;
+			sourceTree = "<group>";
+		};
 		0760164C2A87CD52007CE9F5 = {
 			isa = PBXGroup;
 			children = (
@@ -304,6 +345,7 @@
 				07ECFB352AA58259008513C6 /* README.md */,
 				07CFEBA72AB02DCB00291484 /* Upcoming Kontests iOS Widget */,
 				07CFEBF12AB042A500291484 /* Upcoming Kontests macOS Widget */,
+				07183EA32AB85633006C92AD /* KontestTests */,
 				07CFEBA22AB02DCB00291484 /* Frameworks */,
 				076016562A87CD52007CE9F5 /* Products */,
 			);
@@ -315,6 +357,7 @@
 				076016552A87CD52007CE9F5 /* Kontest.app */,
 				07CFEBA12AB02DCB00291484 /* Upcoming Kontests iOS WidgetExtension.appex */,
 				07CFEBEE2AB042A500291484 /* Upcoming Kontests macOS WidgetExtension.appex */,
+				07183EA22AB85633006C92AD /* KontestTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -391,6 +434,7 @@
 		07ECFB372AA58259008513C6 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				07183EB02AB8586F006C92AD /* MockViewModels */,
 				07ECFB382AA58259008513C6 /* ChangeUsernameViewModel.swift */,
 				07ECFB392AA58259008513C6 /* LeetCodeGraphQLViewModel.swift */,
 				07ECFB3A2AA58259008513C6 /* AllKontestsViewModel.swift */,
@@ -566,6 +610,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		07183EA12AB85633006C92AD /* KontestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07183EAA2AB85633006C92AD /* Build configuration list for PBXNativeTarget "KontestTests" */;
+			buildPhases = (
+				07183E9E2AB85633006C92AD /* Sources */,
+				07183E9F2AB85633006C92AD /* Frameworks */,
+				07183EA02AB85633006C92AD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				07183EA72AB85633006C92AD /* PBXTargetDependency */,
+			);
+			name = KontestTests;
+			productName = KontestTests;
+			productReference = 07183EA22AB85633006C92AD /* KontestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		076016542A87CD52007CE9F5 /* Kontest */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 076016632A87CD55007CE9F5 /* Build configuration list for PBXNativeTarget "Kontest" */;
@@ -640,6 +702,10 @@
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					07183EA12AB85633006C92AD = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 076016542A87CD52007CE9F5;
+					};
 					076016542A87CD52007CE9F5 = {
 						CreatedOnToolsVersion = 15.0;
 					};
@@ -671,11 +737,19 @@
 				076016542A87CD52007CE9F5 /* Kontest */,
 				07CFEBA02AB02DCB00291484 /* Upcoming Kontests iOS WidgetExtension */,
 				07CFEBED2AB042A500291484 /* Upcoming Kontests macOS WidgetExtension */,
+				07183EA12AB85633006C92AD /* KontestTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		07183EA02AB85633006C92AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		076016532A87CD52007CE9F5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -710,10 +784,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		07183E9E2AB85633006C92AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07183EA52AB85633006C92AD /* KontestTests.swift in Sources */,
+				07183EAC2AB857C6006C92AD /* AllKontestsViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		076016512A87CD52007CE9F5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07183EB42AB858AE006C92AD /* MockFilterWebsitesViewModel.swift in Sources */,
 				07ECFBB32AA58259008513C6 /* KontestDTO.swift in Sources */,
 				07ECFB832AA58259008513C6 /* AllKontestsViewModel.swift in Sources */,
 				07ECFBC82AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift in Sources */,
@@ -741,6 +825,7 @@
 				07ECFBA72AA58259008513C6 /* ClipboardUtility.swift in Sources */,
 				07ECFBBA2AA58259008513C6 /* LeetCodeGraphQLAPIFetcher.swift in Sources */,
 				07ECFB8F2AA58259008513C6 /* CodeForcesAPIRepository.swift in Sources */,
+				07183EB22AB8587A006C92AD /* MockNotificationsViewModel.swift in Sources */,
 				077E6EAF2AB4B2120003E897 /* ErrorView.swift in Sources */,
 				07ECFBA42AA58259008513C6 /* AllNotificationMenu.swift in Sources */,
 				07ECFBAF2AA58259008513C6 /* CodeChefAPIDTO.swift in Sources */,
@@ -838,6 +923,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		07183EA72AB85633006C92AD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 076016542A87CD52007CE9F5 /* Kontest */;
+			targetProxy = 07183EA62AB85633006C92AD /* PBXContainerItemProxy */;
+		};
 		07CFEBB02AB02DCC00291484 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			platformFilter = ios;
@@ -855,6 +945,42 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		07183EA82AB85633006C92AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R2Z9FDM5M6;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ayushsinghal.KontestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kontest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Kontest";
+			};
+			name = Debug;
+		};
+		07183EA92AB85633006C92AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R2Z9FDM5M6;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ayushsinghal.KontestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kontest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Kontest";
+			};
+			name = Release;
+		};
 		076016612A87CD55007CE9F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1165,6 +1291,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		07183EAA2AB85633006C92AD /* Build configuration list for PBXNativeTarget "KontestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07183EA82AB85633006C92AD /* Debug */,
+				07183EA92AB85633006C92AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		076016502A87CD52007CE9F5 /* Build configuration list for PBXProject "Kontest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

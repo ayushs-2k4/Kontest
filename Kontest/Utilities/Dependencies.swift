@@ -20,7 +20,7 @@ class Dependencies {
     private init() {
         self.notificationsViewModel = NotificationsViewModel()
         self.filterWebsitesViewModel = FilterWebsitesViewModel()
-        self.allKontestsViewModel = AllKontestsViewModel(notificationsViewModel: notificationsViewModel, filterWebsitesViewModel: filterWebsitesViewModel)
+        self.allKontestsViewModel = AllKontestsViewModel(notificationsViewModel: notificationsViewModel, filterWebsitesViewModel: filterWebsitesViewModel, repository: KontestRepository())
         self.changeUsernameViewModel = ChangeUsernameViewModel()
     }
 }

@@ -13,7 +13,7 @@ import OSLog
 class AllKontestsViewModel {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "AllKontestsViewModel")
 
-    let repository = KontestRepository()
+    let repository: KontestFetcher
     let notificationsViewModel: NotificationsViewModelProtocol
     let filterWebsitesViewModel: FilterWebsitesViewModelProtocol
 
@@ -40,7 +40,8 @@ class AllKontestsViewModel {
 
     var isLoading = false
 
-    init(notificationsViewModel: NotificationsViewModelProtocol,filterWebsitesViewModel: FilterWebsitesViewModelProtocol) {
+    init(notificationsViewModel: NotificationsViewModelProtocol, filterWebsitesViewModel: FilterWebsitesViewModelProtocol, repository: KontestFetcher) {
+        self.repository = repository
         self.notificationsViewModel = notificationsViewModel
         self.filterWebsitesViewModel = filterWebsitesViewModel
         shouldFetchAllEventsFromCalendar = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.bool(forKey: "shouldFetchAllEventsFromCalendar")
