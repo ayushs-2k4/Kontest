@@ -14,8 +14,8 @@ class AllKontestsViewModel {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "AllKontestsViewModel")
 
     let repository = KontestRepository()
-
-    static let instance = AllKontestsViewModel()
+    let notificationsViewModel: NotificationsViewModelProtocol
+    let filterWebsitesViewModel: FilterWebsitesViewModelProtocol
 
     private var timer: AnyCancellable?
 
@@ -40,7 +40,9 @@ class AllKontestsViewModel {
 
     var isLoading = false
 
-    private init() {
+    init(notificationsViewModel: NotificationsViewModelProtocol,filterWebsitesViewModel: FilterWebsitesViewModelProtocol) {
+        self.notificationsViewModel = notificationsViewModel
+        self.filterWebsitesViewModel = filterWebsitesViewModel
         shouldFetchAllEventsFromCalendar = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.bool(forKey: "shouldFetchAllEventsFromCalendar")
         setDefaultValuesForFilterWebsiteKeysToTrue()
         addAllowedWebsites()
@@ -171,12 +173,12 @@ class AllKontestsViewModel {
 
         logger.info("Ran addAllowedWebsites()")
 
-        allowedWebsites.append(contentsOf: FilterWebsitesViewModel.instance.getAllowedWebsites())
+        allowedWebsites.append(contentsOf: filterWebsitesViewModel.getAllowedWebsites())
     }
 
     private func checkNotificationAuthorization() {
         Task {
-            let numberOfNotifications = NotificationsViewModel.instance.pendingNotifications.count
+            let numberOfNotifications = notificationsViewModel.pendingNotifications.count
             if numberOfNotifications > 0 {
                 let notificationsAuthorizationLevel = await LocalNotificationManager.instance.getNotificationsAuthorizationLevel()
 

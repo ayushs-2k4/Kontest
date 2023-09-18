@@ -15,9 +15,9 @@ struct AllKontestsScreen: View {
     @State var showNotificationForAllKontestsAlert = false
     let isInDevelopmentMode = false
     @State private var isNoNotificationIconAnimating = false
-    let notificationsViewModel = NotificationsViewModel.instance
+    let notificationsViewModel = Dependencies.instance.notificationsViewModel
 
-    let changeUsernameViewModel = ChangeUsernameViewModel.instance
+    let changeUsernameViewModel = Dependencies.instance.changeUsernameViewModel
 
     @Environment(ErrorState.self) private var errorState
 
@@ -233,6 +233,6 @@ struct AllKontestsScreen: View {
 
     return AllKontestsScreen()
         .environment(networkMonitor)
-        .environment(AllKontestsViewModel.instance)
+        .environment(Dependencies.instance.allKontestsViewModel)
         .environment(Router.instance)
 }

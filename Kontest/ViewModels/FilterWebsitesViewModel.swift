@@ -8,12 +8,8 @@
 import Foundation
 import OSLog
 
-class FilterWebsitesViewModel {
+class FilterWebsitesViewModel: FilterWebsitesViewModelProtocol {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "FilterWebsitesViewModel")
-
-    private init() {}
-
-    static let instance = FilterWebsitesViewModel()
 
     func getAllowedWebsites() -> [String] {
         var allowedWebsites: [String] = []

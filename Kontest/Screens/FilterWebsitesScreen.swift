@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FilterWebsitesScreen: View {
-    let allKontestsViewModel = AllKontestsViewModel.instance
+    let allKontestsViewModel = Dependencies.instance.allKontestsViewModel
 
     @AppStorage(FilterWebsiteKey.codeForcesKey.rawValue,store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var codeForcesKey = true
     @AppStorage(FilterWebsiteKey.atCoderKey.rawValue,store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var atCoderKey = true
