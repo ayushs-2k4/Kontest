@@ -10,21 +10,16 @@ import OSLog
 import UserNotifications
 
 @Observable
-class NotificationsViewModel {
+class NotificationsViewModel: NotificationsViewModelProtocol {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "NotificationsViewModel")
 
     var pendingNotifications: [UNNotificationRequest] = []
 
-    static let instance: NotificationsViewModel = .init()
-
-    private let allKontestsViewModel: AllKontestsViewModel
-
-    private init() {
-        self.allKontestsViewModel = AllKontestsViewModel.instance
+    init() {
         getAllPendingNotifications()
     }
 
-    func getAllPendingNotifications() {
+     func getAllPendingNotifications() {
         LocalNotificationManager.instance.getAllPendingNotifications(completion: { notifications in
             self.pendingNotifications = notifications.sorted(by: { firstNotificationRequest, secondNotificationRequest in
                 let firstTrigger = firstNotificationRequest.trigger as? UNCalendarNotificationTrigger
@@ -38,7 +33,7 @@ class NotificationsViewModel {
         })
     }
 
-    func getNumberOfNotificationsWhichCanBeSettedForAKontest(kontest: KontestModel) -> Int {
+     func getNumberOfNotificationsWhichCanBeSettedForAKontest(kontest: KontestModel) -> Int {
         var ans = 0
         let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
         if kontestStartDate == nil {
@@ -87,7 +82,7 @@ class NotificationsViewModel {
         return ans
     }
 
-    private func setNotification(kontest: KontestModel, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String, kontestSubTitle: String, kontestBody: String) async throws {
+    internal func setNotification(kontest: KontestModel, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String, kontestSubTitle: String, kontestBody: String) async throws {
         let notificationsAuthorizationLevel = await LocalNotificationManager.instance.getNotificationsAuthorizationLevel()
 
         if notificationsAuthorizationLevel.authorizationStatus == .denied {
@@ -119,26 +114,26 @@ class NotificationsViewModel {
             } else {
                 kontestBody == "" ? "\(kontest.name) is starting in \(minutesBefore) minutes." : kontestBody
             }
-                try await setNotification(kontest: kontest, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore, kontestTitle: title, kontestSubTitle: subTitle, kontestBody: body)
+            try await setNotification(kontest: kontest, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore, kontestTitle: title, kontestSubTitle: subTitle, kontestBody: body)
         }
     }
 
     func setNotificationForAllKontests(minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String = "", kontestSubTitle: String = "", kontestBody: String = "") async throws {
-        logger.info("count: \("\(allKontestsViewModel.toShowKontests.count)")")
-        for i in 0 ..< allKontestsViewModel.toShowKontests.count {
-            let kontest = allKontestsViewModel.toShowKontests[i]
+        logger.info("count: \("\(Dependencies.instance.allKontestsViewModel.toShowKontests.count)")")
+        for i in 0 ..< Dependencies.instance.allKontestsViewModel.toShowKontests.count {
+            let kontest = Dependencies.instance.allKontestsViewModel.toShowKontests[i]
             let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
 
             if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()) {
-                    try await setNotificationForKontest(kontest: kontest, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore, kontestTitle: kontestTitle, kontestSubTitle: kontestSubTitle, kontestBody: kontestBody)
+                try await setNotificationForKontest(kontest: kontest, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore, kontestTitle: kontestTitle, kontestSubTitle: kontestSubTitle, kontestBody: kontestBody)
             }
         }
     }
 
     func removeAllPendingNotifications() {
         LocalNotificationManager.instance.removeAllPendingNotifications()
-        for i in 0 ..< allKontestsViewModel.allKontests.count {
-            updateIsSetForNotification(kontest: allKontestsViewModel.allKontests[i], to: false, removeAll: true)
+        for i in 0 ..< Dependencies.instance.allKontestsViewModel.allKontests.count {
+            updateIsSetForNotification(kontest: Dependencies.instance.allKontestsViewModel.allKontests[i], to: false, removeAll: true)
         }
     }
 
@@ -157,42 +152,42 @@ class NotificationsViewModel {
     func updateIsSetForNotification(kontest: KontestModel, to: Bool, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, removeAll: Bool = false) {
         if to == false {
             if removeAll == true {
-                if let index = allKontestsViewModel.allKontests.firstIndex(where: { $0 == kontest }) {
-                    allKontestsViewModel.allKontests[index].isSetForReminder10MiutesBefore = false
-                    allKontestsViewModel.allKontests[index].isSetForReminder30MiutesBefore = false
-                    allKontestsViewModel.allKontests[index].isSetForReminder1HourBefore = false
-                    allKontestsViewModel.allKontests[index].isSetForReminder6HoursBefore = false
+                if let index = Dependencies.instance.allKontestsViewModel.allKontests.firstIndex(where: { $0 == kontest }) {
+                    Dependencies.instance.allKontestsViewModel.allKontests[index].isSetForReminder10MiutesBefore = false
+                    Dependencies.instance.allKontestsViewModel.allKontests[index].isSetForReminder30MiutesBefore = false
+                    Dependencies.instance.allKontestsViewModel.allKontests[index].isSetForReminder1HourBefore = false
+                    Dependencies.instance.allKontestsViewModel.allKontests[index].isSetForReminder6HoursBefore = false
 
-                    allKontestsViewModel.allKontests[index].saveReminderStatus(minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
+                    Dependencies.instance.allKontestsViewModel.allKontests[index].saveReminderStatus(minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
                 }
             } else {
-                if let index = allKontestsViewModel.allKontests.firstIndex(where: { $0 == kontest }) {
+                if let index = Dependencies.instance.allKontestsViewModel.allKontests.firstIndex(where: { $0 == kontest }) {
                     if minutesBefore == 10 {
-                        allKontestsViewModel.allKontests[index].isSetForReminder10MiutesBefore = to
+                        Dependencies.instance.allKontestsViewModel.allKontests[index].isSetForReminder10MiutesBefore = to
                     } else if minutesBefore == 30 {
-                        allKontestsViewModel.allKontests[index].isSetForReminder30MiutesBefore = to
+                        Dependencies.instance.allKontestsViewModel.allKontests[index].isSetForReminder30MiutesBefore = to
                     } else if hoursBefore == 1 {
-                        allKontestsViewModel.allKontests[index].isSetForReminder1HourBefore = to
+                        Dependencies.instance.allKontestsViewModel.allKontests[index].isSetForReminder1HourBefore = to
                     } else {
-                        allKontestsViewModel.allKontests[index].isSetForReminder6HoursBefore = to
+                        Dependencies.instance.allKontestsViewModel.allKontests[index].isSetForReminder6HoursBefore = to
                     }
 
-                    allKontestsViewModel.allKontests[index].saveReminderStatus(minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
+                    Dependencies.instance.allKontestsViewModel.allKontests[index].saveReminderStatus(minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
                 }
             }
         } else {
-            if let index = allKontestsViewModel.allKontests.firstIndex(where: { $0 == kontest }) {
+            if let index = Dependencies.instance.allKontestsViewModel.allKontests.firstIndex(where: { $0 == kontest }) {
                 if minutesBefore == 10 {
-                    allKontestsViewModel.allKontests[index].isSetForReminder10MiutesBefore = to
+                    Dependencies.instance.allKontestsViewModel.allKontests[index].isSetForReminder10MiutesBefore = to
                 } else if minutesBefore == 30 {
-                    allKontestsViewModel.allKontests[index].isSetForReminder30MiutesBefore = to
+                    Dependencies.instance.allKontestsViewModel.allKontests[index].isSetForReminder30MiutesBefore = to
                 } else if hoursBefore == 1 {
-                    allKontestsViewModel.allKontests[index].isSetForReminder1HourBefore = to
+                    Dependencies.instance.allKontestsViewModel.allKontests[index].isSetForReminder1HourBefore = to
                 } else {
-                    allKontestsViewModel.allKontests[index].isSetForReminder6HoursBefore = to
+                    Dependencies.instance.allKontestsViewModel.allKontests[index].isSetForReminder6HoursBefore = to
                 }
 
-                allKontestsViewModel.allKontests[index].saveReminderStatus(minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
+                Dependencies.instance.allKontestsViewModel.allKontests[index].saveReminderStatus(minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
             }
         }
     }

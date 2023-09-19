@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07183EAC2AB857C6006C92AD /* AllKontestsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EAB2AB857C6006C92AD /* AllKontestsViewModelTests.swift */; };
+		07183EB22AB8587A006C92AD /* MockNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EB12AB8587A006C92AD /* MockNotificationsViewModel.swift */; };
+		07183EB42AB858AE006C92AD /* MockFilterWebsitesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EB32AB858AE006C92AD /* MockFilterWebsitesViewModel.swift */; };
+		07183EB72AB8752D006C92AD /* CalendarUtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EB62AB8752D006C92AD /* CalendarUtilityTests.swift */; };
 		071915642AB1695E00E1CB56 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071915632AB1695E00E1CB56 /* NetworkMonitor.swift */; };
 		071915672AB169D300E1CB56 /* NoInternetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071915662AB169D300E1CB56 /* NoInternetScreen.swift */; };
 		071915682AB16CE300E1CB56 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071915632AB1695E00E1CB56 /* NetworkMonitor.swift */; };
@@ -28,7 +32,6 @@
 		078429302AB5EFB40078D836 /* AddToCalendarIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0784292D2AB5EF660078D836 /* AddToCalendarIntent.swift */; };
 		078429332AB604E60078D836 /* KontestWidgetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078429312AB603FB0078D836 /* KontestWidgetModel.swift */; };
 		078429342AB604E70078D836 /* KontestWidgetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078429312AB603FB0078D836 /* KontestWidgetModel.swift */; };
-		079EE1662AB741F20057D936 /* MyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079EE1652AB741F20057D936 /* MyTest.swift */; };
 		07A31F002AAC818D00EBC296 /* FilterWebsiteKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A31EFF2AAC818D00EBC296 /* FilterWebsiteKey.swift */; };
 		07A31F022AAC831300EBC296 /* FilterWebsitesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A31F012AAC831300EBC296 /* FilterWebsitesViewModel.swift */; };
 		07A750202AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A7501F2AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift */; };
@@ -129,10 +132,13 @@
 		07ECFBC42AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFBC32AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift */; };
 		07ECFBC62AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFBC52AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift */; };
 		07ECFBC82AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFBC72AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift */; };
+		07FD85A92AB78D5600D26C4C /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FD85A82AB78D5600D26C4C /* Dependencies.swift */; };
+		07FD85AB2AB804FA00D26C4C /* NotificationsViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FD85AA2AB804FA00D26C4C /* NotificationsViewModelProtocol.swift */; };
+		07FD85AD2AB809BC00D26C4C /* FilterWebsitesViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FD85AC2AB809BC00D26C4C /* FilterWebsitesViewModelProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		079EE15F2AB741CD0057D936 /* PBXContainerItemProxy */ = {
+		07183EA62AB85633006C92AD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0760164D2A87CD52007CE9F5 /* Project object */;
 			proxyType = 1;
@@ -171,6 +177,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		07183EA22AB85633006C92AD /* KontestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KontestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		07183EAB2AB857C6006C92AD /* AllKontestsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllKontestsViewModelTests.swift; sourceTree = "<group>"; };
+		07183EB12AB8587A006C92AD /* MockNotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNotificationsViewModel.swift; sourceTree = "<group>"; };
+		07183EB32AB858AE006C92AD /* MockFilterWebsitesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFilterWebsitesViewModel.swift; sourceTree = "<group>"; };
+		07183EB52AB86A53006C92AD /* KontestTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = KontestTestPlan.xctestplan; sourceTree = "<group>"; };
+		07183EB62AB8752D006C92AD /* CalendarUtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarUtilityTests.swift; sourceTree = "<group>"; };
 		071915632AB1695E00E1CB56 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		071915662AB169D300E1CB56 /* NoInternetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetScreen.swift; sourceTree = "<group>"; };
 		073269E72AAC42350028476D /* FilterWebsitesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesView.swift; sourceTree = "<group>"; };
@@ -185,9 +197,6 @@
 		077E6EB02AB4B3220003E897 /* ErrorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorState.swift; sourceTree = "<group>"; };
 		0784292D2AB5EF660078D836 /* AddToCalendarIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCalendarIntent.swift; sourceTree = "<group>"; };
 		078429312AB603FB0078D836 /* KontestWidgetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestWidgetModel.swift; sourceTree = "<group>"; };
-		079EE15B2AB741CD0057D936 /* KontestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KontestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		079EE1642AB741F10057D936 /* KontestTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KontestTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		079EE1652AB741F20057D936 /* MyTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTest.swift; sourceTree = "<group>"; };
 		07A31EFF2AAC818D00EBC296 /* FilterWebsiteKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsiteKey.swift; sourceTree = "<group>"; };
 		07A31F012AAC831300EBC296 /* FilterWebsitesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesViewModel.swift; sourceTree = "<group>"; };
 		07A7501F2AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoKontestsDueToFiltersScreen.swift; sourceTree = "<group>"; };
@@ -265,22 +274,25 @@
 		07ECFBC32AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeUserProfileGraphQLAPIModel.swift; sourceTree = "<group>"; };
 		07ECFBC52AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeUserRankingsGraphQLAPIModel.swift; sourceTree = "<group>"; };
 		07ECFBC72AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeUserRankingsGraphQLAPIDTO.swift; sourceTree = "<group>"; };
+		07FD85A82AB78D5600D26C4C /* Dependencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
+		07FD85AA2AB804FA00D26C4C /* NotificationsViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModelProtocol.swift; sourceTree = "<group>"; };
+		07FD85AC2AB809BC00D26C4C /* FilterWebsitesViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesViewModelProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		07183E9F2AB85633006C92AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		076016522A87CD52007CE9F5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				07ECFBC22AA582E3008513C6 /* LeetCodeSchema in Frameworks */,
 				07ECFBBF2AA582D2008513C6 /* Apollo in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		079EE1582AB741CD0057D936 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,16 +319,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07183EA32AB85633006C92AD /* KontestTests */ = {
+			isa = PBXGroup;
+			children = (
+				07183EAB2AB857C6006C92AD /* AllKontestsViewModelTests.swift */,
+				07183EB62AB8752D006C92AD /* CalendarUtilityTests.swift */,
+			);
+			path = KontestTests;
+			sourceTree = "<group>";
+		};
+		07183EB02AB8586F006C92AD /* MockViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				07183EB12AB8587A006C92AD /* MockNotificationsViewModel.swift */,
+				07183EB32AB858AE006C92AD /* MockFilterWebsitesViewModel.swift */,
+			);
+			path = MockViewModels;
+			sourceTree = "<group>";
+		};
 		0760164C2A87CD52007CE9F5 = {
 			isa = PBXGroup;
 			children = (
+				07183EB52AB86A53006C92AD /* KontestTestPlan.xctestplan */,
 				07EA6F492AB6405F00CD932E /* Upcoming Kontests iOS WidgetExtension.entitlements */,
 				07ECFB7F2AA58259008513C6 /* apollo-codegen-config.json */,
 				07ECFB362AA58259008513C6 /* Kontest */,
 				07ECFB352AA58259008513C6 /* README.md */,
 				07CFEBA72AB02DCB00291484 /* Upcoming Kontests iOS Widget */,
 				07CFEBF12AB042A500291484 /* Upcoming Kontests macOS Widget */,
-				079EE15C2AB741CD0057D936 /* KontestTests */,
+				07183EA32AB85633006C92AD /* KontestTests */,
 				07CFEBA22AB02DCB00291484 /* Frameworks */,
 				076016562A87CD52007CE9F5 /* Products */,
 			);
@@ -328,7 +359,7 @@
 				076016552A87CD52007CE9F5 /* Kontest.app */,
 				07CFEBA12AB02DCB00291484 /* Upcoming Kontests iOS WidgetExtension.appex */,
 				07CFEBEE2AB042A500291484 /* Upcoming Kontests macOS WidgetExtension.appex */,
-				079EE15B2AB741CD0057D936 /* KontestTests.xctest */,
+				07183EA22AB85633006C92AD /* KontestTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -339,15 +370,6 @@
 				0784292D2AB5EF660078D836 /* AddToCalendarIntent.swift */,
 			);
 			path = Intents;
-			sourceTree = "<group>";
-		};
-		079EE15C2AB741CD0057D936 /* KontestTests */ = {
-			isa = PBXGroup;
-			children = (
-				079EE1652AB741F20057D936 /* MyTest.swift */,
-				079EE1642AB741F10057D936 /* KontestTests-Bridging-Header.h */,
-			);
-			path = KontestTests;
 			sourceTree = "<group>";
 		};
 		07CFEBA22AB02DCB00291484 /* Frameworks */ = {
@@ -414,6 +436,7 @@
 		07ECFB372AA58259008513C6 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				07183EB02AB8586F006C92AD /* MockViewModels */,
 				07ECFB382AA58259008513C6 /* ChangeUsernameViewModel.swift */,
 				07ECFB392AA58259008513C6 /* LeetCodeGraphQLViewModel.swift */,
 				07ECFB3A2AA58259008513C6 /* AllKontestsViewModel.swift */,
@@ -527,6 +550,7 @@
 				07ECFB652AA58259008513C6 /* Constants.swift */,
 				07ECFB662AA58259008513C6 /* CalendarUtility.swift */,
 				07ECFB672AA58259008513C6 /* ClipboardUtility.swift */,
+				07FD85A82AB78D5600D26C4C /* Dependencies.swift */,
 				07ECFB682AA58259008513C6 /* LocalNotificationManager.swift */,
 				07ECFB692AA58259008513C6 /* Screen.swift */,
 				07ECFB6A2AA58259008513C6 /* Router.swift */,
@@ -567,6 +591,7 @@
 		07ECFB782AA58259008513C6 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				07FD85AE2AB80AD000D26C4C /* ViewModelProtocols */,
 				07ECFB792AA58259008513C6 /* KontestFetcher.swift */,
 				07ECFB7A2AA58259008513C6 /* CodeChefFetcher.swift */,
 				07ECFB7B2AA58259008513C6 /* CodeForcesFetcher.swift */,
@@ -575,9 +600,36 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		07FD85AE2AB80AD000D26C4C /* ViewModelProtocols */ = {
+			isa = PBXGroup;
+			children = (
+				07FD85AA2AB804FA00D26C4C /* NotificationsViewModelProtocol.swift */,
+				07FD85AC2AB809BC00D26C4C /* FilterWebsitesViewModelProtocol.swift */,
+			);
+			path = ViewModelProtocols;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		07183EA12AB85633006C92AD /* KontestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07183EAA2AB85633006C92AD /* Build configuration list for PBXNativeTarget "KontestTests" */;
+			buildPhases = (
+				07183E9E2AB85633006C92AD /* Sources */,
+				07183E9F2AB85633006C92AD /* Frameworks */,
+				07183EA02AB85633006C92AD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				07183EA72AB85633006C92AD /* PBXTargetDependency */,
+			);
+			name = KontestTests;
+			productName = KontestTests;
+			productReference = 07183EA22AB85633006C92AD /* KontestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		076016542A87CD52007CE9F5 /* Kontest */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 076016632A87CD55007CE9F5 /* Build configuration list for PBXNativeTarget "Kontest" */;
@@ -601,24 +653,6 @@
 			productName = "Coding Kontest";
 			productReference = 076016552A87CD52007CE9F5 /* Kontest.app */;
 			productType = "com.apple.product-type.application";
-		};
-		079EE15A2AB741CD0057D936 /* KontestTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 079EE1632AB741CD0057D936 /* Build configuration list for PBXNativeTarget "KontestTests" */;
-			buildPhases = (
-				079EE1572AB741CD0057D936 /* Sources */,
-				079EE1582AB741CD0057D936 /* Frameworks */,
-				079EE1592AB741CD0057D936 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				079EE1602AB741CD0057D936 /* PBXTargetDependency */,
-			);
-			name = KontestTests;
-			productName = KontestTests;
-			productReference = 079EE15B2AB741CD0057D936 /* KontestTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		07CFEBA02AB02DCB00291484 /* Upcoming Kontests iOS WidgetExtension */ = {
 			isa = PBXNativeTarget;
@@ -670,13 +704,12 @@
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
+					07183EA12AB85633006C92AD = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 076016542A87CD52007CE9F5;
+					};
 					076016542A87CD52007CE9F5 = {
 						CreatedOnToolsVersion = 15.0;
-					};
-					079EE15A2AB741CD0057D936 = {
-						CreatedOnToolsVersion = 15.0;
-						LastSwiftMigration = 1500;
-						TestTargetID = 076016542A87CD52007CE9F5;
 					};
 					07CFEBA02AB02DCB00291484 = {
 						CreatedOnToolsVersion = 15.0;
@@ -706,12 +739,19 @@
 				076016542A87CD52007CE9F5 /* Kontest */,
 				07CFEBA02AB02DCB00291484 /* Upcoming Kontests iOS WidgetExtension */,
 				07CFEBED2AB042A500291484 /* Upcoming Kontests macOS WidgetExtension */,
-				079EE15A2AB741CD0057D936 /* KontestTests */,
+				07183EA12AB85633006C92AD /* KontestTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		07183EA02AB85633006C92AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		076016532A87CD52007CE9F5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -722,13 +762,6 @@
 				07ECFB892AA58259008513C6 /* Assets.xcassets in Resources */,
 				07ECFB962AA58259008513C6 /* Preview Assets.xcassets in Resources */,
 				07ECFB802AA58259008513C6 /* README.md in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		079EE1592AB741CD0057D936 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -753,16 +786,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		07183E9E2AB85633006C92AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07183EB72AB8752D006C92AD /* CalendarUtilityTests.swift in Sources */,
+				07183EAC2AB857C6006C92AD /* AllKontestsViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		076016512A87CD52007CE9F5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07183EB42AB858AE006C92AD /* MockFilterWebsitesViewModel.swift in Sources */,
 				07ECFBB32AA58259008513C6 /* KontestDTO.swift in Sources */,
 				07ECFB832AA58259008513C6 /* AllKontestsViewModel.swift in Sources */,
 				07ECFBC82AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift in Sources */,
 				07ECFB952AA58259008513C6 /* KontestModel.swift in Sources */,
 				07ECFB812AA58259008513C6 /* ChangeUsernameViewModel.swift in Sources */,
 				07ECFBB02AA58259008513C6 /* CodeForcesUserRatingAPIDTO.swift in Sources */,
+				07FD85A92AB78D5600D26C4C /* Dependencies.swift in Sources */,
 				071915642AB1695E00E1CB56 /* NetworkMonitor.swift in Sources */,
 				07ECFB822AA58259008513C6 /* LeetCodeGraphQLViewModel.swift in Sources */,
 				07ECFB882AA58259008513C6 /* KontestApp.swift in Sources */,
@@ -776,15 +820,18 @@
 				07ECFB9A2AA58259008513C6 /* RatingsView.swift in Sources */,
 				07ECFB842AA58259008513C6 /* CodeChefViewModel.swift in Sources */,
 				07ECFB852AA58259008513C6 /* CodeForcesViewModel.swift in Sources */,
+				07FD85AB2AB804FA00D26C4C /* NotificationsViewModelProtocol.swift in Sources */,
 				073269EC2AAC451B0028476D /* FilterWebsitesScreen.swift in Sources */,
 				07ECFBB62AA58259008513C6 /* KontestFetcher.swift in Sources */,
 				07ECFB8D2AA58259008513C6 /* LeetCodeAPIGraphQLRepository.swift in Sources */,
 				07ECFBA72AA58259008513C6 /* ClipboardUtility.swift in Sources */,
 				07ECFBBA2AA58259008513C6 /* LeetCodeGraphQLAPIFetcher.swift in Sources */,
 				07ECFB8F2AA58259008513C6 /* CodeForcesAPIRepository.swift in Sources */,
+				07183EB22AB8587A006C92AD /* MockNotificationsViewModel.swift in Sources */,
 				077E6EAF2AB4B2120003E897 /* ErrorView.swift in Sources */,
 				07ECFBA42AA58259008513C6 /* AllNotificationMenu.swift in Sources */,
 				07ECFBAF2AA58259008513C6 /* CodeChefAPIDTO.swift in Sources */,
+				07FD85AD2AB809BC00D26C4C /* FilterWebsitesViewModelProtocol.swift in Sources */,
 				07ECFB8C2AA58259008513C6 /* KontestRepository.swift in Sources */,
 				077E6EAD2AB4B1D10003E897 /* ErrorWrapper.swift in Sources */,
 				074DD4522AA61570005C16A5 /* AppError.swift in Sources */,
@@ -822,14 +869,6 @@
 				07ECFBA82AA58259008513C6 /* LocalNotificationManager.swift in Sources */,
 				07ECFB992AA58259008513C6 /* LeetCodeGraphQLView.swift in Sources */,
 				07ECFB9B2AA58259008513C6 /* NoKontestsDownloadedScreen.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		079EE1572AB741CD0057D936 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				079EE1662AB741F20057D936 /* MyTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -886,10 +925,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		079EE1602AB741CD0057D936 /* PBXTargetDependency */ = {
+		07183EA72AB85633006C92AD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 076016542A87CD52007CE9F5 /* Kontest */;
-			targetProxy = 079EE15F2AB741CD0057D936 /* PBXContainerItemProxy */;
+			targetProxy = 07183EA62AB85633006C92AD /* PBXContainerItemProxy */;
 		};
 		07CFEBB02AB02DCC00291484 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -908,6 +947,42 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		07183EA82AB85633006C92AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R2Z9FDM5M6;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ayushsinghal.KontestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kontest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Kontest";
+			};
+			name = Debug;
+		};
+		07183EA92AB85633006C92AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = R2Z9FDM5M6;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ayushsinghal.KontestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kontest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Kontest";
+			};
+			name = Release;
+		};
 		076016612A87CD55007CE9F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1099,47 +1174,6 @@
 			};
 			name = Release;
 		};
-		079EE1612AB741CD0057D936 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = R2Z9FDM5M6;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ayushsinghal.KontestTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "KontestTests/KontestTests-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kontest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Kontest";
-			};
-			name = Debug;
-		};
-		079EE1622AB741CD0057D936 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = R2Z9FDM5M6;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ayushsinghal.KontestTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "KontestTests/KontestTests-Bridging-Header.h";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kontest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Kontest";
-			};
-			name = Release;
-		};
 		07CFEBB32AB02DCC00291484 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1259,6 +1293,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		07183EAA2AB85633006C92AD /* Build configuration list for PBXNativeTarget "KontestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07183EA82AB85633006C92AD /* Debug */,
+				07183EA92AB85633006C92AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		076016502A87CD52007CE9F5 /* Build configuration list for PBXProject "Kontest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1273,15 +1316,6 @@
 			buildConfigurations = (
 				076016642A87CD55007CE9F5 /* Debug */,
 				076016652A87CD55007CE9F5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		079EE1632AB741CD0057D936 /* Build configuration list for PBXNativeTarget "KontestTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				079EE1612AB741CD0057D936 /* Debug */,
-				079EE1622AB741CD0057D936 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

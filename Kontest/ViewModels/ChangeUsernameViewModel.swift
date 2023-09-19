@@ -13,13 +13,11 @@ class ChangeUsernameViewModel {
     var codeForcesUsername: String = ""
     var codeChefUsername: String = ""
     
-    static let instance = ChangeUsernameViewModel()
-    
     private let leetcodeUsernameKey = "leetcodeUsername"
     private let codeForcesUsernameKey = "codeForcesUsername"
     private let codeChefUsernameKey = "codeChefUsername"
     
-    private init() {
+    init() {
         if let leetcodeUsername = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.string(forKey: leetcodeUsernameKey) {
             self.leetcodeUsername = leetcodeUsername
         }

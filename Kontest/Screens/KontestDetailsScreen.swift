@@ -88,7 +88,7 @@ struct ButtonsView: View {
         self.kontest = kontest
         kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
         kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
-        notificationsViewModel = NotificationsViewModel.instance
+        notificationsViewModel = Dependencies.instance.notificationsViewModel
     }
 
     var body: some View {
@@ -283,7 +283,7 @@ struct RemainingTimeView: View {
 //        .environment(AllKontestsViewModel())
 
     return KontestDetailsScreen(kontest: KontestModel.from(dto: KontestDTO(name: "THIRD PROGRAMMING CONTEST 2023 ALGO (AtCoder Beginner Contest 318)", url: "https://hackerrank.com/contests/projecteuler", start_time: startTime, end_time: endTime, duration: "1020.0", site: "AtCoder", in_24_hours: "No", status: "CODING")))
-        .environment(AllKontestsViewModel.instance)
+        .environment(Dependencies.instance.allKontestsViewModel)
 }
 
 // #Preview("TopCardView") {

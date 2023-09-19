@@ -10,7 +10,7 @@ import SwiftUI
 struct AllNotificationMenu: View {
     @State var showNotificationForAllKontestsAlert = false
     @State var showNotificationForAllKontestsAlertTitle = ""
-    let notificationsViewModel = NotificationsViewModel.instance
+    let notificationsViewModel = Dependencies.instance.notificationsViewModel
     @Environment(AllKontestsViewModel.self) private var allKontestsViewModel
     @Environment(ErrorState.self) private var errorState
 
@@ -97,5 +97,5 @@ extension AllNotificationMenu {
 
 #Preview {
     AllNotificationMenu()
-        .environment(AllKontestsViewModel.instance)
+        .environment(Dependencies.instance.allKontestsViewModel)
 }

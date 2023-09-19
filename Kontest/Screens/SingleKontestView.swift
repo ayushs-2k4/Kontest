@@ -36,7 +36,7 @@ struct SingleKontestView: View {
         let isKontestStartingTimeLessThanADay = !(CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 0, hours: 0, days: 1))
         isKontestOfFutureAndStartingInLessThan24Hours = isKontestOfFuture && isKontestStartingTimeLessThanADay
 
-        notificationsViewModel = NotificationsViewModel.instance
+        notificationsViewModel = Dependencies.instance.notificationsViewModel
     }
 
     var body: some View {
@@ -206,7 +206,7 @@ struct SingleKontestView: View {
 }
 
 #Preview("SingleKontentView") {
-    let allKontestsViewModel = AllKontestsViewModel.instance
+    let allKontestsViewModel = Dependencies.instance.allKontestsViewModel
 
     return List {
         TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
