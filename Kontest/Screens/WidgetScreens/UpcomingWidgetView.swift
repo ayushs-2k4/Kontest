@@ -100,6 +100,7 @@ struct createSingleKontestView: View {
         if let startDate, let endDate {
             HStack {
                 Text(kontest.name)
+                    .lineLimit(1)
                     .foregroundStyle(kontest.site == "AtCoder" ? Color.gray : KontestModel.getColorForIdentifier(site: kontest.site))
 
                 Spacer()
@@ -133,7 +134,7 @@ struct createSingleKontestView: View {
                                     Text(" - ")
                                     Text(endDate.formatted(date: .omitted, time: .shortened))
                                 }
-                            } else {
+                            } else if widgetFamily == .systemLarge {
                                 Text(startDate.formatted(date: .omitted, time: .shortened))
                             }
                         }
@@ -144,7 +145,12 @@ struct createSingleKontestView: View {
                             let p = CalendarUtility.getWeekdayNameFromDate(date: startDate)
                             Text("(\(p))")
                         }
-                        Text(CalendarUtility.getKontestDate(date: startDate))
+
+                        if widgetFamily == .systemExtraLarge {
+                            Text(startDate.formatted(date: .abbreviated, time: .omitted))
+                        } else if widgetFamily == .systemLarge {
+                            Text(startDate.formatted(date: .numeric, time: .omitted))
+                        }
                     }
                 }
 
