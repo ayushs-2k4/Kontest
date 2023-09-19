@@ -17,37 +17,35 @@ struct UpcomingWidgetView: View {
     @Environment(\.widgetFamily) private var widgetFamily
 
     var body: some View {
-        VStack {
-            if let error = error {
-                if let appError = error as? AppError {
-                    Text("Error: \(appError.title)")
-                } else {
-                    Text("Error: \(error.localizedDescription)")
-                }
+        if let error = error {
+            if let appError = error as? AppError {
+                Text("Error: \(appError.title)")
             } else {
-                if ongoingKontests.isEmpty && laterTodayKontests.isEmpty && tomorrowKontests.isEmpty && laterKontests.isEmpty {
-                    Text("No Kontests Scheduled")
-                } else {
-                    Color.clear
-                        .overlay(
-                            LazyVStack {
-                                if !ongoingKontests.isEmpty {
-                                    CreateSectionView(title: "Live Now", kontests: ongoingKontests, widgetFamily: widgetFamily, kontestStatus: .OnGoing)
-                                }
+                Text("Error: \(error.localizedDescription)")
+            }
+        } else {
+            if ongoingKontests.isEmpty && laterTodayKontests.isEmpty && tomorrowKontests.isEmpty && laterKontests.isEmpty {
+                Text("No Kontests Scheduled")
+            } else {
+                GeometryReader { geometry in
+                    LazyVStack {
+                        if !ongoingKontests.isEmpty {
+                            CreateSectionView(title: "Live Now", kontests: ongoingKontests, widgetFamily: widgetFamily, kontestStatus: .OnGoing)
+                        }
 
-                                if !laterTodayKontests.isEmpty {
-                                    CreateSectionView(title: "Later Today Kontests", kontests: laterTodayKontests, widgetFamily: widgetFamily, kontestStatus: .LaterToday)
-                                }
+                        if !laterTodayKontests.isEmpty {
+                            CreateSectionView(title: "Later Today Kontests", kontests: laterTodayKontests, widgetFamily: widgetFamily, kontestStatus: .LaterToday)
+                        }
 
-                                if !tomorrowKontests.isEmpty {
-                                    CreateSectionView(title: "Tomorrow Kontests", kontests: tomorrowKontests, widgetFamily: widgetFamily, kontestStatus: .Tomorrow)
-                                }
+                        if !tomorrowKontests.isEmpty {
+                            CreateSectionView(title: "Tomorrow Kontests", kontests: tomorrowKontests, widgetFamily: widgetFamily, kontestStatus: .Tomorrow)
+                        }
 
-                                if !laterKontests.isEmpty {
-                                    CreateSectionView(title: "Later Kontests", kontests: laterKontests, widgetFamily: widgetFamily, kontestStatus: .Later)
-                                }
-                            },
-                            alignment: .top)
+                        if !laterKontests.isEmpty {
+                            CreateSectionView(title: "Later Kontests", kontests: laterKontests, widgetFamily: widgetFamily, kontestStatus: .Later)
+                        }
+                    }
+                    .frame(height: geometry.size.height, alignment: .top)
                 }
             }
         }
@@ -61,7 +59,7 @@ struct CreateSectionView: View {
     let kontestStatus: KontestStatus
 
     var body: some View {
-        VStack(alignment: .leading) {
+        LazyVStack(alignment: .leading) {
             Text(title)
                 .bold()
 
