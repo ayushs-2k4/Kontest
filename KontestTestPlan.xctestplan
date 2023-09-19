@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "B41D1049-1E7D-4BD1-8384-670662AD9F59",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Kontest.xcodeproj",
+        "identifier" : "07183EA12AB85633006C92AD",
+        "name" : "KontestTests"
+      }
+    }
+  ],
+  "version" : 1
+}

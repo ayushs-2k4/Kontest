@@ -22,7 +22,7 @@ struct ChangeUsernameScreen: View {
 }
 
 struct MainChangeUsernameView: View {
-    let changeUsernameViewModel = ChangeUsernameViewModel.instance
+    let changeUsernameViewModel = Dependencies.instance.changeUsernameViewModel
 
     @State private var leetcodeUsername: String = ""
     @State private var codeForcesUsername: String = ""

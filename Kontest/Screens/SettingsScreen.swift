@@ -47,7 +47,7 @@ struct SingleSettingsTileView: View {
     NavigationStack {
         SettingsScreen()
     }
-    .environment(ChangeUsernameViewModel.instance)
+    .environment(Dependencies.instance.changeUsernameViewModel)
     .environment(Router.instance)
 }
 

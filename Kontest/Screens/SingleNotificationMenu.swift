@@ -10,7 +10,7 @@ import SwiftUI
 struct SingleNotificationMenu: View {
     var kontest: KontestModel
     @Environment(AllKontestsViewModel.self) private var allKontestsViewModel
-    let notificationsViewModel = NotificationsViewModel.instance
+    let notificationsViewModel = Dependencies.instance.notificationsViewModel
     @Environment(ErrorState.self) private var errorState
 
     var body: some View {
@@ -150,5 +150,5 @@ extension SingleNotificationMenu {
 
 #Preview {
     SingleNotificationMenu(kontest: KontestModel.from(dto: KontestDTO(name: "ProjectEuler+1", url: "https://hackerrank.com/contests/projecteuler", start_time: "2023-08-15 18:29:00 UTC", end_time: "2023-08-18 17:43:00 UTC", duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "BEFORE")))
-        .environment(AllKontestsViewModel.instance)
+        .environment(Dependencies.instance.allKontestsViewModel)
 }
