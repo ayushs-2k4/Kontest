@@ -115,7 +115,7 @@ struct createSingleKontestView: View {
                                         Text("Ends in: \(futureDate, style: .timer)")
                                             .fontDesign(.default).monospacedDigit()
                                             .multilineTextAlignment(.trailing)
-                                    } else if kontestStatus == .LaterToday {
+                                    } else if kontestStatus == .LaterToday || kontestStatus == .Tomorrow {
                                         let seconds = startDate.timeIntervalSince(Date())
                                         let futureDate = Calendar.current.date(byAdding: .second, value: Int(seconds), to: Date())!
 
