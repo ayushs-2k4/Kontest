@@ -113,14 +113,14 @@ struct createSingleKontestView: View {
                                         let futureDate = Calendar.current.date(byAdding: .second, value: Int(seconds), to: Date())!
 
                                         Text("Ends in: \(futureDate, style: .timer)")
-                                            .font(.callout.monospacedDigit())
+                                            .fontDesign(.default).monospacedDigit()
                                             .multilineTextAlignment(.trailing)
                                     } else if kontestStatus == .LaterToday {
                                         let seconds = startDate.timeIntervalSince(Date())
                                         let futureDate = Calendar.current.date(byAdding: .second, value: Int(seconds), to: Date())!
 
                                         Text("Starting in: \(futureDate, style: .timer)")
-                                            .font(.callout.monospacedDigit())
+                                            .fontDesign(.default).monospacedDigit()
                                             .multilineTextAlignment(.trailing)
                                     }
                                 } else {
@@ -132,6 +132,7 @@ struct createSingleKontestView: View {
                                     Text(" - ")
                                     Text(endDate.formatted(date: .omitted, time: .shortened))
                                 }
+
                             } else if widgetFamily == .systemLarge {
                                 Text(startDate.formatted(date: .omitted, time: .shortened))
                             }
