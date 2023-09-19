@@ -28,21 +28,26 @@ struct UpcomingWidgetView: View {
                 if ongoingKontests.isEmpty && laterTodayKontests.isEmpty && tomorrowKontests.isEmpty && laterKontests.isEmpty {
                     Text("No Kontests Scheduled")
                 } else {
-                    if !ongoingKontests.isEmpty {
-                        CreateSectionView(title: "Live Now", kontests: ongoingKontests, widgetFamily: widgetFamily, kontestStatus: .OnGoing)
-                    }
+                    Color.clear
+                        .overlay(
+                            LazyVStack {
+                                if !ongoingKontests.isEmpty {
+                                    CreateSectionView(title: "Live Now", kontests: ongoingKontests, widgetFamily: widgetFamily, kontestStatus: .OnGoing)
+                                }
 
-                    if !laterTodayKontests.isEmpty {
-                        CreateSectionView(title: "Later Today Kontests", kontests: laterTodayKontests, widgetFamily: widgetFamily, kontestStatus: .LaterToday)
-                    }
+                                if !laterTodayKontests.isEmpty {
+                                    CreateSectionView(title: "Later Today Kontests", kontests: laterTodayKontests, widgetFamily: widgetFamily, kontestStatus: .LaterToday)
+                                }
 
-                    if !tomorrowKontests.isEmpty {
-                        CreateSectionView(title: "Tomorrow Kontests", kontests: tomorrowKontests, widgetFamily: widgetFamily, kontestStatus: .Tomorrow)
-                    }
+                                if !tomorrowKontests.isEmpty {
+                                    CreateSectionView(title: "Tomorrow Kontests", kontests: tomorrowKontests, widgetFamily: widgetFamily, kontestStatus: .Tomorrow)
+                                }
 
-                    if !laterKontests.isEmpty {
-                        CreateSectionView(title: "Later Kontests", kontests: laterKontests, widgetFamily: widgetFamily, kontestStatus: .Later)
-                    }
+                                if !laterKontests.isEmpty {
+                                    CreateSectionView(title: "Later Kontests", kontests: laterKontests, widgetFamily: widgetFamily, kontestStatus: .Later)
+                                }
+                            },
+                            alignment: .top)
                 }
             }
         }
