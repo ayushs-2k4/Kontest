@@ -420,4 +420,8 @@ class CalendarUtility {
 
         return dateFormatter.string(from: date)
     }
+
+    static func getAuthorizationStatus() -> EKAuthorizationStatus {
+        return EKEventStore.authorizationStatus(for: EKEntityType.event)
+    }
 }

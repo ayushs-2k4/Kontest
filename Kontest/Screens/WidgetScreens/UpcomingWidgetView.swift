@@ -10,6 +10,7 @@ import WidgetKit
 
 struct UpcomingWidgetView: View {
     let error: Error?
+    let toShowCalendarButton: Bool
     let ongoingKontests: [KontestModel]
     let laterTodayKontests: [KontestModel]
     let tomorrowKontests: [KontestModel]
@@ -30,19 +31,19 @@ struct UpcomingWidgetView: View {
                 GeometryReader { geometry in
                     LazyVStack {
                         if !ongoingKontests.isEmpty {
-                            CreateSectionView(title: "Live Now", kontests: ongoingKontests, widgetFamily: widgetFamily, kontestStatus: .OnGoing)
+                            CreateSectionView(title: "Live Now", kontests: ongoingKontests, widgetFamily: widgetFamily, kontestStatus: .OnGoing, toShowCalendarButton: toShowCalendarButton)
                         }
 
                         if !laterTodayKontests.isEmpty {
-                            CreateSectionView(title: "Later Today Kontests", kontests: laterTodayKontests, widgetFamily: widgetFamily, kontestStatus: .LaterToday)
+                            CreateSectionView(title: "Later Today Kontests", kontests: laterTodayKontests, widgetFamily: widgetFamily, kontestStatus: .LaterToday, toShowCalendarButton: toShowCalendarButton)
                         }
 
                         if !tomorrowKontests.isEmpty {
-                            CreateSectionView(title: "Tomorrow Kontests", kontests: tomorrowKontests, widgetFamily: widgetFamily, kontestStatus: .Tomorrow)
+                            CreateSectionView(title: "Tomorrow Kontests", kontests: tomorrowKontests, widgetFamily: widgetFamily, kontestStatus: .Tomorrow, toShowCalendarButton: toShowCalendarButton)
                         }
 
                         if !laterKontests.isEmpty {
-                            CreateSectionView(title: "Later Kontests", kontests: laterKontests, widgetFamily: widgetFamily, kontestStatus: .Later)
+                            CreateSectionView(title: "Later Kontests", kontests: laterKontests, widgetFamily: widgetFamily, kontestStatus: .Later, toShowCalendarButton: toShowCalendarButton)
                         }
                     }
                     .frame(height: geometry.size.height, alignment: .top)
@@ -57,6 +58,7 @@ struct CreateSectionView: View {
     let kontests: [KontestModel]
     let widgetFamily: WidgetFamily
     let kontestStatus: KontestStatus
+    let toShowCalendarButton: Bool
 
     var body: some View {
         LazyVStack(alignment: .leading) {
@@ -64,7 +66,7 @@ struct CreateSectionView: View {
                 .bold()
 
             ForEach(kontests.indices, id: \.self) { index in
-                createSingleKontestView(kontest: kontests[index], widgetFamily: widgetFamily, kontestStatus: kontestStatus)
+                createSingleKontestView(kontest: kontests[index], widgetFamily: widgetFamily, kontestStatus: kontestStatus, toShowCalendarButton: toShowCalendarButton)
                 if index != kontests.count - 1 {
                     Divider()
                 }
@@ -81,6 +83,7 @@ struct createSingleKontestView: View {
     let kontest: KontestModel
     let widgetFamily: WidgetFamily
     let kontestStatus: KontestStatus
+    let toShowCalendarButton: Bool
 
     @Environment(\.widgetRenderingMode) var widgetRenderingMode
 
@@ -153,8 +156,10 @@ struct createSingleKontestView: View {
                     }
                 }
 
-                Toggle(isOn: kontest.isCalendarEventAdded, intent: AddToCalendarIntent(title: kontest.name, notes: "", startDate: startDate, endDate: endDate, url: URL(string: kontest.url), toRemove: kontest.isCalendarEventAdded)) {}
-                    .toggleStyle(MyCustomToggleStyle(onColor: .green, offColor: .blue))
+                if toShowCalendarButton {
+                    Toggle(isOn: kontest.isCalendarEventAdded, intent: AddToCalendarIntent(title: kontest.name, notes: "", startDate: startDate, endDate: endDate, url: URL(string: kontest.url), toRemove: kontest.isCalendarEventAdded)) {}
+                        .toggleStyle(MyCustomToggleStyle(onColor: .green, offColor: .blue))
+                }
             }
         }
     }

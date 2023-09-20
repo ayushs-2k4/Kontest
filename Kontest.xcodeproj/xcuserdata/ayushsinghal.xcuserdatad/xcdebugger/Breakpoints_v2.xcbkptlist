@@ -7,253 +7,190 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "62F457CF-7A51-416F-8F5E-EEAC89E83B53"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "KontestTests/AllKontestsViewModelTests.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "testFilterKontestsUsingSearchText()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "62F457CF-7A51-416F-8F5E-EEAC89E83B53 - 400c2058623b7180"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "KontestTests.AllKontestsViewModelTests.testFilterKontestsUsingSearchText() -&gt; ()"
-                  moduleName = "KontestTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/KontestTests/AllKontestsViewModelTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "34"
-                  endingLineNumber = "34"
-                  offsetFromSymbolStart = "84">
-               </Location>
-               <Location
-                  uuid = "62F457CF-7A51-416F-8F5E-EEAC89E83B53 - 400c2058623b7180"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "KontestTests.AllKontestsViewModelTests.testFilterKontestsUsingSearchText() -&gt; ()"
-                  moduleName = "KontestTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/KontestTests/AllKontestsViewModelTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "34"
-                  endingLineNumber = "34"
-                  offsetFromSymbolStart = "96">
-               </Location>
-               <Location
-                  uuid = "62F457CF-7A51-416F-8F5E-EEAC89E83B53 - 400c2058623b71de"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "KontestTests.AllKontestsViewModelTests.testFilterKontestsUsingSearchText() -&gt; ()"
-                  moduleName = "KontestTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/KontestTests/AllKontestsViewModelTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "36"
-                  endingLineNumber = "36"
-                  offsetFromSymbolStart = "288">
-               </Location>
-               <Location
-                  uuid = "62F457CF-7A51-416F-8F5E-EEAC89E83B53 - fd2d60cf1e8ed3ba"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Any&gt;, Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;) -&gt; Swift.Bool in KontestTests.AllKontestsViewModelTests.testFilterKontestsUsingSearchText() -&gt; ()"
-                  moduleName = "KontestTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/KontestTests/AllKontestsViewModelTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "36"
-                  endingLineNumber = "36"
-                  offsetFromSymbolStart = "72">
-               </Location>
-               <Location
-                  uuid = "62F457CF-7A51-416F-8F5E-EEAC89E83B53 - fd2d60cf1e8ed3c5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Any&gt;, Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;) -&gt; Swift.Bool in KontestTests.AllKontestsViewModelTests.testFilterKontestsUsingSearchText() -&gt; ()"
-                  moduleName = "KontestTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/KontestTests/AllKontestsViewModelTests.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "120">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "056B89CC-15F0-445C-BC6B-582721D9BB3C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Kontest/ViewModels/AllKontestsViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
-            landmarkName = "searchText"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A5D1AB65-C6EE-4EDD-80DB-FC5087A7BD15"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Kontest/ViewModels/AllKontestsViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
-            landmarkName = "filterKontestsUsingSearchText()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A79F2CD0-7618-4001-AC1D-8AA02DECEA8E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Kontest/ViewModels/AllKontestsViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "filterKontestsUsingSearchText()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A79F2CD0-7618-4001-AC1D-8AA02DECEA8E - bca3d115b9d26477"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Kontest.AllKontestsViewModel.filterKontestsUsingSearchText() -&gt; ()"
-                  moduleName = "Kontest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/ViewModels/AllKontestsViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "111"
-                  endingLineNumber = "111"
-                  offsetFromSymbolStart = "112">
-               </Location>
-               <Location
-                  uuid = "A79F2CD0-7618-4001-AC1D-8AA02DECEA8E - 171a69486796fdd0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Kontest.KontestModel) -&gt; Swift.Bool in Kontest.AllKontestsViewModel.filterKontestsUsingSearchText() -&gt; ()"
-                  moduleName = "Kontest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/ViewModels/AllKontestsViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "111"
-                  endingLineNumber = "111"
-                  offsetFromSymbolStart = "76">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "EC691C93-BD4E-4914-B051-CBA8F2783DFD"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Kontest/ViewModels/AllKontestsViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "filterKontestsUsingSearchText()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "FD4148CA-6837-4942-8E85-8B7F297475A1"
+            uuid = "2BF2EFBD-92E4-4AF2-809F-AC68C6ABEDF4"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kontest/ViewModels/AllKontestsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
-            landmarkName = "filterKontestsUsingSearchText()"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "getAllKontests()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2BF2EFBD-92E4-4AF2-809F-AC68C6ABEDF4 - 235dbc66d9289462"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Kontest.AllKontestsViewModel.getAllKontests() async -&gt; Swift.Array&lt;Kontest.KontestModel&gt;"
+                  moduleName = "Kontest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/ViewModels/AllKontestsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "140">
+               </Location>
+               <Location
+                  uuid = "2BF2EFBD-92E4-4AF2-809F-AC68C6ABEDF4 - 367cb4714fdbc883"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) await resume partial function for Kontest.AllKontestsViewModel.getAllKontests() async -&gt; Swift.Array&lt;Kontest.KontestModel&gt;"
+                  moduleName = "Kontest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/ViewModels/AllKontestsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "2BF2EFBD-92E4-4AF2-809F-AC68C6ABEDF4 - 92af84af15da1c66"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for Kontest.AllKontestsViewModel.getAllKontests() async -&gt; Swift.Array&lt;Kontest.KontestModel&gt;"
+                  moduleName = "Kontest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/ViewModels/AllKontestsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "2BF2EFBD-92E4-4AF2-809F-AC68C6ABEDF4 - 42018ce8418fa79a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(7) suspend resume partial function for Kontest.AllKontestsViewModel.getAllKontests() async -&gt; Swift.Array&lt;Kontest.KontestModel&gt;"
+                  moduleName = "Kontest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/ViewModels/AllKontestsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "104">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0580B95E-9CFA-4E34-B7E6-8B0D98FD8CFB"
+            uuid = "EAF5345F-8A14-4650-862D-64C091E5991C"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kontest/ViewModels/AllKontestsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
-            landmarkName = "filterKontestsUsingSearchText()"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "getAllKontests()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "EAF5345F-8A14-4650-862D-64C091E5991C - 235dbc66d92895a0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Kontest.AllKontestsViewModel.getAllKontests() async -&gt; Swift.Array&lt;Kontest.KontestModel&gt;"
+                  moduleName = "Kontest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/ViewModels/AllKontestsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "328">
+               </Location>
+               <Location
+                  uuid = "EAF5345F-8A14-4650-862D-64C091E5991C - 92af84af15da1da4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for Kontest.AllKontestsViewModel.getAllKontests() async -&gt; Swift.Array&lt;Kontest.KontestModel&gt;"
+                  moduleName = "Kontest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/ViewModels/AllKontestsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "85"
+                  endingLineNumber = "85"
+                  offsetFromSymbolStart = "100">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B16B3114-3799-4D53-80C5-6C85064B32C0"
+            uuid = "3D70E538-2FF8-4516-84BF-EDD960B2D860"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "KontestTests/AllKontestsViewModelTests.swift"
+            filePath = "Kontest/ViewModels/AllKontestsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "testInitialization()"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "getAllKontests()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3D70E538-2FF8-4516-84BF-EDD960B2D860 - b489d202dd4379d3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Kontest.KontestModel) -&gt; Swift.Bool in Kontest.AllKontestsViewModel.getAllKontests() async -&gt; Swift.Array&lt;Kontest.KontestModel&gt;"
+                  moduleName = "Kontest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/ViewModels/AllKontestsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "101"
+                  endingLineNumber = "101"
+                  offsetFromSymbolStart = "660">
+               </Location>
+               <Location
+                  uuid = "3D70E538-2FF8-4516-84BF-EDD960B2D860 - b489d202dd43791d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Kontest.KontestModel) -&gt; Swift.Bool in Kontest.AllKontestsViewModel.getAllKontests() async -&gt; Swift.Array&lt;Kontest.KontestModel&gt;"
+                  moduleName = "Kontest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/ViewModels/AllKontestsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "103"
+                  endingLineNumber = "103"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "68BFDEE9-590E-4866-99BD-704CF55670EF"
+            uuid = "28D1C5F6-52A4-489E-8C96-0D3FA04CCE9B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Kontest/Utilities/CalendarUtility.swift"
+            filePath = "Kontest/ViewModels/AllKontestsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "getFormattedDuration(fromSeconds:)"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "fetchAllKontests()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

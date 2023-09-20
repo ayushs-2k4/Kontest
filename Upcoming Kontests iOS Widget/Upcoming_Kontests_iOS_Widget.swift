@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 import WidgetKit
 
 struct Provider: TimelineProvider {
@@ -132,7 +133,7 @@ struct Upcoming_Kontests_iOS_WidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
-        UpcomingWidgetView(error: entry.error, ongoingKontests: entry.ongoingKontests, laterTodayKontests: entry.laterTodayKontests, tomorrowKontests: entry.tomorrowKontests, laterKontests: entry.laterKontests)
+        UpcomingWidgetView(error: entry.error, toShowCalendarButton: CalendarUtility.getAuthorizationStatus() == .fullAccess, ongoingKontests: entry.ongoingKontests, laterTodayKontests: entry.laterTodayKontests, tomorrowKontests: entry.tomorrowKontests, laterKontests: entry.laterKontests)
     }
 }
 
