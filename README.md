@@ -54,11 +54,9 @@ Contributing is more than welcome, if you feel like helping the app, or want to 
 
 ### License
 
-[MIT License](https://github.com/ayushs-2k4/Kontest/blob/main/LICENSE)
-
 You can do whatever you want with this source code: modify, tweak or use as learning resources, for example... 🛠👨🏻‍💻
 
-But, please don't distribute the app on App Store with different name. 🥺
+But, please don't distribute the app on App Store. 🥺
 
 ### What's 'Kontest'?
 
