@@ -11,6 +11,8 @@ import WidgetKit
 struct UpcomingWidgetView: View {
     let error: Error?
     let toShowCalendarButton: Bool
+    let allKontests: [KontestModel]
+    let filteredKontests: [KontestModel]
     let ongoingKontests: [KontestModel]
     let laterTodayKontests: [KontestModel]
     let tomorrowKontests: [KontestModel]
@@ -27,7 +29,9 @@ struct UpcomingWidgetView: View {
                 Text("Error: \(error.localizedDescription)")
             }
         } else {
-            if ongoingKontests.isEmpty && laterTodayKontests.isEmpty && tomorrowKontests.isEmpty && laterKontests.isEmpty {
+            if !allKontests.isEmpty && filteredKontests.isEmpty {
+                Text("Change filters to see Kontests")
+            } else if allKontests.isEmpty {
                 Text("No Kontests Scheduled")
             } else {
                 GeometryReader { geometry in
@@ -52,12 +56,6 @@ struct UpcomingWidgetView: View {
                 }
             }
         }
-
-//        if let userDefaults {
-//            Text(userDefaults.string(forKey: "MyAyushKey") ?? "No value")
-//        } else {
-//            Text("No User Defaults")
-//        }
     }
 }
 

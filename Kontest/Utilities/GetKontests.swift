@@ -39,7 +39,15 @@ class GetKontests {
         }
     }
 
-    static func getKontestsDividedIncategories() async -> (ongoingKontests: [KontestModel], laterTodayKontests: [KontestModel], tomorrowKontests: [KontestModel], laterKontests: [KontestModel], error: Error?) {
+    static func getKontestsDividedIncategories() async -> (
+        allKontests: [KontestModel],
+        filteredKontests: [KontestModel],
+        ongoingKontests: [KontestModel],
+        laterTodayKontests: [KontestModel],
+        tomorrowKontests: [KontestModel],
+        laterKontests: [KontestModel],
+        error: Error?
+    ) {
         let today = Date()
         let tomorrow = CalendarUtility.getTomorrow()
         let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
@@ -65,8 +73,8 @@ class GetKontests {
             CalendarUtility.getDate(date: $0.start_time) ?? today >= dayAfterTomorrow
         }
 
-        var ans: ([KontestModel], [KontestModel], [KontestModel], [KontestModel], Error?)
-        ans = (ongoingKontests, laterTodayKontests, tomorrowKontests, laterKontests, error)
+        var ans: ([KontestModel], [KontestModel], [KontestModel], [KontestModel], [KontestModel], [KontestModel], Error?)
+        ans = (allKontests, filteredKontests, ongoingKontests, laterTodayKontests, tomorrowKontests, laterKontests, error)
         return ans
     }
 }

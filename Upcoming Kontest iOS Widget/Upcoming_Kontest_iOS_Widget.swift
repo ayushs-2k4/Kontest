@@ -29,6 +29,8 @@ struct Provider: TimelineProvider {
         SimpleEntry(
             date: Date(),
             error: nil,
+            allKontests: [kontestModel],
+            filteredKontests: [kontestModel],
             ongoingKontests: [kontestModel],
             laterTodayKontests: [kontestModel],
             tomorrowKontests: [kontestModel],
@@ -47,6 +49,8 @@ struct Provider: TimelineProvider {
                 let entry = SimpleEntry(
                     date: Date(),
                     error: kontestsDividedInCategories.error,
+                    allKontests: kontestsDividedInCategories.allKontests,
+                    filteredKontests: kontestsDividedInCategories.filteredKontests,
                     ongoingKontests: kontestsDividedInCategories.ongoingKontests,
                     laterTodayKontests: kontestsDividedInCategories.laterTodayKontests,
                     tomorrowKontests: kontestsDividedInCategories.tomorrowKontests,
@@ -59,6 +63,8 @@ struct Provider: TimelineProvider {
             let entry = SimpleEntry(
                 date: Date(),
                 error: AppError(title: "No Internet Connection", description: "Connect to Internet"),
+                allKontests: [],
+                filteredKontests: [],
                 ongoingKontests: [],
                 laterTodayKontests: [],
                 tomorrowKontests: [],
@@ -92,6 +98,8 @@ struct Provider: TimelineProvider {
                 let entry = SimpleEntry(
                     date: nextDateToRefresh,
                     error: kontestsDividedInCategories.error,
+                    allKontests: kontestsDividedInCategories.allKontests,
+                    filteredKontests: kontestsDividedInCategories.filteredKontests,
                     ongoingKontests: kontestsDividedInCategories.ongoingKontests,
                     laterTodayKontests: kontestsDividedInCategories.laterTodayKontests,
                     tomorrowKontests: kontestsDividedInCategories.tomorrowKontests,
@@ -110,15 +118,17 @@ struct Provider: TimelineProvider {
 //            if let entry = upcomingKontestsWidgetCache.newEntryFromPrevious(withDate: Date()) {
 //                myEntries.append(entry)
 //            } else {
-                let entry = SimpleEntry(
-                    date: Date(),
-                    error: AppError(title: "No Internet Connection", description: "Connect to Internet"),
-                    ongoingKontests: [],
-                    laterTodayKontests: [],
-                    tomorrowKontests: [],
-                    laterKontests: []
-                )
-                myEntries.append(entry)
+            let entry = SimpleEntry(
+                date: Date(),
+                error: AppError(title: "No Internet Connection", description: "Connect to Internet"),
+                allKontests: [],
+                filteredKontests: [],
+                ongoingKontests: [],
+                laterTodayKontests: [],
+                tomorrowKontests: [],
+                laterKontests: []
+            )
+            myEntries.append(entry)
 //            }
 
             let timeline = Timeline(entries: myEntries, policy: .after(.now.advanced(by: 0.5 * 60 * 60)))
@@ -131,6 +141,8 @@ struct Provider: TimelineProvider {
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let error: Error?
+    let allKontests: [KontestModel]
+    let filteredKontests: [KontestModel]
     let ongoingKontests: [KontestModel]
     let laterTodayKontests: [KontestModel]
     let tomorrowKontests: [KontestModel]
@@ -141,7 +153,16 @@ struct Upcoming_Kontests_iOS_WidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
-        UpcomingWidgetView(error: entry.error, toShowCalendarButton: CalendarUtility.getAuthorizationStatus() == .fullAccess, ongoingKontests: entry.ongoingKontests, laterTodayKontests: entry.laterTodayKontests, tomorrowKontests: entry.tomorrowKontests, laterKontests: entry.laterKontests)
+        UpcomingWidgetView(
+            error: entry.error,
+            toShowCalendarButton: CalendarUtility.getAuthorizationStatus() == .fullAccess,
+            allKontests: entry.allKontests,
+            filteredKontests: entry.filteredKontests,
+            ongoingKontests: entry.ongoingKontests,
+            laterTodayKontests: entry.laterTodayKontests,
+            tomorrowKontests: entry.tomorrowKontests,
+            laterKontests: entry.laterKontests
+        )
     }
 }
 
@@ -170,5 +191,14 @@ struct Upcoming_Kontest_iOS_Widget: Widget {
 } timeline: {
     let kontestModel = KontestModel.from(dto: KontestDTO(name: "ProjectEuler+1,xd", url: "https://hackerrank.com/contests/projecteuler", start_time: "2023-08-15 18:29:00 UTC", end_time: "2023-08-18 17:43:00 UTC", duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "BEFORE"))
 
-    SimpleEntry(date: .now, error: nil, ongoingKontests: [kontestModel], laterTodayKontests: [kontestModel], tomorrowKontests: [kontestModel, kontestModel], laterKontests: [kontestModel])
+    SimpleEntry(
+        date: .now,
+        error: nil,
+        allKontests: [kontestModel],
+        filteredKontests: [kontestModel],
+        ongoingKontests: [kontestModel],
+        laterTodayKontests: [kontestModel],
+        tomorrowKontests: [kontestModel, kontestModel],
+        laterKontests: [kontestModel]
+    )
 }

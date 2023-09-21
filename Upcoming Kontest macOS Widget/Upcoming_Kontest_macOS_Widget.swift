@@ -26,6 +26,8 @@ struct Provider: TimelineProvider {
         SimpleEntry(
             date: Date(),
             error: nil,
+            allKontests: [kontestModel],
+            filteredKontests: [kontestModel],
             ongoingKontests: [kontestModel],
             laterTodayKontests: [kontestModel],
             tomorrowKontests: [kontestModel],
@@ -44,6 +46,8 @@ struct Provider: TimelineProvider {
                 let entry = SimpleEntry(
                     date: Date(),
                     error: kontestsDividedInCategories.error,
+                    allKontests: kontestsDividedInCategories.allKontests,
+                    filteredKontests: kontestsDividedInCategories.filteredKontests,
                     ongoingKontests: kontestsDividedInCategories.ongoingKontests,
                     laterTodayKontests: kontestsDividedInCategories.laterTodayKontests,
                     tomorrowKontests: kontestsDividedInCategories.tomorrowKontests,
@@ -56,6 +60,8 @@ struct Provider: TimelineProvider {
             let entry = SimpleEntry(
                 date: Date(),
                 error: AppError(title: "No Internet Connection", description: "Connect to Internet"),
+                allKontests: [],
+                filteredKontests: [],
                 ongoingKontests: [],
                 laterTodayKontests: [],
                 tomorrowKontests: [],
@@ -88,6 +94,8 @@ struct Provider: TimelineProvider {
                 let entry = SimpleEntry(
                     date: nextDateToRefresh,
                     error: kontestsDividedInCategories.error,
+                    allKontests: kontestsDividedInCategories.allKontests,
+                    filteredKontests: kontestsDividedInCategories.filteredKontests,
                     ongoingKontests: kontestsDividedInCategories.ongoingKontests,
                     laterTodayKontests: kontestsDividedInCategories.laterTodayKontests,
                     tomorrowKontests: kontestsDividedInCategories.tomorrowKontests,
@@ -104,6 +112,8 @@ struct Provider: TimelineProvider {
             let entry = SimpleEntry(
                 date: Date(),
                 error: AppError(title: "No Internet Connection", description: "Connect to Internet"),
+                allKontests: [],
+                filteredKontests: [],
                 ongoingKontests: [],
                 laterTodayKontests: [],
                 tomorrowKontests: [],
@@ -122,6 +132,8 @@ struct Provider: TimelineProvider {
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let error: Error?
+    let allKontests: [KontestModel]
+    let filteredKontests: [KontestModel]
     let ongoingKontests: [KontestModel]
     let laterTodayKontests: [KontestModel]
     let tomorrowKontests: [KontestModel]
@@ -132,7 +144,16 @@ struct Upcoming_Kontest_macOS_WidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
-        UpcomingWidgetView(error: entry.error, toShowCalendarButton: CalendarUtility.getAuthorizationStatus() == .fullAccess, ongoingKontests: entry.ongoingKontests, laterTodayKontests: entry.laterTodayKontests, tomorrowKontests: entry.tomorrowKontests, laterKontests: entry.laterKontests)
+        UpcomingWidgetView(
+            error: entry.error,
+            toShowCalendarButton: CalendarUtility.getAuthorizationStatus() == .fullAccess,
+            allKontests: entry.allKontests,
+            filteredKontests: entry.filteredKontests,
+            ongoingKontests: entry.ongoingKontests,
+            laterTodayKontests: entry.laterTodayKontests,
+            tomorrowKontests: entry.tomorrowKontests,
+            laterKontests: entry.laterKontests
+        )
     }
 }
 
