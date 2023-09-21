@@ -27,11 +27,14 @@ Kontest would not be possible without the public knowledge of the community. To 
   
 Core:
 
+-   Swift
 -   SwiftUI (with UIKit and AppKit interoperability)
 -   WidgetKit
 -   AppIntent
 -   EventKit
+-   REST API
 -   Async/ Await
+-   Dependency Injection
 
 Package Managers
 
