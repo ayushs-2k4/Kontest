@@ -20,6 +20,7 @@ class FilterWebsitesViewModel: FilterWebsitesViewModelProtocol {
 
         if userDefaults.bool(forKey: FilterWebsiteKey.codeForcesKey.rawValue) {
             allowedWebsites.append("CodeForces")
+            allowedWebsites.append("CodeForces::Gym")
         }
 
         if userDefaults.bool(forKey: FilterWebsiteKey.atCoderKey.rawValue) {

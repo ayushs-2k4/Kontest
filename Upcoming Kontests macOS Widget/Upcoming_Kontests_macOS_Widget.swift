@@ -132,7 +132,7 @@ struct Upcoming_Kontests_macOS_WidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
-        UpcomingWidgetView(error: entry.error, ongoingKontests: entry.ongoingKontests, laterTodayKontests: entry.laterTodayKontests, tomorrowKontests: entry.tomorrowKontests, laterKontests: entry.laterKontests)
+        UpcomingWidgetView(error: entry.error, toShowCalendarButton: CalendarUtility.getAuthorizationStatus() == .fullAccess, ongoingKontests: entry.ongoingKontests, laterTodayKontests: entry.laterTodayKontests, tomorrowKontests: entry.tomorrowKontests, laterKontests: entry.laterKontests)
     }
 }
 
