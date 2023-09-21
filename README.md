@@ -74,3 +74,9 @@ Discover a Seamless Contest Experience with Kontest, an application meticulously
 6. **Continuous Updates**: Kontest is committed to providing regular updates to improve functionality, introduce new features, and ensure compatibility with the latest operating system versions, guaranteeing a seamless experience over time.
 
 Elevate your competitive programming journey with Kontest. Download now and immerse yourself in a world of contests, reminders, and rankings like never before. Stay at the forefront of your competitive programming pursuits with the professionalism and excellence of Kontest.
+
+---
+
+Thanks and take care! 🍀
+
+I'm on @ayushs_2k4 on almost everywhere.
