@@ -1,8 +1,8 @@
 //
-//  Upcoming_Kontests_iOS_Widget.swift
-//  Upcoming Kontests iOS Widget
+//  Upcoming_Kontest_iOS_Widget.swift
+//  Upcoming Kontest iOS Widget
 //
-//  Created by Ayush Singhal on 12/09/23.
+//  Created by Ayush Singhal on 21/09/23.
 //
 
 import SwiftUI
@@ -145,7 +145,7 @@ struct Upcoming_Kontests_iOS_WidgetEntryView: View {
     }
 }
 
-struct Upcoming_Kontests_iOS_Widget: Widget {
+struct Upcoming_Kontest_iOS_Widget: Widget {
     let kind: String = "Upcoming_Kontests_iOS_Widget"
 
     var body: some WidgetConfiguration {
@@ -166,7 +166,7 @@ struct Upcoming_Kontests_iOS_Widget: Widget {
 }
 
 #Preview(as: .systemExtraLarge) {
-    Upcoming_Kontests_iOS_Widget()
+    Upcoming_Kontest_iOS_Widget()
 } timeline: {
     let kontestModel = KontestModel.from(dto: KontestDTO(name: "ProjectEuler+1,xd", url: "https://hackerrank.com/contests/projecteuler", start_time: "2023-08-15 18:29:00 UTC", end_time: "2023-08-18 17:43:00 UTC", duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "BEFORE"))
 

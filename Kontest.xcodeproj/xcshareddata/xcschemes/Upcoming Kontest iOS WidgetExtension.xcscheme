@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "07CFEBA02AB02DCB00291484"
-               BuildableName = "Upcoming Kontests iOS WidgetExtension.appex"
-               BlueprintName = "Upcoming Kontests iOS WidgetExtension"
+               BlueprintIdentifier = "0764FF7B2ABC717E0060AC1F"
+               BuildableName = "Upcoming Kontest iOS WidgetExtension.appex"
+               BlueprintName = "Upcoming Kontest iOS WidgetExtension"
                ReferencedContainer = "container:Kontest.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -43,19 +43,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
-      <Testables>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "07183EA12AB85633006C92AD"
-               BuildableName = "KontestTests.xctest"
-               BlueprintName = "KontestTests"
-               ReferencedContainer = "container:Kontest.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -74,9 +61,9 @@
          BundleIdentifier = "com.apple.springboard">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "07CFEBA02AB02DCB00291484"
-            BuildableName = "Upcoming Kontests iOS WidgetExtension.appex"
-            BlueprintName = "Upcoming Kontests iOS WidgetExtension"
+            BlueprintIdentifier = "0764FF7B2ABC717E0060AC1F"
+            BuildableName = "Upcoming Kontest iOS WidgetExtension.appex"
+            BlueprintName = "Upcoming Kontest iOS WidgetExtension"
             ReferencedContainer = "container:Kontest.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
