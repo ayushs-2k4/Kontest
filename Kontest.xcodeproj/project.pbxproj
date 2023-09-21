@@ -337,6 +337,17 @@
 			path = MockViewModels;
 			sourceTree = "<group>";
 		};
+		073B78AB2ABC686800BA1CF2 /* SettingsScreens */ = {
+			isa = PBXGroup;
+			children = (
+				07ECFB572AA58259008513C6 /* SettingsScreen.swift */,
+				073269E72AAC42350028476D /* FilterWebsitesView.swift */,
+				073269EB2AAC451B0028476D /* FilterWebsitesScreen.swift */,
+				073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */,
+			);
+			path = SettingsScreens;
+			sourceTree = "<group>";
+		};
 		0760164C2A87CD52007CE9F5 = {
 			isa = PBXGroup;
 			children = (
@@ -519,9 +530,9 @@
 		07ECFB552AA58259008513C6 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				073B78AB2ABC686800BA1CF2 /* SettingsScreens */,
 				07CFEC032AB042E400291484 /* WidgetScreens */,
 				07ECFB562AA58259008513C6 /* CodeChefView.swift */,
-				07ECFB572AA58259008513C6 /* SettingsScreen.swift */,
 				07ECFB582AA58259008513C6 /* LeetCodeGraphQLView.swift */,
 				07ECFB592AA58259008513C6 /* RatingsView.swift */,
 				07ECFB5A2AA58259008513C6 /* NoKontestsDownloadedScreen.swift */,
@@ -533,9 +544,6 @@
 				07ECFB612AA58259008513C6 /* SingleKontestView.swift */,
 				07ECFB622AA58259008513C6 /* PendingNotificationsScreen.swift */,
 				07ECFB632AA58259008513C6 /* AllNotificationMenu.swift */,
-				073269E72AAC42350028476D /* FilterWebsitesView.swift */,
-				073269EB2AAC451B0028476D /* FilterWebsitesScreen.swift */,
-				073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */,
 				071915662AB169D300E1CB56 /* NoInternetScreen.swift */,
 				07A7501F2AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift */,
 				077E6EAE2AB4B2120003E897 /* ErrorView.swift */,

@@ -31,7 +31,7 @@ struct UpcomingWidgetView: View {
                 GeometryReader { geometry in
                     LazyVStack {
                         if !ongoingKontests.isEmpty {
-                            CreateSectionView(title: "Live Now", kontests: ongoingKontests, widgetFamily: widgetFamily, kontestStatus: .OnGoing, toShowCalendarButton: toShowCalendarButton)
+                            CreateSectionView(title: "Live Now", kontests: ongoingKontests, widgetFamily: widgetFamily, kontestStatus: .OnGoing, toShowCalendarButton: false)
                         }
 
                         if !laterTodayKontests.isEmpty {

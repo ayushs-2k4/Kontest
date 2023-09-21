@@ -95,40 +95,41 @@ struct SingleKontestView: View {
             }
             .help("Copy link")
 
-            Button {
-                if kontest.isCalendarEventAdded {
-                    Task {
-                        do {
-                            try await CalendarUtility.removeEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
+            if !isKontestRunning {
+                Button {
+                    if kontest.isCalendarEventAdded {
+                        Task {
+                            do {
+                                try await CalendarUtility.removeEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
 
-                            kontest.isCalendarEventAdded = false
-                        }
-                        catch {
-                            errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Check that you have given Kontest the Calendar Permission (Full Access)")
-                        }
-                    }
-                }
-                else {
-                    Task {
-                        do {
-                            if try await CalendarUtility.addEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url)) {
-                                kontest.isCalendarEventAdded = true
+                                kontest.isCalendarEventAdded = false
+                            }
+                            catch {
+                                errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Check that you have given Kontest the Calendar Permission (Full Access)")
                             }
                         }
-                        catch {
-                            errorState.errorWrapper = ErrorWrapper(error: error, guidance: "")
+                    }
+                    else {
+                        Task {
+                            do {
+                                if try await CalendarUtility.addEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url)) {
+                                    kontest.isCalendarEventAdded = true
+                                }
+                            }
+                            catch {
+                                errorState.errorWrapper = ErrorWrapper(error: error, guidance: "")
+                            }
                         }
                     }
+
+                    WidgetCenter.shared.reloadAllTimelines()
+                } label: {
+                    Image(systemName: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus")
+                        .contentTransition(.symbolEffect(.replace.upUp))
+                        .frame(width: 20)
                 }
-
-                WidgetCenter.shared.reloadAllTimelines()
-            } label: {
-                Image(systemName: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus")
-                    .contentTransition(.symbolEffect(.replace))
-                    .frame(width: 20)
+                .help(kontest.isCalendarEventAdded ? "Remove from Calendar" : "Add to Calendar")
             }
-            .help(kontest.isCalendarEventAdded ? "Remove from Calendar" : "Add to Calendar")
-
             #endif
 
             #if os(macOS)
