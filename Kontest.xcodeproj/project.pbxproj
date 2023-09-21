@@ -1249,7 +1249,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ayushsinghal.Kontest.Upcoming-Kontests-iOS-Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ayushsinghal.Kontest.Upcoming-Kontest-iOS-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1277,7 +1277,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ayushsinghal.Kontest.Upcoming-Kontests-iOS-Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ayushsinghal.Kontest.Upcoming-Kontest-iOS-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1308,7 +1308,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ayushsinghal.Kontest.Upcoming-Kontests-macOS-Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ayushsinghal.Kontest.Upcoming-Kontest-macOS-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
@@ -1340,7 +1340,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ayushsinghal.Kontest.Upcoming-Kontests-macOS-Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ayushsinghal.Kontest.Upcoming-Kontest-macOS-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
