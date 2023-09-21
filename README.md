@@ -68,7 +68,7 @@ Discover a Seamless Contest Experience with Kontest, an application meticulously
 
 2. **Effortless Reminder Setup**: Plan your contest participation effortlessly by setting reminders for upcoming contests. Kontest sends timely notifications to ensure you're well-prepared and informed for each event.
 
-3. **Live Rankings at Your Fingertips**: Dive into real-time Codeforces and LeetCode rankings directly from within the app. Track your progress and benchmark yourself against other competitive programmers with ease.
+3. **Live Rankings at Your Fingertips**: Dive into real-time Codeforces, CodeChef and LeetCode rankings directly from within the app. Track your progress and benchmark yourself against other competitive programmers with ease.
 
 4. **Sleek User Interface**: Immerse yourself in a sleek and intuitive user interface, carefully designed to prioritize functionality and user-friendliness. Navigating through contests, reminders, and rankings becomes a seamless experience.
 
