@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct FilterWebsitesScreen: View {
     let allKontestsViewModel = Dependencies.instance.allKontestsViewModel
@@ -61,6 +62,7 @@ struct FilterWebsitesScreen: View {
         .onDisappear {
             allKontestsViewModel.addAllowedWebsites()
             allKontestsViewModel.filterKontests()
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
 }
