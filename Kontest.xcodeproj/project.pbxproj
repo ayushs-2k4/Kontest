@@ -39,6 +39,10 @@
 		07ADFEFF2AB213F8000BF59C /* BlinkingDotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB5D2AA58259008513C6 /* BlinkingDotView.swift */; };
 		07B74E742AB06CBB001D08CE /* AllKontestsFakeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB452AA58259008513C6 /* AllKontestsFakeRepository.swift */; };
 		07B74E752AB06CBC001D08CE /* AllKontestsFakeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB452AA58259008513C6 /* AllKontestsFakeRepository.swift */; };
+		07C6EE902ABAE38900FEA3D7 /* WidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE8F2ABAE38900FEA3D7 /* WidgetCache.swift */; };
+		07C6EE912ABAE38900FEA3D7 /* WidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE8F2ABAE38900FEA3D7 /* WidgetCache.swift */; };
+		07C6EE942ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */; };
+		07C6EE952ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */; };
 		07CFEBA42AB02DCB00291484 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CFEBA32AB02DCB00291484 /* WidgetKit.framework */; };
 		07CFEBA62AB02DCB00291484 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CFEBA52AB02DCB00291484 /* SwiftUI.framework */; };
 		07CFEBA92AB02DCB00291484 /* Upcoming_Kontests_iOS_WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CFEBA82AB02DCB00291484 /* Upcoming_Kontests_iOS_WidgetBundle.swift */; };
@@ -73,6 +77,12 @@
 		07CFEC102AB0436800291484 /* KontestRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB462AA58259008513C6 /* KontestRepository.swift */; };
 		07CFEC112AB0436D00291484 /* KontestFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB792AA58259008513C6 /* KontestFetcher.swift */; };
 		07CFEC122AB0437300291484 /* DownloadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB6B2AA58259008513C6 /* DownloadData.swift */; };
+		07D9B79C2ABB20F6005635CB /* FilterWebsitesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A31F012AAC831300EBC296 /* FilterWebsitesViewModel.swift */; };
+		07D9B79D2ABB20F7005635CB /* FilterWebsitesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A31F012AAC831300EBC296 /* FilterWebsitesViewModel.swift */; };
+		07D9B79E2ABB2109005635CB /* FilterWebsitesViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FD85AC2AB809BC00D26C4C /* FilterWebsitesViewModelProtocol.swift */; };
+		07D9B79F2ABB2109005635CB /* FilterWebsitesViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FD85AC2AB809BC00D26C4C /* FilterWebsitesViewModelProtocol.swift */; };
+		07D9B7A02ABB210D005635CB /* FilterWebsiteKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A31EFF2AAC818D00EBC296 /* FilterWebsiteKey.swift */; };
+		07D9B7A12ABB210E005635CB /* FilterWebsiteKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A31EFF2AAC818D00EBC296 /* FilterWebsiteKey.swift */; };
 		07ECFB802AA58259008513C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 07ECFB352AA58259008513C6 /* README.md */; };
 		07ECFB812AA58259008513C6 /* ChangeUsernameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB382AA58259008513C6 /* ChangeUsernameViewModel.swift */; };
 		07ECFB822AA58259008513C6 /* LeetCodeGraphQLViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB392AA58259008513C6 /* LeetCodeGraphQLViewModel.swift */; };
@@ -200,6 +210,8 @@
 		07A31EFF2AAC818D00EBC296 /* FilterWebsiteKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsiteKey.swift; sourceTree = "<group>"; };
 		07A31F012AAC831300EBC296 /* FilterWebsitesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesViewModel.swift; sourceTree = "<group>"; };
 		07A7501F2AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoKontestsDueToFiltersScreen.swift; sourceTree = "<group>"; };
+		07C6EE8F2ABAE38900FEA3D7 /* WidgetCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetCache.swift; sourceTree = "<group>"; };
+		07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingKontestsWidgetCache.swift; sourceTree = "<group>"; };
 		07CFEBA12AB02DCB00291484 /* Upcoming Kontests iOS WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Upcoming Kontests iOS WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07CFEBA32AB02DCB00291484 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		07CFEBA52AB02DCB00291484 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -404,6 +416,15 @@
 			path = Intents;
 			sourceTree = "<group>";
 		};
+		07C6EE922ABAE4D700FEA3D7 /* WidgetCache */ = {
+			isa = PBXGroup;
+			children = (
+				07C6EE8F2ABAE38900FEA3D7 /* WidgetCache.swift */,
+				07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */,
+			);
+			path = WidgetCache;
+			sourceTree = "<group>";
+		};
 		07CFEBA22AB02DCB00291484 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -570,6 +591,7 @@
 		07ECFB642AA58259008513C6 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				07C6EE922ABAE4D700FEA3D7 /* WidgetCache */,
 				07A31EFF2AAC818D00EBC296 /* FilterWebsiteKey.swift */,
 				07ECFB652AA58259008513C6 /* Constants.swift */,
 				07ECFB662AA58259008513C6 /* CalendarUtility.swift */,
@@ -902,7 +924,10 @@
 			files = (
 				07ADFEFE2AB213F8000BF59C /* BlinkingDotView.swift in Sources */,
 				07CFEBB62AB02DE100291484 /* KontestModel.swift in Sources */,
+				07C6EE902ABAE38900FEA3D7 /* WidgetCache.swift in Sources */,
+				07D9B7A02ABB210D005635CB /* FilterWebsiteKey.swift in Sources */,
 				07CFEBAB2AB02DCB00291484 /* Upcoming_Kontests_iOS_Widget.swift in Sources */,
+				07D9B79E2ABB2109005635CB /* FilterWebsitesViewModelProtocol.swift in Sources */,
 				0719156A2AB1BCC100E1CB56 /* AppError.swift in Sources */,
 				07CFEBBC2AB02EDF00291484 /* DownloadData.swift in Sources */,
 				07CFEBBB2AB02ED700291484 /* KontestRepository.swift in Sources */,
@@ -913,11 +938,13 @@
 				07CFEBBD2AB02EE300291484 /* KontestFetcher.swift in Sources */,
 				07CFEC0E2AB0436100291484 /* GetKontests.swift in Sources */,
 				07CFEBB72AB02E0800291484 /* KontestStatus.swift in Sources */,
+				07D9B79C2ABB20F6005635CB /* FilterWebsitesViewModel.swift in Sources */,
 				07CFEBA92AB02DCB00291484 /* Upcoming_Kontests_iOS_WidgetBundle.swift in Sources */,
 				078429332AB604E60078D836 /* KontestWidgetModel.swift in Sources */,
 				07CFEBB92AB02E1000291484 /* Constants.swift in Sources */,
 				07CFEC052AB042F500291484 /* UpcomingWidgetView.swift in Sources */,
 				071915682AB16CE300E1CB56 /* NetworkMonitor.swift in Sources */,
+				07C6EE942ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -927,7 +954,10 @@
 			files = (
 				07ADFEFF2AB213F8000BF59C /* BlinkingDotView.swift in Sources */,
 				07CFEBF52AB042A500291484 /* Upcoming_Kontests_macOS_Widget.swift in Sources */,
+				07C6EE912ABAE38900FEA3D7 /* WidgetCache.swift in Sources */,
+				07D9B7A12ABB210E005635CB /* FilterWebsiteKey.swift in Sources */,
 				07CFEC0F2AB0436200291484 /* GetKontests.swift in Sources */,
+				07D9B79F2ABB2109005635CB /* FilterWebsitesViewModelProtocol.swift in Sources */,
 				0719156B2AB1BCC200E1CB56 /* AppError.swift in Sources */,
 				07CFEC082AB0430D00291484 /* CalendarUtility.swift in Sources */,
 				07CFEC062AB042F500291484 /* UpcomingWidgetView.swift in Sources */,
@@ -938,11 +968,13 @@
 				07CFEC092AB0431300291484 /* KontestDTO.swift in Sources */,
 				07CFEBF32AB042A500291484 /* Upcoming_Kontests_macOS_WidgetBundle.swift in Sources */,
 				07CFEC0A2AB0431700291484 /* KontestStatus.swift in Sources */,
+				07D9B79D2ABB20F7005635CB /* FilterWebsitesViewModel.swift in Sources */,
 				07CFEC112AB0436D00291484 /* KontestFetcher.swift in Sources */,
 				078429342AB604E70078D836 /* KontestWidgetModel.swift in Sources */,
 				07CFEC0B2AB0432200291484 /* Constants.swift in Sources */,
 				07CFEC122AB0437300291484 /* DownloadData.swift in Sources */,
 				071915692AB16CE400E1CB56 /* NetworkMonitor.swift in Sources */,
+				07C6EE952ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1260,6 +1292,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Upcoming Kontests macOS Widget/Upcoming_Kontests_macOS_Widget.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R2Z9FDM5M6;
@@ -1277,6 +1310,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ayushsinghal.Kontest.Upcoming-Kontests-macOS-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1290,6 +1324,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "Upcoming Kontests macOS Widget/Upcoming_Kontests_macOS_Widget.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R2Z9FDM5M6;
@@ -1307,6 +1342,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ayushsinghal.Kontest.Upcoming-Kontests-macOS-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;

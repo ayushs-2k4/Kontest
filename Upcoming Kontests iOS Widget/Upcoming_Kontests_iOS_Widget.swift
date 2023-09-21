@@ -10,6 +10,8 @@ import UserNotifications
 import WidgetKit
 
 struct Provider: TimelineProvider {
+//    private let upcomingKontestsWidgetCache = UpcomingKontestsWidgetCache()
+
     let kontestModel = KontestModel.from(
         dto: KontestDTO(
             name: "ProjectEuler+1",
@@ -74,6 +76,7 @@ struct Provider: TimelineProvider {
         networkMonitor.start()
 
         if networkMonitor.currentStatus == .satisfied {
+            print("Internet YES")
             Task {
                 let kontestsDividedInCategories = await GetKontests.getKontestsDividedIncategories()
 
@@ -96,22 +99,27 @@ struct Provider: TimelineProvider {
                 )
 
                 myEntries.append(entry)
+//                upcomingKontestsWidgetCache.storeNewEntry(entry)
 
                 let timeline = Timeline(entries: myEntries, policy: .after(nextDateToRefresh))
                 completion(timeline)
             }
         } else {
             var myEntries: [SimpleEntry] = []
-            let entry = SimpleEntry(
-                date: Date(),
-                error: AppError(title: "No Internet Connection", description: "Connect to Internet"),
-                ongoingKontests: [],
-                laterTodayKontests: [],
-                tomorrowKontests: [],
-                laterKontests: []
-            )
 
-            myEntries.append(entry)
+//            if let entry = upcomingKontestsWidgetCache.newEntryFromPrevious(withDate: Date()) {
+//                myEntries.append(entry)
+//            } else {
+                let entry = SimpleEntry(
+                    date: Date(),
+                    error: AppError(title: "No Internet Connection", description: "Connect to Internet"),
+                    ongoingKontests: [],
+                    laterTodayKontests: [],
+                    tomorrowKontests: [],
+                    laterKontests: []
+                )
+                myEntries.append(entry)
+//            }
 
             let timeline = Timeline(entries: myEntries, policy: .after(.now.advanced(by: 0.5 * 60 * 60)))
             completion(timeline)

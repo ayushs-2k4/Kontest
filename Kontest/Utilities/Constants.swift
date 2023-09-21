@@ -7,7 +7,7 @@
 
 import Foundation
 
- struct Constants {
-   static let minutesToBeReminderBefore = 10
-   static let userDefaultsGroupID = "group.com.ayushsinghal.kontest"
+struct Constants {
+    static let minutesToBeReminderBefore = 10
+    static let userDefaultsGroupID = "group.com.ayushsinghal.kontest"
 }

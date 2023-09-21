@@ -9,11 +9,29 @@ import AppIntents
 import Foundation
 import WidgetKit
 
-struct AddToCalendarIntent: AppIntent {
+struct AddToCalendarIntent: AppIntent, Hashable {
+    static func == (lhs: AddToCalendarIntent, rhs: AddToCalendarIntent) -> Bool {
+        lhs.title == rhs.title &&
+            lhs.notes == rhs.notes &&
+            lhs.startDate == rhs.startDate &&
+            lhs.endDate == rhs.endDate &&
+            lhs.url == rhs.url &&
+            lhs.toRemove == rhs.toRemove
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(title)
+        hasher.combine(notes)
+        hasher.combine(startDate)
+        hasher.combine(endDate)
+        hasher.combine(url)
+        hasher.combine(toRemove)
+    }
+
     init() {}
 
     static var title: LocalizedStringResource = "Add to Calendar"
-    
+
     static var isDiscoverable: Bool = false
 
     @Parameter(title: "title")

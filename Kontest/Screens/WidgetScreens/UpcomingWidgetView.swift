@@ -17,6 +17,8 @@ struct UpcomingWidgetView: View {
     let laterKontests: [KontestModel]
     @Environment(\.widgetFamily) private var widgetFamily
 
+    let userDefaults = UserDefaults(suiteName: Constants.userDefaultsGroupID)
+
     var body: some View {
         if let error = error {
             if let appError = error as? AppError {
@@ -50,6 +52,12 @@ struct UpcomingWidgetView: View {
                 }
             }
         }
+
+//        if let userDefaults {
+//            Text(userDefaults.string(forKey: "MyAyushKey") ?? "No value")
+//        } else {
+//            Text("No User Defaults")
+//        }
     }
 }
 

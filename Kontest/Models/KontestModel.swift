@@ -10,7 +10,30 @@ import EventKit
 import SwiftUI
 
 @Observable
-class KontestModel: Decodable, Identifiable, Hashable {
+class KontestModel: Codable, Identifiable, Hashable {
+    enum CodingKeys: CodingKey {
+        case id
+        case name
+        case url
+        case start_time
+        case end_time
+        case duration
+        case site
+        case in_24_hours
+        case _status
+        case _isSetForReminder10MiutesBefore
+        case _isSetForReminder30MiutesBefore
+        case _isSetForReminder1HourBefore
+        case _isSetForReminder6HoursBefore
+        case logo
+        case _isCalendarEventAdded
+        case _$observationRegistrar
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+    }
+    
     let id: String
     let name: String
     let url: String
