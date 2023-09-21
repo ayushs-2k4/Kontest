@@ -54,7 +54,7 @@ Contributing is more than welcome, if you feel like helping the app, or want to 
 
 ### License
 
-[MIT License](https://github.com/vinhnx/Clendar/blob/main/LICENSE)
+[MIT License](https://github.com/ayushs-2k4/Kontest/blob/main/LICENSE)
 
 You can do whatever you want with this source code: modify, tweak or use as learning resources, for example... 🛠👨🏻‍💻
 
