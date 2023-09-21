@@ -1,8 +1,8 @@
 //
-//  Upcoming_Kontests_macOS_Widget.swift
-//  Upcoming Kontests macOS Widget
+//  Upcoming_Kontest_macOS_Widget.swift
+//  Upcoming Kontest macOS Widget
 //
-//  Created by Ayush Singhal on 12/09/23.
+//  Created by Ayush Singhal on 21/09/23.
 //
 
 import SwiftUI
@@ -128,7 +128,7 @@ struct SimpleEntry: TimelineEntry {
     let laterKontests: [KontestModel]
 }
 
-struct Upcoming_Kontests_macOS_WidgetEntryView: View {
+struct Upcoming_Kontest_macOS_WidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
@@ -136,16 +136,16 @@ struct Upcoming_Kontests_macOS_WidgetEntryView: View {
     }
 }
 
-struct Upcoming_Kontests_macOS_Widget: Widget {
-    let kind: String = "Upcoming_Kontests_macOS_Widget"
+struct Upcoming_Kontest_macOS_Widget: Widget {
+    let kind: String = "Upcoming_Kontest_macOS_Widget"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             if #available(macOS 14.0, *) {
-                Upcoming_Kontests_macOS_WidgetEntryView(entry: entry)
+                Upcoming_Kontest_macOS_WidgetEntryView(entry: entry)
                     .containerBackground(Color.widgetBackground, for: .widget)
             } else {
-                Upcoming_Kontests_macOS_WidgetEntryView(entry: entry)
+                Upcoming_Kontest_macOS_WidgetEntryView(entry: entry)
                     .padding()
                     .background()
             }
