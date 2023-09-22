@@ -3,4 +3,54 @@
    uuid = "14DBFDB1-A92E-494B-83BA-8ABD6EDBB76C"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "172CD715-49E2-42BC-8C09-A398D1E2301A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kontest/Utilities/WidgetCache/UpcomingKontestsWidgetCache.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "newEntryFromPrevious(withDate:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "172CD715-49E2-42BC-8C09-A398D1E2301A - 967dc39ab1ca975"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Upcoming_Kontest_iOS_WidgetExtension.UpcomingKontestsWidgetCache.newEntryFromPrevious(withDate: Foundation.Date) async -&gt; Swift.Optional&lt;Upcoming_Kontest_iOS_WidgetExtension.SimpleEntry&gt;"
+                  moduleName = "Upcoming Kontest iOS WidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/Utilities/WidgetCache/UpcomingKontestsWidgetCache.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "344">
+               </Location>
+               <Location
+                  uuid = "172CD715-49E2-42BC-8C09-A398D1E2301A - ad912ae109fbc772"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Upcoming_Kontest_iOS_WidgetExtension.UpcomingKontestsWidgetCache.newEntryFromPrevious(withDate: Foundation.Date) async -&gt; Swift.Optional&lt;Upcoming_Kontest_iOS_WidgetExtension.SimpleEntry&gt;"
+                  moduleName = "Upcoming Kontest iOS WidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/Utilities/WidgetCache/UpcomingKontestsWidgetCache.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "364">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

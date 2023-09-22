@@ -12,6 +12,6 @@ protocol WidgetCache: Codable {
     associatedtype TimelineEntryType: TimelineEntry
 
     var previousEntry: TimelineEntryType? { get set }
-    func newEntryFromPrevious(withDate date: Date) -> TimelineEntryType?
+    func newEntryFromPrevious(withDate date: Date) async -> TimelineEntryType?
     func storeNewEntry(_ entry: TimelineEntryType) -> Void
 }

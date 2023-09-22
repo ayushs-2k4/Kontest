@@ -10,7 +10,7 @@ import OSLog
 
 class UpcomingKontestsWidgetCache: WidgetCache {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "UpcomingKontestsWidgetCache")
-    
+
     enum CodingKeys: CodingKey {
         case previousEntry
     }
@@ -31,21 +31,29 @@ class UpcomingKontestsWidgetCache: WidgetCache {
 
     var previousEntry: TimelineEntryType? = nil
 
-    func newEntryFromPrevious(withDate date: Date) -> TimelineEntryType? {
-//        guard let previousEntry = previousEntry else { return nil }
-//
-//        return TimelineEntryType(
-//            date: previousEntry.date,
-//            error: previousEntry.error,
-//            allKontests: previousEntry.allKontests,
-//            filteredKontests: previousEntry.filteredKontests,
-//            ongoingKontests: previousEntry.ongoingKontests,
-//            laterTodayKontests: previousEntry.laterKontests,
-//            tomorrowKontests: previousEntry.tomorrowKontests,
-//            laterKontests: previousEntry.laterKontests
-//        )
-
+    func newEntryFromPrevious(withDate date: Date) async -> TimelineEntryType? {
         guard let previousWidgetCache = loadWidgetCache() else { return nil }
+
+        let allEvents = try? await CalendarUtility.getAllEvents()
+        previousWidgetCache.ongoingKontests.forEach { kontest in
+            kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+            logger.info("Ran loadCalendarStatus offline for \(kontest.name) with \(kontest.isCalendarEventAdded)")
+        }
+        
+        previousWidgetCache.laterTodayKontests.forEach { kontest in
+            kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+            logger.info("Ran loadCalendarStatus offline for \(kontest.name) with \(kontest.isCalendarEventAdded)")
+        }
+        
+        previousWidgetCache.tomorrowKontests.forEach { kontest in
+            kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+            logger.info("Ran loadCalendarStatus offline for \(kontest.name) with \(kontest.isCalendarEventAdded)")
+        }
+        
+        previousWidgetCache.laterKontests.forEach { kontest in
+            kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+            logger.info("Ran loadCalendarStatus offline for \(kontest.name) with \(kontest.isCalendarEventAdded)")
+        }
 
         return previousWidgetCache
     }

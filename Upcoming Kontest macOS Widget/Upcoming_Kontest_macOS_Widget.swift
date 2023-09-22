@@ -36,15 +36,25 @@ struct Provider: TimelineProvider {
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
+        let upcomingKontestsWidgetCache = UpcomingKontestsWidgetCache()
+
         let networkMonitor = NetworkMonitor.shared
         networkMonitor.start()
 
         if networkMonitor.currentStatus == .satisfied {
+            print("Internet YES")
             Task {
                 let kontestsDividedInCategories = await GetKontests.getKontestsDividedIncategories()
 
+                let nextDateToRefresh = CalendarUtility.getNextDateToRefresh(
+                    ongoingKontests: kontestsDividedInCategories.ongoingKontests,
+                    laterTodayKontests: kontestsDividedInCategories.laterTodayKontests,
+                    tomorrowKontests: kontestsDividedInCategories.tomorrowKontests,
+                    laterKontests: kontestsDividedInCategories.laterKontests
+                )
+
                 let entry = SimpleEntry(
-                    date: Date(),
+                    date: nextDateToRefresh,
                     error: kontestsDividedInCategories.error,
                     allKontests: kontestsDividedInCategories.allKontests,
                     filteredKontests: kontestsDividedInCategories.filteredKontests,
@@ -54,24 +64,35 @@ struct Provider: TimelineProvider {
                     laterKontests: kontestsDividedInCategories.laterKontests
                 )
 
+                upcomingKontestsWidgetCache.storeNewEntry(entry)
+
+                networkMonitor.stop()
                 completion(entry)
             }
         } else {
-            let entry = SimpleEntry(
-                date: Date(),
-                error: AppError(title: "No Internet Connection", description: "Connect to Internet"),
-                allKontests: [],
-                filteredKontests: [],
-                ongoingKontests: [],
-                laterTodayKontests: [],
-                tomorrowKontests: [],
-                laterKontests: []
-            )
-
-            completion(entry)
+            Task {
+                if var entry = await upcomingKontestsWidgetCache.newEntryFromPrevious(withDate: Date()) {
+                    entry.isDataOld = true
+                    networkMonitor.stop()
+                    completion(entry)
+                } else {
+                    let entry = SimpleEntry(
+                        date: Date(),
+                        error: AppError(title: "No Internet Connection", description: "Connect to Internet"),
+                        allKontests: [],
+                        filteredKontests: [],
+                        ongoingKontests: [],
+                        laterTodayKontests: [],
+                        tomorrowKontests: [],
+                        laterKontests: []
+                    )
+                    var myEntries: [SimpleEntry] = []
+                    myEntries.append(entry)
+                    networkMonitor.stop()
+                    completion(entry)
+                }
+            }
         }
-
-        networkMonitor.stop()
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
@@ -113,28 +134,32 @@ struct Provider: TimelineProvider {
                 completion(timeline)
             }
         } else {
-            var myEntries: [SimpleEntry] = []
+            print("Internet NO")
 
-            if var entry = upcomingKontestsWidgetCache.newEntryFromPrevious(withDate: Date()) {
-                entry.isDataOld = true
-                myEntries.append(entry)
-            } else {
-                let entry = SimpleEntry(
-                    date: Date(),
-                    error: AppError(title: "No Internet Connection", description: "Connect to Internet"),
-                    allKontests: [],
-                    filteredKontests: [],
-                    ongoingKontests: [],
-                    laterTodayKontests: [],
-                    tomorrowKontests: [],
-                    laterKontests: []
-                )
-                myEntries.append(entry)
+            Task {
+                var myEntries: [SimpleEntry] = []
+
+                if var entry = await upcomingKontestsWidgetCache.newEntryFromPrevious(withDate: Date()) {
+                    entry.isDataOld = true
+                    myEntries.append(entry)
+                } else {
+                    let entry = SimpleEntry(
+                        date: Date(),
+                        error: AppError(title: "No Internet Connection", description: "Connect to Internet"),
+                        allKontests: [],
+                        filteredKontests: [],
+                        ongoingKontests: [],
+                        laterTodayKontests: [],
+                        tomorrowKontests: [],
+                        laterKontests: []
+                    )
+                    myEntries.append(entry)
+                }
+
+                let timeline = Timeline(entries: myEntries, policy: .after(.now.advanced(by: 0.5 * 60 * 60)))
+                networkMonitor.stop()
+                completion(timeline)
             }
-
-            let timeline = Timeline(entries: myEntries, policy: .after(.now.advanced(by: 0.5 * 60 * 60)))
-            networkMonitor.stop()
-            completion(timeline)
         }
     }
 }
