@@ -165,6 +165,9 @@ struct createSingleKontestView: View {
                 if toShowCalendarButton {
                     Toggle(isOn: kontest.isCalendarEventAdded, intent: AddToCalendarIntent(title: kontest.name, notes: "", startDate: startDate, endDate: endDate, url: URL(string: kontest.url), toRemove: kontest.isCalendarEventAdded)) {}
                         .toggleStyle(MyCustomToggleStyle(onColor: .green, offColor: .blue))
+                } else {
+                    Spacer()
+                        .frame(width: 0, height: 30)
                 }
             }
         }
@@ -172,8 +175,8 @@ struct createSingleKontestView: View {
 }
 
 struct MyCustomToggleStyle: ToggleStyle {
-    var onColor: Color = .green
-    var offColor: Color = .green
+    var onColor: Color
+    var offColor: Color
 
     func makeBody(configuration: Configuration) -> some View {
         HStack {

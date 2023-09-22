@@ -27,19 +27,6 @@ struct AllKontestsScreen: View {
     @State private var text: String = ""
 
     var body: some View {
-//        VStack {
-//            if let userDefaults {
-//                Text(userDefaults.string(forKey: "MyAyushKey") ?? "No value")
-//                TextField("Enter", text: $text)
-//                Button("Save") {
-//                    userDefaults.setValue(text, forKey: "MyAyushKey")
-//                    WidgetCenter.shared.reloadAllTimelines()
-//                }
-//            } else {
-//                Text("No User Defaults")
-//            }
-//        }
-
         NavigationStack(path: Bindable(router).path) {
             if networkMonitor.currentStatus == .satisfied {
                 ZStack {

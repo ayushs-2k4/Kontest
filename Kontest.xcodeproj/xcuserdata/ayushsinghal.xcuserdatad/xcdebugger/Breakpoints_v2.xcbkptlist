@@ -3,4 +3,182 @@
    uuid = "14DBFDB1-A92E-494B-83BA-8ABD6EDBB76C"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EDE9F6B7-395F-434E-AF4B-73C4AE8E6716"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kontest/Screens/AllKontestsScreen.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "EDE9F6B7-395F-434E-AF4B-73C4AE8E6716 - b9742fc67d5295da"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Kontest.AllKontestsScreen.body.getter : some"
+                  moduleName = "Kontest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/Screens/AllKontestsScreen.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "1040">
+               </Location>
+               <Location
+                  uuid = "EDE9F6B7-395F-434E-AF4B-73C4AE8E6716 - 135c8248c31ab39b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.listRowSeparator(_: SwiftUI.Visibility, edges: SwiftUI.VerticalEdge.Set) -&gt; some&gt;&gt;.0, SwiftUI._ConditionalContent&lt;Kontest.NoKontestsDueToFiltersScreen, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, SwiftUI.TupleView&lt;(Swift.Optional&lt;&lt;&lt;opaque return type of Kontest.AllKontestsScreen.createSection(title: Swift.String, kontests: Swift.Array&lt;Kontest.KontestModel&gt;, timelineViewDefaultContext: SwiftUI.TimelineView&lt;SwiftUI.EveryMinuteTimelineSchedule, Swift.Never&gt;.Context) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;&lt;&lt;opaque return type of Kontest.AllKontestsScreen.createSection(title: Swift.String, kontests: Swift.Array&lt;Kontest.KontestModel&gt;, timelineViewDefaultContext: SwiftUI.TimelineView&lt;SwiftUI.EveryMinuteTimelineSchedule, Swift.Never&gt;.Context) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;&lt;&lt;opaque return type of Kontest.AllKontestsScreen.createSection(title: Swift.String, kontests: Swift.Array&lt;Kontest.KontestModel&gt;, timelineViewDefaultContext: SwiftUI.TimelineView&lt;SwiftUI.EveryMinuteTimelineSchedule, Swift.Never&gt;.Context) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;&lt;&lt;opaque return type of Kontest.AllKontestsScreen.createSection(title: Swift.String, kontests: Swift.Array&lt;Kontest.KontestModel&gt;, timelineViewDefaultContext: SwiftUI.TimelineView&lt;SwiftUI.EveryMinuteTimelineSchedule, Swift.Never&gt;.Context) -&gt; some&gt;&gt;.0&gt;)&gt;&gt;&gt;)&gt; in closure #1 () -&gt; SwiftUI.List&lt;Swift.Never, SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.listRowSeparator(_: SwiftUI.Visibility, edges: SwiftUI.VerticalEdge.Set) -&gt; some&gt;&gt;.0, SwiftUI._ConditionalContent&lt;Kontest.NoKontestsDueToFiltersScreen, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, SwiftUI.TupleView&lt;(Swift.Optional&lt;&lt;&lt;opaque return type of Kontest.AllKontestsScreen.createSection(title: Swift.String, kontests: Swift.Array&lt;Kontest.KontestModel&gt;, timelineViewDefaultContext: SwiftUI.TimelineView&lt;SwiftUI.EveryMinuteTimelineSchedule, Swift.Never&gt;.Context) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;&lt;&lt;opaque return type of Kontest.AllKontestsScreen.createSection(title: Swift.String, kontests: Swift.Array&lt;Kontest.KontestModel&gt;, timelineViewDefaultContext: SwiftUI.TimelineView&lt;SwiftUI.EveryMinuteTimelineSchedule, Swift.Never&gt;.Context) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;&lt;&lt;opaque return type of Kontest.AllKontestsScreen.createSection(title: Swift.String, kontests: Swift.Array&lt;Kontest.KontestModel&gt;, timelineViewDefaultContext: SwiftUI.TimelineView&lt;SwiftUI.EveryMinuteTimelineSchedule, Swift.Never&gt;.Context) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;&lt;&lt;opaque return type of Kontest.AllKontestsScreen.createSection(title: Swift.String, kontests: Swift.Array&lt;Kontest.KontestModel&gt;, timelineViewDefaultContext: SwiftUI.TimelineView&lt;SwiftUI.EveryMinuteTimelineSchedule, Swift.Never&gt;.Context) -&gt; some&gt;&gt;.0&gt;)&gt;&gt;&gt;)&gt;&gt; in closure #1 (SwiftUI.TimelineView&lt;SwiftUI.EveryMinuteTimelineSchedule, Swift.Never&gt;.Context) -&gt; SwiftUI.VStack&lt;SwiftUI.List&lt;Swift.Never, SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.listRowSeparator(_: SwiftUI.Visibility, edges: SwiftUI.VerticalEdge.Set) -&gt; some&gt;&gt;.0, SwiftUI._ConditionalContent&lt;Kontest.NoKontestsDueToFiltersScreen, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, SwiftUI.TupleView&lt;(Swift.Optional&lt;&lt;&lt;opaque return type of Kontest.AllKontestsScreen.createSection(title: Swift.String, kontests: Swift.Array&lt;Kontest.KontestModel&gt;, timelineViewDefaultContext: SwiftUI.TimelineView&lt;SwiftUI.EveryMinuteTimelineSchedule, Swift.Never&gt;.Context) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;&lt;&lt;opaque return type of Kontest.AllKontestsScreen.createSection(title: Swift.String, kontests: Swift.Array&lt;Kontest.KontestModel&gt;, timelineViewDefaultContext: SwiftUI.TimelineView&lt;SwiftUI.EveryMinuteTimelineSchedule, Swift.Never&gt;.Context) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;&lt;&lt;opaque return type of Kontest.AllKontestsScreen.createSection(title: Swift.String, kontests: Swift.Array&lt;Kontest.KontestModel&gt;, timelineViewDefaultContext: SwiftUI.TimelineView&lt;SwiftUI.EveryMinuteTimelineSchedule, Swift.Never&gt;.Context) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;&lt;&lt;opaque return type of Kontest.AllKontestsScreen.createSection(title: Swift.String, kontests: Swift.Array&lt;Kontest.KontestModel&gt;, timelineViewDefaultContext: SwiftUI.TimelineView&lt;SwiftUI.EveryMinuteTimelineSchedule, Swift.Never&gt;.Context) -&gt; some&gt;&gt;.0&gt;)&gt;&gt;&gt;)&gt;&gt;&gt; in closure #1 () -&gt; SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;SwiftUI.ProgressView&lt;SwiftUI.EmptyView, SwiftUI.EmptyView&gt;, Kontest.NoKontestsDownloadedScreen&gt;, &lt;&lt;opaque return type of SwiftUI.View.searchable(text: SwiftUI.Binding&lt;Swift.String&gt;, placement: SwiftUI.SearchFieldPlacement, prompt: Swift.Optional&lt;SwiftUI.Text&gt;) -&gt; some&gt;&gt;.0&gt; in closure #1 () -&gt; SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.navigationDestination&lt;&#x3c4;_0_0, &#x3c4;_0_1 where &#x3c4;_1_0: Swift.Hashable, &#x3c4;_1_1: SwiftUI.View&gt;(for: &#x3c4;_1_0.Type, destination: (&#x3c4;_1_0) -&gt; &#x3c4;_1_1) -&gt; some&gt;&gt;.0, Kontest.NoInternetScreen&gt; in Kontest.AllKontestsScreen.body.getter : some"
+                  moduleName = "Kontest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/Screens/AllKontestsScreen.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "1428">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "05B2537E-AB96-4626-B2AA-3DFC62D45FA4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kontest/Screens/RatingsScreens/CodeForcesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C7B33463-5840-40EE-86CB-FD5390F019BC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kontest/Repositories/CodeForcesRepository/CodeForcesAPIRepository.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "getUserRating(username:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C7B33463-5840-40EE-86CB-FD5390F019BC - 7e980f260ebc1747"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Kontest.CodeForcesAPIRepository.getUserRating(username: Swift.String) async throws -&gt; Kontest.CodeForcesUserRatingAPIDTO"
+                  moduleName = "Kontest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/Repositories/CodeForcesRepository/CodeForcesAPIRepository.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "1344">
+               </Location>
+               <Location
+                  uuid = "C7B33463-5840-40EE-86CB-FD5390F019BC - 56d70b0aa49b6b79"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Kontest.CodeForcesAPIRepository.getUserRating(username: Swift.String) async throws -&gt; Kontest.CodeForcesUserRatingAPIDTO"
+                  moduleName = "Kontest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/Repositories/CodeForcesRepository/CodeForcesAPIRepository.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "1616">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "44FBBBC2-FDDF-4737-9ECA-B5CF4A6185F9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kontest/Repositories/CodeForcesRepository/CodeForcesAPIRepository.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "getUserInfo(username:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "44FBBBC2-FDDF-4737-9ECA-B5CF4A6185F9 - 52750232be827240"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Kontest.CodeForcesAPIRepository.getUserInfo(username: Swift.String) async throws -&gt; Kontest.CodeForcesUserInfoAPIDTO"
+                  moduleName = "Kontest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/Repositories/CodeForcesRepository/CodeForcesAPIRepository.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "1344">
+               </Location>
+               <Location
+                  uuid = "44FBBBC2-FDDF-4737-9ECA-B5CF4A6185F9 - 178d624f3ed1441"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Kontest.CodeForcesAPIRepository.getUserInfo(username: Swift.String) async throws -&gt; Kontest.CodeForcesUserInfoAPIDTO"
+                  moduleName = "Kontest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/Repositories/CodeForcesRepository/CodeForcesAPIRepository.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "1616">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C0961610-4991-45C9-98C8-6FD715CCF732"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kontest/Screens/RatingsScreens/CodeForcesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
