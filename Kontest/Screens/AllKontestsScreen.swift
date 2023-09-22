@@ -22,15 +22,12 @@ struct AllKontestsScreen: View {
     @Environment(ErrorState.self) private var errorState
 
     @Environment(Router.self) private var router
-    
-    @State private var myText:String = "Previous Text"
 
     let userDefaults = UserDefaults(suiteName: Constants.userDefaultsGroupID)
     @State private var text: String = ""
 
     var body: some View {
         NavigationStack(path: Bindable(router).path) {
-            Text(myText)
             if networkMonitor.currentStatus == .satisfied {
                 ZStack {
                     if allKontestsViewModel.isLoading {
@@ -199,12 +196,10 @@ struct AllKontestsScreen: View {
             }
         }
         .onAppear {
-            myText = "Updated Text"
             WidgetCenter.shared.reloadAllTimelines()
         }
         .onChange(of: networkMonitor.currentStatus) {
             if networkMonitor.currentStatus == .satisfied {
-                myText = "Updated Text 2"
                 allKontestsViewModel.fetchAllKontests()
                 WidgetCenter.shared.reloadAllTimelines()
             }
