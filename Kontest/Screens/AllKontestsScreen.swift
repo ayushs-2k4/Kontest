@@ -85,7 +85,6 @@ struct AllKontestsScreen: View {
                 .navigationTitle("Kontest")
                 .onAppear {
                     LocalNotificationManager.instance.setBadgeCountTo0()
-                    WidgetCenter.shared.reloadAllTimelines()
                 }
                 .toolbar {
                     if isInDevelopmentMode {
@@ -195,6 +194,9 @@ struct AllKontestsScreen: View {
             } else {
                 NoInternetScreen()
             }
+        }
+        .onAppear {
+            WidgetCenter.shared.reloadAllTimelines()
         }
         .onChange(of: networkMonitor.currentStatus) {
             if networkMonitor.currentStatus == .satisfied {

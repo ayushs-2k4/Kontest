@@ -10,6 +10,7 @@ import WidgetKit
 
 struct UpcomingWidgetView: View {
     let error: Error?
+    let isDataOld: Bool
     let toShowCalendarButton: Bool
     let allKontests: [KontestModel]
     let filteredKontests: [KontestModel]
@@ -36,6 +37,10 @@ struct UpcomingWidgetView: View {
             } else {
                 GeometryReader { geometry in
                     LazyVStack {
+                        if isDataOld{
+                            Text("Data is not updated")
+                        }
+                        
                         if !ongoingKontests.isEmpty {
                             CreateSectionView(title: "Live Now", kontests: ongoingKontests, widgetFamily: widgetFamily, kontestStatus: .OnGoing, toShowCalendarButton: false)
                         }

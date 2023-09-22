@@ -116,7 +116,8 @@ struct Provider: TimelineProvider {
         } else {
             var myEntries: [SimpleEntry] = []
 
-            if let entry = upcomingKontestsWidgetCache.newEntryFromPrevious(withDate: Date()) {
+            if var entry = upcomingKontestsWidgetCache.newEntryFromPrevious(withDate: Date()) {
+                entry.isDataOld = true
                 myEntries.append(entry)
             } else {
                 let entry = SimpleEntry(
@@ -142,6 +143,7 @@ struct Provider: TimelineProvider {
 struct SimpleEntry: TimelineEntry, Codable {
     let date: Date
     let error: Error?
+    var isDataOld = false
     let allKontests: [KontestModel]
     let filteredKontests: [KontestModel]
     let ongoingKontests: [KontestModel]
@@ -173,8 +175,6 @@ struct SimpleEntry: TimelineEntry, Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         date = try container.decode(Date.self, forKey: .date)
-        // You can customize the decoding of the 'error' property here
-        // For example, if 'error' is a String, you can decode it like this:
         error = nil
         allKontests = try container.decode([KontestModel].self, forKey: .allKontests)
         filteredKontests = try container.decode([KontestModel].self, forKey: .filteredKontests)
@@ -191,6 +191,7 @@ struct Upcoming_Kontests_iOS_WidgetEntryView: View {
     var body: some View {
         UpcomingWidgetView(
             error: entry.error,
+            isDataOld: entry.isDataOld,
             toShowCalendarButton: CalendarUtility.getAuthorizationStatus() == .fullAccess,
             allKontests: entry.allKontests,
             filteredKontests: entry.filteredKontests,
