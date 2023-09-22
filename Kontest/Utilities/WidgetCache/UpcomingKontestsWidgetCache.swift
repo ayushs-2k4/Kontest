@@ -34,28 +34,40 @@ class UpcomingKontestsWidgetCache: WidgetCache {
     func newEntryFromPrevious(withDate date: Date) async -> TimelineEntryType? {
         guard let previousWidgetCache = loadWidgetCache() else { return nil }
 
+        let newlyFilteredKontests = getFilteredKontests(allKontests: previousWidgetCache.allKontests) // Filtered kontests where date might have changed like from tomorrow to today
+
         let allEvents = try? await CalendarUtility.getAllEvents()
-        previousWidgetCache.ongoingKontests.forEach { kontest in
-            kontest.loadCalendarStatus(allEvents: allEvents ?? [])
-            logger.info("Ran loadCalendarStatus offline for \(kontest.name) with \(kontest.isCalendarEventAdded)")
-        }
-        
-        previousWidgetCache.laterTodayKontests.forEach { kontest in
-            kontest.loadCalendarStatus(allEvents: allEvents ?? [])
-            logger.info("Ran loadCalendarStatus offline for \(kontest.name) with \(kontest.isCalendarEventAdded)")
-        }
-        
-        previousWidgetCache.tomorrowKontests.forEach { kontest in
-            kontest.loadCalendarStatus(allEvents: allEvents ?? [])
-            logger.info("Ran loadCalendarStatus offline for \(kontest.name) with \(kontest.isCalendarEventAdded)")
-        }
-        
-        previousWidgetCache.laterKontests.forEach { kontest in
+
+        newlyFilteredKontests.ongoingKontests.forEach { kontest in
             kontest.loadCalendarStatus(allEvents: allEvents ?? [])
             logger.info("Ran loadCalendarStatus offline for \(kontest.name) with \(kontest.isCalendarEventAdded)")
         }
 
-        return previousWidgetCache
+        newlyFilteredKontests.laterTodayKontests.forEach { kontest in
+            kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+            logger.info("Ran loadCalendarStatus offline for \(kontest.name) with \(kontest.isCalendarEventAdded)")
+        }
+
+        newlyFilteredKontests.tomorrowKontests.forEach { kontest in
+            kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+            logger.info("Ran loadCalendarStatus offline for \(kontest.name) with \(kontest.isCalendarEventAdded)")
+        }
+
+        newlyFilteredKontests.laterKontests.forEach { kontest in
+            kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+            logger.info("Ran loadCalendarStatus offline for \(kontest.name) with \(kontest.isCalendarEventAdded)")
+        }
+
+        return TimelineEntryType(
+            date: Date(),
+            error: nil,
+            allKontests: newlyFilteredKontests.allKontests,
+            filteredKontests: newlyFilteredKontests.filteredKontests,
+            ongoingKontests: newlyFilteredKontests.ongoingKontests,
+            laterTodayKontests: newlyFilteredKontests.laterTodayKontests,
+            tomorrowKontests: newlyFilteredKontests.tomorrowKontests,
+            laterKontests: newlyFilteredKontests.laterKontests
+        )
     }
 
     func storeNewEntry(_ entry: TimelineEntryType) {
@@ -63,6 +75,48 @@ class UpcomingKontestsWidgetCache: WidgetCache {
         if let previousEntry {
             persistWidgetCache(cache: previousEntry)
         }
+    }
+
+    func getFilteredKontests(allKontests: [KontestModel]) -> (
+        allKontests: [KontestModel],
+        filteredKontests: [KontestModel],
+        ongoingKontests: [KontestModel],
+        laterTodayKontests: [KontestModel],
+        tomorrowKontests: [KontestModel],
+        laterKontests: [KontestModel]
+    ) // Filters given kontests where date might have changed like from tomorrow to today
+    {
+        let newAllKontests = allKontests.filter { kontest in
+            let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
+            let isKontestEnded = CalendarUtility.isKontestOfPast(kontestEndDate: kontestEndDate ?? Date())
+
+            return !isKontestEnded
+        }
+
+        let allowedWebsites = FilterWebsitesViewModel().getAllowedWebsites()
+        let filteredKontests = newAllKontests.filter { kontest in
+            allowedWebsites.contains(kontest.site)
+        }
+
+        let today = Date()
+        let tomorrow = CalendarUtility.getTomorrow()
+        let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
+
+        let ongoingKontests = filteredKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? today, kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? today) }
+
+        let laterTodayKontests = filteredKontests.filter {
+            CalendarUtility.getDate(date: $0.start_time) ?? today < tomorrow && !(ongoingKontests.contains($0))
+        }
+
+        let tomorrowKontests = filteredKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? today >= tomorrow) && (CalendarUtility.getDate(date: $0.start_time) ?? today < dayAfterTomorrow) }
+
+        let laterKontests = filteredKontests.filter {
+            CalendarUtility.getDate(date: $0.start_time) ?? today >= dayAfterTomorrow
+        }
+
+        var ans: ([KontestModel], [KontestModel], [KontestModel], [KontestModel], [KontestModel], [KontestModel])
+        ans = (allKontests, filteredKontests, ongoingKontests, laterTodayKontests, tomorrowKontests, laterKontests)
+        return ans
     }
 }
 
