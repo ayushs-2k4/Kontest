@@ -43,6 +43,10 @@
 		0764FF9E2ABC726F0060AC1F /* AddToCalendarIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0784292D2AB5EF660078D836 /* AddToCalendarIntent.swift */; };
 		0764FFA02ABC72870060AC1F /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 0764FF9F2ABC72870060AC1F /* Apollo */; };
 		0764FFA22ABC72BF0060AC1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07ECFB402AA58259008513C6 /* Assets.xcassets */; };
+		0779F4742ABD5B63004E50F6 /* UpcomingKontestsWidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */; };
+		0779F4752ABD5B64004E50F6 /* UpcomingKontestsWidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */; };
+		0779F4762ABD5B71004E50F6 /* WidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE8F2ABAE38900FEA3D7 /* WidgetCache.swift */; };
+		0779F4772ABD5B73004E50F6 /* WidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE8F2ABAE38900FEA3D7 /* WidgetCache.swift */; };
 		077E6EAD2AB4B1D10003E897 /* ErrorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EAC2AB4B1D10003E897 /* ErrorWrapper.swift */; };
 		077E6EAF2AB4B2120003E897 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EAE2AB4B2120003E897 /* ErrorView.swift */; };
 		077E6EB12AB4B3220003E897 /* ErrorState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EB02AB4B3220003E897 /* ErrorState.swift */; };
@@ -930,6 +934,8 @@
 				0764FF912ABC72180060AC1F /* CalendarUtility.swift in Sources */,
 				0764FF9B2ABC72590060AC1F /* DownloadData.swift in Sources */,
 				0764FF812ABC717E0060AC1F /* Upcoming_Kontest_iOS_WidgetBundle.swift in Sources */,
+				0779F4762ABD5B71004E50F6 /* WidgetCache.swift in Sources */,
+				0779F4742ABD5B63004E50F6 /* UpcomingKontestsWidgetCache.swift in Sources */,
 				0764FF952ABC72360060AC1F /* NetworkMonitor.swift in Sources */,
 				0764FF922ABC721E0060AC1F /* KontestStatus.swift in Sources */,
 			);
@@ -955,6 +961,8 @@
 				079F680B2ABC80C2001B0EFE /* Upcoming_Kontest_macOS_WidgetBundle.swift in Sources */,
 				079F68272ABC818E001B0EFE /* AddToCalendarIntent.swift in Sources */,
 				079F681E2ABC8150001B0EFE /* AppError.swift in Sources */,
+				0779F4772ABD5B73004E50F6 /* WidgetCache.swift in Sources */,
+				0779F4752ABD5B64004E50F6 /* UpcomingKontestsWidgetCache.swift in Sources */,
 				079F68212ABC8161001B0EFE /* FilterWebsiteKey.swift in Sources */,
 				079F68262ABC818A001B0EFE /* KontestRepository.swift in Sources */,
 			);

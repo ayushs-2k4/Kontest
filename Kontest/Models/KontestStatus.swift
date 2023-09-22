@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum KontestStatus: Decodable {
+enum KontestStatus: Codable {
     case OnGoing
     case LaterToday
     case Tomorrow

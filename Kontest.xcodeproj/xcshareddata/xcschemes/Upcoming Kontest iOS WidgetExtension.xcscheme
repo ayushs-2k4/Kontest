@@ -56,8 +56,18 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.springboard">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0764FF7B2ABC717E0060AC1F"
+            BuildableName = "Upcoming Kontest iOS WidgetExtension.appex"
+            BlueprintName = "Upcoming Kontest iOS WidgetExtension"
+            ReferencedContainer = "container:Kontest.xcodeproj">
+         </BuildableReference>
+      </RemoteRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "076016542A87CD52007CE9F5"
@@ -65,7 +75,7 @@
             BlueprintName = "Kontest"
             ReferencedContainer = "container:Kontest.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "_XCWidgetKind"
@@ -79,7 +89,7 @@
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "_XCWidgetFamily"
-            value = "systemMedium"
+            value = "systemExtraLarge"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>

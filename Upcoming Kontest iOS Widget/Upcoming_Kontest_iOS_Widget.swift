@@ -10,8 +10,6 @@ import UserNotifications
 import WidgetKit
 
 struct Provider: TimelineProvider {
-//    private let upcomingKontestsWidgetCache = UpcomingKontestsWidgetCache()
-
     let kontestModel = KontestModel.from(
         dto: KontestDTO(
             name: "ProjectEuler+1",
@@ -78,6 +76,8 @@ struct Provider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+        let upcomingKontestsWidgetCache = UpcomingKontestsWidgetCache()
+
         let networkMonitor = NetworkMonitor.shared
         networkMonitor.start()
 
@@ -107,38 +107,39 @@ struct Provider: TimelineProvider {
                 )
 
                 myEntries.append(entry)
-//                upcomingKontestsWidgetCache.storeNewEntry(entry)
+                upcomingKontestsWidgetCache.storeNewEntry(entry)
 
                 let timeline = Timeline(entries: myEntries, policy: .after(nextDateToRefresh))
+                networkMonitor.stop()
                 completion(timeline)
             }
         } else {
             var myEntries: [SimpleEntry] = []
 
-//            if let entry = upcomingKontestsWidgetCache.newEntryFromPrevious(withDate: Date()) {
-//                myEntries.append(entry)
-//            } else {
-            let entry = SimpleEntry(
-                date: Date(),
-                error: AppError(title: "No Internet Connection", description: "Connect to Internet"),
-                allKontests: [],
-                filteredKontests: [],
-                ongoingKontests: [],
-                laterTodayKontests: [],
-                tomorrowKontests: [],
-                laterKontests: []
-            )
-            myEntries.append(entry)
-//            }
+            if let entry = upcomingKontestsWidgetCache.newEntryFromPrevious(withDate: Date()) {
+                myEntries.append(entry)
+            } else {
+                let entry = SimpleEntry(
+                    date: Date(),
+                    error: AppError(title: "No Internet Connection", description: "Connect to Internet"),
+                    allKontests: [],
+                    filteredKontests: [],
+                    ongoingKontests: [],
+                    laterTodayKontests: [],
+                    tomorrowKontests: [],
+                    laterKontests: []
+                )
+                myEntries.append(entry)
+            }
 
             let timeline = Timeline(entries: myEntries, policy: .after(.now.advanced(by: 0.5 * 60 * 60)))
+            networkMonitor.stop()
             completion(timeline)
         }
-        networkMonitor.stop()
     }
 }
 
-struct SimpleEntry: TimelineEntry {
+struct SimpleEntry: TimelineEntry, Codable {
     let date: Date
     let error: Error?
     let allKontests: [KontestModel]
@@ -147,6 +148,41 @@ struct SimpleEntry: TimelineEntry {
     let laterTodayKontests: [KontestModel]
     let tomorrowKontests: [KontestModel]
     let laterKontests: [KontestModel]
+
+    enum CodingKeys: CodingKey {
+        case date
+        case allKontests
+        case filteredKontests
+        case ongoingKontests
+        case laterTodayKontests
+        case tomorrowKontests
+        case laterKontests
+    }
+
+    init(date: Date, error: Error?, allKontests: [KontestModel], filteredKontests: [KontestModel], ongoingKontests: [KontestModel], laterTodayKontests: [KontestModel], tomorrowKontests: [KontestModel], laterKontests: [KontestModel]) {
+        self.date = date
+        self.error = error
+        self.allKontests = allKontests
+        self.filteredKontests = filteredKontests
+        self.ongoingKontests = ongoingKontests
+        self.laterTodayKontests = laterTodayKontests
+        self.tomorrowKontests = tomorrowKontests
+        self.laterKontests = laterKontests
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        date = try container.decode(Date.self, forKey: .date)
+        // You can customize the decoding of the 'error' property here
+        // For example, if 'error' is a String, you can decode it like this:
+        error = nil
+        allKontests = try container.decode([KontestModel].self, forKey: .allKontests)
+        filteredKontests = try container.decode([KontestModel].self, forKey: .filteredKontests)
+        ongoingKontests = try container.decode([KontestModel].self, forKey: .ongoingKontests)
+        laterTodayKontests = try container.decode([KontestModel].self, forKey: .laterTodayKontests)
+        tomorrowKontests = try container.decode([KontestModel].self, forKey: .tomorrowKontests)
+        laterKontests = try container.decode([KontestModel].self, forKey: .laterKontests)
+    }
 }
 
 struct Upcoming_Kontests_iOS_WidgetEntryView: View {
