@@ -7,7 +7,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "172CD715-49E2-42BC-8C09-A398D1E2301A"
+            uuid = "0AF1AA13-BD47-4E0E-A5D1-6BBBE331CFED"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -20,7 +20,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "172CD715-49E2-42BC-8C09-A398D1E2301A - 967dc39ab1ca975"
+                  uuid = "0AF1AA13-BD47-4E0E-A5D1-6BBBE331CFED - 967dc39ab1ca975"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -32,10 +32,10 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "43"
                   endingLineNumber = "43"
-                  offsetFromSymbolStart = "344">
+                  offsetFromSymbolStart = "368">
                </Location>
                <Location
-                  uuid = "172CD715-49E2-42BC-8C09-A398D1E2301A - ad912ae109fbc772"
+                  uuid = "0AF1AA13-BD47-4E0E-A5D1-6BBBE331CFED - ad912ae109fbc772"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -47,7 +47,101 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "43"
                   endingLineNumber = "43"
-                  offsetFromSymbolStart = "364">
+                  offsetFromSymbolStart = "388">
+               </Location>
+               <Location
+                  uuid = "0AF1AA13-BD47-4E0E-A5D1-6BBBE331CFED - 19bb0d0387da3cd7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Upcoming_Kontest_iOS_WidgetExtension.KontestModel) -&gt; () in Upcoming_Kontest_iOS_WidgetExtension.UpcomingKontestsWidgetCache.newEntryFromPrevious(withDate: Foundation.Date) async -&gt; Swift.Optional&lt;Upcoming_Kontest_iOS_WidgetExtension.SimpleEntry&gt;"
+                  moduleName = "Upcoming Kontest iOS WidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/Utilities/WidgetCache/UpcomingKontestsWidgetCache.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "180">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0ABA4B00-324A-4307-BCCC-AB4176795876"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kontest/Utilities/WidgetCache/UpcomingKontestsWidgetCache.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "storeNewEntry(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "93692D13-1CBC-48A0-8B99-FCA5208B3C87"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kontest/Utilities/GetKontests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "getKontests()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "93692D13-1CBC-48A0-8B99-FCA5208B3C87 - 8a506e70c06283dd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for static Upcoming_Kontest_iOS_WidgetExtension.GetKontests.getKontests() async -&gt; (fetchedKontests: Swift.Array&lt;Upcoming_Kontest_iOS_WidgetExtension.KontestModel&gt;, error: Swift.Optional&lt;Swift.Error&gt;)"
+                  moduleName = "Upcoming Kontest iOS WidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/Utilities/GetKontests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "512">
+               </Location>
+               <Location
+                  uuid = "93692D13-1CBC-48A0-8B99-FCA5208B3C87 - 365ef55de75615dc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(6) suspend resume partial function for static Upcoming_Kontest_iOS_WidgetExtension.GetKontests.getKontests() async -&gt; (fetchedKontests: Swift.Array&lt;Upcoming_Kontest_iOS_WidgetExtension.KontestModel&gt;, error: Swift.Optional&lt;Swift.Error&gt;)"
+                  moduleName = "Upcoming Kontest iOS WidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/Utilities/GetKontests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "168">
+               </Location>
+               <Location
+                  uuid = "93692D13-1CBC-48A0-8B99-FCA5208B3C87 - d2451dbe8a4b67d3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(7) suspend resume partial function for static Upcoming_Kontest_iOS_WidgetExtension.GetKontests.getKontests() async -&gt; (fetchedKontests: Swift.Array&lt;Upcoming_Kontest_iOS_WidgetExtension.KontestModel&gt;, error: Swift.Optional&lt;Swift.Error&gt;)"
+                  moduleName = "Upcoming Kontest iOS WidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/Utilities/GetKontests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "200">
                </Location>
             </Locations>
          </BreakpointContent>

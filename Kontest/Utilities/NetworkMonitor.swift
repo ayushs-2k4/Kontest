@@ -33,6 +33,11 @@ class NetworkMonitor {
 
     func start() {
         monitor.start(queue: queue)
+
+        let p = monitor.currentPath.status
+        logger.log("p: \("\(p)")")
+        currentStatus = monitor.currentPath.status
+
         monitor.pathUpdateHandler = { [weak self] path in
 
             guard let interface = NWInterface.InterfaceType.allCases.filter({ path.usesInterfaceType($0) }).first else { return }

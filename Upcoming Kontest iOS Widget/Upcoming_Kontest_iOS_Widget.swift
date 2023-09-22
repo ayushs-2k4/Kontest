@@ -47,51 +47,43 @@ struct Provider: TimelineProvider {
             Task {
                 let kontestsDividedInCategories = await GetKontests.getKontestsDividedIncategories()
 
-                let nextDateToRefresh = CalendarUtility.getNextDateToRefresh(
-                    ongoingKontests: kontestsDividedInCategories.ongoingKontests,
-                    laterTodayKontests: kontestsDividedInCategories.laterTodayKontests,
-                    tomorrowKontests: kontestsDividedInCategories.tomorrowKontests,
-                    laterKontests: kontestsDividedInCategories.laterKontests
-                )
-
-                let entry = SimpleEntry(
-                    date: nextDateToRefresh,
-                    error: kontestsDividedInCategories.error,
-                    allKontests: kontestsDividedInCategories.allKontests,
-                    filteredKontests: kontestsDividedInCategories.filteredKontests,
-                    ongoingKontests: kontestsDividedInCategories.ongoingKontests,
-                    laterTodayKontests: kontestsDividedInCategories.laterTodayKontests,
-                    tomorrowKontests: kontestsDividedInCategories.tomorrowKontests,
-                    laterKontests: kontestsDividedInCategories.laterKontests
-                )
-
-                upcomingKontestsWidgetCache.storeNewEntry(entry)
-
-                networkMonitor.stop()
-                completion(entry)
-            }
-        } else {
-            Task {
-                if var entry = await upcomingKontestsWidgetCache.newEntryFromPrevious(withDate: Date()) {
-                    entry.isDataOld = true
+                if let error = kontestsDividedInCategories.error {
+                    let entry = await getKontestsEntryFromCache(upcomingKontestsWidgetCache: upcomingKontestsWidgetCache)
                     networkMonitor.stop()
                     completion(entry)
                 } else {
-                    let entry = SimpleEntry(
-                        date: Date(),
-                        error: AppError(title: "No Internet Connection", description: "Connect to Internet"),
-                        allKontests: [],
-                        filteredKontests: [],
-                        ongoingKontests: [],
-                        laterTodayKontests: [],
-                        tomorrowKontests: [],
-                        laterKontests: []
+                    let nextDateToRefresh = CalendarUtility.getNextDateToRefresh(
+                        ongoingKontests: kontestsDividedInCategories.ongoingKontests,
+                        laterTodayKontests: kontestsDividedInCategories.laterTodayKontests,
+                        tomorrowKontests: kontestsDividedInCategories.tomorrowKontests,
+                        laterKontests: kontestsDividedInCategories.laterKontests
                     )
-                    var myEntries: [SimpleEntry] = []
-                    myEntries.append(entry)
+
+                    let entry = SimpleEntry(
+                        date: nextDateToRefresh,
+                        error: kontestsDividedInCategories.error,
+                        allKontests: kontestsDividedInCategories.allKontests,
+                        filteredKontests: kontestsDividedInCategories.filteredKontests,
+                        ongoingKontests: kontestsDividedInCategories.ongoingKontests,
+                        laterTodayKontests: kontestsDividedInCategories.laterTodayKontests,
+                        tomorrowKontests: kontestsDividedInCategories.tomorrowKontests,
+                        laterKontests: kontestsDividedInCategories.laterKontests
+                    )
+
+                    upcomingKontestsWidgetCache.storeNewEntry(entry)
+
                     networkMonitor.stop()
                     completion(entry)
                 }
+            }
+        } else {
+            print("Internet NO")
+
+            Task {
+                let entry = await getKontestsEntryFromCache(upcomingKontestsWidgetCache: upcomingKontestsWidgetCache)
+
+                networkMonitor.stop()
+                completion(entry)
             }
         }
     }
@@ -107,32 +99,41 @@ struct Provider: TimelineProvider {
             Task {
                 let kontestsDividedInCategories = await GetKontests.getKontestsDividedIncategories()
 
-                let nextDateToRefresh = CalendarUtility.getNextDateToRefresh(
-                    ongoingKontests: kontestsDividedInCategories.ongoingKontests,
-                    laterTodayKontests: kontestsDividedInCategories.laterTodayKontests,
-                    tomorrowKontests: kontestsDividedInCategories.tomorrowKontests,
-                    laterKontests: kontestsDividedInCategories.laterKontests
-                )
+                if let error = kontestsDividedInCategories.error, let nsError = error as NSError?, nsError.code == -1003 || nsError.code == -1009 {
+                    let entry = await getKontestsEntryFromCache(upcomingKontestsWidgetCache: upcomingKontestsWidgetCache)
+                    var myEntries: [SimpleEntry] = []
+                    myEntries.append(entry)
+                    let timeline = Timeline(entries: myEntries, policy: .after(.now.advanced(by: 0.5 * 60 * 60)))
+                    networkMonitor.stop()
+                    completion(timeline)
+                } else {
+                    let nextDateToRefresh = CalendarUtility.getNextDateToRefresh(
+                        ongoingKontests: kontestsDividedInCategories.ongoingKontests,
+                        laterTodayKontests: kontestsDividedInCategories.laterTodayKontests,
+                        tomorrowKontests: kontestsDividedInCategories.tomorrowKontests,
+                        laterKontests: kontestsDividedInCategories.laterKontests
+                    )
 
-                var myEntries: [SimpleEntry] = []
+                    var myEntries: [SimpleEntry] = []
 
-                let entry = SimpleEntry(
-                    date: nextDateToRefresh,
-                    error: kontestsDividedInCategories.error,
-                    allKontests: kontestsDividedInCategories.allKontests,
-                    filteredKontests: kontestsDividedInCategories.filteredKontests,
-                    ongoingKontests: kontestsDividedInCategories.ongoingKontests,
-                    laterTodayKontests: kontestsDividedInCategories.laterTodayKontests,
-                    tomorrowKontests: kontestsDividedInCategories.tomorrowKontests,
-                    laterKontests: kontestsDividedInCategories.laterKontests
-                )
+                    let entry = SimpleEntry(
+                        date: nextDateToRefresh,
+                        error: kontestsDividedInCategories.error,
+                        allKontests: kontestsDividedInCategories.allKontests,
+                        filteredKontests: kontestsDividedInCategories.filteredKontests,
+                        ongoingKontests: kontestsDividedInCategories.ongoingKontests,
+                        laterTodayKontests: kontestsDividedInCategories.laterTodayKontests,
+                        tomorrowKontests: kontestsDividedInCategories.tomorrowKontests,
+                        laterKontests: kontestsDividedInCategories.laterKontests
+                    )
 
-                myEntries.append(entry)
-                upcomingKontestsWidgetCache.storeNewEntry(entry)
+                    myEntries.append(entry)
+                    upcomingKontestsWidgetCache.storeNewEntry(entry)
 
-                let timeline = Timeline(entries: myEntries, policy: .after(nextDateToRefresh))
-                networkMonitor.stop()
-                completion(timeline)
+                    let timeline = Timeline(entries: myEntries, policy: .after(nextDateToRefresh))
+                    networkMonitor.stop()
+                    completion(timeline)
+                }
             }
         } else {
             print("Internet NO")
@@ -140,28 +141,33 @@ struct Provider: TimelineProvider {
             Task {
                 var myEntries: [SimpleEntry] = []
 
-                if var entry = await upcomingKontestsWidgetCache.newEntryFromPrevious(withDate: Date()) {
-                    entry.isDataOld = true
-                    myEntries.append(entry)
-                } else {
-                    let entry = SimpleEntry(
-                        date: Date(),
-                        error: AppError(title: "No Internet Connection", description: "Connect to Internet"),
-                        allKontests: [],
-                        filteredKontests: [],
-                        ongoingKontests: [],
-                        laterTodayKontests: [],
-                        tomorrowKontests: [],
-                        laterKontests: []
-                    )
-                    myEntries.append(entry)
-                }
+                let entry = await getKontestsEntryFromCache(upcomingKontestsWidgetCache: upcomingKontestsWidgetCache)
+                myEntries.append(entry)
 
                 let timeline = Timeline(entries: myEntries, policy: .after(.now.advanced(by: 0.5 * 60 * 60)))
                 networkMonitor.stop()
                 completion(timeline)
             }
         }
+    }
+}
+
+private func getKontestsEntryFromCache(upcomingKontestsWidgetCache: UpcomingKontestsWidgetCache) async -> SimpleEntry {
+    if var entry = await upcomingKontestsWidgetCache.newEntryFromPrevious(withDate: Date()) {
+        entry.isDataOld = true
+        return entry
+    } else {
+        let entry = SimpleEntry(
+            date: Date(),
+            error: AppError(title: "No Internet Connection", description: "Connect to Internet"),
+            allKontests: [],
+            filteredKontests: [],
+            ongoingKontests: [],
+            laterTodayKontests: [],
+            tomorrowKontests: [],
+            laterKontests: []
+        )
+        return entry
     }
 }
 
