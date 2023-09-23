@@ -5,10 +5,13 @@
 //  Created by Ayush Singhal on 21/09/23.
 //
 
+import OSLog
 import SwiftUI
 import WidgetKit
 
 struct Provider: TimelineProvider {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "Provider")
+
     let kontestModel = KontestModel.from(
         dto: KontestDTO(
             name: "ProjectEuler+1",
@@ -38,12 +41,12 @@ struct Provider: TimelineProvider {
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
         let upcomingKontestsWidgetCache = UpcomingKontestsWidgetCache()
 
-        let networkMonitor = NetworkMonitor.shared
-        networkMonitor.start()
+        Task {
+            let networkMonitor = NetworkMonitor.shared
+            await networkMonitor.startFromWidget()
 
-        if networkMonitor.currentStatus == .satisfied {
-            print("Internet YES")
-            Task {
+            if networkMonitor.currentStatus == .satisfied {
+                print("Internet YES")
                 let kontestsDividedInCategories = await GetKontests.getKontestsDividedIncategories()
 
                 if let error = kontestsDividedInCategories.error {
@@ -74,11 +77,9 @@ struct Provider: TimelineProvider {
                     networkMonitor.stop()
                     completion(entry)
                 }
-            }
-        } else {
-            print("Internet NO")
+            } else {
+                print("Internet NO")
 
-            Task {
                 let entry = await getKontestsEntryFromCache(upcomingKontestsWidgetCache: upcomingKontestsWidgetCache)
 
                 networkMonitor.stop()
@@ -90,12 +91,15 @@ struct Provider: TimelineProvider {
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         let upcomingKontestsWidgetCache = UpcomingKontestsWidgetCache()
 
-        let networkMonitor = NetworkMonitor.shared
-        networkMonitor.start()
+        Task {
+            let networkMonitor = NetworkMonitor.shared
 
-        if networkMonitor.currentStatus == .satisfied {
-            print("Internet YES")
-            Task {
+            logger.info("Start")
+            await networkMonitor.startFromWidget()
+            logger.info("End")
+
+            if networkMonitor.currentStatus == .satisfied {
+                print("Internet YES")
                 let kontestsDividedInCategories = await GetKontests.getKontestsDividedIncategories()
 
                 if let error = kontestsDividedInCategories.error, let nsError = error as NSError?, nsError.code == -1003 || nsError.code == -1009 {
@@ -133,11 +137,9 @@ struct Provider: TimelineProvider {
                     networkMonitor.stop()
                     completion(timeline)
                 }
-            }
-        } else {
-            print("Internet NO")
+            } else {
+                print("Internet NO")
 
-            Task {
                 var myEntries: [SimpleEntry] = []
 
                 let entry = await getKontestsEntryFromCache(upcomingKontestsWidgetCache: upcomingKontestsWidgetCache)
