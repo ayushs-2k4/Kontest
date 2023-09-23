@@ -345,6 +345,9 @@ class CalendarUtility {
         event.notes = notes
         event.url = url
 
+        let alarm = EKAlarm(relativeOffset: -15 * 60)
+        event.alarms = [alarm]
+
         do {
             try store.save(event, span: .thisEvent)
             logger.info("Event saved: \(event)")
