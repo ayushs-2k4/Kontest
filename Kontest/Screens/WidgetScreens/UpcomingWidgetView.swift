@@ -37,10 +37,10 @@ struct UpcomingWidgetView: View {
             } else {
                 GeometryReader { geometry in
                     LazyVStack {
-                        if isDataOld{
+                        if isDataOld {
                             Text("Data is not updated")
                         }
-                        
+
                         if !ongoingKontests.isEmpty {
                             CreateSectionView(title: "Live Now", kontests: ongoingKontests, widgetFamily: widgetFamily, kontestStatus: .OnGoing, toShowCalendarButton: false)
                         }
@@ -112,7 +112,6 @@ struct createSingleKontestView: View {
         if let startDate, let endDate {
             HStack {
                 Text(kontest.name)
-                    .lineLimit(1)
                     .foregroundStyle(kontest.site == "AtCoder" ? Color.gray : KontestModel.getColorForIdentifier(site: kontest.site))
 
                 Spacer()
@@ -129,7 +128,7 @@ struct createSingleKontestView: View {
                                         Text("Ends in: \(futureDate, style: .timer)")
                                             .fontDesign(.default).monospacedDigit()
                                             .multilineTextAlignment(.trailing)
-                                    } else if kontestStatus == .LaterToday || kontestStatus == .Tomorrow {
+                                    } else if toShowStartingIn {
                                         let seconds = startDate.timeIntervalSince(Date())
                                         let futureDate = Calendar.current.date(byAdding: .second, value: Int(seconds), to: Date())!
 
@@ -166,6 +165,8 @@ struct createSingleKontestView: View {
                         }
                     }
                 }
+                
+                .minimumScaleFactor(0.1)
 
                 if toShowCalendarButton {
                     Toggle(isOn: kontest.isCalendarEventAdded, intent: AddToCalendarIntent(title: kontest.name, notes: "", startDate: startDate, endDate: endDate, url: URL(string: kontest.url), toRemove: kontest.isCalendarEventAdded)) {}
@@ -175,7 +176,18 @@ struct createSingleKontestView: View {
                         .frame(width: 0, height: 30)
                 }
             }
+            .lineLimit(1)
+            
+            
         }
+    }
+
+    var toShowStartingIn: Bool {
+        let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
+        let isKontestOfFuture = CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date())
+        let isKontestStartingTimeLessThanADay = !(CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 0, hours: 0, days: 1))
+
+        return isKontestOfFuture && isKontestStartingTimeLessThanADay
     }
 }
 
