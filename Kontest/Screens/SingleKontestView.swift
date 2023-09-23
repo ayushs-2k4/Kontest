@@ -16,6 +16,8 @@ struct SingleKontestView: View {
     @Environment(ErrorState.self) private var errorState
     @Environment(\.colorScheme) private var colorScheme
 
+    @State private var isCalendarPopoverVisible: Bool = false
+
     let notificationsViewModel: NotificationsViewModel
 
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -53,8 +55,7 @@ struct SingleKontestView: View {
                 if isKontestRunning {
                     BlinkingDotView(color: .green)
                         .frame(width: 10, height: 10)
-                }
-                else {
+                } else {
                     EmptyView()
                 }
                 #endif
@@ -95,38 +96,51 @@ struct SingleKontestView: View {
             }
             .help("Copy link")
 
-            if !isKontestRunning {
+            if !isKontestRunning, let kontestStartDate {
                 Button {
-                    if kontest.isCalendarEventAdded {
-                        Task {
-                            do {
-                                try await CalendarUtility.removeEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
-
-                                kontest.isCalendarEventAdded = false
-                            }
-                            catch {
-                                errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Check that you have given Kontest the Calendar Permission (Full Access)")
-                            }
-                        }
-                    }
-                    else {
-                        Task {
-                            do {
-                                if try await CalendarUtility.addEvent(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url)) {
-                                    kontest.isCalendarEventAdded = true
-                                }
-                            }
-                            catch {
-                                errorState.errorWrapper = ErrorWrapper(error: error, guidance: "")
-                            }
-                        }
-                    }
-
-                    WidgetCenter.shared.reloadAllTimelines()
+                    isCalendarPopoverVisible = true
                 } label: {
                     Image(systemName: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus")
                         .contentTransition(.symbolEffect(.replace.upUp))
                         .frame(width: 20)
+                }
+                .popover(isPresented: $isCalendarPopoverVisible, arrowEdge: .bottom) {
+                    CalendarPopoverView(date: kontestStartDate.addingTimeInterval(-15 * 60), kontestStartDate: kontestStartDate, isAlreadySetted: kontest.isCalendarEventAdded, onPressDelete: {
+                        print(kontest.isCalendarEventAdded ? "Delete" : "Cancel")
+
+                        Task {
+                            do {
+                                try await CalendarUtility.removeEvent(startDate: kontestStartDate, endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
+
+                                kontest.isCalendarEventAdded = false
+                            } catch {
+                                errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Check that you have given Kontest the Calendar Permission (Full Access)")
+                            }
+
+                            isCalendarPopoverVisible = false
+                            WidgetCenter.shared.reloadAllTimelines()
+                        }
+                    }, onPressSet: { setDate in
+                        print("setDate: \(setDate)")
+
+                        Task {
+                            do {
+                                if kontest.isCalendarEventAdded { // If one event was already setted, then remove it and set a new event
+                                    try await CalendarUtility.removeEvent(startDate: kontestStartDate, endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
+                                }
+
+                                if try await CalendarUtility.addEvent(startDate: kontestStartDate, endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url), alarmAbsoluteDate: setDate) {
+                                    kontest.isCalendarEventAdded = true
+                                }
+                            } catch {
+                                errorState.errorWrapper = ErrorWrapper(error: error, guidance: "")
+                            }
+
+                            isCalendarPopoverVisible = false
+                            WidgetCenter.shared.reloadAllTimelines()
+                        }
+                    })
+                    .presentationCompactAdaptation(.popover)
                 }
                 .help(kontest.isCalendarEventAdded ? "Remove from Calendar" : "Add to Calendar")
             }
@@ -192,8 +206,7 @@ struct SingleKontestView: View {
                     #else
                     Text("\(CalendarUtility.getNumericKontestDate(date: kontestStartDate ?? Date())) - \(CalendarUtility.getNumericKontestDate(date: kontestEndDate ?? Date()))")
                     #endif
-                }
-                else {
+                } else {
                     Text("No date provided")
                 }
             }

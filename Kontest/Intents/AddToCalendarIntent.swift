@@ -65,7 +65,7 @@ struct AddToCalendarIntent: AppIntent, Hashable {
         if toRemove {
             try await CalendarUtility.removeEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url)
         } else {
-            if try await CalendarUtility.addEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url) {
+            if try await CalendarUtility.addEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url, alarmAbsoluteDate: startDate.addingTimeInterval(-15 * 60)) {
                 print("Event Successfully added.")
             }
         }

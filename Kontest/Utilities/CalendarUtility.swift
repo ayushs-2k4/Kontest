@@ -300,7 +300,7 @@ class CalendarUtility {
         return isGranted
     }
 
-    static func addEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?) async throws -> Bool {
+    static func addEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?, alarmAbsoluteDate: Date) async throws -> Bool {
         // Check the authorization status for calendar events
         let authorizationStatus = EKEventStore.authorizationStatus(for: EKEntityType.event)
 
@@ -312,7 +312,7 @@ class CalendarUtility {
                 if isGranted {
                     // Permission granted, continue to create and save the event
                     do {
-                        return try createAndSaveEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url)
+                        return try createAndSaveEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url, alarmAbsoluteDate: alarmAbsoluteDate)
                     } catch {
                         throw error
                     }
@@ -327,7 +327,7 @@ class CalendarUtility {
         } else {
             // If already authorized, create and save the event
             do {
-                return try createAndSaveEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url)
+                return try createAndSaveEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url, alarmAbsoluteDate: alarmAbsoluteDate)
             } catch {
                 throw error
             }
@@ -335,7 +335,7 @@ class CalendarUtility {
     }
 
     // Function to create and save the event
-    private static func createAndSaveEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?) throws -> Bool {
+    private static func createAndSaveEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?, alarmAbsoluteDate: Date) throws -> Bool {
         UserDefaults(suiteName: Constants.userDefaultsGroupID)!.set(true, forKey: "shouldFetchAllEventsFromCalendar")
         let event = EKEvent(eventStore: store)
         event.calendar = store.defaultCalendarForNewEvents
@@ -345,7 +345,7 @@ class CalendarUtility {
         event.notes = notes
         event.url = url
 
-        let alarm = EKAlarm(relativeOffset: -15 * 60)
+        let alarm = EKAlarm(absoluteDate: alarmAbsoluteDate)
         event.alarms = [alarm]
 
         do {

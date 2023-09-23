@@ -43,6 +43,7 @@
 		0764FF9E2ABC726F0060AC1F /* AddToCalendarIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0784292D2AB5EF660078D836 /* AddToCalendarIntent.swift */; };
 		0764FFA02ABC72870060AC1F /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 0764FF9F2ABC72870060AC1F /* Apollo */; };
 		0764FFA22ABC72BF0060AC1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07ECFB402AA58259008513C6 /* Assets.xcassets */; };
+		07740EA52ABF171F00A93EAF /* CalendarPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07740EA42ABF171F00A93EAF /* CalendarPopoverView.swift */; };
 		0779F4742ABD5B63004E50F6 /* UpcomingKontestsWidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */; };
 		0779F4752ABD5B64004E50F6 /* UpcomingKontestsWidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */; };
 		0779F4762ABD5B71004E50F6 /* WidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE8F2ABAE38900FEA3D7 /* WidgetCache.swift */; };
@@ -202,6 +203,7 @@
 		0764FF862ABC717F0060AC1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0764FF8D2ABC71D40060AC1F /* Upcoming Kontest iOS WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Upcoming Kontest iOS WidgetExtension.entitlements"; sourceTree = "<group>"; };
 		07710E842AB46220008DE1D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		07740EA42ABF171F00A93EAF /* CalendarPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPopoverView.swift; sourceTree = "<group>"; };
 		077E6EAC2AB4B1D10003E897 /* ErrorWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorWrapper.swift; sourceTree = "<group>"; };
 		077E6EAE2AB4B2120003E897 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		077E6EB02AB4B3220003E897 /* ErrorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorState.swift; sourceTree = "<group>"; };
@@ -580,6 +582,7 @@
 				071915662AB169D300E1CB56 /* NoInternetScreen.swift */,
 				07A7501F2AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift */,
 				077E6EAE2AB4B2120003E897 /* ErrorView.swift */,
+				07740EA42ABF171F00A93EAF /* CalendarPopoverView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -904,6 +907,7 @@
 				07ECFBAA2AA58259008513C6 /* Router.swift in Sources */,
 				073269E82AAC42350028476D /* FilterWebsitesView.swift in Sources */,
 				07ECFB982AA58259008513C6 /* SettingsScreen.swift in Sources */,
+				07740EA52ABF171F00A93EAF /* CalendarPopoverView.swift in Sources */,
 				07ECFB862AA58259008513C6 /* NotificationsViewModel.swift in Sources */,
 				07ECFB942AA58259008513C6 /* CodeChefAPIModel.swift in Sources */,
 				07567EA52AB645E9007EFEE1 /* AddToCalendarIntent.swift in Sources */,
