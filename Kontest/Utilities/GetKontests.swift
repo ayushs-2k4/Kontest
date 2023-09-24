@@ -49,8 +49,6 @@ class GetKontests {
         error: Error?
     ) {
         let today = Date()
-        let tomorrow = CalendarUtility.getTomorrow()
-        let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
 
         let allKontestsWithError = await GetKontests.getKontests()
         let allKontests = allKontestsWithError.fetchedKontests

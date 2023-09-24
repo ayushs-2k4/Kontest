@@ -219,7 +219,55 @@ struct AllKontestsScreen: View {
             ForEach(kontests) { kontest in
                 #if os(macOS)
                 Link(destination: URL(string: kontest.url)!, label: {
-                    SingleKontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
+                    let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
+                    let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
+
+                    if let kontestStartDate, let kontestEndDate, !CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate, kontestEndDate: kontestEndDate) {
+                        SingleKontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
+                            .swipeActions(edge: .leading) {
+                                Button("", systemImage: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus")
+                                    { let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
+                                        let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
+                                        print("Setted")
+
+                                        if let kontestStartDate {
+                                            if kontest.isCalendarEventAdded {
+                                                Task {
+                                                    do {
+                                                        try await CalendarUtility.removeEvent(startDate: kontestStartDate, endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
+
+                                                        kontest.isCalendarEventAdded = false
+                                                    } catch {
+                                                        errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Check that you have given Kontest the Calendar Permission (Full Access)")
+                                                    }
+
+                                                    WidgetCenter.shared.reloadAllTimelines()
+                                                }
+                                            } else {
+                                                Task {
+                                                    do {
+                                                        if kontest.isCalendarEventAdded { // If one event was already setted, then remove it and set a new event
+                                                            try await CalendarUtility.removeEvent(startDate: kontestStartDate, endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
+                                                        }
+
+                                                        if try await CalendarUtility.addEvent(startDate: kontestStartDate, endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url), alarmAbsoluteDate: kontestStartDate.addingTimeInterval(-15 * 60)) {
+                                                            kontest.isCalendarEventAdded = true
+                                                        }
+                                                    } catch {
+                                                        errorState.errorWrapper = ErrorWrapper(error: error, guidance: "")
+                                                    }
+
+                                                    WidgetCenter.shared.reloadAllTimelines()
+                                                }
+                                            }
+                                        }
+                                    }
+                                    .tint(Color(red: 94/255, green: 92/255, blue: 222/255))
+                            }
+                    } else {
+                        SingleKontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
+                    }
+
                 })
                 #else
                 NavigationLink(value: SelectionState.kontestModel(kontest)) {
