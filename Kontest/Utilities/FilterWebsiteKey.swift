@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import OSLog
 
 enum FilterWebsiteKey: String, CaseIterable {
     case codeForcesKey
@@ -19,9 +20,17 @@ enum FilterWebsiteKey: String, CaseIterable {
 }
 
 func setDefaultValuesForFilterWebsiteKeysToTrue() {
+    let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "FilterWebsiteKey")
+
     let userDefaults = UserDefaults(suiteName: Constants.userDefaultsGroupID)!
 
     FilterWebsiteKey.allCases.forEach { filterWebsiteKey in
-        userDefaults.register(defaults: [filterWebsiteKey.rawValue: true])
+        if userDefaults.value(forKey: filterWebsiteKey.rawValue) == nil {
+            logger.info("Ran1: \(filterWebsiteKey.rawValue): \(userDefaults.bool(forKey: filterWebsiteKey.rawValue))")
+            userDefaults.setValue(true, forKey: filterWebsiteKey.rawValue)
+            logger.info("Ran2: \(filterWebsiteKey.rawValue): \(userDefaults.bool(forKey: filterWebsiteKey.rawValue))")
+        } else {
+            logger.info("Not Ran: \(filterWebsiteKey.rawValue): \(userDefaults.bool(forKey: filterWebsiteKey.rawValue))")
+        }
     }
 }

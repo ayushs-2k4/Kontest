@@ -10,7 +10,7 @@ import OSLog
 
 class GetKontests {
     private static let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "GetKontests")
-    
+
     static func getKontests() async -> (fetchedKontests: [KontestModel], error: Error?) {
         let repository = KontestRepository()
 
@@ -39,7 +39,15 @@ class GetKontests {
         }
     }
 
-    static func getKontestsDividedIncategories() async -> (ongoingKontests: [KontestModel], laterTodayKontests: [KontestModel], tomorrowKontests: [KontestModel], laterKontests: [KontestModel], error: Error?) {
+    static func getKontestsDividedIncategories() async -> (
+        allKontests: [KontestModel],
+        filteredKontests: [KontestModel],
+        ongoingKontests: [KontestModel],
+        laterTodayKontests: [KontestModel],
+        tomorrowKontests: [KontestModel],
+        laterKontests: [KontestModel],
+        error: Error?
+    ) {
         let today = Date()
         let tomorrow = CalendarUtility.getTomorrow()
         let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
@@ -48,20 +56,21 @@ class GetKontests {
         let allKontests = allKontestsWithError.fetchedKontests
         let error = allKontestsWithError.error
 
-        let ongoingKontests = allKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? today, kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? today) }
+        let filterWebsiteViewModel = FilterWebsitesViewModel()
+        let allowedWebsites = filterWebsiteViewModel.getAllowedWebsites()
 
-        let laterTodayKontests = allKontests.filter {
-            CalendarUtility.getDate(date: $0.start_time) ?? today < tomorrow && !(ongoingKontests.contains($0))
-        }
+        let filteredKontests = allKontests.filter { allowedWebsites.contains($0.site) }
 
-        let tomorrowKontests = allKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? today >= tomorrow) && (CalendarUtility.getDate(date: $0.start_time) ?? today < dayAfterTomorrow) }
+        let ongoingKontests = filteredKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? today, kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? today) }
 
-        let laterKontests = allKontests.filter {
-            CalendarUtility.getDate(date: $0.start_time) ?? today >= dayAfterTomorrow
-        }
+        let laterTodayKontests = filteredKontests.filter { CalendarUtility.isKontestLaterToday(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? Date()) }
 
-        var ans: ([KontestModel], [KontestModel], [KontestModel], [KontestModel], Error?)
-        ans = (ongoingKontests, laterTodayKontests, tomorrowKontests, laterKontests, error)
+        let tomorrowKontests = filteredKontests.filter { CalendarUtility.isKontestTomorrow(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? Date()) }
+
+        let laterKontests = filteredKontests.filter { CalendarUtility.isKontestLater(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? Date()) }
+
+        var ans: ([KontestModel], [KontestModel], [KontestModel], [KontestModel], [KontestModel], [KontestModel], Error?)
+        ans = (allKontests, filteredKontests, ongoingKontests, laterTodayKontests, tomorrowKontests, laterKontests, error)
         return ans
     }
 }

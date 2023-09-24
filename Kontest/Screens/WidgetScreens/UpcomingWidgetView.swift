@@ -10,12 +10,17 @@ import WidgetKit
 
 struct UpcomingWidgetView: View {
     let error: Error?
+    let isDataOld: Bool
     let toShowCalendarButton: Bool
+    let allKontests: [KontestModel]
+    let filteredKontests: [KontestModel]
     let ongoingKontests: [KontestModel]
     let laterTodayKontests: [KontestModel]
     let tomorrowKontests: [KontestModel]
     let laterKontests: [KontestModel]
     @Environment(\.widgetFamily) private var widgetFamily
+
+    let userDefaults = UserDefaults(suiteName: Constants.userDefaultsGroupID)
 
     var body: some View {
         if let error = error {
@@ -25,13 +30,19 @@ struct UpcomingWidgetView: View {
                 Text("Error: \(error.localizedDescription)")
             }
         } else {
-            if ongoingKontests.isEmpty && laterTodayKontests.isEmpty && tomorrowKontests.isEmpty && laterKontests.isEmpty {
+            if !allKontests.isEmpty && filteredKontests.isEmpty {
+                Text("Change filters to see Kontests")
+            } else if allKontests.isEmpty {
                 Text("No Kontests Scheduled")
             } else {
                 GeometryReader { geometry in
                     LazyVStack {
+                        if isDataOld {
+                            Text("Data is not updated")
+                        }
+
                         if !ongoingKontests.isEmpty {
-                            CreateSectionView(title: "Live Now", kontests: ongoingKontests, widgetFamily: widgetFamily, kontestStatus: .OnGoing, toShowCalendarButton: toShowCalendarButton)
+                            CreateSectionView(title: "Live Now", kontests: ongoingKontests, widgetFamily: widgetFamily, kontestStatus: .OnGoing, toShowCalendarButton: false)
                         }
 
                         if !laterTodayKontests.isEmpty {
@@ -101,7 +112,6 @@ struct createSingleKontestView: View {
         if let startDate, let endDate {
             HStack {
                 Text(kontest.name)
-                    .lineLimit(1)
                     .foregroundStyle(kontest.site == "AtCoder" ? Color.gray : KontestModel.getColorForIdentifier(site: kontest.site))
 
                 Spacer()
@@ -118,7 +128,7 @@ struct createSingleKontestView: View {
                                         Text("Ends in: \(futureDate, style: .timer)")
                                             .fontDesign(.default).monospacedDigit()
                                             .multilineTextAlignment(.trailing)
-                                    } else if kontestStatus == .LaterToday || kontestStatus == .Tomorrow {
+                                    } else if toShowStartingIn {
                                         let seconds = startDate.timeIntervalSince(Date())
                                         let futureDate = Calendar.current.date(byAdding: .second, value: Int(seconds), to: Date())!
 
@@ -155,19 +165,35 @@ struct createSingleKontestView: View {
                         }
                     }
                 }
+                
+                .minimumScaleFactor(0.1)
 
                 if toShowCalendarButton {
                     Toggle(isOn: kontest.isCalendarEventAdded, intent: AddToCalendarIntent(title: kontest.name, notes: "", startDate: startDate, endDate: endDate, url: URL(string: kontest.url), toRemove: kontest.isCalendarEventAdded)) {}
                         .toggleStyle(MyCustomToggleStyle(onColor: .green, offColor: .blue))
+                } else {
+                    Spacer()
+                        .frame(width: 0, height: 30)
                 }
             }
+            .lineLimit(1)
+            
+            
         }
+    }
+
+    var toShowStartingIn: Bool {
+        let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
+        let isKontestOfFuture = CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date())
+        let isKontestStartingTimeLessThanADay = !(CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 0, hours: 0, days: 1))
+
+        return isKontestOfFuture && isKontestStartingTimeLessThanADay
     }
 }
 
 struct MyCustomToggleStyle: ToggleStyle {
-    var onColor: Color = .green
-    var offColor: Color = .green
+    var onColor: Color
+    var offColor: Color
 
     func makeBody(configuration: Configuration) -> some View {
         HStack {

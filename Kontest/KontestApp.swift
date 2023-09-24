@@ -24,7 +24,7 @@ struct KontestApp: App {
 
     var body: some Scene {
         WindowGroup {
-            if let defaults = UserDefaults(suiteName: "group.com.ayushsinghal.kontest") {
+            if let defaults = UserDefaults(suiteName: Constants.userDefaultsGroupID) {
                 AllKontestsScreen()
                     .environment(allKontestsViewModel)
                     .environment(router)

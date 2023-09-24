@@ -10,7 +10,57 @@ import EventKit
 import SwiftUI
 
 @Observable
-class KontestModel: Decodable, Identifiable, Hashable {
+class KontestModel: Codable, Identifiable, Hashable {
+    enum CodingKeys: CodingKey {
+        case id
+        case name
+        case url
+        case start_time
+        case end_time
+        case duration
+        case site
+        case in_24_hours
+        case status
+        case isSetForReminder10MiutesBefore
+        case isSetForReminder30MiutesBefore
+        case isSetForReminder1HourBefore
+        case isSetForReminder6HoursBefore
+        case logo
+        case isCalendarEventAdded
+    }
+
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        id = try container.decodeIfPresent(String.self, forKey: .id) ?? "No ID"
+        name = try container.decodeIfPresent(String.self, forKey: .name) ?? "No Name"
+        url = try container.decodeIfPresent(String.self, forKey: .url) ?? "No URL"
+        start_time = try container.decodeIfPresent(String.self, forKey: .start_time) ?? "No Start Time"
+        end_time = try container.decodeIfPresent(String.self, forKey: .end_time) ?? "No End Time"
+        duration = try container.decodeIfPresent(String.self, forKey: .duration) ?? "-1"
+        site = try container.decodeIfPresent(String.self, forKey: .site) ?? "No Site"
+        in_24_hours = try container.decodeIfPresent(String.self, forKey: .in_24_hours) ?? "N/A"
+        status = try container.decodeIfPresent(KontestStatus.self, forKey: .status) ?? KontestStatus.OnGoing
+        isSetForReminder10MiutesBefore = try container.decodeIfPresent(Bool.self, forKey: .isSetForReminder10MiutesBefore) ?? false
+        isSetForReminder30MiutesBefore = try container.decodeIfPresent(Bool.self, forKey: .isSetForReminder30MiutesBefore) ?? false
+        isSetForReminder1HourBefore = try container.decodeIfPresent(Bool.self, forKey: .isSetForReminder1HourBefore) ?? false
+        isSetForReminder6HoursBefore = try container.decodeIfPresent(Bool.self, forKey: .isSetForReminder6HoursBefore) ?? false
+        logo = try container.decodeIfPresent(String.self, forKey: .logo) ?? "No Logo"
+        isCalendarEventAdded = try container.decodeIfPresent(Bool.self, forKey: .isCalendarEventAdded) ?? false
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(url, forKey: .url)
+        try container.encode(start_time, forKey: .start_time)
+        try container.encode(end_time, forKey: .end_time)
+        try container.encode(duration, forKey: .duration)
+        try container.encode(site, forKey: .site)
+        try container.encode(in_24_hours, forKey: .in_24_hours)
+        try container.encode(status, forKey: .status)
+    }
+
     let id: String
     let name: String
     let url: String
@@ -33,12 +83,12 @@ class KontestModel: Decodable, Identifiable, Hashable {
         self.site = site
         self.in_24_hours = in_24_hours
         self.status = status
-        self.isSetForReminder10MiutesBefore = false
-        self.isSetForReminder30MiutesBefore = false
-        self.isSetForReminder1HourBefore = false
-        self.isSetForReminder6HoursBefore = false
+        isSetForReminder10MiutesBefore = false
+        isSetForReminder30MiutesBefore = false
+        isSetForReminder1HourBefore = false
+        isSetForReminder6HoursBefore = false
         self.logo = logo
-        self.isCalendarEventAdded = false
+        isCalendarEventAdded = false
     }
 
     func hash(into hasher: inout Hasher) {
@@ -204,5 +254,9 @@ extension KontestModel {
 
     func loadCalendarStatus(allEvents: [EKEvent]) {
         isCalendarEventAdded = CalendarUtility.isEventPresentInCalendar(allEventsOfCalendar: allEvents, startDate: CalendarUtility.getDate(date: start_time) ?? Date(), endDate: CalendarUtility.getDate(date: end_time) ?? Date(), title: name, url: URL(string: url))
+    }
+
+    static var example: KontestModel {
+        KontestModel.from(dto: KontestDTO(name: "ProjectEuler+1", url: "https://hackerrank.com/contests/projecteuler", start_time: "2023-08-15 18:29:00 UTC", end_time: "2023-08-18 17:43:00 UTC", duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "BEFORE"))
     }
 }

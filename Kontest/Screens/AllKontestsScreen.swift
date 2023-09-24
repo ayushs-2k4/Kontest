@@ -23,6 +23,9 @@ struct AllKontestsScreen: View {
 
     @Environment(Router.self) private var router
 
+    let userDefaults = UserDefaults(suiteName: Constants.userDefaultsGroupID)
+    @State private var text: String = ""
+
     var body: some View {
         NavigationStack(path: Bindable(router).path) {
             if networkMonitor.currentStatus == .satisfied {
@@ -82,7 +85,6 @@ struct AllKontestsScreen: View {
                 .navigationTitle("Kontest")
                 .onAppear {
                     LocalNotificationManager.instance.setBadgeCountTo0()
-                    WidgetCenter.shared.reloadAllTimelines()
                 }
                 .toolbar {
                     if isInDevelopmentMode {
@@ -192,6 +194,9 @@ struct AllKontestsScreen: View {
             } else {
                 NoInternetScreen()
             }
+        }
+        .onAppear {
+            WidgetCenter.shared.reloadAllTimelines()
         }
         .onChange(of: networkMonitor.currentStatus) {
             if networkMonitor.currentStatus == .satisfied {

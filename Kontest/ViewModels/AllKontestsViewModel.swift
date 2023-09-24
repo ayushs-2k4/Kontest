@@ -148,8 +148,6 @@ class AllKontestsViewModel {
 
     private func splitKontestsIntoDifferentCategories() {
         let today = Date()
-        let tomorrow = CalendarUtility.getTomorrow()
-        let dayAfterTomorrow = CalendarUtility.getDayAfterTomorrow()
 
         toShowKontests = toShowKontests.filter {
             let kontestEndDate = CalendarUtility.getDate(date: $0.end_time)
@@ -160,15 +158,11 @@ class AllKontestsViewModel {
 
         ongoingKontests = toShowKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? today, kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? today) }
 
-        laterTodayKontests = toShowKontests.filter {
-            CalendarUtility.getDate(date: $0.start_time) ?? today < tomorrow && !(ongoingKontests.contains($0))
-        }
+        laterTodayKontests = toShowKontests.filter { CalendarUtility.isKontestLaterToday(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? Date()) }
 
-        tomorrowKontests = toShowKontests.filter { (CalendarUtility.getDate(date: $0.start_time) ?? today >= tomorrow) && (CalendarUtility.getDate(date: $0.start_time) ?? today < dayAfterTomorrow) }
+        tomorrowKontests = toShowKontests.filter { CalendarUtility.isKontestTomorrow(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? Date()) }
 
-        laterKontests = toShowKontests.filter {
-            CalendarUtility.getDate(date: $0.start_time) ?? today >= dayAfterTomorrow
-        }
+        laterKontests = toShowKontests.filter { CalendarUtility.isKontestLater(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? Date()) }
     }
 
     private var allowedWebsites: [String] = []
