@@ -219,38 +219,12 @@ struct AllKontestsScreen: View {
             ForEach(kontests) { kontest in
                 #if os(macOS)
                 Link(destination: URL(string: kontest.url)!, label: {
-                    let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
-                    let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
-
-                    if let kontestStartDate, let kontestEndDate, !CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate, kontestEndDate: kontestEndDate) {
-                        SingleKontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
-                            .swipeActions(edge: .leading) {
-                                Button("", systemImage: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus") {
-                                    calendarSwipeButtonAction(kontest: kontest)
-                                }
-                                .tint(Color(red: 94/255, green: 92/255, blue: 222/255))
-                            }
-                    } else {
-                        SingleKontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
-                    }
+                    kontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
 
                 })
                 #else
                 NavigationLink(value: SelectionState.kontestModel(kontest)) {
-                    let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
-                    let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
-                    
-                    if let kontestStartDate, let kontestEndDate, !CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate, kontestEndDate: kontestEndDate) {
-                        SingleKontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
-                            .swipeActions(edge: .leading) {
-                                Button("", systemImage: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus") {
-                                    calendarSwipeButtonAction(kontest: kontest)
-                                }
-                                .tint(Color(red: 94/255, green: 92/255, blue: 222/255))
-                            }
-                    } else {
-                        SingleKontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
-                    }
+                    kontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
                 }
                 #endif
             }
@@ -305,6 +279,26 @@ extension AllKontestsScreen {
                     WidgetCenter.shared.reloadAllTimelines()
                 }
             }
+        }
+    }
+}
+
+extension AllKontestsScreen {
+    @ViewBuilder
+    func kontestView(kontest: KontestModel, timelineViewDefaultContext: TimelineViewDefaultContext) -> some View {
+        let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
+        let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
+
+        if let kontestStartDate, let kontestEndDate, !CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate, kontestEndDate: kontestEndDate) {
+            SingleKontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
+                .swipeActions(edge: .leading) {
+                    Button("", systemImage: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus") {
+                        calendarSwipeButtonAction(kontest: kontest)
+                    }
+                    .tint(Color(red: 94/255, green: 92/255, blue: 222/255))
+                }
+        } else {
+            SingleKontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
         }
     }
 }
