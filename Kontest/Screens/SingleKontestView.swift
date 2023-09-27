@@ -105,7 +105,7 @@ struct SingleKontestView: View {
                         .frame(width: 20)
                 }
                 .popover(isPresented: $isCalendarPopoverVisible, arrowEdge: .bottom) {
-                    CalendarPopoverView(date: kontestStartDate.addingTimeInterval(-15 * 60), kontestStartDate: kontestStartDate, isAlreadySetted: kontest.isCalendarEventAdded, onPressDelete: {
+                    CalendarPopoverView(date: kontest.calendarDate != nil ? kontest.calendarDate! : kontestStartDate.addingTimeInterval(-15 * 60), kontestStartDate: kontestStartDate, isAlreadySetted: kontest.isCalendarEventAdded, onPressDelete: {
                         print(kontest.isCalendarEventAdded ? "Delete" : "Cancel")
 
                         Task {
@@ -113,6 +113,7 @@ struct SingleKontestView: View {
                                 try await CalendarUtility.removeEvent(startDate: kontestStartDate, endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
 
                                 kontest.isCalendarEventAdded = false
+                                kontest.calendarDate = nil
                             } catch {
                                 errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Check that you have given Kontest the Calendar Permission (Full Access)")
                             }
@@ -131,6 +132,7 @@ struct SingleKontestView: View {
 
                                 if try await CalendarUtility.addEvent(startDate: kontestStartDate, endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url), alarmAbsoluteDate: setDate) {
                                     kontest.isCalendarEventAdded = true
+                                    kontest.calendarDate = setDate
                                 }
                             } catch {
                                 errorState.errorWrapper = ErrorWrapper(error: error, guidance: "")

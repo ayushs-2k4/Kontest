@@ -27,6 +27,7 @@ class KontestModel: Codable, Identifiable, Hashable {
         case isSetForReminder6HoursBefore
         case logo
         case isCalendarEventAdded
+        case calendarDate
     }
 
     required init(from decoder: Decoder) throws {
@@ -47,6 +48,7 @@ class KontestModel: Codable, Identifiable, Hashable {
         isSetForReminder6HoursBefore = try container.decodeIfPresent(Bool.self, forKey: .isSetForReminder6HoursBefore) ?? false
         logo = try container.decodeIfPresent(String.self, forKey: .logo) ?? "No Logo"
         isCalendarEventAdded = try container.decodeIfPresent(Bool.self, forKey: .isCalendarEventAdded) ?? false
+        calendarDate = try container.decodeIfPresent(Date.self, forKey: .calendarDate)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -59,6 +61,7 @@ class KontestModel: Codable, Identifiable, Hashable {
         try container.encode(site, forKey: .site)
         try container.encode(in_24_hours, forKey: .in_24_hours)
         try container.encode(status, forKey: .status)
+        try container.encode(calendarDate, forKey: .calendarDate)
     }
 
     let id: String
@@ -72,6 +75,7 @@ class KontestModel: Codable, Identifiable, Hashable {
     var isSetForReminder6HoursBefore: Bool
     let logo: String
     var isCalendarEventAdded: Bool
+    var calendarDate: Date?
 
     init(id: String, name: String, url: String, start_time: String, end_time: String, duration: String, site: String, in_24_hours: String, status: KontestStatus, logo: String) {
         self.id = id
@@ -254,6 +258,10 @@ extension KontestModel {
 
     func loadCalendarStatus(allEvents: [EKEvent]) {
         isCalendarEventAdded = CalendarUtility.isEventPresentInCalendar(allEventsOfCalendar: allEvents, startDate: CalendarUtility.getDate(date: start_time) ?? Date(), endDate: CalendarUtility.getDate(date: end_time) ?? Date(), title: name, url: URL(string: url))
+    }
+
+    func loadCalendarDate(allEvents: [EKEvent]) {
+        calendarDate = CalendarUtility.getCalendarDateOfEvent(allEventsOfCalendar: allEvents, startDate: CalendarUtility.getDate(date: start_time) ?? Date(), endDate: CalendarUtility.getDate(date: end_time) ?? Date(), title: name, url: URL(string: url))
     }
 
     static var example: KontestModel {
