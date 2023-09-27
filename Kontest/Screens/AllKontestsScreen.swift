@@ -256,7 +256,7 @@ extension AllKontestsScreen {
                         try await CalendarUtility.removeEvent(startDate: kontestStartDate, endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
 
                         kontest.isCalendarEventAdded = false
-                        kontest.calendarDate = nil
+                        kontest.calendarEventDate = nil
                     } catch {
                         errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Check that you have given Kontest the Calendar Permission (Full Access)")
                     }
@@ -272,7 +272,7 @@ extension AllKontestsScreen {
 
                         if try await CalendarUtility.addEvent(startDate: kontestStartDate, endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url), alarmAbsoluteDate: kontestStartDate.addingTimeInterval(-15 * 60)) {
                             kontest.isCalendarEventAdded = true
-                            kontest.calendarDate = kontestStartDate.addingTimeInterval(-15 * 60)
+                            kontest.calendarEventDate = kontestStartDate.addingTimeInterval(-15 * 60)
                         }
                     } catch {
                         errorState.errorWrapper = ErrorWrapper(error: error, guidance: "")
