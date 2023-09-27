@@ -32,7 +32,8 @@ class GetKontests {
                     let isKontestEnded = CalendarUtility.isKontestOfPast(kontestEndDate: kontestEndDate ?? Date())
 
                     return !kontestDuration.isEmpty && !isKontestEnded
-                }, nil)
+                }
+                .sorted { CalendarUtility.getDate(date: $0.start_time) ?? Date() < CalendarUtility.getDate(date: $1.start_time) ?? Date() }, nil)
         } catch {
             logger.info("error in fetching all Kontests: \(error)")
             return ([], error)
