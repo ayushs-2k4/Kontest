@@ -54,9 +54,10 @@ class AllKontestsViewModel {
         isLoading = true
         Task {
             let allKontests = await getAllKontests()
+            let sortedKontests = sortAllKontests(allKontests: allKontests)
 
             await MainActor.run {
-                self.allKontests = allKontests
+                self.allKontests = sortedKontests
             }
 
             checkNotificationAuthorization()
@@ -104,6 +105,10 @@ class AllKontestsViewModel {
             logger.error("error in fetching all Kontests: \(error)")
             return []
         }
+    }
+
+    private func sortAllKontests(allKontests: [KontestModel]) -> [KontestModel] {
+        allKontests.sorted { CalendarUtility.getDate(date: $0.start_time) ?? Date() < CalendarUtility.getDate(date: $1.start_time) ?? Date() }
     }
 
     private func filterKontestsUsingSearchText() {

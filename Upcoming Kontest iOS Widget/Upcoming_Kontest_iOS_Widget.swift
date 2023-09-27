@@ -49,7 +49,7 @@ struct Provider: TimelineProvider {
                 print("Internet YES")
                 let kontestsDividedInCategories = await GetKontests.getKontestsDividedIncategories()
 
-                if let error = kontestsDividedInCategories.error {
+                if kontestsDividedInCategories.error != nil {
                     let entry = await getKontestsEntryFromCache(upcomingKontestsWidgetCache: upcomingKontestsWidgetCache)
                     networkMonitor.stop()
                     completion(entry)

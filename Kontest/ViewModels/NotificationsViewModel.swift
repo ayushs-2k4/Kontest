@@ -19,7 +19,7 @@ class NotificationsViewModel: NotificationsViewModelProtocol {
         getAllPendingNotifications()
     }
 
-     func getAllPendingNotifications() {
+    func getAllPendingNotifications() {
         LocalNotificationManager.instance.getAllPendingNotifications(completion: { notifications in
             self.pendingNotifications = notifications.sorted(by: { firstNotificationRequest, secondNotificationRequest in
                 let firstTrigger = firstNotificationRequest.trigger as? UNCalendarNotificationTrigger
@@ -33,7 +33,7 @@ class NotificationsViewModel: NotificationsViewModelProtocol {
         })
     }
 
-     func getNumberOfNotificationsWhichCanBeSettedForAKontest(kontest: KontestModel) -> Int {
+    func getNumberOfNotificationsWhichCanBeSettedForAKontest(kontest: KontestModel) -> Int {
         var ans = 0
         let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
         if kontestStartDate == nil {
@@ -82,7 +82,7 @@ class NotificationsViewModel: NotificationsViewModelProtocol {
         return ans
     }
 
-    internal func setNotification(kontest: KontestModel, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String, kontestSubTitle: String, kontestBody: String) async throws {
+    internal func setNotification(kontest: KontestModel, minutesBefore: Int, hoursBefore: Int, daysBefore: Int, kontestTitle: String, kontestSubTitle: String, kontestBody: String) async throws {
         let notificationsAuthorizationLevel = await LocalNotificationManager.instance.getNotificationsAuthorizationLevel()
 
         if notificationsAuthorizationLevel.authorizationStatus == .denied {
@@ -91,14 +91,14 @@ class NotificationsViewModel: NotificationsViewModelProtocol {
 
         let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
         let notificationDate = CalendarUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: minutesBefore, hours: hoursBefore, days: daysBefore)
-        let notificationID = kontest.id + CalendarUtility.getKontestDate(date: notificationDate) + CalendarUtility.getTimeFromDate(date: notificationDate)
+        let notificationID = LocalNotificationManager.instance.getNotificationID(kontestID: kontest.id, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
 
         LocalNotificationManager.instance.scheduleCalendarNotification(notificationContent: LocalNotificationManager.NotificationContent(title: kontestTitle, subtitle: kontestSubTitle, body: kontestBody, date: notificationDate), id: notificationID)
 
-        updateIsSetForNotification(kontest: kontest, to: true, minutesBefore: minutesBefore, hoursBefore: hoursBefore)
+        updateIsSetForNotification(kontest: kontest, to: true, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
     }
 
-    func setNotificationForKontest(kontest: KontestModel, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String = "", kontestSubTitle: String = "", kontestBody: String = "") async throws {
+    func setNotificationForKontest(kontest: KontestModel, minutesBefore: Int, hoursBefore: Int, daysBefore: Int, kontestTitle: String = "", kontestSubTitle: String = "", kontestBody: String = "") async throws {
         let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
 
         // Checking if we actually have given time in starting of kontest; like if given 6 hours, then checking if we actually have 6 hours or not in starting of kontest.
@@ -118,7 +118,7 @@ class NotificationsViewModel: NotificationsViewModelProtocol {
         }
     }
 
-    func setNotificationForAllKontests(minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, kontestTitle: String = "", kontestSubTitle: String = "", kontestBody: String = "") async throws {
+    func setNotificationForAllKontests(minutesBefore: Int, hoursBefore: Int, daysBefore: Int, kontestTitle: String = "", kontestSubTitle: String = "", kontestBody: String = "") async throws {
         logger.info("count: \("\(Dependencies.instance.allKontestsViewModel.toShowKontests.count)")")
         for i in 0 ..< Dependencies.instance.allKontestsViewModel.toShowKontests.count {
             let kontest = Dependencies.instance.allKontestsViewModel.toShowKontests[i]
@@ -133,14 +133,12 @@ class NotificationsViewModel: NotificationsViewModelProtocol {
     func removeAllPendingNotifications() {
         LocalNotificationManager.instance.removeAllPendingNotifications()
         for i in 0 ..< Dependencies.instance.allKontestsViewModel.allKontests.count {
-            updateIsSetForNotification(kontest: Dependencies.instance.allKontestsViewModel.allKontests[i], to: false, removeAll: true)
+            updateIsSetForNotification(kontest: Dependencies.instance.allKontestsViewModel.allKontests[i], to: false, minutesBefore: -1, hoursBefore: -1, daysBefore: -1, removeAll: true)
         }
     }
 
-    func removePendingNotification(kontest: KontestModel, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0) {
-        let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
-        let notificationDate = CalendarUtility.getTimeBefore(originalDate: kontestStartDate ?? Date(), minutes: minutesBefore, hours: hoursBefore, days: daysBefore)
-        let notificationID = kontest.id + CalendarUtility.getKontestDate(date: notificationDate) + CalendarUtility.getTimeFromDate(date: notificationDate)
+    func removePendingNotification(kontest: KontestModel, minutesBefore: Int, hoursBefore: Int, daysBefore: Int) {
+        let notificationID = LocalNotificationManager.instance.getNotificationID(kontestID: kontest.id, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
         LocalNotificationManager.instance.removePendingNotification(identifiers: [notificationID])
         updateIsSetForNotification(kontest: kontest, to: false, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
     }
@@ -149,7 +147,7 @@ class NotificationsViewModel: NotificationsViewModelProtocol {
         LocalNotificationManager.instance.printAllPendingNotifications()
     }
 
-    func updateIsSetForNotification(kontest: KontestModel, to: Bool, minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0, removeAll: Bool = false) {
+    func updateIsSetForNotification(kontest: KontestModel, to: Bool, minutesBefore: Int, hoursBefore: Int, daysBefore: Int, removeAll: Bool = false) {
         if to == false {
             if removeAll == true {
                 if let index = Dependencies.instance.allKontestsViewModel.allKontests.firstIndex(where: { $0 == kontest }) {
@@ -158,7 +156,10 @@ class NotificationsViewModel: NotificationsViewModelProtocol {
                     Dependencies.instance.allKontestsViewModel.allKontests[index].isSetForReminder1HourBefore = false
                     Dependencies.instance.allKontestsViewModel.allKontests[index].isSetForReminder6HoursBefore = false
 
-                    Dependencies.instance.allKontestsViewModel.allKontests[index].saveReminderStatus(minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
+                    Dependencies.instance.allKontestsViewModel.allKontests[index].saveReminderStatus(minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
+                    Dependencies.instance.allKontestsViewModel.allKontests[index].saveReminderStatus(minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
+                    Dependencies.instance.allKontestsViewModel.allKontests[index].saveReminderStatus(minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
+                    Dependencies.instance.allKontestsViewModel.allKontests[index].saveReminderStatus(minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
                 }
             } else {
                 if let index = Dependencies.instance.allKontestsViewModel.allKontests.firstIndex(where: { $0 == kontest }) {

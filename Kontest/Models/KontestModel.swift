@@ -207,8 +207,8 @@ extension KontestModel {
     }
 
     // Save reminder status to UserDefaults
-    func saveReminderStatus(minutesBefore: Int = Constants.minutesToBeReminderBefore, hoursBefore: Int = 0, daysBefore: Int = 0) {
-        let userDefaultsID = id + "\(minutesBefore)\(hoursBefore)\(daysBefore)"
+    func saveReminderStatus(minutesBefore: Int, hoursBefore: Int, daysBefore: Int) {
+        let userDefaultsID = LocalNotificationManager.instance.getNotificationID(kontestID: id, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
 
         if minutesBefore == 10 {
             UserDefaults(suiteName: Constants.userDefaultsGroupID)!.set(isSetForReminder10MiutesBefore, forKey: userDefaultsID)
@@ -223,16 +223,16 @@ extension KontestModel {
 
     // Load reminder status from UserDefaults
     func loadReminderStatus() {
-        var userDefaultsID = id + "10" + "0" + "0"
+        var userDefaultsID = LocalNotificationManager.instance.getNotificationID(kontestID: id, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
         isSetForReminder10MiutesBefore = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.bool(forKey: userDefaultsID)
 
-        userDefaultsID = id + "30" + "0" + "0"
+        userDefaultsID = LocalNotificationManager.instance.getNotificationID(kontestID: id, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
         isSetForReminder30MiutesBefore = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.bool(forKey: userDefaultsID)
 
-        userDefaultsID = id + "0" + "1" + "0"
+        userDefaultsID = LocalNotificationManager.instance.getNotificationID(kontestID: id, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
         isSetForReminder1HourBefore = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.bool(forKey: userDefaultsID)
 
-        userDefaultsID = id + "0" + "6" + "0"
+        userDefaultsID = LocalNotificationManager.instance.getNotificationID(kontestID: id, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
         isSetForReminder6HoursBefore = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.bool(forKey: userDefaultsID)
     }
 

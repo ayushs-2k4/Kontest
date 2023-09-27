@@ -154,4 +154,8 @@ class LocalNotificationManager {
         let body: String
         let date: Date
     }
+
+    func getNotificationID(kontestID: String, minutesBefore: Int, hoursBefore: Int, daysBefore: Int) -> String {
+        return kontestID + "\(minutesBefore)\(hoursBefore)\(daysBefore)"
+    }
 }

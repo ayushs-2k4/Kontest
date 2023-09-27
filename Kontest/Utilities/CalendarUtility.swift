@@ -375,7 +375,7 @@ class CalendarUtility {
             }
         }
 
-        guard let interval = Calendar.current.dateInterval(of: .month, for: Date()) else { return nil }
+        let interval = DateInterval(start: Date(), end: Calendar.current.date(byAdding: .year, value: 1, to: Date())!)
 
         let predicate = store.predicateForEvents(withStart: interval.start, end: interval.end, calendars: nil)
 
