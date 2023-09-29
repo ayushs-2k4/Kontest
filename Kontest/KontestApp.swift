@@ -36,6 +36,11 @@ struct KontestApp: App {
                             .fixedSize()
                         #endif
                     }
+                    .onAppear(perform: {
+                        #if os(macOS)
+                            disallowTabbingMode()
+                        #endif
+                    })
                     .defaultAppStorage(defaults)
             } else {
                 Text("Failed to load user defaults")
@@ -46,3 +51,9 @@ struct KontestApp: App {
         }
     }
 }
+
+#if os(macOS)
+    fileprivate func disallowTabbingMode() {
+        NSWindow.allowsAutomaticWindowTabbing = false
+    }
+#endif

@@ -17,5 +17,7 @@ struct MyMenu: Commands {
             }
             .keyboardShortcut(KeyEquivalent(","), modifiers: .command)
         }
+
+        CommandGroup(replacing: CommandGroupPlacement.newItem) {}
     }
 }
