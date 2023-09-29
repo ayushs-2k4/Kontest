@@ -149,7 +149,7 @@ struct SingleKontestView: View {
             #if os(macOS)
             if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()), notificationsViewModel.getNumberOfNotificationsWhichCanBeSettedForAKontest(kontest: kontest) > 0 {
                 SingleNotificationMenu(kontest: kontest)
-                    .frame(width: 32)
+                    .frame(width: 45)
             }
             #endif
 
