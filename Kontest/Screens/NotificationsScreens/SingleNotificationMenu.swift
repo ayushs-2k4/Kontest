@@ -96,6 +96,7 @@ struct SingleNotificationMenu: View {
             Image(systemName: imageName)
 //                .frame(width: (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.screen.bounds.width)
         }
+        .menuIndicator(.hidden)
     }
 }
 
