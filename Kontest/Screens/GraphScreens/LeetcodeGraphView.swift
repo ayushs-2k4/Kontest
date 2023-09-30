@@ -41,6 +41,7 @@ struct LeetcodeGraphView: View {
 
             Toggle("Show Annotations?", isOn: $showAnnotations)
                 .toggleStyle(.switch)
+                .padding(.horizontal)
 
             Chart {
                 ForEach(attendedContests, id: \.contest?.title) { attendedContest in
@@ -68,6 +69,7 @@ struct LeetcodeGraphView: View {
             }
             .chartScrollableAxes(.horizontal)
             .chartXVisibleDomain(length: 3600*24*30) // 30 days
+            .padding(.horizontal)
         }
     }
 }
