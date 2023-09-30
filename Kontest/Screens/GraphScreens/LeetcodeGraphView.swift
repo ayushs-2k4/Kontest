@@ -24,52 +24,56 @@ struct LeetcodeGraphView: View {
         if leetcodeGraphQLViewModel.isLoading {
             ProgressView()
         } else {
-            Text(leetcodeGraphQLViewModel.username)
-                .onAppear {
-                    if let ratings = leetcodeGraphQLViewModel.userContestRankingHistory {
-                        attendedContests.removeAll(keepingCapacity: true)
+            if let error = leetcodeGraphQLViewModel.error {
+                Text("Error: \(error.localizedDescription)")
+            } else {
+                Text(leetcodeGraphQLViewModel.username)
+                    .onAppear {
+                        if let ratings = leetcodeGraphQLViewModel.userContestRankingHistory {
+                            attendedContests.removeAll(keepingCapacity: true)
 
-                        for rating in ratings {
-                            if let rating, rating.attended ?? false == true {
-                                attendedContests.append(rating)
-                            }
-                        }
-                    }
-                }
-
-            Text("Total Kontests attended: \(attendedContests.count)")
-
-            Toggle("Show Annotations?", isOn: $showAnnotations)
-                .toggleStyle(.switch)
-                .padding(.horizontal)
-
-            Chart {
-                ForEach(attendedContests, id: \.contest?.title) { attendedContest in
-                    let timestamp = TimeInterval(Int(attendedContest.contest?.startTime ?? "-1") ?? -1)
-                    let date = Date(timeIntervalSince1970: timestamp)
-
-                    PointMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.rating ?? -1))
-                        .annotation(position: .top) {
-                            if showAnnotations {
-                                Text("\(Int(attendedContest.rating ?? -1))")
-                            }
-                        }
-                        .annotation(position: .bottom) {
-                            if showAnnotations {
-                                VStack {
-                                    Text("\(date.formatted(date: .numeric, time: .shortened))")
-
-                                    Text(attendedContest.contest?.title ?? "")
+                            for rating in ratings {
+                                if let rating, rating.attended ?? false == true {
+                                    attendedContests.append(rating)
                                 }
                             }
                         }
+                    }
 
-                    LineMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.rating ?? -1))
+                Text("Total Kontests attended: \(attendedContests.count)")
+
+                Toggle("Show Annotations?", isOn: $showAnnotations)
+                    .toggleStyle(.switch)
+                    .padding(.horizontal)
+
+                Chart {
+                    ForEach(attendedContests, id: \.contest?.title) { attendedContest in
+                        let timestamp = TimeInterval(Int(attendedContest.contest?.startTime ?? "-1") ?? -1)
+                        let date = Date(timeIntervalSince1970: timestamp)
+
+                        PointMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.rating ?? -1))
+                            .annotation(position: .top) {
+                                if showAnnotations {
+                                    Text("\(Int(attendedContest.rating ?? -1))")
+                                }
+                            }
+                            .annotation(position: .bottom) {
+                                if showAnnotations {
+                                    VStack {
+                                        Text("\(date.formatted(date: .numeric, time: .shortened))")
+
+                                        Text(attendedContest.contest?.title ?? "")
+                                    }
+                                }
+                            }
+
+                        LineMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.rating ?? -1))
+                    }
                 }
+                .chartScrollableAxes(.horizontal)
+                .chartXVisibleDomain(length: 3600*24*30) // 30 days
+                .padding(.horizontal)
             }
-            .chartScrollableAxes(.horizontal)
-            .chartXVisibleDomain(length: 3600*24*30) // 30 days
-            .padding(.horizontal)
         }
     }
 }

@@ -16,10 +16,10 @@ enum Panel: Hashable {
 }
 
 struct Sidebar: View {
-    @Binding var selection: Panel?
+    @Binding var panelSelection: Panel?
 
     var body: some View {
-        List(selection: $selection) {
+        List(selection: $panelSelection) {
             NavigationLink(value: Panel.AllKontestScreen) {
                 Text("AllKontestsScreen")
             }
@@ -41,10 +41,10 @@ struct Sidebar: View {
 }
 
 struct DetailColumn: View {
-    @Binding var selection: Panel?
+    @Binding var panelSelection: Panel?
 
     var body: some View {
-        switch selection {
+        switch panelSelection {
         case .AllKontestScreen:
             AllKontestsScreen()
             
@@ -61,14 +61,13 @@ struct DetailColumn: View {
 }
 
 struct ContentView: View {
-    @State private var selection: Panel? = .AllKontestScreen
-//    @State private var selection: Panel? = .LeetCodeGraphView
+    @State private var panelSelection: Panel? = .AllKontestScreen
 
     var body: some View {
         NavigationSplitView {
-            Sidebar(selection: $selection)
+            Sidebar(panelSelection: $panelSelection)
         } detail: {
-            DetailColumn(selection: $selection)
+            DetailColumn(panelSelection: $panelSelection)
         }
         .onAppear {
             WidgetCenter.shared.reloadAllTimelines()
