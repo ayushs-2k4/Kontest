@@ -16,8 +16,23 @@ struct LeetcodeGraphView: View {
     @State private var attendedContests: [LeetCodeUserRankingHistoryGraphQLAPIModel]
     @State private var showAnnotations: Bool = true
 
+    @State private var rawSelectedDate: Date?
+
+    @State private var sortedDates: [Date] = []
+
+    var selectedDate: Date? {
+        guard let rawSelectedDate else { return nil }
+
+        return sortedDates.first { date in
+            let dateComponents = Calendar.current.dateComponents([.day], from: date)
+            let rawSelectedDateComponents = Calendar.current.dateComponents([.day], from: rawSelectedDate)
+
+            return dateComponents == rawSelectedDateComponents
+        }
+    }
+
     init() {
-        self._attendedContests = State(initialValue: [])
+        _attendedContests = State(initialValue: [])
     }
 
     var body: some View {
@@ -36,6 +51,11 @@ struct LeetcodeGraphView: View {
                                 if let rating, rating.attended ?? false == true {
                                     attendedContests.append(rating)
                                 }
+                            }
+
+                            sortedDates = attendedContests.map { ele in
+                                let timestamp = ele.contest?.startTime ?? "-1"
+                                return Date(timeIntervalSince1970: TimeInterval(timestamp) ?? -1)
                             }
                         }
                     }
@@ -69,6 +89,32 @@ struct LeetcodeGraphView: View {
                                 }
                             }
 
+                        if let selectedDate {
+                            RuleMark(x: .value("selectedDate", selectedDate, unit: .day))
+                                .zIndex(-1)
+                                .annotation(position: .leading, spacing: 0, overflowResolution: .init(
+                                    x: .fit(to: .chart),
+                                    y: .disabled
+                                )) {
+                                    let kon = getKonInfo(date: selectedDate)
+                                    VStack {
+                                        if let kon {
+                                            Text(kon.contest?.title ?? "")
+
+                                            if let ranking = kon.ranking {
+                                                Text("Ranking: \(ranking)")
+                                            }
+
+                                            if let rating = kon.rating {
+                                                Text("rating: \(rating)")
+                                            }
+                                        }
+
+                                        Text("\(selectedDate.formatted())")
+                                    }
+                                }
+                        }
+
                         LineMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.rating ?? -1))
                             .interpolationMethod(.catmullRom)
                     }
@@ -76,7 +122,16 @@ struct LeetcodeGraphView: View {
                 .chartScrollableAxes(.horizontal)
                 .chartXVisibleDomain(length: 3600*24*30) // 30 days
                 .padding(.horizontal)
+                .chartXSelection(value: $rawSelectedDate)
             }
+        }
+    }
+
+    func getKonInfo(date: Date) -> LeetCodeUserRankingHistoryGraphQLAPIModel? {
+        return attendedContests.first { leetCodeUserRankingHistoryGraphQLAPIModel in
+            let timestamp = TimeInterval(Int(leetCodeUserRankingHistoryGraphQLAPIModel.contest?.startTime ?? "-1") ?? -1)
+
+            return date == Date(timeIntervalSince1970: timestamp)
         }
     }
 }

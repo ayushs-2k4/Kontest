@@ -7,17 +7,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "38CCB767-B1CF-4911-A62B-BCDECF068BAA"
-            shouldBeEnabled = "Yes"
+            uuid = "C4DB410D-8264-407A-BEB2-656CD4C096A1"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Kontest/Screens/SettingsScreens/ChangeUsernameScreen.swift"
+            filePath = "Kontest/Screens/GraphScreens/LeetcodeGraphView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "completeForm()"
-            landmarkType = "7">
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "selectedDate"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
