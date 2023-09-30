@@ -32,6 +32,7 @@ class LeetCodeGraphQLViewModel {
     }
 
     func fetchUserData(username: String) {
+        print("Ran")
         repository.getUserData(username: username) { [weak self] leetCodeUserProfileGraphQLAPIDTO, error in
             if error != nil {
                 self?.logger.error("\(error)")

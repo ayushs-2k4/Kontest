@@ -14,6 +14,7 @@ class Dependencies {
     let filterWebsitesViewModel: FilterWebsitesViewModel
     let allKontestsViewModel: AllKontestsViewModel
     let changeUsernameViewModel: ChangeUsernameViewModel
+    let leetCodeGraphQLViewModel: LeetCodeGraphQLViewModel
 
     static let instance = Dependencies()
 
@@ -22,5 +23,6 @@ class Dependencies {
         self.filterWebsitesViewModel = FilterWebsitesViewModel()
         self.allKontestsViewModel = AllKontestsViewModel(notificationsViewModel: notificationsViewModel, filterWebsitesViewModel: filterWebsitesViewModel, repository: KontestRepository())
         self.changeUsernameViewModel = ChangeUsernameViewModel()
+        self.leetCodeGraphQLViewModel = LeetCodeGraphQLViewModel(username: changeUsernameViewModel.leetcodeUsername)
     }
 }

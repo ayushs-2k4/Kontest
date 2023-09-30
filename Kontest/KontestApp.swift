@@ -25,7 +25,7 @@ struct KontestApp: App {
     var body: some Scene {
         WindowGroup {
             if let defaults = UserDefaults(suiteName: Constants.userDefaultsGroupID) {
-                AllKontestsScreen()
+                ContentView()
                     .environment(allKontestsViewModel)
                     .environment(router)
                     .environment(networkMonitor)
@@ -45,6 +45,8 @@ struct KontestApp: App {
             } else {
                 Text("Failed to load user defaults")
             }
+            
+//            ContentView()
         }
         .commands {
             MyMenu(router: $router)

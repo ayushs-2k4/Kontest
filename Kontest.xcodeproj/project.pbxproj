@@ -13,6 +13,8 @@
 		07183EB72AB8752D006C92AD /* CalendarUtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EB62AB8752D006C92AD /* CalendarUtilityTests.swift */; };
 		071915642AB1695E00E1CB56 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071915632AB1695E00E1CB56 /* NetworkMonitor.swift */; };
 		071915672AB169D300E1CB56 /* NoInternetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071915662AB169D300E1CB56 /* NoInternetScreen.swift */; };
+		0725FB632AC7E2EA00564DE0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0725FB622AC7E2EA00564DE0 /* ContentView.swift */; };
+		0725FB662AC7EA3F00564DE0 /* LeetcodeGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0725FB652AC7EA3F00564DE0 /* LeetcodeGraphView.swift */; };
 		073269E82AAC42350028476D /* FilterWebsitesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073269E72AAC42350028476D /* FilterWebsitesView.swift */; };
 		073269EC2AAC451B0028476D /* FilterWebsitesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073269EB2AAC451B0028476D /* FilterWebsitesScreen.swift */; };
 		073269EF2AAC4B0C0028476D /* ChangeUsernameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */; };
@@ -192,6 +194,8 @@
 		07183EB62AB8752D006C92AD /* CalendarUtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarUtilityTests.swift; sourceTree = "<group>"; };
 		071915632AB1695E00E1CB56 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		071915662AB169D300E1CB56 /* NoInternetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetScreen.swift; sourceTree = "<group>"; };
+		0725FB622AC7E2EA00564DE0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		0725FB652AC7EA3F00564DE0 /* LeetcodeGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetcodeGraphView.swift; sourceTree = "<group>"; };
 		073269E72AAC42350028476D /* FilterWebsitesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesView.swift; sourceTree = "<group>"; };
 		073269EB2AAC451B0028476D /* FilterWebsitesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesScreen.swift; sourceTree = "<group>"; };
 		073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUsernameScreen.swift; sourceTree = "<group>"; };
@@ -346,6 +350,14 @@
 				07183EB32AB858AE006C92AD /* MockFilterWebsitesViewModel.swift */,
 			);
 			path = MockViewModels;
+			sourceTree = "<group>";
+		};
+		0725FB642AC7EA3500564DE0 /* GraphScreens */ = {
+			isa = PBXGroup;
+			children = (
+				0725FB652AC7EA3F00564DE0 /* LeetcodeGraphView.swift */,
+			);
+			path = GraphScreens;
 			sourceTree = "<group>";
 		};
 		073B78AB2ABC686800BA1CF2 /* SettingsScreens */ = {
@@ -572,6 +584,7 @@
 		07ECFB552AA58259008513C6 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				0725FB642AC7EA3500564DE0 /* GraphScreens */,
 				073B78AD2ABC6A2400BA1CF2 /* NotificationsScreens */,
 				073B78AC2ABC69FF00BA1CF2 /* RatingsScreens */,
 				073B78AB2ABC686800BA1CF2 /* SettingsScreens */,
@@ -585,6 +598,7 @@
 				07A7501F2AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift */,
 				077E6EAE2AB4B2120003E897 /* ErrorView.swift */,
 				07740EA42ABF171F00A93EAF /* CalendarPopoverView.swift */,
+				0725FB622AC7E2EA00564DE0 /* ContentView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -855,6 +869,7 @@
 				07ECFBB02AA58259008513C6 /* CodeForcesUserRatingAPIDTO.swift in Sources */,
 				07FD85A92AB78D5600D26C4C /* Dependencies.swift in Sources */,
 				071915642AB1695E00E1CB56 /* NetworkMonitor.swift in Sources */,
+				0725FB662AC7EA3F00564DE0 /* LeetcodeGraphView.swift in Sources */,
 				07ECFB822AA58259008513C6 /* LeetCodeGraphQLViewModel.swift in Sources */,
 				07ECFB882AA58259008513C6 /* KontestApp.swift in Sources */,
 				07ECFBB72AA58259008513C6 /* CodeChefFetcher.swift in Sources */,
@@ -896,6 +911,7 @@
 				07ECFB912AA58259008513C6 /* CodeForcesUserRatingAPIModel.swift in Sources */,
 				07ECFB8A2AA58259008513C6 /* CodeChefAPIRepository.swift in Sources */,
 				07ECFBA52AA58259008513C6 /* Constants.swift in Sources */,
+				0725FB632AC7E2EA00564DE0 /* ContentView.swift in Sources */,
 				07ECFBAE2AA58259008513C6 /* CodeForcesUserInfoAPIDTO.swift in Sources */,
 				07A750202AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift in Sources */,
 				07A31F002AAC818D00EBC296 /* FilterWebsiteKey.swift in Sources */,
