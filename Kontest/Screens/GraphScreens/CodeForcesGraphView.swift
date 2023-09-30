@@ -59,7 +59,10 @@ struct CodeForcesGraphView: View {
                                 if showAnnotations {
                                     VStack {
                                         Text("\(updateDate.formatted(date: .numeric, time: .shortened))")
+                                        
+                                        #if os(macOS)
                                         Text("\(attendedContest.contestName)")
+                                        #endif
                                     }
                                 }
                             }

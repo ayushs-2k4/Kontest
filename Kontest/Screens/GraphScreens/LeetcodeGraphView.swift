@@ -62,7 +62,9 @@ struct LeetcodeGraphView: View {
                                     VStack {
                                         Text("\(date.formatted(date: .numeric, time: .shortened))")
 
-                                        Text(attendedContest.contest?.title ?? "")
+                                        #if os(macOS)
+                                            Text(attendedContest.contest?.title ?? "")
+                                        #endif
                                     }
                                 }
                             }
