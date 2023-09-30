@@ -39,6 +39,22 @@ struct LeetcodeGraphView: View {
         } else {
             ScrollView {
                 Button("Get") {
+                    if self.attendedContests.isEmpty {
+                        if let history = leetcodeGraphQLViewModel.userContestRankingHistory {
+                            for item in history {
+                                print("item: \(item)")
+                                if let item, item.attended ?? true {
+                                    self.attendedContests.append(item)
+                                }
+                            }
+                        }
+                    }
+
+                    print("Done")
+                }
+                .onAppear(perform: {
+                    self.attendedContests.removeAll()
+                    
                     if let history = leetcodeGraphQLViewModel.userContestRankingHistory {
                         for item in history {
                             print("item: \(item)")
@@ -46,18 +62,13 @@ struct LeetcodeGraphView: View {
                                 self.attendedContests.append(item)
                             }
                         }
-//                        if let item = history[10], item.attended ?? true{
-//                            self.attendedContests.append(item)
-//                        }
                     }
-
-                    print("Done")
-                }
+                })
 
                 Text("\(attendedContests.count)")
 
-//                Toggle("Show Annotations?", isOn: $showAnnotations)
-//                    .padding(.horizontal)
+                Toggle("Show Annotations?", isOn: $showAnnotations)
+                    .padding(.horizontal)
 
                 VStack {
                     ForEach(attendedContests, id: \.contest?.title) { item in
@@ -88,8 +99,6 @@ struct LeetcodeGraphView: View {
             }
             .chartScrollableAxes(.horizontal)
             .chartXVisibleDomain(length: 3600*24*30)
-            
-//            .padding()
         }
     }
 }

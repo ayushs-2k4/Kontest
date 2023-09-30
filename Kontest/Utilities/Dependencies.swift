@@ -7,14 +7,12 @@
 
 import Foundation
 
-
-
 class Dependencies {
     let notificationsViewModel: NotificationsViewModel
     let filterWebsitesViewModel: FilterWebsitesViewModel
     let allKontestsViewModel: AllKontestsViewModel
     let changeUsernameViewModel: ChangeUsernameViewModel
-    let leetCodeGraphQLViewModel: LeetCodeGraphQLViewModel
+    private(set) var leetCodeGraphQLViewModel: LeetCodeGraphQLViewModel
 
     static let instance = Dependencies()
 
@@ -24,5 +22,9 @@ class Dependencies {
         self.allKontestsViewModel = AllKontestsViewModel(notificationsViewModel: notificationsViewModel, filterWebsitesViewModel: filterWebsitesViewModel, repository: KontestRepository())
         self.changeUsernameViewModel = ChangeUsernameViewModel()
         self.leetCodeGraphQLViewModel = LeetCodeGraphQLViewModel(username: changeUsernameViewModel.leetcodeUsername)
+    }
+
+    func changeLeetcodeUsername(leetCodeUsername: String) {
+        leetCodeGraphQLViewModel = LeetCodeGraphQLViewModel(username: leetCodeUsername)
     }
 }

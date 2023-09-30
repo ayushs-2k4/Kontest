@@ -34,6 +34,7 @@ class ChangeUsernameViewModel {
     func setLeetcodeUsername(newLeetcodeUsername: String) {
         leetcodeUsername = newLeetcodeUsername.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
         UserDefaults(suiteName: Constants.userDefaultsGroupID)!.set(leetcodeUsername, forKey: leetcodeUsernameKey)
+        Dependencies.instance.changeLeetcodeUsername(leetCodeUsername: newLeetcodeUsername)
     }
         
     func setCodeForcesUsername(newCodeForcesUsername: String) {

@@ -17,7 +17,8 @@ struct LeetCodeGraphQLView: View {
     init(username: String, bgColor: Color, hoveringScaleValue: CGFloat) {
         self.bgColor = bgColor
         self.username = username
-        self.leetCodeGraphQLViewModel = Dependencies.instance.leetCodeGraphQLViewModel
+//        self.leetCodeGraphQLViewModel = Dependencies.instance.leetCodeGraphQLViewModel
+        self.leetCodeGraphQLViewModel = LeetCodeGraphQLViewModel(username: username)
         self.hoveringScaleValue = hoveringScaleValue
     }
 
