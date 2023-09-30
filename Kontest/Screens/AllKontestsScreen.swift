@@ -201,6 +201,11 @@ struct AllKontestsScreen: View {
         .onChange(of: networkMonitor.currentStatus) {
             if networkMonitor.currentStatus == .satisfied {
                 allKontestsViewModel.fetchAllKontests()
+                
+                Dependencies.instance.reloadLeetcodeUsername()
+                Dependencies.instance.reloadCodeChefUsername()
+                Dependencies.instance.reloadCodeForcesUsername()
+                
                 WidgetCenter.shared.reloadAllTimelines()
             }
         }

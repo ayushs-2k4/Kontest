@@ -35,8 +35,20 @@ class Dependencies {
     func changeCodeChefUsername(codeChefUsername: String) {
         codeChefViewModel = CodeChefViewModel(username: codeChefUsername)
     }
-    
+
     func changeCodeForcesUsername(codeForcesUsername: String) {
         codeForcesViewModel = CodeForcesViewModel(username: codeForcesUsername)
+    }
+
+    func reloadLeetcodeUsername() {
+        leetCodeGraphQLViewModel = LeetCodeGraphQLViewModel(username: changeUsernameViewModel.leetcodeUsername)
+    }
+
+    func reloadCodeChefUsername() {
+        codeChefViewModel = CodeChefViewModel(username: changeUsernameViewModel.codeChefUsername)
+    }
+
+    func reloadCodeForcesUsername() {
+        codeForcesViewModel = CodeForcesViewModel(username: changeUsernameViewModel.codeForcesUsername)
     }
 }
