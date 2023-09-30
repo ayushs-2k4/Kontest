@@ -97,6 +97,7 @@ struct ButtonsView: View {
         VStack {
             if CalendarUtility.isKontestOfFuture(kontestStartDate: kontestStartDate ?? Date()), notificationsViewModel.getNumberOfNotificationsWhichCanBeSettedForAKontest(kontest: kontest) > 0 {
                 SingleNotificationMenu(kontest: kontest)
+                    .controlSize(.large)
 
                 if let kontestStartDate {
                     Button {
@@ -106,6 +107,7 @@ struct ButtonsView: View {
                         Text("Add to Calendar")
                             .frame(maxWidth: .infinity)
                     }
+                    .controlSize(.large)
                     .popover(isPresented: $isCalendarPopoverVisible, arrowEdge: .bottom) {
                         CalendarPopoverView(date: kontestStartDate.addingTimeInterval(-15 * 60), kontestStartDate: kontestStartDate, isAlreadySetted: kontest.isCalendarEventAdded, onPressDelete: {
                             print(kontest.isCalendarEventAdded ? "Delete" : "Cancel")
@@ -151,6 +153,7 @@ struct ButtonsView: View {
                 Text("Contest Registration Page")
                     .frame(maxWidth: .infinity)
             })
+            .controlSize(.large)
         }
         .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.site))
         .buttonStyle(.bordered)

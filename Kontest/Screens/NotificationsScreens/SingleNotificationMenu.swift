@@ -95,7 +95,14 @@ struct SingleNotificationMenu: View {
             let imageName = isSetForAllNotifications(kontest: kontest) ? "bell.fill" : "bell"
             Image(systemName: imageName)
 //                .frame(width: (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.screen.bounds.width)
+        } primaryAction: {
+            if notificationsViewModel.getNumberOfSettedNotificationForAKontest(kontest: kontest) < 4{
+                setNotificationForAKontestAtAllTimes(kontest: kontest)
+            }else{
+                removeAllNotificationForAKontest(kontest: kontest)
+            }
         }
+
     }
 }
 
