@@ -30,6 +30,8 @@ class AllKontestsViewModel {
     private(set) var tomorrowKontests: [KontestModel] = []
     private(set) var laterKontests: [KontestModel] = []
 
+    private var nextDateToRefresh: Date?
+
     private let shouldFetchAllEventsFromCalendar: Bool
 
     var searchText: String = "" {
@@ -62,16 +64,49 @@ class AllKontestsViewModel {
 
             checkNotificationAuthorization()
             filterKontests()
+
+            // Doing this here (after splitting kontests into categories initiall)
+            nextDateToRefresh = CalendarUtility.getNextDateToRefresh(
+                ongoingKontests: ongoingKontests,
+                laterTodayKontests: laterTodayKontests,
+                tomorrowKontests: tomorrowKontests,
+                laterKontests: laterKontests
+            )
+
             isLoading = false
             removeReminderStatusFromUserDefaultsOfKontestsWhichAreEnded()
 
             self.timer = Timer.publish(every: 1, on: .main, in: .default)
                 .autoconnect()
-                .sink { [weak self] _ in
+                .sink { [weak self] timer in
                     guard let self else { return }
 
-                    if self.searchText.isEmpty {
-                        self.splitKontestsIntoDifferentCategories()
+                    let timeInterval = Double(timer.timeIntervalSince1970)
+                    let currentDate = Date(timeIntervalSince1970: timeInterval)
+
+                    if let nextDateToRefresh {
+                        let timeInterval = currentDate.timeIntervalSince(nextDateToRefresh)
+                        print("nextDateToRefresh: \(nextDateToRefresh.formatted())")
+                        print("timeInterval: \(timeInterval)")
+                        print("")
+
+                        if timeInterval >= 5, timeInterval <= 5 {
+                            if self.searchText.isEmpty {
+                                self.splitKontestsIntoDifferentCategories()
+                            }
+                        } else if timeInterval > 5, timeInterval <= 10 {
+                            print("acshj")
+                            self.nextDateToRefresh = CalendarUtility.getNextDateToRefresh(
+                                ongoingKontests: ongoingKontests,
+                                laterTodayKontests: laterTodayKontests,
+                                tomorrowKontests: tomorrowKontests,
+                                laterKontests: laterKontests
+                            )
+                        }
+                    } else {
+                        if self.searchText.isEmpty {
+                            self.splitKontestsIntoDifferentCategories()
+                        }
                     }
                 }
         }
@@ -153,6 +188,7 @@ class AllKontestsViewModel {
     }
 
     private func splitKontestsIntoDifferentCategories() {
+        print("YEs")
         let today = Date()
 
         toShowKontests = toShowKontests.filter {
