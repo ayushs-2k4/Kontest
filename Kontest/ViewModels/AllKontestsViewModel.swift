@@ -65,7 +65,7 @@ class AllKontestsViewModel {
             checkNotificationAuthorization()
             filterKontests()
 
-            // Doing this here (after splitting kontests into categories initiall)
+            // Doing this here (after splitting kontests into categories initially)
             nextDateToRefresh = CalendarUtility.getNextDateToRefresh(
                 ongoingKontests: ongoingKontests,
                 laterTodayKontests: laterTodayKontests,

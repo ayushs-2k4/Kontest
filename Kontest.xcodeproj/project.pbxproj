@@ -56,6 +56,7 @@
 		077E6EAD2AB4B1D10003E897 /* ErrorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EAC2AB4B1D10003E897 /* ErrorWrapper.swift */; };
 		077E6EAF2AB4B2120003E897 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EAE2AB4B2120003E897 /* ErrorView.swift */; };
 		077E6EB12AB4B3220003E897 /* ErrorState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EB02AB4B3220003E897 /* ErrorState.swift */; };
+		0787AE982AC89C0100F1B80C /* RotatingMapScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0787AE972AC89C0100F1B80C /* RotatingMapScreen.swift */; };
 		079F68072ABC80C2001B0EFE /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CFEBA32AB02DCB00291484 /* WidgetKit.framework */; };
 		079F68082ABC80C2001B0EFE /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CFEBA52AB02DCB00291484 /* SwiftUI.framework */; };
 		079F680B2ABC80C2001B0EFE /* Upcoming_Kontest_macOS_WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F680A2ABC80C2001B0EFE /* Upcoming_Kontest_macOS_WidgetBundle.swift */; };
@@ -220,6 +221,7 @@
 		077E6EB02AB4B3220003E897 /* ErrorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorState.swift; sourceTree = "<group>"; };
 		0784292D2AB5EF660078D836 /* AddToCalendarIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCalendarIntent.swift; sourceTree = "<group>"; };
 		078429312AB603FB0078D836 /* KontestWidgetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestWidgetModel.swift; sourceTree = "<group>"; };
+		0787AE972AC89C0100F1B80C /* RotatingMapScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingMapScreen.swift; sourceTree = "<group>"; };
 		079F68062ABC80C2001B0EFE /* Upcoming Kontest macOS WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Upcoming Kontest macOS WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		079F680A2ABC80C2001B0EFE /* Upcoming_Kontest_macOS_WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upcoming_Kontest_macOS_WidgetBundle.swift; sourceTree = "<group>"; };
 		079F680C2ABC80C2001B0EFE /* Upcoming_Kontest_macOS_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upcoming_Kontest_macOS_Widget.swift; sourceTree = "<group>"; };
@@ -376,6 +378,7 @@
 				073269E72AAC42350028476D /* FilterWebsitesView.swift */,
 				073269EB2AAC451B0028476D /* FilterWebsitesScreen.swift */,
 				073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */,
+				0787AE972AC89C0100F1B80C /* RotatingMapScreen.swift */,
 			);
 			path = SettingsScreens;
 			sourceTree = "<group>";
@@ -888,6 +891,7 @@
 				07ECFB812AA58259008513C6 /* ChangeUsernameViewModel.swift in Sources */,
 				07ECFBB02AA58259008513C6 /* CodeForcesUserRatingAPIDTO.swift in Sources */,
 				07FD85A92AB78D5600D26C4C /* Dependencies.swift in Sources */,
+				0787AE982AC89C0100F1B80C /* RotatingMapScreen.swift in Sources */,
 				071915642AB1695E00E1CB56 /* NetworkMonitor.swift in Sources */,
 				0725FB662AC7EA3F00564DE0 /* LeetcodeGraphView.swift in Sources */,
 				07D7666C2AC8407B000A3DFD /* DetailColumn.swift in Sources */,

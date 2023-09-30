@@ -17,4 +17,5 @@ enum Screen: Hashable {
 enum SettingsScreens {
     case ChangeUserNamesScreen
     case FilterWebsitesScreen
+    case RotatingMapScreen
 }

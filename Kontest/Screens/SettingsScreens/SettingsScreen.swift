@@ -22,6 +22,11 @@ struct SettingsScreen: View {
                     router.appendScreen(screen: Screen.SettingsScreenType(.FilterWebsitesScreen))
                 }
                 .buttonStyle(.bordered)
+                
+                Button("About Me!") {
+                    router.appendScreen(screen: Screen.SettingsScreenType(.RotatingMapScreen))
+                }
+                .buttonStyle(.bordered)
             }
         }
         .navigationTitle("Settings")

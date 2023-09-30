@@ -184,6 +184,9 @@ struct AllKontestsScreen: View {
 
                             case .FilterWebsitesScreen:
                                 FilterWebsitesScreen()
+
+                            case .RotatingMapScreen:
+                               RandomRotatingMapScreen(navigationTitle: "About Me")
                             }
                         }
 
