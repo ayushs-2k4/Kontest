@@ -45,8 +45,6 @@ struct KontestApp: App {
             } else {
                 Text("Failed to load user defaults")
             }
-            
-//            ContentView()
         }
         .commands {
             MyMenu(router: $router)

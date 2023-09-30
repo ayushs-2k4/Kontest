@@ -19,5 +19,7 @@ struct MyMenu: Commands {
         }
 
         CommandGroup(replacing: CommandGroupPlacement.newItem) {}
+        
+        SidebarCommands()
     }
 }
