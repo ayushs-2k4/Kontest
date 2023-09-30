@@ -91,6 +91,7 @@ class AllKontestsViewModel {
 
                     // Load Calendar status
                     kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+                    kontest.loadCalendarEventDate(allEvents: allEvents ?? [])
 
                     return kontest
                 }
