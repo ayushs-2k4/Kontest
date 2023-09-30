@@ -97,21 +97,25 @@ struct LeetcodeGraphView: View {
                                     x: .fit(to: .chart),
                                     y: .disabled
                                 )) {
-                                    let kon = getKonInfo(date: selectedDate)
-                                    VStack {
-                                        if let kon {
-                                            Text(kon.contest?.title ?? "")
+                                    let kontest = getKontestFromDate(date: selectedDate)
+                                    VStack(spacing: 10) {
+                                        if let kontest {
+                                            Text(kontest.contest?.title ?? "")
 
-                                            if let ranking = kon.ranking {
+                                            Text("\(selectedDate.formatted())")
+
+                                            if let problemsSolved = kontest.problemsSolved {
+                                                Text("Total problems solved: \(problemsSolved)")
+                                            }
+                                            
+                                            if let ranking = kontest.ranking {
                                                 Text("Ranking: \(ranking)")
                                             }
 
-                                            if let rating = kon.rating {
+                                            if let rating = kontest.rating {
                                                 Text("rating: \(rating)")
                                             }
                                         }
-
-                                        Text("\(selectedDate.formatted())")
                                     }
                                 }
                         }
@@ -128,7 +132,7 @@ struct LeetcodeGraphView: View {
         }
     }
 
-    func getKonInfo(date: Date) -> LeetCodeUserRankingHistoryGraphQLAPIModel? {
+    private func getKontestFromDate(date: Date) -> LeetCodeUserRankingHistoryGraphQLAPIModel? {
         return attendedContests.first { leetCodeUserRankingHistoryGraphQLAPIModel in
             let timestamp = TimeInterval(Int(leetCodeUserRankingHistoryGraphQLAPIModel.contest?.startTime ?? "-1") ?? -1)
 
