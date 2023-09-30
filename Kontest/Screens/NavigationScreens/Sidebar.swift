@@ -13,21 +13,21 @@ struct Sidebar: View {
     var body: some View {
         List(selection: $panelSelection) {
             NavigationLink(value: Panel.AllKontestScreen) {
-                Text("AllKontestsScreen")
+                Text("All Kontests")
             }
 
             Section("Ranking Graphs") {
                 NavigationLink(value: Panel.CodeForcesGraphView) {
-                    Text("CodeForces Graph")
+                    Text("CodeForces Rankings")
                 }
 
                 NavigationLink(value: Panel.LeetCodeGraphView) {
-                    Text("LeetCode Graph")
+                    Text("LeetCode Rankings")
                 }
             }
         }
         #if os(macOS)
-        .navigationSplitViewColumnWidth(min: 150, ideal: 200, max: 250)
+        .navigationSplitViewColumnWidth(min: 180, ideal: 200, max: 250)
         #endif
     }
 }

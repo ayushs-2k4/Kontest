@@ -37,99 +37,102 @@ struct LeetcodeGraphView: View {
     }
 
     var body: some View {
-        if leetcodeGraphQLViewModel.isLoading {
-            ProgressView()
-        } else {
-            if let error = leetcodeGraphQLViewModel.error {
-                Text("Error: \(error.localizedDescription)")
+        Group{
+            if leetcodeGraphQLViewModel.isLoading {
+                ProgressView()
             } else {
-                Text(leetcodeGraphQLViewModel.username)
-                    .onAppear {
-                        if let ratings = leetcodeGraphQLViewModel.userContestRankingHistory {
-                            attendedContests.removeAll(keepingCapacity: true)
+                if let error = leetcodeGraphQLViewModel.error {
+                    Text("Error: \(error.localizedDescription)")
+                } else {
+                    Text(leetcodeGraphQLViewModel.username)
+                        .onAppear {
+                            if let ratings = leetcodeGraphQLViewModel.userContestRankingHistory {
+                                attendedContests.removeAll(keepingCapacity: true)
 
-                            for rating in ratings {
-                                if let rating, rating.attended ?? false == true {
-                                    attendedContests.append(rating)
-                                }
-                            }
-
-                            sortedDates = attendedContests.map { ele in
-                                let timestamp = ele.contest?.startTime ?? "-1"
-                                return Date(timeIntervalSince1970: TimeInterval(timestamp) ?? -1)
-                            }
-                        }
-                    }
-
-                Text("Total Kontests attended: \(attendedContests.count)")
-
-                Toggle("Show Annotations?", isOn: $showAnnotations)
-                    .toggleStyle(.switch)
-                    .padding(.horizontal)
-
-                Chart {
-                    ForEach(attendedContests, id: \.contest?.title) { attendedContest in
-                        let timestamp = TimeInterval(Int(attendedContest.contest?.startTime ?? "-1") ?? -1)
-                        let date = Date(timeIntervalSince1970: timestamp)
-
-                        PointMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.rating ?? -1))
-                            .annotation(position: .top) {
-                                if showAnnotations {
-                                    Text("\(Int(attendedContest.rating ?? -1))")
-                                }
-                            }
-                            .annotation(position: .bottom) {
-                                if showAnnotations {
-                                    VStack {
-                                        Text("\(date.formatted(date: .numeric, time: .shortened))")
-
-                                        #if os(macOS)
-                                            Text(attendedContest.contest?.title ?? "")
-                                        #endif
+                                for rating in ratings {
+                                    if let rating, rating.attended ?? false == true {
+                                        attendedContests.append(rating)
                                     }
                                 }
+
+                                sortedDates = attendedContests.map { ele in
+                                    let timestamp = ele.contest?.startTime ?? "-1"
+                                    return Date(timeIntervalSince1970: TimeInterval(timestamp) ?? -1)
+                                }
                             }
+                        }
 
-                        if let selectedDate {
-                            RuleMark(x: .value("selectedDate", selectedDate, unit: .day))
-                                .zIndex(-1)
-                                .annotation(position: .leading, spacing: 0, overflowResolution: .init(
-                                    x: .fit(to: .chart),
-                                    y: .disabled
-                                )) {
-                                    let kontest = getKontestFromDate(date: selectedDate)
-                                    VStack(spacing: 10) {
-                                        if let kontest {
-                                            Text(kontest.contest?.title ?? "")
+                    Text("Total Kontests attended: \(attendedContests.count)")
 
-                                            Text("\(selectedDate.formatted())")
+                    Toggle("Show Annotations?", isOn: $showAnnotations)
+                        .toggleStyle(.switch)
+                        .padding(.horizontal)
 
-                                            if let problemsSolved = kontest.problemsSolved {
-                                                Text("Total problems solved: \(problemsSolved)")
-                                            }
-                                            
-                                            if let ranking = kontest.ranking {
-                                                Text("Ranking: \(ranking)")
-                                            }
+                    Chart {
+                        ForEach(attendedContests, id: \.contest?.title) { attendedContest in
+                            let timestamp = TimeInterval(Int(attendedContest.contest?.startTime ?? "-1") ?? -1)
+                            let date = Date(timeIntervalSince1970: timestamp)
 
-                                            if let rating = kontest.rating {
-                                                Text("rating: \(rating)")
-                                            }
+                            PointMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.rating ?? -1))
+                                .annotation(position: .top) {
+                                    if showAnnotations {
+                                        Text("\(Int(attendedContest.rating ?? -1))")
+                                    }
+                                }
+                                .annotation(position: .bottom) {
+                                    if showAnnotations {
+                                        VStack {
+                                            Text("\(date.formatted(date: .numeric, time: .shortened))")
+
+                                            #if os(macOS)
+                                                Text(attendedContest.contest?.title ?? "")
+                                            #endif
                                         }
                                     }
                                 }
-                        }
 
-                        LineMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.rating ?? -1))
-                            .interpolationMethod(.catmullRom)
+                            if let selectedDate {
+                                RuleMark(x: .value("selectedDate", selectedDate, unit: .day))
+                                    .zIndex(-1)
+                                    .annotation(position: .leading, spacing: 0, overflowResolution: .init(
+                                        x: .fit(to: .chart),
+                                        y: .disabled
+                                    )) {
+                                        let kontest = getKontestFromDate(date: selectedDate)
+                                        VStack(spacing: 10) {
+                                            if let kontest {
+                                                Text(kontest.contest?.title ?? "")
+
+                                                Text("\(selectedDate.formatted())")
+
+                                                if let problemsSolved = kontest.problemsSolved {
+                                                    Text("Total problems solved: \(problemsSolved)")
+                                                }
+                                                
+                                                if let ranking = kontest.ranking {
+                                                    Text("Ranking: \(ranking)")
+                                                }
+
+                                                if let rating = kontest.rating {
+                                                    Text("rating: \(rating)")
+                                                }
+                                            }
+                                        }
+                                    }
+                            }
+
+                            LineMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.rating ?? -1))
+                                .interpolationMethod(.catmullRom)
+                        }
                     }
+                    .chartScrollableAxes(.horizontal)
+                    .chartXVisibleDomain(length: 3600*24*30) // 30 days
+                    .padding(.horizontal)
+                    .chartXSelection(value: $rawSelectedDate)
                 }
-                .chartScrollableAxes(.horizontal)
-                .chartXVisibleDomain(length: 3600*24*30) // 30 days
-                .padding(.horizontal)
-                .chartXSelection(value: $rawSelectedDate)
             }
         }
+        .navigationTitle("Leetcode Rankings")
     }
 
     private func getKontestFromDate(date: Date) -> LeetCodeUserRankingHistoryGraphQLAPIModel? {
