@@ -11,9 +11,7 @@ import Charts
 import SwiftUI
 
 struct LeetcodeGraphView: View {
-//    let leetcodeGraphQLViewModel = LeetCodeGraphQLViewModel(username: "neal_wu")
-//    let leetcodeGraphQLViewModel = LeetCodeGraphQLViewModel(username: "ayushs_2k4")
-    let leetcodeGraphQLViewModel = Dependencies.instance.leetCodeGraphQLViewModel
+    let leetcodeGraphQLViewModel: LeetCodeGraphQLViewModel = Dependencies.instance.leetCodeGraphQLViewModel
 
     @State private var attendedContests: [LeetCodeUserRankingHistoryGraphQLAPIModel]
     @State private var showAnnotations: Bool = true
@@ -23,82 +21,53 @@ struct LeetcodeGraphView: View {
     }
 
     var body: some View {
-        Text("\(leetcodeGraphQLViewModel.userContestRankingHistory?.count ?? -1)")
-            .onChange(of: leetcodeGraphQLViewModel.userContestRankingHistory) { _, newValue in
-                if let newValue {
-                    for item in newValue {
-                        if let item, item.attended ?? true {
-                            self.attendedContests.append(item)
-                        }
-                    }
-                }
-            }
-
         if leetcodeGraphQLViewModel.isLoading {
             ProgressView()
         } else {
-            ScrollView {
-                Button("Get") {
-                    if self.attendedContests.isEmpty {
-                        if let history = leetcodeGraphQLViewModel.userContestRankingHistory {
-                            for item in history {
-                                print("item: \(item)")
-                                if let item, item.attended ?? true {
-                                    self.attendedContests.append(item)
-                                }
+            Text(leetcodeGraphQLViewModel.username)
+                .onAppear {
+                    if let ratings = leetcodeGraphQLViewModel.userContestRankingHistory {
+                        attendedContests.removeAll(keepingCapacity: true)
+
+                        for rating in ratings {
+                            if let rating, rating.attended ?? false == true {
+                                attendedContests.append(rating)
                             }
                         }
                     }
-
-                    print("Done")
                 }
-                .onAppear(perform: {
-                    self.attendedContests.removeAll()
 
-                    if let history = leetcodeGraphQLViewModel.userContestRankingHistory {
-                        for item in history {
-                            print("item: \(item)")
-                            if let item, item.attended ?? true {
-                                self.attendedContests.append(item)
-                            }
-                        }
-                    }
-                })
+            Text("Total Kontests attended: \(attendedContests.count)")
 
-                Text("\(attendedContests.count)")
-
-                Toggle("Show Annotations?", isOn: $showAnnotations)
-                    .padding(.horizontal)
-
-                VStack {
-                    ForEach(attendedContests, id: \.contest?.title) { item in
-                        Text(item.contest?.title ?? "No name")
-                    }
-                }
-            }
+            Toggle("Show Annotations?", isOn: $showAnnotations)
+                .toggleStyle(.switch)
 
             Chart {
-                ForEach(attendedContests, id: \.contest?.title) { item in
-                    let timestamp = TimeInterval(Int(item.contest?.startTime ?? "-1") ?? -1)
+                ForEach(attendedContests, id: \.contest?.title) { attendedContest in
+                    let timestamp = TimeInterval(Int(attendedContest.contest?.startTime ?? "-1") ?? -1)
                     let date = Date(timeIntervalSince1970: timestamp)
 
-                    PointMark(x: .value("Time", date, unit: .day), y: .value("Ratings", item.rating ?? -1))
+                    PointMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.rating ?? -1))
                         .annotation(position: .top) {
                             if showAnnotations {
-                                Text("\(Int(item.rating ?? -1))")
+                                Text("\(Int(attendedContest.rating ?? -1))")
                             }
                         }
                         .annotation(position: .bottom) {
                             if showAnnotations {
-                                Text("\(date.formatted(date: .numeric, time: .shortened))")
+                                VStack {
+                                    Text("\(date.formatted(date: .numeric, time: .shortened))")
+
+                                    Text(attendedContest.contest?.title ?? "")
+                                }
                             }
                         }
 
-                    LineMark(x: .value("Time", date), y: .value("Ratings", item.rating ?? -1))
+                    LineMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.rating ?? -1))
                 }
             }
             .chartScrollableAxes(.horizontal)
-            .chartXVisibleDomain(length: 3600*24*30)
+            .chartXVisibleDomain(length: 3600*24*30) // 30 days
         }
     }
 }

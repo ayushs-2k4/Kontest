@@ -13,6 +13,7 @@ class LeetCodeGraphQLViewModel {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "FilterWebsitesViewModel")
 
     let repository = LeetCodeAPIGraphQLRepository()
+    let username: String
 
     var leetCodeUserProfileGraphQLAPIModel: LeetCodeUserProfileGraphQLAPIModel?
     var userContestRanking: LeetCodeUserRankingGraphQLAPIModel?
@@ -24,6 +25,7 @@ class LeetCodeGraphQLViewModel {
     var isFetchingUserRankings: Bool = false
 
     init(username: String) {
+        self.username = username
         self.isFetchingUserData = true
         self.isFetchingUserRankings = true
         self.isLoading = true

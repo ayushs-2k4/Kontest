@@ -52,7 +52,7 @@ struct DetailColumn: View {
             LeetcodeGraphView()
             
         case .CodeForcesGraphView:
-            Text("CodeForcesGraphView")
+            CodeForcesGraphView()
             
         case nil:
             Text("Nil")

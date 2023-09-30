@@ -15,6 +15,7 @@
 		071915672AB169D300E1CB56 /* NoInternetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071915662AB169D300E1CB56 /* NoInternetScreen.swift */; };
 		0725FB632AC7E2EA00564DE0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0725FB622AC7E2EA00564DE0 /* ContentView.swift */; };
 		0725FB662AC7EA3F00564DE0 /* LeetcodeGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0725FB652AC7EA3F00564DE0 /* LeetcodeGraphView.swift */; };
+		0725FB682AC82F0A00564DE0 /* CodeForcesGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0725FB672AC82F0A00564DE0 /* CodeForcesGraphView.swift */; };
 		073269E82AAC42350028476D /* FilterWebsitesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073269E72AAC42350028476D /* FilterWebsitesView.swift */; };
 		073269EC2AAC451B0028476D /* FilterWebsitesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073269EB2AAC451B0028476D /* FilterWebsitesScreen.swift */; };
 		073269EF2AAC4B0C0028476D /* ChangeUsernameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */; };
@@ -196,6 +197,7 @@
 		071915662AB169D300E1CB56 /* NoInternetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetScreen.swift; sourceTree = "<group>"; };
 		0725FB622AC7E2EA00564DE0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0725FB652AC7EA3F00564DE0 /* LeetcodeGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetcodeGraphView.swift; sourceTree = "<group>"; };
+		0725FB672AC82F0A00564DE0 /* CodeForcesGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeForcesGraphView.swift; sourceTree = "<group>"; };
 		073269E72AAC42350028476D /* FilterWebsitesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesView.swift; sourceTree = "<group>"; };
 		073269EB2AAC451B0028476D /* FilterWebsitesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesScreen.swift; sourceTree = "<group>"; };
 		073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUsernameScreen.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 			isa = PBXGroup;
 			children = (
 				0725FB652AC7EA3F00564DE0 /* LeetcodeGraphView.swift */,
+				0725FB672AC82F0A00564DE0 /* CodeForcesGraphView.swift */,
 			);
 			path = GraphScreens;
 			sourceTree = "<group>";
@@ -878,6 +881,7 @@
 				07ECFB9E2AA58259008513C6 /* BlinkingDotView.swift in Sources */,
 				07ECFBA62AA58259008513C6 /* CalendarUtility.swift in Sources */,
 				07ECFBC62AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift in Sources */,
+				0725FB682AC82F0A00564DE0 /* CodeForcesGraphView.swift in Sources */,
 				076134CF2AA86AC300946B02 /* KontestDetailViewModel.swift in Sources */,
 				07ECFB9A2AA58259008513C6 /* RatingsView.swift in Sources */,
 				07ECFB842AA58259008513C6 /* CodeChefViewModel.swift in Sources */,
