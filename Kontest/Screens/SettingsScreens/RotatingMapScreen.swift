@@ -40,13 +40,27 @@ struct RotatingMapScreen: View {
     let parkingSpot: ParkingSpot
 
     var body: some View {
-        TimelineView(.animation) { context in
-            VStack {
-                let seconds = context.date.timeIntervalSince1970
-                let rotationPeriod = 240.0
-                let headingDelta = seconds.percent(truncation: rotationPeriod)
+        GeometryReader { proxy in
+            TimelineView(.animation) { context in
+                VStack {
+                    let seconds = context.date.timeIntervalSince1970
+                    let rotationPeriod = 240.0
+                    let headingDelta = seconds.percent(truncation: rotationPeriod)
+                    let pitchPeriod = 60.0
+                    let pitchDelta = seconds
+                        .percent(truncation: pitchPeriod)
+                        .symmetricEaseInOut()
 
-                RotatingMapView(coordinates: self.parkingSpot.location, distance: 1000, pitch: 60, heading: headingDelta * 360)
+                    let viewWidthPercent = (350.0 ... 1000).percent(for: proxy.size.width)
+                    let distanceMultiplier = (1 - viewWidthPercent) * 0.5 + 1
+
+                    RotatingMapView(
+                        coordinates: self.parkingSpot.location,
+                        distance: distanceMultiplier * self.parkingSpot.cameraDistance,
+                        pitch: 60,
+                        heading: headingDelta * 360
+                    )
+                }
             }
         }
     }
@@ -85,7 +99,47 @@ struct RotatingMapView: View {
     RandomRotatingMapScreen(navigationTitle: "RandomRotatingMapScreen")
 }
 
+public extension ClosedRange where Bound: BinaryFloatingPoint {
+    func percent(for value: Bound, clamped: Bool = true) -> Bound {
+        var result = (value - lowerBound) / (upperBound - value)
+        if clamped {
+            result = Swift.min(Swift.max(result, 0), 1)
+        }
+        return result
+    }
+}
+
 public extension BinaryFloatingPoint {
+    func easeInOut(clamped: Bool = true) -> Self {
+        assert(self.isFinite)
+        let timing = clamped ? min(max(self, 0), 1) : self
+        return timing * timing * (3.0 - 2.0 * timing)
+    }
+
+    /// Takes a value from 0 to 1 and returns a value that starts at 0, eases into 1, and eases back into 0.
+    ///
+    /// For example, the following inputs generate these outputs:
+    /// Input  | Output
+    /// --- | ---
+    /// `0` | `0`
+    /// `0.25` | `0.5`
+    /// `0.5` | `1`
+    /// `0.75` | `0.5`
+    /// `1` | `0`
+    ///
+    /// > Important: Only call this method on a finite number.
+    /// - Parameter clamped: Ignores values outside `0...1`, defaults to `true`.
+    /// - Returns: A value that is easing from 0 to 1 and back to 0.
+    func symmetricEaseInOut(clamped: Bool = true) -> Self {
+        assert(self.isFinite)
+        let timing = clamped ? min(max(self, 0), 1) : self
+        if timing <= 0.5 {
+            return (timing * 2).easeInOut(clamped: clamped)
+        } else {
+            return (2 - (timing * 2)).easeInOut(clamped: clamped)
+        }
+    }
+
     func percent(truncation: Self) -> Self {
         assert(self.isFinite)
         assert(!truncation.isZero && truncation.isFinite)
