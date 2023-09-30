@@ -21,14 +21,15 @@ struct LeetcodeGraphView: View {
     @State private var sortedDates: [Date] = []
 
     var selectedDate: Date? {
-        guard let rawSelectedDate else { return nil }
+        guard let rawSelectedDate = rawSelectedDate else { return nil }
 
-        return sortedDates.first { date in
-            let dateComponents = Calendar.current.dateComponents([.day], from: date)
-            let rawSelectedDateComponents = Calendar.current.dateComponents([.day], from: rawSelectedDate)
+        let selectedDay = Calendar.current.startOfDay(for: rawSelectedDate)
 
-            return dateComponents == rawSelectedDateComponents
+        if let matchingDate = sortedDates.first(where: { Calendar.current.startOfDay(for: $0) == selectedDay }) {
+            return matchingDate
         }
+
+        return nil
     }
 
     init() {
