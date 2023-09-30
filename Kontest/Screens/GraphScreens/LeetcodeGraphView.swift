@@ -70,6 +70,7 @@ struct LeetcodeGraphView: View {
                             }
 
                         LineMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.rating ?? -1))
+                            .interpolationMethod(.catmullRom)
                     }
                 }
                 .chartScrollableAxes(.horizontal)

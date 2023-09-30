@@ -68,6 +68,7 @@ struct CodeForcesGraphView: View {
                             }
 
                         LineMark(x: .value("Time", updateDate, unit: .day), y: .value("Ratings", newRating))
+                            .interpolationMethod(.catmullRom)
                     }
                 }
                 .chartScrollableAxes(.horizontal)
