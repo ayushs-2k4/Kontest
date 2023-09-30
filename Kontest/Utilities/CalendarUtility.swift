@@ -427,4 +427,16 @@ class CalendarUtility {
     static func getAuthorizationStatus() -> EKAuthorizationStatus {
         return EKEventStore.authorizationStatus(for: EKEntityType.event)
     }
+
+    static func getCalendarDateOfEvent(allEventsOfCalendar: [EKEvent], startDate: Date, endDate: Date, title: String, url: URL?) -> Date? {
+        let event = allEventsOfCalendar.first { event in
+            event.startDate == startDate && event.endDate == endDate && event.title == title && event.url == url
+        }
+
+        if let event {
+            return event.alarms?.first?.absoluteDate ?? event.startDate.addingTimeInterval(-15 * 60)
+        } else {
+            return nil
+        }
+    }
 }
