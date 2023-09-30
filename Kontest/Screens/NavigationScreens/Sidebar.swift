@@ -13,21 +13,33 @@ struct Sidebar: View {
     var body: some View {
         List(selection: $panelSelection) {
             NavigationLink(value: Panel.AllKontestScreen) {
-                Text("All Kontests")
+                Label("All Kontests", systemImage: "chart.bar")
             }
 
             Section("Ranking Graphs") {
                 NavigationLink(value: Panel.CodeForcesGraphView) {
-                    Text("CodeForces Rankings")
+                    Label {
+                        Text("CodeForces Rankings")
+                    } icon: {
+                        Image(.codeForcesLogo)
+                            .resizable()
+                            .frame(width: 16, height: 16)
+                    }
                 }
 
                 NavigationLink(value: Panel.LeetCodeGraphView) {
-                    Text("LeetCode Rankings")
+                    Label {
+                        Text("LeetCode Rankings")
+                    } icon: {
+                        Image(.leetCodeDarkLogo)
+                            .resizable()
+                            .frame(width: 16, height: 16)
+                    }
                 }
             }
         }
         #if os(macOS)
-        .navigationSplitViewColumnWidth(min: 180, ideal: 200, max: 250)
+        .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: 250)
         #endif
     }
 }
