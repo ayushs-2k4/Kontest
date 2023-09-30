@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 enum Panel: Hashable {
     case AllKontestScreen
@@ -69,6 +70,9 @@ struct ContentView: View {
         } detail: {
             DetailColumn(selection: $selection)
         }
+        .onAppear {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
     }
 }
 
@@ -77,5 +81,5 @@ struct ContentView: View {
         .environment(Dependencies.instance.allKontestsViewModel)
         .environment(Router.instance)
         .environment(NetworkMonitor.shared)
-//        .environment(errorState)
+        .environment(ErrorState())
 }

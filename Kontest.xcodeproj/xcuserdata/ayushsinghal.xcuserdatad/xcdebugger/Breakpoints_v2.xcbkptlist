@@ -7,64 +7,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "91B1D10B-6A55-4EBB-8900-926B11011F4D"
+            uuid = "38CCB767-B1CF-4911-A62B-BCDECF068BAA"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Kontest/ViewModels/LeetCodeGraphQLViewModel.swift"
+            filePath = "Kontest/Screens/SettingsScreens/ChangeUsernameScreen.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "fetchUserData(username:)"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "completeForm()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "91B1D10B-6A55-4EBB-8900-926B11011F4D - db0577b65ecaaa80"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Kontest.LeetCodeGraphQLViewModel.fetchUserData(username: Swift.String) -&gt; ()"
-                  moduleName = "Kontest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/ViewModels/LeetCodeGraphQLViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "76">
-               </Location>
-               <Location
-                  uuid = "91B1D10B-6A55-4EBB-8900-926B11011F4D - 850b1507263609f2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Kontest.LeetCodeUserProfileGraphQLAPIDTO&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Kontest.LeetCodeGraphQLViewModel.fetchUserData(username: Swift.String) -&gt; ()"
-                  moduleName = "Kontest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/ViewModels/LeetCodeGraphQLViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "688">
-               </Location>
-               <Location
-                  uuid = "91B1D10B-6A55-4EBB-8900-926B11011F4D - db0577b65ecaaa80"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Kontest.LeetCodeGraphQLViewModel.fetchUserData(username: Swift.String) -&gt; ()"
-                  moduleName = "Kontest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ayushsinghal/XcodeProjects/My%20Projects/Kontest/Kontest/ViewModels/LeetCodeGraphQLViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "132">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

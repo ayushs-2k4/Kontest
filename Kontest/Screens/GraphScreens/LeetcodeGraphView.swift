@@ -54,7 +54,7 @@ struct LeetcodeGraphView: View {
                 }
                 .onAppear(perform: {
                     self.attendedContests.removeAll()
-                    
+
                     if let history = leetcodeGraphQLViewModel.userContestRankingHistory {
                         for item in history {
                             print("item: \(item)")

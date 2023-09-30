@@ -17,7 +17,7 @@ struct CodeChefView: View {
     init(username: String, bgColor: Color, hoveringScaleValue: CGFloat) {
         self.username = username
         self.bgColor = bgColor
-        self.codeChefViewModel = CodeChefViewModel(username: username)
+        self.codeChefViewModel = Dependencies.instance.codeChefViewModel
         self.hoveringScaleValue = hoveringScaleValue
     }
     

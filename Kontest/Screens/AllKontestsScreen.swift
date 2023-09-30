@@ -195,9 +195,6 @@ struct AllKontestsScreen: View {
                 NoInternetScreen()
             }
         }
-        .onAppear {
-            WidgetCenter.shared.reloadAllTimelines()
-        }
         .onChange(of: networkMonitor.currentStatus) {
             if networkMonitor.currentStatus == .satisfied {
                 allKontestsViewModel.fetchAllKontests()

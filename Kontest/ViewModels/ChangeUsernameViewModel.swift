@@ -40,10 +40,12 @@ class ChangeUsernameViewModel {
     func setCodeForcesUsername(newCodeForcesUsername: String) {
         codeForcesUsername = newCodeForcesUsername.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
         UserDefaults(suiteName: Constants.userDefaultsGroupID)!.set(codeForcesUsername, forKey: codeForcesUsernameKey)
+        Dependencies.instance.changeCodeForcesUsername(codeForcesUsername: newCodeForcesUsername)
     }
     
     func setCodeChefUsername(newCodeChefUsername: String) {
         codeChefUsername = newCodeChefUsername.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
         UserDefaults(suiteName: Constants.userDefaultsGroupID)!.set(codeChefUsername, forKey: codeChefUsernameKey)
+        Dependencies.instance.changeCodeChefUsername(codeChefUsername: newCodeChefUsername)
     }
 }
