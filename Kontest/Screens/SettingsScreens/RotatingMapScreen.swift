@@ -66,33 +66,42 @@ struct RotatingMapScreen: View {
     let parkingSpot: ParkingSpot
 
     var body: some View {
-        VStack {
-            GeometryReader { proxy in
-                TimelineView(.animation) { context in
-                    VStack {
-                        let seconds = context.date.timeIntervalSince1970
-                        let rotationPeriod = 240.0
-                        let headingDelta = seconds.percent(truncation: rotationPeriod)
-                        let pitchPeriod = 60.0
-                        let pitchDelta = seconds
-                            .percent(truncation: pitchPeriod)
-                            .symmetricEaseInOut()
+        GeometryReader { proxy in
+            TimelineView(.animation) { context in
+                VStack {
+                    let seconds = context.date.timeIntervalSince1970
+                    let rotationPeriod = 240.0
+                    let headingDelta = seconds.percent(truncation: rotationPeriod)
+                    let pitchPeriod = 60.0
+                    let pitchDelta = seconds
+                        .percent(truncation: pitchPeriod)
+                        .symmetricEaseInOut()
 
-                        let viewWidthPercent = (350.0 ... 1000).percent(for: proxy.size.width)
-                        let distanceMultiplier = (1 - viewWidthPercent) * 0.5 + 1
+                    let viewWidthPercent = (350.0 ... 1000).percent(for: proxy.size.width)
+                    let distanceMultiplier = (1 - viewWidthPercent) * 0.5 + 1
 
-                        RotatingMapView(
-                            coordinates: self.parkingSpot.location,
-                            distance: distanceMultiplier * self.parkingSpot.cameraDistance,
-                            pitch: 60,
-                            heading: headingDelta * 360
-                        )
-                    }
+                    RotatingMapView(
+                        coordinates: self.parkingSpot.location,
+                        distance: distanceMultiplier * self.parkingSpot.cameraDistance,
+                        pitch: 60,
+                        heading: headingDelta * 360
+                    )
                 }
             }
-
-            AboutMeCard()
         }
+        #if os(macOS)
+        .overlay(alignment: .top) {
+            AboutMeCard()
+                .frame(maxWidth: .infinity)
+                .background(.ultraThinMaterial)
+        }
+        #else
+        .overlay(alignment: .bottom) {
+                AboutMeCard()
+                    .frame(maxWidth: .infinity)
+                    .background(.thinMaterial)
+            }
+        #endif
     }
 }
 
