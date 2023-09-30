@@ -13,6 +13,7 @@ struct KontestApp: App {
 
     @State private var router = Router.instance
     @State private var errorState = ErrorState()
+    @State private var panelSelection: Panel? = .AllKontestScreen
 
     let networkMonitor = NetworkMonitor.shared
 
@@ -25,7 +26,7 @@ struct KontestApp: App {
     var body: some Scene {
         WindowGroup {
             if let defaults = UserDefaults(suiteName: Constants.userDefaultsGroupID) {
-                ContentView()
+                ContentView(panelSelection: $panelSelection)
                     .environment(allKontestsViewModel)
                     .environment(router)
                     .environment(networkMonitor)
@@ -47,7 +48,7 @@ struct KontestApp: App {
             }
         }
         .commands {
-            MyMenu(router: $router)
+            MyMenu(router: $router, panelSelection: $panelSelection)
         }
     }
 }

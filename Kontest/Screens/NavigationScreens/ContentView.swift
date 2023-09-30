@@ -9,7 +9,7 @@ import SwiftUI
 import WidgetKit
 
 struct ContentView: View {
-    @State private var panelSelection: Panel? = .AllKontestScreen
+    @Binding var panelSelection: Panel?
 
     var body: some View {
         NavigationSplitView {
@@ -24,7 +24,9 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    @State var panelSelection: Panel? = .AllKontestScreen
+
+    return ContentView(panelSelection: $panelSelection)
         .environment(Dependencies.instance.allKontestsViewModel)
         .environment(Router.instance)
         .environment(NetworkMonitor.shared)
