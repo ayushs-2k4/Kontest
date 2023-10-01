@@ -12,6 +12,8 @@ struct ContentView: View {
     @Binding var panelSelection: Panel?
 
     var body: some View {
+        let _ = Self._printChanges()
+        
         NavigationSplitView {
             Sidebar(panelSelection: $panelSelection)
         } detail: {

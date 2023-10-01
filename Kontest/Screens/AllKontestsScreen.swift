@@ -27,6 +27,8 @@ struct AllKontestsScreen: View {
     @State private var text: String = ""
 
     var body: some View {
+        let _ = Self._printChanges()
+        
         NavigationStack(path: Bindable(router).path) {
             if networkMonitor.currentStatus == .satisfied {
                 ZStack {
@@ -57,11 +59,13 @@ struct AllKontestsScreen: View {
                                             Text("Please try some different search term")
                                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                                         } else {
+                                            
                                             if ongoingKontests.count > 0 {
                                                 createSection(title: "Live Now", kontests: ongoingKontests, timelineViewDefaultContext: timelineViewDefaultContext)
                                             }
 
                                             if laterTodayKontests.count > 0 {
+                                                let _ = Self._printChanges()
                                                 createSection(title: "Later Today", kontests: laterTodayKontests, timelineViewDefaultContext: timelineViewDefaultContext)
                                             }
 

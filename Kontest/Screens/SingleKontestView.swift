@@ -20,8 +20,6 @@ struct SingleKontestView: View {
 
     let notificationsViewModel: NotificationsViewModel
 
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-
     let kontestStartDate: Date?
     let kontestEndDate: Date?
 

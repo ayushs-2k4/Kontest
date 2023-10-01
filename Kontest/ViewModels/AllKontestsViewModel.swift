@@ -86,16 +86,16 @@ class AllKontestsViewModel {
 
                     if let nextDateToRefresh {
                         let timeInterval = currentDate.timeIntervalSince(nextDateToRefresh)
-                        print("nextDateToRefresh: \(nextDateToRefresh.formatted())")
-                        print("timeInterval: \(timeInterval)")
-                        print("")
+//                        print("nextDateToRefresh: \(nextDateToRefresh.formatted())")
+//                        print("timeInterval: \(timeInterval)")
+//                        print("")
 
                         if timeInterval >= 5, timeInterval <= 5 {
                             if self.searchText.isEmpty {
                                 self.splitKontestsIntoDifferentCategories()
                             }
                         } else if timeInterval > 5, timeInterval <= 10 {
-                            print("acshj")
+//                            print("acshj")
                             self.nextDateToRefresh = CalendarUtility.getNextDateToRefresh(
                                 ongoingKontests: ongoingKontests,
                                 laterTodayKontests: laterTodayKontests,
