@@ -83,7 +83,7 @@ struct RotatingMapScreen: View {
                     RotatingMapView(
                         coordinates: self.parkingSpot.location,
                         distance: distanceMultiplier * self.parkingSpot.cameraDistance,
-                        pitch: 60,
+                        pitch: (50...60).value(percent: pitchDelta),
                         heading: headingDelta * 360
                     )
                 }
@@ -140,6 +140,14 @@ struct RotatingMapView: View {
 }
 
 public extension ClosedRange where Bound: BinaryFloatingPoint {
+    func value(percent: Bound, clamped: Bool = true) -> Bound {
+        var percent = percent
+        if clamped {
+            percent = Swift.min(Swift.max(percent, 0), 1)
+        }
+        return (1 - percent) * lowerBound + percent * upperBound
+    }
+    
     func percent(for value: Bound, clamped: Bool = true) -> Bound {
         var result = (value - lowerBound) / (upperBound - value)
         if clamped {
