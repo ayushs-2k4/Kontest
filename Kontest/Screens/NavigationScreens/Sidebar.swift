@@ -38,8 +38,5 @@ struct Sidebar: View {
                 }
             }
         }
-        #if os(macOS)
-        .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: 250)
-        #endif
     }
 }

@@ -17,6 +17,7 @@ struct ContentView: View {
             Sidebar(panelSelection: $panelSelection)
             #if os(macOS)
                 .toolbar(removing: .sidebarToggle)
+                .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: 250)
             #endif
         } detail: {
             DetailColumn(panelSelection: $panelSelection)
