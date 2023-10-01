@@ -19,6 +19,7 @@
 		073269E82AAC42350028476D /* FilterWebsitesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073269E72AAC42350028476D /* FilterWebsitesView.swift */; };
 		073269EC2AAC451B0028476D /* FilterWebsitesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073269EB2AAC451B0028476D /* FilterWebsitesScreen.swift */; };
 		073269EF2AAC4B0C0028476D /* ChangeUsernameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */; };
+		07367C482ACA097000A558ED /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07367C472ACA097000A558ED /* DeviceType.swift */; };
 		0742254B2AC1444500EEB578 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB682AA58259008513C6 /* LocalNotificationManager.swift */; };
 		0742254C2AC1444600EEB578 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB682AA58259008513C6 /* LocalNotificationManager.swift */; };
 		074DD4522AA61570005C16A5 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074DD4512AA61570005C16A5 /* AppError.swift */; };
@@ -205,6 +206,7 @@
 		073269E72AAC42350028476D /* FilterWebsitesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesView.swift; sourceTree = "<group>"; };
 		073269EB2AAC451B0028476D /* FilterWebsitesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesScreen.swift; sourceTree = "<group>"; };
 		073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUsernameScreen.swift; sourceTree = "<group>"; };
+		07367C472ACA097000A558ED /* DeviceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceType.swift; sourceTree = "<group>"; };
 		074DD4512AA61570005C16A5 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		076016552A87CD52007CE9F5 /* Kontest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kontest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		076134CE2AA86AC300946B02 /* KontestDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestDetailViewModel.swift; sourceTree = "<group>"; };
@@ -646,6 +648,7 @@
 				077E6EAC2AB4B1D10003E897 /* ErrorWrapper.swift */,
 				077E6EB02AB4B3220003E897 /* ErrorState.swift */,
 				07D7666D2AC84094000A3DFD /* Panel.swift */,
+				07367C472ACA097000A558ED /* DeviceType.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -901,6 +904,7 @@
 				07ECFBA12AA58259008513C6 /* SingleNotificationMenu.swift in Sources */,
 				073269EF2AAC4B0C0028476D /* ChangeUsernameScreen.swift in Sources */,
 				07ECFB9E2AA58259008513C6 /* BlinkingDotView.swift in Sources */,
+				07367C482ACA097000A558ED /* DeviceType.swift in Sources */,
 				07ECFBA62AA58259008513C6 /* CalendarUtility.swift in Sources */,
 				07ECFBC62AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift in Sources */,
 				0725FB682AC82F0A00564DE0 /* CodeForcesGraphView.swift in Sources */,
