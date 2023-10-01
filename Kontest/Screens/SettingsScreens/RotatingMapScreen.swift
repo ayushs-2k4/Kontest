@@ -127,7 +127,7 @@ struct RotatingMapView: View {
             .onChange(of: self.heading) { _, _ in
                 self.cameraPosition = .camera(MapCamera(centerCoordinate: self.coordinates.coordinate, distance: self.distance, heading: self.heading, pitch: self.pitch))
             }
-            .mapStyle(.standard(pointsOfInterest: .excludingAll))
+            .mapStyle(.standard(elevation: .realistic, pointsOfInterest: .excludingAll))
     }
 }
 
