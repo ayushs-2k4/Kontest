@@ -36,43 +36,40 @@ struct AllKontestsScreen: View {
                         NoKontestsDownloadedScreen()
                     } else {
                         TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
-                            VStack {
-                                List {
-                                    RatingsView(codeForcesUsername: changeUsernameViewModel.codeForcesUsername, leetCodeUsername: changeUsernameViewModel.leetcodeUsername, codeChefUsername: changeUsernameViewModel.codeChefUsername)
-                                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-                                        .listRowSeparator(.hidden)
+                            List {
+                                RatingsView(codeForcesUsername: changeUsernameViewModel.codeForcesUsername, leetCodeUsername: changeUsernameViewModel.leetcodeUsername, codeChefUsername: changeUsernameViewModel.codeChefUsername)
+                                    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                                    .listRowSeparator(.hidden)
 
-                                    if allKontestsViewModel.backupKontests.isEmpty { // There are some kontests but they are hidden due to KontestFilters
-                                        NoKontestsDueToFiltersScreen()
+                                if allKontestsViewModel.backupKontests.isEmpty { // There are some kontests but they are hidden due to KontestFilters
+                                    NoKontestsDueToFiltersScreen()
+                                } else {
+                                    let ongoingKontests = allKontestsViewModel.ongoingKontests
+
+                                    let laterTodayKontests = allKontestsViewModel.laterTodayKontests
+
+                                    let tomorrowKontests = allKontestsViewModel.tomorrowKontests
+
+                                    let laterKontests = allKontestsViewModel.laterKontests
+
+                                    if allKontestsViewModel.toShowKontests.isEmpty && !allKontestsViewModel.searchText.isEmpty {
+                                        Text("Please try some different search term")
+                                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                                     } else {
-                                        let ongoingKontests = allKontestsViewModel.ongoingKontests
+                                        if ongoingKontests.count > 0 {
+                                            createSection(title: "Live Now", kontests: ongoingKontests, timelineViewDefaultContext: timelineViewDefaultContext)
+                                        }
 
-                                        let laterTodayKontests = allKontestsViewModel.laterTodayKontests
+                                        if laterTodayKontests.count > 0 {
+                                            createSection(title: "Later Today", kontests: laterTodayKontests, timelineViewDefaultContext: timelineViewDefaultContext)
+                                        }
 
-                                        let tomorrowKontests = allKontestsViewModel.tomorrowKontests
+                                        if tomorrowKontests.count > 0 {
+                                            createSection(title: "Tomorrow", kontests: tomorrowKontests, timelineViewDefaultContext: timelineViewDefaultContext)
+                                        }
 
-                                        let laterKontests = allKontestsViewModel.laterKontests
-
-                                        if allKontestsViewModel.toShowKontests.isEmpty && !allKontestsViewModel.searchText.isEmpty {
-                                            Text("Please try some different search term")
-                                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                                        } else {
-                                            
-                                            if ongoingKontests.count > 0 {
-                                                createSection(title: "Live Now", kontests: ongoingKontests, timelineViewDefaultContext: timelineViewDefaultContext)
-                                            }
-
-                                            if laterTodayKontests.count > 0 {
-                                                createSection(title: "Later Today", kontests: laterTodayKontests, timelineViewDefaultContext: timelineViewDefaultContext)
-                                            }
-
-                                            if tomorrowKontests.count > 0 {
-                                                createSection(title: "Tomorrow", kontests: tomorrowKontests, timelineViewDefaultContext: timelineViewDefaultContext)
-                                            }
-
-                                            if laterKontests.count > 0 {
-                                                createSection(title: "Upcoming", kontests: laterKontests, timelineViewDefaultContext: timelineViewDefaultContext)
-                                            }
+                                        if laterKontests.count > 0 {
+                                            createSection(title: "Upcoming", kontests: laterKontests, timelineViewDefaultContext: timelineViewDefaultContext)
                                         }
                                     }
                                 }
@@ -187,7 +184,7 @@ struct AllKontestsScreen: View {
                                 FilterWebsitesScreen()
 
                             case .RotatingMapScreen:
-                               RandomRotatingMapScreen(navigationTitle: "About Me")
+                                RandomRotatingMapScreen(navigationTitle: "About Me")
                             }
                         }
 
@@ -202,11 +199,11 @@ struct AllKontestsScreen: View {
         .onChange(of: networkMonitor.currentStatus) {
             if networkMonitor.currentStatus == .satisfied {
                 allKontestsViewModel.fetchAllKontests()
-                
+
                 Dependencies.instance.reloadLeetcodeUsername()
                 Dependencies.instance.reloadCodeChefUsername()
                 Dependencies.instance.reloadCodeForcesUsername()
-                
+
                 WidgetCenter.shared.reloadAllTimelines()
             }
         }
