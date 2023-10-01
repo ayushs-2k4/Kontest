@@ -62,7 +62,7 @@ struct CodeForcesGraphView: View {
                                             Text("\(updateDate.formatted(date: .numeric, time: .shortened))")
 
                                             #if os(macOS)
-                                            Text("\(attendedContest.contestName)")
+                                            Text(attendedContest.contestName)
                                             #endif
                                         }
                                     }
@@ -73,7 +73,7 @@ struct CodeForcesGraphView: View {
                         }
                     }
                     .chartScrollableAxes(.horizontal)
-                    .chartXVisibleDomain(length: 3600*24*30) // 30 days
+                    .chartXVisibleDomain(length: 3600*24*15) // 15 days
                     .padding(.horizontal)
                 }
             }
