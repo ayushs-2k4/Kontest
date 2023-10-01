@@ -19,7 +19,7 @@ struct CodeForcesGraphView: View {
     }
 
     var body: some View {
-        Group {
+        VStack {
             if codeForcesViewModel.isLoading {
                 ProgressView()
             } else {

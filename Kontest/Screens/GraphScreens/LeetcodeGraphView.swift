@@ -37,7 +37,7 @@ struct LeetcodeGraphView: View {
     }
 
     var body: some View {
-        Group{
+        VStack {
             if leetcodeGraphQLViewModel.isLoading {
                 ProgressView()
             } else {
@@ -108,7 +108,7 @@ struct LeetcodeGraphView: View {
                                                 if let problemsSolved = kontest.problemsSolved {
                                                     Text("Total problems solved: \(problemsSolved)")
                                                 }
-                                                
+
                                                 if let ranking = kontest.ranking {
                                                     Text("Ranking: \(ranking)")
                                                 }
