@@ -27,8 +27,6 @@ struct AllKontestsScreen: View {
     @State private var text: String = ""
 
     var body: some View {
-        let _ = Self._printChanges()
-        
         NavigationStack(path: Bindable(router).path) {
             if networkMonitor.currentStatus == .satisfied {
                 ZStack {
@@ -65,7 +63,6 @@ struct AllKontestsScreen: View {
                                             }
 
                                             if laterTodayKontests.count > 0 {
-                                                let _ = Self._printChanges()
                                                 createSection(title: "Later Today", kontests: laterTodayKontests, timelineViewDefaultContext: timelineViewDefaultContext)
                                             }
 
