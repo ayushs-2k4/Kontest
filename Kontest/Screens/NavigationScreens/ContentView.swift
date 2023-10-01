@@ -16,24 +16,10 @@ struct ContentView: View {
         NavigationSplitView(columnVisibility: $coluVis) {
             Sidebar(panelSelection: $panelSelection)
             #if os(macOS)
-                .toolbar(removing: .sidebarToggle)
                 .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: 250)
             #endif
         } detail: {
             DetailColumn(panelSelection: $panelSelection)
-            #if os(macOS)
-                .toolbar(content: {
-                    ToolbarItem(placement: .navigation) {
-                        Button {
-                            withAnimation {
-                                coluVis = coluVis == .all ? .detailOnly : .all
-                            }
-                        } label: {
-                            Image(systemName: "sidebar.left")
-                        }
-                    }
-                })
-            #endif
         }
         .onAppear {
             WidgetCenter.shared.reloadAllTimelines()
