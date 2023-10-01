@@ -11,6 +11,7 @@ import WidgetKit
 struct ContentView: View {
     @Binding var panelSelection: Panel?
     @State private var coluVis: NavigationSplitViewVisibility = .automatic
+    let path = Router.instance.path
 
     let deviceType = getDeviceType()
 
@@ -33,6 +34,8 @@ struct ContentView: View {
                     .tabItem {
                         Label("All Kontests", systemImage: "chart.bar")
                     }
+                    .toolbar(path.contains(.screen(.SettingsScreen)) ? .hidden : .visible, for: .tabBar)
+                    .animation(path.contains(.screen(.SettingsScreen)) ? nil : .default, value: path)
 
                 CodeForcesGraphView()
                     .tabItem {
@@ -42,7 +45,6 @@ struct ContentView: View {
                 LeetcodeGraphView()
                     .tabItem {
                         Label("LeetCode Rankings", image: .leetCodeLogoSmall)
-                       
                     }
             }
         }
