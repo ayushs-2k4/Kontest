@@ -34,8 +34,10 @@ struct ContentView: View {
                     .tabItem {
                         Label("All Kontests", systemImage: "chart.bar")
                     }
+                #if os(iOS)
                     .toolbar(path.contains(.screen(.SettingsScreen)) ? .hidden : .visible, for: .tabBar)
                     .animation(path.contains(.screen(.SettingsScreen)) ? nil : .default, value: path)
+                #endif
 
                 CodeForcesGraphView()
                     .tabItem {
