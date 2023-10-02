@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Sidebar: View {
     @Binding var panelSelection: Panel?
+    @Environment(\.colorScheme) private var colorScheme
 
     var body: some View {
         List(selection: $panelSelection) {
@@ -31,7 +32,7 @@ struct Sidebar: View {
                     Label {
                         Text("LeetCode Rankings")
                     } icon: {
-                        Image(.leetCodeDarkLogo)
+                        Image(colorScheme == .dark ? .leetCodeWhiteLogo : .leetCodeDarkLogo)
                             .resizable()
                             .frame(width: 16, height: 16)
                     }

@@ -99,8 +99,8 @@ struct LeetcodeGraphView: View {
                                         y: .disabled
                                     )) {
                                         let kontest = getKontestFromDate(date: selectedDate)
-                                        VStack(spacing: 10) {
-                                            if let kontest {
+                                        if let kontest {
+                                            VStack(spacing: 10) {
                                                 Text(kontest.contest?.title ?? "")
 
                                                 Text("\(selectedDate.formatted())")
@@ -117,6 +117,7 @@ struct LeetcodeGraphView: View {
                                                     Text("rating: \(rating)")
                                                 }
                                             }
+                                            .padding()
                                         }
                                     }
                             }
