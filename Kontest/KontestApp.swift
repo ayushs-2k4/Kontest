@@ -42,6 +42,9 @@ struct KontestApp: App {
                             disallowTabbingMode()
                         #endif
                     })
+                #if os(macOS)
+                    .frame(minWidth: 900, idealWidth: 1100, minHeight: 500, idealHeight: 600)
+                #endif
                     .defaultAppStorage(defaults)
             } else {
                 Text("Failed to load user defaults")
