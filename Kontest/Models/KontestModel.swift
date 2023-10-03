@@ -256,10 +256,14 @@ extension KontestModel {
         }
     }
 
+    /// loads the calendar status of an event
     func loadCalendarStatus(allEvents: [EKEvent]) {
-        isCalendarEventAdded = CalendarUtility.isEventPresentInCalendar(allEventsOfCalendar: allEvents, startDate: CalendarUtility.getDate(date: start_time) ?? Date(), endDate: CalendarUtility.getDate(date: end_time) ?? Date(), title: name, url: URL(string: url))
+        let p = CalendarUtility.isEventPresentInCalendar(allEventsOfCalendar: allEvents, startDate: CalendarUtility.getDate(date: start_time) ?? Date(), endDate: CalendarUtility.getDate(date: end_time) ?? Date(), title: name, url: URL(string: url))
+
+        isCalendarEventAdded = p
     }
 
+    /// loads the date of first time notification of an event
     func loadCalendarEventDate(allEvents: [EKEvent]) {
         calendarEventDate = CalendarUtility.getCalendarDateOfEvent(allEventsOfCalendar: allEvents, startDate: CalendarUtility.getDate(date: start_time) ?? Date(), endDate: CalendarUtility.getDate(date: end_time) ?? Date(), title: name, url: URL(string: url))
     }

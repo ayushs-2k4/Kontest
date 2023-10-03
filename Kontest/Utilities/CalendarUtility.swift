@@ -5,6 +5,7 @@
 //  Created by Ayush Singhal on 13/08/23.
 //
 
+import Combine
 import EventKit
 import Foundation
 import OSLog
@@ -12,7 +13,7 @@ import OSLog
 class CalendarUtility {
     private static let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "CalendarUtility")
 
-    private static let store = EKEventStore()
+    private static let eventStore = EKEventStore()
 
     // DateFormatter for the first format: "2024-07-30T18:30:00.000Z"
     static func getFormattedDate1(date: String) -> Date? {
@@ -291,7 +292,7 @@ class CalendarUtility {
 
     private static func requestFullAccessToReminders() async throws -> Bool {
         do {
-            try await store.requestFullAccessToEvents()
+            try await eventStore.requestFullAccessToEvents()
         } catch {
             throw error
         }
@@ -337,8 +338,8 @@ class CalendarUtility {
     // Function to create and save the event
     private static func createAndSaveEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?, alarmAbsoluteDate: Date) throws -> Bool {
         UserDefaults(suiteName: Constants.userDefaultsGroupID)!.set(true, forKey: "shouldFetchAllEventsFromCalendar")
-        let event = EKEvent(eventStore: store)
-        event.calendar = store.defaultCalendarForNewEvents
+        let event = EKEvent(eventStore: eventStore)
+        event.calendar = eventStore.defaultCalendarForNewEvents
         event.title = title
         event.startDate = startDate
         event.endDate = endDate
@@ -349,7 +350,7 @@ class CalendarUtility {
         event.alarms = [alarm]
 
         do {
-            try store.save(event, span: .thisEvent)
+            try eventStore.save(event, span: .thisEvent)
             logger.info("Event saved: \(event)")
             return true
         } catch {
@@ -377,9 +378,9 @@ class CalendarUtility {
 
         let interval = DateInterval(start: Date(), end: Calendar.current.date(byAdding: .year, value: 1, to: Date())!)
 
-        let predicate = store.predicateForEvents(withStart: interval.start, end: interval.end, calendars: nil)
+        let predicate = eventStore.predicateForEvents(withStart: interval.start, end: interval.end, calendars: nil)
 
-        let events = store.events(matching: predicate)
+        let events = eventStore.events(matching: predicate)
 
         logger.info("FullAccessinterval: \(interval)")
         logger.info("FullAccess Events: \(events)")
@@ -397,7 +398,7 @@ class CalendarUtility {
 
             if let events, !events.isEmpty {
                 do {
-                    try store.remove(events[0], span: .thisEvent)
+                    try eventStore.remove(events[0], span: .thisEvent)
                 } catch {
                     logger.error("Error in removing event: \(error)")
                 }
@@ -438,5 +439,20 @@ class CalendarUtility {
         } else {
             return nil
         }
+    }
+
+    static func addCalendarObserver(onChange: @escaping (Notification) -> Void) {
+        logger.info("Observation of calendar started")
+
+        NotificationCenter.default.addObserver(forName: .EKEventStoreChanged, object: nil, queue: nil) { notification in
+            onChange(notification)
+        }
+
+        //        var cancellables: [AnyCancellable] = []
+        //
+        //        NotificationCenter.default.publisher(for: .EKEventStoreChanged, object: eventStore).sink { notification in
+        //            print("Observation Changed")
+        //        }
+        //        .store(in: &cancellables)
     }
 }

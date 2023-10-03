@@ -50,6 +50,12 @@ class AllKontestsViewModel {
         setDefaultValuesForFilterWebsiteKeysToTrue()
         addAllowedWebsites()
         fetchAllKontests()
+
+        #if os(macOS)
+        do {
+            try addCalendarObserver()
+        } catch {}
+        #endif
     }
 
     func fetchAllKontests() {
@@ -231,4 +237,32 @@ class AllKontestsViewModel {
             }
         }
     }
+
+    #if os(macOS)
+    func addCalendarObserver() throws {
+        CalendarUtility.addCalendarObserver { [weak self] _ in
+            guard let self else { return }
+
+            Task {
+                let allEvents = self.shouldFetchAllEventsFromCalendar ? try await CalendarUtility.getAllEvents() : []
+
+                for kontest in self.ongoingKontests {
+                    kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+                }
+
+                for kontest in self.laterTodayKontests {
+                    kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+                }
+
+                for kontest in self.tomorrowKontests {
+                    kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+                }
+
+                for kontest in self.laterKontests {
+                    kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+                }
+            }
+        }
+    }
+    #endif
 }
