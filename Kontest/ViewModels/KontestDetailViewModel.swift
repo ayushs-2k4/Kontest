@@ -5,6 +5,7 @@
 //  Created by Ayush Singhal on 06/09/23.
 //
 
+#if os(iOS)
 import Combine
 import SwiftUI
 
@@ -47,3 +48,4 @@ class KontestDetailViewModel {
         isKontestOfFutureAndStartingInLessThan24Hours = isKontestOfFuture && isKontestStartingTimeLessThanADay
     }
 }
+#endif

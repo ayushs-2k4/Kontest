@@ -189,7 +189,9 @@ struct AllKontestsScreen: View {
                         }
 
                     case .kontestModel(let kontest):
+                        #if os(iOS)
                         KontestDetailsScreen(kontest: kontest)
+                        #endif
                     }
                 }
             } else {

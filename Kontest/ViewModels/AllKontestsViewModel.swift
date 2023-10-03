@@ -54,7 +54,9 @@ class AllKontestsViewModel {
         #if os(macOS)
         do {
             try addCalendarObserver()
-        } catch {}
+        } catch {
+            logger.info("Can not add observer to Calendar")
+        }
         #endif
     }
 
