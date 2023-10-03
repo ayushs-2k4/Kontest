@@ -13,9 +13,13 @@
 		07183EB72AB8752D006C92AD /* CalendarUtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EB62AB8752D006C92AD /* CalendarUtilityTests.swift */; };
 		071915642AB1695E00E1CB56 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071915632AB1695E00E1CB56 /* NetworkMonitor.swift */; };
 		071915672AB169D300E1CB56 /* NoInternetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071915662AB169D300E1CB56 /* NoInternetScreen.swift */; };
+		0725FB632AC7E2EA00564DE0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0725FB622AC7E2EA00564DE0 /* ContentView.swift */; };
+		0725FB662AC7EA3F00564DE0 /* LeetcodeGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0725FB652AC7EA3F00564DE0 /* LeetcodeGraphView.swift */; };
+		0725FB682AC82F0A00564DE0 /* CodeForcesGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0725FB672AC82F0A00564DE0 /* CodeForcesGraphView.swift */; };
 		073269E82AAC42350028476D /* FilterWebsitesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073269E72AAC42350028476D /* FilterWebsitesView.swift */; };
 		073269EC2AAC451B0028476D /* FilterWebsitesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073269EB2AAC451B0028476D /* FilterWebsitesScreen.swift */; };
 		073269EF2AAC4B0C0028476D /* ChangeUsernameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */; };
+		07367C482ACA097000A558ED /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07367C472ACA097000A558ED /* DeviceType.swift */; };
 		0742254B2AC1444500EEB578 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB682AA58259008513C6 /* LocalNotificationManager.swift */; };
 		0742254C2AC1444600EEB578 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB682AA58259008513C6 /* LocalNotificationManager.swift */; };
 		074DD4522AA61570005C16A5 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074DD4512AA61570005C16A5 /* AppError.swift */; };
@@ -53,6 +57,7 @@
 		077E6EAD2AB4B1D10003E897 /* ErrorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EAC2AB4B1D10003E897 /* ErrorWrapper.swift */; };
 		077E6EAF2AB4B2120003E897 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EAE2AB4B2120003E897 /* ErrorView.swift */; };
 		077E6EB12AB4B3220003E897 /* ErrorState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EB02AB4B3220003E897 /* ErrorState.swift */; };
+		0787AE982AC89C0100F1B80C /* RotatingMapScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0787AE972AC89C0100F1B80C /* RotatingMapScreen.swift */; };
 		079F68072ABC80C2001B0EFE /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CFEBA32AB02DCB00291484 /* WidgetKit.framework */; };
 		079F68082ABC80C2001B0EFE /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CFEBA52AB02DCB00291484 /* SwiftUI.framework */; };
 		079F680B2ABC80C2001B0EFE /* Upcoming_Kontest_macOS_WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F680A2ABC80C2001B0EFE /* Upcoming_Kontest_macOS_WidgetBundle.swift */; };
@@ -80,6 +85,9 @@
 		07A31F002AAC818D00EBC296 /* FilterWebsiteKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A31EFF2AAC818D00EBC296 /* FilterWebsiteKey.swift */; };
 		07A31F022AAC831300EBC296 /* FilterWebsitesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A31F012AAC831300EBC296 /* FilterWebsitesViewModel.swift */; };
 		07A750202AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A7501F2AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift */; };
+		07D766692AC8404A000A3DFD /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D766682AC8404A000A3DFD /* Sidebar.swift */; };
+		07D7666C2AC8407B000A3DFD /* DetailColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7666B2AC8407B000A3DFD /* DetailColumn.swift */; };
+		07D7666E2AC84094000A3DFD /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7666D2AC84094000A3DFD /* Panel.swift */; };
 		07ECFB802AA58259008513C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 07ECFB352AA58259008513C6 /* README.md */; };
 		07ECFB812AA58259008513C6 /* ChangeUsernameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB382AA58259008513C6 /* ChangeUsernameViewModel.swift */; };
 		07ECFB822AA58259008513C6 /* LeetCodeGraphQLViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB392AA58259008513C6 /* LeetCodeGraphQLViewModel.swift */; };
@@ -192,9 +200,13 @@
 		07183EB62AB8752D006C92AD /* CalendarUtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarUtilityTests.swift; sourceTree = "<group>"; };
 		071915632AB1695E00E1CB56 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		071915662AB169D300E1CB56 /* NoInternetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetScreen.swift; sourceTree = "<group>"; };
+		0725FB622AC7E2EA00564DE0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		0725FB652AC7EA3F00564DE0 /* LeetcodeGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetcodeGraphView.swift; sourceTree = "<group>"; };
+		0725FB672AC82F0A00564DE0 /* CodeForcesGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeForcesGraphView.swift; sourceTree = "<group>"; };
 		073269E72AAC42350028476D /* FilterWebsitesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesView.swift; sourceTree = "<group>"; };
 		073269EB2AAC451B0028476D /* FilterWebsitesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesScreen.swift; sourceTree = "<group>"; };
 		073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUsernameScreen.swift; sourceTree = "<group>"; };
+		07367C472ACA097000A558ED /* DeviceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceType.swift; sourceTree = "<group>"; };
 		074DD4512AA61570005C16A5 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		076016552A87CD52007CE9F5 /* Kontest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kontest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		076134CE2AA86AC300946B02 /* KontestDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestDetailViewModel.swift; sourceTree = "<group>"; };
@@ -211,6 +223,7 @@
 		077E6EB02AB4B3220003E897 /* ErrorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorState.swift; sourceTree = "<group>"; };
 		0784292D2AB5EF660078D836 /* AddToCalendarIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCalendarIntent.swift; sourceTree = "<group>"; };
 		078429312AB603FB0078D836 /* KontestWidgetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestWidgetModel.swift; sourceTree = "<group>"; };
+		0787AE972AC89C0100F1B80C /* RotatingMapScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingMapScreen.swift; sourceTree = "<group>"; };
 		079F68062ABC80C2001B0EFE /* Upcoming Kontest macOS WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Upcoming Kontest macOS WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		079F680A2ABC80C2001B0EFE /* Upcoming_Kontest_macOS_WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upcoming_Kontest_macOS_WidgetBundle.swift; sourceTree = "<group>"; };
 		079F680C2ABC80C2001B0EFE /* Upcoming_Kontest_macOS_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upcoming_Kontest_macOS_Widget.swift; sourceTree = "<group>"; };
@@ -226,6 +239,9 @@
 		07CFEBA52AB02DCB00291484 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		07CFEC042AB042F500291484 /* UpcomingWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingWidgetView.swift; sourceTree = "<group>"; };
 		07CFEC0C2AB0435200291484 /* GetKontests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetKontests.swift; sourceTree = "<group>"; };
+		07D766682AC8404A000A3DFD /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
+		07D7666B2AC8407B000A3DFD /* DetailColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailColumn.swift; sourceTree = "<group>"; };
+		07D7666D2AC84094000A3DFD /* Panel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Panel.swift; sourceTree = "<group>"; };
 		07EA6F482AB6405A00CD932E /* Kontest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kontest.entitlements; sourceTree = "<group>"; };
 		07EA6F492AB6405F00CD932E /* Upcoming Kontests iOS WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Upcoming Kontests iOS WidgetExtension.entitlements"; sourceTree = "<group>"; };
 		07ECFB352AA58259008513C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -348,6 +364,15 @@
 			path = MockViewModels;
 			sourceTree = "<group>";
 		};
+		0725FB642AC7EA3500564DE0 /* GraphScreens */ = {
+			isa = PBXGroup;
+			children = (
+				0725FB652AC7EA3F00564DE0 /* LeetcodeGraphView.swift */,
+				0725FB672AC82F0A00564DE0 /* CodeForcesGraphView.swift */,
+			);
+			path = GraphScreens;
+			sourceTree = "<group>";
+		};
 		073B78AB2ABC686800BA1CF2 /* SettingsScreens */ = {
 			isa = PBXGroup;
 			children = (
@@ -355,6 +380,7 @@
 				073269E72AAC42350028476D /* FilterWebsitesView.swift */,
 				073269EB2AAC451B0028476D /* FilterWebsitesScreen.swift */,
 				073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */,
+				0787AE972AC89C0100F1B80C /* RotatingMapScreen.swift */,
 			);
 			path = SettingsScreens;
 			sourceTree = "<group>";
@@ -465,6 +491,16 @@
 			path = WidgetScreens;
 			sourceTree = "<group>";
 		};
+		07D7666A2AC84066000A3DFD /* NavigationScreens */ = {
+			isa = PBXGroup;
+			children = (
+				0725FB622AC7E2EA00564DE0 /* ContentView.swift */,
+				07D766682AC8404A000A3DFD /* Sidebar.swift */,
+				07D7666B2AC8407B000A3DFD /* DetailColumn.swift */,
+			);
+			path = NavigationScreens;
+			sourceTree = "<group>";
+		};
 		07ECFB362AA58259008513C6 /* Kontest */ = {
 			isa = PBXGroup;
 			children = (
@@ -572,6 +608,8 @@
 		07ECFB552AA58259008513C6 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				07D7666A2AC84066000A3DFD /* NavigationScreens */,
+				0725FB642AC7EA3500564DE0 /* GraphScreens */,
 				073B78AD2ABC6A2400BA1CF2 /* NotificationsScreens */,
 				073B78AC2ABC69FF00BA1CF2 /* RatingsScreens */,
 				073B78AB2ABC686800BA1CF2 /* SettingsScreens */,
@@ -609,6 +647,8 @@
 				071915632AB1695E00E1CB56 /* NetworkMonitor.swift */,
 				077E6EAC2AB4B1D10003E897 /* ErrorWrapper.swift */,
 				077E6EB02AB4B3220003E897 /* ErrorState.swift */,
+				07D7666D2AC84094000A3DFD /* Panel.swift */,
+				07367C472ACA097000A558ED /* DeviceType.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -854,15 +894,20 @@
 				07ECFB812AA58259008513C6 /* ChangeUsernameViewModel.swift in Sources */,
 				07ECFBB02AA58259008513C6 /* CodeForcesUserRatingAPIDTO.swift in Sources */,
 				07FD85A92AB78D5600D26C4C /* Dependencies.swift in Sources */,
+				0787AE982AC89C0100F1B80C /* RotatingMapScreen.swift in Sources */,
 				071915642AB1695E00E1CB56 /* NetworkMonitor.swift in Sources */,
+				0725FB662AC7EA3F00564DE0 /* LeetcodeGraphView.swift in Sources */,
+				07D7666C2AC8407B000A3DFD /* DetailColumn.swift in Sources */,
 				07ECFB822AA58259008513C6 /* LeetCodeGraphQLViewModel.swift in Sources */,
 				07ECFB882AA58259008513C6 /* KontestApp.swift in Sources */,
 				07ECFBB72AA58259008513C6 /* CodeChefFetcher.swift in Sources */,
 				07ECFBA12AA58259008513C6 /* SingleNotificationMenu.swift in Sources */,
 				073269EF2AAC4B0C0028476D /* ChangeUsernameScreen.swift in Sources */,
 				07ECFB9E2AA58259008513C6 /* BlinkingDotView.swift in Sources */,
+				07367C482ACA097000A558ED /* DeviceType.swift in Sources */,
 				07ECFBA62AA58259008513C6 /* CalendarUtility.swift in Sources */,
 				07ECFBC62AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift in Sources */,
+				0725FB682AC82F0A00564DE0 /* CodeForcesGraphView.swift in Sources */,
 				076134CF2AA86AC300946B02 /* KontestDetailViewModel.swift in Sources */,
 				07ECFB9A2AA58259008513C6 /* RatingsView.swift in Sources */,
 				07ECFB842AA58259008513C6 /* CodeChefViewModel.swift in Sources */,
@@ -884,6 +929,7 @@
 				074DD4522AA61570005C16A5 /* AppError.swift in Sources */,
 				07ECFBAC2AA58259008513C6 /* FontUtility.swift in Sources */,
 				07ECFB922AA58259008513C6 /* CodeForcesUserInfoAPIModel.swift in Sources */,
+				07D766692AC8404A000A3DFD /* Sidebar.swift in Sources */,
 				07ECFBA32AA58259008513C6 /* PendingNotificationsScreen.swift in Sources */,
 				07ECFB9C2AA58259008513C6 /* AllKontestsScreen.swift in Sources */,
 				07ECFB972AA58259008513C6 /* CodeChefView.swift in Sources */,
@@ -892,10 +938,12 @@
 				07ECFBB82AA58259008513C6 /* CodeForcesFetcher.swift in Sources */,
 				07A31F022AAC831300EBC296 /* FilterWebsitesViewModel.swift in Sources */,
 				07ECFB8B2AA58259008513C6 /* AllKontestsFakeRepository.swift in Sources */,
+				07D7666E2AC84094000A3DFD /* Panel.swift in Sources */,
 				071915672AB169D300E1CB56 /* NoInternetScreen.swift in Sources */,
 				07ECFB912AA58259008513C6 /* CodeForcesUserRatingAPIModel.swift in Sources */,
 				07ECFB8A2AA58259008513C6 /* CodeChefAPIRepository.swift in Sources */,
 				07ECFBA52AA58259008513C6 /* Constants.swift in Sources */,
+				0725FB632AC7E2EA00564DE0 /* ContentView.swift in Sources */,
 				07ECFBAE2AA58259008513C6 /* CodeForcesUserInfoAPIDTO.swift in Sources */,
 				07A750202AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift in Sources */,
 				07A31F002AAC818D00EBC296 /* FilterWebsiteKey.swift in Sources */,

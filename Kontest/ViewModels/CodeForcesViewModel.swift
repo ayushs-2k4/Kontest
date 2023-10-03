@@ -5,8 +5,8 @@
 //  Created by Ayush Singhal on 16/08/23.
 //
 
-import SwiftUI
 import OSLog
+import SwiftUI
 
 @Observable
 class CodeForcesViewModel {
@@ -14,6 +14,7 @@ class CodeForcesViewModel {
     
     let codeForcesAPIRepository = CodeForcesAPIRepository()
     
+    let username: String
     var codeForcesRatings: CodeForcesUserRatingAPIModel?
     var codeForcesUserInfos: CodeForcesUserInfoAPIModel?
     
@@ -22,6 +23,7 @@ class CodeForcesViewModel {
     var error: Error?
     
     init(username: String) {
+        self.username = username
         self.isLoading = true
         Task {
             await self.getCodeForcesRatings(username: username)
@@ -35,7 +37,7 @@ class CodeForcesViewModel {
             let fetchedCodeForcesRatings = try await codeForcesAPIRepository.getUserRating(username: username)
             logger.info("\("\(fetchedCodeForcesRatings)")")
             
-            self.codeForcesRatings = CodeForcesUserRatingAPIModel.from(dto: fetchedCodeForcesRatings)
+            codeForcesRatings = CodeForcesUserRatingAPIModel.from(dto: fetchedCodeForcesRatings)
         } catch {
             self.error = error
             logger.error("error in fetching CodeForces Rating: \(error)")
@@ -75,7 +77,7 @@ class CodeForcesViewModel {
             let fetchedCodeForcesUserInfo = try await codeForcesAPIRepository.getUserInfo(username: username)
             logger.info("\("\(fetchedCodeForcesUserInfo)")")
             
-            self.codeForcesUserInfos = CodeForcesUserInfoAPIModel.from(dto: fetchedCodeForcesUserInfo)
+            codeForcesUserInfos = CodeForcesUserInfoAPIModel.from(dto: fetchedCodeForcesUserInfo)
         } catch {
             self.error = error
             logger.error("error in fetching CodeForces User Info: \(error)")

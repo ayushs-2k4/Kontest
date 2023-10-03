@@ -16,7 +16,7 @@ struct CodeForcesView: View {
 
     init(username: String, bgGradient: RadialGradient, hoveringScaleValue: CGFloat) {
         self.username = username
-        self.codeForcesViewModel = CodeForcesViewModel(username: username)
+        self.codeForcesViewModel = Dependencies.instance.codeForcesViewModel
         self.bgGradient = bgGradient
         self.hoveringScaleValue = hoveringScaleValue
     }

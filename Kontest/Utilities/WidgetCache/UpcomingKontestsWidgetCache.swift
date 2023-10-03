@@ -124,7 +124,7 @@ extension UpcomingKontestsWidgetCache {
             logger.info("saved data: \(str)")
             logger.info("Saved widget cache")
         } catch {
-            print(error)
+            logger.error("\(error.localizedDescription, privacy: .public)")
         }
     }
 
@@ -139,7 +139,7 @@ extension UpcomingKontestsWidgetCache {
             logger.info("Loaded widget cache")
             return cache
         } catch {
-            print(error)
+            logger.error("\(error.localizedDescription, privacy: .public)")
             return nil
         }
     }

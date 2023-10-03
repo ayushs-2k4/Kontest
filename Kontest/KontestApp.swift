@@ -13,6 +13,7 @@ struct KontestApp: App {
 
     @State private var router = Router.instance
     @State private var errorState = ErrorState()
+    @State private var panelSelection: Panel? = .AllKontestScreen
 
     let networkMonitor = NetworkMonitor.shared
 
@@ -25,7 +26,7 @@ struct KontestApp: App {
     var body: some Scene {
         WindowGroup {
             if let defaults = UserDefaults(suiteName: Constants.userDefaultsGroupID) {
-                AllKontestsScreen()
+                ContentView(panelSelection: $panelSelection)
                     .environment(allKontestsViewModel)
                     .environment(router)
                     .environment(networkMonitor)
@@ -41,13 +42,16 @@ struct KontestApp: App {
                             disallowTabbingMode()
                         #endif
                     })
+                #if os(macOS)
+                    .frame(minWidth: 900, idealWidth: 1100, minHeight: 500, idealHeight: 600)
+                #endif
                     .defaultAppStorage(defaults)
             } else {
                 Text("Failed to load user defaults")
             }
         }
         .commands {
-            MyMenu(router: $router)
+            MyMenu(router: $router, panelSelection: $panelSelection)
         }
     }
 }
