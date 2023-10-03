@@ -32,7 +32,7 @@ class AllKontestsViewModel {
 
     private var nextDateToRefresh: Date?
 
-    private let shouldFetchAllEventsFromCalendar: Bool
+    private var shouldFetchAllEventsFromCalendar: Bool
 
     var searchText: String = "" {
         didSet {
@@ -121,6 +121,8 @@ class AllKontestsViewModel {
     private func getAllKontests() async -> [KontestModel] {
         do {
             let fetchedKontests = try await repository.getAllKontests()
+            
+            shouldFetchAllEventsFromCalendar = CalendarUtility.getAuthorizationStatus() == .fullAccess
 
             let allEvents = shouldFetchAllEventsFromCalendar ? try await CalendarUtility.getAllEvents() : []
 
