@@ -12,6 +12,7 @@ struct SettingsScreen: View {
         #if os(macOS)
         VStack {
             AllSettingsButtonsView()
+                .buttonStyle(MyButtonStyle())
         }
         .navigationTitle("Settings")
         #else
@@ -66,4 +67,58 @@ struct SingleSettingsTileView: View {
 
 #Preview("SingleSettingsTileView") {
     SingleSettingsTileView(title: "Change Usernames", onTapGesture: {})
+}
+
+struct MyButtonStyle: ButtonStyle {
+    let color: Color = .black
+    @Environment(\.colorScheme) private var colorScheme
+    @State private var isHovering = false
+    @State private var isPressed = false
+
+    func makeBody(configuration: Configuration) -> some View {
+//        configuration.label
+//            .padding(5)
+        ////            .background(configuration.isPressed ? color.opacity(0.10) : color.opacity(1))
+//            .background(getBackgroundColor())
+//            .foregroundStyle(color)
+//            .containerShape(RoundedRectangle(cornerRadius: 6.0))
+//            .cornerRadius(6.0)
+//            .onHover(perform: { hovering in
+//                isHovering = hovering
+//            })
+//            .animation(.easeInOut, value: isHovering)
+//            .onChange(of: configuration.isPressed) {oldValue, newValue in
+//                self.isPressed = newValue
+//            }
+
+        configuration.label
+            .padding()
+            .contentShape(RoundedRectangle(cornerRadius: 10))
+            .overlay {
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(colorScheme == .light ? Color.black : Color.white)
+                    .padding(1)
+            }
+            .scaleEffect(configuration.isPressed ? 0.95 : 1)
+            .animation(.easeInOut, value: configuration.isPressed)
+
+//        configuration.label
+//            .padding()
+//            .background(.blue)
+//            .foregroundStyle(.white)
+//            .clipShape(Capsule())
+//            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+//            .animation(.easeOut(duration: 0.2), value: configuration.isPressed)
+    }
+
+    private func getBackgroundColor() -> Color {
+        return if isPressed {
+            Color.gray.opacity(0.5)
+        } else
+        if isHovering {
+            Color.gray.opacity(0.25)
+        } else {
+            Color.clear
+        }
+    }
 }
