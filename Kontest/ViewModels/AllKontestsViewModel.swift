@@ -254,18 +254,22 @@ class AllKontestsViewModel {
 
                     for kontest in self.ongoingKontests {
                         kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+                        kontest.loadCalendarEventDate(allEvents: allEvents ?? [])
                     }
 
                     for kontest in self.laterTodayKontests {
                         kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+                        kontest.loadCalendarEventDate(allEvents: allEvents ?? [])
                     }
 
                     for kontest in self.tomorrowKontests {
                         kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+                        kontest.loadCalendarEventDate(allEvents: allEvents ?? [])
                     }
 
                     for kontest in self.laterKontests {
                         kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+                        kontest.loadCalendarEventDate(allEvents: allEvents ?? [])
                     }
                 }
             }

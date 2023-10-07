@@ -120,7 +120,7 @@ struct SingleKontestView: View {
                             WidgetCenter.shared.reloadAllTimelines()
                         }
                     }, onPressSet: { setDate in
-                        print("setDate: \(setDate)")
+                        print("setDate: \(setDate.formatted())")
 
                         Task {
                             do {
