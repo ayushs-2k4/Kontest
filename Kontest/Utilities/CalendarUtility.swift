@@ -435,7 +435,13 @@ class CalendarUtility {
         }
 
         if let event {
-            return event.alarms?.first?.absoluteDate ?? event.startDate.addingTimeInterval(-15 * 60)
+            if let absoluteDate = event.alarms?.first?.absoluteDate {
+                return absoluteDate
+            } else if let relativeOffset = event.alarms?.first?.relativeOffset {
+                return event.startDate.addingTimeInterval(relativeOffset)
+            } else {
+                return event.alarms?.first?.absoluteDate ?? event.startDate.addingTimeInterval(-15 * 60)
+            }
         } else {
             return nil
         }
