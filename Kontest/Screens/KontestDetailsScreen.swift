@@ -8,6 +8,7 @@
 import SwiftUI
 import WidgetKit
 
+#if os(iOS)
 struct KontestDetailsScreen: View {
     @Environment(\.colorScheme) private var colorScheme
 
@@ -327,3 +328,4 @@ struct RemainingTimeView: View {
 // #Preview("TimeView") {
 //    TimeView(horizontalAlignment: .leading)
 // }
+#endif

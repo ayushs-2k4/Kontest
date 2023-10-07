@@ -17,16 +17,18 @@ struct ContentView: View {
 
     var body: some View {
         if deviceType == .iPadOS || deviceType == .macOS {
-            NavigationSplitView(columnVisibility: $coluVis) {
-                Sidebar(panelSelection: $panelSelection)
-                #if os(macOS)
-                    .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: 250)
-                #endif
-            } detail: {
-                DetailColumn(panelSelection: $panelSelection)
-            }
-            .onAppear {
-                WidgetCenter.shared.reloadAllTimelines()
+            GeometryReader { geometryProxy in
+                NavigationSplitView(columnVisibility: $coluVis) {
+                    Sidebar(panelSelection: $panelSelection)
+                    #if os(macOS)
+                        .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: max(250, geometryProxy.size.width / 5))
+                    #endif
+                } detail: {
+                    DetailColumn(panelSelection: $panelSelection)
+                }
+                .onAppear {
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
             }
         } else if deviceType == .iOS {
             TabView(selection: $panelSelection) {

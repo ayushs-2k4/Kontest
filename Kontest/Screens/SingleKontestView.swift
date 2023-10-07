@@ -244,6 +244,7 @@ struct SingleKontestView: View {
         }
     }
     .environment(allKontestsViewModel)
+    .environment(ErrorState())
 
 //    return SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "1v1 Games by CodeChef", url: "https://www.codechef.com/GAMES", start_time: "2023-11-10 06:30:00 UTC", end_time: "2032-11-10 06:30:00 UTC", duration: "315619200.0", site: "CodeChef", in_24_hours: "No", status: "CODING")))
 //        .environment(allKontestsViewModel)

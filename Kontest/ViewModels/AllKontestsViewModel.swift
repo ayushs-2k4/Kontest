@@ -32,7 +32,7 @@ class AllKontestsViewModel {
 
     private var nextDateToRefresh: Date?
 
-    private let shouldFetchAllEventsFromCalendar: Bool
+    private var shouldFetchAllEventsFromCalendar: Bool
 
     var searchText: String = "" {
         didSet {
@@ -50,6 +50,14 @@ class AllKontestsViewModel {
         setDefaultValuesForFilterWebsiteKeysToTrue()
         addAllowedWebsites()
         fetchAllKontests()
+
+        #if os(macOS)
+        do {
+            try addCalendarObserver()
+        } catch {
+            logger.info("Can not add observer to Calendar with error: \(error)")
+        }
+        #endif
     }
 
     func fetchAllKontests() {
@@ -113,6 +121,8 @@ class AllKontestsViewModel {
     private func getAllKontests() async -> [KontestModel] {
         do {
             let fetchedKontests = try await repository.getAllKontests()
+            
+            shouldFetchAllEventsFromCalendar = CalendarUtility.getAuthorizationStatus() == .fullAccess
 
             let allEvents = shouldFetchAllEventsFromCalendar ? try await CalendarUtility.getAllEvents() : []
 
@@ -231,4 +241,35 @@ class AllKontestsViewModel {
             }
         }
     }
+
+    #if os(macOS)
+    func addCalendarObserver() throws {
+        if CalendarUtility.getAuthorizationStatus() == .fullAccess {
+            CalendarUtility.addCalendarObserver { [weak self] _ in
+                guard let self else { return }
+                print("Yes")
+
+                Task {
+                    let allEvents = self.shouldFetchAllEventsFromCalendar ? try await CalendarUtility.getAllEvents() : []
+
+                    for kontest in self.ongoingKontests {
+                        kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+                    }
+
+                    for kontest in self.laterTodayKontests {
+                        kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+                    }
+
+                    for kontest in self.tomorrowKontests {
+                        kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+                    }
+
+                    for kontest in self.laterKontests {
+                        kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+                    }
+                }
+            }
+        }
+    }
+    #endif
 }
