@@ -74,6 +74,7 @@ struct LeetcodeGraphView: View {
                             let date = Date(timeIntervalSince1970: timestamp)
 
                             PointMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.rating ?? -1))
+                                .opacity(0)
                                 .annotation(position: .top) {
                                     if showAnnotations {
                                         Text("\(Int(attendedContest.rating ?? -1))")
@@ -92,13 +93,14 @@ struct LeetcodeGraphView: View {
                                 }
 
                             if let selectedDate {
+                                let kontest = getKontestFromDate(date: selectedDate)
+
                                 RuleMark(x: .value("selectedDate", selectedDate, unit: .day))
                                     .zIndex(-1)
                                     .annotation(position: .leading, spacing: 0, overflowResolution: .init(
                                         x: .fit(to: .chart),
                                         y: .disabled
                                     )) {
-                                        let kontest = getKontestFromDate(date: selectedDate)
                                         if let kontest {
                                             VStack(spacing: 10) {
                                                 Text(kontest.contest?.title ?? "")
@@ -120,10 +122,15 @@ struct LeetcodeGraphView: View {
                                             .padding()
                                         }
                                     }
+
+                                if let rating = kontest?.rating {
+                                    PointMark(x: .value("selectedDate", selectedDate, unit: .day), y: .value("", rating))
+                                }
                             }
 
                             LineMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.rating ?? -1))
                                 .interpolationMethod(.catmullRom)
+                                .symbol(Circle().strokeBorder(lineWidth: 2))
                         }
                     }
                     .chartScrollableAxes(.horizontal)
