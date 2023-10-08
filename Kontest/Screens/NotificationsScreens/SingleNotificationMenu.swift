@@ -16,26 +16,6 @@ struct SingleNotificationMenu: View {
     var body: some View {
         let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
         Menu {
-            if notificationsViewModel.getNumberOfSettedNotificationForAKontest(kontest: kontest) <= 2 {
-                Button {
-                    setNotificationForAKontestAtAllTimes(kontest: kontest)
-                } label: {
-                    Image(systemName: "bell")
-                    Text("Set all notifications for this kontest")
-                }
-                .help("Set Notification for this kontest 10 mins, 30 mins, 1 hr, 6 hrs before")
-            }
-
-            if notificationsViewModel.getNumberOfSettedNotificationForAKontest(kontest: kontest) >= 2 {
-                Button {
-                    removeAllNotificationForAKontest(kontest: kontest)
-                } label: {
-                    Image(systemName: "bell.slash")
-                    Text("Remove all notification for this kontest")
-                }
-                .help("Remove All Notification for this kontest")
-            }
-
             if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 10, hours: 0, days: 0) {
                 Button {
                     if kontest.isSetForReminder10MiutesBefore {
