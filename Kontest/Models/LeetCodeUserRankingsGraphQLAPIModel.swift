@@ -27,7 +27,8 @@ struct BadgeModel: Codable {
     let name: String?
 }
 
-struct LeetCodeUserRankingHistoryGraphQLAPIModel: Codable, Equatable {
+struct LeetCodeUserRankingHistoryGraphQLAPIModel: Codable, Equatable,Identifiable {
+    let id = UUID()
     static func == (lhs: LeetCodeUserRankingHistoryGraphQLAPIModel, rhs: LeetCodeUserRankingHistoryGraphQLAPIModel) -> Bool {
         return lhs.attended == rhs.attended &&
             lhs.trendDirection == rhs.trendDirection &&
