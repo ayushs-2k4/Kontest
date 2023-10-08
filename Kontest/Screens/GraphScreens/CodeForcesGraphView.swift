@@ -51,6 +51,7 @@ struct CodeForcesGraphView: View {
                             let newRating = attendedContest.newRating
 
                             PointMark(x: .value("Time", updateDate, unit: .day), y: .value("Ratings", newRating))
+                                .opacity(0)
                                 .annotation(position: .top) {
                                     if showAnnotations {
                                         Text("\(newRating)")
@@ -70,6 +71,7 @@ struct CodeForcesGraphView: View {
 
                             LineMark(x: .value("Time", updateDate, unit: .day), y: .value("Ratings", newRating))
                                 .interpolationMethod(.catmullRom)
+                                .symbol(Circle().strokeBorder(lineWidth: 2))
                         }
                     }
                     .chartScrollableAxes(.horizontal)
