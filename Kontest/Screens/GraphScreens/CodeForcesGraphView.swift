@@ -77,6 +77,7 @@ struct CodeForcesGraphView: View {
                     .chartScrollableAxes(.horizontal)
                     .chartXVisibleDomain(length: 3600*24*15) // 15 days
                     .padding(.horizontal)
+                    .animation(.default, value: showAnnotations)
                 }
             }
         }
