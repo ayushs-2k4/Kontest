@@ -80,4 +80,58 @@ class LeetCodeGraphQLViewModel {
             self?.isLoading = (self?.isFetchingUserData ?? false) || (self?.isFetchingUserRankings ?? false)
         }
     }
+
+    // Chart properties
+
+    var attendedKontests: [LeetCodeUserRankingHistoryGraphQLAPIModel] {
+        if let ratings = userContestRankingHistory {
+            var kons: [LeetCodeUserRankingHistoryGraphQLAPIModel] = []
+
+            for rating in ratings {
+                if let rating, rating.attended ?? false == true {
+                    kons.append(rating)
+                }
+            }
+
+            return kons
+        }
+
+        return []
+    }
+
+    var sortedDates: [Date] {
+        attendedKontests.map { ele in
+            let timestamp = ele.contest?.startTime ?? "-1"
+            return Date(timeIntervalSince1970: TimeInterval(timestamp) ?? -1)
+        }
+    }
+
+    @ObservationIgnored
+    var rawSelectedDate: Date? {
+        didSet(newValue) {
+            if let newValue {
+                print("rawSelectedDate changed")
+
+                let selectedDay = Calendar.current.startOfDay(for: newValue)
+
+                let foundDate = sortedDates.first { date in
+                    Calendar.current.startOfDay(for: date) == selectedDay
+                }
+
+                if let foundDate {
+                    selectedDate = foundDate
+                } else {
+                    if selectedDate != nil {
+                        selectedDate = nil
+                    }
+                }
+            }
+        }
+    }
+
+    var selectedDate: Date? {
+        didSet {
+            print("selectedDate changed")
+        }
+    }
 }

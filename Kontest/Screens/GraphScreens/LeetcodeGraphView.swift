@@ -77,19 +77,11 @@ struct LeetCodeChart: View {
 
     @Binding var showAnnotations: Bool
 
-    @State private var rawSelectedDate: Date?
+    @State private var visibleDates: [Date] = [.now, .now]
 
-    var selectedDate: Date? {
-        guard let rawSelectedDate else { return nil }
+    @State private var selectedDate: Date? = nil
 
-        print("selectedDate changed")
-
-        let selectedDay = Calendar.current.startOfDay(for: rawSelectedDate)
-
-        return sortedDates.first { date in
-            Calendar.current.startOfDay(for: date) == selectedDay
-        }
-    }
+    var model = Dependencies.instance.leetCodeGraphQLViewModel
 
     let curGradient = LinearGradient(
         gradient: Gradient(
@@ -112,9 +104,10 @@ struct LeetCodeChart: View {
     )
 
     var body: some View {
+        let _ = Self._printChanges()
+
         Chart {
             ForEach(attendedContests) { attendedContest in
-
                 let timestamp = TimeInterval(Int(attendedContest.contest?.startTime ?? "-1") ?? -1)
                 let date = Date(timeIntervalSince1970: timestamp)
 
@@ -145,7 +138,7 @@ struct LeetCodeChart: View {
                     .interpolationMethod(.catmullRom)
                     .foregroundStyle(curGradient)
 
-                if let selectedDate, let kontest = getKontestFromDate(date: selectedDate), let contest = kontest.contest {
+                if let selectedDate = model.selectedDate, let kontest = getKontestFromDate(date: selectedDate), let contest = kontest.contest {
                     RuleMark(x: .value("selectedDate", selectedDate, unit: .day))
                         .zIndex(-1)
                         .annotation(position: .leading, spacing: 0, overflowResolution: .init(
@@ -179,9 +172,9 @@ struct LeetCodeChart: View {
             }
         }
         .chartScrollableAxes(.horizontal)
-        .chartXVisibleDomain(length: 3600*24*30) // 30 days
+        .chartXVisibleDomain(length: 3600 * 24 * 30) // 30 days
         .padding(.horizontal)
-        .chartXSelection(value: $rawSelectedDate)
+        .chartXSelection(value: Bindable(model).rawSelectedDate)
         .animation(.default, value: showAnnotations)
     }
 }
