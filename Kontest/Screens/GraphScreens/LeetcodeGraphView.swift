@@ -14,13 +14,7 @@ struct LeetcodeGraphView: View {
 
     let leetcodeGraphQLViewModel: LeetCodeGraphQLViewModel = Dependencies.instance.leetCodeGraphQLViewModel
 
-    @State private var attendedContests: [LeetCodeUserRankingHistoryGraphQLAPIModel]
-    @State private var sortedDates: [Date] = []
     @State private var showAnnotations: Bool = true
-
-    init() {
-        _attendedContests = State(initialValue: [])
-    }
 
     var body: some View {
         VStack {
@@ -32,32 +26,14 @@ struct LeetcodeGraphView: View {
 
                 } else {
                     Text(leetcodeGraphQLViewModel.username)
-                        .onAppear {
-                            if let ratings = leetcodeGraphQLViewModel.userContestRankingHistory {
-                                attendedContests.removeAll(keepingCapacity: true)
 
-                                for rating in ratings {
-                                    if let rating, rating.attended ?? false == true {
-                                        attendedContests.append(rating)
-                                    }
-                                }
-                            }
-
-                            sortedDates = attendedContests.map { ele in
-                                let timestamp = ele.contest?.startTime ?? "-1"
-                                return Date(timeIntervalSince1970: TimeInterval(timestamp) ?? -1)
-                            }
-                        }
-
-                    Text("Total Kontests attended: \(attendedContests.count)")
+                    Text("Total Kontests attended: \(leetcodeGraphQLViewModel.attendedKontests.count)")
 
                     Toggle("Show Annotations?", isOn: $showAnnotations)
                         .toggleStyle(.switch)
                         .padding(.horizontal)
 
                     LeetCodeChart(
-                        attendedContests: $attendedContests,
-                        sortedDates: $sortedDates,
                         showAnnotations: $showAnnotations
                     )
                 }
@@ -70,9 +46,6 @@ struct LeetcodeGraphView: View {
 struct LeetCodeChart: View {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "MyChart")
 
-    @Binding var attendedContests: [LeetCodeUserRankingHistoryGraphQLAPIModel]
-    @Binding var sortedDates: [Date]
-
     let leetcodeGraphQLViewModel: LeetCodeGraphQLViewModel = Dependencies.instance.leetCodeGraphQLViewModel
 
     @Binding var showAnnotations: Bool
@@ -81,7 +54,7 @@ struct LeetCodeChart: View {
 
     @State private var selectedDate: Date? = nil
 
-    var model = Dependencies.instance.leetCodeGraphQLViewModel
+    var leetCodeGraphQLViewModel = Dependencies.instance.leetCodeGraphQLViewModel
 
     let curGradient = LinearGradient(
         gradient: Gradient(
@@ -107,7 +80,7 @@ struct LeetCodeChart: View {
         let _ = Self._printChanges()
 
         Chart {
-            ForEach(attendedContests) { attendedContest in
+            ForEach(leetCodeGraphQLViewModel.attendedKontests) { attendedContest in
                 let timestamp = TimeInterval(Int(attendedContest.contest?.startTime ?? "-1") ?? -1)
                 let date = Date(timeIntervalSince1970: timestamp)
 
@@ -138,7 +111,7 @@ struct LeetCodeChart: View {
                     .interpolationMethod(.catmullRom)
                     .foregroundStyle(curGradient)
 
-                if let selectedDate = model.selectedDate, let kontest = getKontestFromDate(date: selectedDate), let contest = kontest.contest {
+                if let selectedDate = leetCodeGraphQLViewModel.selectedDate, let kontest = getKontestFromDate(date: selectedDate), let contest = kontest.contest {
                     RuleMark(x: .value("selectedDate", selectedDate, unit: .day))
                         .zIndex(-1)
                         .annotation(position: .leading, spacing: 0, overflowResolution: .init(
@@ -174,14 +147,15 @@ struct LeetCodeChart: View {
         .chartScrollableAxes(.horizontal)
         .chartXVisibleDomain(length: 3600 * 24 * 30) // 30 days
         .padding(.horizontal)
-        .chartXSelection(value: Bindable(model).rawSelectedDate)
+        .chartXSelection(value: Bindable(leetCodeGraphQLViewModel).rawSelectedDate)
+//        .chartScrollPosition(x: Bindable(model).chartXScrollPosition)
         .animation(.default, value: showAnnotations)
     }
 }
 
 extension LeetCodeChart {
     private func getKontestFromDate(date: Date) -> LeetCodeUserRankingHistoryGraphQLAPIModel? {
-        return attendedContests.first { leetCodeUserRankingHistoryGraphQLAPIModel in
+        return leetCodeGraphQLViewModel.attendedKontests.first { leetCodeUserRankingHistoryGraphQLAPIModel in
             let timestamp = TimeInterval(Int(leetCodeUserRankingHistoryGraphQLAPIModel.contest?.startTime ?? "-1") ?? -1)
 
             return date == Date(timeIntervalSince1970: timestamp)
