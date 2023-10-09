@@ -50,7 +50,7 @@ struct LeetcodeGraphView: View {
                         }
 
                     Text("Total Kontests attended: \(attendedContests.count)")
-                    
+
                     Toggle("Show Annotations?", isOn: $showAnnotations)
                         .toggleStyle(.switch)
                         .padding(.horizontal)
@@ -91,10 +91,28 @@ struct LeetCodeChart: View {
         }
     }
 
+    let curGradient = LinearGradient(
+        gradient: Gradient(
+            colors: [
+                Color(.systemYellow).opacity(0.8),
+                Color(.systemYellow).opacity(0.5),
+                Color(.systemYellow).opacity(0.35),
+                Color(.systemYellow).opacity(0.3),
+                Color(.systemYellow).opacity(0.2),
+                Color(.systemYellow).opacity(0.15),
+                Color(.systemYellow).opacity(0.1),
+                Color(.systemYellow).opacity(0.05),
+                Color(.systemYellow).opacity(0.03),
+                Color(.systemYellow).opacity(0.01),
+                Color(.systemYellow).opacity(0)
+            ]
+        ),
+        startPoint: .top,
+        endPoint: .bottom
+    )
+
     var body: some View {
         Chart {
-            let _ = Self._printChanges()
-
             ForEach(attendedContests) { attendedContest in
 
                 let timestamp = TimeInterval(Int(attendedContest.contest?.startTime ?? "-1") ?? -1)
@@ -122,6 +140,10 @@ struct LeetCodeChart: View {
                 LineMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.rating ?? -1))
                     .interpolationMethod(.catmullRom)
                     .symbol(Circle().strokeBorder(lineWidth: 2))
+
+                AreaMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.rating ?? -1))
+                    .interpolationMethod(.catmullRom)
+                    .foregroundStyle(curGradient)
 
                 if let selectedDate, let kontest = getKontestFromDate(date: selectedDate), let contest = kontest.contest {
                     RuleMark(x: .value("selectedDate", selectedDate, unit: .day))
@@ -162,7 +184,9 @@ struct LeetCodeChart: View {
         .chartXSelection(value: $rawSelectedDate)
         .animation(.default, value: showAnnotations)
     }
+}
 
+extension LeetCodeChart {
     private func getKontestFromDate(date: Date) -> LeetCodeUserRankingHistoryGraphQLAPIModel? {
         return attendedContests.first { leetCodeUserRankingHistoryGraphQLAPIModel in
             let timestamp = TimeInterval(Int(leetCodeUserRankingHistoryGraphQLAPIModel.contest?.startTime ?? "-1") ?? -1)
