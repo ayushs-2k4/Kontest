@@ -57,19 +57,19 @@ struct AllKontestsScreen: View {
                                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                                     } else {
                                         if ongoingKontests.count > 0 {
-                                            createSection(title: "Live Now", kontests: ongoingKontests, timelineViewDefaultContext: timelineViewDefaultContext)
+                                            createSection(title: "Live Now - \(ongoingKontests.count)", kontests: ongoingKontests, timelineViewDefaultContext: timelineViewDefaultContext)
                                         }
 
                                         if laterTodayKontests.count > 0 {
-                                            createSection(title: "Later Today", kontests: laterTodayKontests, timelineViewDefaultContext: timelineViewDefaultContext)
+                                            createSection(title: "Later Today - \(laterTodayKontests.count)", kontests: laterTodayKontests, timelineViewDefaultContext: timelineViewDefaultContext)
                                         }
 
                                         if tomorrowKontests.count > 0 {
-                                            createSection(title: "Tomorrow", kontests: tomorrowKontests, timelineViewDefaultContext: timelineViewDefaultContext)
+                                            createSection(title: "Tomorrow - \(tomorrowKontests.count)", kontests: tomorrowKontests, timelineViewDefaultContext: timelineViewDefaultContext)
                                         }
 
                                         if laterKontests.count > 0 {
-                                            createSection(title: "Upcoming", kontests: laterKontests, timelineViewDefaultContext: timelineViewDefaultContext)
+                                            createSection(title: "Upcoming - \(laterKontests.count)", kontests: laterKontests, timelineViewDefaultContext: timelineViewDefaultContext)
                                         }
                                     }
                                 }
@@ -239,15 +239,6 @@ struct AllKontestsScreen: View {
     }
 }
 
-#Preview {
-    let networkMonitor = NetworkMonitor.shared
-
-    return AllKontestsScreen()
-        .environment(networkMonitor)
-        .environment(Dependencies.instance.allKontestsViewModel)
-        .environment(Router.instance)
-}
-
 extension AllKontestsScreen {
     func calendarSwipeButtonAction(kontest: KontestModel) {
         let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
@@ -308,4 +299,14 @@ extension AllKontestsScreen {
             SingleKontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
         }
     }
+}
+
+#Preview {
+    let networkMonitor = NetworkMonitor.shared
+
+    return AllKontestsScreen()
+        .environment(networkMonitor)
+        .environment(Dependencies.instance.allKontestsViewModel)
+        .environment(Router.instance)
+        .environment(ErrorState())
 }
