@@ -175,7 +175,7 @@ struct SingleKontestView: View {
 
                             Text("Ends in \(remainingTimeInEndingOfRunningKontest)")
                                 .font(FontUtility.getRemainingTimeFontSize().monospacedDigit())
-                                .contentTransition(.numericText())
+                                .contentTransition(.numericText(countsDown: true))
                                 .animation(.easeInOut, value: remainingTimeInEndingOfRunningKontest)
                         }
 
@@ -187,7 +187,7 @@ struct SingleKontestView: View {
 
                             Text("Starting in \(remainingTimeInStartingOfFutureKontest)")
                                 .font(FontUtility.getRemainingTimeFontSize().monospacedDigit())
-                                .contentTransition(.numericText())
+                                .contentTransition(.numericText(countsDown: true))
                                 .animation(.easeInOut, value: remainingTimeInStartingOfFutureKontest)
                         }
 
