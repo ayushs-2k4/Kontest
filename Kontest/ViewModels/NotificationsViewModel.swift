@@ -192,4 +192,22 @@ class NotificationsViewModel: NotificationsViewModelProtocol {
             }
         }
     }
+
+    func isSetForAllNotifications(kontest: KontestModel) -> Bool {
+        var ans = true
+        let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
+
+        if (CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 10) && !kontest.isSetForReminder10MiutesBefore) || (CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: 30) && !kontest.isSetForReminder30MiutesBefore) || (CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, hours: 1) && !kontest.isSetForReminder1HourBefore) || (CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, hours: 6) && !kontest.isSetForReminder6HoursBefore) {
+            ans = false
+        }
+
+        return ans
+    }
+    
+    func removeAllNotificationForAKontest(kontest: KontestModel) {
+        removePendingNotification(kontest: kontest, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
+        removePendingNotification(kontest: kontest, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
+        removePendingNotification(kontest: kontest, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
+        removePendingNotification(kontest: kontest, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
+    }
 }

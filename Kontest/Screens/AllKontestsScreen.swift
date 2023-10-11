@@ -225,7 +225,6 @@ struct AllKontestsScreen: View {
                 #if os(macOS)
                 Link(destination: URL(string: kontest.url)!, label: {
                     kontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
-
                 })
                 #else
                 NavigationLink(value: SelectionState.kontestModel(kontest)) {
@@ -287,16 +286,47 @@ extension AllKontestsScreen {
         let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
         let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
 
-        if let kontestStartDate, let kontestEndDate, !CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate, kontestEndDate: kontestEndDate) {
-            SingleKontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
-                .swipeActions(edge: .leading) {
+        SingleKontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
+            .swipeActions(edge: .leading) {
+                if let kontestStartDate, let kontestEndDate, !CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate, kontestEndDate: kontestEndDate) {
                     Button("", systemImage: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus") {
                         calendarSwipeButtonAction(kontest: kontest)
                     }
                     .tint(Color(red: 94/255, green: 92/255, blue: 222/255))
                 }
-        } else {
-            SingleKontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
+            }
+            .swipeActions(edge: .trailing) {
+                let numberOfNotificationsWhichCanBeSettedForAKontest = notificationsViewModel.getNumberOfNotificationsWhichCanBeSettedForAKontest(kontest: kontest)
+
+                if numberOfNotificationsWhichCanBeSettedForAKontest > 0 {
+                    let numberOfNotificationsWhichAreCurrentlySetted = notificationsViewModel.getNumberOfSettedNotificationForAKontest(kontest: kontest)
+                    let image = notificationsViewModel.isSetForAllNotifications(kontest: kontest) ? "bell.fill" : "bell"
+                    let title = notificationsViewModel.isSetForAllNotifications(kontest: kontest) ? "Remove all notifications" : "Set all notifications"
+
+                    Button(title, systemImage: image) {
+                        if numberOfNotificationsWhichAreCurrentlySetted < numberOfNotificationsWhichCanBeSettedForAKontest {
+                            setNotificationForAKontestAtAllTimes(kontest: kontest)
+                        } else {
+                            notificationsViewModel.removeAllNotificationForAKontest(kontest: kontest)
+                        }
+                    }
+                }
+            }
+    }
+
+    private func setNotificationForAKontestAtAllTimes(kontest: KontestModel) {
+        Task {
+            do {
+                try await notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
+
+                try await notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
+
+                try await notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
+
+                try await notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
+            } catch {
+                errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Please provide Notification Permission in order to set notifications")
+            }
         }
     }
 }
