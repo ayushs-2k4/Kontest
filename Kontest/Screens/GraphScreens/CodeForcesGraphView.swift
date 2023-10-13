@@ -17,6 +17,26 @@ struct CodeForcesGraphView: View {
     init() {
         self._attendedContests = State(initialValue: [])
     }
+    
+    let curGradient = LinearGradient(
+        gradient: Gradient(
+            colors: [
+                Color(.systemYellow).opacity(0.8),
+                Color(.systemYellow).opacity(0.5),
+                Color(.systemYellow).opacity(0.35),
+                Color(.systemYellow).opacity(0.3),
+                Color(.systemYellow).opacity(0.2),
+                Color(.systemYellow).opacity(0.15),
+                Color(.systemYellow).opacity(0.1),
+                Color(.systemYellow).opacity(0.05),
+                Color(.systemYellow).opacity(0.03),
+                Color(.systemYellow).opacity(0.01),
+                Color(.systemYellow).opacity(0)
+            ]
+        ),
+        startPoint: .top,
+        endPoint: .bottom
+    )
 
     var body: some View {
         VStack {
@@ -51,6 +71,7 @@ struct CodeForcesGraphView: View {
                             let newRating = attendedContest.newRating
 
                             PointMark(x: .value("Time", updateDate, unit: .day), y: .value("Ratings", newRating))
+                                .opacity(0)
                                 .annotation(position: .top) {
                                     if showAnnotations {
                                         Text("\(newRating)")
@@ -70,11 +91,17 @@ struct CodeForcesGraphView: View {
 
                             LineMark(x: .value("Time", updateDate, unit: .day), y: .value("Ratings", newRating))
                                 .interpolationMethod(.catmullRom)
+                                .symbol(Circle().strokeBorder(lineWidth: 2))
+                            
+                            AreaMark(x: .value("Time", updateDate, unit: .day), y: .value("Ratings", newRating))
+                                .interpolationMethod(.catmullRom)
+                                .foregroundStyle(curGradient)
                         }
                     }
                     .chartScrollableAxes(.horizontal)
                     .chartXVisibleDomain(length: 3600*24*15) // 15 days
                     .padding(.horizontal)
+                    .animation(.default, value: showAnnotations)
                 }
             }
         }

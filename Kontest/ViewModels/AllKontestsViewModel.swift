@@ -96,7 +96,7 @@ class AllKontestsViewModel {
                         let timeInterval = currentDate.timeIntervalSince(nextDateToRefresh)
                         logger.info("nextDateToRefresh: \(nextDateToRefresh.formatted())\ntimeInterval: \(timeInterval)")
 
-                        if timeInterval >= 5, timeInterval <= 5 {
+                        if timeInterval >= -5, timeInterval <= 5 {
                             if self.searchText.isEmpty {
                                 self.splitKontestsIntoDifferentCategories()
                             }
@@ -121,7 +121,7 @@ class AllKontestsViewModel {
     private func getAllKontests() async -> [KontestModel] {
         do {
             let fetchedKontests = try await repository.getAllKontests()
-            
+
             shouldFetchAllEventsFromCalendar = CalendarUtility.getAuthorizationStatus() == .fullAccess
 
             let allEvents = shouldFetchAllEventsFromCalendar ? try await CalendarUtility.getAllEvents() : []
@@ -208,6 +208,10 @@ class AllKontestsViewModel {
 
         ongoingKontests = toShowKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? today, kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? today) }
 
+        ongoingKontests = ongoingKontests.sorted { kontestModel1, kontestModel2 in
+            CalendarUtility.getDate(date: kontestModel1.end_time) ?? Date() < CalendarUtility.getDate(date: kontestModel2.end_time) ?? Date()
+        }
+
         laterTodayKontests = toShowKontests.filter { CalendarUtility.isKontestLaterToday(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? Date()) }
 
         tomorrowKontests = toShowKontests.filter { CalendarUtility.isKontestTomorrow(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? Date()) }
@@ -254,18 +258,22 @@ class AllKontestsViewModel {
 
                     for kontest in self.ongoingKontests {
                         kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+                        kontest.loadCalendarEventDate(allEvents: allEvents ?? [])
                     }
 
                     for kontest in self.laterTodayKontests {
                         kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+                        kontest.loadCalendarEventDate(allEvents: allEvents ?? [])
                     }
 
                     for kontest in self.tomorrowKontests {
                         kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+                        kontest.loadCalendarEventDate(allEvents: allEvents ?? [])
                     }
 
                     for kontest in self.laterKontests {
                         kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+                        kontest.loadCalendarEventDate(allEvents: allEvents ?? [])
                     }
                 }
             }

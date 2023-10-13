@@ -68,6 +68,7 @@ class KontestDetailViewModel {
                     print("swacd2")
 
                     self.kontest.loadCalendarStatus(allEvents: allEvents ?? [])
+                    self.kontest.loadCalendarEventDate(allEvents: allEvents ?? [])
                 }
             }
         }

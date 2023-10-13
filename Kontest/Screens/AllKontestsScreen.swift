@@ -57,19 +57,19 @@ struct AllKontestsScreen: View {
                                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                                     } else {
                                         if ongoingKontests.count > 0 {
-                                            createSection(title: "Live Now", kontests: ongoingKontests, timelineViewDefaultContext: timelineViewDefaultContext)
+                                            createSection(title: "Live Now - \(ongoingKontests.count)", kontests: ongoingKontests, timelineViewDefaultContext: timelineViewDefaultContext)
                                         }
 
                                         if laterTodayKontests.count > 0 {
-                                            createSection(title: "Later Today", kontests: laterTodayKontests, timelineViewDefaultContext: timelineViewDefaultContext)
+                                            createSection(title: "Later Today - \(laterTodayKontests.count)", kontests: laterTodayKontests, timelineViewDefaultContext: timelineViewDefaultContext)
                                         }
 
                                         if tomorrowKontests.count > 0 {
-                                            createSection(title: "Tomorrow", kontests: tomorrowKontests, timelineViewDefaultContext: timelineViewDefaultContext)
+                                            createSection(title: "Tomorrow - \(tomorrowKontests.count)", kontests: tomorrowKontests, timelineViewDefaultContext: timelineViewDefaultContext)
                                         }
 
                                         if laterKontests.count > 0 {
-                                            createSection(title: "Upcoming", kontests: laterKontests, timelineViewDefaultContext: timelineViewDefaultContext)
+                                            createSection(title: "Upcoming - \(laterKontests.count)", kontests: laterKontests, timelineViewDefaultContext: timelineViewDefaultContext)
                                         }
                                     }
                                 }
@@ -225,7 +225,6 @@ struct AllKontestsScreen: View {
                 #if os(macOS)
                 Link(destination: URL(string: kontest.url)!, label: {
                     kontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
-
                 })
                 #else
                 NavigationLink(value: SelectionState.kontestModel(kontest)) {
@@ -237,15 +236,6 @@ struct AllKontestsScreen: View {
             Text(title)
         }
     }
-}
-
-#Preview {
-    let networkMonitor = NetworkMonitor.shared
-
-    return AllKontestsScreen()
-        .environment(networkMonitor)
-        .environment(Dependencies.instance.allKontestsViewModel)
-        .environment(Router.instance)
 }
 
 extension AllKontestsScreen {
@@ -296,16 +286,57 @@ extension AllKontestsScreen {
         let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time)
         let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
 
-        if let kontestStartDate, let kontestEndDate, !CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate, kontestEndDate: kontestEndDate) {
-            SingleKontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
-                .swipeActions(edge: .leading) {
+        SingleKontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
+            .swipeActions(edge: .leading) {
+                if let kontestStartDate, let kontestEndDate, !CalendarUtility.isKontestRunning(kontestStartDate: kontestStartDate, kontestEndDate: kontestEndDate) {
                     Button("", systemImage: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus") {
                         calendarSwipeButtonAction(kontest: kontest)
                     }
                     .tint(Color(red: 94/255, green: 92/255, blue: 222/255))
                 }
-        } else {
-            SingleKontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
+            }
+            .swipeActions(edge: .trailing) {
+                let numberOfNotificationsWhichCanBeSettedForAKontest = notificationsViewModel.getNumberOfNotificationsWhichCanBeSettedForAKontest(kontest: kontest)
+
+                if numberOfNotificationsWhichCanBeSettedForAKontest > 0 {
+                    let numberOfNotificationsWhichAreCurrentlySetted = notificationsViewModel.getNumberOfSettedNotificationForAKontest(kontest: kontest)
+                    let image = notificationsViewModel.isSetForAllNotifications(kontest: kontest) ? "bell.fill" : "bell"
+                    let title = notificationsViewModel.isSetForAllNotifications(kontest: kontest) ? "Remove all notifications" : "Set all notifications"
+
+                    Button(title, systemImage: image) {
+                        if numberOfNotificationsWhichAreCurrentlySetted < numberOfNotificationsWhichCanBeSettedForAKontest {
+                            setNotificationForAKontestAtAllTimes(kontest: kontest)
+                        } else {
+                            notificationsViewModel.removeAllNotificationForAKontest(kontest: kontest)
+                        }
+                    }
+                }
+            }
+    }
+
+    private func setNotificationForAKontestAtAllTimes(kontest: KontestModel) {
+        Task {
+            do {
+                try await notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
+
+                try await notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
+
+                try await notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
+
+                try await notificationsViewModel.setNotificationForKontest(kontest: kontest, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
+            } catch {
+                errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Please provide Notification Permission in order to set notifications")
+            }
         }
     }
+}
+
+#Preview {
+    let networkMonitor = NetworkMonitor.shared
+
+    return AllKontestsScreen()
+        .environment(networkMonitor)
+        .environment(Dependencies.instance.allKontestsViewModel)
+        .environment(Router.instance)
+        .environment(ErrorState())
 }

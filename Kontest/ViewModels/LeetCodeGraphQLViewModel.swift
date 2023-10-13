@@ -29,55 +29,124 @@ class LeetCodeGraphQLViewModel {
         self.isFetchingUserData = true
         self.isFetchingUserRankings = true
         self.isLoading = true
-        fetchUserData(username: username)
-        fetchUserRankings(username: username)
-    }
 
-    func fetchUserData(username: String) {
-        print("Ran")
-        repository.getUserData(username: username) { [weak self] leetCodeUserProfileGraphQLAPIDTO, error in
-            if error != nil {
-                self?.logger.error("\(error)")
-                self?.error = error
-            } else {
-                if let leetCodeUserProfileGraphQLAPIDTO {
-                    // Handle the data here when the GraphQL query succeeds.
-                    self?.logger.info("-------\("\(leetCodeUserProfileGraphQLAPIDTO)")----------")
+        self.sortedDates = []
 
-                    self?.leetCodeUserProfileGraphQLAPIModel = LeetCodeUserProfileGraphQLAPIModel.from(leetCodeUserProfileGraphQLAPIDTO: leetCodeUserProfileGraphQLAPIDTO)
-                    self?.error = nil
-                } else {
-                    // Handle the case when the GraphQL query fails or returns nil data.
-                    self?.logger.error("Failed to fetchUserData.")
-                    self?.error = URLError(.badURL)
+        self.chartXScrollPosition = .now
+
+        Task {
+            await withTaskGroup(of: Void.self) { taskGroup in
+                // fetching user data
+                taskGroup.addTask {
+                    do {
+                        self.isLoading = true
+                        let leetCodeUserProfileGraphQLAPIDTO = try await self.repository.getUserData(username: username)
+
+                        self.leetCodeUserProfileGraphQLAPIModel = LeetCodeUserProfileGraphQLAPIModel.from(leetCodeUserProfileGraphQLAPIDTO: leetCodeUserProfileGraphQLAPIDTO)
+                        self.error = nil
+
+                        self.isFetchingUserData = false
+                        self.isLoading = (self.isFetchingUserData) || (self.isFetchingUserRankings)
+                    } catch {
+                        self.logger.error("Failed to fetchUserData.")
+                        self.error = URLError(.badURL)
+                    }
+                }
+
+                // fetching user rankings
+                taskGroup.addTask {
+                    do {
+                        self.isLoading = true
+                        let leetCodeUserRankingsGraphQLAPIDTO = try await self.repository.getUserRankingInfo(username: username)
+
+                        let userContestRanking = LeetCodeUserRankingGraphQLAPIModel.from(leetCodeUserRankingGraphQLAPIDTO: leetCodeUserRankingsGraphQLAPIDTO.leetCodeUserRankingGraphQLAPIDTO)
+
+                        let userContestRankingHistory = LeetCodeUserRankingHistoryGraphQLAPIModel.from(leetCodeUserRankingHistoryGraphQLAPIDTOs: leetCodeUserRankingsGraphQLAPIDTO.leetCodeUserRankingHistoryGraphQLAPIDTO)
+
+                        self.userContestRanking = userContestRanking
+                        self.userContestRankingHistory = userContestRankingHistory
+
+                        self.error = nil
+                        self.isFetchingUserRankings = false
+                        self.isLoading = (self.isFetchingUserData) || (self.isFetchingUserRankings)
+                    } catch {
+                        self.logger.error("Failed to fetchUserRankings.")
+                        self.error = URLError(.badURL)
+                    }
                 }
             }
 
-            self?.isFetchingUserData = false
-            self?.isLoading = (self?.isFetchingUserData ?? false) || (self?.isFetchingUserRankings ?? false)
+            self.sortedDates = attendedKontests.map { ele in
+                let timestamp = ele.contest?.startTime ?? "-1"
+                return Date(timeIntervalSince1970: TimeInterval(timestamp) ?? -1)
+            }
+
+            self.chartXScrollPosition = sortedDates.first?.addingTimeInterval(-86400 * 3) ?? .now
         }
     }
 
-    func fetchUserRankings(username: String) {
-        repository.getUserRankingInfo(username: username) { [weak self] leetCodeUserRankingsGraphQLAPIDTO, error in
-            if error != nil {
-                self?.logger.error("\(error)")
-                self?.error = error
-            } else {
-                if let leetCodeUserRankingsGraphQLAPIDTO, let userContestRanking = LeetCodeUserRankingGraphQLAPIModel.from(leetCodeUserRankingGraphQLAPIDTO: leetCodeUserRankingsGraphQLAPIDTO.leetCodeUserRankingGraphQLAPIDTO), let userContestRankingHistory = LeetCodeUserRankingHistoryGraphQLAPIModel.from(leetCodeUserRankingHistoryGraphQLAPIDTOs: leetCodeUserRankingsGraphQLAPIDTO.leetCodeUserRankingHistoryGraphQLAPIDTO) {
-                    self?.userContestRanking = userContestRanking
+    // Chart properties
+    var attendedKontests: [LeetCodeUserRankingHistoryGraphQLAPIModel] {
+        if let ratings = userContestRankingHistory {
+            var kons: [LeetCodeUserRankingHistoryGraphQLAPIModel] = []
 
-                    self?.userContestRankingHistory = userContestRankingHistory
-
-                    self?.error = nil
-                } else {
-                    self?.logger.error("Failed to fetchUserRankings.")
-                    self?.error = URLError(.badURL)
+            for rating in ratings {
+                if let rating, rating.attended ?? false == true {
+                    kons.append(rating)
                 }
             }
 
-            self?.isFetchingUserRankings = false
-            self?.isLoading = (self?.isFetchingUserData ?? false) || (self?.isFetchingUserRankings ?? false)
+            return kons
+        }
+
+        return []
+    }
+
+    var sortedDates: [Date]
+//    var sortedDates: [Date] {
+//        attendedKontests.map { ele in
+//            let timestamp = ele.contest?.startTime ?? "-1"
+//            return Date(timeIntervalSince1970: TimeInterval(timestamp) ?? -1)
+//        }
+//    }
+
+    @ObservationIgnored
+    var rawSelectedDate: Date? {
+        didSet(newValue) {
+            if let newValue {
+                print("rawSelectedDate changed")
+
+                let selectedDay = Calendar.current.startOfDay(for: newValue)
+
+                let foundDate = sortedDates.first { date in
+                    Calendar.current.startOfDay(for: date) == selectedDay
+                }
+
+                if let foundDate {
+                    selectedDate = foundDate
+                } else {
+                    if selectedDate != nil {
+                        selectedDate = nil
+                    }
+                }
+            }
+        }
+    }
+
+    var selectedDate: Date? {
+        didSet {
+            print("selectedDate changed")
+        }
+    }
+
+    @ObservationIgnored
+    var chartXScrollPosition: Date {
+        willSet {
+            print("chartScrollPosition willSet")
+        }
+
+        didSet {
+            print("chartScrollPosition didSet")
         }
     }
 }

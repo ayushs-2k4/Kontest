@@ -11,8 +11,8 @@ class AllKontestsFakeRepository: KontestFetcher {
     func getAllKontests() async throws -> [KontestDTO] {
         var kontests: [KontestDTO] = []
 
-        let startTime = "2023-09-9 18:06:00 UTC"
-        let endTime = "2023-09-9 18:11:20 UTC"
+        let startTime = "2023-08-15 18:31:00 UTC"
+        let endTime = "2023-12-10 13:38:30 UTC"
 
 //        let startTime = "2023-08-15 6:2:00 UTC"
 //        let endTime = "2023-08-17 17:43:00 UTC"
@@ -24,7 +24,7 @@ class AllKontestsFakeRepository: KontestFetcher {
 //        let endTime3 = "2023-08-18 17:43:00 UTC"
 
         let startTime3 = "2023-08-15 18:31:00 UTC"
-        let endTime3 = "2023-08-18 17:43:00 UTC"
+        let endTime3 = "2023-10-10 13:40:10 UTC"
 
         let allKontests: [KontestDTO] = [
             KontestDTO(name: "ProjectEuler+1", url: "https://hackerrank.com/contests/projecteuler", start_time: "2023-08-15 18:29:00 UTC", end_time: "2023-08-18 17:43:00 UTC", duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "BEFORE"),
