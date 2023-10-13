@@ -24,15 +24,10 @@ class HapticFeedbackUtility {
             return modelIdentifier
         }
 
-        static func perf() {
-            performHapticFeedback()
-        }
-
         static func performHapticFeedback() {
             let hapticPerformer: NSHapticFeedbackPerformer? = NSHapticFeedbackManager.defaultPerformer
 
             hapticPerformer?.perform(.alignment, performanceTime: .now)
         }
-
     #endif
 }

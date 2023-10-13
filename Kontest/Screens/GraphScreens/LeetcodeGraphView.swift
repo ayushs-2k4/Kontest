@@ -77,6 +77,7 @@ struct LeetCodeChart: View {
     var body: some View {
         let _ = Self._printChanges()
 
+        #if os(macOS)
         EmptyView()
             .hidden()
             .onChange(of: leetcodeGraphQLViewModel.selectedDate) { _, newValue in
@@ -84,6 +85,7 @@ struct LeetCodeChart: View {
                     HapticFeedbackUtility.performHapticFeedback()
                 }
             }
+        #endif
 
         Chart {
             ForEach(leetCodeGraphQLViewModel.attendedKontests) { attendedContest in
