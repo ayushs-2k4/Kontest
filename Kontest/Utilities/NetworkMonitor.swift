@@ -17,6 +17,13 @@ extension NWPath.Status: CaseIterable {
     public static var allCases: [NWPath.Status] = [.satisfied, .unsatisfied, .requiresConnection]
 }
 
+enum AppNetworkStatus {
+    case satisfied
+    case unsatisfied
+    case requiresConnection
+    case initialPhase
+}
+
 @Observable
 class NetworkMonitor {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "NetworkMonitor")
@@ -25,7 +32,7 @@ class NetworkMonitor {
     private let queue = DispatchQueue(label: "NetworkMonitorQueue")
 
     var currentInterface: NWInterface.InterfaceType = .other
-    var currentStatus: NWPath.Status = .unsatisfied
+    var currentStatus: AppNetworkStatus = .initialPhase
 
     private init() {
         monitor = NWPathMonitor()
@@ -34,20 +41,57 @@ class NetworkMonitor {
     func start() {
         monitor.start(queue: queue)
 
-        let p = monitor.currentPath.status
-        logger.log("p: \("\(p)")")
-        currentStatus = monitor.currentPath.status
+        let status = monitor.currentPath.status
+        logger.log("status: \("\(status)")")
+
+        currentStatus = getAppNetworkStatus(status: status)
 
         monitor.pathUpdateHandler = { [weak self] path in
+            
+            guard let self else { return }
 
             guard let interface = NWInterface.InterfaceType.allCases.filter({ path.usesInterfaceType($0) }).first else { return }
 
-            self?.currentInterface = interface
+            self.currentInterface = interface
 
-            self?.currentStatus = path.status
+            let status = path.status
 
-            self?.logger.info("Status: \("\(path.status)")")
-            self?.logger.info("Interface: \("\(interface)")")
+            self.currentStatus = getAppNetworkStatus(status: status)
+
+            self.logger.info("Status: \("\(path.status)")")
+            self.logger.info("Interface: \("\(interface)")")
+        }
+    }
+
+    func start(afterSeconds seconds: Float) {
+        Task {
+            monitor.start(queue: queue)
+
+            let nanoSeconds = UInt64(seconds*1000000000)
+
+            self.currentStatus = .satisfied
+            try? await Task.sleep(nanoseconds: nanoSeconds)
+
+            let status = monitor.currentPath.status
+            logger.log("status: \("\(status)")")
+
+            currentStatus = getAppNetworkStatus(status: status)
+
+            monitor.pathUpdateHandler = { [weak self] path in
+                
+                guard let self else { return }
+
+                guard let interface = NWInterface.InterfaceType.allCases.filter({ path.usesInterfaceType($0) }).first else { return }
+
+                self.currentInterface = interface
+
+                let status = path.status
+
+                self.currentStatus = getAppNetworkStatus(status: status)
+
+                self.logger.info("Status: \("\(path.status)")")
+                self.logger.info("Interface: \("\(interface)")")
+            }
         }
     }
 
@@ -58,22 +102,55 @@ class NetworkMonitor {
 
         let p = monitor.currentPath.status
         logger.log("p: \("\(p)")")
-        currentStatus = monitor.currentPath.status
+
+        currentStatus = switch p {
+        case .satisfied:
+            .satisfied
+
+        case .unsatisfied:
+            .unsatisfied
+
+        case .requiresConnection:
+            .requiresConnection
+
+        @unknown default:
+            .initialPhase
+        }
 
         monitor.pathUpdateHandler = { [weak self] path in
 
+            guard let self else { return }
+
             guard let interface = NWInterface.InterfaceType.allCases.filter({ path.usesInterfaceType($0) }).first else { return }
 
-            self?.currentInterface = interface
+            self.currentInterface = interface
 
-            self?.currentStatus = path.status
+            let status = path.status
 
-            self?.logger.info("Status: \("\(path.status)")")
-            self?.logger.info("Interface: \("\(interface)")")
+            self.currentStatus = getAppNetworkStatus(status: status)
+
+            self.logger.info("Status: \("\(path.status)")")
+            self.logger.info("Interface: \("\(interface)")")
         }
     }
 
     func stop() {
         monitor.cancel()
+    }
+
+    private func getAppNetworkStatus(status: NWPath.Status) -> AppNetworkStatus {
+        return switch status {
+        case .satisfied:
+            .satisfied
+
+        case .unsatisfied:
+            .unsatisfied
+
+        case .requiresConnection:
+            .requiresConnection
+
+        @unknown default:
+            .initialPhase
+        }
     }
 }

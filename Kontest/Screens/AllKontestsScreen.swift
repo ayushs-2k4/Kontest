@@ -28,7 +28,9 @@ struct AllKontestsScreen: View {
 
     var body: some View {
         NavigationStack(path: Bindable(router).path) {
-            if networkMonitor.currentStatus == .satisfied {
+            if networkMonitor.currentStatus == .initialPhase {
+                ProgressView()
+            } else if networkMonitor.currentStatus == .satisfied {
                 ZStack {
                     if allKontestsViewModel.isLoading {
                         ProgressView()

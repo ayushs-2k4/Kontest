@@ -18,7 +18,7 @@ struct KontestApp: App {
     let networkMonitor = NetworkMonitor.shared
 
     init() {
-        networkMonitor.start()
+        networkMonitor.start(afterSeconds: 0.5)
     }
 
     var body: some Scene {
