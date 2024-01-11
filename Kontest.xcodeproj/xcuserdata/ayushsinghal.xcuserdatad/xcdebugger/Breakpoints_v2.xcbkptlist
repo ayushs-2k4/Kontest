@@ -7,113 +7,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A3EF2871-AEC7-43F9-BAC8-FC28AF3F63A6"
+            uuid = "22E81A25-8F49-4B3E-B303-928F96ECBEFB"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Kontest/Repositories/KontestRepository/KontestNewRepository.swift"
+            filePath = "Kontest/ViewModels/AllKontestsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
-            landmarkName = "getAllKontests()"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "filterKontests()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "A3EF2871-AEC7-43F9-BAC8-FC28AF3F63A6 - 4ea9ed79b00a2f76"
+                  uuid = "22E81A25-8F49-4B3E-B303-928F96ECBEFB - 4c7025f1609aadc7"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for Kontest.KontestNewRepository.getAllKontests() async throws -&gt; Swift.Array&lt;Kontest.KontestDTO&gt;"
+                  symbolName = "closure #1 (Kontest.KontestModel) -&gt; Swift.Bool in Kontest.AllKontestsViewModel.filterKontests() -&gt; ()"
                   moduleName = "Kontest"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ayushsinghal/XCode%20Projects/Completed/Kontest/Kontest/Repositories/KontestRepository/KontestNewRepository.swift"
+                  urlString = "file:///Users/ayushsinghal/XCode%20Projects/Completed/Kontest/Kontest/ViewModels/AllKontestsViewModel.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "98"
-                  endingLineNumber = "98"
-                  offsetFromSymbolStart = "6848">
+                  startingLineNumber = "194"
+                  endingLineNumber = "194"
+                  offsetFromSymbolStart = "212">
                </Location>
                <Location
-                  uuid = "A3EF2871-AEC7-43F9-BAC8-FC28AF3F63A6 - 4ea9ed79b00a2fb0"
+                  uuid = "22E81A25-8F49-4B3E-B303-928F96ECBEFB - 4c7025f1609aadc7"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for Kontest.KontestNewRepository.getAllKontests() async throws -&gt; Swift.Array&lt;Kontest.KontestDTO&gt;"
+                  symbolName = "closure #1 (Kontest.KontestModel) -&gt; Swift.Bool in Kontest.AllKontestsViewModel.filterKontests() -&gt; ()"
                   moduleName = "Kontest"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ayushsinghal/XCode%20Projects/Completed/Kontest/Kontest/Repositories/KontestRepository/KontestNewRepository.swift"
+                  urlString = "file:///Users/ayushsinghal/XCode%20Projects/Completed/Kontest/Kontest/ViewModels/AllKontestsViewModel.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "104"
-                  endingLineNumber = "104"
-                  offsetFromSymbolStart = "6848">
+                  startingLineNumber = "194"
+                  endingLineNumber = "194"
+                  offsetFromSymbolStart = "224">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9C4A7257-068D-4CB0-B2DA-805B30404E52"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Kontest/Repositories/KontestRepository/KontestNewRepository.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "getAllKontests()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "9C4A7257-068D-4CB0-B2DA-805B30404E52 - 4ea9ed79b00a2f34"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for Kontest.KontestNewRepository.getAllKontests() async throws -&gt; Swift.Array&lt;Kontest.KontestDTO&gt;"
-                  moduleName = "Kontest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ayushsinghal/XCode%20Projects/Completed/Kontest/Kontest/Repositories/KontestRepository/KontestNewRepository.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "100"
-                  endingLineNumber = "100"
-                  offsetFromSymbolStart = "8260">
-               </Location>
-               <Location
-                  uuid = "9C4A7257-068D-4CB0-B2DA-805B30404E52 - 4ea9ed79b00a2e7e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for Kontest.KontestNewRepository.getAllKontests() async throws -&gt; Swift.Array&lt;Kontest.KontestDTO&gt;"
-                  moduleName = "Kontest"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ayushsinghal/XCode%20Projects/Completed/Kontest/Kontest/Repositories/KontestRepository/KontestNewRepository.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "106"
-                  endingLineNumber = "106"
-                  offsetFromSymbolStart = "8260">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4DD4655B-1052-4D76-8140-730B103A4535"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Kontest/Repositories/KontestRepository/KontestNewRepository.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "getAllKontests()"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

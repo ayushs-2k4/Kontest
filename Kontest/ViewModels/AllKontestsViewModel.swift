@@ -189,9 +189,9 @@ class AllKontestsViewModel {
 
     func filterKontests() {
         toShowKontests = allKontests.filter {
-            let isKontestWebsiteInAllowedWebsites = allowedWebsites.contains($0.siteAbbreviation)
+            let isKontestWebsiteInAllowedWebsites = allowedWebsites.contains($0.site)
 
-//            return isKontestWebsiteInAllowedWebsites
+            return isKontestWebsiteInAllowedWebsites
             return true
         }
         backupKontests = toShowKontests

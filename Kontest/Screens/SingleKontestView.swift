@@ -43,7 +43,7 @@ struct SingleKontestView: View {
         HStack(alignment: .center) {
             VStack {
                 #if os(macOS)
-                Image(KontestModel.getLogo(site: kontest.siteAbbreviation))
+                Image(KontestModel.getLogo(siteAbbreviation: kontest.siteAbbreviation))
                     .resizable()
                     .aspectRatio(1, contentMode: .fit)
                     .frame(width: FontUtility.getLogoSize())

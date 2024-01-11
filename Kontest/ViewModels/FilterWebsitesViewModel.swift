@@ -50,6 +50,16 @@ class FilterWebsitesViewModel: FilterWebsitesViewModelProtocol {
         if userDefaults.bool(forKey: FilterWebsiteKey.tophKey.rawValue) {
             allowedWebsites.append("toph.co")
         }
+        
+        allowedWebsites.append("codingninjas.com/codestudio")
+        
+        allowedWebsites.append("projecteuler.net")
+        
+        allowedWebsites.append("topcoder.com")
+        
+//        allowedWebsites.append("yukicoder.me")
+        
+        allowedWebsites.append("geeksforgeeks.org")
 
         return allowedWebsites
     }
