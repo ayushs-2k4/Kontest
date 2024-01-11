@@ -28,7 +28,7 @@ struct CodeChefView: View {
                     isHovering = hovering
                 }
             })
-            .scaleEffect(isHovering && !codeChefViewModel.isLoading && codeChefViewModel.error == nil ? hoveringScaleValue : 1)
+            .scaleEffect(isHovering && !codeChefViewModel.username.isEmpty && !codeChefViewModel.isLoading && codeChefViewModel.error == nil ? hoveringScaleValue : 1)
     }
 }
 
@@ -137,7 +137,7 @@ struct CodeChefProfileView: View {
         }
         .onTapGesture {
             if !isLoading {
-                if error == nil {
+                if !username.isEmpty && error == nil {
                     guard let url = URL(string: "https://www.codechef.com/users/\(username)") else { return }
                     openURL(url)
                 } else {

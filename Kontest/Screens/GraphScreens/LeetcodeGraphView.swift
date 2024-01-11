@@ -18,7 +18,9 @@ struct LeetcodeGraphView: View {
 
     var body: some View {
         VStack {
-            if leetcodeGraphQLViewModel.isLoading {
+            if leetcodeGraphQLViewModel.username.isEmpty {
+                Text("Please update your username in the settings")
+            } else if leetcodeGraphQLViewModel.isLoading {
                 ProgressView()
             } else {
                 if let error = leetcodeGraphQLViewModel.error {
@@ -78,13 +80,13 @@ struct LeetCodeChart: View {
         let _ = Self._printChanges()
 
         #if os(macOS)
-        EmptyView()
-            .hidden()
-            .onChange(of: leetcodeGraphQLViewModel.selectedDate) { _, newValue in
-                if let selectedDate = newValue {
-                    HapticFeedbackUtility.performHapticFeedback()
+            EmptyView()
+                .hidden()
+                .onChange(of: leetcodeGraphQLViewModel.selectedDate) { _, newValue in
+                    if let selectedDate = newValue {
+                        HapticFeedbackUtility.performHapticFeedback()
+                    }
                 }
-            }
         #endif
 
         Chart {

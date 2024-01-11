@@ -25,9 +25,13 @@ class CodeForcesViewModel {
     init(username: String) {
         self.username = username
         self.isLoading = true
-        Task {
-            await self.getCodeForcesRatings(username: username)
-            await self.getCodeForcesUserInfo(username: username)
+        if !username.isEmpty {
+            Task {
+                await self.getCodeForcesRatings(username: username)
+                await self.getCodeForcesUserInfo(username: username)
+                self.isLoading = false
+            }
+        } else {
             self.isLoading = false
         }
     }

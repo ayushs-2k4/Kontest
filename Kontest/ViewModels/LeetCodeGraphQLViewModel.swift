@@ -34,54 +34,65 @@ class LeetCodeGraphQLViewModel {
 
         self.chartXScrollPosition = .now
 
-        Task {
-            await withTaskGroup(of: Void.self) { taskGroup in
-                // fetching user data
-                taskGroup.addTask {
-                    do {
-                        self.isLoading = true
-                        let leetCodeUserProfileGraphQLAPIDTO = try await self.repository.getUserData(username: username)
+        if !username.isEmpty {
+            Task {
+                await withTaskGroup(of: Void.self) { taskGroup in
+                    // fetching user data
+                    taskGroup.addTask {
+                        do {
+                            self.isLoading = true
+                            let leetCodeUserProfileGraphQLAPIDTO = try await self.repository.getUserData(username: username)
 
-                        self.leetCodeUserProfileGraphQLAPIModel = LeetCodeUserProfileGraphQLAPIModel.from(leetCodeUserProfileGraphQLAPIDTO: leetCodeUserProfileGraphQLAPIDTO)
-                        self.error = nil
+                            self.leetCodeUserProfileGraphQLAPIModel = LeetCodeUserProfileGraphQLAPIModel.from(leetCodeUserProfileGraphQLAPIDTO: leetCodeUserProfileGraphQLAPIDTO)
+                            self.error = nil
 
-                        self.isFetchingUserData = false
-                        self.isLoading = (self.isFetchingUserData) || (self.isFetchingUserRankings)
-                    } catch {
-                        self.logger.error("Failed to fetchUserData.")
-                        self.error = URLError(.badURL)
+                            self.isFetchingUserData = false
+                            self.isLoading = (self.isFetchingUserData) || (self.isFetchingUserRankings)
+                        } catch {
+                            self.isFetchingUserData = false
+                            self.logger.error("Failed to fetchUserData.")
+                            self.error = URLError(.badURL)
+                        }
+                    }
+
+                    // fetching user rankings
+                    taskGroup.addTask {
+                        do {
+                            self.isLoading = true
+                            let leetCodeUserRankingsGraphQLAPIDTO = try await self.repository.getUserRankingInfo(username: username)
+
+                            if leetCodeUserRankingsGraphQLAPIDTO.leetCodeUserRankingGraphQLAPIDTO == nil {
+                                throw URLError(.badURL)
+                            }
+
+                            let userContestRanking = LeetCodeUserRankingGraphQLAPIModel.from(leetCodeUserRankingGraphQLAPIDTO: leetCodeUserRankingsGraphQLAPIDTO.leetCodeUserRankingGraphQLAPIDTO)
+
+                            let userContestRankingHistory = LeetCodeUserRankingHistoryGraphQLAPIModel.from(leetCodeUserRankingHistoryGraphQLAPIDTOs: leetCodeUserRankingsGraphQLAPIDTO.leetCodeUserRankingHistoryGraphQLAPIDTO)
+
+                            self.userContestRanking = userContestRanking
+                            self.userContestRankingHistory = userContestRankingHistory
+
+                            self.error = nil
+                            self.isFetchingUserRankings = false
+                            self.isLoading = (self.isFetchingUserData) || (self.isFetchingUserRankings)
+                        } catch {
+                            self.isLoading = false
+                            self.isFetchingUserRankings = false
+                            self.logger.error("Failed to fetchUserRankings.")
+                            self.error = URLError(.badURL)
+                        }
                     }
                 }
 
-                // fetching user rankings
-                taskGroup.addTask {
-                    do {
-                        self.isLoading = true
-                        let leetCodeUserRankingsGraphQLAPIDTO = try await self.repository.getUserRankingInfo(username: username)
-
-                        let userContestRanking = LeetCodeUserRankingGraphQLAPIModel.from(leetCodeUserRankingGraphQLAPIDTO: leetCodeUserRankingsGraphQLAPIDTO.leetCodeUserRankingGraphQLAPIDTO)
-
-                        let userContestRankingHistory = LeetCodeUserRankingHistoryGraphQLAPIModel.from(leetCodeUserRankingHistoryGraphQLAPIDTOs: leetCodeUserRankingsGraphQLAPIDTO.leetCodeUserRankingHistoryGraphQLAPIDTO)
-
-                        self.userContestRanking = userContestRanking
-                        self.userContestRankingHistory = userContestRankingHistory
-
-                        self.error = nil
-                        self.isFetchingUserRankings = false
-                        self.isLoading = (self.isFetchingUserData) || (self.isFetchingUserRankings)
-                    } catch {
-                        self.logger.error("Failed to fetchUserRankings.")
-                        self.error = URLError(.badURL)
-                    }
+                self.sortedDates = attendedKontests.map { ele in
+                    let timestamp = ele.contest?.startTime ?? "-1"
+                    return Date(timeIntervalSince1970: TimeInterval(timestamp) ?? -1)
                 }
-            }
 
-            self.sortedDates = attendedKontests.map { ele in
-                let timestamp = ele.contest?.startTime ?? "-1"
-                return Date(timeIntervalSince1970: TimeInterval(timestamp) ?? -1)
+                self.chartXScrollPosition = sortedDates.first?.addingTimeInterval(-86400 * 3) ?? .now
             }
-
-            self.chartXScrollPosition = sortedDates.first?.addingTimeInterval(-86400 * 3) ?? .now
+        } else {
+            self.isLoading = false
         }
     }
 

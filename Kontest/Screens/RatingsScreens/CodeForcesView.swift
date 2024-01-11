@@ -28,7 +28,7 @@ struct CodeForcesView: View {
                     isHovering = hovering
                 }
             })
-            .scaleEffect(isHovering && !codeForcesViewModel.isLoading && codeForcesViewModel.error == nil ? hoveringScaleValue : 1)
+            .scaleEffect(isHovering && !codeForcesViewModel.username.isEmpty && !codeForcesViewModel.isLoading && codeForcesViewModel.error == nil ? hoveringScaleValue : 1)
     }
 }
 
@@ -128,7 +128,7 @@ struct CodeForcesProfileView: View {
                             .fontDesign(.monospaced)
                             .bold()
 
-                        Text("please update your username in the settings")
+                        Text("Please update your username in the settings")
                             .font(.caption)
                     }
                     .padding()
@@ -138,7 +138,7 @@ struct CodeForcesProfileView: View {
         }
         .onTapGesture {
             if !isLoading {
-                if codeForcesViewModel.codeForcesRatings != nil {
+                if !username.isEmpty && codeForcesViewModel.codeForcesRatings != nil {
                     guard let url = URL(string: "https://codeforces.com/profile/\(username)") else { return }
                     openURL(url)
                 }

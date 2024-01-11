@@ -375,8 +375,8 @@
 		0725FB642AC7EA3500564DE0 /* GraphScreens */ = {
 			isa = PBXGroup;
 			children = (
-				0725FB652AC7EA3F00564DE0 /* LeetcodeGraphView.swift */,
 				0725FB672AC82F0A00564DE0 /* CodeForcesGraphView.swift */,
+				0725FB652AC7EA3F00564DE0 /* LeetcodeGraphView.swift */,
 			);
 			path = GraphScreens;
 			sourceTree = "<group>";
