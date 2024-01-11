@@ -51,7 +51,7 @@ struct LeetcodeProfileGraphQLView: View {
                 ProgressView()
             } else {
                 HStack {
-                    Image(.leetCodeWhiteLogo)
+                    Image(.leetCodeDarkLogo)
                         .resizable()
                         .frame(width: 25, height: 25)
 

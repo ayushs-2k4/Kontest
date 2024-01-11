@@ -198,7 +198,7 @@ extension KontestModel {
         }
     }
 
-    static func getColorForIdentifier(siteAbbreviation: String) -> Color {
+    static func getColorForIdentifier(siteAbbreviation: String, theme: ColorScheme = .light) -> Color {
         switch siteAbbreviation {
         case "AtCoder":
             Color(red: 187/255, green: 181/255, blue: 181/255)
@@ -234,7 +234,11 @@ extension KontestModel {
             Color(red: 103/255, green: 79/255, blue: 64/255)
 
         case "TopCoder":
-            Color(red: 128/255, green: 99/255, blue: 203/255)
+            if theme == .light {
+                .black
+            } else {
+                .white
+            }
 
         case "Toph":
             .blue
@@ -247,7 +251,7 @@ extension KontestModel {
         }
     }
 
-    static func getLogo(siteAbbreviation: String) -> String {
+    static func getLogo(siteAbbreviation: String, theme: ColorScheme = .light) -> String {
         return switch siteAbbreviation {
         case "AtCoder":
             "AtCoder Logo"
@@ -277,13 +281,17 @@ extension KontestModel {
             "HackerRank Logo"
 
         case "LeetCode":
-            "LeetCode Dark Logo"
+            "LeetCode Light Logo"
 
         case "Project Euler":
             "Project Euler Logo"
 
         case "TopCoder":
-            "TopCoder Logo"
+            if theme == .light {
+                "TopCoder Light Logo"
+            } else if theme == .dark {
+                "TopCoder Dark Logo"
+            } else { "" }
 
         case "Toph":
             "Toph Logo"

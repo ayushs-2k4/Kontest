@@ -11,14 +11,14 @@ import WidgetKit
 struct FilterWebsitesScreen: View {
     let allKontestsViewModel = Dependencies.instance.allKontestsViewModel
 
-    @AppStorage(FilterWebsiteKey.codeForcesKey.rawValue,store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var codeForcesKey = true
-    @AppStorage(FilterWebsiteKey.atCoderKey.rawValue,store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var atCoderKey = true
-    @AppStorage(FilterWebsiteKey.cSAcademyKey.rawValue,store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var cSAcademyKey = true
-    @AppStorage(FilterWebsiteKey.codeChefKey.rawValue,store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var codeChefKey = true
-    @AppStorage(FilterWebsiteKey.hackerRankKey.rawValue,store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var hackerRankKey = true
-    @AppStorage(FilterWebsiteKey.hackerEarthKey.rawValue,store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var hackerEarthKey = true
-    @AppStorage(FilterWebsiteKey.leetCodeKey.rawValue,store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var leetCodeKey = true
-    @AppStorage(FilterWebsiteKey.tophKey.rawValue,store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var tophKey = true
+    @AppStorage(FilterWebsiteKey.codeForcesKey.rawValue, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var codeForcesKey = true
+    @AppStorage(FilterWebsiteKey.atCoderKey.rawValue, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var atCoderKey = true
+    @AppStorage(FilterWebsiteKey.cSAcademyKey.rawValue, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var cSAcademyKey = true
+    @AppStorage(FilterWebsiteKey.codeChefKey.rawValue, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var codeChefKey = true
+    @AppStorage(FilterWebsiteKey.hackerRankKey.rawValue, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var hackerRankKey = true
+    @AppStorage(FilterWebsiteKey.hackerEarthKey.rawValue, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var hackerEarthKey = true
+    @AppStorage(FilterWebsiteKey.leetCodeKey.rawValue, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var leetCodeKey = true
+    @AppStorage(FilterWebsiteKey.tophKey.rawValue, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var tophKey = true
 
     @Environment(\.colorScheme) private var colorScheme
 
@@ -51,7 +51,7 @@ struct FilterWebsitesScreen: View {
 
                 FilterWebsitesView(siteLogo: Image(.hackerEarthLogo), siteName: "HackerEarth", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "HackerEarth"), isSelected: $hackerEarthKey)
 
-                FilterWebsitesView(siteLogo: Image(colorScheme == .light ? .leetCodeDarkLogo : .leetCodeWhiteLogo), siteName: "LeetCode", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "LeetCode"), isSelected: $leetCodeKey)
+                FilterWebsitesView(siteLogo: Image(colorScheme == .light ? .leetCodeDarkLogo : .leetCodeDarkLogo), siteName: "LeetCode", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "LeetCode"), isSelected: $leetCodeKey)
 
                 FilterWebsitesView(siteLogo: Image(.tophLogo), siteName: "Toph", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "Toph"), isSelected: $tophKey)
             })
@@ -72,4 +72,3 @@ struct FilterWebsitesScreen: View {
         FilterWebsitesScreen()
     }
 }
-

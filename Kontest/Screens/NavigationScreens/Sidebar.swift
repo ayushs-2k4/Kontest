@@ -32,7 +32,7 @@ struct Sidebar: View {
                     Label {
                         Text("LeetCode Rankings")
                     } icon: {
-                        Image(colorScheme == .dark ? .leetCodeWhiteLogo : .leetCodeDarkLogo)
+                        Image(colorScheme == .dark ? .leetCodeDarkLogo : .leetCodeLightLogo)
                             .resizable()
                             .frame(width: 16, height: 16)
                     }
