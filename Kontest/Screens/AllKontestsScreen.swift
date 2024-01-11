@@ -35,7 +35,18 @@ struct AllKontestsScreen: View {
                     if allKontestsViewModel.isLoading {
                         ProgressView()
                     } else if allKontestsViewModel.allKontests.isEmpty { // No Kontests Downloaded
-                        NoKontestsDownloadedScreen()
+                        List {
+                            RatingsView(codeForcesUsername: changeUsernameViewModel.codeForcesUsername, leetCodeUsername: changeUsernameViewModel.leetcodeUsername, codeChefUsername: changeUsernameViewModel.codeChefUsername)
+                                .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+                                .listRowSeparator(.hidden)
+                            
+                            HStack{
+                                Spacer()
+                                NoKontestsDownloadedScreen()
+                                Spacer()
+                            }
+                        }
+                        
                     } else {
                         TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
                             List {

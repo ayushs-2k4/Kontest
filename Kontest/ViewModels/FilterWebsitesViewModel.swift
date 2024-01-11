@@ -19,36 +19,36 @@ class FilterWebsitesViewModel: FilterWebsitesViewModelProtocol {
         let userDefaults = UserDefaults(suiteName: Constants.userDefaultsGroupID)!
 
         if userDefaults.bool(forKey: FilterWebsiteKey.codeForcesKey.rawValue) {
-            allowedWebsites.append("CodeForces")
-            allowedWebsites.append("CodeForces::Gym")
+            allowedWebsites.append("codeforces.com")
+//            allowedWebsites.append("CodeForces::Gym")
         }
 
         if userDefaults.bool(forKey: FilterWebsiteKey.atCoderKey.rawValue) {
-            allowedWebsites.append("AtCoder")
+            allowedWebsites.append("atcoder.jp")
         }
 
         if userDefaults.bool(forKey: FilterWebsiteKey.cSAcademyKey.rawValue) {
-            allowedWebsites.append("CS Academy")
+            allowedWebsites.append("csacademy.com")
         }
 
         if userDefaults.bool(forKey: FilterWebsiteKey.codeChefKey.rawValue) {
-            allowedWebsites.append("CodeChef")
+            allowedWebsites.append("codechef.com")
         }
 
         if userDefaults.bool(forKey: FilterWebsiteKey.hackerRankKey.rawValue) {
-            allowedWebsites.append("HackerRank")
+            allowedWebsites.append("hackerrank.com")
         }
 
         if userDefaults.bool(forKey: FilterWebsiteKey.hackerEarthKey.rawValue) {
-            allowedWebsites.append("HackerEarth")
+            allowedWebsites.append("hackerearth.com")
         }
 
         if userDefaults.bool(forKey: FilterWebsiteKey.leetCodeKey.rawValue) {
-            allowedWebsites.append("LeetCode")
+            allowedWebsites.append("leetcode.com")
         }
 
         if userDefaults.bool(forKey: FilterWebsiteKey.tophKey.rawValue) {
-            allowedWebsites.append("Toph")
+            allowedWebsites.append("toph.co")
         }
 
         return allowedWebsites

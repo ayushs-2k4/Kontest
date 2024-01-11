@@ -42,13 +42,29 @@ class CalendarUtility {
 
         return currentDate
     }
+    
+    static func getFormattedDate3(date: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "MMMM dd, yyyy HH:mm:ss"
+        
+        let currentDate = formatter.date(from: date)
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
+
+        return currentDate
+    }
 
     static func getDate(date: String) -> Date? {
         if let ansDate = getFormattedDate1(date: date) {
             return ansDate
         } else if let ansDate = getFormattedDate2(date: date) {
             return ansDate
-        } else {
+        }else if let ansDate = getFormattedDate3(date: date) {
+            return ansDate
+        }
+        else {
             return nil
         }
     }

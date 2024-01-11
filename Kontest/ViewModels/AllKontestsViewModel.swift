@@ -126,7 +126,7 @@ class AllKontestsViewModel {
 
             let allEvents = shouldFetchAllEventsFromCalendar ? try await CalendarUtility.getAllEvents() : []
 
-            return fetchedKontests
+            let allKontestModels = fetchedKontests
                 .map { dto in
                     let kontest = KontestModel.from(dto: dto)
                     // Load Reminder status
@@ -145,6 +145,8 @@ class AllKontestsViewModel {
 
                     return !kontestDuration.isEmpty && !isKontestEnded
                 }
+            
+            return allKontestModels
         } catch {
             logger.error("error in fetching all Kontests: \(error)")
             return []
@@ -189,7 +191,8 @@ class AllKontestsViewModel {
         toShowKontests = allKontests.filter {
             let isKontestWebsiteInAllowedWebsites = allowedWebsites.contains($0.site)
 
-            return isKontestWebsiteInAllowedWebsites
+//            return isKontestWebsiteInAllowedWebsites
+            return true
         }
         backupKontests = toShowKontests
         splitKontestsIntoDifferentCategories()

@@ -109,13 +109,15 @@ extension KontestModel: Equatable {
 extension KontestModel {
     static func from(dto: KontestDTO) -> KontestModel {
         let id = generateUniqueID(dto: dto)
+        
+        let kontestStartDate = CalendarUtility.getDate(date: dto.start_time)
+        let kontestEndDate = CalendarUtility.getDate(date: dto.end_time)
 
         var status: KontestStatus {
-            let kontestStartDate = CalendarUtility.getDate(date: dto.start_time)
-            let kontestEndDate = CalendarUtility.getDate(date: dto.end_time)
-
             return getKontestStatus(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date())
         }
+        
+        let duration = (kontestEndDate?.timeIntervalSince1970 ?? 0) - (kontestStartDate?.timeIntervalSince1970 ?? 0)
 
         return KontestModel(
             id: id,
@@ -123,7 +125,7 @@ extension KontestModel {
             url: dto.url,
             start_time: dto.start_time,
             end_time: dto.end_time,
-            duration: dto.duration,
+            duration: "\(duration)",
             site: dto.site,
             in_24_hours: dto.in_24_hours,
             status: status,
@@ -170,6 +172,9 @@ extension KontestModel {
 
         case "Toph":
             .blue
+            
+        case "Coding Ninjas":
+                .yellow
 
         default:
             .red
@@ -204,9 +209,12 @@ extension KontestModel {
 
         case "Toph":
             "Toph Logo"
+            
+        case "Coding Ninjas":
+            "Coding Ninjas Logo"
 
         default:
-            "CodeForces Logo"
+            "Placeholder Flag"
         }
     }
 
