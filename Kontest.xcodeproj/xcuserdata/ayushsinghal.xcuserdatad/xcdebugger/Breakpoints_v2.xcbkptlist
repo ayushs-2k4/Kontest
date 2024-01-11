@@ -52,5 +52,291 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "66C64A56-108A-4B73-A8CC-ADC29FBC6A20"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Upcoming Kontest iOS Widget/Upcoming_Kontest_iOS_Widget.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "getSnapshot(in:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "66C64A56-108A-4B73-A8CC-ADC29FBC6A20 - b2b066f769cad8e6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in Upcoming_Kontest_iOS_WidgetExtension.Provider.getSnapshot(in: WidgetKit.TimelineProviderContext, completion: (Upcoming_Kontest_iOS_WidgetExtension.SimpleEntry) -&gt; ()) -&gt; ()"
+                  moduleName = "Upcoming Kontest iOS WidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XCode%20Projects/Completed/Kontest/Upcoming%20Kontest%20iOS%20Widget/Upcoming_Kontest_iOS_Widget.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "580">
+               </Location>
+               <Location
+                  uuid = "66C64A56-108A-4B73-A8CC-ADC29FBC6A20 - baf8c6a488d38cc1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(8) await resume partial function for closure #1 @Sendable () async -&gt; () in Upcoming_Kontest_iOS_WidgetExtension.Provider.getSnapshot(in: WidgetKit.TimelineProviderContext, completion: (Upcoming_Kontest_iOS_WidgetExtension.SimpleEntry) -&gt; ()) -&gt; ()"
+                  moduleName = "Upcoming Kontest iOS WidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XCode%20Projects/Completed/Kontest/Upcoming%20Kontest%20iOS%20Widget/Upcoming_Kontest_iOS_Widget.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "66C64A56-108A-4B73-A8CC-ADC29FBC6A20 - e5e2dd0d2a46149c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(9) suspend resume partial function for closure #1 @Sendable () async -&gt; () in Upcoming_Kontest_iOS_WidgetExtension.Provider.getSnapshot(in: WidgetKit.TimelineProviderContext, completion: (Upcoming_Kontest_iOS_WidgetExtension.SimpleEntry) -&gt; ()) -&gt; ()"
+                  moduleName = "Upcoming Kontest iOS WidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XCode%20Projects/Completed/Kontest/Upcoming%20Kontest%20iOS%20Widget/Upcoming_Kontest_iOS_Widget.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "72">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "28BAB075-07F1-4CB2-BC49-0CB90EB79BF7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Upcoming Kontest iOS Widget/Upcoming_Kontest_iOS_Widget.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "getSnapshot(in:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "50DB92B7-29DD-4658-83B6-9BED31E0C0C7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Upcoming Kontest iOS Widget/Upcoming_Kontest_iOS_Widget.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "getSnapshot(in:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "50DB92B7-29DD-4658-83B6-9BED31E0C0C7 - f65594f3f3e319a1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async -&gt; () in Upcoming_Kontest_iOS_WidgetExtension.Provider.getSnapshot(in: WidgetKit.TimelineProviderContext, completion: (Upcoming_Kontest_iOS_WidgetExtension.SimpleEntry) -&gt; ()) -&gt; ()"
+                  moduleName = "Upcoming Kontest iOS WidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XCode%20Projects/Completed/Kontest/Upcoming%20Kontest%20iOS%20Widget/Upcoming_Kontest_iOS_Widget.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "80">
+               </Location>
+               <Location
+                  uuid = "50DB92B7-29DD-4658-83B6-9BED31E0C0C7 - f7e0a9d6a247ad8e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for closure #1 @Sendable () async -&gt; () in Upcoming_Kontest_iOS_WidgetExtension.Provider.getSnapshot(in: WidgetKit.TimelineProviderContext, completion: (Upcoming_Kontest_iOS_WidgetExtension.SimpleEntry) -&gt; ()) -&gt; ()"
+                  moduleName = "Upcoming Kontest iOS WidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XCode%20Projects/Completed/Kontest/Upcoming%20Kontest%20iOS%20Widget/Upcoming_Kontest_iOS_Widget.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "50DB92B7-29DD-4658-83B6-9BED31E0C0C7 - b2b066f769cac5a3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in Upcoming_Kontest_iOS_WidgetExtension.Provider.getSnapshot(in: WidgetKit.TimelineProviderContext, completion: (Upcoming_Kontest_iOS_WidgetExtension.SimpleEntry) -&gt; ()) -&gt; ()"
+                  moduleName = "Upcoming Kontest iOS WidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XCode%20Projects/Completed/Kontest/Upcoming%20Kontest%20iOS%20Widget/Upcoming_Kontest_iOS_Widget.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "88">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3AFE409E-F290-428A-B5E4-E163299240C8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Upcoming Kontest iOS Widget/Upcoming_Kontest_iOS_Widget.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "getSnapshot(in:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7FE4C37C-B1FC-454E-9C74-72743A3D1462"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Upcoming Kontest iOS Widget/Upcoming_Kontest_iOS_Widget.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "getSnapshot(in:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9A5ED831-0748-4AFA-B997-2D8755278443"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Upcoming Kontest iOS Widget/Upcoming_Kontest_iOS_Widget.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "getSnapshot(in:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7C769265-41D8-44E5-8132-FDCD562DB632"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kontest/Utilities/WidgetCache/UpcomingKontestsWidgetCache.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "persistWidgetCache(cache:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FF4E126E-FDFF-4C5B-8862-614D44131822"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kontest/Utilities/WidgetCache/UpcomingKontestsWidgetCache.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
+            landmarkName = "loadWidgetCache()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A34647E4-0456-4721-8F1B-2A9A42D83797"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kontest/Utilities/WidgetCache/UpcomingKontestsWidgetCache.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "loadWidgetCache()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A62D4187-D024-4641-BC2C-D3E239F49A24"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kontest/Utilities/WidgetCache/UpcomingKontestsWidgetCache.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "loadWidgetCache()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6612FAA5-3522-473E-89FE-20CAF4AE419A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kontest/Utilities/WidgetCache/UpcomingKontestsWidgetCache.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "loadWidgetCache()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "392630CD-EACC-40D0-8F2C-86517AA189B7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kontest/ViewModels/FilterWebsitesViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "getAllowedWebsites()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
