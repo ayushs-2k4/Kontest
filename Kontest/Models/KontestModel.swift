@@ -281,7 +281,13 @@ extension KontestModel {
             "HackerRank Logo"
 
         case "LeetCode":
-            "LeetCode Light Logo"
+            if colorScheme == .light {
+                "LeetCode Light Logo"
+            } else if colorScheme == .dark {
+                "LeetCode Dark Logo"
+            } else {
+                ""
+            }
 
         case "Project Euler":
             "Project Euler Logo"
