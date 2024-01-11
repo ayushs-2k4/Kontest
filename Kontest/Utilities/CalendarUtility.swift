@@ -125,7 +125,7 @@ enum CalendarUtility {
 
         let dateComponents = DateComponents(hour: hours, minute: minutes)
 
-        let ans = dateComponents.hour ?? 1 <= 360 ? formatter.string(from: dateComponents) : nil
+        let ans = dateComponents.hour ?? 1 <= Constants.maximumDurationOfAKontestInHours ? formatter.string(from: dateComponents) : nil
         return ans
     }
 
