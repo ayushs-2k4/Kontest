@@ -76,7 +76,7 @@ struct FilterWebsitesScreen: View {
 
                 FilterWebsitesView(siteLogo: Image(.projectEulerLogo), siteName: "Project Euler", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "Project Euler"), isSelected: $projectEulerKey)
 
-                FilterWebsitesView(siteLogo: colorScheme == .light ? Image(.topCoderLightLogo) : Image(.topCoderDarkLogo), siteName: "TopCoder", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "TopCoder", theme: colorScheme), isSelected: $topCodeKey)
+                FilterWebsitesView(siteLogo: colorScheme == .light ? Image(.topCoderLightLogo) : Image(.topCoderDarkLogo), siteName: "TopCoder", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "TopCoder", colorScheme: colorScheme), isSelected: $topCodeKey)
 
                 FilterWebsitesView(siteLogo: Image(.tophLogo), siteName: "Toph", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "Toph"), isSelected: $tophKey)
 
