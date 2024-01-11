@@ -23,7 +23,9 @@ class KontestNewRepository: KontestFetcher {
 
             let rawHTML = String(decoding: data, as: UTF8.self)
             let parsedHTML = try SwiftSoup.parse(rawHTML)
-            let contestElements = try parsedHTML.select(".contest.row:not(.subcontest) > div + div > i + a")
+//            let contestElements = try parsedHTML.select(".contest.row:not(.subcontest) > div + div > i + a")
+            let contestElements = try parsedHTML.select(".contest.row > div + div > i + a")
+
 
             var myAllContests: [KontestDTO] = []
 

@@ -192,7 +192,6 @@ class AllKontestsViewModel {
             let isKontestWebsiteInAllowedWebsites = allowedWebsites.contains($0.site)
 
             return isKontestWebsiteInAllowedWebsites
-            return true
         }
         backupKontests = toShowKontests
         splitKontestsIntoDifferentCategories()
