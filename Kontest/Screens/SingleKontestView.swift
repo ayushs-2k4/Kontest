@@ -43,7 +43,7 @@ struct SingleKontestView: View {
         HStack(alignment: .center) {
             VStack {
                 #if os(macOS)
-                Image(KontestModel.getLogo(site: kontest.site))
+                Image(KontestModel.getLogo(site: kontest.siteAbbreviation))
                     .resizable()
                     .aspectRatio(1, contentMode: .fit)
                     .frame(width: FontUtility.getLogoSize())
@@ -62,8 +62,8 @@ struct SingleKontestView: View {
 
             VStack(alignment: .leading) {
                 HStack {
-                    Text(kontest.site.uppercased())
-                        .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.site))
+                    Text(kontest.siteAbbreviation.uppercased())
+                        .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.siteAbbreviation))
                         .bold()
                         .font(FontUtility.getSiteFontSize())
 
@@ -158,7 +158,7 @@ struct SingleKontestView: View {
             VStack {
                 if kontestStartDate != nil && kontestEndDate != nil {
                     Text("\(kontestStartDate!.formatted(date: .omitted, time: .shortened)) - \(kontestEndDate!.formatted(date: .omitted, time: .shortened))")
-                        .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.site))
+                        .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.siteAbbreviation))
                         .font(FontUtility.getTimeFontSize())
                         .bold()
 

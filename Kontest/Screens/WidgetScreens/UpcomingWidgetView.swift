@@ -112,7 +112,7 @@ struct createSingleKontestView: View {
         if let startDate, let endDate {
             HStack {
                 Text(kontest.name)
-                    .foregroundStyle(kontest.site == "AtCoder" ? Color.gray : KontestModel.getColorForIdentifier(site: kontest.site))
+                    .foregroundStyle(kontest.siteAbbreviation == "AtCoder" ? Color.gray : KontestModel.getColorForIdentifier(site: kontest.siteAbbreviation))
 
                 Spacer()
 

@@ -32,15 +32,15 @@ struct KontestDetailsScreen: View {
             VStack {
                 let timeDifferenceString = CalendarUtility.getTimeDifferenceString(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date())
 
-                TopCardView(color: KontestModel.getColorForIdentifier(site: kontest.site), kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date(), boxText: timeDifferenceString)
+                TopCardView(color: KontestModel.getColorForIdentifier(siteAbbreviation: kontest.siteAbbreviation), kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date(), boxText: timeDifferenceString)
                     .frame(height: 300)
 
                 Spacer()
 
                 VStack {
                     HStack {
-                        Text(kontest.site.uppercased())
-                            .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.site))
+                        Text(kontest.siteAbbreviation.uppercased())
+                            .foregroundStyle(KontestModel.getColorForIdentifier(siteAbbreviation: kontest.siteAbbreviation))
                             .padding(.horizontal)
 
                         if kontestDetailViewModel.isKontestRunning {
@@ -158,7 +158,7 @@ struct ButtonsView: View {
             })
             .controlSize(.large)
         }
-        .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.site))
+        .foregroundStyle(KontestModel.getColorForIdentifier(siteAbbreviation: kontest.siteAbbreviation))
         .buttonStyle(.bordered)
         .padding()
     }
@@ -308,7 +308,7 @@ struct RemainingTimeView: View {
 //    return KontestDetailsScreen(kontest: KontestModel.from(dto: KontestDTO(name: "ProjectEuler+", url: "https://hackerrank.com/contests/projecteuler", start_time: startTime, end_time: endTime, duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "CODING")))
 //        .environment(AllKontestsViewModel())
 
-    return KontestDetailsScreen(kontest: KontestModel.from(dto: KontestDTO(name: "THIRD PROGRAMMING CONTEST 2023 ALGO (AtCoder Beginner Contest 318)", url: "https://hackerrank.com/contests/projecteuler", start_time: startTime, end_time: endTime, duration: "1020.0", site: "AtCoder", in_24_hours: "No", status: "CODING")))
+    return KontestDetailsScreen(kontest: KontestModel.from(dto: KontestDTO(name: "THIRD PROGRAMMING CONTEST 2023 ALGO (AtCoder Beginner Contest 318)", url: "https://hackerrank.com/contests/projecteuler", start_time: startTime, end_time: endTime, duration: "1020.0", siteAbbreviation: "AtCoder", in_24_hours: "No", status: "CODING")))
         .environment(Dependencies.instance.allKontestsViewModel)
         .environment(ErrorState())
 }

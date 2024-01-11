@@ -104,7 +104,7 @@ class NotificationsViewModel: NotificationsViewModelProtocol {
         // Checking if we actually have given time in starting of kontest; like if given 6 hours, then checking if we actually have 6 hours or not in starting of kontest.
         if CalendarUtility.isRemainingTimeGreaterThanGivenTime(date: kontestStartDate, minutes: minutesBefore, hours: hoursBefore, days: daysBefore) {
             let title = kontestTitle == "" ? kontest.name : kontestTitle
-            let subTitle = kontestSubTitle == "" ? kontest.site : kontestSubTitle
+            let subTitle = kontestSubTitle == "" ? kontest.siteAbbreviation : kontestSubTitle
             let body = if hoursBefore > 0 {
                 if hoursBefore == 1 {
                     kontestBody == "" ? "\(kontest.name) is starting in \(hoursBefore) hour." : kontestBody

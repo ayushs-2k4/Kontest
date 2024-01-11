@@ -58,7 +58,7 @@ class GetKontests {
         let filterWebsiteViewModel = FilterWebsitesViewModel()
         let allowedWebsites = filterWebsiteViewModel.getAllowedWebsites()
 
-        let filteredKontests = allKontests.filter { allowedWebsites.contains($0.site) }
+        let filteredKontests = allKontests.filter { allowedWebsites.contains($0.siteAbbreviation) }
 
         let ongoingKontests = filteredKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? today, kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? today) }
 

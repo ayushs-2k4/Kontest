@@ -9,47 +9,6 @@ import Foundation
 import OSLog
 import SwiftSoup
 
-func getSiteFromLocation(location:String) -> String{
-    
-    switch location.lowercased() {
-    case "codingninjas.com/codestudio":
-        "Coding Ninjas"
-    
-    case "codingninjas.com":
-        "Coding Ninjas"
-        
-    case "yukicoder.me":
-        "Yuki Coder"
-        
-    case "hackerearth.com":
-        "HackerEarth"
-        
-    case "hackerrank.com":
-        "HackerRank"
-        
-    case "atcoder.jp":
-        "AtCoder"
-        
-    case "codeforces.com":
-        "CodeForces"
-        
-    case "leetcode.com":
-        "LeetCode"
-        
-    case "codechef.com":
-        "CodeChef"
-        
-    case "toph.com":
-        "Toph"
-        
-    case "csacademy.com":
-        "CS Academy"
-        
-    default:
-        location
-    }
-}
-
 class KontestNewRepository: KontestFetcher {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "KontestNewRepository")
 
@@ -98,9 +57,8 @@ class KontestNewRepository: KontestFetcher {
                     dateFormatter.locale = Locale(identifier: "en_US_POSIX")
                     dateFormatter.dateFormat = dateFormat
                     
-                    let site = getSiteFromLocation(location: location ?? "")
                     
-                    let konDTo = KontestDTO(name: konName, url: url ?? "" , start_time: startTime ?? "", end_time: endTime ?? "", duration: "", site: site, in_24_hours: "NO", status: "CODING")
+                    let konDTo = KontestDTO(name: konName, url: url ?? "" , start_time: startTime ?? "", end_time: endTime ?? "", duration: "", site: location ?? "", in_24_hours: "NO", status: "CODING")
 
                     print("HI")
                     myAllContests.append(konDTo)

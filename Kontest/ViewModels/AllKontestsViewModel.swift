@@ -160,7 +160,7 @@ class AllKontestsViewModel {
     private func filterKontestsUsingSearchText() {
         let filteredKontests = backupKontests
             .filter { kontest in
-                kontest.name.localizedCaseInsensitiveContains(searchText) || kontest.site.localizedCaseInsensitiveContains(searchText) || kontest.url.localizedCaseInsensitiveContains(searchText)
+                kontest.name.localizedCaseInsensitiveContains(searchText) || kontest.siteAbbreviation.localizedCaseInsensitiveContains(searchText) || kontest.url.localizedCaseInsensitiveContains(searchText)
             }
 
         // Update the filtered kontests
@@ -189,7 +189,7 @@ class AllKontestsViewModel {
 
     func filterKontests() {
         toShowKontests = allKontests.filter {
-            let isKontestWebsiteInAllowedWebsites = allowedWebsites.contains($0.site)
+            let isKontestWebsiteInAllowedWebsites = allowedWebsites.contains($0.siteAbbreviation)
 
 //            return isKontestWebsiteInAllowedWebsites
             return true

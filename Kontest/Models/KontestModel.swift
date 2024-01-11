@@ -18,7 +18,7 @@ class KontestModel: Codable, Identifiable, Hashable {
         case start_time
         case end_time
         case duration
-        case site
+        case siteAbbreviation
         case in_24_hours
         case status
         case isSetForReminder10MiutesBefore
@@ -39,7 +39,7 @@ class KontestModel: Codable, Identifiable, Hashable {
         start_time = try container.decodeIfPresent(String.self, forKey: .start_time) ?? "No Start Time"
         end_time = try container.decodeIfPresent(String.self, forKey: .end_time) ?? "No End Time"
         duration = try container.decodeIfPresent(String.self, forKey: .duration) ?? "-1"
-        site = try container.decodeIfPresent(String.self, forKey: .site) ?? "No Site"
+        siteAbbreviation = try container.decodeIfPresent(String.self, forKey: .siteAbbreviation) ?? "No Site"
         in_24_hours = try container.decodeIfPresent(String.self, forKey: .in_24_hours) ?? "N/A"
         status = try container.decodeIfPresent(KontestStatus.self, forKey: .status) ?? KontestStatus.OnGoing
         isSetForReminder10MiutesBefore = try container.decodeIfPresent(Bool.self, forKey: .isSetForReminder10MiutesBefore) ?? false
@@ -58,7 +58,7 @@ class KontestModel: Codable, Identifiable, Hashable {
         try container.encode(start_time, forKey: .start_time)
         try container.encode(end_time, forKey: .end_time)
         try container.encode(duration, forKey: .duration)
-        try container.encode(site, forKey: .site)
+        try container.encode(siteAbbreviation, forKey: .siteAbbreviation)
         try container.encode(in_24_hours, forKey: .in_24_hours)
         try container.encode(status, forKey: .status)
         try container.encode(calendarEventDate, forKey: .calendarDate)
@@ -67,7 +67,8 @@ class KontestModel: Codable, Identifiable, Hashable {
     let id: String
     let name: String
     let url: String
-    let start_time, end_time, duration, site, in_24_hours: String
+    let start_time, end_time, duration, in_24_hours: String
+    var siteAbbreviation:String
     var status: KontestStatus
     var isSetForReminder10MiutesBefore: Bool
     var isSetForReminder30MiutesBefore: Bool
@@ -84,7 +85,7 @@ class KontestModel: Codable, Identifiable, Hashable {
         self.start_time = start_time
         self.end_time = end_time
         self.duration = duration
-        self.site = site
+        self.siteAbbreviation = KontestModel.getSiteAbbreviationFromSite(site: site)
         self.in_24_hours = in_24_hours
         self.status = status
         isSetForReminder10MiutesBefore = false
@@ -107,6 +108,46 @@ extension KontestModel: Equatable {
 }
 
 extension KontestModel {
+   static func getSiteAbbreviationFromSite(site:String)->String{
+        switch site {
+        case "codingninjas.com/codestudio":
+            "Coding Ninjas"
+        
+        case "codingninjas.com":
+            "Coding Ninjas"
+            
+        case "yukicoder.me":
+            "Yuki Coder"
+            
+        case "hackerearth.com":
+            "HackerEarth"
+            
+        case "hackerrank.com":
+            "HackerRank"
+            
+        case "atcoder.jp":
+            "AtCoder"
+            
+        case "codeforces.com":
+            "CodeForces"
+            
+        case "leetcode.com":
+            "LeetCode"
+            
+        case "codechef.com":
+            "CodeChef"
+            
+        case "toph.com":
+            "Toph"
+            
+        case "csacademy.com":
+            "CS Academy"
+            
+        default:
+            site
+        }
+    }
+    
     static func from(dto: KontestDTO) -> KontestModel {
         let id = generateUniqueID(dto: dto)
         
@@ -174,7 +215,7 @@ extension KontestModel {
             .blue
             
         case "Coding Ninjas":
-                .yellow
+                .orange
 
         default:
             .red

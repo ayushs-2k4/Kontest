@@ -95,7 +95,7 @@ class UpcomingKontestsWidgetCache: WidgetCache {
 
         let allowedWebsites = FilterWebsitesViewModel().getAllowedWebsites()
         let filteredKontests = newAllKontests.filter { kontest in
-            allowedWebsites.contains(kontest.site)
+            allowedWebsites.contains(kontest.siteAbbreviation)
         }
 
         let today = Date()
