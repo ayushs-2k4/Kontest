@@ -198,8 +198,8 @@ extension KontestModel {
         }
     }
 
-    static func getColorForIdentifier(site: String) -> Color {
-        switch site {
+    static func getColorForIdentifier(siteAbbreviation: String) -> Color {
+        switch siteAbbreviation {
         case "CodeForces":
             .pink
 

@@ -39,21 +39,21 @@ struct FilterWebsitesScreen: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, content: {
-                FilterWebsitesView(siteLogo: Image(.codeForcesLogo), siteName: "CodeForces", borderColor: KontestModel.getColorForIdentifier(site: "CodeForces"), isSelected: $codeForcesKey)
+                FilterWebsitesView(siteLogo: Image(.codeForcesLogo), siteName: "CodeForces", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "CodeForces"), isSelected: $codeForcesKey)
 
-                FilterWebsitesView(siteLogo: Image(.atCoderLogo), siteName: "AtCoder", borderColor: KontestModel.getColorForIdentifier(site: "AtCoder"), isSelected: $atCoderKey)
+                FilterWebsitesView(siteLogo: Image(.atCoderLogo), siteName: "AtCoder", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "AtCoder"), isSelected: $atCoderKey)
 
-                FilterWebsitesView(siteLogo: Image(.csAcademyLogo), siteName: "CodeForces", borderColor: KontestModel.getColorForIdentifier(site: "CS Academy"), isSelected: $cSAcademyKey)
+                FilterWebsitesView(siteLogo: Image(.csAcademyLogo), siteName: "CodeForces", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "CS Academy"), isSelected: $cSAcademyKey)
 
-                FilterWebsitesView(siteLogo: Image(.codeChefLogo), siteName: "CodeChef", borderColor: KontestModel.getColorForIdentifier(site: "CodeChef"), isSelected: $codeChefKey)
+                FilterWebsitesView(siteLogo: Image(.codeChefLogo), siteName: "CodeChef", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "CodeChef"), isSelected: $codeChefKey)
 
-                FilterWebsitesView(siteLogo: Image(.hackerRankLogo), siteName: "HackerRank", borderColor: KontestModel.getColorForIdentifier(site: "HackerRank"), isSelected: $hackerRankKey)
+                FilterWebsitesView(siteLogo: Image(.hackerRankLogo), siteName: "HackerRank", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "HackerRank"), isSelected: $hackerRankKey)
 
-                FilterWebsitesView(siteLogo: Image(.hackerEarthLogo), siteName: "HackerEarth", borderColor: KontestModel.getColorForIdentifier(site: "HackerEarth"), isSelected: $hackerEarthKey)
+                FilterWebsitesView(siteLogo: Image(.hackerEarthLogo), siteName: "HackerEarth", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "HackerEarth"), isSelected: $hackerEarthKey)
 
-                FilterWebsitesView(siteLogo: Image(colorScheme == .light ? .leetCodeDarkLogo : .leetCodeWhiteLogo), siteName: "LeetCode", borderColor: KontestModel.getColorForIdentifier(site: "LeetCode"), isSelected: $leetCodeKey)
+                FilterWebsitesView(siteLogo: Image(colorScheme == .light ? .leetCodeDarkLogo : .leetCodeWhiteLogo), siteName: "LeetCode", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "LeetCode"), isSelected: $leetCodeKey)
 
-                FilterWebsitesView(siteLogo: Image(.tophLogo), siteName: "Toph", borderColor: KontestModel.getColorForIdentifier(site: "Toph"), isSelected: $tophKey)
+                FilterWebsitesView(siteLogo: Image(.tophLogo), siteName: "Toph", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "Toph"), isSelected: $tophKey)
             })
         }
         .padding()

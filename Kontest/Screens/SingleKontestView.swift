@@ -63,7 +63,7 @@ struct SingleKontestView: View {
             VStack(alignment: .leading) {
                 HStack {
                     Text(kontest.siteAbbreviation.uppercased())
-                        .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.siteAbbreviation))
+                        .foregroundStyle(KontestModel.getColorForIdentifier(siteAbbreviation: kontest.siteAbbreviation))
                         .bold()
                         .font(FontUtility.getSiteFontSize())
 
@@ -158,7 +158,7 @@ struct SingleKontestView: View {
             VStack {
                 if kontestStartDate != nil && kontestEndDate != nil {
                     Text("\(kontestStartDate!.formatted(date: .omitted, time: .shortened)) - \(kontestEndDate!.formatted(date: .omitted, time: .shortened))")
-                        .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.siteAbbreviation))
+                        .foregroundStyle(KontestModel.getColorForIdentifier(siteAbbreviation: kontest.siteAbbreviation))
                         .font(FontUtility.getTimeFontSize())
                         .bold()
 
