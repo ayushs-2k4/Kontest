@@ -114,47 +114,47 @@ extension KontestModel: Equatable {
 extension KontestModel {
     static func getSiteAbbreviationFromSite(site: String) -> String {
         switch site {
+        case "atcoder.jp":
+            "AtCoder"
+
+        case "codechef.com":
+            "CodeChef"
+
+        case "codeforces.com":
+            "CodeForces"
+
+        case "codingninjas.com":
+            "Coding Ninjas"
+
+        case "codingninjas.com/codestudio":
+            "Coding Ninjas"
+
+        case "csacademy.com":
+            "CS Academy"
+
+        case "geeksforgeeks.org":
+            "Geeks For Geeks"
+
         case "hackerearth.com":
             "HackerEarth"
 
         case "hackerrank.com":
             "HackerRank"
 
-        case "atcoder.jp":
-            "AtCoder"
-
-        case "codeforces.com":
-            "CodeForces"
-
         case "leetcode.com":
             "LeetCode"
-
-        case "codechef.com":
-            "CodeChef"
-
-        case "toph.com":
-            "Toph"
-
-        case "csacademy.com":
-            "CS Academy"
-
-        case "codingninjas.com/codestudio":
-            "Coding Ninjas"
-
-        case "codingninjas.com":
-            "Coding Ninjas"
 
         case "projecteuler.net":
             "Project Euler"
 
-        case "yukicoder.me":
-            "Yuki Coder"
-
         case "topcoder.com":
             "TopCoder"
-            
-        case "geeksforgeeks.org":
-            "Geeks For Geeks"
+
+        case "toph.com":
+            "Toph"
+
+        case "yukicoder.me":
+            "Yuki Coder"
 
         default:
             site
@@ -200,38 +200,47 @@ extension KontestModel {
 
     static func getColorForIdentifier(siteAbbreviation: String) -> Color {
         switch siteAbbreviation {
+        case "AtCoder":
+            Color(red: 187/255, green: 181/255, blue: 181/255)
+
+        case "CodeChef":
+            Color(red: 250/255, green: 155/255, blue: 101/255)
+
         case "CodeForces":
             .pink
 
         case "CodeForces::Gym":
             .red
 
-        case "AtCoder":
-            Color(red: 187/255, green: 181/255, blue: 181/255)
+        case "Coding Ninjas":
+            .orange
 
         case "CS Academy":
             .red
 
-        case "CodeChef":
-            Color(red: 250/255, green: 155/255, blue: 101/255)
-
-        case "HackerRank":
+        case "Geeks For Geeks":
             .green
 
         case "HackerEarth":
             Color(red: 101/255, green: 125/255, blue: 251/255)
 
+        case "HackerRank":
+            .green
+
         case "LeetCode":
             Color(red: 235/255, green: 162/255, blue: 64/255)
+
+        case "Project Euler":
+            Color(red: 103/255, green: 79/255, blue: 64/255)
+
+        case "TopCoder":
+            Color(red: 128/255, green: 99/255, blue: 203/255)
 
         case "Toph":
             .blue
 
-        case "Coding Ninjas":
-            .orange
-            
-        case "Geeks For Geeks":
-                .green
+        case "Yuki Coder":
+            Color(red: 60/255, green: 66/255, blue: 79/255)
 
         default:
             .red
@@ -240,44 +249,47 @@ extension KontestModel {
 
     static func getLogo(siteAbbreviation: String) -> String {
         return switch siteAbbreviation {
+        case "AtCoder":
+            "AtCoder Logo"
+
+        case "CodeChef":
+            "CodeChef Logo"
+
         case "CodeForces":
             "CodeForces Logo"
 
         case "CodeForces::Gym":
             "CodeForces Logo"
 
-        case "AtCoder":
-            "AtCoder Logo"
+        case "Coding Ninjas":
+            "Coding Ninjas Logo"
 
         case "CS Academy":
             "CSAcademy Logo"
 
-        case "CodeChef":
-            "CodeChef Logo"
-
-        case "HackerRank":
-            "HackerRank Logo"
+        case "Geeks For Geeks":
+            "Geeks For Geeks Logo"
 
         case "HackerEarth":
             "HackerEarth Logo"
 
+        case "HackerRank":
+            "HackerRank Logo"
+
         case "LeetCode":
             "LeetCode Dark Logo"
-
-        case "Toph":
-            "Toph Logo"
-
-        case "Coding Ninjas":
-            "Coding Ninjas Logo"
 
         case "Project Euler":
             "Project Euler Logo"
 
         case "TopCoder":
             "TopCoder Logo"
-            
-        case "Geeks For Geeks":
-            "Geeks For Geeks Logo"
+
+        case "Toph":
+            "Toph Logo"
+
+        case "Yuki Coder":
+            "Yuki Coder Logo"
 
         default:
             "Placeholder Flag"
