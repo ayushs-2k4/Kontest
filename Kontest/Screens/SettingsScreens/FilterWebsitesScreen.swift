@@ -20,6 +20,12 @@ struct FilterWebsitesScreen: View {
     @AppStorage(FilterWebsiteKey.leetCodeKey.rawValue, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var leetCodeKey = true
     @AppStorage(FilterWebsiteKey.tophKey.rawValue, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var tophKey = true
 
+    @AppStorage(FilterWebsiteKey.codingNinjasKey.rawValue, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var codingNinjasKey = true
+    @AppStorage(FilterWebsiteKey.geeksForGeeksKey.rawValue, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var geeksForGeeksKey = true
+    @AppStorage(FilterWebsiteKey.projectEulerKey.rawValue, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var projectEulerKey = true
+    @AppStorage(FilterWebsiteKey.topCodeKey.rawValue, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var topCodeKey = true
+    @AppStorage(FilterWebsiteKey.yukiCoderKey.rawValue, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var yukiCoderKey = true
+
     @Environment(\.colorScheme) private var colorScheme
 
     let columns: [GridItem]
@@ -54,6 +60,16 @@ struct FilterWebsitesScreen: View {
                 FilterWebsitesView(siteLogo: Image(colorScheme == .light ? .leetCodeDarkLogo : .leetCodeDarkLogo), siteName: "LeetCode", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "LeetCode"), isSelected: $leetCodeKey)
 
                 FilterWebsitesView(siteLogo: Image(.tophLogo), siteName: "Toph", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "Toph"), isSelected: $tophKey)
+
+                FilterWebsitesView(siteLogo: Image(.codingNinjasLogo), siteName: "Coding Ninjas", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "Coding Ninjas"), isSelected: $codingNinjasKey)
+
+                FilterWebsitesView(siteLogo: Image(.geeksForGeeksLogo), siteName: "Geeks For Geeks", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "Geeks For Geeks"), isSelected: $geeksForGeeksKey)
+
+                FilterWebsitesView(siteLogo: Image(.projectEulerLogo), siteName: "Project Euler", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "Project Euler"), isSelected: $projectEulerKey)
+
+                FilterWebsitesView(siteLogo: colorScheme == .light ? Image(.topCoderLightLogo) : Image(.topCoderDarkLogo), siteName: "TopCoder", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "TopCoder", theme: colorScheme), isSelected: $topCodeKey)
+
+                FilterWebsitesView(siteLogo: Image(.yukiCoderLogo), siteName: "Yuki Coder", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "Yuki Coder"), isSelected: $yukiCoderKey)
             })
         }
         .padding()
@@ -70,5 +86,6 @@ struct FilterWebsitesScreen: View {
 #Preview {
     NavigationStack {
         FilterWebsitesScreen()
+            .frame(width: 500, height: 500)
     }
 }

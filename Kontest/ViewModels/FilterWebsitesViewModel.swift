@@ -49,16 +49,26 @@ class FilterWebsitesViewModel: FilterWebsitesViewModelProtocol {
         if userDefaults.bool(forKey: FilterWebsiteKey.tophKey.rawValue) {
             allowedWebsites.append("toph.co")
         }
-        
-        allowedWebsites.append("codingninjas.com/codestudio")
-        
-        allowedWebsites.append("projecteuler.net")
-        
-        allowedWebsites.append("topcoder.com")
-        
-//        allowedWebsites.append("yukicoder.me")
-        
-        allowedWebsites.append("geeksforgeeks.org")
+
+        if userDefaults.bool(forKey: FilterWebsiteKey.codingNinjasKey.rawValue) {
+            allowedWebsites.append("codingninjas.com/codestudio")
+        }
+
+        if userDefaults.bool(forKey: FilterWebsiteKey.projectEulerKey.rawValue) {
+            allowedWebsites.append("projecteuler.net")
+        }
+
+        if userDefaults.bool(forKey: FilterWebsiteKey.topCodeKey.rawValue) {
+            allowedWebsites.append("topcoder.com")
+        }
+
+        if userDefaults.bool(forKey: FilterWebsiteKey.yukiCoderKey.rawValue) {
+            allowedWebsites.append("yukicoder.me")
+        }
+
+        if userDefaults.bool(forKey: FilterWebsiteKey.geeksForGeeksKey.rawValue) {
+            allowedWebsites.append("geeksforgeeks.org")
+        }
 
         return allowedWebsites
     }

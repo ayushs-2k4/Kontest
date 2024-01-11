@@ -9,14 +9,20 @@ import Foundation
 import OSLog
 
 enum FilterWebsiteKey: String, CaseIterable {
-    case codeForcesKey
     case atCoderKey
-    case cSAcademyKey
     case codeChefKey
-    case hackerRankKey
+    case codeForcesKey
+    case cSAcademyKey
     case hackerEarthKey
+    case hackerRankKey
     case leetCodeKey
     case tophKey
+    
+    case codingNinjasKey
+    case geeksForGeeksKey
+    case projectEulerKey
+    case topCodeKey
+    case yukiCoderKey
 }
 
 func setDefaultValuesForFilterWebsiteKeysToTrue() {
