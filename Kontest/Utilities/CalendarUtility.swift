@@ -10,13 +10,28 @@ import EventKit
 import Foundation
 import OSLog
 
-class CalendarUtility {
+enum CalendarUtility {
     private static let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "CalendarUtility")
 
     private static let eventStore = EKEventStore()
 
-    // DateFormatter for the first format: "2024-07-30T18:30:00.000Z"
+    // DateFormatter for the third format: "December 07, 2023 18:30:00"
     static func getFormattedDate1(date: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "MMMM dd, yyyy HH:mm:ss"
+        formatter.timeZone = .gmt
+
+        let currentDate = formatter.date(from: date)
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "h:mm a"
+
+        return currentDate
+    }
+
+    // DateFormatter for the second format: "2024-07-30T18:30:00.000Z"
+    static func getFormattedDate2(date: String) -> Date? {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         formatter.locale = Locale(identifier: "en_US_POSIX")
@@ -29,25 +44,12 @@ class CalendarUtility {
         return currentDate
     }
 
-    // DateFormatter for the second format: "2022-10-10 06:30:00 UTC"
-    static func getFormattedDate2(date: String) -> Date? {
+    // DateFormatter for the third format: "2022-10-10 06:30:00 UTC"
+    static func getFormattedDate3(date: String) -> Date? {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss zzz" // 2023-08-30 14:30:00 UTC
         formatter.locale = Locale(identifier: "en_US_POSIX")
 
-        let currentDate = formatter.date(from: date)
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "h:mm a"
-
-        return currentDate
-    }
-    
-    static func getFormattedDate3(date: String) -> Date? {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.dateFormat = "MMMM dd, yyyy HH:mm:ss"
-        
         let currentDate = formatter.date(from: date)
 
         let dateFormatter = DateFormatter()
@@ -61,10 +63,9 @@ class CalendarUtility {
             return ansDate
         } else if let ansDate = getFormattedDate2(date: date) {
             return ansDate
-        }else if let ansDate = getFormattedDate3(date: date) {
+        } else if let ansDate = getFormattedDate3(date: date) {
             return ansDate
-        }
-        else {
+        } else {
             return nil
         }
     }
