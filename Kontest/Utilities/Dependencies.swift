@@ -21,7 +21,7 @@ class Dependencies {
     private init() {
         self.notificationsViewModel = NotificationsViewModel()
         self.filterWebsitesViewModel = FilterWebsitesViewModel()
-        self.allKontestsViewModel = AllKontestsViewModel(notificationsViewModel: notificationsViewModel, filterWebsitesViewModel: filterWebsitesViewModel, repository: KontestRepository())
+        self.allKontestsViewModel = AllKontestsViewModel(notificationsViewModel: notificationsViewModel, filterWebsitesViewModel: filterWebsitesViewModel, repository: KontestNewRepository())
         self.changeUsernameViewModel = ChangeUsernameViewModel()
         self.leetCodeGraphQLViewModel = LeetCodeGraphQLViewModel(username: changeUsernameViewModel.leetcodeUsername)
         self.codeChefViewModel = CodeChefViewModel(username: changeUsernameViewModel.codeChefUsername)

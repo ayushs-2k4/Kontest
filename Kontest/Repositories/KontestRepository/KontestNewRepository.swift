@@ -67,8 +67,6 @@ class KontestNewRepository: KontestFetcher {
                 }
             }
 
-//            let allFetchedKontests = try JSONDecoder().decode([KontestDTO].self, from: data)
-
             return myAllContests
         } catch {
             logger.error("error in downloading all Kontests async await: \(error)")

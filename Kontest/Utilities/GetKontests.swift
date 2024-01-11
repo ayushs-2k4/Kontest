@@ -12,7 +12,7 @@ class GetKontests {
     private static let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "GetKontests")
 
     static func getKontests() async -> (fetchedKontests: [KontestModel], error: Error?) {
-        let repository = KontestRepository()
+        let repository = KontestNewRepository()
 
         do {
             let fetchedKontests = try await repository.getAllKontests()
@@ -58,7 +58,7 @@ class GetKontests {
         let filterWebsiteViewModel = FilterWebsitesViewModel()
         let allowedWebsites = filterWebsiteViewModel.getAllowedWebsites()
 
-        let filteredKontests = allKontests.filter { allowedWebsites.contains($0.siteAbbreviation) }
+        let filteredKontests = allKontests.filter { allowedWebsites.contains($0.site) }
 
         let ongoingKontests = filteredKontests.filter { CalendarUtility.isKontestRunning(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? today, kontestEndDate: CalendarUtility.getDate(date: $0.end_time) ?? today) }
 

@@ -9,8 +9,7 @@ import SwiftUI
 
 @main
 struct KontestApp: App {
-//    @State private var allKontestsViewModel = Dependencies.instance.allKontestsViewModel
-    @State private var allKontestsViewModel = AllKontestsViewModel(notificationsViewModel: NotificationsViewModel(), filterWebsitesViewModel: FilterWebsitesViewModel(), repository: KontestNewRepository())
+    @State private var allKontestsViewModel = Dependencies.instance.allKontestsViewModel
 
     @State private var router = Router.instance
     @State private var errorState = ErrorState()

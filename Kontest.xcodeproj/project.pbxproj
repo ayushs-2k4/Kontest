@@ -42,7 +42,6 @@
 		0764FF972ABC72460060AC1F /* FilterWebsitesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A31F012AAC831300EBC296 /* FilterWebsitesViewModel.swift */; };
 		0764FF982ABC724A0060AC1F /* FilterWebsitesViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FD85AC2AB809BC00D26C4C /* FilterWebsitesViewModelProtocol.swift */; };
 		0764FF992ABC724E0060AC1F /* FilterWebsiteKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A31EFF2AAC818D00EBC296 /* FilterWebsiteKey.swift */; };
-		0764FF9A2ABC72540060AC1F /* KontestRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB462AA58259008513C6 /* KontestRepository.swift */; };
 		0764FF9B2ABC72590060AC1F /* DownloadData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB6B2AA58259008513C6 /* DownloadData.swift */; };
 		0764FF9C2ABC725B0060AC1F /* KontestFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB792AA58259008513C6 /* KontestFetcher.swift */; };
 		0764FF9D2ABC72650060AC1F /* UpcomingWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CFEC042AB042F500291484 /* UpcomingWidgetView.swift */; };
@@ -77,7 +76,6 @@
 		079F68232ABC816B001B0EFE /* FilterWebsitesViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FD85AC2AB809BC00D26C4C /* FilterWebsitesViewModelProtocol.swift */; };
 		079F68242ABC8172001B0EFE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB652AA58259008513C6 /* Constants.swift */; };
 		079F68252ABC817A001B0EFE /* KontestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB742AA58259008513C6 /* KontestDTO.swift */; };
-		079F68262ABC818A001B0EFE /* KontestRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB462AA58259008513C6 /* KontestRepository.swift */; };
 		079F68272ABC818E001B0EFE /* AddToCalendarIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0784292D2AB5EF660078D836 /* AddToCalendarIntent.swift */; };
 		079F68292ABC819A001B0EFE /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 079F68282ABC819A001B0EFE /* Apollo */; };
 		079F682A2ABC81A5001B0EFE /* KontestFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB792AA58259008513C6 /* KontestFetcher.swift */; };
@@ -87,6 +85,10 @@
 		07A750202AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07A7501F2AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift */; };
 		07AA752C2B4FCD9F00DCD75B /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 07AA752B2B4FCD9F00DCD75B /* SwiftSoup */; };
 		07AA752E2B4FCF7A00DCD75B /* KontestNewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA752D2B4FCF7A00DCD75B /* KontestNewRepository.swift */; };
+		07AA752F2B501A6400DCD75B /* KontestNewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA752D2B4FCF7A00DCD75B /* KontestNewRepository.swift */; };
+		07AA75302B501A6400DCD75B /* KontestNewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA752D2B4FCF7A00DCD75B /* KontestNewRepository.swift */; };
+		07AA75322B501AEB00DCD75B /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 07AA75312B501AEB00DCD75B /* SwiftSoup */; };
+		07AA75342B501AF200DCD75B /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 07AA75332B501AF200DCD75B /* SwiftSoup */; };
 		07D766692AC8404A000A3DFD /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D766682AC8404A000A3DFD /* Sidebar.swift */; };
 		07D7666C2AC8407B000A3DFD /* DetailColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7666B2AC8407B000A3DFD /* DetailColumn.swift */; };
 		07D7666E2AC84094000A3DFD /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7666D2AC84094000A3DFD /* Panel.swift */; };
@@ -102,7 +104,6 @@
 		07ECFB892AA58259008513C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07ECFB402AA58259008513C6 /* Assets.xcassets */; };
 		07ECFB8A2AA58259008513C6 /* CodeChefAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB432AA58259008513C6 /* CodeChefAPIRepository.swift */; };
 		07ECFB8B2AA58259008513C6 /* AllKontestsFakeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB452AA58259008513C6 /* AllKontestsFakeRepository.swift */; };
-		07ECFB8C2AA58259008513C6 /* KontestRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB462AA58259008513C6 /* KontestRepository.swift */; };
 		07ECFB8D2AA58259008513C6 /* LeetCodeAPIGraphQLRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB482AA58259008513C6 /* LeetCodeAPIGraphQLRepository.swift */; };
 		07ECFB8F2AA58259008513C6 /* CodeForcesAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB4B2AA58259008513C6 /* CodeForcesAPIRepository.swift */; };
 		07ECFB902AA58259008513C6 /* KontestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB4D2AA58259008513C6 /* KontestStatus.swift */; };
@@ -260,7 +261,6 @@
 		07ECFB402AA58259008513C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		07ECFB432AA58259008513C6 /* CodeChefAPIRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeChefAPIRepository.swift; sourceTree = "<group>"; };
 		07ECFB452AA58259008513C6 /* AllKontestsFakeRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllKontestsFakeRepository.swift; sourceTree = "<group>"; };
-		07ECFB462AA58259008513C6 /* KontestRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KontestRepository.swift; sourceTree = "<group>"; };
 		07ECFB482AA58259008513C6 /* LeetCodeAPIGraphQLRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeetCodeAPIGraphQLRepository.swift; sourceTree = "<group>"; };
 		07ECFB4B2AA58259008513C6 /* CodeForcesAPIRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeForcesAPIRepository.swift; sourceTree = "<group>"; };
 		07ECFB4D2AA58259008513C6 /* KontestStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KontestStatus.swift; sourceTree = "<group>"; };
@@ -334,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0764FF7E2ABC717E0060AC1F /* SwiftUI.framework in Frameworks */,
+				07AA75322B501AEB00DCD75B /* SwiftSoup in Frameworks */,
 				0764FFA02ABC72870060AC1F /* Apollo in Frameworks */,
 				0764FF7D2ABC717E0060AC1F /* WidgetKit.framework in Frameworks */,
 			);
@@ -344,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				079F68082ABC80C2001B0EFE /* SwiftUI.framework in Frameworks */,
+				07AA75342B501AF200DCD75B /* SwiftSoup in Frameworks */,
 				079F68292ABC819A001B0EFE /* Apollo in Frameworks */,
 				079F68072ABC80C2001B0EFE /* WidgetKit.framework in Frameworks */,
 			);
@@ -567,7 +569,6 @@
 			isa = PBXGroup;
 			children = (
 				07ECFB452AA58259008513C6 /* AllKontestsFakeRepository.swift */,
-				07ECFB462AA58259008513C6 /* KontestRepository.swift */,
 				07AA752D2B4FCF7A00DCD75B /* KontestNewRepository.swift */,
 			);
 			path = KontestRepository;
@@ -765,6 +766,7 @@
 			name = "Upcoming Kontest iOS WidgetExtension";
 			packageProductDependencies = (
 				0764FF9F2ABC72870060AC1F /* Apollo */,
+				07AA75312B501AEB00DCD75B /* SwiftSoup */,
 			);
 			productName = "Upcoming Kontest iOS WidgetExtension";
 			productReference = 0764FF7C2ABC717E0060AC1F /* Upcoming Kontest iOS WidgetExtension.appex */;
@@ -785,6 +787,7 @@
 			name = "Upcoming Kontest macOS WidgetExtension";
 			packageProductDependencies = (
 				079F68282ABC819A001B0EFE /* Apollo */,
+				07AA75332B501AF200DCD75B /* SwiftSoup */,
 			);
 			productName = "Upcoming Kontest macOS WidgetExtension";
 			productReference = 079F68062ABC80C2001B0EFE /* Upcoming Kontest macOS WidgetExtension.appex */;
@@ -934,7 +937,6 @@
 				07ECFBA42AA58259008513C6 /* AllNotificationMenu.swift in Sources */,
 				07ECFBAF2AA58259008513C6 /* CodeChefAPIDTO.swift in Sources */,
 				07FD85AD2AB809BC00D26C4C /* FilterWebsitesViewModelProtocol.swift in Sources */,
-				07ECFB8C2AA58259008513C6 /* KontestRepository.swift in Sources */,
 				077E6EAD2AB4B1D10003E897 /* ErrorWrapper.swift in Sources */,
 				074DD4522AA61570005C16A5 /* AppError.swift in Sources */,
 				07ECFBAC2AA58259008513C6 /* FontUtility.swift in Sources */,
@@ -989,12 +991,12 @@
 				0764FF9D2ABC72650060AC1F /* UpcomingWidgetView.swift in Sources */,
 				0764FF9E2ABC726F0060AC1F /* AddToCalendarIntent.swift in Sources */,
 				0764FF992ABC724E0060AC1F /* FilterWebsiteKey.swift in Sources */,
-				0764FF9A2ABC72540060AC1F /* KontestRepository.swift in Sources */,
 				0764FF8E2ABC71FE0060AC1F /* KontestModel.swift in Sources */,
 				0764FF972ABC72460060AC1F /* FilterWebsitesViewModel.swift in Sources */,
 				0764FF832ABC717E0060AC1F /* Upcoming_Kontest_iOS_Widget.swift in Sources */,
 				0764FF962ABC72400060AC1F /* GetKontests.swift in Sources */,
 				0764FF8F2ABC72070060AC1F /* KontestDTO.swift in Sources */,
+				07AA752F2B501A6400DCD75B /* KontestNewRepository.swift in Sources */,
 				0764FF9C2ABC725B0060AC1F /* KontestFetcher.swift in Sources */,
 				0764FF982ABC724A0060AC1F /* FilterWebsitesViewModelProtocol.swift in Sources */,
 				0764FF932ABC72230060AC1F /* AppError.swift in Sources */,
@@ -1023,6 +1025,7 @@
 				079F68242ABC8172001B0EFE /* Constants.swift in Sources */,
 				079F68252ABC817A001B0EFE /* KontestDTO.swift in Sources */,
 				079F681C2ABC8140001B0EFE /* KontestModel.swift in Sources */,
+				07AA75302B501A6400DCD75B /* KontestNewRepository.swift in Sources */,
 				079F68192ABC8135001B0EFE /* CalendarUtility.swift in Sources */,
 				079F682B2ABC81AD001B0EFE /* DownloadData.swift in Sources */,
 				079F682A2ABC81A5001B0EFE /* KontestFetcher.swift in Sources */,
@@ -1032,7 +1035,6 @@
 				0779F4772ABD5B73004E50F6 /* WidgetCache.swift in Sources */,
 				0779F4752ABD5B64004E50F6 /* UpcomingKontestsWidgetCache.swift in Sources */,
 				079F68212ABC8161001B0EFE /* FilterWebsiteKey.swift in Sources */,
-				079F68262ABC818A001B0EFE /* KontestRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1504,6 +1506,16 @@
 			productName = Apollo;
 		};
 		07AA752B2B4FCD9F00DCD75B /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 07AA752A2B4FCD9F00DCD75B /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+		07AA75312B501AEB00DCD75B /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 07AA752A2B4FCD9F00DCD75B /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+		07AA75332B501AF200DCD75B /* SwiftSoup */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 07AA752A2B4FCD9F00DCD75B /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
