@@ -9,13 +9,14 @@ import SwiftUI
 import WidgetKit
 
 struct AllKontestsScreen: View {
+    let isInDevelopmentMode = false
+
     @ObservedObject var clockObserver = ClockObserver()
 
     @Environment(AllKontestsViewModel.self) private var allKontestsViewModel
     @Environment(NetworkMonitor.self) private var networkMonitor
     @State var showRemoveAllNotificationsAlert = false
     @State var showNotificationForAllKontestsAlert = false
-    let isInDevelopmentMode = false
     @State private var isNoNotificationIconAnimating = false
     let notificationsViewModel = Dependencies.instance.notificationsViewModel
 

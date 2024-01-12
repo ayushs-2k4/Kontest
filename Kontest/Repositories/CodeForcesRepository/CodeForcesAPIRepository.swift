@@ -10,7 +10,7 @@ import OSLog
 
 class CodeForcesAPIRepository: CodeForcesFetcher {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "CodeForcesAPIRepository")
-    
+
     func getUserRating(username: String) async throws -> CodeForcesUserRatingAPIDTO {
         guard let url = URL(string: "https://codeforces.com/api/user.rating?handle=\(username)") else {
             logger.error("Error in making CodeForces ratings url")
@@ -19,6 +19,10 @@ class CodeForcesAPIRepository: CodeForcesFetcher {
 
         do {
             let data = try await downloadDataWithAsyncAwait(url: url)
+            if String(decoding: data, as: UTF8.self).contains(Constants.codeforcesNotAvailableErrorResponseMessage) {
+                throw AppError(title: "CodeForces API not available right now", description: "")
+            }
+
             let fetchedCodeForcesRatings = try JSONDecoder().decode(CodeForcesUserRatingAPIDTO.self, from: data)
 
             return fetchedCodeForcesRatings
@@ -36,6 +40,11 @@ class CodeForcesAPIRepository: CodeForcesFetcher {
 
         do {
             let data = try await downloadDataWithAsyncAwait(url: url)
+
+            if String(decoding: data, as: UTF8.self).contains(Constants.codeforcesNotAvailableErrorResponseMessage) {
+                throw AppError(title: "CodeForces API not available right now", description: "")
+            }
+
             let fetchedCodeForcesProfile = try JSONDecoder().decode(CodeForcesUserInfoAPIDTO.self, from: data)
 
             return fetchedCodeForcesProfile

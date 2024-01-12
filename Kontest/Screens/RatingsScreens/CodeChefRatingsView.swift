@@ -1,5 +1,5 @@
 //
-//  CodeChefView.swift
+//  CodeChefRatingsView.swift
 //  Kontest
 //
 //  Created by Ayush Singhal on 27/08/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CodeChefView: View {
+struct CodeChefRatingsView: View {
     let username: String
     let codeChefViewModel: CodeChefViewModel
     let bgColor: Color
@@ -152,8 +152,8 @@ struct CodeChefProfileView: View {
 
 #Preview {
     VStack {
-        CodeChefView(username: "ayushs_2k4", bgColor: .brown, hoveringScaleValue: 1.05)
-        CodeChefView(username: "ayush_2k4", bgColor: Color(red: 90/255, green: 55/255, blue: 31/255), hoveringScaleValue: 1.05)
+        CodeChefRatingsView(username: "ayushs_2k4", bgColor: .brown, hoveringScaleValue: 1.05)
+        CodeChefRatingsView(username: "ayush_2k4", bgColor: Color(red: 90/255, green: 55/255, blue: 31/255), hoveringScaleValue: 1.05)
     }
     .environment(Router.instance)
 }
