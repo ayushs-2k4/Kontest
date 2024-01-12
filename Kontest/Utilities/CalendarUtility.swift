@@ -124,8 +124,11 @@ enum CalendarUtility {
         formatter.allowedUnits = [.day, .hour, .minute, .second]
 
         let dateComponents = DateComponents(hour: hours, minute: minutes)
+        
+        let totalMinutes = (dateComponents.hour ?? 0) * 60 + (dateComponents.minute ?? 0)
 
-        let ans = dateComponents.hour ?? 1 <= Constants.maximumDurationOfAKontestInHours ? formatter.string(from: dateComponents) : nil
+        let ans = ((totalMinutes <= Constants.maximumDurationOfAKontestInMinutes) && (totalMinutes >= Constants.minimumDurationOfAKontestInMinutes)) ? formatter.string(from: dateComponents) : nil // It verifies that kontest duration is in between minimum and maximum range, and if it is not in range then returns nil. If it is nil then in "AllKontestsViewModel", during filtering it removes that kontest entry.
+        
         return ans
     }
 
