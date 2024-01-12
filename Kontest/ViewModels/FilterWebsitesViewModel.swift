@@ -69,6 +69,10 @@ class FilterWebsitesViewModel: FilterWebsitesViewModelProtocol {
         if userDefaults.bool(forKey: FilterWebsiteKey.geeksForGeeksKey.rawValue) {
             allowedWebsites.append("geeksforgeeks.org")
         }
+        
+        if userDefaults.bool(forKey: FilterWebsiteKey.cupsOnlineKey.rawValue) {
+            allowedWebsites.append("cups.online")
+        }
 
         return allowedWebsites
     }

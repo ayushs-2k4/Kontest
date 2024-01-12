@@ -23,6 +23,8 @@ enum FilterWebsiteKey: String, CaseIterable {
     case projectEulerKey
     case topCodeKey
     case yukiCoderKey
+    
+    case cupsOnlineKey
 }
 
 func setDefaultValuesForFilterWebsiteKeysToTrue() {
