@@ -128,6 +128,8 @@ struct createSingleKontestView: View {
                                         Text("Ends in: \(futureDate, style: .timer)")
                                             .fontDesign(.default).monospacedDigit()
                                             .multilineTextAlignment(.trailing)
+                                            .contentTransition(.numericText(countsDown: true))
+                                        
                                     } else if toShowStartingIn {
                                         let seconds = startDate.timeIntervalSince(Date())
                                         let futureDate = Calendar.current.date(byAdding: .second, value: Int(seconds), to: Date())!
@@ -135,6 +137,7 @@ struct createSingleKontestView: View {
                                         Text("Starting in: \(futureDate, style: .timer)")
                                             .fontDesign(.default).monospacedDigit()
                                             .multilineTextAlignment(.trailing)
+                                            .contentTransition(.numericText(countsDown: true))
                                     }
                                 } else {
                                     Text("")
