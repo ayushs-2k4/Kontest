@@ -27,8 +27,21 @@ struct BadgeModel: Codable {
     let name: String?
 }
 
-struct LeetCodeUserRankingHistoryGraphQLAPIModel: Codable, Equatable,Identifiable {
-    let id = UUID()
+struct LeetCodeUserRankingHistoryGraphQLAPIModel: Codable, Equatable, Identifiable {
+    let id: UUID
+
+    init(id: UUID = UUID(), attended: Bool?, trendDirection: String?, problemsSolved: Int?, totalProblems: Int?, finishTimeInSeconds: Int?, rating: Double?, ranking: Int?, contest: ContestModel?) {
+        self.id = id
+        self.attended = attended
+        self.trendDirection = trendDirection
+        self.problemsSolved = problemsSolved
+        self.totalProblems = totalProblems
+        self.finishTimeInSeconds = finishTimeInSeconds
+        self.rating = rating
+        self.ranking = ranking
+        self.contest = contest
+    }
+
     static func == (lhs: LeetCodeUserRankingHistoryGraphQLAPIModel, rhs: LeetCodeUserRankingHistoryGraphQLAPIModel) -> Bool {
         return lhs.attended == rhs.attended &&
             lhs.trendDirection == rhs.trendDirection &&

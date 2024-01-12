@@ -52,7 +52,17 @@ struct CodeForcesProfileView: View {
 
     var body: some View {
         ZStack {
-            bgGradient
+            if error == nil && !username.isEmpty {
+                bgGradient
+            }
+            else {
+                RadialGradient(
+                    gradient: Gradient(stops: [.init(color: Color.red, location: 0.0), .init(color: Color.white, location: 0.8)]),
+                    center: .center,
+                    startRadius: 10,
+                    endRadius: 500
+                )
+            }
 
             if isLoading && error == nil {
                 ProgressView()
