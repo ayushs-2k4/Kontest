@@ -44,6 +44,13 @@ struct CodeForcesGraphView: View {
                 Text("Please update your username in the settings")
             } else if codeForcesViewModel.isLoading {
                 ProgressView()
+            } else if codeForcesViewModel.error is AppError {
+                let appError = codeForcesViewModel.error as! AppError
+
+                Text(appError.title)
+                    .bold()
+
+                Text(appError.description)
             } else {
                 if let error = codeForcesViewModel.error {
                     Text("Error: \(error.localizedDescription)")
