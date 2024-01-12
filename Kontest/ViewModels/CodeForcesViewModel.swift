@@ -23,6 +23,7 @@ class CodeForcesViewModel {
     var error: Error?
     
     init(username: String) {
+        self.error = nil
         self.username = username
         self.isLoading = true
         if !username.isEmpty {

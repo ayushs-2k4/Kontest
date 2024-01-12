@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - CodeForcesUserInfoDTO
 
-struct CodeForcesUserInfoAPIDTO:Codable {
+struct CodeForcesUserInfoAPIDTO: Codable {
     let status: String
     let result: [CodeForcesUserInfoAPIResultDTO]
 }
@@ -17,11 +17,12 @@ struct CodeForcesUserInfoAPIDTO:Codable {
 // MARK: - CodeForcesUserInfoAPIResultDTO
 
 struct CodeForcesUserInfoAPIResultDTO: Codable {
-    let contribution, lastOnlineTimeSeconds, rating, friendOfCount: Int
+    let contribution, lastOnlineTimeSeconds, friendOfCount: Int
     let titlePhoto: String
-    let rank, handle: String
-    let maxRating: Int
+    let handle: String
     let avatar: String
     let registrationTimeSeconds: Int
-    let maxRank: String
+
+    let rating, maxRating: Int? // Making optional, because when user has not given any contest, then these do not come in JSON from API.
+    let rank, maxRank: String? // Making optional, because when user has not given any contest, then these do not come in JSON from API.
 }
