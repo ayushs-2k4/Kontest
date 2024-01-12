@@ -1,5 +1,5 @@
 //
-//  LeetCodeGraphQLView.swift
+//  LeetCodeRatingsGraphQLView.swift
 //  Kontest
 //
 //  Created by Ayush Singhal on 04/09/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LeetCodeGraphQLView: View {
+struct LeetCodeRatingsGraphQLView: View {
     let username: String
     let leetCodeGraphQLViewModel: LeetCodeGraphQLViewModel
     let bgColor: Color
@@ -141,6 +141,6 @@ struct LeetcodeProfileGraphQLView: View {
 }
 
 #Preview {
-    LeetCodeGraphQLView(username: "ayushs_2k4", bgColor: Color(red: 40/255, green: 40/255, blue: 40/255), hoveringScaleValue: 1.05)
+    LeetCodeRatingsGraphQLView(username: "ayushs_2k4", bgColor: Color(red: 40/255, green: 40/255, blue: 40/255), hoveringScaleValue: 1.05)
         .environment(Router.instance)
 }

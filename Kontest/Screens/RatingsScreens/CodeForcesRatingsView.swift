@@ -1,5 +1,5 @@
 //
-//  CodeForcesView.swift
+//  CodeForcesRatingsView.swift
 //  Kontest
 //
 //  Created by Ayush Singhal on 16/08/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CodeForcesView: View {
+struct CodeForcesRatingsView: View {
     let username: String
     let codeForcesViewModel: CodeForcesViewModel
     let bgGradient: RadialGradient
@@ -164,10 +164,10 @@ struct CodeForcesProfileView: View {
     let bgGradient: RadialGradient = .init(gradient: Gradient(stops: [.init(color: Color(red: 159/255, green: 150/255, blue: 137/255), location: 0.0), .init(color: Color(red: 209/255, green: 204/255, blue: 198/255), location: 0.5)]), center: .center, startRadius: 10, endRadius: 500)
 
     return VStack {
-        CodeForcesView(username: "Fefer_Ivan", bgGradient: bgGradient, hoveringScaleValue: 1.05)
-        CodeForcesView(username: "ayushsinghals", bgGradient: bgGradient, hoveringScaleValue: 1.05)
-        CodeForcesView(username: "ayushsinghals02", bgGradient: bgGradient, hoveringScaleValue: 1.05)
-        CodeForcesView(username: "yermak0v", bgGradient: bgGradient, hoveringScaleValue: 1.05)
+        CodeForcesRatingsView(username: "Fefer_Ivan", bgGradient: bgGradient, hoveringScaleValue: 1.05)
+        CodeForcesRatingsView(username: "ayushsinghals", bgGradient: bgGradient, hoveringScaleValue: 1.05)
+        CodeForcesRatingsView(username: "ayushsinghals02", bgGradient: bgGradient, hoveringScaleValue: 1.05)
+        CodeForcesRatingsView(username: "yermak0v", bgGradient: bgGradient, hoveringScaleValue: 1.05)
     }
     .environment(Router.instance)
 }

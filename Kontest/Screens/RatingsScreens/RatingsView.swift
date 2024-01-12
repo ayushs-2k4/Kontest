@@ -20,17 +20,17 @@ struct RatingsView: View {
     var body: some View {
         ScrollView(.horizontal) {
             LazyHStack(spacing: hSpacing) {
-                CodeForcesView(username: codeForcesUsername, bgGradient: bgGradient, hoveringScaleValue: hoveringScaleValue)
+                CodeForcesRatingsView(username: codeForcesUsername, bgGradient: bgGradient, hoveringScaleValue: hoveringScaleValue)
                     .clipShape(.rect(cornerRadius: cornerRadius))
                     .aspectRatio(heroRatio, contentMode: .fit)
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
 
-                LeetCodeGraphQLView(username: leetCodeUsername, bgColor: Color(red: 34/255, green: 34/255, blue: 34/255), hoveringScaleValue: hoveringScaleValue)
+                LeetCodeRatingsGraphQLView(username: leetCodeUsername, bgColor: Color(red: 34/255, green: 34/255, blue: 34/255), hoveringScaleValue: hoveringScaleValue)
                     .clipShape(.rect(cornerRadius: cornerRadius))
                     .aspectRatio(heroRatio, contentMode: .fit)
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
 
-                CodeChefView(username: codeChefUsername, bgColor: .brown, hoveringScaleValue: hoveringScaleValue)
+                CodeChefRatingsView(username: codeChefUsername, bgColor: .brown, hoveringScaleValue: hoveringScaleValue)
                     .clipShape(.rect(cornerRadius: cornerRadius))
                     .aspectRatio(heroRatio, contentMode: .fit)
                     .containerRelativeFrame(.horizontal, count: columns, spacing: 10)
