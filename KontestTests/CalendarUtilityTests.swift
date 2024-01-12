@@ -11,7 +11,7 @@ import XCTest
 class CalendarUtilityTests: XCTestCase {
     func test_getFormattedDate1_True() {
         let dateString = "2024-07-30T18:30:00.000Z"
-        let formattedDate = CalendarUtility.getFormattedDate1(date: dateString)
+        let formattedDate = CalendarUtility.getFormattedDate2(date: dateString)
 
         let correctDateComponents = DateComponents(timeZone: TimeZone(identifier: "UTC"), year: 2024, month: 7, day: 30, hour: 18, minute: 30, second: 0)
         let date = Calendar.current.date(from: correctDateComponents)!
@@ -21,7 +21,7 @@ class CalendarUtilityTests: XCTestCase {
 
     func test_getFormattedDate2_True() {
         let dateString = "2022-10-10 06:30:00 UTC"
-        let formattedDate = CalendarUtility.getFormattedDate2(date: dateString)
+        let formattedDate = CalendarUtility.getFormattedDate3(date: dateString)
 
         let correctDateComponents = DateComponents(timeZone: TimeZone(identifier: "UTC"), year: 2022, month: 10, day: 10, hour: 6, minute: 30, second: 0)
         let date = Calendar.current.date(from: correctDateComponents)!
