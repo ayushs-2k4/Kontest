@@ -9,6 +9,8 @@ import SwiftUI
 import WidgetKit
 
 struct AllKontestsScreen: View {
+    @ObservedObject var clockObserver = ClockObserver()
+
     @Environment(AllKontestsViewModel.self) private var allKontestsViewModel
     @Environment(NetworkMonitor.self) private var networkMonitor
     @State var showRemoveAllNotificationsAlert = false
@@ -39,14 +41,14 @@ struct AllKontestsScreen: View {
                             RatingsView(codeForcesUsername: changeUsernameViewModel.codeForcesUsername, leetCodeUsername: changeUsernameViewModel.leetcodeUsername, codeChefUsername: changeUsernameViewModel.codeChefUsername)
                                 .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                                 .listRowSeparator(.hidden)
-                            
-                            HStack{
+
+                            HStack {
                                 Spacer()
                                 NoKontestsDownloadedScreen()
                                 Spacer()
                             }
                         }
-                        
+
                     } else {
                         TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
                             List {
@@ -211,6 +213,11 @@ struct AllKontestsScreen: View {
                 NoInternetScreen()
             }
         }
+        .onChange(of: clockObserver.clockDidChange) {
+            // Perform actions when the clock changes
+            print("Clock changed!")
+        }
+
         .onChange(of: networkMonitor.currentStatus) {
             if networkMonitor.currentStatus == .satisfied {
                 allKontestsViewModel.fetchAllKontests()
