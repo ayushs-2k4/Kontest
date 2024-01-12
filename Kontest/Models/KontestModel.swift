@@ -231,7 +231,7 @@ extension KontestModel {
             Color(red: 235/255, green: 162/255, blue: 64/255)
 
         case "Project Euler":
-            Color(red: 103/255, green: 79/255, blue: 64/255)
+            Color(red: 178/255, green: 128/255, blue: 100/255)
 
         case "TopCoder":
             if colorScheme == .light {
