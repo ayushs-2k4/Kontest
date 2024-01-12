@@ -10,7 +10,7 @@ import SwiftUI
 struct CodeForcesView: View {
     let username: String
     let codeForcesViewModel: CodeForcesViewModel
-    let bgGradient: RadialGradient 
+    let bgGradient: RadialGradient
     @State var isHovering = false
     let hoveringScaleValue: CGFloat
 
@@ -52,7 +52,7 @@ struct CodeForcesProfileView: View {
 
     var body: some View {
         ZStack {
-           bgGradient
+            bgGradient
 
             if isLoading && error == nil {
                 ProgressView()
@@ -117,6 +117,14 @@ struct CodeForcesProfileView: View {
                             .padding()
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                     }
+                }
+                else if error is AppError {
+                    let appError = error as! AppError
+
+                    Text(appError.title)
+                        .bold()
+
+                    Text(appError.description)
                 }
                 else {
                     Text("LastRank 0")
