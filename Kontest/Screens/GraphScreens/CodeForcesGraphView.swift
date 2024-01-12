@@ -17,7 +17,7 @@ struct CodeForcesGraphView: View {
     init() {
         self._attendedContests = State(initialValue: [])
     }
-    
+
     let curGradient = LinearGradient(
         gradient: Gradient(
             colors: [
@@ -40,7 +40,9 @@ struct CodeForcesGraphView: View {
 
     var body: some View {
         VStack {
-            if codeForcesViewModel.isLoading {
+            if codeForcesViewModel.username.isEmpty {
+                Text("Please update your username in the settings")
+            } else if codeForcesViewModel.isLoading {
                 ProgressView()
             } else {
                 if let error = codeForcesViewModel.error {
@@ -92,7 +94,7 @@ struct CodeForcesGraphView: View {
                             LineMark(x: .value("Time", updateDate, unit: .day), y: .value("Ratings", newRating))
                                 .interpolationMethod(.catmullRom)
                                 .symbol(Circle().strokeBorder(lineWidth: 2))
-                            
+
                             AreaMark(x: .value("Time", updateDate, unit: .day), y: .value("Ratings", newRating))
                                 .interpolationMethod(.catmullRom)
                                 .foregroundStyle(curGradient)
@@ -111,4 +113,5 @@ struct CodeForcesGraphView: View {
 
 #Preview {
     CodeForcesGraphView()
+        .frame(width: 500, height: 500)
 }

@@ -40,6 +40,6 @@ struct KontestWidgetModel: AppEntity, Identifiable {
 
 extension KontestWidgetModel {
     static func from(kontestModel: KontestModel) -> KontestWidgetModel {
-        return KontestWidgetModel(id: kontestModel.id, name: kontestModel.name, url: kontestModel.url, start_time: kontestModel.start_time, end_time: kontestModel.end_time, duration: kontestModel.duration, site: kontestModel.site, in_24_hours: kontestModel.in_24_hours, status: kontestModel.status, isSetForReminder10MiutesBefore: kontestModel.isSetForReminder10MiutesBefore, isSetForReminder30MiutesBefore: kontestModel.isSetForReminder30MiutesBefore, isSetForReminder1HourBefore: kontestModel.isSetForReminder1HourBefore, isSetForReminder6HoursBefore: kontestModel.isSetForReminder6HoursBefore, logo: kontestModel.logo, isCalendarEventAdded: kontestModel.isCalendarEventAdded)
+        return KontestWidgetModel(id: kontestModel.id, name: kontestModel.name, url: kontestModel.url, start_time: kontestModel.start_time, end_time: kontestModel.end_time, duration: kontestModel.duration, site: kontestModel.siteAbbreviation, in_24_hours: kontestModel.in_24_hours, status: kontestModel.status, isSetForReminder10MiutesBefore: kontestModel.isSetForReminder10MiutesBefore, isSetForReminder30MiutesBefore: kontestModel.isSetForReminder30MiutesBefore, isSetForReminder1HourBefore: kontestModel.isSetForReminder1HourBefore, isSetForReminder6HoursBefore: kontestModel.isSetForReminder6HoursBefore, logo: kontestModel.logo, isCalendarEventAdded: kontestModel.isCalendarEventAdded)
     }
 }

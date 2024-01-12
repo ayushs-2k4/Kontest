@@ -28,7 +28,7 @@ struct LeetCodeGraphQLView: View {
                     isHovering = hovering
                 }
             })
-            .scaleEffect(isHovering && !leetCodeGraphQLViewModel.isLoading && leetCodeGraphQLViewModel.error == nil ? hoveringScaleValue : 1)
+            .scaleEffect(isHovering && !leetCodeGraphQLViewModel.username.isEmpty && !leetCodeGraphQLViewModel.isLoading && leetCodeGraphQLViewModel.error == nil ? hoveringScaleValue : 1)
     }
 }
 
@@ -51,7 +51,7 @@ struct LeetcodeProfileGraphQLView: View {
                 ProgressView()
             } else {
                 HStack {
-                    Image(.leetCodeWhiteLogo)
+                    Image(.leetCodeDarkLogo)
                         .resizable()
                         .frame(width: 25, height: 25)
 
@@ -127,7 +127,7 @@ struct LeetcodeProfileGraphQLView: View {
         }
         .onTapGesture {
             if !isLoading {
-                if error == nil {
+                if error == nil && !username.isEmpty {
                     guard let url = URL(string: "https://leetcode.com/\(username)") else { return }
                     openURL(url)
                 } else {

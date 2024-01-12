@@ -126,7 +126,7 @@ class AllKontestsViewModel {
 
             let allEvents = shouldFetchAllEventsFromCalendar ? try await CalendarUtility.getAllEvents() : []
 
-            return fetchedKontests
+            let allKontestModels = fetchedKontests
                 .map { dto in
                     let kontest = KontestModel.from(dto: dto)
                     // Load Reminder status
@@ -145,6 +145,8 @@ class AllKontestsViewModel {
 
                     return !kontestDuration.isEmpty && !isKontestEnded
                 }
+            
+            return allKontestModels
         } catch {
             logger.error("error in fetching all Kontests: \(error)")
             return []
@@ -158,7 +160,7 @@ class AllKontestsViewModel {
     private func filterKontestsUsingSearchText() {
         let filteredKontests = backupKontests
             .filter { kontest in
-                kontest.name.localizedCaseInsensitiveContains(searchText) || kontest.site.localizedCaseInsensitiveContains(searchText) || kontest.url.localizedCaseInsensitiveContains(searchText)
+                kontest.name.localizedCaseInsensitiveContains(searchText) || kontest.siteAbbreviation.localizedCaseInsensitiveContains(searchText) || kontest.url.localizedCaseInsensitiveContains(searchText)
             }
 
         // Update the filtered kontests

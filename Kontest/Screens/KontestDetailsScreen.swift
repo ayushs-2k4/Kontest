@@ -32,15 +32,15 @@ struct KontestDetailsScreen: View {
             VStack {
                 let timeDifferenceString = CalendarUtility.getTimeDifferenceString(startDate: kontestStartDate ?? Date(), endDate: kontestEndDate ?? Date())
 
-                TopCardView(color: KontestModel.getColorForIdentifier(site: kontest.site), kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date(), boxText: timeDifferenceString)
+                TopCardView(color: KontestModel.getColorForIdentifier(siteAbbreviation: kontest.siteAbbreviation), kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date(), boxText: timeDifferenceString)
                     .frame(height: 300)
 
                 Spacer()
 
                 VStack {
                     HStack {
-                        Text(kontest.site.uppercased())
-                            .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.site))
+                        Text(kontest.siteAbbreviation.uppercased())
+                            .foregroundStyle(KontestModel.getColorForIdentifier(siteAbbreviation: kontest.siteAbbreviation))
                             .padding(.horizontal)
 
                         if kontestDetailViewModel.isKontestRunning {
@@ -158,7 +158,7 @@ struct ButtonsView: View {
             })
             .controlSize(.large)
         }
-        .foregroundStyle(KontestModel.getColorForIdentifier(site: kontest.site))
+        .foregroundStyle(KontestModel.getColorForIdentifier(siteAbbreviation: kontest.siteAbbreviation))
         .buttonStyle(.bordered)
         .padding()
     }

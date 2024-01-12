@@ -19,6 +19,7 @@ class KontestModel: Codable, Identifiable, Hashable {
         case end_time
         case duration
         case site
+        case siteAbbreviation
         case in_24_hours
         case status
         case isSetForReminder10MiutesBefore
@@ -40,6 +41,7 @@ class KontestModel: Codable, Identifiable, Hashable {
         end_time = try container.decodeIfPresent(String.self, forKey: .end_time) ?? "No End Time"
         duration = try container.decodeIfPresent(String.self, forKey: .duration) ?? "-1"
         site = try container.decodeIfPresent(String.self, forKey: .site) ?? "No Site"
+        siteAbbreviation = try container.decodeIfPresent(String.self, forKey: .siteAbbreviation) ?? "No Site"
         in_24_hours = try container.decodeIfPresent(String.self, forKey: .in_24_hours) ?? "N/A"
         status = try container.decodeIfPresent(KontestStatus.self, forKey: .status) ?? KontestStatus.OnGoing
         isSetForReminder10MiutesBefore = try container.decodeIfPresent(Bool.self, forKey: .isSetForReminder10MiutesBefore) ?? false
@@ -59,6 +61,7 @@ class KontestModel: Codable, Identifiable, Hashable {
         try container.encode(end_time, forKey: .end_time)
         try container.encode(duration, forKey: .duration)
         try container.encode(site, forKey: .site)
+        try container.encode(siteAbbreviation, forKey: .siteAbbreviation)
         try container.encode(in_24_hours, forKey: .in_24_hours)
         try container.encode(status, forKey: .status)
         try container.encode(calendarEventDate, forKey: .calendarDate)
@@ -68,6 +71,7 @@ class KontestModel: Codable, Identifiable, Hashable {
     let name: String
     let url: String
     let start_time, end_time, duration, site, in_24_hours: String
+    var siteAbbreviation: String
     var status: KontestStatus
     var isSetForReminder10MiutesBefore: Bool
     var isSetForReminder30MiutesBefore: Bool
@@ -85,6 +89,7 @@ class KontestModel: Codable, Identifiable, Hashable {
         self.end_time = end_time
         self.duration = duration
         self.site = site
+        siteAbbreviation = KontestModel.getSiteAbbreviationFromSite(site: site)
         self.in_24_hours = in_24_hours
         self.status = status
         isSetForReminder10MiutesBefore = false
@@ -107,15 +112,66 @@ extension KontestModel: Equatable {
 }
 
 extension KontestModel {
+    static func getSiteAbbreviationFromSite(site: String) -> String {
+        switch site {
+        case "atcoder.jp":
+            "AtCoder"
+
+        case "codechef.com":
+            "CodeChef"
+
+        case "codeforces.com":
+            "CodeForces"
+
+        case "codingninjas.com":
+            "Coding Ninjas"
+
+        case "codingninjas.com/codestudio":
+            "Coding Ninjas"
+
+        case "csacademy.com":
+            "CS Academy"
+
+        case "geeksforgeeks.org":
+            "Geeks For Geeks"
+
+        case "hackerearth.com":
+            "HackerEarth"
+
+        case "hackerrank.com":
+            "HackerRank"
+
+        case "leetcode.com":
+            "LeetCode"
+
+        case "projecteuler.net":
+            "Project Euler"
+
+        case "topcoder.com":
+            "TopCoder"
+
+        case "toph.com":
+            "Toph"
+
+        case "yukicoder.me":
+            "Yuki Coder"
+
+        default:
+            site
+        }
+    }
+
     static func from(dto: KontestDTO) -> KontestModel {
         let id = generateUniqueID(dto: dto)
 
-        var status: KontestStatus {
-            let kontestStartDate = CalendarUtility.getDate(date: dto.start_time)
-            let kontestEndDate = CalendarUtility.getDate(date: dto.end_time)
+        let kontestStartDate = CalendarUtility.getDate(date: dto.start_time)
+        let kontestEndDate = CalendarUtility.getDate(date: dto.end_time)
 
+        var status: KontestStatus {
             return getKontestStatus(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date())
         }
+
+        let duration = (kontestEndDate?.timeIntervalSince1970 ?? 0) - (kontestStartDate?.timeIntervalSince1970 ?? 0)
 
         return KontestModel(
             id: id,
@@ -123,11 +179,11 @@ extension KontestModel {
             url: dto.url,
             start_time: dto.start_time,
             end_time: dto.end_time,
-            duration: dto.duration,
+            duration: "\(duration)",
             site: dto.site,
             in_24_hours: dto.in_24_hours,
             status: status,
-            logo: getLogo(site: dto.site)
+            logo: getLogo(siteAbbreviation: dto.site)
         )
     }
 
@@ -142,71 +198,115 @@ extension KontestModel {
         }
     }
 
-    static func getColorForIdentifier(site: String) -> Color {
-        switch site {
+    static func getColorForIdentifier(siteAbbreviation: String, colorScheme: ColorScheme = .light) -> Color {
+        switch siteAbbreviation {
+        case "AtCoder":
+            Color(red: 187/255, green: 181/255, blue: 181/255)
+
+        case "CodeChef":
+            Color(red: 250/255, green: 155/255, blue: 101/255)
+
         case "CodeForces":
             .pink
 
         case "CodeForces::Gym":
             .red
 
-        case "AtCoder":
-            Color(red: 187/255, green: 181/255, blue: 181/255)
+        case "Coding Ninjas":
+            .orange
 
         case "CS Academy":
             .red
 
-        case "CodeChef":
-            Color(red: 250/255, green: 155/255, blue: 101/255)
-
-        case "HackerRank":
+        case "Geeks For Geeks":
             .green
 
         case "HackerEarth":
             Color(red: 101/255, green: 125/255, blue: 251/255)
 
+        case "HackerRank":
+            .green
+
         case "LeetCode":
             Color(red: 235/255, green: 162/255, blue: 64/255)
 
+        case "Project Euler":
+            Color(red: 103/255, green: 79/255, blue: 64/255)
+
+        case "TopCoder":
+            if colorScheme == .light {
+                .black
+            } else {
+                .white
+            }
+
         case "Toph":
             .blue
+
+        case "Yuki Coder":
+            Color(red: 60/255, green: 66/255, blue: 79/255)
 
         default:
             .red
         }
     }
 
-    static func getLogo(site: String) -> String {
-        return switch site {
+    static func getLogo(siteAbbreviation: String, colorScheme: ColorScheme = .light) -> String {
+        return switch siteAbbreviation {
+        case "AtCoder":
+            "AtCoder Logo"
+
+        case "CodeChef":
+            "CodeChef Logo"
+
         case "CodeForces":
             "CodeForces Logo"
 
         case "CodeForces::Gym":
             "CodeForces Logo"
 
-        case "AtCoder":
-            "AtCoder Logo"
+        case "Coding Ninjas":
+            "Coding Ninjas Logo"
 
         case "CS Academy":
             "CSAcademy Logo"
 
-        case "CodeChef":
-            "CodeChef Logo"
-
-        case "HackerRank":
-            "HackerRank Logo"
+        case "Geeks For Geeks":
+            "Geeks For Geeks Logo"
 
         case "HackerEarth":
             "HackerEarth Logo"
 
+        case "HackerRank":
+            "HackerRank Logo"
+
         case "LeetCode":
-            "LeetCode Dark Logo"
+            if colorScheme == .light {
+                "LeetCode Light Logo"
+            } else if colorScheme == .dark {
+                "LeetCode Dark Logo"
+            } else {
+                ""
+            }
+
+        case "Project Euler":
+            "Project Euler Logo"
+
+        case "TopCoder":
+            if colorScheme == .light {
+                "TopCoder Light Logo"
+            } else if colorScheme == .dark {
+                "TopCoder Dark Logo"
+            } else { "" }
 
         case "Toph":
             "Toph Logo"
 
+        case "Yuki Coder":
+            "Yuki Coder Logo"
+
         default:
-            "CodeForces Logo"
+            "Placeholder Flag"
         }
     }
 

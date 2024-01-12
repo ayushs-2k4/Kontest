@@ -12,7 +12,7 @@ class AllKontestsFakeRepository: KontestFetcher {
         var kontests: [KontestDTO] = []
 
         let startTime = "2023-08-15 18:31:00 UTC"
-        let endTime = "2023-12-10 13:38:30 UTC"
+        let endTime = "2025-12-10 13:38:30 UTC"
 
 //        let startTime = "2023-08-15 6:2:00 UTC"
 //        let endTime = "2023-08-17 17:43:00 UTC"
@@ -27,9 +27,9 @@ class AllKontestsFakeRepository: KontestFetcher {
         let endTime3 = "2023-10-10 13:40:10 UTC"
 
         let allKontests: [KontestDTO] = [
-            KontestDTO(name: "ProjectEuler+1", url: "https://hackerrank.com/contests/projecteuler", start_time: "2023-08-15 18:29:00 UTC", end_time: "2023-08-18 17:43:00 UTC", duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "BEFORE"),
-
-            KontestDTO(name: "ProjectEuler+2", url: "https://hackerrank.com/contests/projecteuler", start_time: "2014-07-07T15:38:00.000Z", end_time: "2024-07-30T18:30:00.000Z", duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "BEFORE"),
+//            KontestDTO(name: "ProjectEuler+1", url: "https://hackerrank.com/contests/projecteuler", start_time: "2023-08-15 18:29:00 UTC", end_time: "2023-08-18 17:43:00 UTC", duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "BEFORE"),
+//
+//            KontestDTO(name: "ProjectEuler+2", url: "https://hackerrank.com/contests/projecteuler", start_time: "2014-07-07T15:38:00.000Z", end_time: "2024-07-30T18:30:00.000Z", duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "BEFORE"),
 
             KontestDTO(name: "ProjectEuler+3", url: "https://hackerrank.com/contests/projecteuler", start_time: startTime, end_time: endTime, duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "BEFORE"),
 

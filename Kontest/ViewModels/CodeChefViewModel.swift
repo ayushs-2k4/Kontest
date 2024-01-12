@@ -11,9 +11,9 @@ import OSLog
 @Observable
 class CodeChefViewModel {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "CodeChefViewModel")
-    
-    let codeChefAPIRepository = CodeChefAPIRepository()
 
+    let codeChefAPIRepository = CodeChefAPIRepository()
+    let username: String
     var codeChefProfile: CodeChefAPIModel?
 
     var isLoading = false
@@ -22,9 +22,14 @@ class CodeChefViewModel {
 
     init(username: String) {
         self.isLoading = true
+        self.username = username
 
-        Task {
-            await self.getCodeChefProfile(username: username)
+        if !username.isEmpty {
+            Task {
+                await self.getCodeChefProfile(username: username)
+                self.isLoading = false
+            }
+        } else {
             self.isLoading = false
         }
     }
@@ -33,7 +38,7 @@ class CodeChefViewModel {
         do {
             let fetchedCodeChefProfile = try await codeChefAPIRepository.getUserData(username: username)
 
-            self.codeChefProfile = CodeChefAPIModel.from(codeChefAPIDTO: fetchedCodeChefProfile)
+            codeChefProfile = CodeChefAPIModel.from(codeChefAPIDTO: fetchedCodeChefProfile)
         } catch {
             self.error = error
             logger.error("error in fetching CodeChef Profile: \(error)")

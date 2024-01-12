@@ -43,5 +43,5 @@ struct FilterWebsitesView: View {
 #Preview {
     @State var isSelected: Bool = true
 
-    return FilterWebsitesView(siteLogo: Image(.hackerRankLogo), siteName: "Hacker Rank", borderColor: KontestModel.getColorForIdentifier(site: "HackerRank"), isSelected: $isSelected)
+    return FilterWebsitesView(siteLogo: Image(.hackerRankLogo), siteName: "Hacker Rank", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "HackerRank"), isSelected: $isSelected)
 }

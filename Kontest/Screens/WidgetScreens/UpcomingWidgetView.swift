@@ -112,7 +112,7 @@ struct createSingleKontestView: View {
         if let startDate, let endDate {
             HStack {
                 Text(kontest.name)
-                    .foregroundStyle(kontest.site == "AtCoder" ? Color.gray : KontestModel.getColorForIdentifier(site: kontest.site))
+                    .foregroundStyle(kontest.siteAbbreviation == "AtCoder" ? Color.gray : kontest.siteAbbreviation == "TopCoder" ? .primary : KontestModel.getColorForIdentifier(siteAbbreviation: kontest.siteAbbreviation))
 
                 Spacer()
 
@@ -128,6 +128,8 @@ struct createSingleKontestView: View {
                                         Text("Ends in: \(futureDate, style: .timer)")
                                             .fontDesign(.default).monospacedDigit()
                                             .multilineTextAlignment(.trailing)
+                                            .contentTransition(.numericText(countsDown: true))
+                                        
                                     } else if toShowStartingIn {
                                         let seconds = startDate.timeIntervalSince(Date())
                                         let futureDate = Calendar.current.date(byAdding: .second, value: Int(seconds), to: Date())!
@@ -135,6 +137,7 @@ struct createSingleKontestView: View {
                                         Text("Starting in: \(futureDate, style: .timer)")
                                             .fontDesign(.default).monospacedDigit()
                                             .multilineTextAlignment(.trailing)
+                                            .contentTransition(.numericText(countsDown: true))
                                     }
                                 } else {
                                     Text("")
