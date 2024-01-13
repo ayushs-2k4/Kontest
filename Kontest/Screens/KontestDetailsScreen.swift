@@ -102,7 +102,24 @@ struct ButtonsView: View {
 
                 if let kontestStartDate {
                     Button {
-                        isCalendarPopoverVisible = true
+                        let authorizationStatus = CalendarUtility.getAuthorizationStatus()
+
+                        if authorizationStatus == .fullAccess {
+                            isCalendarPopoverVisible = true
+                        } else {
+                            Task {
+                                do {
+                                    let isGranted = try await CalendarUtility.requestFullAccessToReminders()
+
+                                    if !isGranted {
+                                        throw AppError(title: "Permission not Granted", description: "Calendar Permission is not granted.")
+                                    }
+
+                                } catch {
+                                    errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Check that you have given Kontest the Calendar Permission (Full Access)")
+                                }
+                            }
+                        }
 
                     } label: {
                         Text("Add to Calendar")
@@ -126,7 +143,7 @@ struct ButtonsView: View {
                                 isCalendarPopoverVisible = false
                                 WidgetCenter.shared.reloadAllTimelines()
                             }
-                        }, onPressSet: { setDate,selectedCalendar  in
+                        }, onPressSet: { setDate, _ in
                             print("setDate: \(setDate)")
 
                             Task {
@@ -302,8 +319,8 @@ struct RemainingTimeView: View {
 //    let startTime = "2023-08-14 17:42:00 UTC"
 //    let endTime = "2023-08-21 17:43:00 UTC"
 
-    let startTime = "2023-10-30 00:00:00 UTC"
-    let endTime = "2023-11-30 23:59:00 UTC"
+    let startTime = "2024-10-30 00:00:00 UTC"
+    let endTime = "2024-11-30 23:59:00 UTC"
 
 //    return KontestDetailsScreen(kontest: KontestModel.from(dto: KontestDTO(name: "ProjectEuler+", url: "https://hackerrank.com/contests/projecteuler", start_time: startTime, end_time: endTime, duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "CODING")))
 //        .environment(AllKontestsViewModel())

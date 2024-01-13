@@ -96,7 +96,24 @@ struct SingleKontestView: View {
 
             if !isKontestRunning, let kontestStartDate {
                 Button {
-                    isCalendarPopoverVisible = true
+                    let authorizationStatus = CalendarUtility.getAuthorizationStatus()
+
+                    if authorizationStatus == .fullAccess {
+                        isCalendarPopoverVisible = true
+                    } else {
+                        Task {
+                            do {
+                                let isGranted = try await CalendarUtility.requestFullAccessToReminders()
+
+                                if !isGranted {
+                                    throw AppError(title: "Permission not Granted", description: "Calendar Permission is not granted.")
+                                }
+
+                            } catch {
+                                errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Check that you have given Kontest the Calendar Permission (Full Access)")
+                            }
+                        }
+                    }
                 } label: {
                     Image(systemName: kontest.isCalendarEventAdded ? "calendar.badge.minus" : "calendar.badge.plus")
                         .contentTransition(.symbolEffect(.replace.upUp))
@@ -119,7 +136,7 @@ struct SingleKontestView: View {
                             isCalendarPopoverVisible = false
                             WidgetCenter.shared.reloadAllTimelines()
                         }
-                    }, onPressSet: { setDate, selectedCalendar  in
+                    }, onPressSet: { setDate, selectedCalendar in
                         print("setDate: \(setDate.formatted())")
 
                         Task {

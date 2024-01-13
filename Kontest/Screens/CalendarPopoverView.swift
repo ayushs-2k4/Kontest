@@ -72,9 +72,6 @@ struct PickerView: View {
     @Binding var selectedCalendarIndex: Int
 
     var body: some View {
-        Text("selected account index: \(selectedAccountIndex)")
-        Text("selected calendar index: \(selectedCalendarIndex)")
-
         VStack {
             Picker("Select Account", selection: $selectedAccountIndex) {
                 ForEach(arr.indices, id: \.self) { index in
@@ -107,7 +104,7 @@ func getDict() -> [(String, [EKCalendar])] {
 
         return dict
     } catch {
-        return [("lkdas", [])]
+        return [("Test Calendar", [])]
     }
 }
 
