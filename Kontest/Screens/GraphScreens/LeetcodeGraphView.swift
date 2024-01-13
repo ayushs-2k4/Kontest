@@ -82,8 +82,8 @@ struct LeetCodeChart: View {
         #if os(macOS)
             EmptyView()
                 .hidden()
-                .onChange(of: leetcodeGraphQLViewModel.selectedDate) { _, newValue in
-                    if let selectedDate = newValue {
+                .onChange(of: leetcodeGraphQLViewModel.selectedDate) { _, selectedDate in
+                    if selectedDate != nil {
                         HapticFeedbackUtility.performHapticFeedback()
                     }
                 }

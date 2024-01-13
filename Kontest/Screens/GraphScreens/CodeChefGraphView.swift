@@ -44,7 +44,7 @@ struct CodeChefGraphView: View {
 
 struct CodeChefChart: View {
     @Binding var showAnnotations: Bool
-    
+
     let curGradient = LinearGradient(
         gradient: Gradient(
             colors: [
@@ -68,20 +68,29 @@ struct CodeChefChart: View {
     let codeChefViewModel: CodeChefViewModel = Dependencies.instance.codeChefViewModel
 
     var body: some View {
+        #if os(macOS)
+            EmptyView()
+                .hidden()
+                .onChange(of: codeChefViewModel.selectedDate) { _, selectedDate in
+                    if selectedDate != nil {
+                        HapticFeedbackUtility.performHapticFeedback()
+                    }
+                }
+        #endif
+
         Chart {
             ForEach(codeChefViewModel.attendedKontests) { attendedKontest in
                 let date = CalendarUtility.getFormattedDateForCodeChefKontestRatings(date: attendedKontest.endDate)
 
-                let rank = Int(attendedKontest.rank)
                 let rating = Int(attendedKontest.rating)
                 let name = attendedKontest.name
 
-                if let date, rank != nil, rating != nil {
-                    PointMark(x: .value("Time", date, unit: .day), y: .value("Ratings", rating!))
+                if let date, let rating {
+                    PointMark(x: .value("Time", date, unit: .day), y: .value("Ratings", rating))
                         .opacity(0)
                         .annotation(position: .top) {
                             if showAnnotations {
-                                Text("\(rating!)")
+                                Text("\(rating)")
                             }
                         }
                         .annotation(position: .bottom) {
@@ -95,14 +104,38 @@ struct CodeChefChart: View {
                                 }
                             }
                         }
-                    
-                    LineMark(x: .value("Time", date, unit: .day), y: .value("Ratings", rating!))
+
+                    LineMark(x: .value("Time", date, unit: .day), y: .value("Ratings", rating))
                         .interpolationMethod(.catmullRom)
                         .symbol(Circle().strokeBorder(lineWidth: 2))
-                    
-                    AreaMark(x: .value("Time", date, unit: .day), y: .value("Ratings", rating!))
+
+                    AreaMark(x: .value("Time", date, unit: .day), y: .value("Ratings", rating))
                         .interpolationMethod(.catmullRom)
                         .foregroundStyle(curGradient)
+                }
+            }
+
+            if let selectedDate = codeChefViewModel.selectedDate, let kontest = getKontestFromDate(date: selectedDate) {
+                RuleMark(x: .value("selectedDate", selectedDate, unit: .day))
+                    .zIndex(-1)
+                    .annotation(position: .leading, spacing: 0, overflowResolution: .init(
+                        x: .fit(to: .chart),
+                        y: .disabled
+                    )) {
+                        VStack(spacing: 10) {
+                            Text(kontest.name)
+
+                            Text("Ended: \(selectedDate.formatted(date: Date.FormatStyle.DateStyle.abbreviated, time: .shortened))")
+
+                            Text("Ranking: \(kontest.rank)")
+
+                            Text("rating: \(kontest.rating)")
+                        }
+                        .padding()
+                    }
+
+                if let rating = Int(kontest.rating) {
+                    PointMark(x: .value("selectedDate", selectedDate, unit: .day), y: .value("", rating))
                 }
             }
         }
@@ -110,7 +143,18 @@ struct CodeChefChart: View {
         .chartScrollableAxes(.horizontal)
         .chartXVisibleDomain(length: 3600 * 24 * 30) // 30 days
         .padding(.horizontal)
+        .chartXSelection(value: Bindable(codeChefViewModel).rawSelectedDate)
         .animation(.default, value: showAnnotations)
+    }
+}
+
+extension CodeChefChart {
+    private func getKontestFromDate(date: Date) -> CodeChefScrapingContestModel? {
+        return codeChefViewModel.attendedKontests.first { codeChefScrapingContestModel in
+            let endDate = CalendarUtility.getFormattedDateForCodeChefKontestRatings(date: codeChefScrapingContestModel.endDate) ?? .now
+
+            return date == endDate
+        }
     }
 }
 
