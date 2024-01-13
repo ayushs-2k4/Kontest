@@ -145,7 +145,7 @@ class AllKontestsViewModel {
 
                     return !kontestDuration.isEmpty && !isKontestEnded
                 }
-            
+
             return allKontestModels
         } catch {
             logger.error("error in fetching all Kontests: \(error)")

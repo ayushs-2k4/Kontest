@@ -21,6 +21,9 @@ struct DetailColumn: View {
         case .CodeForcesGraphView:
             CodeForcesGraphView()
 
+        case .CodeChefGraphView:
+            CodeChefGraphView()
+
         case nil:
             Text("Nil")
         }

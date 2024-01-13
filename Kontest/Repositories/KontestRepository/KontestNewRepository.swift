@@ -26,7 +26,6 @@ class KontestNewRepository: KontestFetcher {
 //            let contestElements = try parsedHTML.select(".contest.row:not(.subcontest) > div + div > i + a")
             let contestElements = try parsedHTML.select(".contest.row > div + div > i + a")
 
-
             var myAllContests: [KontestDTO] = []
 
             for element in contestElements {
@@ -58,9 +57,8 @@ class KontestNewRepository: KontestFetcher {
                     let dateFormatter = DateFormatter()
                     dateFormatter.locale = Locale(identifier: "en_US_POSIX")
                     dateFormatter.dateFormat = dateFormat
-                    
-                    
-                    let konDTo = KontestDTO(name: konName, url: url ?? "" , start_time: startTime ?? "", end_time: endTime ?? "", duration: "", site: location ?? "", in_24_hours: "NO", status: "CODING")
+
+                    let konDTo = KontestDTO(name: konName, url: url ?? "", start_time: startTime ?? "", end_time: endTime ?? "", duration: "", site: location ?? "", in_24_hours: "NO", status: "CODING")
 
                     print("HI")
                     myAllContests.append(konDTo)

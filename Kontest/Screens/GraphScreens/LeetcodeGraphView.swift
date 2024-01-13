@@ -54,7 +54,7 @@ struct LeetCodeChart: View {
 
     @State private var visibleDates: [Date] = [.now, .now]
 
-    var leetCodeGraphQLViewModel = Dependencies.instance.leetCodeGraphQLViewModel
+    let leetCodeGraphQLViewModel = Dependencies.instance.leetCodeGraphQLViewModel
 
     let curGradient = LinearGradient(
         gradient: Gradient(
@@ -82,8 +82,8 @@ struct LeetCodeChart: View {
         #if os(macOS)
             EmptyView()
                 .hidden()
-                .onChange(of: leetcodeGraphQLViewModel.selectedDate) { _, newValue in
-                    if let selectedDate = newValue {
+                .onChange(of: leetcodeGraphQLViewModel.selectedDate) { _, selectedDate in
+                    if selectedDate != nil {
                         HapticFeedbackUtility.performHapticFeedback()
                     }
                 }
@@ -142,7 +142,7 @@ struct LeetCodeChart: View {
                                 }
 
                                 if let rating = kontest.rating {
-                                    Text("rating: \(Int(rating))")
+                                    Text("Rating: \(Int(rating))")
                                 }
                             }
                             .padding()

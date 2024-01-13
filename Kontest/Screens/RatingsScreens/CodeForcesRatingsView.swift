@@ -38,6 +38,8 @@ struct CodeForcesProfileView: View {
     let bgGradient: RadialGradient
     let isLoading: Bool
     let error: Error?
+    
+    @State private var locationForGrad = 0.8
 
     init(codeForcesViewModel: CodeForcesViewModel, username: String, bgGradient: RadialGradient, isLoading: Bool, error: Error?) {
         self.codeForcesViewModel = codeForcesViewModel
@@ -57,11 +59,14 @@ struct CodeForcesProfileView: View {
             }
             else {
                 RadialGradient(
-                    gradient: Gradient(stops: [.init(color: Color.red, location: 0.0), .init(color: Color.white, location: 0.8)]),
+                    gradient: Gradient(stops: [.init(color: Color.red, location: 0.0), .init(color: Color.white, location: locationForGrad)]),
                     center: .center,
                     startRadius: 10,
                     endRadius: 500
                 )
+//                .onAppear{
+//                    withAnimation(<#T##animation: Animation?##Animation?#>, <#T##body: () throws -> Result##() throws -> Result#>)
+//                }
             }
 
             if isLoading && error == nil {

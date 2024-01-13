@@ -57,6 +57,20 @@ enum CalendarUtility {
 
         return currentDate
     }
+    
+    // DateFormatter for the fourth format: "2023-06-21 22:00:06"
+    static func getFormattedDateForCodeChefKontestRatings(date:String) -> Date?
+    {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // 2023-06-21 22:00:06
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        formatter.timeZone = .init(abbreviation: "IST")
+
+        let currentDate = formatter.date(from: date)
+        
+        return currentDate
+    }
 
     static func getDate(date: String) -> Date? {
         if let ansDate = getFormattedDate1(date: date) {

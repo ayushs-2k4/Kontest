@@ -20,7 +20,7 @@ struct Sidebar: View {
             Section("Ranking Graphs") {
                 NavigationLink(value: Panel.CodeForcesGraphView) {
                     Label {
-                        Text("CodeForces Rankings")
+                        Text("CodeForces Ratings")
                     } icon: {
                         Image(.codeForcesLogo)
                             .resizable()
@@ -30,9 +30,19 @@ struct Sidebar: View {
 
                 NavigationLink(value: Panel.LeetCodeGraphView) {
                     Label {
-                        Text("LeetCode Rankings")
+                        Text("LeetCode Ratings")
                     } icon: {
                         Image(colorScheme == .dark ? .leetCodeDarkLogo : .leetCodeLightLogo)
+                            .resizable()
+                            .frame(width: 16, height: 16)
+                    }
+                }
+                
+                NavigationLink(value: Panel.CodeChefGraphView) {
+                    Label {
+                        Text("Codechef Ratings")
+                    } icon: {
+                        Image(.codeChefLogo)
                             .resizable()
                             .frame(width: 16, height: 16)
                     }

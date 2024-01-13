@@ -12,4 +12,5 @@ enum Panel: Hashable {
 
     case LeetCodeGraphView
     case CodeForcesGraphView
+    case CodeChefGraphView
 }
