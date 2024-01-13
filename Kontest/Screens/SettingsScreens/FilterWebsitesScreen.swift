@@ -37,6 +37,8 @@ struct FilterWebsitesScreen: View {
 
     @AppStorage(FilterWebsiteKey.yukiCoderKey.rawValue, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var yukiCoderKey = true
 
+    @AppStorage(FilterWebsiteKey.cupsOnlineKey.rawValue, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var cupsOnlineKey = true
+
     @Environment(\.colorScheme) private var colorScheme
 
     let columns: [GridItem]
@@ -66,6 +68,8 @@ struct FilterWebsitesScreen: View {
 
                 FilterWebsitesView(siteLogo: Image(KontestModel.getLogo(siteAbbreviation: "CS Academy", colorScheme: colorScheme)), siteName: "CS Academy", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "CS Academy"), isSelected: $cSAcademyKey)
 
+                FilterWebsitesView(siteLogo: Image(KontestModel.getLogo(siteAbbreviation: "Cups Online", colorScheme: colorScheme)), siteName: "Cups.Online", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "Cups Online"), isSelected: $cupsOnlineKey)
+
                 FilterWebsitesView(siteLogo: Image(KontestModel.getLogo(siteAbbreviation: "Geeks For Geeks", colorScheme: colorScheme)), siteName: "Geeks For Geeks", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "Geeks For Geeks"), isSelected: $geeksForGeeksKey)
 
                 FilterWebsitesView(siteLogo: Image(KontestModel.getLogo(siteAbbreviation: "HackerEarth", colorScheme: colorScheme)), siteName: "HackerEarth", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "HackerEarth"), isSelected: $hackerEarthKey)
@@ -81,6 +85,7 @@ struct FilterWebsitesScreen: View {
                 FilterWebsitesView(siteLogo: Image(KontestModel.getLogo(siteAbbreviation: "Toph", colorScheme: colorScheme)), siteName: "Toph", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "Toph"), isSelected: $tophKey)
 
                 FilterWebsitesView(siteLogo: Image(KontestModel.getLogo(siteAbbreviation: "Yuki Coder", colorScheme: colorScheme)), siteName: "Yuki Coder", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "Yuki Coder"), isSelected: $yukiCoderKey)
+
             })
         }
         .padding()

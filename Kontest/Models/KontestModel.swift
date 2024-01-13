@@ -156,6 +156,9 @@ extension KontestModel {
         case "yukicoder.me":
             "Yuki Coder"
 
+        case "cups.online":
+            "Cups Online"
+
         default:
             site
         }
@@ -246,6 +249,9 @@ extension KontestModel {
         case "Yuki Coder":
             Color(red: 60/255, green: 66/255, blue: 79/255)
 
+        case "Cups Online":
+            .blue
+
         default:
             .red
         }
@@ -304,6 +310,9 @@ extension KontestModel {
 
         case "Yuki Coder":
             "Yuki Coder Logo"
+
+        case "Cups Online":
+            "Cups.online Logo"
 
         default:
             "Placeholder Flag"
