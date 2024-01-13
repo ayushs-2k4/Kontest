@@ -126,7 +126,7 @@ struct ButtonsView: View {
                                 isCalendarPopoverVisible = false
                                 WidgetCenter.shared.reloadAllTimelines()
                             }
-                        }, onPressSet: { setDate in
+                        }, onPressSet: { setDate,selectedCalendar  in
                             print("setDate: \(setDate)")
 
                             Task {

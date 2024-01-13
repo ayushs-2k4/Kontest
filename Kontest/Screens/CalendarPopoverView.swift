@@ -14,10 +14,15 @@ struct CalendarPopoverView: View {
     @State private var selectedDate: Date
     let isAlreadySetted: Bool
 
-    let onPressDelete: () -> Void
-    let onPressSet: (_ setDate: Date) -> Void
+    let calendarsArray = getDict()
 
-    init(date: Date, kontestStartDate: Date, isAlreadySetted: Bool, onPressDelete: @escaping () -> Void, onPressSet: @escaping (_: Date) -> Void) {
+    @State private var selectedAccountIndex = 0
+    @State private var selectedCalendarIndex = 0
+
+    let onPressDelete: () -> Void
+    let onPressSet: (_ setDate: Date, _ calendar: EKCalendar) -> Void
+
+    init(date: Date, kontestStartDate: Date, isAlreadySetted: Bool, onPressDelete: @escaping () -> Void, onPressSet: @escaping (_: Date, _: EKCalendar) -> Void) {
         self.date = date
         self.kontestStartDate = kontestStartDate
         self._selectedDate = State(initialValue: date)
@@ -30,7 +35,11 @@ struct CalendarPopoverView: View {
         VStack {
             DatePicker("Select When to Alert", selection: $selectedDate, in: .now ... kontestStartDate)
 
-            PickerView()
+            PickerView(
+                arr: calendarsArray,
+                selectedAccountIndex: $selectedAccountIndex,
+                selectedCalendarIndex: $selectedCalendarIndex
+            )
 
             HStack {
                 Button(role: .destructive) {
@@ -45,7 +54,8 @@ struct CalendarPopoverView: View {
                 Spacer()
 
                 Button(isAlreadySetted ? "Change" : "Set") {
-                    onPressSet(selectedDate)
+                    let selectedCalendar = calendarsArray[selectedAccountIndex].1[selectedCalendarIndex]
+                    onPressSet(selectedDate, selectedCalendar)
                 }
                 .foregroundStyle(.blue)
             }
@@ -56,10 +66,10 @@ struct CalendarPopoverView: View {
 }
 
 struct PickerView: View {
-    let arr: [(String, [EKCalendar])] = getDict()
+    let arr: [(String, [EKCalendar])]
 
-    @State private var selectedAccountIndex = 0
-    @State private var selectedCalendarIndex = 0
+    @Binding var selectedAccountIndex: Int
+    @Binding var selectedCalendarIndex: Int
 
     var body: some View {
         Text("selected account index: \(selectedAccountIndex)")
@@ -105,7 +115,7 @@ func getDict() -> [(String, [EKCalendar])] {
 #Preview {
     CalendarPopoverView(date: Date().addingTimeInterval(-15 * 60), kontestStartDate: Date().addingTimeInterval(86400), isAlreadySetted: true) {
         print("Delete")
-    } onPressSet: { setDate in
+    } onPressSet: { setDate, _ in
         print("setDate: \(setDate)")
     }
 }

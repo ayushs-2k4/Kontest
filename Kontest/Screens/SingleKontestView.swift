@@ -119,7 +119,7 @@ struct SingleKontestView: View {
                             isCalendarPopoverVisible = false
                             WidgetCenter.shared.reloadAllTimelines()
                         }
-                    }, onPressSet: { setDate in
+                    }, onPressSet: { setDate, selectedCalendar  in
                         print("setDate: \(setDate.formatted())")
 
                         Task {
@@ -128,7 +128,7 @@ struct SingleKontestView: View {
                                     try await CalendarUtility.removeEvent(startDate: kontestStartDate, endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
                                 }
 
-                                if try await CalendarUtility.addEvent(startDate: kontestStartDate, endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url), alarmAbsoluteDate: setDate) {
+                                if try await CalendarUtility.addEvent(startDate: kontestStartDate, endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url), alarmAbsoluteDate: setDate, calendar: selectedCalendar) {
                                     kontest.isCalendarEventAdded = true
                                     kontest.calendarEventDate = setDate
                                 }

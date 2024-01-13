@@ -334,7 +334,7 @@ enum CalendarUtility {
         return isGranted
     }
 
-    static func addEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?, alarmAbsoluteDate: Date) async throws -> Bool {
+    static func addEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?, alarmAbsoluteDate: Date,calendar: EKCalendar? = eventStore.defaultCalendarForNewEvents) async throws -> Bool {
         // Check the authorization status for calendar events
         let authorizationStatus = EKEventStore.authorizationStatus(for: EKEntityType.event)
 
@@ -346,7 +346,7 @@ enum CalendarUtility {
                 if isGranted {
                     // Permission granted, continue to create and save the event
                     do {
-                        return try createAndSaveEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url, alarmAbsoluteDate: alarmAbsoluteDate)
+                        return try createAndSaveEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url, alarmAbsoluteDate: alarmAbsoluteDate, calendar: calendar)
                     } catch {
                         throw error
                     }
@@ -361,7 +361,7 @@ enum CalendarUtility {
         } else {
             // If already authorized, create and save the event
             do {
-                return try createAndSaveEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url, alarmAbsoluteDate: alarmAbsoluteDate)
+                return try createAndSaveEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url, alarmAbsoluteDate: alarmAbsoluteDate, calendar: calendar)
             } catch {
                 throw error
             }
@@ -369,10 +369,11 @@ enum CalendarUtility {
     }
 
     // Function to create and save the event
-    private static func createAndSaveEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?, alarmAbsoluteDate: Date) throws -> Bool {
+    private static func createAndSaveEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?, alarmAbsoluteDate: Date, calendar: EKCalendar?) throws -> Bool {
         UserDefaults(suiteName: Constants.userDefaultsGroupID)!.set(true, forKey: "shouldFetchAllEventsFromCalendar")
         let event = EKEvent(eventStore: eventStore)
-        event.calendar = eventStore.defaultCalendarForNewEvents
+//        event.calendar = eventStore.defaultCalendarForNewEvents
+        event.calendar = calendar
         event.title = title
         event.startDate = startDate
         event.endDate = endDate
