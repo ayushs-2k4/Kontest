@@ -87,7 +87,10 @@ struct PickerView: View {
                 let selectedAccountValue = arr[selectedAccountIndex].1
 
                 ForEach(selectedAccountValue.indices, id: \.self) { index in
-                    Text("\(selectedAccountValue[index].title)")
+                    let calendar = selectedAccountValue[index]
+
+                    Text("\(calendar.title)")
+                        .foregroundStyle(Color(calendar.cgColor))
                         .tag(index)
                 }
             }
@@ -102,13 +105,9 @@ func getDict() -> [(String, [EKCalendar])] {
     do {
         let dict = try CalendarUtility.getChangableCalendarsByTheirSources()
 
-//        let k = dict.sorted { ele1, ele2 in
-//            ele1.key < ele2.key
-//        }
-
         return dict
     } catch {
-        return []
+        return [("lkdas", [])]
     }
 }
 
