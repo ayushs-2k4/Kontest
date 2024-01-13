@@ -29,7 +29,7 @@ func getUserDataFromParsedHTML(stringHTML: String) -> String {
 class CodeChefScrapingAPIRepository {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "CodeChefAPIRepository")
 
-    func getUserData(username: String) async throws -> [CodeChefScrapingContestDTO] {
+    func getUserKontests(username: String) async throws -> [CodeChefScrapingContestDTO] {
         guard let url = URL(string: "https://www.codechef.com/users/\(username)") else {
             logger.error("Error in making CodeChef url")
             throw URLError(.badURL)
@@ -41,8 +41,8 @@ class CodeChefScrapingAPIRepository {
             let rawHTML = String(decoding: data, as: UTF8.self)
             let parsedHTML = try SwiftSoup.parse(rawHTML)
 
-            var stringHTML = try parsedHTML.outerHtml()
-            
+            let stringHTML = try parsedHTML.outerHtml()
+
             let finalDataString = getUserDataFromParsedHTML(stringHTML: stringHTML)
 
             let allContests = try JSONDecoder().decode([CodeChefScrapingContestDTO].self, from: finalDataString.data(using: .utf8)!)

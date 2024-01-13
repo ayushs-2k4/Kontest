@@ -7,17 +7,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3AB9BAA7-BEA4-4745-9649-844774390B1B"
+            uuid = "C569376C-168C-4093-8C0B-2C62B6A00EDA"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kontest/Repositories/CodeChefRepository/CodeChefScrapingAPIRepository.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "getUserData(username:)"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "getUserKontests(username:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C569376C-168C-4093-8C0B-2C62B6A00EDA - 56b97db7d30ed974"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Kontest.CodeChefScrapingAPIRepository.getUserKontests(username: Swift.String) async throws -&gt; Swift.Array&lt;Kontest.CodeChefScrapingContestDTO&gt;"
+                  moduleName = "Kontest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XCode%20Projects/Completed/Kontest/Kontest/Repositories/CodeChefRepository/CodeChefScrapingAPIRepository.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "1428">
+               </Location>
+               <Location
+                  uuid = "C569376C-168C-4093-8C0B-2C62B6A00EDA - 6cdf5d3440da7f75"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Kontest.CodeChefScrapingAPIRepository.getUserKontests(username: Swift.String) async throws -&gt; Swift.Array&lt;Kontest.CodeChefScrapingContestDTO&gt;"
+                  moduleName = "Kontest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XCode%20Projects/Completed/Kontest/Kontest/Repositories/CodeChefRepository/CodeChefScrapingAPIRepository.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "176">
+               </Location>
+               <Location
+                  uuid = "C569376C-168C-4093-8C0B-2C62B6A00EDA - 56b97db7d30ed974"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Kontest.CodeChefScrapingAPIRepository.getUserKontests(username: Swift.String) async throws -&gt; Swift.Array&lt;Kontest.CodeChefScrapingContestDTO&gt;"
+                  moduleName = "Kontest"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ayushsinghal/XCode%20Projects/Completed/Kontest/Kontest/Repositories/CodeChefRepository/CodeChefScrapingAPIRepository.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "1268">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

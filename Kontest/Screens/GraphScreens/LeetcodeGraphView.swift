@@ -54,7 +54,7 @@ struct LeetCodeChart: View {
 
     @State private var visibleDates: [Date] = [.now, .now]
 
-    var leetCodeGraphQLViewModel = Dependencies.instance.leetCodeGraphQLViewModel
+    let leetCodeGraphQLViewModel = Dependencies.instance.leetCodeGraphQLViewModel
 
     let curGradient = LinearGradient(
         gradient: Gradient(

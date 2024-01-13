@@ -37,6 +37,16 @@ struct Sidebar: View {
                             .frame(width: 16, height: 16)
                     }
                 }
+                
+                NavigationLink(value: Panel.CodeChefGraphView) {
+                    Label {
+                        Text("Codechef Rankings")
+                    } icon: {
+                        Image(.codeChefLogo)
+                            .resizable()
+                            .frame(width: 16, height: 16)
+                    }
+                }
             }
         }
     }

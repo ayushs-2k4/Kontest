@@ -43,12 +43,6 @@ class AllKontestsViewModel {
     var isLoading = false
 
     init(notificationsViewModel: NotificationsViewModelProtocol, filterWebsitesViewModel: FilterWebsitesViewModelProtocol, repository: KontestFetcher) {
-        let codeChefScrapingAPIRepository = CodeChefScrapingAPIRepository()
-
-        Task {
-            try await codeChefScrapingAPIRepository.getUserData(username: "ayushs_2k4")
-        }
-
         self.repository = repository
         self.notificationsViewModel = notificationsViewModel
         self.filterWebsitesViewModel = filterWebsitesViewModel

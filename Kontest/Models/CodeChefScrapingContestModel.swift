@@ -7,7 +7,9 @@
 
 import Foundation
 
-struct CodeChefScrapingContestModel: Codable {
+struct CodeChefScrapingContestModel: Codable, Identifiable {
+    let id: UUID
+
     let code: String
     let year: String
     let month: String
@@ -19,6 +21,21 @@ struct CodeChefScrapingContestModel: Codable {
     let name: String
     let endDate: String
     let color: String
+    
+    init(id: UUID = UUID(), code: String, year: String, month: String, day: String, reason: String?, penalised_in: String?, rating: String, rank: String, name: String, endDate: String, color: String) {
+        self.id = id
+        self.code = code
+        self.year = year
+        self.month = month
+        self.day = day
+        self.reason = reason
+        self.penalised_in = penalised_in
+        self.rating = rating
+        self.rank = rank
+        self.name = name
+        self.endDate = endDate
+        self.color = color
+    }
 }
 
 extension CodeChefScrapingContestModel {
