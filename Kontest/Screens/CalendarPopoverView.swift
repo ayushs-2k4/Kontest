@@ -5,6 +5,7 @@
 //  Created by Ayush Singhal on 23/09/23.
 //
 
+import EventKit
 import SwiftUI
 
 struct CalendarPopoverView: View {
@@ -29,6 +30,8 @@ struct CalendarPopoverView: View {
         VStack {
             DatePicker("Select When to Alert", selection: $selectedDate, in: .now ... kontestStartDate)
 
+            PickerView()
+
             HStack {
                 Button(role: .destructive) {
                     onPressDelete()
@@ -49,6 +52,53 @@ struct CalendarPopoverView: View {
             .padding(.horizontal)
         }
         .padding()
+    }
+}
+
+struct PickerView: View {
+    let arr: [(String, [EKCalendar])] = getDict()
+
+    @State private var selectedAccountIndex = 0
+    @State private var selectedCalendarIndex = 0
+
+    var body: some View {
+        Text("selected account index: \(selectedAccountIndex)")
+        Text("selected calendar index: \(selectedCalendarIndex)")
+
+        VStack {
+            Picker("Select Account", selection: $selectedAccountIndex) {
+                ForEach(arr.indices, id: \.self) { index in
+                    Text(arr[index].0)
+                        .tag(index)
+                }
+            }
+
+            Picker("Select Calendar", selection: $selectedCalendarIndex) {
+                let selectedAccountValue = arr[selectedAccountIndex].1
+
+                ForEach(selectedAccountValue.indices, id: \.self) { index in
+                    Text("\(selectedAccountValue[index].title)")
+                        .tag(index)
+                }
+            }
+        }
+        .onChange(of: selectedAccountIndex) {
+            selectedCalendarIndex = 0
+        }
+    }
+}
+
+func getDict() -> [(String, [EKCalendar])] {
+    do {
+        let dict = try CalendarUtility.getChangableCalendarsByTheirSources()
+
+//        let k = dict.sorted { ele1, ele2 in
+//            ele1.key < ele2.key
+//        }
+
+        return dict
+    } catch {
+        return []
     }
 }
 
