@@ -58,6 +58,9 @@
 		077E6EB12AB4B3220003E897 /* ErrorState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EB02AB4B3220003E897 /* ErrorState.swift */; };
 		0787AE982AC89C0100F1B80C /* RotatingMapScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0787AE972AC89C0100F1B80C /* RotatingMapScreen.swift */; };
 		0791DA552B51646200A9CA23 /* ClockObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791DA542B51646200A9CA23 /* ClockObserver.swift */; };
+		079CF54E2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CF54D2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift */; };
+		079CF5502B527ECD00BE8E13 /* CodeChefScrapingContestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CF54F2B527ECD00BE8E13 /* CodeChefScrapingContestDTO.swift */; };
+		079CF5522B527F6700BE8E13 /* CodeChefScrapingContestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CF5512B527F6700BE8E13 /* CodeChefScrapingContestModel.swift */; };
 		079F68072ABC80C2001B0EFE /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CFEBA32AB02DCB00291484 /* WidgetKit.framework */; };
 		079F68082ABC80C2001B0EFE /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CFEBA52AB02DCB00291484 /* SwiftUI.framework */; };
 		079F680B2ABC80C2001B0EFE /* Upcoming_Kontest_macOS_WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079F680A2ABC80C2001B0EFE /* Upcoming_Kontest_macOS_WidgetBundle.swift */; };
@@ -230,6 +233,9 @@
 		078429312AB603FB0078D836 /* KontestWidgetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestWidgetModel.swift; sourceTree = "<group>"; };
 		0787AE972AC89C0100F1B80C /* RotatingMapScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingMapScreen.swift; sourceTree = "<group>"; };
 		0791DA542B51646200A9CA23 /* ClockObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockObserver.swift; sourceTree = "<group>"; };
+		079CF54D2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefScrapingAPIRepository.swift; sourceTree = "<group>"; };
+		079CF54F2B527ECD00BE8E13 /* CodeChefScrapingContestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefScrapingContestDTO.swift; sourceTree = "<group>"; };
+		079CF5512B527F6700BE8E13 /* CodeChefScrapingContestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefScrapingContestModel.swift; sourceTree = "<group>"; };
 		079F68062ABC80C2001B0EFE /* Upcoming Kontest macOS WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Upcoming Kontest macOS WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		079F680A2ABC80C2001B0EFE /* Upcoming_Kontest_macOS_WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upcoming_Kontest_macOS_WidgetBundle.swift; sourceTree = "<group>"; };
 		079F680C2ABC80C2001B0EFE /* Upcoming_Kontest_macOS_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upcoming_Kontest_macOS_Widget.swift; sourceTree = "<group>"; };
@@ -563,6 +569,7 @@
 			isa = PBXGroup;
 			children = (
 				07ECFB432AA58259008513C6 /* CodeChefAPIRepository.swift */,
+				079CF54D2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift */,
 			);
 			path = CodeChefRepository;
 			sourceTree = "<group>";
@@ -603,6 +610,7 @@
 				07ECFBC32AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift */,
 				07ECFBC52AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift */,
 				078429312AB603FB0078D836 /* KontestWidgetModel.swift */,
+				079CF5512B527F6700BE8E13 /* CodeChefScrapingContestModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -674,6 +682,7 @@
 				07ECFB732AA58259008513C6 /* LeetCodeUserProfileGraphQLAPIDTO.swift */,
 				07ECFB742AA58259008513C6 /* KontestDTO.swift */,
 				07ECFBC72AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift */,
+				079CF54F2B527ECD00BE8E13 /* CodeChefScrapingContestDTO.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -920,6 +929,7 @@
 				07ECFBB72AA58259008513C6 /* CodeChefFetcher.swift in Sources */,
 				07ECFBA12AA58259008513C6 /* SingleNotificationMenu.swift in Sources */,
 				073269EF2AAC4B0C0028476D /* ChangeUsernameScreen.swift in Sources */,
+				079CF5522B527F6700BE8E13 /* CodeChefScrapingContestModel.swift in Sources */,
 				07ECFB9E2AA58259008513C6 /* BlinkingDotView.swift in Sources */,
 				07367C482ACA097000A558ED /* DeviceType.swift in Sources */,
 				07ECFBA62AA58259008513C6 /* CalendarUtility.swift in Sources */,
@@ -962,6 +972,8 @@
 				0725FB632AC7E2EA00564DE0 /* ContentView.swift in Sources */,
 				07ECFBAE2AA58259008513C6 /* CodeForcesUserInfoAPIDTO.swift in Sources */,
 				07A750202AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift in Sources */,
+				079CF54E2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift in Sources */,
+				079CF5502B527ECD00BE8E13 /* CodeChefScrapingContestDTO.swift in Sources */,
 				07A31F002AAC818D00EBC296 /* FilterWebsiteKey.swift in Sources */,
 				07ECFBC42AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift in Sources */,
 				07ECFBA22AA58259008513C6 /* SingleKontestView.swift in Sources */,
