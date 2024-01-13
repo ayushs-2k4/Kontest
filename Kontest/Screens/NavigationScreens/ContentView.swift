@@ -43,17 +43,17 @@ struct ContentView: View {
 
                 CodeForcesGraphView()
                     .tabItem {
-                        Label("CodeForces Rankings", image: .codeForcesLogoSmall)
+                        Label("CodeForces Ratings", image: .codeForcesLogoSmall)
                     }
 
                 LeetcodeGraphView()
                     .tabItem {
-                        Label("LeetCode Rankings", image: .leetCodeLogoSmall)
+                        Label("LeetCode Ratings", image: .leetCodeLogoSmall)
                     }
                 
                 CodeChefGraphView()
                     .tabItem {
-                        Label("CodeChef Rankings", image: .codeChefSmallLogo)
+                        Label("CodeChef Ratings", image: .codeChefSmallLogo)
                     }
             }
         }

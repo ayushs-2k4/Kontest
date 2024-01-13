@@ -142,7 +142,7 @@ struct LeetCodeChart: View {
                                 }
 
                                 if let rating = kontest.rating {
-                                    Text("rating: \(Int(rating))")
+                                    Text("Rating: \(Int(rating))")
                                 }
                             }
                             .padding()

@@ -127,9 +127,7 @@ struct CodeChefChart: View {
 
                             Text("Ended: \(selectedDate.formatted(date: Date.FormatStyle.DateStyle.abbreviated, time: .shortened))")
 
-                            Text("Ranking: \(kontest.rank)")
-
-                            Text("rating: \(kontest.rating)")
+                            Text("Rating: \(kontest.rating)")
                         }
                         .padding()
                     }
