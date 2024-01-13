@@ -137,7 +137,7 @@ struct CodeChefChart: View {
                 }
             }
         }
-        .foregroundStyle(.brown)
+        .foregroundStyle(Color(nsColor: NSColor.systemBrown))
         .chartScrollableAxes(.horizontal)
         .chartXVisibleDomain(length: 3600 * 24 * 30) // 30 days
         .padding(.horizontal)
