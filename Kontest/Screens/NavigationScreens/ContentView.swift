@@ -50,6 +50,11 @@ struct ContentView: View {
                     .tabItem {
                         Label("LeetCode Rankings", image: .leetCodeLogoSmall)
                     }
+                
+                CodeChefGraphView()
+                    .tabItem {
+                        Label("CodeChef Rankings", image: .codeChefSmallLogo)
+                    }
             }
         }
     }
