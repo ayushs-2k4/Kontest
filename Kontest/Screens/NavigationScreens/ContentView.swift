@@ -11,7 +11,6 @@ import WidgetKit
 struct ContentView: View {
     @Binding var panelSelection: Panel?
     @State private var coluVis: NavigationSplitViewVisibility = .automatic
-    let path = Router.instance.path
 
     let deviceType = getDeviceType()
 
@@ -31,31 +30,44 @@ struct ContentView: View {
                 }
             }
         } else if deviceType == .iOS {
-            TabView(selection: $panelSelection) {
-                AllKontestsScreen()
-                    .tabItem {
-                        Label("All Kontests", systemImage: "chart.bar")
-                    }
-                #if os(iOS)
-                    .toolbar(path.contains(.screen(.SettingsScreen)) ? .hidden : .visible, for: .tabBar)
-                    .animation(path.contains(.screen(.SettingsScreen)) ? nil : .default, value: path)
-                #endif
+            iOSVeiw()
+        }
+    }
+}
 
-                CodeForcesGraphView()
-                    .tabItem {
-                        Label("CodeForces Ratings", image: .codeForcesLogoSmall)
-                    }
+struct iOSVeiw: View {
+    @State private var panelSelection: Panel = .AllKontestScreen // we are making a new panelSelection and using it from @Binding, because in iOS, panelSelection is not changing (KontestApp.swift) when we are changing tabs, but it works perfectly fine in macOS.
+    let path = Router.instance.path
 
-                LeetcodeGraphView()
-                    .tabItem {
-                        Label("LeetCode Ratings", image: .leetCodeLogoSmall)
-                    }
-                
-                CodeChefGraphView()
-                    .tabItem {
-                        Label("CodeChef Ratings", image: .codeChefSmallLogo)
-                    }
-            }
+    var body: some View {
+        TabView(selection: $panelSelection) {
+            AllKontestsScreen()
+                .tabItem {
+                    Label("All Kontests", systemImage: "chart.bar")
+                }
+                .tag(Panel.AllKontestScreen)
+            #if os(iOS)
+                .toolbar(path.contains(.screen(.SettingsScreen)) ? .hidden : .visible, for: .tabBar)
+                .animation(path.contains(.screen(.SettingsScreen)) ? nil : .default, value: path)
+            #endif
+
+            CodeForcesGraphView()
+                .tabItem {
+                    Label("CodeForces Ratings", image: .codeForcesLogoSmall)
+                }
+                .tag(Panel.CodeForcesGraphView)
+
+            LeetcodeGraphView()
+                .tabItem {
+                    Label("LeetCode Ratings", image: .leetCodeLogoSmall)
+                }
+                .tag(Panel.LeetCodeGraphView)
+
+            CodeChefGraphView()
+                .tabItem {
+                    Label("CodeChef Ratings", image: .codeChefSmallLogo)
+                }
+                .tag(Panel.CodeChefGraphView)
         }
     }
 }
