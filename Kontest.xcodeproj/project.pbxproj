@@ -539,12 +539,36 @@
 		07BDE0902B546B3C0059A5FA /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				079A67202B544D2300901C0D /* AuthenticationManager.swift */,
-				079A671E2B544CD000901C0D /* SignUpView.swift */,
-				07BDE0912B546BDE0059A5FA /* SignInView.swift */,
-				079A67222B544EAE00901C0D /* SignInEmailViewModel.swift */,
+				07BDE0952B5481060059A5FA /* Managers */,
+				07BDE0942B5480FC0059A5FA /* ViewModels */,
+				07BDE0932B5480EE0059A5FA /* Screens */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		07BDE0932B5480EE0059A5FA /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				079A671E2B544CD000901C0D /* SignUpView.swift */,
+				07BDE0912B546BDE0059A5FA /* SignInView.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		07BDE0942B5480FC0059A5FA /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				079A67222B544EAE00901C0D /* SignInEmailViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		07BDE0952B5481060059A5FA /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				079A67202B544D2300901C0D /* AuthenticationManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		07C6EE922ABAE4D700FEA3D7 /* WidgetCache */ = {

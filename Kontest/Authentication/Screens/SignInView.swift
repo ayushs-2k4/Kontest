@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SignInView: View {
     let signInEmailViewModel: SignInEmailViewModel = .shared
+
     @State private var isPasswordFieldVisible: Bool = false
 
     @Environment(Router.self) private var router
@@ -32,6 +33,24 @@ struct SignInView: View {
                 .padding(.horizontal)
             }
 
+            if let error = signInEmailViewModel.error {
+                withAnimation {
+                    HStack {
+                        Spacer()
+
+                        if let appError = error as? AppError {
+                            Text(appError.title)
+                                .foregroundStyle(.red)
+                                .padding(.horizontal)
+                        } else {
+                            Text(error.localizedDescription)
+                                .foregroundStyle(.red)
+                                .padding(.horizontal)
+                        }
+                    }
+                }
+            }
+
             HStack {
                 Spacer()
 
@@ -39,6 +58,15 @@ struct SignInView: View {
                     ProgressView()
                         .controlSize(.small)
                         .padding(.horizontal, 1)
+                }
+
+                Button("Sign Out") {
+                    do {
+                        try AuthenticationManager.shared.signOut()
+                        print("Successfully signed out")
+                    } catch {
+                        print("Error in signin out: \(error)")
+                    }
                 }
 
                 Button {
@@ -49,14 +77,28 @@ struct SignInView: View {
                 }
 
                 Button {
+                    signInEmailViewModel.error = nil
+
                     if !isPasswordFieldVisible {
                         withAnimation {
                             if checkIfEmailIsCorrect(emailAddress: signInEmailViewModel.email) {
                                 isPasswordFieldVisible = true
+                            } else {
+                                signInEmailViewModel.error = AppError(title: "Email is not in correct format", description: "")
                             }
                         }
                     } else {
-                        signInEmailViewModel.signIn()
+                        Task {
+                            let isSignInSuccessful = await signInEmailViewModel.signIn()
+
+                            if isSignInSuccessful {
+                                print("Yes, sign in is successful")
+
+                                router.goToRootView()
+                            } else {
+                                print("No, sign in is not successful")
+                            }
+                        }
                     }
                 } label: {
                     Text("Continue")
@@ -71,13 +113,6 @@ struct SignInView: View {
         .frame(maxWidth: 400)
         #endif
     }
-}
-
-private func checkIfEmailIsCorrect(emailAddress: String) -> Bool {
-    let emailRegex = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
-
-    let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-    return emailPredicate.evaluate(with: emailAddress)
 }
 
 private struct SignInViewTextField: View {
