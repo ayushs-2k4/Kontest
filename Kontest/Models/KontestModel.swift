@@ -29,6 +29,8 @@ class KontestModel: Codable, Identifiable, Hashable {
         case logo
         case isCalendarEventAdded
         case calendarDate
+        case selectedCalendarAccount
+        case selectedCalendarName
     }
 
     required init(from decoder: Decoder) throws {
@@ -51,6 +53,8 @@ class KontestModel: Codable, Identifiable, Hashable {
         logo = try container.decodeIfPresent(String.self, forKey: .logo) ?? "No Logo"
         isCalendarEventAdded = try container.decodeIfPresent(Bool.self, forKey: .isCalendarEventAdded) ?? false
         calendarEventDate = try container.decodeIfPresent(Date.self, forKey: .calendarDate)
+        selectedCalendarAccount = try container.decodeIfPresent(String.self, forKey: .selectedCalendarAccount)
+        selectedCalendarName = try container.decodeIfPresent(String.self, forKey: .selectedCalendarName)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -65,6 +69,8 @@ class KontestModel: Codable, Identifiable, Hashable {
         try container.encode(in_24_hours, forKey: .in_24_hours)
         try container.encode(status, forKey: .status)
         try container.encode(calendarEventDate, forKey: .calendarDate)
+        try container.encode(selectedCalendarAccount, forKey: .selectedCalendarAccount)
+        try container.encode(selectedCalendarName, forKey: .selectedCalendarName)
     }
 
     let id: String
@@ -80,6 +86,8 @@ class KontestModel: Codable, Identifiable, Hashable {
     let logo: String
     var isCalendarEventAdded: Bool
     var calendarEventDate: Date?
+    var selectedCalendarAccount: String?
+    var selectedCalendarName:String?
 
     init(id: String, name: String, url: String, start_time: String, end_time: String, duration: String, site: String, in_24_hours: String, status: KontestStatus, logo: String) {
         self.id = id
@@ -376,8 +384,17 @@ extension KontestModel {
     func loadCalendarEventDate(allEvents: [EKEvent]) {
         calendarEventDate = CalendarUtility.getCalendarDateOfEvent(allEventsOfCalendar: allEvents, startDate: CalendarUtility.getDate(date: start_time) ?? Date(), endDate: CalendarUtility.getDate(date: end_time) ?? Date(), title: name, url: URL(string: url))
     }
+    
+    /// loads the calendar name and account name of an event
+    func loadEventCalendar(allEvents:[EKEvent])
+    {
+        selectedCalendarAccount = CalendarUtility.getCalendarAccountNameOfAnEvent(allEventsOfCalendar: allEvents, startDate: CalendarUtility.getDate(date: start_time) ?? Date(), endDate: CalendarUtility.getDate(date: end_time) ?? Date(), title: name, url: URL(string: url))
+        
+        selectedCalendarName = CalendarUtility.getCalendarNameOfAnEvent(allEventsOfCalendar: allEvents, startDate: CalendarUtility.getDate(date: start_time) ?? Date(), endDate: CalendarUtility.getDate(date: end_time) ?? Date(), title: name, url: URL(string: url))
+    }
 
     static var example: KontestModel {
         KontestModel.from(dto: KontestDTO(name: "ProjectEuler+1", url: "https://hackerrank.com/contests/projecteuler", start_time: "2023-08-15 18:29:00 UTC", end_time: "2023-08-18 17:43:00 UTC", duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "BEFORE"))
     }
 }
+

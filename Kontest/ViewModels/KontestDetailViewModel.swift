@@ -59,7 +59,7 @@ class KontestDetailViewModel {
 
     private func addCalendarObserver() throws {
         if CalendarUtility.getAuthorizationStatus() == .fullAccess {
-            CalendarUtility.addCalendarObserver { [weak self] _ in
+            CalendarUtility.addCalendarObserver(onChange: { [weak self] _ in
                 guard let self else { return }
 
                 Task {
@@ -69,8 +69,9 @@ class KontestDetailViewModel {
 
                     self.kontest.loadCalendarStatus(allEvents: allEvents ?? [])
                     self.kontest.loadCalendarEventDate(allEvents: allEvents ?? [])
+                    self.kontest.loadEventCalendar(allEvents: allEvents ?? [])
                 }
-            }
+            })
         }
     }
 }

@@ -563,4 +563,32 @@ enum CalendarUtility {
 
         return ans
     }
+
+    static func getCalendarAccountNameOfAnEvent(allEventsOfCalendar: [EKEvent], startDate: Date, endDate: Date, title: String, url: URL?) -> String? {
+        let event = allEventsOfCalendar.first { event in
+            event.startDate == startDate && event.endDate == endDate && event.title == title && event.url == url
+        }
+
+        if let event {
+            let calendarAccountName = event.calendar.source.title
+
+            return calendarAccountName
+        } else {
+            return nil
+        }
+    }
+
+    static func getCalendarNameOfAnEvent(allEventsOfCalendar: [EKEvent], startDate: Date, endDate: Date, title: String, url: URL?) -> String? {
+        let event = allEventsOfCalendar.first { event in
+            event.startDate == startDate && event.endDate == endDate && event.title == title && event.url == url
+        }
+
+        if let event {
+            let calendarName = event.calendar.title
+
+            return calendarName
+        } else {
+            return nil
+        }
+    }
 }

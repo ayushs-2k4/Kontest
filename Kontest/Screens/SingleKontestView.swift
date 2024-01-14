@@ -120,32 +120,48 @@ struct SingleKontestView: View {
                         .frame(width: 20)
                 }
                 .popover(isPresented: $isCalendarPopoverVisible, arrowEdge: .bottom) {
-                    CalendarPopoverView(date: kontest.calendarEventDate != nil ? kontest.calendarEventDate! : kontestStartDate.addingTimeInterval(-15 * 60), kontestStartDate: kontestStartDate, isAlreadySetted: kontest.isCalendarEventAdded, onPressDelete: {
+                    CalendarPopoverView(date: kontest.calendarEventDate != nil ? kontest.calendarEventDate! : kontestStartDate.addingTimeInterval(-15 * 60),
+                                        kontestStartDate: kontestStartDate,
+                                        isAlreadySetted: kontest.isCalendarEventAdded,
+                                        calendarName: kontest.selectedCalendarName,
+                                        calendarAccount: kontest.selectedCalendarAccount,
+                                        onPressDelete: {
                         print(kontest.isCalendarEventAdded ? "Delete" : "Cancel")
-
+                        
                         Task {
                             do {
                                 try await CalendarUtility.removeEvent(startDate: kontestStartDate, endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
-
+                                
                                 kontest.isCalendarEventAdded = false
                                 kontest.calendarEventDate = nil
                             } catch {
                                 errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Check that you have given Kontest the Calendar Permission (Full Access)")
                             }
-
+                            
                             isCalendarPopoverVisible = false
                             WidgetCenter.shared.reloadAllTimelines()
                         }
-                    }, onPressSet: { setDate, selectedCalendar in
+                    },
+                                        onPressSet: {
+                        setDate,
+                        selectedCalendar in
                         print("setDate: \(setDate.formatted())")
-
+                        
                         Task {
                             do {
                                 if kontest.isCalendarEventAdded { // If one event was already setted, then remove it and set a new event
                                     try await CalendarUtility.removeEvent(startDate: kontestStartDate, endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
                                 }
-
-                                if try await CalendarUtility.addEvent(startDate: kontestStartDate, endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url), alarmAbsoluteDate: setDate, calendar: selectedCalendar) {
+                                
+                                if try await CalendarUtility.addEvent(
+                                    startDate: kontestStartDate,
+                                    endDate: kontestEndDate ?? Date(),
+                                    title: kontest.name,
+                                    notes: "",
+                                    url: URL(string: kontest.url),
+                                    alarmAbsoluteDate: setDate,
+                                    calendar: selectedCalendar
+                                ) {
                                     kontest.isCalendarEventAdded = true
                                     kontest.calendarEventDate = setDate
                                 }

@@ -14,7 +14,7 @@ struct CalendarPopoverView: View {
     @State private var selectedDate: Date
     let isAlreadySetted: Bool
 
-    let calendarsArray = getDict()
+    let calendarsArray = getAllCalendarsArray()
 
     @State private var selectedAccountIndex = 0
     @State private var selectedCalendarIndex = 0
@@ -22,11 +22,38 @@ struct CalendarPopoverView: View {
     let onPressDelete: () -> Void
     let onPressSet: (_ setDate: Date, _ calendar: EKCalendar) -> Void
 
-    init(date: Date, kontestStartDate: Date, isAlreadySetted: Bool, onPressDelete: @escaping () -> Void, onPressSet: @escaping (_: Date, _: EKCalendar) -> Void) {
+    init(
+        date: Date,
+        kontestStartDate: Date,
+        isAlreadySetted: Bool,
+        calendarName: String?,
+        calendarAccount: String?,
+        onPressDelete: @escaping () -> Void,
+        onPressSet: @escaping (_: Date, _: EKCalendar) -> Void
+    ) {
         self.date = date
         self.kontestStartDate = kontestStartDate
-        self._selectedDate = State(initialValue: date)
         self.isAlreadySetted = isAlreadySetted
+
+        let selectedAccountIndex = calendarsArray.firstIndex { calendar in
+            calendar.0 == calendarAccount
+        }
+
+        if let selectedAccountIndex {
+            self._selectedAccountIndex = State(initialValue: selectedAccountIndex)
+
+            let allCalendarsOfSelectedAccount = calendarsArray[selectedAccountIndex].1
+
+            let selectedCalendarIndex = allCalendarsOfSelectedAccount.firstIndex { calendar in
+                calendar.title == calendarName
+            }
+
+            if let selectedCalendarIndex {
+                self._selectedCalendarIndex = State(initialValue: selectedCalendarIndex)
+            }
+        }
+
+        self._selectedDate = State(initialValue: date)
         self.onPressDelete = onPressDelete
         self.onPressSet = onPressSet
     }
@@ -95,10 +122,13 @@ struct PickerView: View {
         .onChange(of: selectedAccountIndex) {
             selectedCalendarIndex = 0
         }
+        .onChange(of: selectedCalendarIndex) { oldValue, newValue in
+            print("Changed selected calendar index from \(oldValue) to \(newValue)")
+        }
     }
 }
 
-func getDict() -> [(String, [EKCalendar])] {
+func getAllCalendarsArray() -> [(String, [EKCalendar])] {
     do {
         let dict = try CalendarUtility.getChangableCalendarsByTheirSources()
 
@@ -109,7 +139,13 @@ func getDict() -> [(String, [EKCalendar])] {
 }
 
 #Preview {
-    CalendarPopoverView(date: Date().addingTimeInterval(-15 * 60), kontestStartDate: Date().addingTimeInterval(86400), isAlreadySetted: true) {
+    CalendarPopoverView(
+        date: Date().addingTimeInterval(-15 * 60),
+        kontestStartDate: Date().addingTimeInterval(86400),
+        isAlreadySetted: true,
+        calendarName: "",
+        calendarAccount: ""
+    ) {
         print("Delete")
     } onPressSet: { setDate, _ in
         print("setDate: \(setDate)")
