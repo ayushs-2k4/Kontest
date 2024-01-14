@@ -39,6 +39,16 @@ struct CodeForcesGraphView: View {
     )
 
     var body: some View {
+        #if os(macOS)
+            EmptyView()
+                .hidden()
+                .onChange(of: codeForcesViewModel.selectedDate) { _, selectedDate in
+                    if selectedDate != nil {
+                        HapticFeedbackUtility.performHapticFeedback()
+                    }
+                }
+        #endif
+
         VStack {
             if codeForcesViewModel.username.isEmpty {
                 Text("Please update your username in the settings")
@@ -92,7 +102,7 @@ struct CodeForcesGraphView: View {
                                             Text("\(updateDate.formatted(date: .numeric, time: .shortened))")
 
                                             #if os(macOS)
-                                            Text(attendedContest.contestName)
+                                                Text(attendedContest.contestName)
                                             #endif
                                         }
                                     }
@@ -106,15 +116,58 @@ struct CodeForcesGraphView: View {
                                 .interpolationMethod(.catmullRom)
                                 .foregroundStyle(curGradient)
                         }
+
+                        if let selectedDate = codeForcesViewModel.selectedDate, let kontest = getKontestFromDate(date: selectedDate) {
+                            RuleMark(x: .value("selectedDate", selectedDate, unit: .day))
+                                .zIndex(-1)
+                                .annotation(position: .leading, spacing: 0, overflowResolution: .init(
+                                    x: .fit(to: .chart),
+                                    y: .disabled
+                                )) {
+                                    VStack(spacing: 10) {
+                                        if showAnnotations {
+                                            Text("Old Rating: \(kontest.oldRating)")
+                                                .bold()
+
+                                            Text("New Rating: \(kontest.newRating)")
+                                                .bold()
+                                        } else {
+                                            Text(kontest.contestName)
+                                                .bold()
+
+                                            Text("\(selectedDate.formatted(date: Date.FormatStyle.DateStyle.abbreviated, time: .shortened))")
+                                                .bold()
+
+                                            Text("Old Rating: \(kontest.oldRating)")
+
+                                            Text("New Rating: \(kontest.newRating)")
+                                        }
+                                    }
+                                    .padding()
+                                }
+                            PointMark(x: .value("selectedDate", selectedDate, unit: .day), y: .value("", kontest.newRating))
+                        }
                     }
                     .chartScrollableAxes(.horizontal)
-                    .chartXVisibleDomain(length: 3600*24*15) // 15 days
+                    .chartXVisibleDomain(length: 3600*24*30) // 30 days
                     .padding(.horizontal)
+                    .chartXSelection(value: Bindable(codeForcesViewModel).rawSelectedDate)
                     .animation(.default, value: showAnnotations)
                 }
             }
         }
         .navigationTitle("CodeForces Rankings")
+    }
+}
+
+extension CodeForcesGraphView {
+    private func getKontestFromDate(date: Date) -> CodeForcesuserRatingAPIResultModel? {
+        codeForcesViewModel.codeForcesRatings?.result.first(where: { codeForcesuserRatingAPIResultModel in
+            let updateTime = codeForcesuserRatingAPIResultModel.ratingUpdateTimeSeconds
+            let updateDate = Date(timeIntervalSince1970: Double(updateTime))
+
+            return updateDate == date
+        })
     }
 }
 
