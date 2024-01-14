@@ -94,7 +94,7 @@ class AllKontestsViewModel {
 
                     if let nextDateToRefresh {
                         let timeInterval = currentDate.timeIntervalSince(nextDateToRefresh)
-                        logger.info("nextDateToRefresh: \(nextDateToRefresh.formatted())\ntimeInterval: \(timeInterval)")
+//                        logger.info("nextDateToRefresh: \(nextDateToRefresh.formatted())\ntimeInterval: \(timeInterval)")
 
                         if timeInterval >= -5, timeInterval <= 5 {
                             if self.searchText.isEmpty {

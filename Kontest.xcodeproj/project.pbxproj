@@ -61,6 +61,11 @@
 		079A67132B54473100901C0D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 079A67122B54473100901C0D /* GoogleService-Info.plist */; };
 		079A67162B5447F600901C0D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 079A67152B5447F600901C0D /* FirebaseAnalytics */; };
 		079A67182B5447F600901C0D /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 079A67172B5447F600901C0D /* FirebaseAnalyticsSwift */; };
+		079A671C2B544CA700901C0D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 079A671B2B544CA700901C0D /* FirebaseAuth */; };
+		079A671F2B544CD000901C0D /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079A671E2B544CD000901C0D /* AuthenticationView.swift */; };
+		079A67212B544D2300901C0D /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079A67202B544D2300901C0D /* AuthenticationManager.swift */; };
+		079A67232B544EAE00901C0D /* SignInEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079A67222B544EAE00901C0D /* SignInEmailViewModel.swift */; };
+		079A67252B54545000901C0D /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079A67242B54545000901C0D /* RootView.swift */; };
 		079CF54E2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CF54D2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift */; };
 		079CF5502B527ECD00BE8E13 /* CodeChefScrapingContestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CF54F2B527ECD00BE8E13 /* CodeChefScrapingContestDTO.swift */; };
 		079CF5522B527F6700BE8E13 /* CodeChefScrapingContestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CF5512B527F6700BE8E13 /* CodeChefScrapingContestModel.swift */; };
@@ -238,6 +243,10 @@
 		0787AE972AC89C0100F1B80C /* RotatingMapScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingMapScreen.swift; sourceTree = "<group>"; };
 		0791DA542B51646200A9CA23 /* ClockObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockObserver.swift; sourceTree = "<group>"; };
 		079A67122B54473100901C0D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		079A671E2B544CD000901C0D /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
+		079A67202B544D2300901C0D /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		079A67222B544EAE00901C0D /* SignInEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailViewModel.swift; sourceTree = "<group>"; };
+		079A67242B54545000901C0D /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		079CF54D2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefScrapingAPIRepository.swift; sourceTree = "<group>"; };
 		079CF54F2B527ECD00BE8E13 /* CodeChefScrapingContestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefScrapingContestDTO.swift; sourceTree = "<group>"; };
 		079CF5512B527F6700BE8E13 /* CodeChefScrapingContestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefScrapingContestModel.swift; sourceTree = "<group>"; };
@@ -338,6 +347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07ECFBC22AA582E3008513C6 /* LeetCodeSchema in Frameworks */,
+				079A671C2B544CA700901C0D /* FirebaseAuth in Frameworks */,
 				07ECFBBF2AA582D2008513C6 /* Apollo in Frameworks */,
 				079A67162B5447F600901C0D /* FirebaseAnalytics in Frameworks */,
 				07AA752C2B4FCD9F00DCD75B /* SwiftSoup in Frameworks */,
@@ -478,6 +488,17 @@
 			path = Intents;
 			sourceTree = "<group>";
 		};
+		079A671D2B544CBF00901C0D /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				079A671E2B544CD000901C0D /* AuthenticationView.swift */,
+				079A67202B544D2300901C0D /* AuthenticationManager.swift */,
+				079A67222B544EAE00901C0D /* SignInEmailViewModel.swift */,
+				079A67242B54545000901C0D /* RootView.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		079F68092ABC80C2001B0EFE /* Upcoming Kontest macOS Widget */ = {
 			isa = PBXGroup;
 			children = (
@@ -529,6 +550,7 @@
 		07ECFB362AA58259008513C6 /* Kontest */ = {
 			isa = PBXGroup;
 			children = (
+				079A671D2B544CBF00901C0D /* Authentication */,
 				079A67122B54473100901C0D /* GoogleService-Info.plist */,
 				07EA6F482AB6405A00CD932E /* Kontest.entitlements */,
 				0784292C2AB5EF520078D836 /* Intents */,
@@ -770,6 +792,7 @@
 				07AA752B2B4FCD9F00DCD75B /* SwiftSoup */,
 				079A67152B5447F600901C0D /* FirebaseAnalytics */,
 				079A67172B5447F600901C0D /* FirebaseAnalyticsSwift */,
+				079A671B2B544CA700901C0D /* FirebaseAuth */,
 			);
 			productName = "Coding Kontest";
 			productReference = 076016552A87CD52007CE9F5 /* Kontest.app */;
@@ -973,6 +996,7 @@
 				07D766692AC8404A000A3DFD /* Sidebar.swift in Sources */,
 				07ECFBA32AA58259008513C6 /* PendingNotificationsScreen.swift in Sources */,
 				07ECFB9C2AA58259008513C6 /* AllKontestsScreen.swift in Sources */,
+				079A67212B544D2300901C0D /* AuthenticationManager.swift in Sources */,
 				07ECFB972AA58259008513C6 /* CodeChefRatingsView.swift in Sources */,
 				07ECFBAD2AA58259008513C6 /* MyMenu.swift in Sources */,
 				07ECFB902AA58259008513C6 /* KontestStatus.swift in Sources */,
@@ -997,13 +1021,16 @@
 				07ECFBAB2AA58259008513C6 /* DownloadData.swift in Sources */,
 				07ECFBA02AA58259008513C6 /* KontestDetailsScreen.swift in Sources */,
 				077E6EB12AB4B3220003E897 /* ErrorState.swift in Sources */,
+				079A67232B544EAE00901C0D /* SignInEmailViewModel.swift in Sources */,
 				07ECFBAA2AA58259008513C6 /* Router.swift in Sources */,
 				073269E82AAC42350028476D /* FilterWebsitesView.swift in Sources */,
 				07ECFB982AA58259008513C6 /* SettingsScreen.swift in Sources */,
 				07740EA52ABF171F00A93EAF /* CalendarPopoverView.swift in Sources */,
+				079A671F2B544CD000901C0D /* AuthenticationView.swift in Sources */,
 				07D9FFCD2AD9A5D000C03A3A /* HapticFeedbackUtility.swift in Sources */,
 				07ECFB862AA58259008513C6 /* NotificationsViewModel.swift in Sources */,
 				07ECFB942AA58259008513C6 /* CodeChefAPIModel.swift in Sources */,
+				079A67252B54545000901C0D /* RootView.swift in Sources */,
 				07567EA52AB645E9007EFEE1 /* AddToCalendarIntent.swift in Sources */,
 				07AA752E2B4FCF7A00DCD75B /* KontestNewRepository.swift in Sources */,
 				07ECFBB22AA58259008513C6 /* LeetCodeUserProfileGraphQLAPIDTO.swift in Sources */,
@@ -1548,6 +1575,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalyticsSwift;
+		};
+		079A671B2B544CA700901C0D /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 		079F68282ABC819A001B0EFE /* Apollo */ = {
 			isa = XCSwiftPackageProductDependency;
