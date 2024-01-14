@@ -111,11 +111,7 @@ struct LeetCodeChart: View {
                     .annotation(position: .bottom) {
                         if showAnnotations {
                             VStack {
-                                Text("\(date.formatted(date: .numeric, time: .shortened))")
-
-                                #if os(macOS)
-                                    Text(attendedContest.contest?.title ?? "")
-                                #endif
+                                Text("\(date.formatted(date: .numeric, time: .omitted))")
                             }
                         }
                     }
@@ -131,25 +127,27 @@ struct LeetCodeChart: View {
                 if let selectedDate = leetCodeGraphQLViewModel.selectedDate, let kontest = getKontestFromDate(date: selectedDate), let contest = kontest.contest {
                     RuleMark(x: .value("selectedDate", selectedDate, unit: .day))
                         .zIndex(-1)
-                        .annotation(position: .leading, spacing: 0, overflowResolution: .init(
+                        .annotation(position: .trailing, spacing: 0, overflowResolution: .init(
                             x: .fit(to: .chart),
                             y: .disabled
                         )) {
                             VStack(spacing: 10) {
                                 Text(contest.title ?? "")
 
-                                Text("\(selectedDate.formatted(date: Date.FormatStyle.DateStyle.abbreviated, time: .omitted))")
+                                Text("\(selectedDate.formatted(date: .abbreviated, time: .shortened))")
 
                                 if let problemsSolved = kontest.problemsSolved {
                                     Text("Total problems solved: \(problemsSolved)")
                                 }
-
+                                
                                 if let ranking = kontest.ranking {
                                     Text("Ranking: \(ranking)")
                                 }
-
-                                if let rating = kontest.rating {
-                                    Text("Rating: \(Int(rating))")
+                                
+                                if !showAnnotations {
+                                    if let rating = kontest.rating {
+                                        Text("Rating: \(Int(rating))")
+                                    }
                                 }
                             }
                             .padding()
