@@ -55,29 +55,29 @@ final class SignInEmailViewModel {
             let nsError = error as NSError
 
             if nsError.domain == "FIRAuthErrorDomain" {
-                let errorCodeName = nsError.userInfo[AuthErrorUserInfoNameKey] as? String
+//                let errorCodeName = nsError.userInfo[AuthErrorUserInfoNameKey] as? String
                 let errorCode = AuthErrorCode(_nsError: nsError)
 
 //                if errorCodeName == "ERROR_INVALID_CREDENTIAL" {
 //                    self.error = AppError(title: "Password is wrong", description: "") // Gives (this) same errorCodeName in atlease these situations ---> Wrong password, Account not present
 //                } else {
-                    switch errorCode {
-                    case AuthErrorCode.wrongPassword:
-                        self.error = AppError(title: "Password is wrong", description: "")
+                switch errorCode {
+                case AuthErrorCode.wrongPassword:
+                    self.error = AppError(title: "Password is wrong", description: "")
 
-                    case AuthErrorCode.userDisabled:
-                        self.error = AppError(title: "Your Account has been disabled", description: "Contact Support - ayushsinghals02@gmail.com")
+                case AuthErrorCode.userDisabled:
+                    self.error = AppError(title: "Your Account has been disabled", description: "Contact Support - ayushsinghals02@gmail.com")
 
-                    case AuthErrorCode.tooManyRequests:
-                        self.error = AppError(title: "Your Account has been temporarily disabled due to multiple wrong attempts", description: "Contact Support - ayushsinghals02@gmail.com")
+                case AuthErrorCode.tooManyRequests:
+                    self.error = AppError(title: "Your Account has been temporarily disabled due to multiple wrong attempts", description: "Contact Support - ayushsinghals02@gmail.com")
 
-                    case AuthErrorCode.userNotFound:
-                        self.error = AppError(title: "You don't have an account, please Sign up instead!", description: "")
+                case AuthErrorCode.userNotFound:
+                    self.error = AppError(title: "You don't have an account, please Sign up instead!", description: "")
 
-                    default:
-                        print(error)
-                        self.error = error
-                    }
+                default:
+                    print(error)
+                    self.error = error
+                }
 //                }
             }
 

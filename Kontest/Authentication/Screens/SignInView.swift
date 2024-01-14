@@ -39,9 +39,18 @@ struct SignInView: View {
                         Spacer()
 
                         if let appError = error as? AppError {
-                            Text(appError.title)
-                                .foregroundStyle(.red)
-                                .padding(.horizontal)
+                            VStack(alignment: .trailing) {
+                                Text(appError.title)
+                                    .foregroundStyle(.red)
+                                    .padding(.horizontal)
+
+                                if !appError.description.isEmpty {
+                                    Text(appError.description)
+                                        .font(.caption2)
+                                        .foregroundStyle(.red)
+                                        .padding(.horizontal)
+                                }
+                            }
                         } else {
                             Text(error.localizedDescription)
                                 .foregroundStyle(.red)
