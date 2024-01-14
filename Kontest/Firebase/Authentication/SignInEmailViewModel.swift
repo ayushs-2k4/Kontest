@@ -23,6 +23,9 @@ final class SignInEmailViewModel {
                 let returnedUserData = try await AuthenticationManager.shared.createNewUser(email: email, password: password)
                 print("Success in logging in with email - password")
                 print("returnedUserData: \(returnedUserData)")
+                
+                UserManager.shared.createNewUser(auth: returnedUserData)
+                
             } catch {
                 print("Error in siging in with email - password: \(error)")
             }

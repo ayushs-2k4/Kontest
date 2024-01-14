@@ -17,7 +17,8 @@ struct RootView: View {
             }
         }
         .onAppear {
-            let authUser = try? AuthenticationManager.shared.getAuthenticatedUser()
+            let authUser = try?
+            AuthenticationManager.shared.getAuthenticatedUser()
 
             self.showSignInView = authUser == nil ? true : false
         }
@@ -34,6 +35,8 @@ struct RootView: View {
             } label: {
                 Text("Sign Out")
             }
+            
+            FireStoreView()
         }
     }
 }

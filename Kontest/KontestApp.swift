@@ -56,6 +56,7 @@ struct KontestApp: App {
 //            }
             
             RootView()
+//            FireStoreView()
         }
         .commands {
             MyMenu(router: $router, panelSelection: $panelSelection)

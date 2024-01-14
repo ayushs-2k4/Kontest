@@ -9,12 +9,19 @@ import SwiftUI
 
 struct AuthenticationView: View {
     let signInEmailViewModel: SignInEmailViewModel = .init()
+    
+    @State private var text:String = ""
 
     var body: some View {
         VStack {
-            TextField("Email", text: Bindable(signInEmailViewModel).email)
+//            TextField("Email", text: Bindable(signInEmailViewModel).email)
 
-            TextField("Password", text: Bindable(signInEmailViewModel).password)
+//            TextField("Password", text: Bindable(signInEmailViewModel).password)
+            
+            
+            TextField("name@email.com", text: $text)
+                .textFieldStyle(.roundedBorder)
+                .padding()
             
             Button{
                 signInEmailViewModel.signIn()

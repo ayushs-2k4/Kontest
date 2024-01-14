@@ -66,6 +66,10 @@
 		079A67212B544D2300901C0D /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079A67202B544D2300901C0D /* AuthenticationManager.swift */; };
 		079A67232B544EAE00901C0D /* SignInEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079A67222B544EAE00901C0D /* SignInEmailViewModel.swift */; };
 		079A67252B54545000901C0D /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079A67242B54545000901C0D /* RootView.swift */; };
+		079A67272B54592100901C0D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 079A67262B54592100901C0D /* FirebaseFirestore */; };
+		079A67292B54592100901C0D /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 079A67282B54592100901C0D /* FirebaseFirestoreSwift */; };
+		079A672D2B545A0000901C0D /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079A672C2B545A0000901C0D /* UserManager.swift */; };
+		079A672F2B545AC500901C0D /* FireStoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079A672E2B545AC500901C0D /* FireStoreView.swift */; };
 		079CF54E2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CF54D2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift */; };
 		079CF5502B527ECD00BE8E13 /* CodeChefScrapingContestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CF54F2B527ECD00BE8E13 /* CodeChefScrapingContestDTO.swift */; };
 		079CF5522B527F6700BE8E13 /* CodeChefScrapingContestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CF5512B527F6700BE8E13 /* CodeChefScrapingContestModel.swift */; };
@@ -247,6 +251,8 @@
 		079A67202B544D2300901C0D /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		079A67222B544EAE00901C0D /* SignInEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailViewModel.swift; sourceTree = "<group>"; };
 		079A67242B54545000901C0D /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		079A672C2B545A0000901C0D /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		079A672E2B545AC500901C0D /* FireStoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreView.swift; sourceTree = "<group>"; };
 		079CF54D2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefScrapingAPIRepository.swift; sourceTree = "<group>"; };
 		079CF54F2B527ECD00BE8E13 /* CodeChefScrapingContestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefScrapingContestDTO.swift; sourceTree = "<group>"; };
 		079CF5512B527F6700BE8E13 /* CodeChefScrapingContestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefScrapingContestModel.swift; sourceTree = "<group>"; };
@@ -352,6 +358,8 @@
 				079A67162B5447F600901C0D /* FirebaseAnalytics in Frameworks */,
 				07AA752C2B4FCD9F00DCD75B /* SwiftSoup in Frameworks */,
 				079A67182B5447F600901C0D /* FirebaseAnalyticsSwift in Frameworks */,
+				079A67272B54592100901C0D /* FirebaseFirestore in Frameworks */,
+				079A67292B54592100901C0D /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +507,24 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		079A672A2B54596500901C0D /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				079A672B2B54596C00901C0D /* FireStore */,
+				079A671D2B544CBF00901C0D /* Authentication */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		079A672B2B54596C00901C0D /* FireStore */ = {
+			isa = PBXGroup;
+			children = (
+				079A672C2B545A0000901C0D /* UserManager.swift */,
+				079A672E2B545AC500901C0D /* FireStoreView.swift */,
+			);
+			path = FireStore;
+			sourceTree = "<group>";
+		};
 		079F68092ABC80C2001B0EFE /* Upcoming Kontest macOS Widget */ = {
 			isa = PBXGroup;
 			children = (
@@ -550,7 +576,7 @@
 		07ECFB362AA58259008513C6 /* Kontest */ = {
 			isa = PBXGroup;
 			children = (
-				079A671D2B544CBF00901C0D /* Authentication */,
+				079A672A2B54596500901C0D /* Firebase */,
 				079A67122B54473100901C0D /* GoogleService-Info.plist */,
 				07EA6F482AB6405A00CD932E /* Kontest.entitlements */,
 				0784292C2AB5EF520078D836 /* Intents */,
@@ -793,6 +819,8 @@
 				079A67152B5447F600901C0D /* FirebaseAnalytics */,
 				079A67172B5447F600901C0D /* FirebaseAnalyticsSwift */,
 				079A671B2B544CA700901C0D /* FirebaseAuth */,
+				079A67262B54592100901C0D /* FirebaseFirestore */,
+				079A67282B54592100901C0D /* FirebaseFirestoreSwift */,
 			);
 			productName = "Coding Kontest";
 			productReference = 076016552A87CD52007CE9F5 /* Kontest.app */;
@@ -966,6 +994,7 @@
 				079CF5542B52843B00BE8E13 /* CodeChefGraphView.swift in Sources */,
 				07ECFBB72AA58259008513C6 /* CodeChefFetcher.swift in Sources */,
 				07ECFBA12AA58259008513C6 /* SingleNotificationMenu.swift in Sources */,
+				079A672D2B545A0000901C0D /* UserManager.swift in Sources */,
 				073269EF2AAC4B0C0028476D /* ChangeUsernameScreen.swift in Sources */,
 				079CF5522B527F6700BE8E13 /* CodeChefScrapingContestModel.swift in Sources */,
 				07ECFB9E2AA58259008513C6 /* BlinkingDotView.swift in Sources */,
@@ -977,6 +1006,7 @@
 				07ECFB9A2AA58259008513C6 /* RatingsView.swift in Sources */,
 				07ECFB842AA58259008513C6 /* CodeChefViewModel.swift in Sources */,
 				07ECFB852AA58259008513C6 /* CodeForcesViewModel.swift in Sources */,
+				079A672F2B545AC500901C0D /* FireStoreView.swift in Sources */,
 				07FD85AB2AB804FA00D26C4C /* NotificationsViewModelProtocol.swift in Sources */,
 				073269EC2AAC451B0028476D /* FilterWebsitesScreen.swift in Sources */,
 				07ECFBB62AA58259008513C6 /* KontestFetcher.swift in Sources */,
@@ -1580,6 +1610,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		079A67262B54592100901C0D /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		079A67282B54592100901C0D /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
 		};
 		079F68282ABC819A001B0EFE /* Apollo */ = {
 			isa = XCSwiftPackageProductDependency;
