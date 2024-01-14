@@ -205,6 +205,15 @@ struct AllKontestsScreen: View {
 
                             case .RotatingMapScreen:
                                 RandomRotatingMapScreen(navigationTitle: "About Me")
+
+                            case .AuthenticationScreenType(let authenticationScreenType):
+                                switch authenticationScreenType {
+                                case .SignInScreen:
+                                    SignInView()
+
+                                case .SignUpScreen:
+                                    SignUpView()
+                                }
                             }
                         }
 

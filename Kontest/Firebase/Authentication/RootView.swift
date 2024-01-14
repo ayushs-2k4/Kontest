@@ -20,7 +20,7 @@ struct RootView: View {
             }
 
         if showSignInView {
-            AuthenticationView()
+            SignUpView()
         }
         else {
             Button {

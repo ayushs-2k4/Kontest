@@ -7,6 +7,8 @@
 		<string>group.com.ayushsinghal.kontest</string>
 	</array>
 	<key>keychain-access-groups</key>
-	<array/>
+	<array>
+		<string>$(AppIdentifierPrefix)com.ayushsinghal.Kontest</string>
+	</array>
 </dict>
 </plist>

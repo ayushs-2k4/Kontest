@@ -34,6 +34,10 @@ class Router {
             path.append(SelectionState.screen(screen))
         }
     }
+    
+    func popupLastScreen(){
+        path.removeLast()
+    }
 
     static let instance: Router = .init()
 }

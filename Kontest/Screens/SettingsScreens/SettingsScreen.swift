@@ -36,6 +36,10 @@ private struct AllSettingsButtonsView: View {
             router.appendScreen(screen: Screen.SettingsScreenType(.FilterWebsitesScreen))
         }
 
+        Button("SignUp/ SignIn") {
+            router.appendScreen(screen: Screen.SettingsScreenType(.AuthenticationScreenType(.SignInScreen)))
+        }
+
         Button("About Me!") {
             router.appendScreen(screen: Screen.SettingsScreenType(.RotatingMapScreen))
         }
