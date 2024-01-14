@@ -42,11 +42,41 @@ struct MainChangeUsernameView: View {
         //        TextField("Enter CodeForces Username", text: Bindable(changeUsernameViewModel).codeForcesUsername)
         //        TextField("Enter Leetcode Username", text: Bindable(changeUsernameViewModel).leetcodeUsername)
 
-        SettingsTextFieldView(lightModeImage: .codeForcesLogo, darkModeImage: .codeForcesLogo, title: "Enter CodeForces Username", boundryColor: KontestModel.getColorForIdentifier(siteAbbreviation: "CodeForces"), submitLabel: .next, usernameBinding: $codeForcesUsername, focusedField: _focusedField, currentField: .CodeForces, onPressingNext: {})
+        SettingsTextFieldView(lightModeImage: .codeForcesLogo,
+                              darkModeImage: .codeForcesLogo,
+                              title: "Enter CodeForces Username",
+                              boundryColor: KontestModel.getColorForIdentifier(siteAbbreviation: "CodeForces"),
+                              submitLabel: .next,
+                              usernameBinding: $codeForcesUsername,
+                              focusedField: _focusedField,
+                              currentField: .CodeForces,
+                              onPressingNext: {
+        })
 
-        SettingsTextFieldView(lightModeImage: .leetCodeLightLogo, darkModeImage: .leetCodeDarkLogo, title: "Enter LeetCode Username", boundryColor: KontestModel.getColorForIdentifier(siteAbbreviation: "LeetCode"), submitLabel: .next, usernameBinding: $leetcodeUsername, focusedField: _focusedField, currentField: .LeetCode, onPressingNext: {})
+        SettingsTextFieldView(lightModeImage: .leetCodeLightLogo,
+                              darkModeImage: .leetCodeDarkLogo,
+                              title: "Enter LeetCode Username",
+                              boundryColor: KontestModel.getColorForIdentifier(
+                                siteAbbreviation: "LeetCode"
+                              ),
+                              submitLabel: .next,
+                              usernameBinding: $leetcodeUsername,
+                              focusedField: _focusedField,
+                              currentField: .LeetCode,
+                              onPressingNext: {
+        })
 
-        SettingsTextFieldView(lightModeImage: .codeChefLogo, darkModeImage: .codeChefLogo, title: "Enter CodeChef Username", boundryColor: KontestModel.getColorForIdentifier(siteAbbreviation: "CodeChef"), submitLabel: .return, usernameBinding: $codeChefUsername, focusedField: _focusedField, currentField: .CodeChef, onPressingNext: { completeForm() })
+        SettingsTextFieldView(lightModeImage: .codeChefLogo,
+                              darkModeImage: .codeChefLogo,
+                              title: "Enter CodeChef Username",
+                              boundryColor: KontestModel.getColorForIdentifier(siteAbbreviation: "CodeChef"),
+                              submitLabel: .return,
+                              usernameBinding: $codeChefUsername,
+                              focusedField: _focusedField,
+                              currentField: .CodeChef,
+                              onPressingNext: {
+            completeForm()
+        })
 
         Button("Save") {
             completeForm()
@@ -73,7 +103,17 @@ struct SettingsTextFieldView: View {
     let currentField: SettingsTextField
     let onPressingNext: () -> ()
 
-    init(lightModeImage: ImageResource, darkModeImage: ImageResource, title: String, boundryColor: Color, submitLabel: SubmitLabel, usernameBinding: Binding<String>, focusedField: FocusState<SettingsTextField?>, currentField: SettingsTextField, onPressingNext: @escaping () -> ()) {
+    init(
+        lightModeImage: ImageResource,
+        darkModeImage: ImageResource,
+        title: String,
+        boundryColor: Color,
+        submitLabel: SubmitLabel,
+        usernameBinding: Binding<String>,
+        focusedField: FocusState<SettingsTextField?>,
+        currentField: SettingsTextField,
+        onPressingNext: @escaping () -> ()
+    ) {
         self.lightModeImage = lightModeImage
         self.darkModeImage = darkModeImage
         self.title = title

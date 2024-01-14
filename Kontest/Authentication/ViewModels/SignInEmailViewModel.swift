@@ -112,6 +112,14 @@ final class SignInEmailViewModel {
             self.isLoading = false
         }
     }
+
+    func clearAllFields() {
+        self.email = ""
+        self.password = ""
+        self.confirmPassword = ""
+        self.firstName = ""
+        self.lastName = ""
+    }
 }
 
 func checkIfEmailIsCorrect(emailAddress: String) -> Bool {

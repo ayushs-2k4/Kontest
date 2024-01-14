@@ -12,6 +12,8 @@ struct SignInView: View {
 
     @State private var isPasswordFieldVisible: Bool = false
 
+    @FocusState private var focusedField: SignInTextField?
+
     @Environment(Router.self) private var router
 
     var body: some View {
@@ -19,6 +21,9 @@ struct SignInView: View {
             SignInViewTextField(
                 leftText: "Email ID:",
                 textHint: "Email",
+                isPasswordType: false,
+                focusedField: _focusedField,
+                currentField: .email,
                 textBinding: Bindable(signInEmailViewModel).email
             )
             .padding(.horizontal)
@@ -28,34 +33,34 @@ struct SignInView: View {
                     leftText: "Pasword:",
                     textHint: "required",
                     isPasswordType: true,
+                    focusedField: _focusedField,
+                    currentField: .password,
                     textBinding: Bindable(signInEmailViewModel).password
                 )
                 .padding(.horizontal)
             }
 
             if let error = signInEmailViewModel.error {
-                withAnimation {
-                    HStack {
-                        Spacer()
+                HStack {
+                    Spacer()
 
-                        if let appError = error as? AppError {
-                            VStack(alignment: .trailing) {
-                                Text(appError.title)
-                                    .foregroundStyle(.red)
-                                    .padding(.horizontal)
-
-                                if !appError.description.isEmpty {
-                                    Text(appError.description)
-                                        .font(.caption2)
-                                        .foregroundStyle(.red)
-                                        .padding(.horizontal)
-                                }
-                            }
-                        } else {
-                            Text(error.localizedDescription)
+                    if let appError = error as? AppError {
+                        VStack(alignment: .trailing) {
+                            Text(appError.title)
                                 .foregroundStyle(.red)
                                 .padding(.horizontal)
+
+                            if !appError.description.isEmpty {
+                                Text(appError.description)
+                                    .font(.caption2)
+                                    .foregroundStyle(.red)
+                                    .padding(.horizontal)
+                            }
                         }
+                    } else {
+                        Text(error.localizedDescription)
+                            .foregroundStyle(.red)
+                            .padding(.horizontal)
                     }
                 }
             }
@@ -85,16 +90,16 @@ struct SignInView: View {
                     Text("Sign Up Instead")
                 }
 
-                Button {
+                Button("Continue") {
                     signInEmailViewModel.error = nil
 
                     if !isPasswordFieldVisible {
-                        withAnimation {
-                            if checkIfEmailIsCorrect(emailAddress: signInEmailViewModel.email) {
-                                isPasswordFieldVisible = true
-                            } else {
-                                signInEmailViewModel.error = AppError(title: "Email is not in correct format", description: "")
-                            }
+                        if checkIfEmailIsCorrect(emailAddress: signInEmailViewModel.email) {
+                            isPasswordFieldVisible = true
+
+                            self.focusedField = .password
+                        } else {
+                            signInEmailViewModel.error = AppError(title: "Email is not in correct format", description: "")
                         }
                     } else {
                         Task {
@@ -104,19 +109,23 @@ struct SignInView: View {
                                 print("Yes, sign in is successful")
 
                                 router.goToRootView()
+
+                                signInEmailViewModel.clearAllFields()
                             } else {
                                 print("No, sign in is not successful")
                             }
                         }
                     }
-                } label: {
-                    Text("Continue")
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(.accent)
+                .keyboardShortcut(.return, modifiers: [])
             }
 
             .padding(.horizontal)
+        }
+        .onAppear {
+            self.focusedField = .email
         }
         #if os(macOS)
         .frame(maxWidth: 400)
@@ -128,7 +137,25 @@ private struct SignInViewTextField: View {
     let leftText: String
     let textHint: String
     var isPasswordType: Bool = false
+    @FocusState private var focusedField: SignInTextField?
+    let currentField: SignInTextField
     @Binding var textBinding: String
+
+    init(
+        leftText: String,
+        textHint: String,
+        isPasswordType: Bool,
+        focusedField: FocusState<SignInTextField?>,
+        currentField: SignInTextField,
+        textBinding: Binding<String>
+    ) {
+        self.leftText = leftText
+        self.textHint = textHint
+        self.isPasswordType = isPasswordType
+        self._focusedField = focusedField
+        self.currentField = currentField
+        self._textBinding = textBinding
+    }
 
     var body: some View {
         HStack {
@@ -138,10 +165,12 @@ private struct SignInViewTextField: View {
                 SecureField(textHint, text: $textBinding)
                     .multilineTextAlignment(.trailing)
                     .textFieldStyle(.plain)
+                    .focused($focusedField, equals: currentField)
             } else {
                 TextField(textHint, text: $textBinding)
                     .multilineTextAlignment(.trailing)
                     .textFieldStyle(.plain)
+                    .focused($focusedField, equals: currentField)
             }
         }
         .padding(10)
@@ -150,6 +179,11 @@ private struct SignInViewTextField: View {
                 .stroke(Color(.systemGray), lineWidth: 1)
         )
     }
+}
+
+enum SignInTextField {
+    case email
+    case password
 }
 
 #Preview {
