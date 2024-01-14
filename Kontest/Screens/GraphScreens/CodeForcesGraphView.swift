@@ -21,17 +21,17 @@ struct CodeForcesGraphView: View {
     let curGradient = LinearGradient(
         gradient: Gradient(
             colors: [
-                Color(.systemYellow).opacity(0.8),
-                Color(.systemYellow).opacity(0.5),
-                Color(.systemYellow).opacity(0.35),
-                Color(.systemYellow).opacity(0.3),
-                Color(.systemYellow).opacity(0.2),
-                Color(.systemYellow).opacity(0.15),
-                Color(.systemYellow).opacity(0.1),
-                Color(.systemYellow).opacity(0.05),
-                Color(.systemYellow).opacity(0.03),
-                Color(.systemYellow).opacity(0.01),
-                Color(.systemYellow).opacity(0)
+                Color(.systemBlue).opacity(0.8),
+                Color(.systemBlue).opacity(0.5),
+                Color(.systemBlue).opacity(0.35),
+                Color(.systemBlue).opacity(0.3),
+                Color(.systemBlue).opacity(0.2),
+                Color(.systemBlue).opacity(0.15),
+                Color(.systemBlue).opacity(0.1),
+                Color(.systemBlue).opacity(0.05),
+                Color(.systemBlue).opacity(0.03),
+                Color(.systemBlue).opacity(0.01),
+                Color(.systemBlue).opacity(0)
             ]
         ),
         startPoint: .top,
@@ -148,6 +148,11 @@ struct CodeForcesGraphView: View {
                             PointMark(x: .value("selectedDate", selectedDate, unit: .day), y: .value("", kontest.newRating))
                         }
                     }
+                    #if os(iOS)
+                    .foregroundStyle(Color(uiColor: UIColor.systemBlue))
+                    #elseif os(macOS)
+                    .foregroundStyle(Color(nsColor: NSColor.systemBlue))
+                    #endif
                     .chartScrollableAxes(.horizontal)
                     .chartXVisibleDomain(length: 3600*24*30) // 30 days
                     .padding(.horizontal)

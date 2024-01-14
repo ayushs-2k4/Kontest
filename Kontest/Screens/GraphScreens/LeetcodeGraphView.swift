@@ -154,6 +154,11 @@ struct LeetCodeChart: View {
                 }
             }
         }
+        #if os(iOS)
+        .foregroundStyle(Color(uiColor: UIColor.systemYellow))
+        #elseif os(macOS)
+        .foregroundStyle(Color(nsColor: NSColor.systemYellow))
+        #endif
         .chartScrollableAxes(.horizontal)
         .chartXVisibleDomain(length: 3600 * 24 * 30) // 30 days
         .padding(.horizontal)
