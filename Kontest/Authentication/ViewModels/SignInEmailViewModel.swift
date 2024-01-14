@@ -107,7 +107,11 @@ final class SignInEmailViewModel {
 
             self.isLoading = false
 
-            UserManager.shared.createNewUser(auth: returnedUserData)
+            UserManager.shared.createNewUser(
+                auth: returnedUserData,
+                firstName: self.firstName,
+                lastName: self.lastName
+            )
 
             return true
         } catch {

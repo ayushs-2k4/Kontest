@@ -29,10 +29,10 @@ struct FireStoreView: View {
         }
 
         if let dbUSer {
-            Text(dbUSer.name)
+            Text(dbUSer.firstName)
+            Text(dbUSer.lastName)
             Text(dbUSer.email)
             Text("\(dbUSer.dateCreated)")
-            Text(dbUSer.clg)
         }
     }
 }
