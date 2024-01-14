@@ -36,7 +36,7 @@ class KontestNewRepository: KontestFetcher {
                 {
                     // Access the data in the dictionary
 
-                    print(dictionary)
+//                    logger.log("dictionary: \(dictionary)")
 
                     let timeDictionary = dictionary["time"] as? [String: String] ?? [:]
 
@@ -60,7 +60,7 @@ class KontestNewRepository: KontestFetcher {
 
                     let konDTo = KontestDTO(name: konName, url: url ?? "", start_time: startTime ?? "", end_time: endTime ?? "", duration: "", site: location ?? "", in_24_hours: "NO", status: "CODING")
 
-                    print("HI")
+//                    print("HI")
                     myAllContests.append(konDTo)
                 } else {
                     print("Error parsing JSON")

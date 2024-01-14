@@ -5,10 +5,14 @@
 //  Created by Ayush Singhal on 12/08/23.
 //
 
+import Firebase
+import OSLog
 import SwiftUI
 
 @main
 struct KontestApp: App {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "KontestApp")
+
     @State private var allKontestsViewModel = Dependencies.instance.allKontestsViewModel
 
     @State private var router = Router.instance
@@ -19,6 +23,9 @@ struct KontestApp: App {
 
     init() {
         networkMonitor.start(afterSeconds: 0.5)
+
+        FirebaseApp.configure()
+        logger.log("Firebase Configured")
     }
 
     var body: some Scene {

@@ -58,6 +58,9 @@
 		077E6EB12AB4B3220003E897 /* ErrorState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EB02AB4B3220003E897 /* ErrorState.swift */; };
 		0787AE982AC89C0100F1B80C /* RotatingMapScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0787AE972AC89C0100F1B80C /* RotatingMapScreen.swift */; };
 		0791DA552B51646200A9CA23 /* ClockObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791DA542B51646200A9CA23 /* ClockObserver.swift */; };
+		079A67132B54473100901C0D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 079A67122B54473100901C0D /* GoogleService-Info.plist */; };
+		079A67162B5447F600901C0D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 079A67152B5447F600901C0D /* FirebaseAnalytics */; };
+		079A67182B5447F600901C0D /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 079A67172B5447F600901C0D /* FirebaseAnalyticsSwift */; };
 		079CF54E2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CF54D2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift */; };
 		079CF5502B527ECD00BE8E13 /* CodeChefScrapingContestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CF54F2B527ECD00BE8E13 /* CodeChefScrapingContestDTO.swift */; };
 		079CF5522B527F6700BE8E13 /* CodeChefScrapingContestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CF5512B527F6700BE8E13 /* CodeChefScrapingContestModel.swift */; };
@@ -234,6 +237,7 @@
 		078429312AB603FB0078D836 /* KontestWidgetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestWidgetModel.swift; sourceTree = "<group>"; };
 		0787AE972AC89C0100F1B80C /* RotatingMapScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingMapScreen.swift; sourceTree = "<group>"; };
 		0791DA542B51646200A9CA23 /* ClockObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockObserver.swift; sourceTree = "<group>"; };
+		079A67122B54473100901C0D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		079CF54D2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefScrapingAPIRepository.swift; sourceTree = "<group>"; };
 		079CF54F2B527ECD00BE8E13 /* CodeChefScrapingContestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefScrapingContestDTO.swift; sourceTree = "<group>"; };
 		079CF5512B527F6700BE8E13 /* CodeChefScrapingContestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefScrapingContestModel.swift; sourceTree = "<group>"; };
@@ -335,7 +339,9 @@
 			files = (
 				07ECFBC22AA582E3008513C6 /* LeetCodeSchema in Frameworks */,
 				07ECFBBF2AA582D2008513C6 /* Apollo in Frameworks */,
+				079A67162B5447F600901C0D /* FirebaseAnalytics in Frameworks */,
 				07AA752C2B4FCD9F00DCD75B /* SwiftSoup in Frameworks */,
+				079A67182B5447F600901C0D /* FirebaseAnalyticsSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,6 +529,7 @@
 		07ECFB362AA58259008513C6 /* Kontest */ = {
 			isa = PBXGroup;
 			children = (
+				079A67122B54473100901C0D /* GoogleService-Info.plist */,
 				07EA6F482AB6405A00CD932E /* Kontest.entitlements */,
 				0784292C2AB5EF520078D836 /* Intents */,
 				07710E842AB46220008DE1D6 /* Info.plist */,
@@ -761,6 +768,8 @@
 				07ECFBBE2AA582D2008513C6 /* Apollo */,
 				07ECFBC12AA582E3008513C6 /* LeetCodeSchema */,
 				07AA752B2B4FCD9F00DCD75B /* SwiftSoup */,
+				079A67152B5447F600901C0D /* FirebaseAnalytics */,
+				079A67172B5447F600901C0D /* FirebaseAnalyticsSwift */,
 			);
 			productName = "Coding Kontest";
 			productReference = 076016552A87CD52007CE9F5 /* Kontest.app */;
@@ -846,6 +855,7 @@
 				07ECFBBD2AA582D2008513C6 /* XCRemoteSwiftPackageReference "apollo-ios" */,
 				07ECFBC02AA582E3008513C6 /* XCLocalSwiftPackageReference "LeetCodeSchema" */,
 				07AA752A2B4FCD9F00DCD75B /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 076016562A87CD52007CE9F5 /* Products */;
 			projectDirPath = "";
@@ -877,6 +887,7 @@
 				07ECFB892AA58259008513C6 /* Assets.xcassets in Resources */,
 				07ECFB962AA58259008513C6 /* Preview Assets.xcassets in Resources */,
 				07ECFB802AA58259008513C6 /* README.md in Resources */,
+				079A67132B54473100901C0D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1496,6 +1507,14 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.19.1;
+			};
+		};
 		07AA752A2B4FCD9F00DCD75B /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scinfu/SwiftSoup";
@@ -1519,6 +1538,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 07ECFBBD2AA582D2008513C6 /* XCRemoteSwiftPackageReference "apollo-ios" */;
 			productName = Apollo;
+		};
+		079A67152B5447F600901C0D /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		079A67172B5447F600901C0D /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
 		};
 		079F68282ABC819A001B0EFE /* Apollo */ = {
 			isa = XCSwiftPackageProductDependency;
