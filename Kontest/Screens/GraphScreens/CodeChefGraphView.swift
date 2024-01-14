@@ -14,6 +14,12 @@ struct CodeChefGraphView: View {
 
     @State private var showAnnotations: Bool = true
 
+    #if os(iOS)
+        let accentColor = Color(uiColor: UIColor.systemBrown)
+    #elseif os(macOS)
+        let accentColor = Color(nsColor: NSColor.systemBrown)
+    #endif
+
     var body: some View {
         VStack {
             if codeChefViewModel.username.isEmpty {
@@ -34,6 +40,7 @@ struct CodeChefGraphView: View {
                     Toggle("Show Annotations?", isOn: $showAnnotations)
                         .toggleStyle(.switch)
                         .padding(.horizontal)
+                        .tint(accentColor)
 
                     CodeChefChart(showAnnotations: $showAnnotations)
                 }
@@ -83,7 +90,6 @@ struct CodeChefChart: View {
                 let date = CalendarUtility.getFormattedDateForCodeChefKontestRatings(date: attendedKontest.endDate)
 
                 let rating = Int(attendedKontest.rating)
-                let name = attendedKontest.name
 
                 if let date, let rating {
                     PointMark(x: .value("Time", date, unit: .day), y: .value("Ratings", rating))
@@ -97,10 +103,6 @@ struct CodeChefChart: View {
                             if showAnnotations {
                                 VStack {
                                     Text("\(date.formatted(date: .numeric, time: .shortened))")
-
-                                    #if os(macOS)
-                                        Text(name)
-                                    #endif
                                 }
                             }
                         }
@@ -124,10 +126,14 @@ struct CodeChefChart: View {
                     )) {
                         VStack(spacing: 10) {
                             Text(kontest.name)
+                                .bold()
 
                             Text("Ended: \(selectedDate.formatted(date: Date.FormatStyle.DateStyle.abbreviated, time: .shortened))")
 
-                            Text("Rating: \(kontest.rating)")
+                            if showAnnotations {}
+                            else {
+                                Text("Rating: \(kontest.rating)")
+                            }
                         }
                         .padding()
                     }

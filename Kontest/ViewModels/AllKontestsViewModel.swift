@@ -135,6 +135,7 @@ class AllKontestsViewModel {
                     // Load Calendar status
                     kontest.loadCalendarStatus(allEvents: allEvents ?? [])
                     kontest.loadCalendarEventDate(allEvents: allEvents ?? [])
+                    kontest.loadEventCalendar(allEvents: allEvents ?? [])
 
                     return kontest
                 }
@@ -251,7 +252,7 @@ class AllKontestsViewModel {
     #if os(macOS)
     func addCalendarObserver() throws {
         if CalendarUtility.getAuthorizationStatus() == .fullAccess {
-            CalendarUtility.addCalendarObserver { [weak self] _ in
+            CalendarUtility.addCalendarObserver(onChange: { [weak self] _ in
                 guard let self else { return }
                 print("Yes")
 
@@ -261,24 +262,28 @@ class AllKontestsViewModel {
                     for kontest in self.ongoingKontests {
                         kontest.loadCalendarStatus(allEvents: allEvents ?? [])
                         kontest.loadCalendarEventDate(allEvents: allEvents ?? [])
+                        kontest.loadEventCalendar(allEvents: allEvents ?? [])
                     }
 
                     for kontest in self.laterTodayKontests {
                         kontest.loadCalendarStatus(allEvents: allEvents ?? [])
                         kontest.loadCalendarEventDate(allEvents: allEvents ?? [])
+                        kontest.loadEventCalendar(allEvents: allEvents ?? [])
                     }
 
                     for kontest in self.tomorrowKontests {
                         kontest.loadCalendarStatus(allEvents: allEvents ?? [])
                         kontest.loadCalendarEventDate(allEvents: allEvents ?? [])
+                        kontest.loadEventCalendar(allEvents: allEvents ?? [])
                     }
 
                     for kontest in self.laterKontests {
                         kontest.loadCalendarStatus(allEvents: allEvents ?? [])
                         kontest.loadCalendarEventDate(allEvents: allEvents ?? [])
+                        kontest.loadEventCalendar(allEvents: allEvents ?? [])
                     }
                 }
-            }
+            })
         }
     }
     #endif

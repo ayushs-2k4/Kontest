@@ -57,18 +57,17 @@ enum CalendarUtility {
 
         return currentDate
     }
-    
+
     // DateFormatter for the fourth format: "2023-06-21 22:00:06"
-    static func getFormattedDateForCodeChefKontestRatings(date:String) -> Date?
-    {
+    static func getFormattedDateForCodeChefKontestRatings(date: String) -> Date? {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // 2023-06-21 22:00:06
         formatter.locale = Locale(identifier: "en_US_POSIX")
-        
+
         formatter.timeZone = .init(abbreviation: "IST")
 
         let currentDate = formatter.date(from: date)
-        
+
         return currentDate
     }
 
@@ -138,11 +137,11 @@ enum CalendarUtility {
         formatter.allowedUnits = [.day, .hour, .minute, .second]
 
         let dateComponents = DateComponents(hour: hours, minute: minutes)
-        
+
         let totalMinutes = (dateComponents.hour ?? 0) * 60 + (dateComponents.minute ?? 0)
 
         let ans = ((totalMinutes <= Constants.maximumDurationOfAKontestInMinutes) && (totalMinutes >= Constants.minimumDurationOfAKontestInMinutes)) ? formatter.string(from: dateComponents) : nil // It verifies that kontest duration is in between minimum and maximum range, and if it is not in range then returns nil. If it is nil then in "AllKontestsViewModel", during filtering it removes that kontest entry.
-        
+
         return ans
     }
 
@@ -324,7 +323,7 @@ enum CalendarUtility {
         return nextDateToRefresh
     }
 
-    private static func requestFullAccessToReminders() async throws -> Bool {
+    static func requestFullAccessToReminders() async throws -> Bool {
         do {
             try await eventStore.requestFullAccessToEvents()
         } catch {
@@ -335,7 +334,7 @@ enum CalendarUtility {
         return isGranted
     }
 
-    static func addEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?, alarmAbsoluteDate: Date) async throws -> Bool {
+    static func addEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?, alarmAbsoluteDate: Date, calendar: EKCalendar? = eventStore.defaultCalendarForNewEvents) async throws -> Bool {
         // Check the authorization status for calendar events
         let authorizationStatus = EKEventStore.authorizationStatus(for: EKEntityType.event)
 
@@ -347,7 +346,7 @@ enum CalendarUtility {
                 if isGranted {
                     // Permission granted, continue to create and save the event
                     do {
-                        return try createAndSaveEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url, alarmAbsoluteDate: alarmAbsoluteDate)
+                        return try createAndSaveEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url, alarmAbsoluteDate: alarmAbsoluteDate, calendar: calendar)
                     } catch {
                         throw error
                     }
@@ -362,7 +361,7 @@ enum CalendarUtility {
         } else {
             // If already authorized, create and save the event
             do {
-                return try createAndSaveEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url, alarmAbsoluteDate: alarmAbsoluteDate)
+                return try createAndSaveEvent(startDate: startDate, endDate: endDate, title: title, notes: notes, url: url, alarmAbsoluteDate: alarmAbsoluteDate, calendar: calendar)
             } catch {
                 throw error
             }
@@ -370,10 +369,11 @@ enum CalendarUtility {
     }
 
     // Function to create and save the event
-    private static func createAndSaveEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?, alarmAbsoluteDate: Date) throws -> Bool {
+    private static func createAndSaveEvent(startDate: Date, endDate: Date, title: String, notes: String, url: URL?, alarmAbsoluteDate: Date, calendar: EKCalendar?) throws -> Bool {
         UserDefaults(suiteName: Constants.userDefaultsGroupID)!.set(true, forKey: "shouldFetchAllEventsFromCalendar")
         let event = EKEvent(eventStore: eventStore)
-        event.calendar = eventStore.defaultCalendarForNewEvents
+//        event.calendar = eventStore.defaultCalendarForNewEvents
+        event.calendar = calendar
         event.title = title
         event.startDate = startDate
         event.endDate = endDate
@@ -494,5 +494,101 @@ enum CalendarUtility {
         //            print("Observation Changed")
         //        }
         //        .store(in: &cancellables)
+    }
+
+    static func getAllCalendars() throws -> [EKCalendar] {
+        let authorizationStatus = EKEventStore.authorizationStatus(for: EKEntityType.event)
+
+        if authorizationStatus != .fullAccess {
+            throw AppError(title: "Permission not Granted", description: "Calendar Permission is not granted.")
+        }
+
+        let allCalendars = eventStore.calendars(for: .event)
+
+        for calendar in allCalendars {
+            if calendar.type != .subscription {
+                print("\(calendar) , source - \(calendar.source.title) \n\n")
+            }
+        }
+
+        return allCalendars
+    }
+
+    static func getCalendarsByTheirSources() throws -> [String: [EKCalendar]] {
+        let authorizationStatus = EKEventStore.authorizationStatus(for: EKEntityType.event)
+
+        if authorizationStatus != .fullAccess {
+            throw AppError(title: "Permission not Granted", description: "Calendar Permission is not granted.")
+        }
+
+        let allCalendars = eventStore.calendars(for: .event)
+
+        var ans: [String: [EKCalendar]] = [:]
+
+        for calendar in allCalendars {
+            if ans[calendar.source.title] == nil {
+                ans[calendar.source.title] = []
+            }
+
+            ans[calendar.source.title]?.append(calendar)
+        }
+
+        return ans
+    }
+
+    static func getChangableCalendarsByTheirSources() throws -> [(String, [EKCalendar])] {
+        let authorizationStatus = EKEventStore.authorizationStatus(for: EKEntityType.event)
+
+        if authorizationStatus != .fullAccess {
+            throw AppError(title: "Permission not Granted", description: "Calendar Permission is not granted.")
+        }
+
+        let allCalendars = eventStore.calendars(for: .event)
+
+        var ans: [(String, [EKCalendar])] = []
+
+        for calendar in allCalendars {
+            // Check if the calendar allows content modifications
+            if calendar.allowsContentModifications {
+                // Try to find an existing entry for the calendar source in the result array
+                if let index = ans.firstIndex(where: { $0.0 == calendar.source.title }) {
+                    // If the entry exists, append the calendar to the existing array
+                    ans[index].1.append(calendar)
+                } else {
+                    // If the entry doesn't exist, create a new entry with the source title and the calendar
+                    ans.append((calendar.source.title, [calendar]))
+                }
+            }
+        }
+
+        return ans
+    }
+
+    static func getCalendarAccountNameOfAnEvent(allEventsOfCalendar: [EKEvent], startDate: Date, endDate: Date, title: String, url: URL?) -> String? {
+        let event = allEventsOfCalendar.first { event in
+            event.startDate == startDate && event.endDate == endDate && event.title == title && event.url == url
+        }
+
+        if let event {
+            let calendarAccountName = event.calendar.source.title
+
+            return calendarAccountName
+        } else {
+            return nil
+        }
+    }
+
+    static func getCalendarNameOfAnEvent(allEventsOfCalendar: [EKEvent], startDate: Date, endDate: Date, title: String, url: URL?) -> String? {
+        let event = allEventsOfCalendar.first { event in
+            event.startDate == startDate && event.endDate == endDate && event.title == title && event.url == url
+        }
+
+        if let event {
+            let calendarName = event.calendar.title
+
+            return calendarName
+        } else {
+            return nil
+        }
     }
 }

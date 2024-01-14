@@ -102,7 +102,24 @@ struct ButtonsView: View {
 
                 if let kontestStartDate {
                     Button {
-                        isCalendarPopoverVisible = true
+                        let authorizationStatus = CalendarUtility.getAuthorizationStatus()
+
+                        if authorizationStatus == .fullAccess {
+                            isCalendarPopoverVisible = true
+                        } else {
+                            Task {
+                                do {
+                                    let isGranted = try await CalendarUtility.requestFullAccessToReminders()
+
+                                    if !isGranted {
+                                        throw AppError(title: "Permission not Granted", description: "Calendar Permission is not granted.")
+                                    }
+
+                                } catch {
+                                    errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Check that you have given Kontest the Calendar Permission (Full Access)")
+                                }
+                            }
+                        }
 
                     } label: {
                         Text("Add to Calendar")
@@ -110,44 +127,58 @@ struct ButtonsView: View {
                     }
                     .controlSize(.large)
                     .popover(isPresented: $isCalendarPopoverVisible, arrowEdge: .bottom) {
-                        CalendarPopoverView(date: kontest.calendarEventDate != nil ? kontest.calendarEventDate! : kontestStartDate.addingTimeInterval(-15 * 60), kontestStartDate: kontestStartDate, isAlreadySetted: kontest.isCalendarEventAdded, onPressDelete: {
-                            print(kontest.isCalendarEventAdded ? "Delete" : "Cancel")
+                        CalendarPopoverView(date: kontest.calendarEventDate != nil ? kontest.calendarEventDate! : kontestStartDate.addingTimeInterval(-15 * 60),
+                                            kontestStartDate: kontestStartDate,
+                                            isAlreadySetted: kontest.isCalendarEventAdded,
+                                            calendarName: kontest.selectedCalendarName,
+                                            calendarAccount: kontest.selectedCalendarAccount,
+                                            onPressDelete: {
+                                                print(kontest.isCalendarEventAdded ? "Delete" : "Cancel")
 
-                            Task {
-                                do {
-                                    try await CalendarUtility.removeEvent(startDate: kontestStartDate, endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
+                                                Task {
+                                                    do {
+                                                        try await CalendarUtility.removeEvent(startDate: kontestStartDate, endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
 
-                                    kontest.isCalendarEventAdded = false
-                                    kontest.calendarEventDate = nil
-                                } catch {
-                                    errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Check that you have given Kontest the Calendar Permission (Full Access)")
-                                }
+                                                        kontest.isCalendarEventAdded = false
+                                                        kontest.calendarEventDate = nil
+                                                    } catch {
+                                                        errorState.errorWrapper = ErrorWrapper(error: error, guidance: "Check that you have given Kontest the Calendar Permission (Full Access)")
+                                                    }
 
-                                isCalendarPopoverVisible = false
-                                WidgetCenter.shared.reloadAllTimelines()
-                            }
-                        }, onPressSet: { setDate in
-                            print("setDate: \(setDate)")
+                                                    isCalendarPopoverVisible = false
+                                                    WidgetCenter.shared.reloadAllTimelines()
+                                                }
+                                            },
+                                            onPressSet: { setDate, selectedCalendar in
+                                                print("setDate: \(setDate)")
 
-                            Task {
-                                do {
-                                    if kontest.isCalendarEventAdded { // If one event was already setted, then remove it and set a new event
-                                        try await CalendarUtility.removeEvent(startDate: kontestStartDate, endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
-                                    }
+                                                Task {
+                                                    do {
+                                                        if kontest.isCalendarEventAdded { // If one event was already setted, then remove it and set a new event
+                                                            try await CalendarUtility.removeEvent(startDate: kontestStartDate, endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url))
+                                                        }
 
-                                    if try await CalendarUtility.addEvent(startDate: kontestStartDate, endDate: kontestEndDate ?? Date(), title: kontest.name, notes: "", url: URL(string: kontest.url), alarmAbsoluteDate: setDate) {
-                                        kontest.isCalendarEventAdded = true
-                                        kontest.calendarEventDate = setDate
-                                    }
-                                } catch {
-                                    errorState.errorWrapper = ErrorWrapper(error: error, guidance: "")
-                                }
+                                                        if try await CalendarUtility.addEvent(
+                                                            startDate: kontestStartDate,
+                                                            endDate: kontestEndDate ?? Date(),
+                                                            title: kontest.name,
+                                                            notes: "",
+                                                            url: URL(string: kontest.url),
+                                                            alarmAbsoluteDate: setDate,
+                                                            calendar: selectedCalendar
+                                                        ) {
+                                                            kontest.isCalendarEventAdded = true
+                                                            kontest.calendarEventDate = setDate
+                                                        }
+                                                    } catch {
+                                                        errorState.errorWrapper = ErrorWrapper(error: error, guidance: "")
+                                                    }
 
-                                isCalendarPopoverVisible = false
-                                WidgetCenter.shared.reloadAllTimelines()
-                            }
-                        })
-                        .presentationCompactAdaptation(.popover)
+                                                    isCalendarPopoverVisible = false
+                                                    WidgetCenter.shared.reloadAllTimelines()
+                                                }
+                                            })
+                                            .presentationCompactAdaptation(.popover)
                     }
                 }
             }
@@ -302,8 +333,8 @@ struct RemainingTimeView: View {
 //    let startTime = "2023-08-14 17:42:00 UTC"
 //    let endTime = "2023-08-21 17:43:00 UTC"
 
-    let startTime = "2023-10-30 00:00:00 UTC"
-    let endTime = "2023-11-30 23:59:00 UTC"
+    let startTime = "2024-10-30 00:00:00 UTC"
+    let endTime = "2024-11-30 23:59:00 UTC"
 
 //    return KontestDetailsScreen(kontest: KontestModel.from(dto: KontestDTO(name: "ProjectEuler+", url: "https://hackerrank.com/contests/projecteuler", start_time: startTime, end_time: endTime, duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "CODING")))
 //        .environment(AllKontestsViewModel())
