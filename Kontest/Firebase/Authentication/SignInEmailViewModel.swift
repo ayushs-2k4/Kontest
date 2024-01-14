@@ -11,6 +11,10 @@ import Foundation
 final class SignInEmailViewModel {
     var email = ""
     var password = ""
+    var confirmPassword = ""
+    var firstName = ""
+    var lastName = ""
+    
 
     func signIn() {
         guard !email.isEmpty,!password.isEmpty else {

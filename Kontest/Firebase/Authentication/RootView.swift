@@ -8,20 +8,16 @@
 import SwiftUI
 
 struct RootView: View {
-    @State private var showSignInView: Bool = false
+    @State private var showSignInView: Bool = true
 
     var body: some View {
-        ZStack {
-            NavigationStack {
-                Text("Settings")
-            }
-        }
-        .onAppear {
-            let authUser = try?
-            AuthenticationManager.shared.getAuthenticatedUser()
+        ZStack {}
+            .onAppear {
+                let authUser = try?
+                    AuthenticationManager.shared.getAuthenticatedUser()
 
-            self.showSignInView = authUser == nil ? true : false
-        }
+                self.showSignInView = authUser == nil ? true : false
+            }
 
         if showSignInView {
             AuthenticationView()
@@ -35,7 +31,7 @@ struct RootView: View {
             } label: {
                 Text("Sign Out")
             }
-            
+
             FireStoreView()
         }
     }
