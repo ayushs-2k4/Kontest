@@ -18,6 +18,12 @@ struct CodeForcesGraphView: View {
         self._attendedContests = State(initialValue: [])
     }
 
+    #if os(iOS)
+        let accentColor = Color(uiColor: UIColor.systemBlue)
+    #elseif os(macOS)
+        let accentColor = Color(nsColor: NSColor.systemBlue)
+    #endif
+
     let curGradient = LinearGradient(
         gradient: Gradient(
             colors: [
@@ -81,6 +87,7 @@ struct CodeForcesGraphView: View {
                     Toggle("Show Annotations?", isOn: $showAnnotations)
                         .toggleStyle(.switch)
                         .padding(.horizontal)
+                        .tint(accentColor)
 
                     Chart {
                         ForEach(attendedContests, id: \.contestId) { attendedContest in

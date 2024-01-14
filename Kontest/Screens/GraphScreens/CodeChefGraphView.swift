@@ -13,6 +13,12 @@ struct CodeChefGraphView: View {
     let codeChefViewModel: CodeChefViewModel = Dependencies.instance.codeChefViewModel
 
     @State private var showAnnotations: Bool = true
+    
+#if os(iOS)
+    let accentColor = Color(uiColor: UIColor.systemBrown)
+#elseif os(macOS)
+    let accentColor = Color(nsColor: NSColor.systemBrown)
+#endif
 
     var body: some View {
         VStack {
@@ -34,6 +40,7 @@ struct CodeChefGraphView: View {
                     Toggle("Show Annotations?", isOn: $showAnnotations)
                         .toggleStyle(.switch)
                         .padding(.horizontal)
+                        .tint(accentColor)
 
                     CodeChefChart(showAnnotations: $showAnnotations)
                 }

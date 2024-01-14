@@ -16,6 +16,12 @@ struct LeetcodeGraphView: View {
 
     @State private var showAnnotations: Bool = true
 
+    #if os(iOS)
+        let accentColor = Color(uiColor: UIColor.systemYellow)
+    #elseif os(macOS)
+        let accentColor = Color(nsColor: NSColor.systemYellow)
+    #endif
+
     var body: some View {
         VStack {
             if leetcodeGraphQLViewModel.username.isEmpty {
@@ -34,6 +40,7 @@ struct LeetcodeGraphView: View {
                     Toggle("Show Annotations?", isOn: $showAnnotations)
                         .toggleStyle(.switch)
                         .padding(.horizontal)
+                        .tint(accentColor)
 
                     LeetCodeChart(
                         showAnnotations: $showAnnotations
