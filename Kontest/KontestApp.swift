@@ -54,16 +54,6 @@ struct KontestApp: App {
             } else {
                 Text("Failed to load user defaults")
             }
-
-//            RootView()
-//            SignInView()
-//            SignUpView()
-//            FireStoreView()
-
-//            HStack{
-//                SignInView()
-//                SignUpView()
-//            }
         }
         .commands {
             MyMenu(router: $router, panelSelection: $panelSelection)

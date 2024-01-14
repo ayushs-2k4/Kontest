@@ -1,5 +1,5 @@
 //
-//  SignInView.swift
+//  SignInScreen.swift
 //  Kontest
 //
 //  Created by Ayush Singhal on 1/15/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SignInView: View {
+struct SignInScreen: View {
     let signInEmailViewModel: SignInEmailViewModel = .shared
 
     @State private var isPasswordFieldVisible: Bool = false
@@ -30,7 +30,7 @@ struct SignInView: View {
 
             if isPasswordFieldVisible {
                 SignInViewTextField(
-                    leftText: "Pasword:",
+                    leftText: "Password:",
                     textHint: "required",
                     isPasswordType: true,
                     focusedField: _focusedField,
@@ -97,9 +97,9 @@ struct SignInView: View {
 
                     if !isPasswordFieldVisible { // only email field is visible
                         if signInEmailViewModel.email.isEmpty {
-                            signInEmailViewModel.error = AppError(title: "Email can not be empty", description: "")
+                            signInEmailViewModel.error = AppError(title: "Email can not be empty.", description: "")
                         } else if !checkIfEmailIsCorrect(emailAddress: signInEmailViewModel.email) {
-                            signInEmailViewModel.error = AppError(title: "Email is not in correct format", description: "")
+                            signInEmailViewModel.error = AppError(title: "Email is not in correct format.", description: "")
                         } else {
                             isPasswordFieldVisible = true
 
@@ -192,7 +192,7 @@ enum SignInTextField {
 }
 
 #Preview {
-    SignInView()
+    SignInScreen()
         .environment(Router.instance)
         .frame(width: 500, height: 500)
 }

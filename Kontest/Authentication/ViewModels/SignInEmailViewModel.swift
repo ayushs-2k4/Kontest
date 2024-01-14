@@ -63,13 +63,13 @@ final class SignInEmailViewModel {
 //                } else {
                 switch errorCode {
                 case AuthErrorCode.wrongPassword:
-                    self.error = AppError(title: "Password is wrong", description: "")
+                    self.error = AppError(title: "Your provided password is wrong.", description: "")
 
                 case AuthErrorCode.userDisabled:
-                    self.error = AppError(title: "Your Account has been disabled", description: "Contact Support - ayushsinghals02@gmail.com")
+                    self.error = AppError(title: "Your Account has been disabled.", description: "Contact Support - ayushsinghals02@gmail.com")
 
                 case AuthErrorCode.tooManyRequests:
-                    self.error = AppError(title: "Your Account has been temporarily disabled due to multiple wrong attempts", description: "Contact Support - ayushsinghals02@gmail.com")
+                    self.error = AppError(title: "Your Account has been temporarily disabled due to multiple wrong attempts.", description: "Contact Support - ayushsinghals02@gmail.com")
 
                 case AuthErrorCode.userNotFound:
                     self.error = AppError(title: "You don't have an account, please Sign up instead!", description: "")
@@ -118,22 +118,22 @@ final class SignInEmailViewModel {
 
                 switch errorCode {
                 case AuthErrorCode.userDisabled:
-                    self.error = AppError(title: "Your Account has been disabled", description: "Contact Support - ayushsinghals02@gmail.com")
+                    self.error = AppError(title: "Your Account has been disabled.", description: "Contact Support - ayushsinghals02@gmail.com")
 
                 case AuthErrorCode.tooManyRequests:
-                    self.error = AppError(title: "Your Account has been temporarily disabled due to multiple wrong attempts", description: "Contact Support - ayushsinghals02@gmail.com")
+                    self.error = AppError(title: "Your Account has been temporarily disabled due to multiple wrong attempts.", description: "Contact Support - ayushsinghals02@gmail.com")
 
                 case AuthErrorCode.invalidEmail:
-                    self.error = AppError(title: "Invalid email format", description: "Please provide a valid email address.")
+                    self.error = AppError(title: "Email is in invalid format.", description: "Please provide a valid email address.")
 
                 case AuthErrorCode.emailAlreadyInUse:
-                    self.error = AppError(title: "Email is already in use", description: "Please use a different email address or sign in.")
+                    self.error = AppError(title: "Email is already in use.", description: "Please use a different email address or sign in.")
 
                 case AuthErrorCode.weakPassword:
-                    self.error = AppError(title: "Weak Password", description: "Your password must be at least 6 characters long.")
+                    self.error = AppError(title: "Password is weak.", description: "Your password must be at least 6 characters long.")
 
                 case AuthErrorCode.operationNotAllowed:
-                    self.error = AppError(title: "Signup Not Allowed", description: "Email/password signup is disabled for these credentials.")
+                    self.error = AppError(title: "Signup is currently Not Allowed.", description: "Email/password signup is disabled for these credentials.")
 
                 default:
                     print(error)

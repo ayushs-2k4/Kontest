@@ -209,10 +209,10 @@ struct AllKontestsScreen: View {
                             case .AuthenticationScreenType(let authenticationScreenType):
                                 switch authenticationScreenType {
                                 case .SignInScreen:
-                                    SignInView()
+                                    SignInScreen()
 
                                 case .SignUpScreen:
-                                    SignUpView()
+                                    SignUpScreen()
                                 }
                             }
                         }

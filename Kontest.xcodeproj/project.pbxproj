@@ -62,10 +62,9 @@
 		079A67162B5447F600901C0D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 079A67152B5447F600901C0D /* FirebaseAnalytics */; };
 		079A67182B5447F600901C0D /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 079A67172B5447F600901C0D /* FirebaseAnalyticsSwift */; };
 		079A671C2B544CA700901C0D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 079A671B2B544CA700901C0D /* FirebaseAuth */; };
-		079A671F2B544CD000901C0D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079A671E2B544CD000901C0D /* SignUpView.swift */; };
+		079A671F2B544CD000901C0D /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079A671E2B544CD000901C0D /* SignUpScreen.swift */; };
 		079A67212B544D2300901C0D /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079A67202B544D2300901C0D /* AuthenticationManager.swift */; };
 		079A67232B544EAE00901C0D /* SignInEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079A67222B544EAE00901C0D /* SignInEmailViewModel.swift */; };
-		079A67252B54545000901C0D /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079A67242B54545000901C0D /* RootView.swift */; };
 		079A67272B54592100901C0D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 079A67262B54592100901C0D /* FirebaseFirestore */; };
 		079A67292B54592100901C0D /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 079A67282B54592100901C0D /* FirebaseFirestoreSwift */; };
 		079A672D2B545A0000901C0D /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079A672C2B545A0000901C0D /* UserManager.swift */; };
@@ -106,7 +105,7 @@
 		07AA75302B501A6400DCD75B /* KontestNewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA752D2B4FCF7A00DCD75B /* KontestNewRepository.swift */; };
 		07AA75322B501AEB00DCD75B /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 07AA75312B501AEB00DCD75B /* SwiftSoup */; };
 		07AA75342B501AF200DCD75B /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 07AA75332B501AF200DCD75B /* SwiftSoup */; };
-		07BDE0922B546BDE0059A5FA /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BDE0912B546BDE0059A5FA /* SignInView.swift */; };
+		07BDE0922B546BDE0059A5FA /* SignInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BDE0912B546BDE0059A5FA /* SignInScreen.swift */; };
 		07D766692AC8404A000A3DFD /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D766682AC8404A000A3DFD /* Sidebar.swift */; };
 		07D7666C2AC8407B000A3DFD /* DetailColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7666B2AC8407B000A3DFD /* DetailColumn.swift */; };
 		07D7666E2AC84094000A3DFD /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7666D2AC84094000A3DFD /* Panel.swift */; };
@@ -248,10 +247,9 @@
 		0787AE972AC89C0100F1B80C /* RotatingMapScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingMapScreen.swift; sourceTree = "<group>"; };
 		0791DA542B51646200A9CA23 /* ClockObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockObserver.swift; sourceTree = "<group>"; };
 		079A67122B54473100901C0D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		079A671E2B544CD000901C0D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		079A671E2B544CD000901C0D /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
 		079A67202B544D2300901C0D /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		079A67222B544EAE00901C0D /* SignInEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailViewModel.swift; sourceTree = "<group>"; };
-		079A67242B54545000901C0D /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		079A672C2B545A0000901C0D /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		079A672E2B545AC500901C0D /* FireStoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStoreView.swift; sourceTree = "<group>"; };
 		079CF54D2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefScrapingAPIRepository.swift; sourceTree = "<group>"; };
@@ -268,7 +266,7 @@
 		07A31F012AAC831300EBC296 /* FilterWebsitesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesViewModel.swift; sourceTree = "<group>"; };
 		07A7501F2AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoKontestsDueToFiltersScreen.swift; sourceTree = "<group>"; };
 		07AA752D2B4FCF7A00DCD75B /* KontestNewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestNewRepository.swift; sourceTree = "<group>"; };
-		07BDE0912B546BDE0059A5FA /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		07BDE0912B546BDE0059A5FA /* SignInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreen.swift; sourceTree = "<group>"; };
 		07C6EE8F2ABAE38900FEA3D7 /* WidgetCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetCache.swift; sourceTree = "<group>"; };
 		07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingKontestsWidgetCache.swift; sourceTree = "<group>"; };
 		07CFEBA32AB02DCB00291484 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -498,19 +496,10 @@
 			path = Intents;
 			sourceTree = "<group>";
 		};
-		079A671D2B544CBF00901C0D /* Authentication */ = {
-			isa = PBXGroup;
-			children = (
-				079A67242B54545000901C0D /* RootView.swift */,
-			);
-			path = Authentication;
-			sourceTree = "<group>";
-		};
 		079A672A2B54596500901C0D /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
 				079A672B2B54596C00901C0D /* FireStore */,
-				079A671D2B544CBF00901C0D /* Authentication */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -549,8 +538,8 @@
 		07BDE0932B5480EE0059A5FA /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				079A671E2B544CD000901C0D /* SignUpView.swift */,
-				07BDE0912B546BDE0059A5FA /* SignInView.swift */,
+				079A671E2B544CD000901C0D /* SignUpScreen.swift */,
+				07BDE0912B546BDE0059A5FA /* SignInScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1049,7 +1038,7 @@
 				07ECFBA72AA58259008513C6 /* ClipboardUtility.swift in Sources */,
 				07ECFBBA2AA58259008513C6 /* LeetCodeGraphQLAPIFetcher.swift in Sources */,
 				07ECFB8F2AA58259008513C6 /* CodeForcesAPIRepository.swift in Sources */,
-				07BDE0922B546BDE0059A5FA /* SignInView.swift in Sources */,
+				07BDE0922B546BDE0059A5FA /* SignInScreen.swift in Sources */,
 				07183EB22AB8587A006C92AD /* MockNotificationsViewModel.swift in Sources */,
 				077E6EAF2AB4B2120003E897 /* ErrorView.swift in Sources */,
 				07ECFBA42AA58259008513C6 /* AllNotificationMenu.swift in Sources */,
@@ -1092,11 +1081,10 @@
 				073269E82AAC42350028476D /* FilterWebsitesView.swift in Sources */,
 				07ECFB982AA58259008513C6 /* SettingsScreen.swift in Sources */,
 				07740EA52ABF171F00A93EAF /* CalendarPopoverView.swift in Sources */,
-				079A671F2B544CD000901C0D /* SignUpView.swift in Sources */,
+				079A671F2B544CD000901C0D /* SignUpScreen.swift in Sources */,
 				07D9FFCD2AD9A5D000C03A3A /* HapticFeedbackUtility.swift in Sources */,
 				07ECFB862AA58259008513C6 /* NotificationsViewModel.swift in Sources */,
 				07ECFB942AA58259008513C6 /* CodeChefAPIModel.swift in Sources */,
-				079A67252B54545000901C0D /* RootView.swift in Sources */,
 				07567EA52AB645E9007EFEE1 /* AddToCalendarIntent.swift in Sources */,
 				07AA752E2B4FCF7A00DCD75B /* KontestNewRepository.swift in Sources */,
 				07ECFBB22AA58259008513C6 /* LeetCodeUserProfileGraphQLAPIDTO.swift in Sources */,

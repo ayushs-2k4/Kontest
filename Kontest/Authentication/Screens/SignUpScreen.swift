@@ -1,5 +1,5 @@
 //
-//  SignUpView.swift
+//  SignUpScreen.swift
 //  Kontest
 //
 //  Created by Ayush Singhal on 1/14/24.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SignUpView: View {
+struct SignUpScreen: View {
     let signInEmailViewModel: SignInEmailViewModel = .shared
 
     @Environment(Router.self) private var router
@@ -115,11 +115,11 @@ struct SignUpView: View {
                     } else if signInEmailViewModel.lastName.isEmpty {
                         signInEmailViewModel.error = AppError(title: "Last name can not be empty.", description: "")
                     } else if signInEmailViewModel.email.isEmpty {
-                        signInEmailViewModel.error = AppError(title: "Email can not be empty", description: "")
+                        signInEmailViewModel.error = AppError(title: "Email can not be empty.", description: "")
                     } else if !checkIfEmailIsCorrect(emailAddress: signInEmailViewModel.email) {
-                        signInEmailViewModel.error = AppError(title: "Email is not in correct format", description: "")
+                        signInEmailViewModel.error = AppError(title: "Email is not in correct format.", description: "")
                     } else if signInEmailViewModel.password.isEmpty {
-                        signInEmailViewModel.error = AppError(title: "Password can not be empty", description: "")
+                        signInEmailViewModel.error = AppError(title: "Password can not be empty.", description: "")
                     } else if !checkIfPasswordIsCorrect(password: signInEmailViewModel.password) {
                         signInEmailViewModel.error = AppError(title: "Password not complying with requirements.", description: "")
                     } else if signInEmailViewModel.password != signInEmailViewModel.confirmPassword {
@@ -149,7 +149,7 @@ struct SignUpView: View {
             }
         }
         .onAppear {
-            self.focusedField = .password
+            self.focusedField = .firstName
         }
         .onChange(of: focusedField) { oldValue, newValue in
             print("Focus Changed from \(oldValue) to \(newValue)")
@@ -170,7 +170,7 @@ enum SignUpTextField {
 }
 
 #Preview {
-    SignUpView()
+    SignUpScreen()
         .environment(Router.instance)
         .frame(width: 400, height: 400)
 }
