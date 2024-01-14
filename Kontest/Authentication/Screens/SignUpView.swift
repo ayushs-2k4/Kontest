@@ -94,6 +94,7 @@ struct SignUpView: View {
                 }
 
                 Button {
+                    signInEmailViewModel.clearPasswordFields()
                     router.popupLastScreen()
                     router.appendScreen(screen: Screen.SettingsScreenType(.AuthenticationScreenType(.SignInScreen)))
                 } label: {

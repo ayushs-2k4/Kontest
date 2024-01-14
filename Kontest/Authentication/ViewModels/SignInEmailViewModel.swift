@@ -29,13 +29,13 @@ final class SignInEmailViewModel {
 
     func signIn() async -> Bool {
         if email.isEmpty {
-            error = AppError(title: "Email cannot empty.", description: "")
+            error = AppError(title: "Email cannot be empty.", description: "")
             logger.log("Email is empty.")
             return false
         }
 
         if password.isEmpty {
-            error = AppError(title: "Password cannot empty.", description: "")
+            error = AppError(title: "Password cannot be empty.", description: "")
             logger.log("Password is empty.")
             return false
         }
@@ -157,6 +157,13 @@ final class SignInEmailViewModel {
         self.confirmPassword = ""
         self.firstName = ""
         self.lastName = ""
+        self.isLoading = false
+        self.error = nil
+    }
+
+    func clearPasswordFields() {
+        self.password = ""
+        self.confirmPassword = ""
         self.isLoading = false
         self.error = nil
     }
