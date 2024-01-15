@@ -13,6 +13,13 @@ import SwiftUI
 struct KontestApp: App {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "KontestApp")
 
+    init() {
+        networkMonitor.start(afterSeconds: 0.5)
+
+//        FirebaseApp.configure() // moved to Dependencies, as they are running first than init, and app is crashing on putting this in init()
+//        logger.log("Firebase Configured")
+    }
+
     @State private var allKontestsViewModel = Dependencies.instance.allKontestsViewModel
 
     @State private var router = Router.instance
@@ -20,13 +27,6 @@ struct KontestApp: App {
     @State private var panelSelection: Panel? = .AllKontestScreen
 
     let networkMonitor = NetworkMonitor.shared
-
-    init() {
-        networkMonitor.start(afterSeconds: 0.5)
-
-        FirebaseApp.configure()
-        logger.log("Firebase Configured")
-    }
 
     var body: some Scene {
         WindowGroup {

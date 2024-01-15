@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SignUpScreen: View {
-    let signInEmailViewModel: SignInEmailViewModel = .shared
+    let signInEmailViewModel: AuthenticationEmailViewModel = .shared
 
     @Environment(Router.self) private var router
 

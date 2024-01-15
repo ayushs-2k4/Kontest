@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SignInScreen: View {
-    let signInEmailViewModel: SignInEmailViewModel = .shared
+    let signInEmailViewModel: AuthenticationEmailViewModel = .shared
 
     @State private var isPasswordFieldVisible: Bool = false
 

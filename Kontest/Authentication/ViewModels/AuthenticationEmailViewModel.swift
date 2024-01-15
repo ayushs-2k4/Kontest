@@ -1,5 +1,5 @@
 //
-//  SignInEmailViewModel.swift
+//  AuthenticationEmailViewModel.swift
 //  Kontest
 //
 //  Created by Ayush Singhal on 1/14/24.
@@ -10,7 +10,7 @@ import Foundation
 import OSLog
 
 @Observable
-final class SignInEmailViewModel {
+final class AuthenticationEmailViewModel {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "SignInEmailViewModel")
 
     var email: String = ""
@@ -23,7 +23,7 @@ final class SignInEmailViewModel {
 
     var error: Error?
 
-    static let shared = SignInEmailViewModel()
+    static let shared = AuthenticationEmailViewModel()
 
     private init() {}
 
@@ -107,7 +107,7 @@ final class SignInEmailViewModel {
 
             self.isLoading = false
 
-            UserManager.shared.createNewUser(
+            try UserManager.shared.createNewUser(
                 auth: returnedUserData,
                 firstName: self.firstName,
                 lastName: self.lastName

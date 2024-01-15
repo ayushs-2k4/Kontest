@@ -43,6 +43,20 @@ class AllKontestsViewModel {
     var isLoading = false
 
     init(notificationsViewModel: NotificationsViewModelProtocol, filterWebsitesViewModel: FilterWebsitesViewModelProtocol, repository: KontestFetcher) {
+        Task {
+            let uid = try AuthenticationManager.shared.getAuthenticatedUser().uid
+
+            let userManager = UserManager.shared
+
+            do {
+                let dbUser = try await userManager.getUser(userId: uid)
+
+                print(dbUser)
+            } catch {
+                print("Not Successful")
+            }
+        }
+
         self.repository = repository
         self.notificationsViewModel = notificationsViewModel
         self.filterWebsitesViewModel = filterWebsitesViewModel
