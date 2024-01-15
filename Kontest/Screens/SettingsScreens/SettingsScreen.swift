@@ -5,6 +5,7 @@
 //  Created by Ayush Singhal on 16/08/23.
 //
 
+import OSLog
 import SwiftUI
 
 struct SettingsScreen: View {
@@ -25,7 +26,10 @@ struct SettingsScreen: View {
 }
 
 private struct AllSettingsButtonsView: View {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "AllSettingsButtonsView")
+
     @Environment(Router.self) private var router
+    @State private var isAuthenticated: Bool = AuthenticationManager.shared.isSignedIn()
 
     var body: some View {
         Button("Change Usernames") {
@@ -36,8 +40,18 @@ private struct AllSettingsButtonsView: View {
             router.appendScreen(screen: Screen.SettingsScreenType(.FilterWebsitesScreen))
         }
 
-        Button("SignUp/ SignIn") {
-            router.appendScreen(screen: Screen.SettingsScreenType(.AuthenticationScreenType(.SignInScreen)))
+        Button(isAuthenticated ? "Sign Out" : "Sign In/ Sign Up") {
+            if isAuthenticated {
+                do {
+                    try AuthenticationManager.shared.signOut()
+                } catch {
+                    logger.log("Error in Signing out: \(error)")
+                }
+            } else {
+                router.appendScreen(screen: Screen.SettingsScreenType(.AuthenticationScreenType(.SignInScreen)))
+            }
+
+            isAuthenticated = AuthenticationManager.shared.isSignedIn()
         }
 
         Button("About Me!") {

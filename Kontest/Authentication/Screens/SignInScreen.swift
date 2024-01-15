@@ -74,16 +74,6 @@ struct SignInScreen: View {
                         .padding(.horizontal, 1)
                 }
 
-                Button("Sign Out") {
-                    do {
-                        try AuthenticationManager.shared.signOut()
-                        print("Successfully signed out")
-                    } catch {
-                        signInEmailViewModel.error = AppError(title: "Error in Signing out", description: error.localizedDescription)
-                        print("Error in signin out: \(error)")
-                    }
-                }
-
                 Button {
                     signInEmailViewModel.clearPasswordFields()
                     router.popupLastScreen()
