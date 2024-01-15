@@ -83,15 +83,20 @@ struct MainChangeUsernameView: View {
     }
 
     func completeForm() {
+        UserManager.shared.updateUserUsernames(
+            oldLeetcodeUsername: changeUsernameViewModel.leetcodeUsername,
+            newLeetcodeUsername: leetcodeUsername,
+            oldCodeForcesUsername: changeUsernameViewModel.codeForcesUsername,
+            newCodeForcesUsername: codeForcesUsername,
+            oldCodeChefUsername: changeUsernameViewModel.codeChefUsername,
+            newCodeChefUsername: codeChefUsername
+            
+        )
+        
         changeUsernameViewModel.setCodeForcesUsername(newCodeForcesUsername: codeForcesUsername)
         changeUsernameViewModel.setLeetcodeUsername(newLeetcodeUsername: leetcodeUsername)
         changeUsernameViewModel.setCodeChefUsername(newCodeChefUsername: codeChefUsername)
 
-        UserManager.shared.updateUserUsernames(
-            leetcodeUsername: changeUsernameViewModel.leetcodeUsername,
-            codeForcesUsername: changeUsernameViewModel.codeForcesUsername,
-            codeChefUsername: changeUsernameViewModel.codeChefUsername
-        )
         dismiss()
     }
 }

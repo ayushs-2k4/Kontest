@@ -83,15 +83,19 @@ final class UserManager {
         return snapshot
     }
 
-    func updateUserUsernames(leetcodeUsername: String, codeForcesUsername: String, codeChefUsername: String) {
+    func updateUserUsernames(oldLeetcodeUsername: String, newLeetcodeUsername: String, oldCodeForcesUsername: String, newCodeForcesUsername: String, oldCodeChefUsername: String, newCodeChefUsername: String) {
         if AuthenticationManager.shared.isSignedIn() {
+            let finalLeetcodeUsername = newLeetcodeUsername == "" ? oldLeetcodeUsername : newLeetcodeUsername
+            let finalCodeForcesUsername = newCodeForcesUsername == "" ? oldCodeForcesUsername : newCodeForcesUsername
+            let finalCodeChefUsername = newCodeChefUsername == "" ? oldCodeChefUsername : newCodeChefUsername
+
             do {
                 let userId = try AuthenticationManager.shared.getAuthenticatedUser().uid
 
-                userDocument(userId: userId).setData([
-                    "leetcode_username": leetcodeUsername,
-                    "code_chef_username": codeChefUsername,
-                    "code_forces_username": codeForcesUsername
+                userDocument(userId: userId).updateData([
+                    "leetcode_username": finalLeetcodeUsername,
+                    "code_chef_username": finalCodeChefUsername,
+                    "code_forces_username": finalCodeForcesUsername
                 ])
             } catch {}
         }
