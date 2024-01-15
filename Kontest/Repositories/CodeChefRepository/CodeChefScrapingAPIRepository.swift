@@ -9,9 +9,13 @@ import Foundation
 import OSLog
 import SwiftSoup
 
-func getUserDataFromParsedHTML(stringHTML: String) -> String {
+func getUserDataFromParsedHTML(stringHTML: String) throws -> String {
     let startIndex = stringHTML.ranges(of: "var all_rating =")
     let endIndex = stringHTML.ranges(of: "var current_user_rating")
+
+    if startIndex.count == 0 || endIndex.count == 0 {
+        throw AppError(title: "Username is invalid", description: "")
+    }
 
     var prefinalString = stringHTML[startIndex[0].upperBound ..< endIndex[0].lowerBound]
 
@@ -43,7 +47,7 @@ class CodeChefScrapingAPIRepository {
 
             let stringHTML = try parsedHTML.outerHtml()
 
-            let finalDataString = getUserDataFromParsedHTML(stringHTML: stringHTML)
+            let finalDataString = try getUserDataFromParsedHTML(stringHTML: stringHTML)
 
             let allContests = try JSONDecoder().decode([CodeChefScrapingContestDTO].self, from: finalDataString.data(using: .utf8)!)
 

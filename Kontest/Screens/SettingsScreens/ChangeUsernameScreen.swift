@@ -50,21 +50,19 @@ struct MainChangeUsernameView: View {
                               usernameBinding: $codeForcesUsername,
                               focusedField: _focusedField,
                               currentField: .CodeForces,
-                              onPressingNext: {
-        })
+                              onPressingNext: {})
 
         SettingsTextFieldView(lightModeImage: .leetCodeLightLogo,
                               darkModeImage: .leetCodeDarkLogo,
                               title: "Enter LeetCode Username",
                               boundryColor: KontestModel.getColorForIdentifier(
-                                siteAbbreviation: "LeetCode"
+                                  siteAbbreviation: "LeetCode"
                               ),
                               submitLabel: .next,
                               usernameBinding: $leetcodeUsername,
                               focusedField: _focusedField,
                               currentField: .LeetCode,
-                              onPressingNext: {
-        })
+                              onPressingNext: {})
 
         SettingsTextFieldView(lightModeImage: .codeChefLogo,
                               darkModeImage: .codeChefLogo,
@@ -75,8 +73,8 @@ struct MainChangeUsernameView: View {
                               focusedField: _focusedField,
                               currentField: .CodeChef,
                               onPressingNext: {
-            completeForm()
-        })
+                                  completeForm()
+                              })
 
         Button("Save") {
             completeForm()
@@ -88,6 +86,12 @@ struct MainChangeUsernameView: View {
         changeUsernameViewModel.setCodeForcesUsername(newCodeForcesUsername: codeForcesUsername)
         changeUsernameViewModel.setLeetcodeUsername(newLeetcodeUsername: leetcodeUsername)
         changeUsernameViewModel.setCodeChefUsername(newCodeChefUsername: codeChefUsername)
+
+        UserManager.shared.updateUserUsernames(
+            leetcodeUsername: changeUsernameViewModel.leetcodeUsername,
+            codeForcesUsername: changeUsernameViewModel.codeForcesUsername,
+            codeChefUsername: changeUsernameViewModel.codeChefUsername
+        )
         dismiss()
     }
 }
