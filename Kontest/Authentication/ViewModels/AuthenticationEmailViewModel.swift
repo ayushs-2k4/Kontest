@@ -48,6 +48,10 @@ final class AuthenticationEmailViewModel {
             print("Success in logging in with email - password")
             print("returnedUserData: \(returnedUserData)")
 
+            let uid = returnedUserData.uid
+
+            try await setDownloadedUsernamesAsLocalUsernames(userId: uid)
+
             self.isLoading = false
             return true
 
@@ -170,6 +174,15 @@ final class AuthenticationEmailViewModel {
         self.confirmPassword = ""
         self.isLoading = false
         self.error = nil
+    }
+
+    private func setDownloadedUsernamesAsLocalUsernames(userId: String) async throws {
+        let data = try await UserManager.shared.getUser(userId: userId)
+
+        let changeUsernameViewModel: ChangeUsernameViewModel = Dependencies.instance.changeUsernameViewModel
+        changeUsernameViewModel.setLeetcodeUsername(newLeetcodeUsername: data.leetcodeUsername == "" ? changeUsernameViewModel.leetcodeUsername : data.leetcodeUsername)
+        changeUsernameViewModel.setCodeChefUsername(newCodeChefUsername: data.codeChefUsername == "" ? changeUsernameViewModel.codeChefUsername : data.codeChefUsername)
+        changeUsernameViewModel.setCodeForcesUsername(newCodeForcesUsername: data.codeForcesUsername == "" ? changeUsernameViewModel.codeForcesUsername : data.codeForcesUsername)
     }
 }
 

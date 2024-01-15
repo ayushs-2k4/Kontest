@@ -22,7 +22,7 @@ struct ChangeUsernameScreen: View {
 }
 
 struct MainChangeUsernameView: View {
-    let changeUsernameViewModel = Dependencies.instance.changeUsernameViewModel
+    let changeUsernameViewModel: ChangeUsernameViewModel = Dependencies.instance.changeUsernameViewModel
 
     @State private var leetcodeUsername: String = ""
     @State private var codeForcesUsername: String = ""
@@ -90,9 +90,8 @@ struct MainChangeUsernameView: View {
             newCodeForcesUsername: codeForcesUsername,
             oldCodeChefUsername: changeUsernameViewModel.codeChefUsername,
             newCodeChefUsername: codeChefUsername
-            
         )
-        
+
         changeUsernameViewModel.setCodeForcesUsername(newCodeForcesUsername: codeForcesUsername)
         changeUsernameViewModel.setLeetcodeUsername(newLeetcodeUsername: leetcodeUsername)
         changeUsernameViewModel.setCodeChefUsername(newCodeChefUsername: codeChefUsername)
