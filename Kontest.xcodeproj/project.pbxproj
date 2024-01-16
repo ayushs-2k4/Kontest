@@ -13,6 +13,7 @@
 		07183EB72AB8752D006C92AD /* CalendarUtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EB62AB8752D006C92AD /* CalendarUtilityTests.swift */; };
 		071915642AB1695E00E1CB56 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071915632AB1695E00E1CB56 /* NetworkMonitor.swift */; };
 		071915672AB169D300E1CB56 /* NoInternetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071915662AB169D300E1CB56 /* NoInternetScreen.swift */; };
+		0720B0172B5680F0006721EE /* CollegesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0720B0162B5680F0006721EE /* CollegesRepository.swift */; };
 		0725FB632AC7E2EA00564DE0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0725FB622AC7E2EA00564DE0 /* ContentView.swift */; };
 		0725FB662AC7EA3F00564DE0 /* LeetcodeGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0725FB652AC7EA3F00564DE0 /* LeetcodeGraphView.swift */; };
 		0725FB682AC82F0A00564DE0 /* CodeForcesGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0725FB672AC82F0A00564DE0 /* CodeForcesGraphView.swift */; };
@@ -221,6 +222,7 @@
 		07183EB62AB8752D006C92AD /* CalendarUtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarUtilityTests.swift; sourceTree = "<group>"; };
 		071915632AB1695E00E1CB56 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		071915662AB169D300E1CB56 /* NoInternetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetScreen.swift; sourceTree = "<group>"; };
+		0720B0162B5680F0006721EE /* CollegesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegesRepository.swift; sourceTree = "<group>"; };
 		0725FB622AC7E2EA00564DE0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0725FB652AC7EA3F00564DE0 /* LeetcodeGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetcodeGraphView.swift; sourceTree = "<group>"; };
 		0725FB672AC82F0A00564DE0 /* CodeForcesGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeForcesGraphView.swift; sourceTree = "<group>"; };
@@ -643,6 +645,7 @@
 				07ECFB442AA58259008513C6 /* KontestRepository */,
 				07ECFB472AA58259008513C6 /* LeetcodeRepository */,
 				07ECFB4A2AA58259008513C6 /* CodeForcesRepository */,
+				0720B0162B5680F0006721EE /* CollegesRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1081,6 +1084,7 @@
 				073269E82AAC42350028476D /* FilterWebsitesView.swift in Sources */,
 				07ECFB982AA58259008513C6 /* SettingsScreen.swift in Sources */,
 				07740EA52ABF171F00A93EAF /* CalendarPopoverView.swift in Sources */,
+				0720B0172B5680F0006721EE /* CollegesRepository.swift in Sources */,
 				079A671F2B544CD000901C0D /* SignUpScreen.swift in Sources */,
 				07D9FFCD2AD9A5D000C03A3A /* HapticFeedbackUtility.swift in Sources */,
 				07ECFB862AA58259008513C6 /* NotificationsViewModel.swift in Sources */,

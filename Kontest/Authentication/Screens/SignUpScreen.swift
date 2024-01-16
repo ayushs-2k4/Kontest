@@ -14,7 +14,14 @@ struct SignUpScreen: View {
 
     @State private var text: String = ""
 
+    @State private var selectedState: String = "Andhra Pradesh"
+
+    @State private var collegesList: [College] = []
+    @State private var selectedCollege: String = "This is a college"
+
     @FocusState private var focusedField: SignUpTextField?
+
+    @State private var isCollegeListDownloading = false
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -43,6 +50,72 @@ struct SignUpScreen: View {
                 #endif
             }
             .padding(.vertical)
+
+            HStack {
+                Picker("   Select State:", selection: $selectedState) {
+                    ForEach(Constants.states, id: \.self) { state in
+                        Text(state)
+                    }
+                }
+
+                ProgressView()
+                    .controlSize(.small)
+                    .padding(1)
+                    .hidden()
+            }
+            .onChange(of: selectedState) {
+                collegesList.removeAll()
+
+                Task {
+                    isCollegeListDownloading = true
+                    let downloadedCollegesList = try await CollegesRepository.shared.getAllCollegesOfAStateFromFirestore(state: selectedState)
+                        .sorted { college1, college2 in
+                            college1.name < college2.name
+                        }
+
+                    self.collegesList.append(contentsOf: downloadedCollegesList)
+
+                    isCollegeListDownloading = false
+
+                    selectedCollege = downloadedCollegesList[0].name
+                }
+            }
+            .onAppear(perform: {
+                Task {
+                    isCollegeListDownloading = true
+                    let downloadedCollegesList = try await CollegesRepository.shared.getAllCollegesOfAStateFromFirestore(state: selectedState)
+                        .sorted { college1, college2 in
+                            college1.name < college2.name
+                        }
+
+                    self.collegesList.append(contentsOf: downloadedCollegesList)
+
+                    isCollegeListDownloading = false
+
+                    selectedCollege = downloadedCollegesList[0].name
+                }
+            })
+
+            HStack {
+                Picker("Select College:", selection: $selectedCollege) {
+                    ForEach(collegesList.map { clg in
+                        clg.name
+                    }, id: \.self) { college in
+                        Text(college)
+                    }
+                }
+
+                if isCollegeListDownloading {
+                    ProgressView()
+                        .controlSize(.small)
+                        .padding(1)
+                } else {
+                    ProgressView()
+                        .controlSize(.small)
+                        .padding(1)
+                        .hidden()
+                }
+            }
 
             HStack(alignment: .top) {
                 Text("       Password:")
@@ -101,12 +174,6 @@ struct SignUpScreen: View {
                     Text("Sign In Instead")
                 }
 
-//                Button {
-//                    router.popupLastScreen()
-//                } label: {
-//                    Text("Cancel")
-//                }
-
                 Button {
                     signInEmailViewModel.error = nil
 
@@ -148,16 +215,16 @@ struct SignUpScreen: View {
                 .keyboardShortcut(.return, modifiers: [])
             }
         }
-        .onAppear {
-            self.focusedField = .firstName
-        }
-        .onChange(of: focusedField) { oldValue, newValue in
-            print("Focus Changed from \(oldValue) to \(newValue)")
-        }
         #if os(macOS)
         .frame(maxWidth: 400)
         #endif
         .padding()
+        .onAppear {
+            self.focusedField = .firstName
+        }
+        .onChange(of: focusedField) { oldValue, newValue in
+            print("Focus Changed from \(String(describing: oldValue)) to \(String(describing: newValue))")
+        }
     }
 }
 
