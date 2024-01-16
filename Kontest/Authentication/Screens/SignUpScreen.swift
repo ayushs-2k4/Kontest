@@ -172,6 +172,9 @@ struct SignUpScreen: View {
                 Button {
                     authenticationEmailViewModel.error = nil
 
+                    authenticationEmailViewModel.firstName = authenticationEmailViewModel.firstName.trimmingCharacters(in: .whitespacesAndNewlines)
+                    authenticationEmailViewModel.lastName = authenticationEmailViewModel.lastName.trimmingCharacters(in: .whitespacesAndNewlines)
+
                     if authenticationEmailViewModel.firstName.isEmpty {
                         authenticationEmailViewModel.error = AppError(title: "First name can not be empty.", description: "")
                     } else if authenticationEmailViewModel.lastName.isEmpty {
@@ -219,6 +222,9 @@ struct SignUpScreen: View {
         }
         .onChange(of: focusedField) { oldValue, newValue in
             print("Focus Changed from \(String(describing: oldValue)) to \(String(describing: newValue))")
+
+            authenticationEmailViewModel.firstName = authenticationEmailViewModel.firstName.trimmingCharacters(in: .whitespacesAndNewlines)
+            authenticationEmailViewModel.lastName = authenticationEmailViewModel.lastName.trimmingCharacters(in: .whitespacesAndNewlines)
         }
     }
 }
