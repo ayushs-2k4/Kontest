@@ -160,6 +160,9 @@ struct ChangeNameSheetView: View {
                 }
                 
                 Button {
+                    firstName = firstName.trimmingCharacters(in: .whitespacesAndNewlines)
+                    lastName = lastName.trimmingCharacters(in: .whitespacesAndNewlines)
+                    
                     isFirstNameErrorShown = firstName.isEmpty
                     isLastNameErrorShown = lastName.isEmpty
                     
@@ -288,7 +291,7 @@ struct ChangeCollegeSheetView: View {
                 Button {
                     accountInformationViewModel.updateCollege(collegeStateName: selectedState, collegeName: selectedCollege)
                     
-                        dismiss()
+                    dismiss()
                 } label: {
                     Text("Save")
                 }
