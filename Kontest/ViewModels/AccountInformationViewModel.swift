@@ -52,14 +52,29 @@ class AccountInformationViewModel {
         self.lastName = self.user?.lastName ?? ""
         self.fullName = (self.user?.firstName ?? "") + " " + (self.user?.lastName ?? "")
         self.collegeName = self.user?.selectedCollege ?? ""
-        self.collegeState = self.user?.selectedState ?? ""
-        self.fullCollegeName = (self.user?.selectedCollege ?? "") + ", " + (self.user?.selectedState ?? "")
+        self.collegeState = self.user?.selectedCollegeState ?? ""
+        self.fullCollegeName = (self.user?.selectedCollege ?? "") + ", " + (self.user?.selectedCollegeState ?? "")
     }
     
     func updateName(firstName: String, lastName: String) {
         UserManager.shared.updateName(firstName: firstName, lastName: lastName, completion: { error in
             
             if let error {
+                print("Error in updating name: \(error)")
+                self.logger.log("Error in updating name: \(error)")
+                
+            } else {
+                self.getAuthenticatedUser()
+            }
+        })
+    }
+    
+    func updateCollege(collegeStateName: String, collegeName: String) {
+        UserManager.shared.updateCollege(collegeStateName: collegeStateName, collegeName: collegeName, completion: { error in
+            if let error {
+                print("Error in updating college name: \(error)")
+                self.logger.log("Error in updating college name: \(error)")
+                
             } else {
                 self.getAuthenticatedUser()
             }

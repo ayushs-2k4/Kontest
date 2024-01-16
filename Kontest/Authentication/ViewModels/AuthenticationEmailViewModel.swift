@@ -117,7 +117,7 @@ final class AuthenticationEmailViewModel {
                 auth: returnedUserData,
                 firstName: self.firstName,
                 lastName: self.lastName,
-                selectedState: self.selectedState,
+                selectedCollegeState: self.selectedState,
                 selectedCollege: self.selectedCollege
             )
 

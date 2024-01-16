@@ -16,7 +16,8 @@ struct AccountInformationScreen: View {
     let accountInformationViewModel = AccountInformationViewModel.shared
     @State private var isAuthenticated: Bool = AuthenticationManager.shared.isSignedIn()
     
-    @State private var isSheetPresented: Bool = false
+    @State private var isNameChangeSheetPresented: Bool = false
+    @State private var isCollegeChangeSheetPresented: Bool = false
     
     var body: some View {
         VStack {
@@ -30,7 +31,7 @@ struct AccountInformationScreen: View {
                 }
                 .onTapGesture(perform: {
                     if !accountInformationViewModel.isLoading {
-                        isSheetPresented = true
+                        isNameChangeSheetPresented = true
                     }
                 })
                 
@@ -45,6 +46,11 @@ struct AccountInformationScreen: View {
                     
                     Text(accountInformationViewModel.fullCollegeName)
                 }
+                .onTapGesture(perform: {
+                    if !accountInformationViewModel.isLoading {
+                        isCollegeChangeSheetPresented = true
+                    }
+                })
             }
             .padding()
             .overlay {
@@ -76,8 +82,13 @@ struct AccountInformationScreen: View {
         }
         .padding()
         .frame(maxWidth: 400)
-        .sheet(isPresented: $isSheetPresented, content: {
+        .sheet(isPresented: $isNameChangeSheetPresented, content: {
             ChangeNameSheetView()
+                .frame(minWidth: 400)
+                .padding()
+        })
+        .sheet(isPresented: $isCollegeChangeSheetPresented, content: {
+            ChangeCollegeSheetView()
                 .frame(minWidth: 400)
                 .padding()
         })
@@ -183,6 +194,113 @@ struct ChangeNameSheetView: View {
     }
 }
 
+struct ChangeCollegeSheetView: View {
+    let accountInformationViewModel = AccountInformationViewModel.shared
+    
+    @Environment(\.dismiss) private var dismiss
+    
+    @State private var collegesList: [College] = []
+    @State private var isCollegeListDownloading = false
+    
+    @State private var selectedState: String = ""
+    @State private var selectedCollege: String = ""
+    
+    init() {
+        self._selectedState = State(initialValue: accountInformationViewModel.collegeState)
+        self._selectedCollege = State(initialValue: accountInformationViewModel.collegeName)
+    }
+    
+    var body: some View {
+        VStack {
+            HStack {
+                Picker("   Select State:", selection: $selectedState) {
+                    ForEach(Constants.states, id: \.self) { state in
+                        Text(state)
+                    }
+                }
+
+                ProgressView()
+                    .controlSize(.small)
+                    .padding(1)
+                    .hidden()
+            }
+            .onChange(of: selectedState) {
+                collegesList.removeAll()
+
+                Task {
+                    isCollegeListDownloading = true
+                    let downloadedCollegesList = try await CollegesRepository.shared.getAllCollegesOfAStateFromFirestore(state: selectedState)
+                        .sorted { college1, college2 in
+                            college1.name < college2.name
+                        }
+
+                    self.collegesList.append(contentsOf: downloadedCollegesList)
+
+                    isCollegeListDownloading = false
+
+                    selectedCollege = downloadedCollegesList[0].name
+                }
+            }
+            .onAppear(perform: {
+                Task {
+                    isCollegeListDownloading = true
+                    let downloadedCollegesList = try await CollegesRepository.shared.getAllCollegesOfAStateFromFirestore(state: selectedState)
+                        .sorted { college1, college2 in
+                            college1.name < college2.name
+                        }
+
+                    self.collegesList.append(contentsOf: downloadedCollegesList)
+
+                    isCollegeListDownloading = false
+                }
+            })
+
+            HStack {
+                Picker("Select College:", selection: $selectedCollege) {
+                    ForEach(collegesList.map { clg in
+                        clg.name
+                    }, id: \.self) { college in
+                        Text(college)
+                    }
+                }
+
+                if isCollegeListDownloading {
+                    ProgressView()
+                        .controlSize(.small)
+                        .padding(1)
+                } else {
+                    ProgressView()
+                        .controlSize(.small)
+                        .padding(1)
+                        .hidden()
+                }
+            }
+            
+            HStack {
+                Spacer()
+                
+                Button {
+                    dismiss()
+                } label: {
+                    Text("Cancel")
+                }
+                
+                Button {
+                    accountInformationViewModel.updateCollege(collegeStateName: selectedState, collegeName: selectedCollege)
+                    
+                        dismiss()
+                } label: {
+                    Text("Save")
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.accent)
+                .keyboardShortcut(.return)
+            }
+            .padding(.horizontal)
+        }
+    }
+}
+
 #Preview("AccountInformationScreen") {
     AccountInformationScreen()
         .frame(width: 400, height: 400)
@@ -191,6 +309,12 @@ struct ChangeNameSheetView: View {
 
 #Preview("ChangeNameSheetView") {
     ChangeNameSheetView()
+        .frame(width: 400, height: 400)
+        .environment(Router.instance)
+}
+
+#Preview("ChangeCollegeSheetView") {
+    ChangeCollegeSheetView()
         .frame(width: 400, height: 400)
         .environment(Router.instance)
 }

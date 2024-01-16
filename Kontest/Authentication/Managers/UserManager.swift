@@ -11,15 +11,15 @@ import Foundation
 import OSLog
 
 struct DBUser: Codable {
-    let userId, firstName, lastName, email, selectedState, selectedCollege, leetcodeUsername, codeForcesUsername, codeChefUsername: String
+    let userId, firstName, lastName, email, selectedCollegeState, selectedCollege, leetcodeUsername, codeForcesUsername, codeChefUsername: String
     let dateCreated: Date
 
-    init(userId: String, firstName: String, lastName: String, email: String, selectedState: String, selectedCollege: String, leetcodeUsername: String, codeForcesUsername: String, codeChefUsername: String, dateCreated: Date) {
+    init(userId: String, firstName: String, lastName: String, email: String, selectedCollegeState: String, selectedCollege: String, leetcodeUsername: String, codeForcesUsername: String, codeChefUsername: String, dateCreated: Date) {
         self.userId = userId
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
-        self.selectedState = selectedState
+        self.selectedCollegeState = selectedCollegeState
         self.selectedCollege = selectedCollege
         self.leetcodeUsername = leetcodeUsername
         self.codeForcesUsername = codeForcesUsername
@@ -61,7 +61,7 @@ final class UserManager {
         try userDocument(userId: user.userId).setData(from: user, merge: false, encoder: firestoreEncoder)
     }
 
-    func createNewUser(auth: AuthDataResultModel, firstName: String, lastName: String, selectedState: String, selectedCollege: String) throws {
+    func createNewUser(auth: AuthDataResultModel, firstName: String, lastName: String, selectedCollegeState: String, selectedCollege: String) throws {
         let changeUsernameViewModel = Dependencies.instance.changeUsernameViewModel
 
         let leetcodeUsername: String = changeUsernameViewModel.leetcodeUsername
@@ -74,7 +74,7 @@ final class UserManager {
                 firstName: firstName,
                 lastName: lastName,
                 email: auth.email ?? "No Email",
-                selectedState: selectedState,
+                selectedCollegeState: selectedCollegeState,
                 selectedCollege: selectedCollege,
                 leetcodeUsername: leetcodeUsername,
                 codeForcesUsername: codeForcesUsername,
@@ -130,6 +130,31 @@ final class UserManager {
                 }
             } catch {
                 logger.log("Error in updating name: \(error)")
+                completion(error)
+            }
+        }
+    }
+
+    func updateCollege(collegeStateName: String, collegeName: String, completion: @escaping (Error?) -> ()) {
+        if AuthenticationManager.shared.isSignedIn() {
+            do {
+                let userId = try AuthenticationManager.shared.getAuthenticatedUser().uid
+
+                userDocument(userId: userId).updateData([
+                    "selected_college_state": collegeStateName,
+                    "selected_college": collegeName
+                ]) { error in
+                    if let error {
+                        print("Error in updating college: \(error)")
+                        self.logger.log("Error in updating college: \(error)")
+                        completion(error)
+                    } else {
+                        print("Successfully updated college")
+                        completion(nil)
+                    }
+                }
+            } catch {
+                logger.log("Error in updating college: \(error)")
                 completion(error)
             }
         }
