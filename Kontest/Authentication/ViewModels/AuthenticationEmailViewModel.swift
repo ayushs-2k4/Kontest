@@ -18,6 +18,8 @@ final class AuthenticationEmailViewModel {
     var confirmPassword: String = ""
     var firstName: String = ""
     var lastName: String = ""
+    var selectedState: String = "Andhra Pradesh"
+    var selectedCollege: String = ""
 
     var isLoading: Bool = false
 
@@ -114,7 +116,9 @@ final class AuthenticationEmailViewModel {
             try UserManager.shared.createNewUser(
                 auth: returnedUserData,
                 firstName: self.firstName,
-                lastName: self.lastName
+                lastName: self.lastName,
+                selectedState: self.selectedState,
+                selectedCollege: self.selectedCollege
             )
 
             return true

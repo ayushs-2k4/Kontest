@@ -10,14 +10,16 @@ import FirebaseFirestoreSwift
 import Foundation
 
 struct DBUser: Codable {
-    let userId, firstName, lastName, email, leetcodeUsername, codeForcesUsername, codeChefUsername: String
+    let userId, firstName, lastName, email,selectedState,selectedCollege, leetcodeUsername, codeForcesUsername, codeChefUsername: String
     let dateCreated: Date
 
-    init(userId: String, firstName: String, lastName: String, email: String, leetcodeUsername: String, codeForcesUsername: String, codeChefUsername: String, dateCreated: Date) {
+    init(userId: String, firstName: String, lastName: String, email: String, selectedState: String, selectedCollege: String, leetcodeUsername: String, codeForcesUsername: String, codeChefUsername: String, dateCreated: Date) {
         self.userId = userId
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
+        self.selectedState = selectedState
+        self.selectedCollege = selectedCollege
         self.leetcodeUsername = leetcodeUsername
         self.codeForcesUsername = codeForcesUsername
         self.codeChefUsername = codeChefUsername
@@ -56,7 +58,7 @@ final class UserManager {
         try userDocument(userId: user.userId).setData(from: user, merge: false, encoder: firestoreEncoder)
     }
 
-    func createNewUser(auth: AuthDataResultModel, firstName: String, lastName: String) throws {
+    func createNewUser(auth: AuthDataResultModel, firstName: String, lastName: String,selectedState:String,selectedCollege:String) throws {
         let changeUsernameViewModel = Dependencies.instance.changeUsernameViewModel
 
         let leetcodeUsername: String = changeUsernameViewModel.leetcodeUsername
@@ -69,6 +71,8 @@ final class UserManager {
                 firstName: firstName,
                 lastName: lastName,
                 email: auth.email ?? "No Email",
+                selectedState: selectedState,
+                selectedCollege: selectedCollege,
                 leetcodeUsername: leetcodeUsername,
                 codeForcesUsername: codeForcesUsername,
                 codeChefUsername: codeChefUsername,

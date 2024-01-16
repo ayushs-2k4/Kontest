@@ -8,16 +8,11 @@
 import SwiftUI
 
 struct SignUpScreen: View {
-    let signInEmailViewModel: AuthenticationEmailViewModel = .shared
+    let authenticationEmailViewModel: AuthenticationEmailViewModel = .shared
 
     @Environment(Router.self) private var router
 
-    @State private var text: String = ""
-
-    @State private var selectedState: String = "Andhra Pradesh"
-
     @State private var collegesList: [College] = []
-    @State private var selectedCollege: String = "This is a college"
 
     @FocusState private var focusedField: SignUpTextField?
 
@@ -32,17 +27,17 @@ struct SignUpScreen: View {
             HStack {
                 Text("             Name:")
 
-                TextField("first", text: Bindable(signInEmailViewModel).firstName)
+                TextField("first", text: Bindable(authenticationEmailViewModel).firstName)
                     .focused($focusedField, equals: .firstName)
 
-                TextField("last", text: Bindable(signInEmailViewModel).lastName)
+                TextField("last", text: Bindable(authenticationEmailViewModel).lastName)
                     .focused($focusedField, equals: .lastName)
             }
 
             HStack {
                 Text("Email address:")
 
-                TextField("name@example.com", text: Bindable(signInEmailViewModel).email)
+                TextField("name@example.com", text: Bindable(authenticationEmailViewModel).email)
                     .focused($focusedField, equals: .email)
                 #if available
                     .textInputAutocapitalization(.never)
@@ -52,7 +47,7 @@ struct SignUpScreen: View {
             .padding(.vertical)
 
             HStack {
-                Picker("   Select State:", selection: $selectedState) {
+                Picker("   Select State:", selection: Bindable(authenticationEmailViewModel).selectedState) {
                     ForEach(Constants.states, id: \.self) { state in
                         Text(state)
                     }
@@ -63,12 +58,12 @@ struct SignUpScreen: View {
                     .padding(1)
                     .hidden()
             }
-            .onChange(of: selectedState) {
+            .onChange(of: authenticationEmailViewModel.selectedState) {
                 collegesList.removeAll()
 
                 Task {
                     isCollegeListDownloading = true
-                    let downloadedCollegesList = try await CollegesRepository.shared.getAllCollegesOfAStateFromFirestore(state: selectedState)
+                    let downloadedCollegesList = try await CollegesRepository.shared.getAllCollegesOfAStateFromFirestore(state: authenticationEmailViewModel.selectedState)
                         .sorted { college1, college2 in
                             college1.name < college2.name
                         }
@@ -77,13 +72,13 @@ struct SignUpScreen: View {
 
                     isCollegeListDownloading = false
 
-                    selectedCollege = downloadedCollegesList[0].name
+                    authenticationEmailViewModel.selectedCollege = downloadedCollegesList[0].name
                 }
             }
             .onAppear(perform: {
                 Task {
                     isCollegeListDownloading = true
-                    let downloadedCollegesList = try await CollegesRepository.shared.getAllCollegesOfAStateFromFirestore(state: selectedState)
+                    let downloadedCollegesList = try await CollegesRepository.shared.getAllCollegesOfAStateFromFirestore(state: authenticationEmailViewModel.selectedState)
                         .sorted { college1, college2 in
                             college1.name < college2.name
                         }
@@ -92,12 +87,12 @@ struct SignUpScreen: View {
 
                     isCollegeListDownloading = false
 
-                    selectedCollege = downloadedCollegesList[0].name
+                    authenticationEmailViewModel.selectedCollege = downloadedCollegesList[0].name
                 }
             })
 
             HStack {
-                Picker("Select College:", selection: $selectedCollege) {
+                Picker("Select College:", selection: Bindable(authenticationEmailViewModel).selectedCollege) {
                     ForEach(collegesList.map { clg in
                         clg.name
                     }, id: \.self) { college in
@@ -121,10 +116,10 @@ struct SignUpScreen: View {
                 Text("       Password:")
 
                 VStack(alignment: .leading) {
-                    SecureField("required", text: Bindable(signInEmailViewModel).password)
+                    SecureField("required", text: Bindable(authenticationEmailViewModel).password)
                         .focused($focusedField, equals: .password)
 
-                    SecureField("verify", text: Bindable(signInEmailViewModel).confirmPassword)
+                    SecureField("verify", text: Bindable(authenticationEmailViewModel).confirmPassword)
                         .focused($focusedField, equals: .confirmPassword)
 
                     Text("Your password must be at least 8 characters long and include a number, an uppercase letter and a lowercase letter.")
@@ -132,7 +127,7 @@ struct SignUpScreen: View {
             }
             .padding(.vertical)
 
-            if let error = signInEmailViewModel.error {
+            if let error = authenticationEmailViewModel.error {
                 HStack {
                     Spacer()
 
@@ -160,14 +155,14 @@ struct SignUpScreen: View {
             HStack {
                 Spacer()
 
-                if signInEmailViewModel.isLoading {
+                if authenticationEmailViewModel.isLoading {
                     ProgressView()
                         .controlSize(.small)
                         .padding(.horizontal, 1)
                 }
 
                 Button {
-                    signInEmailViewModel.clearPasswordFields()
+                    authenticationEmailViewModel.clearPasswordFields()
                     router.popupLastScreen()
                     router.appendScreen(screen: Screen.SettingsScreenType(.AuthenticationScreenType(.SignInScreen)))
                 } label: {
@@ -175,32 +170,32 @@ struct SignUpScreen: View {
                 }
 
                 Button {
-                    signInEmailViewModel.error = nil
+                    authenticationEmailViewModel.error = nil
 
-                    if signInEmailViewModel.firstName.isEmpty {
-                        signInEmailViewModel.error = AppError(title: "First name can not be empty.", description: "")
-                    } else if signInEmailViewModel.lastName.isEmpty {
-                        signInEmailViewModel.error = AppError(title: "Last name can not be empty.", description: "")
-                    } else if signInEmailViewModel.email.isEmpty {
-                        signInEmailViewModel.error = AppError(title: "Email can not be empty.", description: "")
-                    } else if !checkIfEmailIsCorrect(emailAddress: signInEmailViewModel.email) {
-                        signInEmailViewModel.error = AppError(title: "Email is not in correct format.", description: "")
-                    } else if signInEmailViewModel.password.isEmpty {
-                        signInEmailViewModel.error = AppError(title: "Password can not be empty.", description: "")
-                    } else if !checkIfPasswordIsCorrect(password: signInEmailViewModel.password) {
-                        signInEmailViewModel.error = AppError(title: "Password not complying with requirements.", description: "")
-                    } else if signInEmailViewModel.password != signInEmailViewModel.confirmPassword {
-                        signInEmailViewModel.error = AppError(title: "The passwords you entered do not match.", description: "")
+                    if authenticationEmailViewModel.firstName.isEmpty {
+                        authenticationEmailViewModel.error = AppError(title: "First name can not be empty.", description: "")
+                    } else if authenticationEmailViewModel.lastName.isEmpty {
+                        authenticationEmailViewModel.error = AppError(title: "Last name can not be empty.", description: "")
+                    } else if authenticationEmailViewModel.email.isEmpty {
+                        authenticationEmailViewModel.error = AppError(title: "Email can not be empty.", description: "")
+                    } else if !checkIfEmailIsCorrect(emailAddress: authenticationEmailViewModel.email) {
+                        authenticationEmailViewModel.error = AppError(title: "Email is not in correct format.", description: "")
+                    } else if authenticationEmailViewModel.password.isEmpty {
+                        authenticationEmailViewModel.error = AppError(title: "Password can not be empty.", description: "")
+                    } else if !checkIfPasswordIsCorrect(password: authenticationEmailViewModel.password) {
+                        authenticationEmailViewModel.error = AppError(title: "Password not complying with requirements.", description: "")
+                    } else if authenticationEmailViewModel.password != authenticationEmailViewModel.confirmPassword {
+                        authenticationEmailViewModel.error = AppError(title: "The passwords you entered do not match.", description: "")
                     } else {
                         Task {
-                            let isSignUpSuccessful = await signInEmailViewModel.signUp()
+                            let isSignUpSuccessful = await authenticationEmailViewModel.signUp()
 
                             if isSignUpSuccessful {
                                 print("Yes, sign up is successful")
 
                                 router.goToRootView()
 
-                                signInEmailViewModel.clearAllFields()
+                                authenticationEmailViewModel.clearAllFields()
                             } else {
                                 print("No, sign up is not successful")
                             }

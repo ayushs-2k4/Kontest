@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SignInScreen: View {
-    let signInEmailViewModel: AuthenticationEmailViewModel = .shared
+    let authenticationEmailViewModel: AuthenticationEmailViewModel = .shared
 
     @State private var isPasswordFieldVisible: Bool = false
 
@@ -24,7 +24,7 @@ struct SignInScreen: View {
                 isPasswordType: false,
                 focusedField: _focusedField,
                 currentField: .email,
-                textBinding: Bindable(signInEmailViewModel).email
+                textBinding: Bindable(authenticationEmailViewModel).email
             )
             .padding(.horizontal)
 
@@ -35,12 +35,12 @@ struct SignInScreen: View {
                     isPasswordType: true,
                     focusedField: _focusedField,
                     currentField: .password,
-                    textBinding: Bindable(signInEmailViewModel).password
+                    textBinding: Bindable(authenticationEmailViewModel).password
                 )
                 .padding(.horizontal)
             }
 
-            if let error = signInEmailViewModel.error {
+            if let error = authenticationEmailViewModel.error {
                 HStack {
                     Spacer()
 
@@ -68,14 +68,14 @@ struct SignInScreen: View {
             HStack {
                 Spacer()
 
-                if signInEmailViewModel.isLoading {
+                if authenticationEmailViewModel.isLoading {
                     ProgressView()
                         .controlSize(.small)
                         .padding(.horizontal, 1)
                 }
 
                 Button {
-                    signInEmailViewModel.clearPasswordFields()
+                    authenticationEmailViewModel.clearPasswordFields()
                     router.popupLastScreen()
                     router.appendScreen(screen: Screen.SettingsScreenType(.AuthenticationScreenType(.SignUpScreen)))
                 } label: {
@@ -83,13 +83,13 @@ struct SignInScreen: View {
                 }
 
                 Button("Continue") {
-                    signInEmailViewModel.error = nil
+                    authenticationEmailViewModel.error = nil
 
                     if !isPasswordFieldVisible { // only email field is visible
-                        if signInEmailViewModel.email.isEmpty {
-                            signInEmailViewModel.error = AppError(title: "Email can not be empty.", description: "")
-                        } else if !checkIfEmailIsCorrect(emailAddress: signInEmailViewModel.email) {
-                            signInEmailViewModel.error = AppError(title: "Email is not in correct format.", description: "")
+                        if authenticationEmailViewModel.email.isEmpty {
+                            authenticationEmailViewModel.error = AppError(title: "Email can not be empty.", description: "")
+                        } else if !checkIfEmailIsCorrect(emailAddress: authenticationEmailViewModel.email) {
+                            authenticationEmailViewModel.error = AppError(title: "Email is not in correct format.", description: "")
                         } else {
                             isPasswordFieldVisible = true
 
@@ -98,14 +98,14 @@ struct SignInScreen: View {
 
                     } else {
                         Task {
-                            let isSignInSuccessful = await signInEmailViewModel.signIn()
+                            let isSignInSuccessful = await authenticationEmailViewModel.signIn()
 
                             if isSignInSuccessful {
                                 print("Yes, sign in is successful")
 
                                 router.goToRootView()
 
-                                signInEmailViewModel.clearAllFields()
+                                authenticationEmailViewModel.clearAllFields()
                             } else {
                                 print("No, sign in is not successful")
                             }
