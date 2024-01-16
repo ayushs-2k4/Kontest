@@ -35,7 +35,7 @@ class Router {
         }
     }
 
-    func popupLastScreen() {
+    func popLastScreen() {
         if !path.isEmpty {
             path.removeLast()
         }

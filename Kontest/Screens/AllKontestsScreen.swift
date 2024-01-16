@@ -213,6 +213,9 @@ struct AllKontestsScreen: View {
 
                                 case .SignUpScreen:
                                     SignUpScreen()
+                                    
+                                case .AccountInformationScreen:
+                                    AccountInformationScreen()
                                 }
                             }
                         }

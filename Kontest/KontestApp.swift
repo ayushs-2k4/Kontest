@@ -16,7 +16,7 @@ struct KontestApp: App {
     init() {
         networkMonitor.start(afterSeconds: 0.5)
 
-//        FirebaseApp.configure() // moved to Dependencies, as they are running first than init, and app is crashing on putting this in init()
+        FirebaseApp.configure() // moved to Dependencies, as they are running first than init, and app is crashing on putting this in init()
 //        logger.log("Firebase Configured")
     }
 

@@ -8,9 +8,10 @@
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import Foundation
+import OSLog
 
 struct DBUser: Codable {
-    let userId, firstName, lastName, email,selectedState,selectedCollege, leetcodeUsername, codeForcesUsername, codeChefUsername: String
+    let userId, firstName, lastName, email, selectedState, selectedCollege, leetcodeUsername, codeForcesUsername, codeChefUsername: String
     let dateCreated: Date
 
     init(userId: String, firstName: String, lastName: String, email: String, selectedState: String, selectedCollege: String, leetcodeUsername: String, codeForcesUsername: String, codeChefUsername: String, dateCreated: Date) {
@@ -28,6 +29,8 @@ struct DBUser: Codable {
 }
 
 final class UserManager {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "UserManager")
+
     static let shared = UserManager()
 
     private init() {}
@@ -58,7 +61,7 @@ final class UserManager {
         try userDocument(userId: user.userId).setData(from: user, merge: false, encoder: firestoreEncoder)
     }
 
-    func createNewUser(auth: AuthDataResultModel, firstName: String, lastName: String,selectedState:String,selectedCollege:String) throws {
+    func createNewUser(auth: AuthDataResultModel, firstName: String, lastName: String, selectedState: String, selectedCollege: String) throws {
         let changeUsernameViewModel = Dependencies.instance.changeUsernameViewModel
 
         let leetcodeUsername: String = changeUsernameViewModel.leetcodeUsername
@@ -101,7 +104,34 @@ final class UserManager {
                     "code_chef_username": finalCodeChefUsername,
                     "code_forces_username": finalCodeForcesUsername
                 ])
-            } catch {}
+            } catch {
+                logger.log("Error in updating usernames: \(error)")
+            }
+        }
+    }
+
+    func updateName(firstName: String, lastName: String, completion: @escaping (Error?) -> ()) {
+        if AuthenticationManager.shared.isSignedIn() {
+            do {
+                let userId = try AuthenticationManager.shared.getAuthenticatedUser().uid
+
+                userDocument(userId: userId).updateData([
+                    "first_name": firstName,
+                    "last_name": lastName
+                ]) { error in
+                    if let error {
+                        print("Error in updating name: \(error)")
+                        self.logger.log("Error in updating name: \(error)")
+                        completion(error)
+                    } else {
+                        print("Successfully updated name")
+                        completion(nil)
+                    }
+                }
+            } catch {
+                logger.log("Error in updating name: \(error)")
+                completion(error)
+            }
         }
     }
 }

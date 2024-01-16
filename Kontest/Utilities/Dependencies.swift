@@ -20,7 +20,7 @@ class Dependencies {
     static let instance = Dependencies()
 
     private init() {
-        FirebaseApp.configure()
+//        FirebaseApp.configure()
 
         self.notificationsViewModel = NotificationsViewModel()
         self.filterWebsitesViewModel = FilterWebsitesViewModel()

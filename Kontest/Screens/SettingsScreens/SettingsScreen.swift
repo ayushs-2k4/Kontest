@@ -40,18 +40,12 @@ private struct AllSettingsButtonsView: View {
             router.appendScreen(screen: Screen.SettingsScreenType(.FilterWebsitesScreen))
         }
 
-        Button(isAuthenticated ? "Sign Out" : "Sign In/ Sign Up") {
+        Button(isAuthenticated ? "Account Information" : "Sign In/ Sign Up") {
             if isAuthenticated {
-                do {
-                    try AuthenticationManager.shared.signOut()
-                } catch {
-                    logger.log("Error in Signing out: \(error)")
-                }
+                router.appendScreen(screen: Screen.SettingsScreenType(.AuthenticationScreenType(.AccountInformationScreen)))
             } else {
                 router.appendScreen(screen: Screen.SettingsScreenType(.AuthenticationScreenType(.SignInScreen)))
             }
-
-            isAuthenticated = AuthenticationManager.shared.isSignedIn()
         }
 
         Button("About Me!") {

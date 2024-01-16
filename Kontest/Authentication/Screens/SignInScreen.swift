@@ -76,7 +76,7 @@ struct SignInScreen: View {
 
                 Button {
                     authenticationEmailViewModel.clearPasswordFields()
-                    router.popupLastScreen()
+                    router.popLastScreen()
                     router.appendScreen(screen: Screen.SettingsScreenType(.AuthenticationScreenType(.SignUpScreen)))
                 } label: {
                     Text("Sign Up Instead")

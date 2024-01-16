@@ -163,7 +163,7 @@ struct SignUpScreen: View {
 
                 Button {
                     authenticationEmailViewModel.clearPasswordFields()
-                    router.popupLastScreen()
+                    router.popLastScreen()
                     router.appendScreen(screen: Screen.SettingsScreenType(.AuthenticationScreenType(.SignInScreen)))
                 } label: {
                     Text("Sign In Instead")
