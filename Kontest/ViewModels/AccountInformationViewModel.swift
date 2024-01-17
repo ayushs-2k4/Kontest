@@ -18,7 +18,7 @@ class AccountInformationViewModel {
     
     static let shared = AccountInformationViewModel()
     
-    private var user: DBUser?
+    var user: DBUser?
     
     var firstName: String = ""
     var lastName: String = ""
@@ -36,7 +36,7 @@ class AccountInformationViewModel {
             do {
                 let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
                 
-                self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
+                self.user = try await UserManager.shared.getUser(userId: authDataResult.email ?? authDataResult.uid)
                 
                 setProperties()
             } catch {
@@ -79,5 +79,15 @@ class AccountInformationViewModel {
                 self.getAuthenticatedUser()
             }
         })
+    }
+    
+    func clearAllFields() {
+        self.user = nil
+        self.firstName = ""
+        self.lastName = ""
+        self.fullName = ""
+        self.collegeName = ""
+        self.collegeState = ""
+        self.fullCollegeName = ""
     }
 }

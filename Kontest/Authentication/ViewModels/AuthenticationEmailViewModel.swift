@@ -50,7 +50,7 @@ final class AuthenticationEmailViewModel {
             print("Success in logging in with email - password")
             print("returnedUserData: \(returnedUserData)")
 
-            let uid = returnedUserData.uid
+            let uid = returnedUserData.email ?? returnedUserData.uid
 
             try await setDownloadedUsernamesAsLocalUsernames(userId: uid)
 

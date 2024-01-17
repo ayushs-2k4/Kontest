@@ -8,6 +8,7 @@
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 import Foundation
+import OSLog
 
 struct College: Codable, Hashable {
     let name: String
@@ -26,6 +27,8 @@ struct College: Codable, Hashable {
 }
 
 class CollegesRepository {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "CollegesRepository")
+
     private init() {}
 
     static let shared: CollegesRepository = .init()
@@ -131,5 +134,88 @@ class CollegesRepository {
         }
 
         return allColleges
+    }
+
+    @MainActor
+    func changeNameOfKeys() {
+        var users: [DBUser] = []
+
+        Task {
+            do {
+                let querySnapshot = try await Firestore.firestore().collection("users").getDocuments()
+                let documents = querySnapshot.documents
+
+                for document in documents {
+                    print(document.data())
+
+                    let dict = document.data()
+
+                    let user = DBUser(
+                        userId: document.documentID,
+                        firstName: dict["first_name"] as? String ?? "",
+                        lastName: dict["last_name"] as? String ?? "",
+                        email: dict["email"] as? String ?? "",
+                        selectedCollegeState: dict["selected_college_state"] as? String ?? "",
+                        selectedCollege: dict["selected_college"] as? String ?? "",
+                        leetcodeUsername: dict["leetcode_username"] as? String ?? "",
+                        codeForcesUsername: ["code_forces_username"] as? String ?? "",
+                        codeChefUsername: dict["code_chef_username"] as? String ?? "",
+                        dateCreated: (dict["date_created"] as? Timestamp)?.dateValue() ?? Date()
+                    )
+
+                    users.append(user)
+                }
+            } catch {
+                print("Error: \(error)")
+            }
+
+            print(users.count)
+
+            var newUsers = users.map { dbUser in
+                DBUser(
+                    userId: dbUser.email,
+                    firstName: dbUser.firstName,
+                    lastName: dbUser.lastName,
+                    email: dbUser.email,
+                    selectedCollegeState: dbUser.selectedCollegeState,
+                    selectedCollege: dbUser.selectedCollege,
+                    leetcodeUsername: dbUser.leetcodeUsername,
+                    codeForcesUsername: dbUser.codeForcesUsername,
+                    codeChefUsername: dbUser.codeChefUsername,
+                    dateCreated: dbUser.dateCreated
+                )
+            }
+
+            do {
+                for newUser in newUsers {
+                    try Firestore.firestore().collection("users").document(newUser.email).setData(from: newUser) { error in
+                        if let error {
+                            self.logger.log("\(error)")
+                        }
+                    }
+                }
+            } catch {
+                logger.log("\(error)")
+            }
+        }
+    }
+
+    func testFunc() {
+        do {
+            try UserManager.shared.createNewUser(
+                user: DBUser(
+                    userId: "ankushsingh20000003@gmail.com",
+                    firstName: "Ankush",
+                    lastName: "Singh",
+                    email: "ankushsingh20000003@gmail.com",
+                    selectedCollegeState: "Delhi",
+                    selectedCollege: "Delhi College of Engineering (DCE)",
+                    leetcodeUsername: "ankush920",
+                    codeForcesUsername: "ankush920",
+                    codeChefUsername: "ankushsingh200",
+                    dateCreated: .now
+                )
+            )
+        } catch {}
     }
 }

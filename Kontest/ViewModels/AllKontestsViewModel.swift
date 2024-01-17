@@ -58,6 +58,11 @@ class AllKontestsViewModel {
             logger.info("Can not add observer to Calendar with error: \(error)")
         }
         #endif
+
+        Task {
+//            await CollegesRepository.shared.changeNameOfKeys()
+//            CollegesRepository.shared.testFunc()
+        }
     }
 
     func fetchAllKontests() {

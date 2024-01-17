@@ -70,7 +70,7 @@ final class UserManager {
 
         try createNewUser(
             user: DBUser(
-                userId: auth.uid,
+                userId: auth.email ?? auth.uid,
                 firstName: firstName,
                 lastName: lastName,
                 email: auth.email ?? "No Email",
@@ -97,7 +97,7 @@ final class UserManager {
             let finalCodeChefUsername = newCodeChefUsername == "" ? oldCodeChefUsername : newCodeChefUsername
 
             do {
-                let userId = try AuthenticationManager.shared.getAuthenticatedUser().uid
+                let userId = try AuthenticationManager.shared.getAuthenticatedUser().email ?? AuthenticationManager.shared.getAuthenticatedUser().uid
 
                 userDocument(userId: userId).updateData([
                     "leetcode_username": finalLeetcodeUsername,
@@ -113,7 +113,7 @@ final class UserManager {
     func updateName(firstName: String, lastName: String, completion: @escaping (Error?) -> ()) {
         if AuthenticationManager.shared.isSignedIn() {
             do {
-                let userId = try AuthenticationManager.shared.getAuthenticatedUser().uid
+                let userId = try AuthenticationManager.shared.getAuthenticatedUser().email ?? AuthenticationManager.shared.getAuthenticatedUser().uid
 
                 userDocument(userId: userId).updateData([
                     "first_name": firstName,
@@ -138,7 +138,7 @@ final class UserManager {
     func updateCollege(collegeStateName: String, collegeName: String, completion: @escaping (Error?) -> ()) {
         if AuthenticationManager.shared.isSignedIn() {
             do {
-                let userId = try AuthenticationManager.shared.getAuthenticatedUser().uid
+                let userId = try AuthenticationManager.shared.getAuthenticatedUser().email ?? AuthenticationManager.shared.getAuthenticatedUser().uid
 
                 userDocument(userId: userId).updateData([
                     "selected_college_state": collegeStateName,

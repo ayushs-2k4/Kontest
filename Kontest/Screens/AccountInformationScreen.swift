@@ -63,6 +63,8 @@ struct AccountInformationScreen: View {
                 do {
                     try AuthenticationManager.shared.signOut()
                     
+                    accountInformationViewModel.clearAllFields()
+                    
                     router.goToRootView()
                 } catch {
                     logger.log("Error in Signing out: \(error)")
@@ -80,6 +82,11 @@ struct AccountInformationScreen: View {
                     .hidden()
             }
         }
+        .onAppear(perform: {
+            if accountInformationViewModel.user == nil {
+                accountInformationViewModel.getAuthenticatedUser()
+            }
+        })
         .padding()
         .frame(maxWidth: 400)
         .sheet(isPresented: $isNameChangeSheetPresented, content: {
