@@ -297,6 +297,7 @@ struct ChangeCollegeSheetView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(.accent)
+                .disabled(isCollegeListDownloading)
                 .keyboardShortcut(.return)
             }
             .padding(.horizontal)
