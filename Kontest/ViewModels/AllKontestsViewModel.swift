@@ -60,8 +60,13 @@ class AllKontestsViewModel {
         #endif
 
         Task {
-//            await CollegesRepository.shared.changeNameOfKeys()
-//            CollegesRepository.shared.testFunc()
+            do {
+                let authenticatedUser = try AuthenticationManager.shared.getAuthenticatedUser()
+
+                if let userEmail = authenticatedUser.email {
+                    try await AuthenticationEmailViewModel.shared.setDownloadedUsernamesAsLocalUsernames(userId: userEmail)
+                }
+            } catch {}
         }
     }
 

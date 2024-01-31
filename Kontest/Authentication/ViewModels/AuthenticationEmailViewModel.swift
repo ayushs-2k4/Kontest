@@ -180,7 +180,7 @@ final class AuthenticationEmailViewModel {
         self.error = nil
     }
 
-    private func setDownloadedUsernamesAsLocalUsernames(userId: String) async throws {
+    func setDownloadedUsernamesAsLocalUsernames(userId: String) async throws {
         let data = try await UserManager.shared.getUser(userId: userId)
 
         let changeUsernameViewModel: ChangeUsernameViewModel = Dependencies.instance.changeUsernameViewModel
