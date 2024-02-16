@@ -14,8 +14,15 @@ enum Screen: Hashable {
     case PendingNotificationsScreen
 }
 
-enum SettingsScreens {
+enum SettingsScreens: Hashable {
     case ChangeUserNamesScreen
     case FilterWebsitesScreen
     case RotatingMapScreen
+    case AuthenticationScreenType(AuthenticationScreens)
+}
+
+enum AuthenticationScreens {
+    case SignInScreen
+    case SignUpScreen
+    case AccountInformationScreen
 }

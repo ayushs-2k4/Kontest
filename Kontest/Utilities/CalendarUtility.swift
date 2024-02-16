@@ -416,8 +416,8 @@ enum CalendarUtility {
 
         let events = eventStore.events(matching: predicate)
 
-        logger.info("FullAccessinterval: \(interval)")
-        logger.info("FullAccess Events: \(events)")
+//        logger.info("FullAccessinterval: \(interval)")
+//        logger.info("FullAccess Events: \(events)")
 
         return events
     }
@@ -507,7 +507,7 @@ enum CalendarUtility {
 
         for calendar in allCalendars {
             if calendar.type != .subscription {
-                print("\(calendar) , source - \(calendar.source.title) \n\n")
+                logger.log("\(calendar) , source - \(calendar.source.title) \n\n")
             }
         }
 

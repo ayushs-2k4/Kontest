@@ -21,7 +21,7 @@ class Router {
         didSet {
             currentSelectionState = path.last ?? .screen(.AllKontestScreen)
             logger.info("path: \(self.path)")
-            logger.info("currentSelectionState: \("\(self.currentSelectionState)")")
+            logger.info("currentSelectionState: \("\(currentSelectionState)")")
         }
     }
 
@@ -33,6 +33,16 @@ class Router {
         } else {
             path.append(SelectionState.screen(screen))
         }
+    }
+
+    func popLastScreen() {
+        if !path.isEmpty {
+            path.removeLast()
+        }
+    }
+
+    func goToRootView() {
+        path.removeAll()
     }
 
     static let instance: Router = .init()

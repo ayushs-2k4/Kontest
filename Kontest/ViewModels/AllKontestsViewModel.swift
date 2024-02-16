@@ -58,6 +58,16 @@ class AllKontestsViewModel {
             logger.info("Can not add observer to Calendar with error: \(error)")
         }
         #endif
+
+        Task {
+            do {
+                let authenticatedUser = try AuthenticationManager.shared.getAuthenticatedUser()
+
+                if let userEmail = authenticatedUser.email {
+                    try await AuthenticationEmailViewModel.shared.setDownloadedUsernamesAsLocalUsernames(userId: userEmail)
+                }
+            } catch {}
+        }
     }
 
     func fetchAllKontests() {
@@ -94,7 +104,7 @@ class AllKontestsViewModel {
 
                     if let nextDateToRefresh {
                         let timeInterval = currentDate.timeIntervalSince(nextDateToRefresh)
-                        logger.info("nextDateToRefresh: \(nextDateToRefresh.formatted())\ntimeInterval: \(timeInterval)")
+//                        logger.info("nextDateToRefresh: \(nextDateToRefresh.formatted())\ntimeInterval: \(timeInterval)")
 
                         if timeInterval >= -5, timeInterval <= 5 {
                             if self.searchText.isEmpty {
