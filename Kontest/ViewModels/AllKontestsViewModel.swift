@@ -21,6 +21,7 @@ class AllKontestsViewModel {
 
     var errorWrapper: ErrorWrapper?
 
+    private var allFetchedKontests: [KontestModel] = []
     private(set) var allKontests: [KontestModel] = []
     private(set) var toShowKontests: [KontestModel] = []
     private(set) var backupKontests: [KontestModel] = []
@@ -73,7 +74,7 @@ class AllKontestsViewModel {
     func fetchAllKontests() {
         isLoading = true
         Task {
-            let allKontests = await getAllKontests()
+            await getAllKontests()
             let sortedKontests = sortAllKontests(allKontests: allKontests)
 
             await MainActor.run {
@@ -128,7 +129,7 @@ class AllKontestsViewModel {
         }
     }
 
-    private func getAllKontests() async -> [KontestModel] {
+    private func getAllKontests() async  {
         do {
             let fetchedKontests = try await repository.getAllKontests()
 
@@ -136,7 +137,7 @@ class AllKontestsViewModel {
 
             let allEvents = shouldFetchAllEventsFromCalendar ? try await CalendarUtility.getAllEvents() : []
 
-            let allKontestModels = fetchedKontests
+            self.allFetchedKontests = fetchedKontests
                 .map { dto in
                     let kontest = KontestModel.from(dto: dto)
                     // Load Reminder status
@@ -149,19 +150,25 @@ class AllKontestsViewModel {
 
                     return kontest
                 }
-                .filter { kontest in
-                    let kontestDuration = CalendarUtility.getFormattedDuration(fromSeconds: kontest.duration) ?? ""
-                    let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
-                    let isKontestEnded = CalendarUtility.isKontestOfPast(kontestEndDate: kontestEndDate ?? Date())
 
-                    return !kontestDuration.isEmpty && !isKontestEnded
-                }
+            filterKontestsByTime()
 
-            return allKontestModels
         } catch {
             logger.error("error in fetching all Kontests: \(error)")
-            return []
+            
+            self.allKontests = []
         }
+    }
+
+    func filterKontestsByTime(){
+        self.allKontests = self.allFetchedKontests
+            .filter { kontest in
+                let kontestDuration = CalendarUtility.getFormattedDuration(fromSeconds: kontest.duration) ?? ""
+                let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
+                let isKontestEnded = CalendarUtility.isKontestOfPast(kontestEndDate: kontestEndDate ?? Date())
+
+                return !kontestDuration.isEmpty && !isKontestEnded
+            }
     }
 
     private func sortAllKontests(allKontests: [KontestModel]) -> [KontestModel] {
@@ -169,7 +176,7 @@ class AllKontestsViewModel {
     }
 
     private func filterKontestsUsingSearchText() {
-        let filteredKontests = backupKontests
+        let filteredKontests = self.backupKontests
             .filter { kontest in
                 kontest.name.localizedCaseInsensitiveContains(searchText) || kontest.siteAbbreviation.localizedCaseInsensitiveContains(searchText) || kontest.url.localizedCaseInsensitiveContains(searchText)
             }
@@ -196,6 +203,16 @@ class AllKontestsViewModel {
         }
 
         return true
+    }
+    
+    
+
+    func addAllowedWebsites() {
+        allowedWebsites.removeAll()
+
+        logger.info("Ran addAllowedWebsites()")
+
+        allowedWebsites.append(contentsOf: filterWebsitesViewModel.getAllowedWebsites())
     }
 
     func filterKontests() {
@@ -233,14 +250,6 @@ class AllKontestsViewModel {
     }
 
     private var allowedWebsites: [String] = []
-
-    func addAllowedWebsites() {
-        allowedWebsites.removeAll()
-
-        logger.info("Ran addAllowedWebsites()")
-
-        allowedWebsites.append(contentsOf: filterWebsitesViewModel.getAllowedWebsites())
-    }
 
     private func checkNotificationAuthorization() {
         Task {

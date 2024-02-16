@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import OSLog
 
 struct SignInScreen: View {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "SignInScreen")
+    
     let authenticationEmailViewModel: AuthenticationEmailViewModel = .shared
 
     @State private var isPasswordFieldVisible: Bool = false
@@ -101,13 +104,13 @@ struct SignInScreen: View {
                             let isSignInSuccessful = await authenticationEmailViewModel.signIn()
 
                             if isSignInSuccessful {
-                                print("Yes, sign in is successful")
+                                logger.log("Yes, sign in is successful")
 
                                 router.goToRootView()
 
                                 authenticationEmailViewModel.clearAllFields()
                             } else {
-                                print("No, sign in is not successful")
+                                logger.log("No, sign in is not successful")
                             }
                         }
                     }

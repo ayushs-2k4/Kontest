@@ -39,6 +39,10 @@ struct FilterWebsitesScreen: View {
 
     @AppStorage(FilterWebsiteKey.cupsOnlineKey.rawValue, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var cupsOnlineKey = true
 
+    @AppStorage(Constants.maximumDurationOfAKontestInMinutesKey, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var maximumDurationOfAKontestInMinutesKey = 360 * 60 * 1.0
+
+    @AppStorage(Constants.minimumDurationOfAKontestInMinutesKey, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var minimumDurationOfAKontestInMinutesKey = 0 * 1.0
+
     @Environment(\.colorScheme) private var colorScheme
 
     let columns: [GridItem]
@@ -87,14 +91,95 @@ struct FilterWebsitesScreen: View {
                 FilterWebsitesView(siteLogo: Image(KontestModel.getLogo(siteAbbreviation: "Yuki Coder", colorScheme: colorScheme)), siteName: "Yuki Coder", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "Yuki Coder"), isSelected: $yukiCoderKey)
 
             })
+
+            // Min Duration Slider
+            MinutesSelectionSlider(
+                message: "Select Min Duration of Kontest (in minutes): \(getMessage(totalMinutes: Int(minimumDurationOfAKontestInMinutesKey)))",
+                minimumMinutes: 0,
+                maximumMinutes: 360,
+                steps: 10,
+                onEditingChanged: { _ in
+                    if minimumDurationOfAKontestInMinutesKey > maximumDurationOfAKontestInMinutesKey {
+                        maximumDurationOfAKontestInMinutesKey = minimumDurationOfAKontestInMinutesKey
+                    }
+                },
+                currentMinutes: $minimumDurationOfAKontestInMinutesKey
+            )
+
+            // Max Duration Slider
+            MinutesSelectionSlider(
+                message: "Select Max Duration of Kontest (in minutes): \(getMessage(totalMinutes: Int(maximumDurationOfAKontestInMinutesKey)))",
+                minimumMinutes: 0,
+                maximumMinutes: 360,
+                steps: 10,
+                onEditingChanged: { _ in
+                    if maximumDurationOfAKontestInMinutesKey < minimumDurationOfAKontestInMinutesKey {
+                        minimumDurationOfAKontestInMinutesKey = maximumDurationOfAKontestInMinutesKey
+                    }
+                },
+                currentMinutes: $maximumDurationOfAKontestInMinutesKey
+            )
         }
         .padding()
         .ignoresSafeArea(edges: .bottom)
         .navigationTitle("Filter Websites")
         .onDisappear {
+            allKontestsViewModel.filterKontestsByTime()
             allKontestsViewModel.addAllowedWebsites()
             allKontestsViewModel.filterKontests()
             WidgetCenter.shared.reloadAllTimelines()
+        }
+    }
+
+    func getMessage(totalMinutes: Int) -> String {
+        let hours = totalMinutes / 60
+        let minutes = totalMinutes % 60
+
+        return if minutes == 0 && hours == 0 {
+            "0 minutes"
+        }
+        else if hours == 0 {
+            "\(minutes) minutes"
+        }
+        else if hours == 1 && minutes == 0 {
+            "1 hour"
+        }
+
+        else if hours == 1 {
+            "1 hour & \(minutes) minutes"
+        }
+        else if minutes == 0 // hours != 0
+        {
+            "\(hours) hours"
+        }
+        else {
+            "\(hours) hours & \(minutes) minutes"
+        }
+    }
+}
+
+struct MinutesSelectionSlider: View {
+    let message: String
+    let minimumMinutes: Double
+    let maximumMinutes: Double
+    let steps: Double
+    let onEditingChanged: (Bool) -> ()
+    @Binding var currentMinutes: Double
+
+    var body: some View {
+        VStack {
+            Text(message)
+
+            HStack {
+                Text("\(Int(minimumMinutes)) minutes")
+
+                Slider(value: $currentMinutes, in: minimumMinutes ... maximumMinutes, step: steps, onEditingChanged: {
+                    isChanged in
+                    onEditingChanged(isChanged)
+                })
+
+                Text("\(Int(maximumMinutes / 60)) hours")
+            }
         }
     }
 }

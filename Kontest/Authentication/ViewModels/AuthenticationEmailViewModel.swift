@@ -11,7 +11,7 @@ import OSLog
 
 @Observable
 final class AuthenticationEmailViewModel {
-    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "SignInEmailViewModel")
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "AuthenticationEmailViewModel")
 
     var email: String = ""
     var password: String = ""
@@ -47,8 +47,8 @@ final class AuthenticationEmailViewModel {
         do {
             let returnedUserData = try await AuthenticationManager.shared.signIn(email: email, password: password)
 
-            print("Success in logging in with email - password")
-            print("returnedUserData: \(returnedUserData)")
+            logger.log("Success in logging in with email - password")
+            logger.log("returnedUserData: \("\(returnedUserData)")")
 
             let uid = returnedUserData.email ?? returnedUserData.uid
 
@@ -81,16 +81,16 @@ final class AuthenticationEmailViewModel {
                     self.error = AppError(title: "You don't have an account, please Sign up instead!", description: "")
 
                 default:
-                    print(error)
+                    logger.error("\(error)")
                     self.error = error
                 }
 //                }
             } else {
-                print(error)
+                logger.error("\(error)")
                 self.error = error
             }
 
-            print("Error in siging in with email - password: \(error)")
+            logger.error("Error in siging in with email - password: \(error)")
 
             self.isLoading = false
             return false
@@ -102,14 +102,14 @@ final class AuthenticationEmailViewModel {
 
         guard !email.isEmpty,!password.isEmpty else {
             error = AppError(title: "Email or Password is Empty", description: "")
-            print("No email or password found.")
+            logger.error("No email or password found.")
             return false
         }
 
         do {
             let returnedUserData = try await AuthenticationManager.shared.createNewUser(email: email, password: password)
-            print("Success in signing up with email - password")
-            print("returnedUserData: \(returnedUserData)")
+            logger.log("Success in signing up with email - password")
+            logger.log("returnedUserData: \("\(returnedUserData)")")
 
             self.isLoading = false
 
@@ -148,15 +148,15 @@ final class AuthenticationEmailViewModel {
                     self.error = AppError(title: "Signup is currently Not Allowed.", description: "Email/password signup is disabled for these credentials.")
 
                 default:
-                    print(error)
+                    logger.error("\(error)")
                     self.error = error
                 }
             } else {
-                print(error)
+                logger.error("\(error)")
                 self.error = error
             }
 
-            print("Error in siging up with email - password: \(error)")
+            logger.error("Error in siging up with email - password: \(error)")
 
             self.isLoading = false
             return false
