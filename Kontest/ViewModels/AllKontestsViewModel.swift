@@ -75,10 +75,9 @@ class AllKontestsViewModel {
         isLoading = true
         Task {
             await getAllKontests()
-            let sortedKontests = sortAllKontests(allKontests: allKontests)
 
             await MainActor.run {
-                self.allKontests = sortedKontests
+                sortAllKontests()
             }
 
             checkNotificationAuthorization()
@@ -129,7 +128,7 @@ class AllKontestsViewModel {
         }
     }
 
-    private func getAllKontests() async  {
+    private func getAllKontests() async {
         do {
             let fetchedKontests = try await repository.getAllKontests()
 
@@ -155,12 +154,12 @@ class AllKontestsViewModel {
 
         } catch {
             logger.error("error in fetching all Kontests: \(error)")
-            
+
             self.allKontests = []
         }
     }
 
-    func filterKontestsByTime(){
+    func filterKontestsByTime() {
         self.allKontests = self.allFetchedKontests
             .filter { kontest in
                 let kontestDuration = CalendarUtility.getFormattedDuration(fromSeconds: kontest.duration) ?? ""
@@ -171,8 +170,8 @@ class AllKontestsViewModel {
             }
     }
 
-    private func sortAllKontests(allKontests: [KontestModel]) -> [KontestModel] {
-        allKontests.sorted { CalendarUtility.getDate(date: $0.start_time) ?? Date() < CalendarUtility.getDate(date: $1.start_time) ?? Date() }
+    func sortAllKontests() {
+        self.allKontests.sort { CalendarUtility.getDate(date: $0.start_time) ?? Date() < CalendarUtility.getDate(date: $1.start_time) ?? Date() }
     }
 
     private func filterKontestsUsingSearchText() {
@@ -204,8 +203,6 @@ class AllKontestsViewModel {
 
         return true
     }
-    
-    
 
     func addAllowedWebsites() {
         allowedWebsites.removeAll()

@@ -94,7 +94,7 @@ struct FilterWebsitesScreen: View {
 
             // Min Duration Slider
             MinutesSelectionSlider(
-                message: "Select Min Duration of Kontest (in minutes): \(getMessage(totalMinutes: Int(minimumDurationOfAKontestInMinutesKey)))",
+                message: "Select Min Duration of Kontest: \(getMessage(totalMinutes: Int(minimumDurationOfAKontestInMinutesKey)))",
                 minimumMinutes: Double(Constants.minimumLimitOfMinutesOfKontest),
                 maximumMinutes: Double(Constants.maximumLimitOfMinutesOfKontest),
                 steps: 10,
@@ -108,7 +108,7 @@ struct FilterWebsitesScreen: View {
 
             // Max Duration Slider
             MinutesSelectionSlider(
-                message: "Select Max Duration of Kontest (in minutes): \(getMessage(totalMinutes: Int(maximumDurationOfAKontestInMinutesKey)))",
+                message: "Select Max Duration of Kontest: \(getMessage(totalMinutes: Int(maximumDurationOfAKontestInMinutesKey)))",
                 minimumMinutes: Double(Constants.minimumLimitOfMinutesOfKontest),
                 maximumMinutes: Double(Constants.maximumLimitOfMinutesOfKontest),
                 steps: 10,
@@ -125,9 +125,16 @@ struct FilterWebsitesScreen: View {
         .navigationTitle("Filter Websites")
         .onDisappear {
             allKontestsViewModel.filterKontestsByTime()
-            allKontestsViewModel.addAllowedWebsites()
-            allKontestsViewModel.filterKontests()
-            WidgetCenter.shared.reloadAllTimelines()
+
+            Task {
+                await MainActor.run {
+                    allKontestsViewModel.sortAllKontests()
+                }
+
+                allKontestsViewModel.addAllowedWebsites()
+                allKontestsViewModel.filterKontests()
+                WidgetCenter.shared.reloadAllTimelines()
+            }
         }
     }
 
