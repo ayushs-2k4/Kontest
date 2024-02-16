@@ -21,7 +21,7 @@ class AllKontestsViewModel {
 
     var errorWrapper: ErrorWrapper?
 
-    private var allFetchedKontests: [KontestModel] = []
+    private(set) var allFetchedKontests: [KontestModel] = []
     private(set) var allKontests: [KontestModel] = []
     private(set) var toShowKontests: [KontestModel] = []
     private(set) var backupKontests: [KontestModel] = []

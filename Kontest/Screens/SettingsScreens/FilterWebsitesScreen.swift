@@ -39,9 +39,9 @@ struct FilterWebsitesScreen: View {
 
     @AppStorage(FilterWebsiteKey.cupsOnlineKey.rawValue, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var cupsOnlineKey = true
 
-    @AppStorage(Constants.maximumDurationOfAKontestInMinutesKey, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var maximumDurationOfAKontestInMinutesKey = 360 * 60 * 1.0
+    @AppStorage(Constants.maximumDurationOfAKontestInMinutesKey, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var maximumDurationOfAKontestInMinutesKey = Double(Constants.maximumLimitOfMinutesOfKontest)
 
-    @AppStorage(Constants.minimumDurationOfAKontestInMinutesKey, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var minimumDurationOfAKontestInMinutesKey = 0 * 1.0
+    @AppStorage(Constants.minimumDurationOfAKontestInMinutesKey, store: UserDefaults(suiteName: Constants.userDefaultsGroupID)) var minimumDurationOfAKontestInMinutesKey = Double(Constants.minimumLimitOfMinutesOfKontest)
 
     @Environment(\.colorScheme) private var colorScheme
 
@@ -95,8 +95,8 @@ struct FilterWebsitesScreen: View {
             // Min Duration Slider
             MinutesSelectionSlider(
                 message: "Select Min Duration of Kontest (in minutes): \(getMessage(totalMinutes: Int(minimumDurationOfAKontestInMinutesKey)))",
-                minimumMinutes: 0,
-                maximumMinutes: 360,
+                minimumMinutes: Double(Constants.minimumLimitOfMinutesOfKontest),
+                maximumMinutes: Double(Constants.maximumLimitOfMinutesOfKontest),
                 steps: 10,
                 onEditingChanged: { _ in
                     if minimumDurationOfAKontestInMinutesKey > maximumDurationOfAKontestInMinutesKey {
@@ -109,8 +109,8 @@ struct FilterWebsitesScreen: View {
             // Max Duration Slider
             MinutesSelectionSlider(
                 message: "Select Max Duration of Kontest (in minutes): \(getMessage(totalMinutes: Int(maximumDurationOfAKontestInMinutesKey)))",
-                minimumMinutes: 0,
-                maximumMinutes: 360,
+                minimumMinutes: Double(Constants.minimumLimitOfMinutesOfKontest),
+                maximumMinutes: Double(Constants.maximumLimitOfMinutesOfKontest),
                 steps: 10,
                 onEditingChanged: { _ in
                     if maximumDurationOfAKontestInMinutesKey < minimumDurationOfAKontestInMinutesKey {

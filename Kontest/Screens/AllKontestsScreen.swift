@@ -42,7 +42,7 @@ struct AllKontestsScreen: View {
                 ZStack {
                     if allKontestsViewModel.isLoading {
                         ProgressView()
-                    } else if allKontestsViewModel.allKontests.isEmpty { // No Kontests Downloaded
+                    } else if allKontestsViewModel.allFetchedKontests.isEmpty { // No Kontests Downloaded
                         List {
                             RatingsView(
                                 codeForcesUsername: changeUsernameViewModel.codeForcesUsername,
@@ -59,7 +59,7 @@ struct AllKontestsScreen: View {
                             }
                         }
 
-                    } else {
+                    } else { // There are some kontests downloaded
                         TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
                             List {
                                 RatingsView(codeForcesUsername: changeUsernameViewModel.codeForcesUsername, leetCodeUsername: changeUsernameViewModel.leetcodeUsername, codeChefUsername: changeUsernameViewModel.codeChefUsername)
