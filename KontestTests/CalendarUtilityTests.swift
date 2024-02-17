@@ -9,6 +9,19 @@
 import XCTest
 
 class CalendarUtilityTests: XCTestCase {
+    let originalMinimumDurationOfAKontestInMinutes = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.float(forKey: Constants.minimumDurationOfAKontestInMinutesKey)
+    let originalMaximumDurationOfAKontestInMinutes = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.float(forKey: Constants.maximumDurationOfAKontestInMinutesKey)
+
+    override func setUp() {
+        UserDefaults(suiteName: Constants.userDefaultsGroupID)?.set(0, forKey: Constants.minimumDurationOfAKontestInMinutesKey)
+        UserDefaults(suiteName: Constants.userDefaultsGroupID)?.set(12 * 24 * 60, forKey: Constants.maximumDurationOfAKontestInMinutesKey) // 12 days
+    }
+
+    override func tearDown() {
+        UserDefaults(suiteName: Constants.userDefaultsGroupID)?.set(originalMinimumDurationOfAKontestInMinutes, forKey: Constants.minimumDurationOfAKontestInMinutesKey)
+        UserDefaults(suiteName: Constants.userDefaultsGroupID)?.set(originalMaximumDurationOfAKontestInMinutes, forKey: Constants.maximumDurationOfAKontestInMinutesKey)
+    }
+
     func test_getFormattedDate1_True() {
         let dateString = "2024-07-30T18:30:00.000Z"
         let formattedDate = CalendarUtility.getFormattedDate2(date: dateString)
