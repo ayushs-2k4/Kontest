@@ -49,6 +49,7 @@ class AllKontestsViewModel {
         self.filterWebsitesViewModel = filterWebsitesViewModel
         shouldFetchAllEventsFromCalendar = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.bool(forKey: "shouldFetchAllEventsFromCalendar")
         setDefaultValuesForFilterWebsiteKeysToTrue()
+        setDefaultValuesForMinAndMaxDurationKeys()
         addAllowedWebsites()
         fetchAllKontests()
 
