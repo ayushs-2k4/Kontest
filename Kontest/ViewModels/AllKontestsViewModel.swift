@@ -83,6 +83,11 @@ class AllKontestsViewModel {
 
             checkNotificationAuthorization()
             filterKontests()
+            
+            // Adding automatic notifications
+            let automaticNotificationsViewModel = AutomaticNotificationsViewModel()
+//            automaticNotificationsViewModel.addAutomaticCalendarEvent(siteAbbreviation: Constants.SiteAbbreviations.CodeChef.rawValue)
+//            automaticNotificationsViewModel.addAutomaticNotifications(siteAbbreviation: Constants.SiteAbbreviations.CodeChef.rawValue)
 
             // Doing this here (after splitting kontests into categories initially)
             nextDateToRefresh = CalendarUtility.getNextDateToRefresh(
@@ -224,7 +229,6 @@ class AllKontestsViewModel {
     }
 
     private func splitKontestsIntoDifferentCategories() {
-        print("YEs")
         let today = Date()
 
         toShowKontests = toShowKontests.filter {

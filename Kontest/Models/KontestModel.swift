@@ -87,7 +87,7 @@ class KontestModel: Codable, Identifiable, Hashable {
     var isCalendarEventAdded: Bool
     var calendarEventDate: Date?
     var selectedCalendarAccount: String?
-    var selectedCalendarName:String?
+    var selectedCalendarName: String?
 
     init(id: String, name: String, url: String, start_time: String, end_time: String, duration: String, site: String, in_24_hours: String, status: KontestStatus, logo: String) {
         self.id = id
@@ -123,49 +123,49 @@ extension KontestModel {
     static func getSiteAbbreviationFromSite(site: String) -> String {
         switch site {
         case "atcoder.jp":
-            "AtCoder"
+            Constants.SiteAbbreviations.AtCoder.rawValue
 
         case "codechef.com":
-            "CodeChef"
+            Constants.SiteAbbreviations.CodeChef.rawValue
 
         case "codeforces.com":
-            "CodeForces"
+            Constants.SiteAbbreviations.CodeForces.rawValue
 
         case "codingninjas.com":
-            "Coding Ninjas"
+            Constants.SiteAbbreviations.CodingNinjas.rawValue
 
         case "codingninjas.com/codestudio":
-            "Coding Ninjas"
+            Constants.SiteAbbreviations.CodingNinjas.rawValue
 
         case "csacademy.com":
-            "CS Academy"
+            Constants.SiteAbbreviations.CSAcademy.rawValue
 
         case "geeksforgeeks.org":
-            "Geeks For Geeks"
+            Constants.SiteAbbreviations.GeeksForGeeks.rawValue
 
         case "hackerearth.com":
-            "HackerEarth"
+            Constants.SiteAbbreviations.HackerEarth.rawValue
 
         case "hackerrank.com":
-            "HackerRank"
+            Constants.SiteAbbreviations.HackerRank.rawValue
 
         case "leetcode.com":
-            "LeetCode"
+            Constants.SiteAbbreviations.LeetCode.rawValue
 
         case "projecteuler.net":
-            "Project Euler"
+            Constants.SiteAbbreviations.ProjectEuler.rawValue
 
         case "topcoder.com":
-            "TopCoder"
+            Constants.SiteAbbreviations.TopCoder.rawValue
 
         case "toph.com":
-            "Toph"
+            Constants.SiteAbbreviations.Toph.rawValue
 
         case "yukicoder.me":
-            "Yuki Coder"
+            Constants.SiteAbbreviations.YukiCoder.rawValue
 
         case "cups.online":
-            "Cups Online"
+            Constants.SiteAbbreviations.CupsOnline.rawValue
 
         default:
             site
@@ -211,53 +211,53 @@ extension KontestModel {
 
     static func getColorForIdentifier(siteAbbreviation: String, colorScheme: ColorScheme = .light) -> Color {
         switch siteAbbreviation {
-        case "AtCoder":
+        case Constants.SiteAbbreviations.AtCoder.rawValue:
             Color(red: 187/255, green: 181/255, blue: 181/255)
 
-        case "CodeChef":
+        case Constants.SiteAbbreviations.CodeChef.rawValue:
             Color(red: 250/255, green: 155/255, blue: 101/255)
 
-        case "CodeForces":
+        case Constants.SiteAbbreviations.CodeForces.rawValue:
             .pink
 
-        case "CodeForces::Gym":
+        case Constants.SiteAbbreviations.CodeForcesGym.rawValue:
             .red
 
-        case "Coding Ninjas":
+        case Constants.SiteAbbreviations.CodingNinjas.rawValue:
             .orange
 
-        case "CS Academy":
+        case Constants.SiteAbbreviations.CSAcademy.rawValue:
             .red
 
-        case "Geeks For Geeks":
+        case Constants.SiteAbbreviations.GeeksForGeeks.rawValue:
             .green
 
-        case "HackerEarth":
+        case Constants.SiteAbbreviations.HackerEarth.rawValue:
             Color(red: 101/255, green: 125/255, blue: 251/255)
 
-        case "HackerRank":
+        case Constants.SiteAbbreviations.HackerRank.rawValue:
             .green
 
-        case "LeetCode":
+        case Constants.SiteAbbreviations.LeetCode.rawValue:
             Color(red: 235/255, green: 162/255, blue: 64/255)
 
-        case "Project Euler":
+        case Constants.SiteAbbreviations.ProjectEuler.rawValue:
             Color(red: 178/255, green: 128/255, blue: 100/255)
 
-        case "TopCoder":
+        case Constants.SiteAbbreviations.TopCoder.rawValue:
             if colorScheme == .light {
                 .black
             } else {
                 .white
             }
 
-        case "Toph":
+        case Constants.SiteAbbreviations.Toph.rawValue:
             .blue
 
-        case "Yuki Coder":
+        case Constants.SiteAbbreviations.YukiCoder.rawValue:
             Color(red: 60/255, green: 66/255, blue: 79/255)
 
-        case "Cups Online":
+        case Constants.SiteAbbreviations.CupsOnline.rawValue:
             .blue
 
         default:
@@ -267,34 +267,34 @@ extension KontestModel {
 
     static func getLogo(siteAbbreviation: String, colorScheme: ColorScheme = .light) -> String {
         return switch siteAbbreviation {
-        case "AtCoder":
+        case Constants.SiteAbbreviations.AtCoder.rawValue:
             "AtCoder Logo"
 
-        case "CodeChef":
+        case Constants.SiteAbbreviations.CodeChef.rawValue:
             "CodeChef Logo"
 
-        case "CodeForces":
+        case Constants.SiteAbbreviations.CodeForces.rawValue:
             "CodeForces Logo"
 
-        case "CodeForces::Gym":
+        case Constants.SiteAbbreviations.CodeForcesGym.rawValue:
             "CodeForces Logo"
 
-        case "Coding Ninjas":
+        case Constants.SiteAbbreviations.CodingNinjas.rawValue:
             "Coding Ninjas Logo"
 
-        case "CS Academy":
+        case Constants.SiteAbbreviations.CSAcademy.rawValue:
             "CSAcademy Logo"
 
-        case "Geeks For Geeks":
+        case Constants.SiteAbbreviations.GeeksForGeeks.rawValue:
             "Geeks For Geeks Logo"
 
-        case "HackerEarth":
+        case Constants.SiteAbbreviations.HackerEarth.rawValue:
             "HackerEarth Logo"
 
-        case "HackerRank":
+        case Constants.SiteAbbreviations.HackerRank.rawValue:
             "HackerRank Logo"
 
-        case "LeetCode":
+        case Constants.SiteAbbreviations.LeetCode.rawValue:
             if colorScheme == .light {
                 "LeetCode Light Logo"
             } else if colorScheme == .dark {
@@ -303,23 +303,23 @@ extension KontestModel {
                 ""
             }
 
-        case "Project Euler":
+        case Constants.SiteAbbreviations.ProjectEuler.rawValue:
             "Project Euler Logo"
 
-        case "TopCoder":
+        case Constants.SiteAbbreviations.TopCoder.rawValue:
             if colorScheme == .light {
                 "TopCoder Light Logo"
             } else if colorScheme == .dark {
                 "TopCoder Dark Logo"
             } else { "" }
 
-        case "Toph":
+        case Constants.SiteAbbreviations.Toph.rawValue:
             "Toph Logo"
 
-        case "Yuki Coder":
+        case Constants.SiteAbbreviations.YukiCoder.rawValue:
             "Yuki Coder Logo"
 
-        case "Cups Online":
+        case Constants.SiteAbbreviations.CupsOnline.rawValue:
             "Cups.online Logo"
 
         default:
@@ -384,12 +384,11 @@ extension KontestModel {
     func loadCalendarEventDate(allEvents: [EKEvent]) {
         calendarEventDate = CalendarUtility.getCalendarDateOfEvent(allEventsOfCalendar: allEvents, startDate: CalendarUtility.getDate(date: start_time) ?? Date(), endDate: CalendarUtility.getDate(date: end_time) ?? Date(), title: name, url: URL(string: url))
     }
-    
+
     /// loads the calendar name and account name of an event
-    func loadEventCalendar(allEvents:[EKEvent])
-    {
+    func loadEventCalendar(allEvents: [EKEvent]) {
         selectedCalendarAccount = CalendarUtility.getCalendarAccountNameOfAnEvent(allEventsOfCalendar: allEvents, startDate: CalendarUtility.getDate(date: start_time) ?? Date(), endDate: CalendarUtility.getDate(date: end_time) ?? Date(), title: name, url: URL(string: url))
-        
+
         selectedCalendarName = CalendarUtility.getCalendarNameOfAnEvent(allEventsOfCalendar: allEvents, startDate: CalendarUtility.getDate(date: start_time) ?? Date(), endDate: CalendarUtility.getDate(date: end_time) ?? Date(), title: name, url: URL(string: url))
     }
 
@@ -397,4 +396,3 @@ extension KontestModel {
         KontestModel.from(dto: KontestDTO(name: "ProjectEuler+1", url: "https://hackerrank.com/contests/projecteuler", start_time: "2023-08-15 18:29:00 UTC", end_time: "2023-08-18 17:43:00 UTC", duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "BEFORE"))
     }
 }
-

@@ -203,7 +203,7 @@ class NotificationsViewModel: NotificationsViewModelProtocol {
 
         return ans
     }
-    
+
     func removeAllNotificationForAKontest(kontest: KontestModel) {
         removePendingNotification(kontest: kontest, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
         removePendingNotification(kontest: kontest, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)

@@ -108,6 +108,7 @@
 		07AA75322B501AEB00DCD75B /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 07AA75312B501AEB00DCD75B /* SwiftSoup */; };
 		07AA75342B501AF200DCD75B /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 07AA75332B501AF200DCD75B /* SwiftSoup */; };
 		07BDE0922B546BDE0059A5FA /* SignInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BDE0912B546BDE0059A5FA /* SignInScreen.swift */; };
+		07C993752B8476F7008411D7 /* AutomaticNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C993742B8476F7008411D7 /* AutomaticNotificationsViewModel.swift */; };
 		07D766692AC8404A000A3DFD /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D766682AC8404A000A3DFD /* Sidebar.swift */; };
 		07D7666C2AC8407B000A3DFD /* DetailColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7666B2AC8407B000A3DFD /* DetailColumn.swift */; };
 		07D7666E2AC84094000A3DFD /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7666D2AC84094000A3DFD /* Panel.swift */; };
@@ -274,6 +275,7 @@
 		07BDE0912B546BDE0059A5FA /* SignInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreen.swift; sourceTree = "<group>"; };
 		07C6EE8F2ABAE38900FEA3D7 /* WidgetCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetCache.swift; sourceTree = "<group>"; };
 		07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingKontestsWidgetCache.swift; sourceTree = "<group>"; };
+		07C993742B8476F7008411D7 /* AutomaticNotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticNotificationsViewModel.swift; sourceTree = "<group>"; };
 		07CFEBA32AB02DCB00291484 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		07CFEBA52AB02DCB00291484 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		07CFEC042AB042F500291484 /* UpcomingWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingWidgetView.swift; sourceTree = "<group>"; };
@@ -623,6 +625,7 @@
 				076134CE2AA86AC300946B02 /* KontestDetailViewModel.swift */,
 				07A31F012AAC831300EBC296 /* FilterWebsitesViewModel.swift */,
 				077685282B56A60200A1449F /* AccountInformationViewModel.swift */,
+				07C993742B8476F7008411D7 /* AutomaticNotificationsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1070,6 +1073,7 @@
 				07A750202AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift in Sources */,
 				079CF54E2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift in Sources */,
 				079CF5502B527ECD00BE8E13 /* CodeChefScrapingContestDTO.swift in Sources */,
+				07C993752B8476F7008411D7 /* AutomaticNotificationsViewModel.swift in Sources */,
 				07A31F002AAC818D00EBC296 /* FilterWebsiteKey.swift in Sources */,
 				07ECFBC42AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift in Sources */,
 				07ECFBA22AA58259008513C6 /* SingleKontestView.swift in Sources */,
