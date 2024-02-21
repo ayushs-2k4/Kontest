@@ -63,10 +63,11 @@ struct FilterWebsitesView: View {
                     }
                     .help(areAutomaticCalendarEventsEnabled ? "Disable automatic Calendar Events for \(siteName)" : "Enable automatic Calendar Events for \(siteName)")
 
-//                    Spacer()
+                    Spacer()
 
-                    // for automatic notifiactions
-//                    Button {}
+//                    // for automatic notifiactions
+                    AutomaticNotificationMenu(siteAbbreviation: self.siteAbbreviation)
+                        .frame(width: 45)
                 }
             }
             .frame(maxWidth: .infinity)

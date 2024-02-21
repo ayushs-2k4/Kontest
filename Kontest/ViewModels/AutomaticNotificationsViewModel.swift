@@ -21,10 +21,25 @@ class AutomaticNotificationsViewModel {
         let userDefaults = UserDefaults(suiteName: Constants.userDefaultsGroupID)!
 
         for siteAbbreviation in getAllSiteAbbreviations() {
-            let newKey = siteAbbreviation + Constants.automaticNotificationSuffix
+            let notificationKey10MinutesBefore = siteAbbreviation + Constants.automaticNotification10MinutesSuffix
+            let notificationKey30MinutesBefore = siteAbbreviation + Constants.automaticNotification30MinutesSuffix
+            let notificationKey1HourBefore = siteAbbreviation + Constants.automaticNotification1HourSuffix
+            let notificationKey6HoursBefore = siteAbbreviation + Constants.automaticNotification6HoursSuffix
 
-            if userDefaults.bool(forKey: newKey) == true {
-                await addAutomaticNotifications(siteAbbreviation: siteAbbreviation)
+            if userDefaults.bool(forKey: notificationKey10MinutesBefore) == true {
+                await addAutomaticNotifications(siteAbbreviation: siteAbbreviation, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
+            }
+
+            if userDefaults.bool(forKey: notificationKey30MinutesBefore) == true {
+                await addAutomaticNotifications(siteAbbreviation: siteAbbreviation, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
+            }
+
+            if userDefaults.bool(forKey: notificationKey1HourBefore) == true {
+                await addAutomaticNotifications(siteAbbreviation: siteAbbreviation, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
+            }
+
+            if userDefaults.bool(forKey: notificationKey6HoursBefore) == true {
+                await addAutomaticNotifications(siteAbbreviation: siteAbbreviation, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
             }
         }
     }
@@ -41,18 +56,44 @@ class AutomaticNotificationsViewModel {
         }
     }
 
-    private func addAutomaticNotifications(siteAbbreviation: String) async {
+    private func addAutomaticNotifications(siteAbbreviation: String, minutesBefore: Int, hoursBefore: Int, daysBefore: Int) async {
         let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "addAutomaticNotifications")
 
         let toShowKontests = allKontestsViewModel.toShowKontests
 
         for kontestModel in toShowKontests {
             if kontestModel.siteAbbreviation == siteAbbreviation {
-                if !kontestModel.isSetForReminder10MiutesBefore {
-                    do {
-                        try await notificationViewModel.setNotificationForKontest(kontest: kontestModel, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
-                    } catch {
-                        logger.error("Error in adding automatic notification to kontest: \("\(kontestModel)") with error: \(error)")
+                if minutesBefore == 10 {
+                    if !kontestModel.isSetForReminder10MiutesBefore {
+                        do {
+                            try await notificationViewModel.setNotificationForKontest(kontest: kontestModel, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
+                        } catch {
+                            logger.error("Error in adding automatic notification to kontest: \("\(kontestModel)") with error: \(error)")
+                        }
+                    }
+                } else if minutesBefore == 30 {
+                    if !kontestModel.isSetForReminder30MiutesBefore {
+                        do {
+                            try await notificationViewModel.setNotificationForKontest(kontest: kontestModel, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
+                        } catch {
+                            logger.error("Error in adding automatic notification to kontest: \("\(kontestModel)") with error: \(error)")
+                        }
+                    }
+                } else if hoursBefore == 1 {
+                    if !kontestModel.isSetForReminder1HourBefore {
+                        do {
+                            try await notificationViewModel.setNotificationForKontest(kontest: kontestModel, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
+                        } catch {
+                            logger.error("Error in adding automatic notification to kontest: \("\(kontestModel)") with error: \(error)")
+                        }
+                    }
+                } else if hoursBefore == 6 {
+                    if !kontestModel.isSetForReminder6HoursBefore {
+                        do {
+                            try await notificationViewModel.setNotificationForKontest(kontest: kontestModel, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
+                        } catch {
+                            logger.error("Error in adding automatic notification to kontest: \("\(kontestModel)") with error: \(error)")
+                        }
                     }
                 }
             }

@@ -59,6 +59,7 @@
 		077E6EAD2AB4B1D10003E897 /* ErrorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EAC2AB4B1D10003E897 /* ErrorWrapper.swift */; };
 		077E6EAF2AB4B2120003E897 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EAE2AB4B2120003E897 /* ErrorView.swift */; };
 		077E6EB12AB4B3220003E897 /* ErrorState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EB02AB4B3220003E897 /* ErrorState.swift */; };
+		07822E552B85EC0800A5731E /* AutomaticNotificationMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07822E542B85EC0800A5731E /* AutomaticNotificationMenu.swift */; };
 		0787AE982AC89C0100F1B80C /* RotatingMapScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0787AE972AC89C0100F1B80C /* RotatingMapScreen.swift */; };
 		0791DA552B51646200A9CA23 /* ClockObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791DA542B51646200A9CA23 /* ClockObserver.swift */; };
 		079A67132B54473100901C0D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 079A67122B54473100901C0D /* GoogleService-Info.plist */; };
@@ -249,6 +250,7 @@
 		077E6EAC2AB4B1D10003E897 /* ErrorWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorWrapper.swift; sourceTree = "<group>"; };
 		077E6EAE2AB4B2120003E897 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		077E6EB02AB4B3220003E897 /* ErrorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorState.swift; sourceTree = "<group>"; };
+		07822E542B85EC0800A5731E /* AutomaticNotificationMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticNotificationMenu.swift; sourceTree = "<group>"; };
 		0784292D2AB5EF660078D836 /* AddToCalendarIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCalendarIntent.swift; sourceTree = "<group>"; };
 		078429312AB603FB0078D836 /* KontestWidgetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestWidgetModel.swift; sourceTree = "<group>"; };
 		0787AE972AC89C0100F1B80C /* RotatingMapScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingMapScreen.swift; sourceTree = "<group>"; };
@@ -719,6 +721,7 @@
 				077E6EAE2AB4B2120003E897 /* ErrorView.swift */,
 				07740EA42ABF171F00A93EAF /* CalendarPopoverView.swift */,
 				077685262B56A50C00A1449F /* AccountInformationScreen.swift */,
+				07822E542B85EC0800A5731E /* AutomaticNotificationMenu.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1097,6 +1100,7 @@
 				07AA752E2B4FCF7A00DCD75B /* KontestNewRepository.swift in Sources */,
 				07ECFBB22AA58259008513C6 /* LeetCodeUserProfileGraphQLAPIDTO.swift in Sources */,
 				07ECFBA82AA58259008513C6 /* LocalNotificationManager.swift in Sources */,
+				07822E552B85EC0800A5731E /* AutomaticNotificationMenu.swift in Sources */,
 				07ECFB992AA58259008513C6 /* LeetCodeRatingsGraphQLView.swift in Sources */,
 				07ECFB9B2AA58259008513C6 /* NoKontestsDownloadedScreen.swift in Sources */,
 			);

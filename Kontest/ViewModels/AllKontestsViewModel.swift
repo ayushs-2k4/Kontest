@@ -90,6 +90,8 @@ class AllKontestsViewModel {
             if hasFullAccessToCalendar {
                 await automaticNotificationsViewModel.addAutomaticCalendarEventToEligibleSites()
             }
+            
+            await automaticNotificationsViewModel.addAutomaticNotificationToEligibleSites()
 
             // Doing this here (after splitting kontests into categories initially)
             nextDateToRefresh = CalendarUtility.getNextDateToRefresh(
