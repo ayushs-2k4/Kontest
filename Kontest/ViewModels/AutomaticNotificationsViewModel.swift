@@ -10,6 +10,10 @@ import OSLog
 
 @Observable
 class AutomaticNotificationsViewModel {
+    static let instance = AutomaticNotificationsViewModel()
+
+    private init() {}
+
     private let allKontestsViewModel: AllKontestsViewModel = Dependencies.instance.allKontestsViewModel
     private let notificationViewModel = Dependencies.instance.notificationsViewModel
 
@@ -39,7 +43,7 @@ class AutomaticNotificationsViewModel {
 
     private func addAutomaticNotifications(siteAbbreviation: String) async {
         let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "addAutomaticNotifications")
-        
+
         let toShowKontests = allKontestsViewModel.toShowKontests
 
         for kontestModel in toShowKontests {
@@ -58,7 +62,6 @@ class AutomaticNotificationsViewModel {
     private func addAutomaticCalendarEvent(siteAbbreviation: String) async {
         let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "addAutomaticCalendarEvent")
 
-        
         let toShowKontests = allKontestsViewModel.toShowKontests
 
         for kontestModel in toShowKontests {

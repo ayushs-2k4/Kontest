@@ -86,7 +86,7 @@ class AllKontestsViewModel {
             filterKontests()
 
             // Adding automatic calendar events
-            let automaticNotificationsViewModel = AutomaticNotificationsViewModel()
+            let automaticNotificationsViewModel = AutomaticNotificationsViewModel.instance
             if hasFullAccessToCalendar {
                 await automaticNotificationsViewModel.addAutomaticCalendarEventToEligibleSites()
             }

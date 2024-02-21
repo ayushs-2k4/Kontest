@@ -215,6 +215,12 @@ struct FilterWebsitesScreen: View {
                 await MainActor.run {
                     allKontestsViewModel.sortAllKontests()
                 }
+                
+                let hasFullAccessToCalendar = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.bool(forKey: "shouldFetchAllEventsFromCalendar")
+                let automaticNotificationsViewModel = AutomaticNotificationsViewModel.instance
+                if hasFullAccessToCalendar {
+                    await automaticNotificationsViewModel.addAutomaticCalendarEventToEligibleSites()
+                }
 
                 allKontestsViewModel.addAllowedWebsites()
                 allKontestsViewModel.filterKontests()
