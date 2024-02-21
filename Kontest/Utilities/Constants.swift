@@ -51,4 +51,8 @@ enum Constants {
 
         case CupsOnline = "Cups Online"
     }
+    
+    static let automaticNotificationSuffix = "automaticNotificationSuffix"
+    
+    static let automaticCalendarEventSuffix = "automaticReminderSuffix"
 }

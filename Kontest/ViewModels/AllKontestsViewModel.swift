@@ -33,7 +33,7 @@ class AllKontestsViewModel {
 
     private var nextDateToRefresh: Date?
 
-    private var shouldFetchAllEventsFromCalendar: Bool
+    private var hasFullAccessToCalendar: Bool
 
     var searchText: String = "" {
         didSet {
@@ -47,9 +47,10 @@ class AllKontestsViewModel {
         self.repository = repository
         self.notificationsViewModel = notificationsViewModel
         self.filterWebsitesViewModel = filterWebsitesViewModel
-        shouldFetchAllEventsFromCalendar = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.bool(forKey: "shouldFetchAllEventsFromCalendar")
+        hasFullAccessToCalendar = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.bool(forKey: "shouldFetchAllEventsFromCalendar")
         setDefaultValuesForFilterWebsiteKeysToTrue()
         setDefaultValuesForMinAndMaxDurationKeys()
+        setDefaultValuesForAutomaticCalendarEventToFalse()
         addAllowedWebsites()
         fetchAllKontests()
 
@@ -83,11 +84,12 @@ class AllKontestsViewModel {
 
             checkNotificationAuthorization()
             filterKontests()
-            
-            // Adding automatic notifications
+
+            // Adding automatic calendar events
             let automaticNotificationsViewModel = AutomaticNotificationsViewModel()
-//            automaticNotificationsViewModel.addAutomaticCalendarEvent(siteAbbreviation: Constants.SiteAbbreviations.CodeChef.rawValue)
-//            automaticNotificationsViewModel.addAutomaticNotifications(siteAbbreviation: Constants.SiteAbbreviations.CodeChef.rawValue)
+            if hasFullAccessToCalendar {
+                await automaticNotificationsViewModel.addAutomaticCalendarEventToEligibleSites()
+            }
 
             // Doing this here (after splitting kontests into categories initially)
             nextDateToRefresh = CalendarUtility.getNextDateToRefresh(
@@ -138,9 +140,9 @@ class AllKontestsViewModel {
         do {
             let fetchedKontests = try await repository.getAllKontests()
 
-            shouldFetchAllEventsFromCalendar = CalendarUtility.getAuthorizationStatus() == .fullAccess
+            hasFullAccessToCalendar = CalendarUtility.getAuthorizationStatus() == .fullAccess
 
-            let allEvents = shouldFetchAllEventsFromCalendar ? try await CalendarUtility.getAllEvents() : []
+            let allEvents = hasFullAccessToCalendar ? try await CalendarUtility.getAllEvents() : []
 
             self.allFetchedKontests = fetchedKontests
                 .map { dto in
@@ -278,7 +280,7 @@ class AllKontestsViewModel {
                 print("Yes")
 
                 Task {
-                    let allEvents = self.shouldFetchAllEventsFromCalendar ? try await CalendarUtility.getAllEvents() : []
+                    let allEvents = self.hasFullAccessToCalendar ? try await CalendarUtility.getAllEvents() : []
 
                     for kontest in self.ongoingKontests {
                         kontest.loadCalendarStatus(allEvents: allEvents ?? [])
