@@ -61,36 +61,121 @@ struct FilterWebsitesScreen: View {
 
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: columns, content: {
-                FilterWebsitesView(siteLogo: Image(KontestModel.getLogo(siteAbbreviation: "AtCoder", colorScheme: colorScheme)), siteName: "AtCoder", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "AtCoder"), isSelected: $atCoderKey)
+            LazyVGrid(columns: columns,
+                      content: {
+                          FilterWebsitesView(
+                              siteLogo: Image(KontestModel.getLogo(siteAbbreviation: Constants.SiteAbbreviations.AtCoder.rawValue, colorScheme: colorScheme)),
+                              siteName: "AtCoder",
+                              borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: Constants.SiteAbbreviations.AtCoder.rawValue),
+                              siteAbbreviation: Constants.SiteAbbreviations.AtCoder.rawValue,
+                              isSelected: $atCoderKey
+                          )
 
-                FilterWebsitesView(siteLogo: Image(KontestModel.getLogo(siteAbbreviation: "CodeChef", colorScheme: colorScheme)), siteName: "CodeChef", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "CodeChef"), isSelected: $codeChefKey)
+                          FilterWebsitesView(
+                              siteLogo: Image(KontestModel.getLogo(siteAbbreviation: Constants.SiteAbbreviations.CodeChef.rawValue, colorScheme: colorScheme)),
+                              siteName: "CodeChef",
+                              borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: Constants.SiteAbbreviations.CodeChef.rawValue),
+                              siteAbbreviation: Constants.SiteAbbreviations.CodeChef.rawValue,
+                              isSelected: $codeChefKey
+                          )
 
-                FilterWebsitesView(siteLogo: Image(KontestModel.getLogo(siteAbbreviation: "CodeForces", colorScheme: colorScheme)), siteName: "CodeForces", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "CodeForces"), isSelected: $codeForcesKey)
+                          FilterWebsitesView(
+                              siteLogo: Image(KontestModel.getLogo(siteAbbreviation: Constants.SiteAbbreviations.CodeForces.rawValue, colorScheme: colorScheme)),
+                              siteName: "CodeForces",
+                              borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: Constants.SiteAbbreviations.CodeForces.rawValue),
+                              siteAbbreviation: Constants.SiteAbbreviations.CodeForces.rawValue,
+                              isSelected: $codeForcesKey
+                          )
 
-                FilterWebsitesView(siteLogo: Image(KontestModel.getLogo(siteAbbreviation: "Coding Ninjas", colorScheme: colorScheme)), siteName: "Coding Ninjas", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "Coding Ninjas"), isSelected: $codingNinjasKey)
+                          FilterWebsitesView(
+                              siteLogo: Image(KontestModel.getLogo(siteAbbreviation: Constants.SiteAbbreviations.CodingNinjas.rawValue, colorScheme: colorScheme)),
+                              siteName: "Coding Ninjas",
+                              borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: Constants.SiteAbbreviations.CodingNinjas.rawValue),
+                              siteAbbreviation: Constants.SiteAbbreviations.CodingNinjas.rawValue,
+                              isSelected: $codingNinjasKey
+                          )
 
-                FilterWebsitesView(siteLogo: Image(KontestModel.getLogo(siteAbbreviation: "CS Academy", colorScheme: colorScheme)), siteName: "CS Academy", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "CS Academy"), isSelected: $cSAcademyKey)
+                          FilterWebsitesView(
+                              siteLogo: Image(KontestModel.getLogo(siteAbbreviation: Constants.SiteAbbreviations.CSAcademy.rawValue, colorScheme: colorScheme)),
+                              siteName: "CS Academy",
+                              borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: Constants.SiteAbbreviations.CSAcademy.rawValue),
+                              siteAbbreviation: Constants.SiteAbbreviations.CSAcademy.rawValue,
+                              isSelected: $cSAcademyKey
+                          )
 
-                FilterWebsitesView(siteLogo: Image(KontestModel.getLogo(siteAbbreviation: "Cups Online", colorScheme: colorScheme)), siteName: "Cups.Online", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "Cups Online"), isSelected: $cupsOnlineKey)
+                          FilterWebsitesView(
+                              siteLogo: Image(KontestModel.getLogo(siteAbbreviation: Constants.SiteAbbreviations.CupsOnline.rawValue, colorScheme: colorScheme)),
+                              siteName: "Cups.Online",
+                              borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: Constants.SiteAbbreviations.CupsOnline.rawValue),
+                              siteAbbreviation: Constants.SiteAbbreviations.CupsOnline.rawValue,
+                              isSelected: $cupsOnlineKey
+                          )
 
-                FilterWebsitesView(siteLogo: Image(KontestModel.getLogo(siteAbbreviation: "Geeks For Geeks", colorScheme: colorScheme)), siteName: "Geeks For Geeks", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "Geeks For Geeks"), isSelected: $geeksForGeeksKey)
+                          FilterWebsitesView(
+                              siteLogo: Image(KontestModel.getLogo(siteAbbreviation: Constants.SiteAbbreviations.GeeksForGeeks.rawValue, colorScheme: colorScheme)),
+                              siteName: "Geeks For Geeks",
+                              borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: Constants.SiteAbbreviations.GeeksForGeeks.rawValue),
+                              siteAbbreviation: Constants.SiteAbbreviations.GeeksForGeeks.rawValue,
+                              isSelected: $geeksForGeeksKey
+                          )
 
-                FilterWebsitesView(siteLogo: Image(KontestModel.getLogo(siteAbbreviation: "HackerEarth", colorScheme: colorScheme)), siteName: "HackerEarth", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "HackerEarth"), isSelected: $hackerEarthKey)
+                          FilterWebsitesView(
+                              siteLogo: Image(KontestModel.getLogo(siteAbbreviation: Constants.SiteAbbreviations.HackerEarth.rawValue, colorScheme: colorScheme)),
+                              siteName: "HackerEarth",
+                              borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: Constants.SiteAbbreviations.HackerEarth.rawValue),
+                              siteAbbreviation: Constants.SiteAbbreviations.HackerEarth.rawValue,
+                              isSelected: $hackerEarthKey
+                          )
 
-                FilterWebsitesView(siteLogo: Image(KontestModel.getLogo(siteAbbreviation: "HackerRank", colorScheme: colorScheme)), siteName: "HackerRank", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "HackerRank"), isSelected: $hackerRankKey)
+                          FilterWebsitesView(
+                              siteLogo: Image(KontestModel.getLogo(siteAbbreviation: Constants.SiteAbbreviations.HackerRank.rawValue, colorScheme: colorScheme)),
+                              siteName: Constants.SiteAbbreviations.HackerRank.rawValue,
+                              borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: Constants.SiteAbbreviations.HackerRank.rawValue),
+                              siteAbbreviation: Constants.SiteAbbreviations.HackerRank.rawValue,
+                              isSelected: $hackerRankKey
+                          )
 
-                FilterWebsitesView(siteLogo: Image(KontestModel.getLogo(siteAbbreviation: "LeetCode", colorScheme: colorScheme)), siteName: "LeetCode", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "LeetCode"), isSelected: $leetCodeKey)
+                          FilterWebsitesView(
+                              siteLogo: Image(KontestModel.getLogo(siteAbbreviation: Constants.SiteAbbreviations.LeetCode.rawValue, colorScheme: colorScheme)),
+                              siteName: "LeetCode",
+                              borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: Constants.SiteAbbreviations.LeetCode.rawValue),
+                              siteAbbreviation: Constants.SiteAbbreviations.LeetCode.rawValue,
+                              isSelected: $leetCodeKey
+                          )
 
-                FilterWebsitesView(siteLogo: Image(KontestModel.getLogo(siteAbbreviation: "Project Euler", colorScheme: colorScheme)), siteName: "Project Euler", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "Project Euler"), isSelected: $projectEulerKey)
+                          FilterWebsitesView(
+                              siteLogo: Image(KontestModel.getLogo(siteAbbreviation: Constants.SiteAbbreviations.ProjectEuler.rawValue, colorScheme: colorScheme)),
+                              siteName: "Project Euler",
+                              borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: Constants.SiteAbbreviations.ProjectEuler.rawValue),
+                              siteAbbreviation: Constants.SiteAbbreviations.ProjectEuler.rawValue,
+                              isSelected: $projectEulerKey
+                          )
 
-                FilterWebsitesView(siteLogo: Image(KontestModel.getLogo(siteAbbreviation: "TopCoder", colorScheme: colorScheme)), siteName: "TopCoder", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "TopCoder", colorScheme: colorScheme), isSelected: $topCodeKey)
+                          FilterWebsitesView(
+                              siteLogo: Image(KontestModel.getLogo(siteAbbreviation: Constants.SiteAbbreviations.TopCoder.rawValue, colorScheme: colorScheme)),
+                              siteName: "TopCoder",
+                              borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: Constants.SiteAbbreviations.TopCoder.rawValue, colorScheme: colorScheme),
+                              siteAbbreviation: Constants.SiteAbbreviations.TopCoder.rawValue,
+                              isSelected: $topCodeKey
+                          )
 
-                FilterWebsitesView(siteLogo: Image(KontestModel.getLogo(siteAbbreviation: "Toph", colorScheme: colorScheme)), siteName: "Toph", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "Toph"), isSelected: $tophKey)
+                          FilterWebsitesView(
+                              siteLogo: Image(KontestModel.getLogo(siteAbbreviation: Constants.SiteAbbreviations.Toph.rawValue, colorScheme: colorScheme)),
+                              siteName: "Toph",
+                              borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: Constants.SiteAbbreviations.Toph.rawValue),
+                              siteAbbreviation: Constants.SiteAbbreviations.Toph.rawValue,
+                              isSelected: $tophKey
+                          )
 
-                FilterWebsitesView(siteLogo: Image(KontestModel.getLogo(siteAbbreviation: "Yuki Coder", colorScheme: colorScheme)), siteName: "Yuki Coder", borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "Yuki Coder"), isSelected: $yukiCoderKey)
+                          FilterWebsitesView(
+                              siteLogo: Image(KontestModel.getLogo(siteAbbreviation: Constants.SiteAbbreviations.YukiCoder.rawValue, colorScheme: colorScheme)),
+                              siteName: "Yuki Coder",
+                              borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: Constants.SiteAbbreviations.YukiCoder.rawValue),
+                              siteAbbreviation: Constants.SiteAbbreviations.YukiCoder.rawValue,
+                              isSelected: $yukiCoderKey
+                          )
 
-            })
+                      })
 
             // Min Duration Slider
             MinutesSelectionSlider(
