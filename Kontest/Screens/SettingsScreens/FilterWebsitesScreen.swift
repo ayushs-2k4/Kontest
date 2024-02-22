@@ -215,16 +215,16 @@ struct FilterWebsitesScreen: View {
                 await MainActor.run {
                     allKontestsViewModel.sortAllKontests()
                 }
-                
+
                 let hasFullAccessToCalendar = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.bool(forKey: "shouldFetchAllEventsFromCalendar")
                 let automaticNotificationsViewModel = AutomaticNotificationsViewModel.instance
                 if hasFullAccessToCalendar {
-                    await automaticNotificationsViewModel.addAutomaticCalendarEventToEligibleSites()
+                    await automaticNotificationsViewModel.addAutomaticCalendarEventToEligibleSites(kontests: Dependencies.instance.allKontestsViewModel.toShowKontests)
                 }
-                
+
                 let notificationAuthorizationLevel = await LocalNotificationManager.instance.getNotificationsAuthorizationLevel()
                 if notificationAuthorizationLevel.authorizationStatus == .authorized {
-                    await automaticNotificationsViewModel.addAutomaticNotificationToEligibleSites()
+                    await automaticNotificationsViewModel.addAutomaticNotificationToEligibleSites(kontests: Dependencies.instance.allKontestsViewModel.toShowKontests)
                 }
 
                 allKontestsViewModel.addAllowedWebsites()

@@ -88,12 +88,12 @@ class AllKontestsViewModel {
             // Adding automatic calendar events
             let automaticNotificationsViewModel = AutomaticNotificationsViewModel.instance
             if hasFullAccessToCalendar {
-                await automaticNotificationsViewModel.addAutomaticCalendarEventToEligibleSites()
+                await automaticNotificationsViewModel.addAutomaticCalendarEventToEligibleSites(kontests: self.toShowKontests)
             }
 
             let notificationAuthorizationLevel = await LocalNotificationManager.instance.getNotificationsAuthorizationLevel()
             if notificationAuthorizationLevel.authorizationStatus == .authorized {
-                await automaticNotificationsViewModel.addAutomaticNotificationToEligibleSites()
+                await automaticNotificationsViewModel.addAutomaticNotificationToEligibleSites(kontests: self.toShowKontests)
             }
 
             // Doing this here (after splitting kontests into categories initially)

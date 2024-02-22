@@ -14,10 +14,9 @@ class AutomaticNotificationsViewModel {
 
     private init() {}
 
-    private let allKontestsViewModel: AllKontestsViewModel = Dependencies.instance.allKontestsViewModel
     private let notificationViewModel = Dependencies.instance.notificationsViewModel
 
-    func addAutomaticNotificationToEligibleSites() async {
+    func addAutomaticNotificationToEligibleSites(kontests: [KontestModel]) async {
         let userDefaults = UserDefaults(suiteName: Constants.userDefaultsGroupID)!
 
         for siteAbbreviation in getAllSiteAbbreviations() {
@@ -27,41 +26,39 @@ class AutomaticNotificationsViewModel {
             let notificationKey6HoursBefore = siteAbbreviation + Constants.automaticNotification6HoursSuffix
 
             if userDefaults.bool(forKey: notificationKey10MinutesBefore) == true {
-                await addAutomaticNotifications(siteAbbreviation: siteAbbreviation, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
+                await addAutomaticNotifications(kontests: kontests, siteAbbreviation: siteAbbreviation, minutesBefore: 10, hoursBefore: 0, daysBefore: 0)
             }
 
             if userDefaults.bool(forKey: notificationKey30MinutesBefore) == true {
-                await addAutomaticNotifications(siteAbbreviation: siteAbbreviation, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
+                await addAutomaticNotifications(kontests: kontests, siteAbbreviation: siteAbbreviation, minutesBefore: 30, hoursBefore: 0, daysBefore: 0)
             }
 
             if userDefaults.bool(forKey: notificationKey1HourBefore) == true {
-                await addAutomaticNotifications(siteAbbreviation: siteAbbreviation, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
+                await addAutomaticNotifications(kontests: kontests, siteAbbreviation: siteAbbreviation, minutesBefore: 0, hoursBefore: 1, daysBefore: 0)
             }
 
             if userDefaults.bool(forKey: notificationKey6HoursBefore) == true {
-                await addAutomaticNotifications(siteAbbreviation: siteAbbreviation, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
+                await addAutomaticNotifications(kontests: kontests, siteAbbreviation: siteAbbreviation, minutesBefore: 0, hoursBefore: 6, daysBefore: 0)
             }
         }
     }
 
-    func addAutomaticCalendarEventToEligibleSites() async {
+    func addAutomaticCalendarEventToEligibleSites(kontests: [KontestModel]) async {
         let userDefaults = UserDefaults(suiteName: Constants.userDefaultsGroupID)!
 
         for siteAbbreviation in getAllSiteAbbreviations() {
             let newKey = siteAbbreviation + Constants.automaticCalendarEventSuffix
 
             if userDefaults.bool(forKey: newKey) == true {
-                await addAutomaticCalendarEvent(siteAbbreviation: siteAbbreviation)
+                await addAutomaticCalendarEvent(kontests: kontests, siteAbbreviation: siteAbbreviation)
             }
         }
     }
 
-    private func addAutomaticNotifications(siteAbbreviation: String, minutesBefore: Int, hoursBefore: Int, daysBefore: Int) async {
+    private func addAutomaticNotifications(kontests: [KontestModel], siteAbbreviation: String, minutesBefore: Int, hoursBefore: Int, daysBefore: Int) async {
         let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "addAutomaticNotifications")
 
-        let toShowKontests = allKontestsViewModel.toShowKontests
-
-        for kontestModel in toShowKontests {
+        for kontestModel in kontests {
             if kontestModel.siteAbbreviation == siteAbbreviation {
                 if minutesBefore == 10 {
                     if !kontestModel.isSetForReminder10MiutesBefore {
@@ -100,12 +97,10 @@ class AutomaticNotificationsViewModel {
         }
     }
 
-    private func addAutomaticCalendarEvent(siteAbbreviation: String) async {
+    private func addAutomaticCalendarEvent(kontests: [KontestModel], siteAbbreviation: String) async {
         let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "addAutomaticCalendarEvent")
 
-        let toShowKontests = allKontestsViewModel.toShowKontests
-
-        for kontestModel in toShowKontests {
+        for kontestModel in kontests {
             if kontestModel.siteAbbreviation == siteAbbreviation {
                 if !kontestModel.isCalendarEventAdded {
                     let kontestStartDate = CalendarUtility.getDate(date: kontestModel.start_time)
