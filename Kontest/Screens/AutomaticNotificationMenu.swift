@@ -107,7 +107,9 @@ struct AutomaticNotificationMenu: View {
             self.areAutomaticNotificationsEnabled1Hour = userDefaults.bool(forKey: siteAbbreviation + Constants.automaticNotification1HourSuffix)
             self.areAutomaticNotificationsEnabled6Hours = userDefaults.bool(forKey: siteAbbreviation + Constants.automaticNotification6HoursSuffix)
         }
+        #if !os(iOS)
         .menuStyle(.borderedButton)
+        #endif
     }
 }
 
