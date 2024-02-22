@@ -90,8 +90,11 @@ class AllKontestsViewModel {
             if hasFullAccessToCalendar {
                 await automaticNotificationsViewModel.addAutomaticCalendarEventToEligibleSites()
             }
-            
-            await automaticNotificationsViewModel.addAutomaticNotificationToEligibleSites()
+
+            let notificationAuthorizationLevel = await LocalNotificationManager.instance.getNotificationsAuthorizationLevel()
+            if notificationAuthorizationLevel.authorizationStatus == .authorized {
+                await automaticNotificationsViewModel.addAutomaticNotificationToEligibleSites()
+            }
 
             // Doing this here (after splitting kontests into categories initially)
             nextDateToRefresh = CalendarUtility.getNextDateToRefresh(

@@ -221,6 +221,11 @@ struct FilterWebsitesScreen: View {
                 if hasFullAccessToCalendar {
                     await automaticNotificationsViewModel.addAutomaticCalendarEventToEligibleSites()
                 }
+                
+                let notificationAuthorizationLevel = await LocalNotificationManager.instance.getNotificationsAuthorizationLevel()
+                if notificationAuthorizationLevel.authorizationStatus == .authorized {
+                    await automaticNotificationsViewModel.addAutomaticNotificationToEligibleSites()
+                }
 
                 allKontestsViewModel.addAllowedWebsites()
                 allKontestsViewModel.filterKontests()
