@@ -216,6 +216,9 @@ struct FilterWebsitesScreen: View {
                     allKontestsViewModel.sortAllKontests()
                 }
 
+                allKontestsViewModel.addAllowedWebsites()
+                allKontestsViewModel.filterKontests()
+
                 let hasFullAccessToCalendar = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.bool(forKey: "shouldFetchAllEventsFromCalendar")
                 let automaticNotificationsViewModel = AutomaticNotificationsViewModel.instance
                 if hasFullAccessToCalendar {
@@ -227,8 +230,6 @@ struct FilterWebsitesScreen: View {
                     await automaticNotificationsViewModel.addAutomaticNotificationToEligibleSites(kontests: Dependencies.instance.allKontestsViewModel.toShowKontests)
                 }
 
-                allKontestsViewModel.addAllowedWebsites()
-                allKontestsViewModel.filterKontests()
                 WidgetCenter.shared.reloadAllTimelines()
             }
         }
