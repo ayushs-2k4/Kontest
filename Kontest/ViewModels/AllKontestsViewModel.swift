@@ -271,7 +271,7 @@ class AllKontestsViewModel {
 
                     errorWrapper = ErrorWrapper(error: AppError(title: "Permission not Granted", description: "You have set some notifications, but notification permission is not granted"), guidance: "Please provide Notification Permission in order to get notifications")
 
-                    logger.info("errorWrapper: \("\(String(describing: errorWrapper))")")
+                    logger.info("errorWrapper: \("\(String(describing: self.errorWrapper))")")
                 }
             }
         }

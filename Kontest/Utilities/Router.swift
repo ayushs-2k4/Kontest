@@ -21,7 +21,7 @@ class Router {
         didSet {
             currentSelectionState = path.last ?? .screen(.AllKontestScreen)
             logger.info("path: \(self.path)")
-            logger.info("currentSelectionState: \("\(currentSelectionState)")")
+            logger.info("currentSelectionState: \("\(self.currentSelectionState)")")
         }
     }
 

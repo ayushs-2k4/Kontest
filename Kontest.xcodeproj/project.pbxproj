@@ -1195,6 +1195,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R2Z9FDM5M6;
 				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ayushsinghal.KontestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1216,6 +1217,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R2Z9FDM5M6;
 				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ayushsinghal.KontestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1372,6 +1374,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ayushsinghal.Kontest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1408,6 +1411,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ayushsinghal.Kontest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
