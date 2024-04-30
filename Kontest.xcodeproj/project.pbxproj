@@ -618,9 +618,9 @@
 			isa = PBXGroup;
 			children = (
 				07183EB02AB8586F006C92AD /* MockViewModels */,
+				07ECFB3A2AA58259008513C6 /* AllKontestsViewModel.swift */,
 				07ECFB382AA58259008513C6 /* ChangeUsernameViewModel.swift */,
 				07ECFB392AA58259008513C6 /* LeetCodeGraphQLViewModel.swift */,
-				07ECFB3A2AA58259008513C6 /* AllKontestsViewModel.swift */,
 				07ECFB3B2AA58259008513C6 /* CodeChefViewModel.swift */,
 				07ECFB3C2AA58259008513C6 /* CodeForcesViewModel.swift */,
 				07ECFB3D2AA58259008513C6 /* NotificationsViewModel.swift */,

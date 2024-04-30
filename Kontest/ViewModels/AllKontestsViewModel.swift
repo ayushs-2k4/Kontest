@@ -144,6 +144,8 @@ class AllKontestsViewModel {
     private func getAllKontests() async {
         do {
             let fetchedKontests = try await repository.getAllKontests()
+            
+            print("fetchedKontests: \(fetchedKontests)")
 
             hasFullAccessToCalendar = CalendarUtility.getAuthorizationStatus() == .fullAccess
 

@@ -78,7 +78,7 @@ struct AllKontestsScreen: View {
                                     let laterKontests = allKontestsViewModel.laterKontests
 
                                     if allKontestsViewModel.toShowKontests.isEmpty && !allKontestsViewModel.searchText.isEmpty {
-                                        Text("Please try some different search term")
+                                        ContentUnavailableView("No Results for \"\(allKontestsViewModel.searchText)\"", systemImage: "magnifyingglass", description: Text("Check the spelling or try a new search."))
                                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                                     } else {
                                         if ongoingKontests.count > 0 {
@@ -197,7 +197,7 @@ struct AllKontestsScreen: View {
                                 .alert("Add all events to your default calendar?", isPresented: $showAddAllKontestToCalendarAlert, actions: {
                                     Button("Add") {
                                         isAddAllKontestsToCalendarIconAnimating = true
-                                        
+
                                         Task {
                                             for kontest in allKontestsViewModel.toShowKontests {
                                                 let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time) ?? Date()
