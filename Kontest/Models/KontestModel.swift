@@ -160,6 +160,9 @@ extension KontestModel {
 
         case "toph.com":
             Constants.SiteAbbreviations.Toph.rawValue
+            
+        case "toph.co":
+            Constants.SiteAbbreviations.Toph.rawValue
 
         case "yukicoder.me":
             Constants.SiteAbbreviations.YukiCoder.rawValue
