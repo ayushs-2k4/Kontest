@@ -1,5 +1,5 @@
 //
-//  FilterWebsiteView.swift
+//  FilterWebsitesViewRegular.swift
 //  Kontest
 //
 //  Created by Ayush Singhal on 09/09/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FilterWebsitesView: View {
+struct FilterWebsitesViewRegular: View {
     let siteLogo: Image
     let siteName: String
     let borderColor: Color
@@ -65,7 +65,7 @@ struct FilterWebsitesView: View {
 
                     Spacer()
 
-//                    // for automatic notifiactions
+//                    for automatic notifiactions
                     AutomaticNotificationMenu(siteAbbreviation: self.siteAbbreviation)
                         .frame(width: 45)
                 }
@@ -89,7 +89,7 @@ struct FilterWebsitesView: View {
 #Preview {
     @State var isSelected: Bool = true
 
-    return FilterWebsitesView(
+    return FilterWebsitesViewRegular(
         siteLogo: Image(.hackerRankLogo),
         siteName: "Hacker Rank",
         borderColor: KontestModel.getColorForIdentifier(siteAbbreviation: "HackerRank"),

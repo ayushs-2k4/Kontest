@@ -47,7 +47,7 @@ struct iOSVeiw: View {
                 }
                 .tag(Panel.AllKontestScreen)
             #if os(iOS)
-                .toolbar(path.contains(.screen(.SettingsScreen)) ? .hidden : .visible, for: .tabBar)
+                .toolbar((path.first == .screen(.AllKontestScreen) || path.isEmpty) ? .visible : .hidden, for: .tabBar)
                 .animation(path.contains(.screen(.SettingsScreen)) ? nil : .default, value: path)
             #endif
 
