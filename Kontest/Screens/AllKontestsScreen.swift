@@ -78,7 +78,7 @@ struct AllKontestsScreen: View {
                                     let laterKontests = allKontestsViewModel.laterKontests
 
                                     if allKontestsViewModel.toShowKontests.isEmpty && !allKontestsViewModel.searchText.isEmpty {
-                                        ContentUnavailableView("No Results for \"\(allKontestsViewModel.searchText)\"", systemImage: "magnifyingglass", description: Text("Check the spelling or try a new search."))
+                                        ContentUnavailableView.search
                                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                                     } else {
                                         if ongoingKontests.count > 0 {
