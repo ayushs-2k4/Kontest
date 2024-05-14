@@ -72,6 +72,14 @@ class LeetCodeGraphQLViewModel {
                             self.userContestRanking = userContestRanking
                             self.userContestRankingHistory = userContestRankingHistory
 
+                            if let ratings = userContestRankingHistory {
+                                for rating in ratings {
+                                    if let rating, rating.attended ?? false == true {
+                                        self.attendedKontests.append(rating)
+                                    }
+                                }
+                            }
+
                             self.error = nil
                             self.isFetchingUserRankings = false
                             self.isLoading = (self.isFetchingUserData) || (self.isFetchingUserRankings)
@@ -97,21 +105,7 @@ class LeetCodeGraphQLViewModel {
     }
 
     // Chart properties
-    var attendedKontests: [LeetCodeUserRankingHistoryGraphQLAPIModel] {
-        if let ratings = userContestRankingHistory {
-            var kons: [LeetCodeUserRankingHistoryGraphQLAPIModel] = []
-
-            for rating in ratings {
-                if let rating, rating.attended ?? false == true {
-                    kons.append(rating)
-                }
-            }
-
-            return kons
-        }
-
-        return []
-    }
+    var attendedKontests: [LeetCodeUserRankingHistoryGraphQLAPIModel] = []
 
     var sortedDates: [Date]
 //    var sortedDates: [Date] {

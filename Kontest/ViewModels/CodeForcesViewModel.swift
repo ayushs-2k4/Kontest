@@ -17,8 +17,9 @@ class CodeForcesViewModel {
     let username: String
     var codeForcesRatings: CodeForcesUserRatingAPIModel?
     var codeForcesUserInfos: CodeForcesUserInfoAPIModel?
-    
     var isLoading = false
+    
+    var attendedKontests: [CodeForcesuserRatingAPIResultModel] = []
     
     var error: Error?
     
@@ -42,6 +43,10 @@ class CodeForcesViewModel {
                         let updateDate = Date(timeIntervalSince1970: Double(updateTime))
                     
                         return updateDate
+                    }
+                    
+                    for result in codeForcesRatings.result {
+                        self.attendedKontests.append(result)
                     }
                 }
                 
