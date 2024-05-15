@@ -61,6 +61,7 @@ struct LeetCodeUserRankingHistoryGraphQLAPIModel: Codable, Equatable, Identifiab
     let rating: Double?
     let ranking: Int?
     let contest: ContestModel?
+    var hasAnimated: Bool = false
 }
 
 struct ContestModel: Codable, Equatable {

@@ -5,10 +5,21 @@
 //  Created by Ayush Singhal on 12/08/23.
 //
 
+import Firebase
+import OSLog
 import SwiftUI
 
 @main
 struct KontestApp: App {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "KontestApp")
+
+    init() {
+        networkMonitor.start(afterSeconds: 0.5)
+
+//        FirebaseApp.configure() // moved to Dependencies, as they are running first than init, and app is crashing on putting this in init()
+//        logger.log("Firebase Configured")
+    }
+
     @State private var allKontestsViewModel = Dependencies.instance.allKontestsViewModel
 
     @State private var router = Router.instance
@@ -17,14 +28,11 @@ struct KontestApp: App {
 
     let networkMonitor = NetworkMonitor.shared
 
-    init() {
-        networkMonitor.start(afterSeconds: 0.5)
-    }
-
     var body: some Scene {
         WindowGroup {
             if let defaults = UserDefaults(suiteName: Constants.userDefaultsGroupID) {
                 ContentView(panelSelection: $panelSelection)
+//                LineChartAnimation()
                     .environment(allKontestsViewModel)
                     .environment(router)
                     .environment(networkMonitor)

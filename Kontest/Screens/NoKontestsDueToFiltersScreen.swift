@@ -12,7 +12,10 @@ struct NoKontestsDueToFiltersScreen: View {
     
     var body: some View {
         Section {
-            Text("Change filters to see kontests.")
+            ContentUnavailableView {
+                Text("Change filters to see kontests.")
+            }
+            
             Button("Filter Websites") {
                 router.appendScreen(screen: .SettingsScreenType(.FilterWebsitesScreen))
             }
@@ -25,4 +28,5 @@ struct NoKontestsDueToFiltersScreen: View {
 
 #Preview {
     NoKontestsDueToFiltersScreen()
+        .environment(Router.instance)
 }

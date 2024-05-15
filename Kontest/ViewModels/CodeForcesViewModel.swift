@@ -17,8 +17,9 @@ class CodeForcesViewModel {
     let username: String
     var codeForcesRatings: CodeForcesUserRatingAPIModel?
     var codeForcesUserInfos: CodeForcesUserInfoAPIModel?
-    
     var isLoading = false
+    
+    var attendedKontests: [CodeForcesuserRatingAPIResultModel] = []
     
     var error: Error?
     
@@ -43,6 +44,10 @@ class CodeForcesViewModel {
                     
                         return updateDate
                     }
+                    
+                    for result in codeForcesRatings.result {
+                        self.attendedKontests.append(result)
+                    }
                 }
                 
                 self.chartXScrollPosition = sortedDates.first?.addingTimeInterval(-86400 * 3) ?? .now
@@ -57,7 +62,7 @@ class CodeForcesViewModel {
     private func getCodeForcesRatings(username: String) async {
         do {
             let fetchedCodeForcesRatings = try await codeForcesAPIRepository.getUserRating(username: username)
-            logger.info("\("\(fetchedCodeForcesRatings)")")
+//            logger.info("\("\(fetchedCodeForcesRatings)")")
             
             codeForcesRatings = CodeForcesUserRatingAPIModel.from(dto: fetchedCodeForcesRatings)
         } catch {
@@ -97,7 +102,7 @@ class CodeForcesViewModel {
     private func getCodeForcesUserInfo(username: String) async {
         do {
             let fetchedCodeForcesUserInfo = try await codeForcesAPIRepository.getUserInfo(username: username)
-            logger.info("\("\(fetchedCodeForcesUserInfo)")")
+//            logger.info("\("\(fetchedCodeForcesUserInfo)")")
             
             codeForcesUserInfos = CodeForcesUserInfoAPIModel.from(dto: fetchedCodeForcesUserInfo)
         } catch {

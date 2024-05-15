@@ -13,6 +13,7 @@ struct CodeChefGraphView: View {
     let codeChefViewModel: CodeChefViewModel = Dependencies.instance.codeChefViewModel
 
     @State private var showAnnotations: Bool = true
+    @State private var hasAnimated: Bool = false
 
     #if os(iOS)
         let accentColor = Color(uiColor: UIColor.systemBrown)
@@ -34,6 +35,16 @@ struct CodeChefGraphView: View {
                 }
                 else {
                     Text(codeChefViewModel.username)
+                        .onAppear {
+                            animateChart()
+                        }
+//                        .onDisappear {
+//                            hasAnimated = false
+//
+//                            for (index, _) in codeChefViewModel.attendedKontests.enumerated() {
+//                                codeChefViewModel.attendedKontests[index].hasAnimated = false
+//                            }
+//                        }
 
                     Text("Total Kontests attended: \(codeChefViewModel.attendedKontests.count)")
 
@@ -43,6 +54,19 @@ struct CodeChefGraphView: View {
                         .tint(accentColor)
 
                     CodeChefChart(showAnnotations: $showAnnotations)
+                }
+            }
+        }
+    }
+
+    private func animateChart() {
+        guard !hasAnimated else { return }
+        hasAnimated = true
+
+        for (index, _) in codeChefViewModel.attendedKontests.enumerated() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.05) {
+                withAnimation(.smooth) {
+                    codeChefViewModel.attendedKontests[index].hasAnimated = true
                 }
             }
         }
@@ -92,7 +116,7 @@ struct CodeChefChart: View {
                 let rating = Int(attendedKontest.rating)
 
                 if let date, let rating {
-                    PointMark(x: .value("Time", date, unit: .day), y: .value("Ratings", rating))
+                    PointMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedKontest.hasAnimated ? rating : 0))
                         .opacity(0)
                         .annotation(position: .top) {
                             if showAnnotations {
@@ -107,11 +131,11 @@ struct CodeChefChart: View {
                             }
                         }
 
-                    LineMark(x: .value("Time", date, unit: .day), y: .value("Ratings", rating))
+                    LineMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedKontest.hasAnimated ? rating : 0))
                         .interpolationMethod(.catmullRom)
                         .symbol(Circle().strokeBorder(lineWidth: 2))
 
-                    AreaMark(x: .value("Time", date, unit: .day), y: .value("Ratings", rating))
+                    AreaMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedKontest.hasAnimated ? rating : 0))
                         .interpolationMethod(.catmullRom)
                         .foregroundStyle(curGradient)
                 }
@@ -143,16 +167,17 @@ struct CodeChefChart: View {
                 }
             }
         }
+        .chartYScale(domain: 0 ... 2000)
         #if os(iOS)
-        .foregroundStyle(Color(uiColor: UIColor.systemBrown))
+            .foregroundStyle(Color(uiColor: UIColor.systemBrown))
         #elseif os(macOS)
-        .foregroundStyle(Color(nsColor: NSColor.systemBrown))
+            .foregroundStyle(Color(nsColor: NSColor.systemBrown))
         #endif
-        .chartScrollableAxes(.horizontal)
-        .chartXVisibleDomain(length: 3600 * 24 * 30) // 30 days
-        .padding(.horizontal)
-        .chartXSelection(value: Bindable(codeChefViewModel).rawSelectedDate)
-        .animation(.default, value: showAnnotations)
+            .chartScrollableAxes(.horizontal)
+            .chartXVisibleDomain(length: 3600 * 24 * 30) // 30 days
+            .padding(.horizontal)
+            .chartXSelection(value: Bindable(codeChefViewModel).rawSelectedDate)
+            .animation(.default, value: showAnnotations)
     }
 }
 

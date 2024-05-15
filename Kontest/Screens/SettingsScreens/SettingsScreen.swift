@@ -5,6 +5,7 @@
 //  Created by Ayush Singhal on 16/08/23.
 //
 
+import OSLog
 import SwiftUI
 
 struct SettingsScreen: View {
@@ -25,7 +26,10 @@ struct SettingsScreen: View {
 }
 
 private struct AllSettingsButtonsView: View {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "AllSettingsButtonsView")
+
     @Environment(Router.self) private var router
+    @State private var isAuthenticated: Bool = AuthenticationManager.shared.isSignedIn()
 
     var body: some View {
         Button("Change Usernames") {
@@ -36,23 +40,16 @@ private struct AllSettingsButtonsView: View {
             router.appendScreen(screen: Screen.SettingsScreenType(.FilterWebsitesScreen))
         }
 
+        Button(isAuthenticated ? "Account Information" : "Sign In/ Sign Up") {
+            if isAuthenticated {
+                router.appendScreen(screen: Screen.SettingsScreenType(.AuthenticationScreenType(.AccountInformationScreen)))
+            } else {
+                router.appendScreen(screen: Screen.SettingsScreenType(.AuthenticationScreenType(.SignInScreen)))
+            }
+        }
+
         Button("About Me!") {
             router.appendScreen(screen: Screen.SettingsScreenType(.RotatingMapScreen))
-        }
-    }
-}
-
-struct SingleSettingsTileView: View {
-    let title: String
-    let backgroundColor: Color = .yellow
-    let onTapGesture: () -> ()
-
-    var body: some View {
-        ZStack {
-            Text(title)
-        }
-        .onTapGesture {
-            onTapGesture()
         }
     }
 }
@@ -63,10 +60,6 @@ struct SingleSettingsTileView: View {
     }
     .environment(Dependencies.instance.changeUsernameViewModel)
     .environment(Router.instance)
-}
-
-#Preview("SingleSettingsTileView") {
-    SingleSettingsTileView(title: "Change Usernames", onTapGesture: {})
 }
 
 struct MyButtonStyle: ButtonStyle {

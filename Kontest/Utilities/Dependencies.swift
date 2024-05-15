@@ -5,6 +5,7 @@
 //  Created by Ayush Singhal on 18/09/23.
 //
 
+import FirebaseCore
 import Foundation
 
 class Dependencies {
@@ -19,6 +20,8 @@ class Dependencies {
     static let instance = Dependencies()
 
     private init() {
+        FirebaseApp.configure()
+
         self.notificationsViewModel = NotificationsViewModel()
         self.filterWebsitesViewModel = FilterWebsitesViewModel()
         self.allKontestsViewModel = AllKontestsViewModel(notificationsViewModel: notificationsViewModel, filterWebsitesViewModel: filterWebsitesViewModel, repository: KontestNewRepository())

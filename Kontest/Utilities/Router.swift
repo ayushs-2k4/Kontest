@@ -35,5 +35,15 @@ class Router {
         }
     }
 
+    func popLastScreen() {
+        if !path.isEmpty {
+            path.removeLast()
+        }
+    }
+
+    func goToRootView() {
+        path.removeAll()
+    }
+
     static let instance: Router = .init()
 }

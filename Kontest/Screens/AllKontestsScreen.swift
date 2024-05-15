@@ -17,7 +17,12 @@ struct AllKontestsScreen: View {
     @Environment(NetworkMonitor.self) private var networkMonitor
     @State var showRemoveAllNotificationsAlert = false
     @State var showNotificationForAllKontestsAlert = false
+    @State private var showAddAllKontestToCalendarAlert = false
+
     @State private var isNoNotificationIconAnimating = false
+    @State private var isAddAllKontestsToCalendarIconAnimating = false
+    @State private var isRemoveAllKontestsFromCalendarIconAnimating = false
+
     let notificationsViewModel = Dependencies.instance.notificationsViewModel
 
     let changeUsernameViewModel = Dependencies.instance.changeUsernameViewModel
@@ -37,7 +42,7 @@ struct AllKontestsScreen: View {
                 ZStack {
                     if allKontestsViewModel.isLoading {
                         ProgressView()
-                    } else if allKontestsViewModel.allKontests.isEmpty { // No Kontests Downloaded
+                    } else if allKontestsViewModel.allFetchedKontests.isEmpty { // No Kontests Downloaded
                         List {
                             RatingsView(
                                 codeForcesUsername: changeUsernameViewModel.codeForcesUsername,
@@ -54,7 +59,7 @@ struct AllKontestsScreen: View {
                             }
                         }
 
-                    } else {
+                    } else { // There are some kontests downloaded
                         TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
                             List {
                                 RatingsView(codeForcesUsername: changeUsernameViewModel.codeForcesUsername, leetCodeUsername: changeUsernameViewModel.leetcodeUsername, codeChefUsername: changeUsernameViewModel.codeChefUsername)
@@ -73,7 +78,7 @@ struct AllKontestsScreen: View {
                                     let laterKontests = allKontestsViewModel.laterKontests
 
                                     if allKontestsViewModel.toShowKontests.isEmpty && !allKontestsViewModel.searchText.isEmpty {
-                                        Text("Please try some different search term")
+                                        ContentUnavailableView.search
                                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                                     } else {
                                         if ongoingKontests.count > 0 {
@@ -155,6 +160,7 @@ struct AllKontestsScreen: View {
                         ToolbarItem(placement: .automatic) { // change the placement here!
                             Button {
                                 showRemoveAllNotificationsAlert = true
+
                                 var transaction = Transaction()
                                 transaction.disablesAnimations = true
                                 withTransaction(transaction) {
@@ -172,6 +178,89 @@ struct AllKontestsScreen: View {
                                 }
                             })
                         }
+
+                        if CalendarUtility.getAuthorizationStatus() == .fullAccess {
+                            ToolbarItem(placement: .automatic) { // change the placement here!
+                                Button {
+                                    showAddAllKontestToCalendarAlert = true
+
+                                    var transaction = Transaction()
+                                    transaction.disablesAnimations = true
+                                    withTransaction(transaction) {
+                                        isAddAllKontestsToCalendarIconAnimating = false
+                                    }
+                                } label: {
+                                    Image(systemName: "calendar.badge.plus")
+                                        .symbolEffect(.bounce.up.byLayer, value: isAddAllKontestsToCalendarIconAnimating)
+                                }
+                                .help("Add all events to Calendar") // Tooltip text
+                                .alert("Add all events to your default calendar?", isPresented: $showAddAllKontestToCalendarAlert, actions: {
+                                    Button("Add") {
+                                        isAddAllKontestsToCalendarIconAnimating = true
+
+                                        Task {
+                                            for kontest in allKontestsViewModel.toShowKontests {
+                                                let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time) ?? Date()
+                                                let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
+                                                let setDate = kontestStartDate.addingTimeInterval(-15 * 60)
+
+                                                if !kontest.isCalendarEventAdded {
+                                                    if try await CalendarUtility.addEvent(
+                                                        startDate: kontestStartDate,
+                                                        endDate: kontestEndDate ?? Date(),
+                                                        title: kontest.name,
+                                                        notes: "",
+                                                        url: URL(string: kontest.url),
+                                                        alarmAbsoluteDate: setDate
+                                                    ) {
+                                                        kontest.isCalendarEventAdded = true
+                                                        kontest.calendarEventDate = setDate
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    Button("Cancel") {}
+                                })
+                            }
+
+                            ToolbarItem(placement: .automatic) { // change the placement here!
+                                Button {
+                                    isRemoveAllKontestsFromCalendarIconAnimating = true
+
+                                    var transaction = Transaction()
+                                    transaction.disablesAnimations = true
+                                    withTransaction(transaction) {
+                                        isRemoveAllKontestsFromCalendarIconAnimating = false
+                                    }
+
+                                    Task {
+                                        for kontest in allKontestsViewModel.toShowKontests {
+                                            let kontestStartDate = CalendarUtility.getDate(date: kontest.start_time) ?? Date()
+                                            let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time) ?? Date()
+
+                                            if kontest.isCalendarEventAdded {
+                                                try await CalendarUtility.removeEvent(
+                                                    startDate: kontestStartDate,
+                                                    endDate: kontestEndDate,
+                                                    title: kontest.name,
+                                                    notes: "",
+                                                    url: URL(string: kontest.url)
+                                                )
+
+                                                kontest.isCalendarEventAdded = false
+                                                kontest.calendarEventDate = nil
+                                            }
+                                        }
+                                    }
+                                } label: {
+                                    Image(systemName: "calendar.badge.minus")
+                                        .symbolEffect(.bounce.up.byLayer, value: isRemoveAllKontestsFromCalendarIconAnimating)
+                                }
+                                .help("Remove all events from Calendar") // Tooltip text
+                            }
+                        }
                     }
 
                     ToolbarItem(placement: .automatic) {
@@ -180,6 +269,7 @@ struct AllKontestsScreen: View {
                         } label: {
                             Image(systemName: "gear")
                         }
+                        .help("Settings") // Tooltip text
                     }
                 }
                 .navigationDestination(for: SelectionState.self) { state in
@@ -205,6 +295,18 @@ struct AllKontestsScreen: View {
 
                             case .RotatingMapScreen:
                                 RandomRotatingMapScreen(navigationTitle: "About Me")
+
+                            case .AuthenticationScreenType(let authenticationScreenType):
+                                switch authenticationScreenType {
+                                case .SignInScreen:
+                                    SignInScreen()
+
+                                case .SignUpScreen:
+                                    SignUpScreen()
+
+                                case .AccountInformationScreen:
+                                    AccountInformationScreen()
+                                }
                             }
                         }
 

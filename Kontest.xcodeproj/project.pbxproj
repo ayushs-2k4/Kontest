@@ -13,13 +13,15 @@
 		07183EB72AB8752D006C92AD /* CalendarUtilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EB62AB8752D006C92AD /* CalendarUtilityTests.swift */; };
 		071915642AB1695E00E1CB56 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071915632AB1695E00E1CB56 /* NetworkMonitor.swift */; };
 		071915672AB169D300E1CB56 /* NoInternetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 071915662AB169D300E1CB56 /* NoInternetScreen.swift */; };
+		0720B0172B5680F0006721EE /* CollegesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0720B0162B5680F0006721EE /* CollegesRepository.swift */; };
 		0725FB632AC7E2EA00564DE0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0725FB622AC7E2EA00564DE0 /* ContentView.swift */; };
 		0725FB662AC7EA3F00564DE0 /* LeetcodeGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0725FB652AC7EA3F00564DE0 /* LeetcodeGraphView.swift */; };
 		0725FB682AC82F0A00564DE0 /* CodeForcesGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0725FB672AC82F0A00564DE0 /* CodeForcesGraphView.swift */; };
-		073269E82AAC42350028476D /* FilterWebsitesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073269E72AAC42350028476D /* FilterWebsitesView.swift */; };
+		073269E82AAC42350028476D /* FilterWebsitesViewRegular.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073269E72AAC42350028476D /* FilterWebsitesViewRegular.swift */; };
 		073269EC2AAC451B0028476D /* FilterWebsitesScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073269EB2AAC451B0028476D /* FilterWebsitesScreen.swift */; };
 		073269EF2AAC4B0C0028476D /* ChangeUsernameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */; };
 		07367C482ACA097000A558ED /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07367C472ACA097000A558ED /* DeviceType.swift */; };
+		073850BF2BE20C7F00EF24D7 /* FilterWebsitesViewCompact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073850BE2BE20C7F00EF24D7 /* FilterWebsitesViewCompact.swift */; };
 		0742254B2AC1444500EEB578 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB682AA58259008513C6 /* LocalNotificationManager.swift */; };
 		0742254C2AC1444600EEB578 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB682AA58259008513C6 /* LocalNotificationManager.swift */; };
 		074DD4522AA61570005C16A5 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074DD4512AA61570005C16A5 /* AppError.swift */; };
@@ -49,6 +51,8 @@
 		0764FFA02ABC72870060AC1F /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 0764FF9F2ABC72870060AC1F /* Apollo */; };
 		0764FFA22ABC72BF0060AC1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07ECFB402AA58259008513C6 /* Assets.xcassets */; };
 		07740EA52ABF171F00A93EAF /* CalendarPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07740EA42ABF171F00A93EAF /* CalendarPopoverView.swift */; };
+		077685272B56A50C00A1449F /* AccountInformationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077685262B56A50C00A1449F /* AccountInformationScreen.swift */; };
+		077685292B56A60200A1449F /* AccountInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077685282B56A60200A1449F /* AccountInformationViewModel.swift */; };
 		0779F4742ABD5B63004E50F6 /* UpcomingKontestsWidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */; };
 		0779F4752ABD5B64004E50F6 /* UpcomingKontestsWidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */; };
 		0779F4762ABD5B71004E50F6 /* WidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE8F2ABAE38900FEA3D7 /* WidgetCache.swift */; };
@@ -56,8 +60,19 @@
 		077E6EAD2AB4B1D10003E897 /* ErrorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EAC2AB4B1D10003E897 /* ErrorWrapper.swift */; };
 		077E6EAF2AB4B2120003E897 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EAE2AB4B2120003E897 /* ErrorView.swift */; };
 		077E6EB12AB4B3220003E897 /* ErrorState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EB02AB4B3220003E897 /* ErrorState.swift */; };
+		07822E552B85EC0800A5731E /* AutomaticNotificationMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07822E542B85EC0800A5731E /* AutomaticNotificationMenu.swift */; };
 		0787AE982AC89C0100F1B80C /* RotatingMapScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0787AE972AC89C0100F1B80C /* RotatingMapScreen.swift */; };
 		0791DA552B51646200A9CA23 /* ClockObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791DA542B51646200A9CA23 /* ClockObserver.swift */; };
+		079A67132B54473100901C0D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 079A67122B54473100901C0D /* GoogleService-Info.plist */; };
+		079A67162B5447F600901C0D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 079A67152B5447F600901C0D /* FirebaseAnalytics */; };
+		079A67182B5447F600901C0D /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 079A67172B5447F600901C0D /* FirebaseAnalyticsSwift */; };
+		079A671C2B544CA700901C0D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 079A671B2B544CA700901C0D /* FirebaseAuth */; };
+		079A671F2B544CD000901C0D /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079A671E2B544CD000901C0D /* SignUpScreen.swift */; };
+		079A67212B544D2300901C0D /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079A67202B544D2300901C0D /* AuthenticationManager.swift */; };
+		079A67232B544EAE00901C0D /* AuthenticationEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079A67222B544EAE00901C0D /* AuthenticationEmailViewModel.swift */; };
+		079A67272B54592100901C0D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 079A67262B54592100901C0D /* FirebaseFirestore */; };
+		079A67292B54592100901C0D /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 079A67282B54592100901C0D /* FirebaseFirestoreSwift */; };
+		079A672D2B545A0000901C0D /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079A672C2B545A0000901C0D /* UserManager.swift */; };
 		079CF54E2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CF54D2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift */; };
 		079CF5502B527ECD00BE8E13 /* CodeChefScrapingContestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CF54F2B527ECD00BE8E13 /* CodeChefScrapingContestDTO.swift */; };
 		079CF5522B527F6700BE8E13 /* CodeChefScrapingContestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CF5512B527F6700BE8E13 /* CodeChefScrapingContestModel.swift */; };
@@ -94,6 +109,8 @@
 		07AA75302B501A6400DCD75B /* KontestNewRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07AA752D2B4FCF7A00DCD75B /* KontestNewRepository.swift */; };
 		07AA75322B501AEB00DCD75B /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 07AA75312B501AEB00DCD75B /* SwiftSoup */; };
 		07AA75342B501AF200DCD75B /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 07AA75332B501AF200DCD75B /* SwiftSoup */; };
+		07BDE0922B546BDE0059A5FA /* SignInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BDE0912B546BDE0059A5FA /* SignInScreen.swift */; };
+		07C993752B8476F7008411D7 /* AutomaticNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C993742B8476F7008411D7 /* AutomaticNotificationsViewModel.swift */; };
 		07D766692AC8404A000A3DFD /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D766682AC8404A000A3DFD /* Sidebar.swift */; };
 		07D7666C2AC8407B000A3DFD /* DetailColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7666B2AC8407B000A3DFD /* DetailColumn.swift */; };
 		07D7666E2AC84094000A3DFD /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7666D2AC84094000A3DFD /* Panel.swift */; };
@@ -209,13 +226,15 @@
 		07183EB62AB8752D006C92AD /* CalendarUtilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarUtilityTests.swift; sourceTree = "<group>"; };
 		071915632AB1695E00E1CB56 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		071915662AB169D300E1CB56 /* NoInternetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternetScreen.swift; sourceTree = "<group>"; };
+		0720B0162B5680F0006721EE /* CollegesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollegesRepository.swift; sourceTree = "<group>"; };
 		0725FB622AC7E2EA00564DE0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0725FB652AC7EA3F00564DE0 /* LeetcodeGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetcodeGraphView.swift; sourceTree = "<group>"; };
 		0725FB672AC82F0A00564DE0 /* CodeForcesGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeForcesGraphView.swift; sourceTree = "<group>"; };
-		073269E72AAC42350028476D /* FilterWebsitesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesView.swift; sourceTree = "<group>"; };
+		073269E72AAC42350028476D /* FilterWebsitesViewRegular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesViewRegular.swift; sourceTree = "<group>"; };
 		073269EB2AAC451B0028476D /* FilterWebsitesScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesScreen.swift; sourceTree = "<group>"; };
 		073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUsernameScreen.swift; sourceTree = "<group>"; };
 		07367C472ACA097000A558ED /* DeviceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceType.swift; sourceTree = "<group>"; };
+		073850BE2BE20C7F00EF24D7 /* FilterWebsitesViewCompact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesViewCompact.swift; sourceTree = "<group>"; };
 		074DD4512AA61570005C16A5 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		076016552A87CD52007CE9F5 /* Kontest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kontest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		076134CE2AA86AC300946B02 /* KontestDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestDetailViewModel.swift; sourceTree = "<group>"; };
@@ -227,13 +246,21 @@
 		0764FF8D2ABC71D40060AC1F /* Upcoming Kontest iOS WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Upcoming Kontest iOS WidgetExtension.entitlements"; sourceTree = "<group>"; };
 		07710E842AB46220008DE1D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		07740EA42ABF171F00A93EAF /* CalendarPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPopoverView.swift; sourceTree = "<group>"; };
+		077685262B56A50C00A1449F /* AccountInformationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInformationScreen.swift; sourceTree = "<group>"; };
+		077685282B56A60200A1449F /* AccountInformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInformationViewModel.swift; sourceTree = "<group>"; };
 		077E6EAC2AB4B1D10003E897 /* ErrorWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorWrapper.swift; sourceTree = "<group>"; };
 		077E6EAE2AB4B2120003E897 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		077E6EB02AB4B3220003E897 /* ErrorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorState.swift; sourceTree = "<group>"; };
+		07822E542B85EC0800A5731E /* AutomaticNotificationMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticNotificationMenu.swift; sourceTree = "<group>"; };
 		0784292D2AB5EF660078D836 /* AddToCalendarIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCalendarIntent.swift; sourceTree = "<group>"; };
 		078429312AB603FB0078D836 /* KontestWidgetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestWidgetModel.swift; sourceTree = "<group>"; };
 		0787AE972AC89C0100F1B80C /* RotatingMapScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingMapScreen.swift; sourceTree = "<group>"; };
 		0791DA542B51646200A9CA23 /* ClockObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockObserver.swift; sourceTree = "<group>"; };
+		079A67122B54473100901C0D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		079A671E2B544CD000901C0D /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
+		079A67202B544D2300901C0D /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		079A67222B544EAE00901C0D /* AuthenticationEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationEmailViewModel.swift; sourceTree = "<group>"; };
+		079A672C2B545A0000901C0D /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		079CF54D2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefScrapingAPIRepository.swift; sourceTree = "<group>"; };
 		079CF54F2B527ECD00BE8E13 /* CodeChefScrapingContestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefScrapingContestDTO.swift; sourceTree = "<group>"; };
 		079CF5512B527F6700BE8E13 /* CodeChefScrapingContestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefScrapingContestModel.swift; sourceTree = "<group>"; };
@@ -248,8 +275,10 @@
 		07A31F012AAC831300EBC296 /* FilterWebsitesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesViewModel.swift; sourceTree = "<group>"; };
 		07A7501F2AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoKontestsDueToFiltersScreen.swift; sourceTree = "<group>"; };
 		07AA752D2B4FCF7A00DCD75B /* KontestNewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestNewRepository.swift; sourceTree = "<group>"; };
+		07BDE0912B546BDE0059A5FA /* SignInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreen.swift; sourceTree = "<group>"; };
 		07C6EE8F2ABAE38900FEA3D7 /* WidgetCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetCache.swift; sourceTree = "<group>"; };
 		07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingKontestsWidgetCache.swift; sourceTree = "<group>"; };
+		07C993742B8476F7008411D7 /* AutomaticNotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticNotificationsViewModel.swift; sourceTree = "<group>"; };
 		07CFEBA32AB02DCB00291484 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		07CFEBA52AB02DCB00291484 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		07CFEC042AB042F500291484 /* UpcomingWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingWidgetView.swift; sourceTree = "<group>"; };
@@ -334,8 +363,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				07ECFBC22AA582E3008513C6 /* LeetCodeSchema in Frameworks */,
+				079A671C2B544CA700901C0D /* FirebaseAuth in Frameworks */,
 				07ECFBBF2AA582D2008513C6 /* Apollo in Frameworks */,
+				079A67162B5447F600901C0D /* FirebaseAnalytics in Frameworks */,
 				07AA752C2B4FCD9F00DCD75B /* SwiftSoup in Frameworks */,
+				079A67182B5447F600901C0D /* FirebaseAnalyticsSwift in Frameworks */,
+				079A67272B54592100901C0D /* FirebaseFirestore in Frameworks */,
+				079A67292B54592100901C0D /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,10 +430,11 @@
 			isa = PBXGroup;
 			children = (
 				07ECFB572AA58259008513C6 /* SettingsScreen.swift */,
-				073269E72AAC42350028476D /* FilterWebsitesView.swift */,
+				073269E72AAC42350028476D /* FilterWebsitesViewRegular.swift */,
 				073269EB2AAC451B0028476D /* FilterWebsitesScreen.swift */,
-				073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */,
 				0787AE972AC89C0100F1B80C /* RotatingMapScreen.swift */,
+				073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */,
+				073850BE2BE20C7F00EF24D7 /* FilterWebsitesViewCompact.swift */,
 			);
 			path = SettingsScreens;
 			sourceTree = "<group>";
@@ -484,6 +519,42 @@
 			path = "Upcoming Kontest macOS Widget";
 			sourceTree = "<group>";
 		};
+		07BDE0902B546B3C0059A5FA /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				07BDE0952B5481060059A5FA /* Managers */,
+				07BDE0942B5480FC0059A5FA /* ViewModels */,
+				07BDE0932B5480EE0059A5FA /* Screens */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		07BDE0932B5480EE0059A5FA /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				079A671E2B544CD000901C0D /* SignUpScreen.swift */,
+				07BDE0912B546BDE0059A5FA /* SignInScreen.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		07BDE0942B5480FC0059A5FA /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				079A67222B544EAE00901C0D /* AuthenticationEmailViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		07BDE0952B5481060059A5FA /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				079A67202B544D2300901C0D /* AuthenticationManager.swift */,
+				079A672C2B545A0000901C0D /* UserManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		07C6EE922ABAE4D700FEA3D7 /* WidgetCache */ = {
 			isa = PBXGroup;
 			children = (
@@ -523,6 +594,8 @@
 		07ECFB362AA58259008513C6 /* Kontest */ = {
 			isa = PBXGroup;
 			children = (
+				07BDE0902B546B3C0059A5FA /* Authentication */,
+				079A67122B54473100901C0D /* GoogleService-Info.plist */,
 				07EA6F482AB6405A00CD932E /* Kontest.entitlements */,
 				0784292C2AB5EF520078D836 /* Intents */,
 				07710E842AB46220008DE1D6 /* Info.plist */,
@@ -545,14 +618,16 @@
 			isa = PBXGroup;
 			children = (
 				07183EB02AB8586F006C92AD /* MockViewModels */,
+				07ECFB3A2AA58259008513C6 /* AllKontestsViewModel.swift */,
 				07ECFB382AA58259008513C6 /* ChangeUsernameViewModel.swift */,
 				07ECFB392AA58259008513C6 /* LeetCodeGraphQLViewModel.swift */,
-				07ECFB3A2AA58259008513C6 /* AllKontestsViewModel.swift */,
 				07ECFB3B2AA58259008513C6 /* CodeChefViewModel.swift */,
 				07ECFB3C2AA58259008513C6 /* CodeForcesViewModel.swift */,
 				07ECFB3D2AA58259008513C6 /* NotificationsViewModel.swift */,
 				076134CE2AA86AC300946B02 /* KontestDetailViewModel.swift */,
 				07A31F012AAC831300EBC296 /* FilterWebsitesViewModel.swift */,
+				077685282B56A60200A1449F /* AccountInformationViewModel.swift */,
+				07C993742B8476F7008411D7 /* AutomaticNotificationsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -564,6 +639,7 @@
 				07ECFB442AA58259008513C6 /* KontestRepository */,
 				07ECFB472AA58259008513C6 /* LeetcodeRepository */,
 				07ECFB4A2AA58259008513C6 /* CodeForcesRepository */,
+				0720B0162B5680F0006721EE /* CollegesRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -644,6 +720,8 @@
 				07A7501F2AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift */,
 				077E6EAE2AB4B2120003E897 /* ErrorView.swift */,
 				07740EA42ABF171F00A93EAF /* CalendarPopoverView.swift */,
+				077685262B56A50C00A1449F /* AccountInformationScreen.swift */,
+				07822E542B85EC0800A5731E /* AutomaticNotificationMenu.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -761,6 +839,11 @@
 				07ECFBBE2AA582D2008513C6 /* Apollo */,
 				07ECFBC12AA582E3008513C6 /* LeetCodeSchema */,
 				07AA752B2B4FCD9F00DCD75B /* SwiftSoup */,
+				079A67152B5447F600901C0D /* FirebaseAnalytics */,
+				079A67172B5447F600901C0D /* FirebaseAnalyticsSwift */,
+				079A671B2B544CA700901C0D /* FirebaseAuth */,
+				079A67262B54592100901C0D /* FirebaseFirestore */,
+				079A67282B54592100901C0D /* FirebaseFirestoreSwift */,
 			);
 			productName = "Coding Kontest";
 			productReference = 076016552A87CD52007CE9F5 /* Kontest.app */;
@@ -846,6 +929,7 @@
 				07ECFBBD2AA582D2008513C6 /* XCRemoteSwiftPackageReference "apollo-ios" */,
 				07ECFBC02AA582E3008513C6 /* XCLocalSwiftPackageReference "LeetCodeSchema" */,
 				07AA752A2B4FCD9F00DCD75B /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 076016562A87CD52007CE9F5 /* Products */;
 			projectDirPath = "";
@@ -877,6 +961,7 @@
 				07ECFB892AA58259008513C6 /* Assets.xcassets in Resources */,
 				07ECFB962AA58259008513C6 /* Preview Assets.xcassets in Resources */,
 				07ECFB802AA58259008513C6 /* README.md in Resources */,
+				079A67132B54473100901C0D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -917,6 +1002,7 @@
 				07183EB42AB858AE006C92AD /* MockFilterWebsitesViewModel.swift in Sources */,
 				07ECFBB32AA58259008513C6 /* KontestDTO.swift in Sources */,
 				07ECFB832AA58259008513C6 /* AllKontestsViewModel.swift in Sources */,
+				077685292B56A60200A1449F /* AccountInformationViewModel.swift in Sources */,
 				07ECFBC82AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift in Sources */,
 				07ECFB952AA58259008513C6 /* KontestModel.swift in Sources */,
 				07ECFB812AA58259008513C6 /* ChangeUsernameViewModel.swift in Sources */,
@@ -932,6 +1018,7 @@
 				079CF5542B52843B00BE8E13 /* CodeChefGraphView.swift in Sources */,
 				07ECFBB72AA58259008513C6 /* CodeChefFetcher.swift in Sources */,
 				07ECFBA12AA58259008513C6 /* SingleNotificationMenu.swift in Sources */,
+				079A672D2B545A0000901C0D /* UserManager.swift in Sources */,
 				073269EF2AAC4B0C0028476D /* ChangeUsernameScreen.swift in Sources */,
 				079CF5522B527F6700BE8E13 /* CodeChefScrapingContestModel.swift in Sources */,
 				07ECFB9E2AA58259008513C6 /* BlinkingDotView.swift in Sources */,
@@ -950,6 +1037,7 @@
 				07ECFBA72AA58259008513C6 /* ClipboardUtility.swift in Sources */,
 				07ECFBBA2AA58259008513C6 /* LeetCodeGraphQLAPIFetcher.swift in Sources */,
 				07ECFB8F2AA58259008513C6 /* CodeForcesAPIRepository.swift in Sources */,
+				07BDE0922B546BDE0059A5FA /* SignInScreen.swift in Sources */,
 				07183EB22AB8587A006C92AD /* MockNotificationsViewModel.swift in Sources */,
 				077E6EAF2AB4B2120003E897 /* ErrorView.swift in Sources */,
 				07ECFBA42AA58259008513C6 /* AllNotificationMenu.swift in Sources */,
@@ -962,6 +1050,7 @@
 				07D766692AC8404A000A3DFD /* Sidebar.swift in Sources */,
 				07ECFBA32AA58259008513C6 /* PendingNotificationsScreen.swift in Sources */,
 				07ECFB9C2AA58259008513C6 /* AllKontestsScreen.swift in Sources */,
+				079A67212B544D2300901C0D /* AuthenticationManager.swift in Sources */,
 				07ECFB972AA58259008513C6 /* CodeChefRatingsView.swift in Sources */,
 				07ECFBAD2AA58259008513C6 /* MyMenu.swift in Sources */,
 				07ECFB902AA58259008513C6 /* KontestStatus.swift in Sources */,
@@ -978,6 +1067,7 @@
 				07A750202AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift in Sources */,
 				079CF54E2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift in Sources */,
 				079CF5502B527ECD00BE8E13 /* CodeChefScrapingContestDTO.swift in Sources */,
+				07C993752B8476F7008411D7 /* AutomaticNotificationsViewModel.swift in Sources */,
 				07A31F002AAC818D00EBC296 /* FilterWebsiteKey.swift in Sources */,
 				07ECFBC42AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift in Sources */,
 				07ECFBA22AA58259008513C6 /* SingleKontestView.swift in Sources */,
@@ -986,17 +1076,23 @@
 				07ECFBAB2AA58259008513C6 /* DownloadData.swift in Sources */,
 				07ECFBA02AA58259008513C6 /* KontestDetailsScreen.swift in Sources */,
 				077E6EB12AB4B3220003E897 /* ErrorState.swift in Sources */,
+				079A67232B544EAE00901C0D /* AuthenticationEmailViewModel.swift in Sources */,
 				07ECFBAA2AA58259008513C6 /* Router.swift in Sources */,
-				073269E82AAC42350028476D /* FilterWebsitesView.swift in Sources */,
+				073269E82AAC42350028476D /* FilterWebsitesViewRegular.swift in Sources */,
+				073850BF2BE20C7F00EF24D7 /* FilterWebsitesViewCompact.swift in Sources */,
 				07ECFB982AA58259008513C6 /* SettingsScreen.swift in Sources */,
 				07740EA52ABF171F00A93EAF /* CalendarPopoverView.swift in Sources */,
+				0720B0172B5680F0006721EE /* CollegesRepository.swift in Sources */,
+				079A671F2B544CD000901C0D /* SignUpScreen.swift in Sources */,
 				07D9FFCD2AD9A5D000C03A3A /* HapticFeedbackUtility.swift in Sources */,
 				07ECFB862AA58259008513C6 /* NotificationsViewModel.swift in Sources */,
 				07ECFB942AA58259008513C6 /* CodeChefAPIModel.swift in Sources */,
 				07567EA52AB645E9007EFEE1 /* AddToCalendarIntent.swift in Sources */,
+				077685272B56A50C00A1449F /* AccountInformationScreen.swift in Sources */,
 				07AA752E2B4FCF7A00DCD75B /* KontestNewRepository.swift in Sources */,
 				07ECFBB22AA58259008513C6 /* LeetCodeUserProfileGraphQLAPIDTO.swift in Sources */,
 				07ECFBA82AA58259008513C6 /* LocalNotificationManager.swift in Sources */,
+				07822E552B85EC0800A5731E /* AutomaticNotificationMenu.swift in Sources */,
 				07ECFB992AA58259008513C6 /* LeetCodeRatingsGraphQLView.swift in Sources */,
 				07ECFB9B2AA58259008513C6 /* NoKontestsDownloadedScreen.swift in Sources */,
 			);
@@ -1091,6 +1187,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R2Z9FDM5M6;
 				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ayushsinghal.KontestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1112,6 +1209,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R2Z9FDM5M6;
 				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ayushsinghal.KontestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1268,6 +1366,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ayushsinghal.Kontest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1287,6 +1386,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Kontest/Kontest.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Kontest/Preview Content\"";
@@ -1304,9 +1404,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ayushsinghal.Kontest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1496,6 +1598,14 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.19.1;
+			};
+		};
 		07AA752A2B4FCD9F00DCD75B /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scinfu/SwiftSoup";
@@ -1519,6 +1629,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 07ECFBBD2AA582D2008513C6 /* XCRemoteSwiftPackageReference "apollo-ios" */;
 			productName = Apollo;
+		};
+		079A67152B5447F600901C0D /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		079A67172B5447F600901C0D /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		079A671B2B544CA700901C0D /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		079A67262B54592100901C0D /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		079A67282B54592100901C0D /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
 		};
 		079F68282ABC819A001B0EFE /* Apollo */ = {
 			isa = XCSwiftPackageProductDependency;

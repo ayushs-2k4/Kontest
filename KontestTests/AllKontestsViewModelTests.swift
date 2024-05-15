@@ -11,15 +11,24 @@ import XCTest
 class AllKontestsViewModelTests: XCTestCase {
     var viewModel: AllKontestsViewModel!
 
+    let originalMinimumDurationOfAKontestInMinutes = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.float(forKey: Constants.minimumDurationOfAKontestInMinutesKey)
+    let originalMaximumDurationOfAKontestInMinutes = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.float(forKey: Constants.maximumDurationOfAKontestInMinutesKey)
+
     override func setUp() async throws {
+        UserDefaults(suiteName: Constants.userDefaultsGroupID)?.set(0, forKey: Constants.minimumDurationOfAKontestInMinutesKey)
+        UserDefaults(suiteName: Constants.userDefaultsGroupID)?.set(12 * 24 * 60, forKey: Constants.maximumDurationOfAKontestInMinutesKey) // 12 days
+        
         viewModel = AllKontestsViewModel(
             notificationsViewModel: MockNotificationsViewModel(),
-            filterWebsitesViewModel: MockFilterWebsitesViewModel(allowedWebsites: ["LeetCode", "CodeForces", "HackerEarth"]),
+            filterWebsitesViewModel: MockFilterWebsitesViewModel(allowedWebsites: ["leetcode.com", "codeforces.com", "hackerearth.com"]),
             repository: KontestsTestFakeRepository()
         )
     }
 
     override func tearDown() {
+        UserDefaults(suiteName: Constants.userDefaultsGroupID)?.set(originalMinimumDurationOfAKontestInMinutes, forKey: Constants.minimumDurationOfAKontestInMinutesKey)
+        UserDefaults(suiteName: Constants.userDefaultsGroupID)?.set(originalMaximumDurationOfAKontestInMinutes, forKey: Constants.maximumDurationOfAKontestInMinutesKey)
+        
         viewModel = nil
     }
 
@@ -63,15 +72,15 @@ class KontestsTestFakeRepository: KontestFetcher {
         print("startDateString: \(startDateString)")
 
         allKontests = [
-            KontestDTO(name: "ProjectEuler+1", url: "https://hackerrank.com/contests/projecteuler", start_time: startDateString, end_time: endDateString, duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "BEFORE"),
+            KontestDTO(name: "ProjectEuler+1", url: "https://hackerrank.com/contests/projecteuler", start_time: startDateString, end_time: endDateString, duration: "1020.0", site: "hackerrank.com", in_24_hours: "No", status: "BEFORE"),
 
-            KontestDTO(name: "1v1 Games by CodeChef", url: "https://www.codechef.com/GAMES", start_time: "2022-10-10 06:30:00 UTC", end_time: "2032-10-10 06:30:00 UTC", duration: "315619200.0", site: "CodeChef", in_24_hours: "No", status: "CODING"), // Expired
+            KontestDTO(name: "1v1 Games by CodeChef", url: "https://www.codechef.com/GAMES", start_time: "2022-10-10 06:30:00 UTC", end_time: "2032-10-10 06:30:00 UTC", duration: "315619200.0", site: "codechef.com", in_24_hours: "No", status: "CODING"), // Expired
 
-            KontestDTO(name: "Weekly Contest 358", url: "https://leetcode.com/contest/weekly-contest-358", start_time: startDateString, end_time: endDateString, duration: "5400", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE"),
+            KontestDTO(name: "Weekly Contest 358", url: "https://leetcode.com/contest/weekly-contest-358", start_time: startDateString, end_time: endDateString, duration: "5400", site: "leetcode.com", in_24_hours: "Yes", status: "BEFORE"),
 
-            KontestDTO(name: "CodeForces Round (Div. 2)", url: "https://codeforces.com/enter?back=%2FcontestRegistration%2F1871", start_time: startDateString, end_time: endDateString, duration: "\(86400 * 3)", site: "CodeForces", in_24_hours: "Yes", status: "CODING"),
+            KontestDTO(name: "CodeForces Round (Div. 2)", url: "https://codeforces.com/enter?back=%2FcontestRegistration%2F1871", start_time: startDateString, end_time: endDateString, duration: "\(86400 * 3)", site: "codeforces.com", in_24_hours: "Yes", status: "CODING"),
 
-            KontestDTO(name: "Hacker Earth Coding", url: "https://hackerearth.com/", start_time: startDateString, end_time: endDateString, duration: "\(86400 * 3)", site: "HackerEarth", in_24_hours: "Yes", status: "CODING")
+            KontestDTO(name: "Hacker Earth Coding", url: "https://hackerearth.com/", start_time: startDateString, end_time: endDateString, duration: "\(86400 * 3)", site: "hackerearth.com", in_24_hours: "Yes", status: "CODING")
         ]
 
         return allKontests

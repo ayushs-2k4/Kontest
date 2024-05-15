@@ -58,7 +58,7 @@ class FilterWebsitesViewModel: FilterWebsitesViewModelProtocol {
             allowedWebsites.append("projecteuler.net")
         }
 
-        if userDefaults.bool(forKey: FilterWebsiteKey.topCodeKey.rawValue) {
+        if userDefaults.bool(forKey: FilterWebsiteKey.topCoderKey.rawValue) {
             allowedWebsites.append("topcoder.com")
         }
 

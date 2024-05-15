@@ -9,6 +9,19 @@
 import XCTest
 
 class CalendarUtilityTests: XCTestCase {
+    let originalMinimumDurationOfAKontestInMinutes = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.float(forKey: Constants.minimumDurationOfAKontestInMinutesKey)
+    let originalMaximumDurationOfAKontestInMinutes = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.float(forKey: Constants.maximumDurationOfAKontestInMinutesKey)
+
+    override func setUp() {
+        UserDefaults(suiteName: Constants.userDefaultsGroupID)?.set(0, forKey: Constants.minimumDurationOfAKontestInMinutesKey)
+        UserDefaults(suiteName: Constants.userDefaultsGroupID)?.set(12 * 24 * 60, forKey: Constants.maximumDurationOfAKontestInMinutesKey) // 12 days
+    }
+
+    override func tearDown() {
+        UserDefaults(suiteName: Constants.userDefaultsGroupID)?.set(originalMinimumDurationOfAKontestInMinutes, forKey: Constants.minimumDurationOfAKontestInMinutesKey)
+        UserDefaults(suiteName: Constants.userDefaultsGroupID)?.set(originalMaximumDurationOfAKontestInMinutes, forKey: Constants.maximumDurationOfAKontestInMinutesKey)
+    }
+
     func test_getFormattedDate1_True() {
         let dateString = "2024-07-30T18:30:00.000Z"
         let formattedDate = CalendarUtility.getFormattedDate2(date: dateString)
@@ -214,25 +227,25 @@ class CalendarUtilityTests: XCTestCase {
 
     func test_getFormattedDuration_1Day12Hours_1d12h() {
         #if os(iOS)
-        XCTAssertEqual(CalendarUtility.getFormattedDuration(fromSeconds: "129600"), "1d 12h")
+        XCTAssertEqual(CalendarUtility.getFormattedDuration(fromSeconds: "129600", minimumDuration: 0, maximumDuration: 10 * 24 * 60), "1d 12h")
         #else
-        XCTAssertEqual(CalendarUtility.getFormattedDuration(fromSeconds: "129600"), "1 day, 12 hours")
+        XCTAssertEqual(CalendarUtility.getFormattedDuration(fromSeconds: "129600", minimumDuration: 0, maximumDuration: 10 * 24 * 60), "1 day, 12 hours")
         #endif
     }
 
     func test_getFormattedDuratiosn_1Day4Hours48Minutes_1d4h48m() {
         #if os(iOS)
-        XCTAssertEqual(CalendarUtility.getFormattedDuration(fromSeconds: "103680"), "1d 4h 48m")
+        XCTAssertEqual(CalendarUtility.getFormattedDuration(fromSeconds: "103680", minimumDuration: 0, maximumDuration: 10 * 24 * 60), "1d 4h 48m")
         #else
-        XCTAssertEqual(CalendarUtility.getFormattedDuration(fromSeconds: "103680"), "1 day, 4 hours, 48 minutes")
+        XCTAssertEqual(CalendarUtility.getFormattedDuration(fromSeconds: "103680", minimumDuration: 0, maximumDuration: 10 * 24 * 60), "1 day, 4 hours, 48 minutes")
         #endif
     }
 
     func test_getFormattedDuratiosn_1Day4Hours48Minutes2Seconds_1d4h48m() {
         #if os(iOS)
-        XCTAssertEqual(CalendarUtility.getFormattedDuration(fromSeconds: "103682"), "1d 4h 48m")
+        XCTAssertEqual(CalendarUtility.getFormattedDuration(fromSeconds: "103682", minimumDuration: 0, maximumDuration: 10 * 24 * 60), "1d 4h 48m")
         #else
-        XCTAssertEqual(CalendarUtility.getFormattedDuration(fromSeconds: "103682"), "1 day, 4 hours, 48 minutes")
+        XCTAssertEqual(CalendarUtility.getFormattedDuration(fromSeconds: "103682", minimumDuration: 0, maximumDuration: 10 * 24 * 60), "1 day, 4 hours, 48 minutes")
         #endif
     }
 

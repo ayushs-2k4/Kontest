@@ -15,6 +15,7 @@ struct LeetcodeGraphView: View {
     let leetcodeGraphQLViewModel: LeetCodeGraphQLViewModel = Dependencies.instance.leetCodeGraphQLViewModel
 
     @State private var showAnnotations: Bool = true
+    @State private var hasAnimated: Bool = false
 
     #if os(iOS)
         let accentColor = Color(uiColor: UIColor.systemYellow)
@@ -34,6 +35,9 @@ struct LeetcodeGraphView: View {
 
                 } else {
                     Text(leetcodeGraphQLViewModel.username)
+                        .onAppear {
+                            animateChart()
+                        }
 
                     Text("Total Kontests attended: \(leetcodeGraphQLViewModel.attendedKontests.count)")
 
@@ -49,6 +53,19 @@ struct LeetcodeGraphView: View {
             }
         }
         .navigationTitle("Leetcode Rankings")
+    }
+
+    private func animateChart() {
+        guard !hasAnimated else { return }
+        hasAnimated = true
+
+        for (index, _) in leetcodeGraphQLViewModel.attendedKontests.enumerated() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.05) {
+                withAnimation(.smooth) {
+                    leetcodeGraphQLViewModel.attendedKontests[index].hasAnimated = true
+                }
+            }
+        }
     }
 }
 
@@ -101,7 +118,7 @@ struct LeetCodeChart: View {
                 let timestamp = TimeInterval(Int(attendedContest.contest?.startTime ?? "-1") ?? -1)
                 let date = Date(timeIntervalSince1970: timestamp)
 
-                PointMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.rating ?? -1))
+                PointMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.hasAnimated ? (attendedContest.rating ?? -1) : 0))
                     .opacity(0)
                     .annotation(position: .top) {
                         if showAnnotations {
@@ -116,11 +133,11 @@ struct LeetCodeChart: View {
                         }
                     }
 
-                LineMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.rating ?? -1))
+                LineMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.hasAnimated ? (attendedContest.rating ?? -1) : 0))
                     .interpolationMethod(.catmullRom)
                     .symbol(Circle().strokeBorder(lineWidth: 2))
 
-                AreaMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.rating ?? -1))
+                AreaMark(x: .value("Time", date, unit: .day), y: .value("Ratings", attendedContest.hasAnimated ? (attendedContest.rating ?? -1) : 0))
                     .interpolationMethod(.catmullRom)
                     .foregroundStyle(curGradient)
 
@@ -139,11 +156,11 @@ struct LeetCodeChart: View {
                                 if let problemsSolved = kontest.problemsSolved {
                                     Text("Total problems solved: \(problemsSolved)")
                                 }
-                                
+
                                 if let ranking = kontest.ranking {
                                     Text("Ranking: \(ranking)")
                                 }
-                                
+
                                 if !showAnnotations {
                                     if let rating = kontest.rating {
                                         Text("Rating: \(Int(rating))")
@@ -159,17 +176,18 @@ struct LeetCodeChart: View {
                 }
             }
         }
+        .chartYScale(domain: 0 ... 2000)
         #if os(iOS)
-        .foregroundStyle(Color(uiColor: UIColor.systemYellow))
+            .foregroundStyle(Color(uiColor: UIColor.systemYellow))
         #elseif os(macOS)
-        .foregroundStyle(Color(nsColor: NSColor.systemYellow))
+            .foregroundStyle(Color(nsColor: NSColor.systemYellow))
         #endif
-        .chartScrollableAxes(.horizontal)
-        .chartXVisibleDomain(length: 3600 * 24 * 30) // 30 days
-        .padding(.horizontal)
-        .chartXSelection(value: Bindable(leetCodeGraphQLViewModel).rawSelectedDate)
+            .chartScrollableAxes(.horizontal)
+            .chartXVisibleDomain(length: 3600 * 24 * 30) // 30 days
+            .padding(.horizontal)
+            .chartXSelection(value: Bindable(leetCodeGraphQLViewModel).rawSelectedDate)
 //        .chartScrollPosition(x: Bindable(model).chartXScrollPosition)
-        .animation(.default, value: showAnnotations)
+            .animation(.default, value: showAnnotations)
     }
 }
 

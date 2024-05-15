@@ -21,6 +21,7 @@ class AllKontestsViewModel {
 
     var errorWrapper: ErrorWrapper?
 
+    private(set) var allFetchedKontests: [KontestModel] = []
     private(set) var allKontests: [KontestModel] = []
     private(set) var toShowKontests: [KontestModel] = []
     private(set) var backupKontests: [KontestModel] = []
@@ -32,7 +33,7 @@ class AllKontestsViewModel {
 
     private var nextDateToRefresh: Date?
 
-    private var shouldFetchAllEventsFromCalendar: Bool
+    private var hasFullAccessToCalendar: Bool
 
     var searchText: String = "" {
         didSet {
@@ -46,8 +47,10 @@ class AllKontestsViewModel {
         self.repository = repository
         self.notificationsViewModel = notificationsViewModel
         self.filterWebsitesViewModel = filterWebsitesViewModel
-        shouldFetchAllEventsFromCalendar = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.bool(forKey: "shouldFetchAllEventsFromCalendar")
+        hasFullAccessToCalendar = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.bool(forKey: "shouldFetchAllEventsFromCalendar")
         setDefaultValuesForFilterWebsiteKeysToTrue()
+        setDefaultValuesForMinAndMaxDurationKeys()
+        setDefaultValuesForAutomaticCalendarEventToFalse()
         addAllowedWebsites()
         fetchAllKontests()
 
@@ -58,20 +61,40 @@ class AllKontestsViewModel {
             logger.info("Can not add observer to Calendar with error: \(error)")
         }
         #endif
+
+        Task {
+            do {
+                let authenticatedUser = try AuthenticationManager.shared.getAuthenticatedUser()
+
+                if let userEmail = authenticatedUser.email {
+                    try await AuthenticationEmailViewModel.shared.setDownloadedUsernamesAsLocalUsernames(userId: userEmail)
+                }
+            } catch {}
+        }
     }
 
     func fetchAllKontests() {
         isLoading = true
         Task {
-            let allKontests = await getAllKontests()
-            let sortedKontests = sortAllKontests(allKontests: allKontests)
+            await getAllKontests()
 
             await MainActor.run {
-                self.allKontests = sortedKontests
+                sortAllKontests()
             }
 
             checkNotificationAuthorization()
             filterKontests()
+
+            // Adding automatic calendar events
+            let automaticNotificationsViewModel = AutomaticNotificationsViewModel.instance
+            if hasFullAccessToCalendar {
+                await automaticNotificationsViewModel.addAutomaticCalendarEventToEligibleSites(kontests: self.toShowKontests)
+            }
+
+            let notificationAuthorizationLevel = await LocalNotificationManager.instance.getNotificationsAuthorizationLevel()
+            if notificationAuthorizationLevel.authorizationStatus == .authorized {
+                await automaticNotificationsViewModel.addAutomaticNotificationToEligibleSites(kontests: self.toShowKontests)
+            }
 
             // Doing this here (after splitting kontests into categories initially)
             nextDateToRefresh = CalendarUtility.getNextDateToRefresh(
@@ -94,7 +117,7 @@ class AllKontestsViewModel {
 
                     if let nextDateToRefresh {
                         let timeInterval = currentDate.timeIntervalSince(nextDateToRefresh)
-                        logger.info("nextDateToRefresh: \(nextDateToRefresh.formatted())\ntimeInterval: \(timeInterval)")
+//                        logger.info("nextDateToRefresh: \(nextDateToRefresh.formatted())\ntimeInterval: \(timeInterval)")
 
                         if timeInterval >= -5, timeInterval <= 5 {
                             if self.searchText.isEmpty {
@@ -118,15 +141,17 @@ class AllKontestsViewModel {
         }
     }
 
-    private func getAllKontests() async -> [KontestModel] {
+    private func getAllKontests() async {
         do {
             let fetchedKontests = try await repository.getAllKontests()
+            
+            print("fetchedKontests: \(fetchedKontests)")
 
-            shouldFetchAllEventsFromCalendar = CalendarUtility.getAuthorizationStatus() == .fullAccess
+            hasFullAccessToCalendar = CalendarUtility.getAuthorizationStatus() == .fullAccess
 
-            let allEvents = shouldFetchAllEventsFromCalendar ? try await CalendarUtility.getAllEvents() : []
+            let allEvents = hasFullAccessToCalendar ? try await CalendarUtility.getAllEvents() : []
 
-            let allKontestModels = fetchedKontests
+            self.allFetchedKontests = fetchedKontests
                 .map { dto in
                     let kontest = KontestModel.from(dto: dto)
                     // Load Reminder status
@@ -139,27 +164,33 @@ class AllKontestsViewModel {
 
                     return kontest
                 }
-                .filter { kontest in
-                    let kontestDuration = CalendarUtility.getFormattedDuration(fromSeconds: kontest.duration) ?? ""
-                    let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
-                    let isKontestEnded = CalendarUtility.isKontestOfPast(kontestEndDate: kontestEndDate ?? Date())
 
-                    return !kontestDuration.isEmpty && !isKontestEnded
-                }
+            filterKontestsByTime()
 
-            return allKontestModels
         } catch {
             logger.error("error in fetching all Kontests: \(error)")
-            return []
+
+            self.allKontests = []
         }
     }
 
-    private func sortAllKontests(allKontests: [KontestModel]) -> [KontestModel] {
-        allKontests.sorted { CalendarUtility.getDate(date: $0.start_time) ?? Date() < CalendarUtility.getDate(date: $1.start_time) ?? Date() }
+    func filterKontestsByTime() {
+        self.allKontests = self.allFetchedKontests
+            .filter { kontest in
+                let kontestDuration = CalendarUtility.getFormattedDuration(fromSeconds: kontest.duration) ?? ""
+                let kontestEndDate = CalendarUtility.getDate(date: kontest.end_time)
+                let isKontestEnded = CalendarUtility.isKontestOfPast(kontestEndDate: kontestEndDate ?? Date())
+
+                return !kontestDuration.isEmpty && !isKontestEnded
+            }
+    }
+
+    func sortAllKontests() {
+        self.allKontests.sort { CalendarUtility.getDate(date: $0.start_time) ?? Date() < CalendarUtility.getDate(date: $1.start_time) ?? Date() }
     }
 
     private func filterKontestsUsingSearchText() {
-        let filteredKontests = backupKontests
+        let filteredKontests = self.backupKontests
             .filter { kontest in
                 kontest.name.localizedCaseInsensitiveContains(searchText) || kontest.siteAbbreviation.localizedCaseInsensitiveContains(searchText) || kontest.url.localizedCaseInsensitiveContains(searchText)
             }
@@ -188,6 +219,14 @@ class AllKontestsViewModel {
         return true
     }
 
+    func addAllowedWebsites() {
+        allowedWebsites.removeAll()
+
+        logger.info("Ran addAllowedWebsites()")
+
+        allowedWebsites.append(contentsOf: filterWebsitesViewModel.getAllowedWebsites())
+    }
+
     func filterKontests() {
         toShowKontests = allKontests.filter {
             let isKontestWebsiteInAllowedWebsites = allowedWebsites.contains($0.site)
@@ -199,7 +238,6 @@ class AllKontestsViewModel {
     }
 
     private func splitKontestsIntoDifferentCategories() {
-        print("YEs")
         let today = Date()
 
         toShowKontests = toShowKontests.filter {
@@ -224,14 +262,6 @@ class AllKontestsViewModel {
 
     private var allowedWebsites: [String] = []
 
-    func addAllowedWebsites() {
-        allowedWebsites.removeAll()
-
-        logger.info("Ran addAllowedWebsites()")
-
-        allowedWebsites.append(contentsOf: filterWebsitesViewModel.getAllowedWebsites())
-    }
-
     private func checkNotificationAuthorization() {
         Task {
             let numberOfNotifications = notificationsViewModel.pendingNotifications.count
@@ -243,7 +273,7 @@ class AllKontestsViewModel {
 
                     errorWrapper = ErrorWrapper(error: AppError(title: "Permission not Granted", description: "You have set some notifications, but notification permission is not granted"), guidance: "Please provide Notification Permission in order to get notifications")
 
-                    logger.info("errorWrapper: \("\(String(describing: errorWrapper))")")
+                    logger.info("errorWrapper: \("\(String(describing: self.errorWrapper))")")
                 }
             }
         }
@@ -257,7 +287,7 @@ class AllKontestsViewModel {
                 print("Yes")
 
                 Task {
-                    let allEvents = self.shouldFetchAllEventsFromCalendar ? try await CalendarUtility.getAllEvents() : []
+                    let allEvents = self.hasFullAccessToCalendar ? try await CalendarUtility.getAllEvents() : []
 
                     for kontest in self.ongoingKontests {
                         kontest.loadCalendarStatus(allEvents: allEvents ?? [])

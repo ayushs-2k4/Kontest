@@ -117,7 +117,7 @@ enum CalendarUtility {
         return kontestStartDate > dayAfterTomorrow
     }
 
-    static func getFormattedDuration(fromSeconds seconds: String) -> String? {
+    static func getFormattedDuration(fromSeconds seconds: String, minimumDuration: Float? = nil, maximumDuration: Float? = nil) -> String? {
         guard let totalSecondsInDouble = Double(seconds) else {
             return "Invalid Duration"
         }
@@ -140,7 +140,12 @@ enum CalendarUtility {
 
         let totalMinutes = (dateComponents.hour ?? 0) * 60 + (dateComponents.minute ?? 0)
 
-        let ans = ((totalMinutes <= Constants.maximumDurationOfAKontestInMinutes) && (totalMinutes >= Constants.minimumDurationOfAKontestInMinutes)) ? formatter.string(from: dateComponents) : nil // It verifies that kontest duration is in between minimum and maximum range, and if it is not in range then returns nil. If it is nil then in "AllKontestsViewModel", during filtering it removes that kontest entry.
+        let minimumDurationOfAKontestInMins = minimumDuration ?? UserDefaults(suiteName: Constants.userDefaultsGroupID)!.float(forKey: Constants.minimumDurationOfAKontestInMinutesKey)
+        
+        let maximumDurationOfAKontestInMins = maximumDuration ?? UserDefaults(suiteName: Constants.userDefaultsGroupID)!.float(forKey: Constants.maximumDurationOfAKontestInMinutesKey)
+
+
+        let ans = ((totalMinutes <= Int(maximumDurationOfAKontestInMins)) && (totalMinutes >= Int(minimumDurationOfAKontestInMins))) ? formatter.string(from: dateComponents) : nil // It verifies that kontest duration is in between minimum and maximum range, and if it is not in range then returns nil. If it is nil then in "AllKontestsViewModel", during filtering it removes that kontest entry.
 
         return ans
     }
@@ -416,8 +421,8 @@ enum CalendarUtility {
 
         let events = eventStore.events(matching: predicate)
 
-        logger.info("FullAccessinterval: \(interval)")
-        logger.info("FullAccess Events: \(events)")
+//        logger.info("FullAccessinterval: \(interval)")
+//        logger.info("FullAccess Events: \(events)")
 
         return events
     }
@@ -507,7 +512,7 @@ enum CalendarUtility {
 
         for calendar in allCalendars {
             if calendar.type != .subscription {
-                print("\(calendar) , source - \(calendar.source.title) \n\n")
+                logger.log("\(calendar) , source - \(calendar.source.title) \n\n")
             }
         }
 
