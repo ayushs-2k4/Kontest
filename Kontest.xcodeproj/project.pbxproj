@@ -173,7 +173,6 @@
 		07ECFBC42AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFBC32AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift */; };
 		07ECFBC62AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFBC52AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift */; };
 		07ECFBC82AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFBC72AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift */; };
-		07F289EF2B57A5DC0089BF48 /* LineChartAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F289EE2B57A5DC0089BF48 /* LineChartAnimation.swift */; };
 		07FD85A92AB78D5600D26C4C /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FD85A82AB78D5600D26C4C /* Dependencies.swift */; };
 		07FD85AB2AB804FA00D26C4C /* NotificationsViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FD85AA2AB804FA00D26C4C /* NotificationsViewModelProtocol.swift */; };
 		07FD85AD2AB809BC00D26C4C /* FilterWebsitesViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FD85AC2AB809BC00D26C4C /* FilterWebsitesViewModelProtocol.swift */; };
@@ -346,7 +345,6 @@
 		07ECFBC32AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeUserProfileGraphQLAPIModel.swift; sourceTree = "<group>"; };
 		07ECFBC52AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeUserRankingsGraphQLAPIModel.swift; sourceTree = "<group>"; };
 		07ECFBC72AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeUserRankingsGraphQLAPIDTO.swift; sourceTree = "<group>"; };
-		07F289EE2B57A5DC0089BF48 /* LineChartAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartAnimation.swift; sourceTree = "<group>"; };
 		07FD85A82AB78D5600D26C4C /* Dependencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
 		07FD85AA2AB804FA00D26C4C /* NotificationsViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModelProtocol.swift; sourceTree = "<group>"; };
 		07FD85AC2AB809BC00D26C4C /* FilterWebsitesViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -434,8 +432,8 @@
 				07ECFB572AA58259008513C6 /* SettingsScreen.swift */,
 				073269E72AAC42350028476D /* FilterWebsitesViewRegular.swift */,
 				073269EB2AAC451B0028476D /* FilterWebsitesScreen.swift */,
-				073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */,
 				0787AE972AC89C0100F1B80C /* RotatingMapScreen.swift */,
+				073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */,
 				073850BE2BE20C7F00EF24D7 /* FilterWebsitesViewCompact.swift */,
 			);
 			path = SettingsScreens;
@@ -596,7 +594,6 @@
 		07ECFB362AA58259008513C6 /* Kontest */ = {
 			isa = PBXGroup;
 			children = (
-				07F289ED2B57A5CE0089BF48 /* LineChartAnimation */,
 				07BDE0902B546B3C0059A5FA /* Authentication */,
 				079A67122B54473100901C0D /* GoogleService-Info.plist */,
 				07EA6F482AB6405A00CD932E /* Kontest.entitlements */,
@@ -790,14 +787,6 @@
 				07ECFB7D2AA58259008513C6 /* LeetCodeGraphQLAPIFetcher.swift */,
 			);
 			path = Protocols;
-			sourceTree = "<group>";
-		};
-		07F289ED2B57A5CE0089BF48 /* LineChartAnimation */ = {
-			isa = PBXGroup;
-			children = (
-				07F289EE2B57A5DC0089BF48 /* LineChartAnimation.swift */,
-			);
-			path = LineChartAnimation;
 			sourceTree = "<group>";
 		};
 		07FD85AE2AB80AD000D26C4C /* ViewModelProtocols */ = {
@@ -1037,7 +1026,6 @@
 				07ECFBA62AA58259008513C6 /* CalendarUtility.swift in Sources */,
 				07ECFBC62AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift in Sources */,
 				0725FB682AC82F0A00564DE0 /* CodeForcesGraphView.swift in Sources */,
-				07F289EF2B57A5DC0089BF48 /* LineChartAnimation.swift in Sources */,
 				076134CF2AA86AC300946B02 /* KontestDetailViewModel.swift in Sources */,
 				07ECFB9A2AA58259008513C6 /* RatingsView.swift in Sources */,
 				07ECFB842AA58259008513C6 /* CodeChefViewModel.swift in Sources */,
@@ -1398,6 +1386,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Kontest/Kontest.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Kontest/Preview Content\"";
@@ -1419,6 +1408,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ayushsinghal.Kontest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

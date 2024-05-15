@@ -54,31 +54,12 @@ private struct AllSettingsButtonsView: View {
     }
 }
 
-struct SingleSettingsTileView: View {
-    let title: String
-    let backgroundColor: Color = .yellow
-    let onTapGesture: () -> ()
-
-    var body: some View {
-        ZStack {
-            Text(title)
-        }
-        .onTapGesture {
-            onTapGesture()
-        }
-    }
-}
-
 #Preview {
     NavigationStack {
         SettingsScreen()
     }
     .environment(Dependencies.instance.changeUsernameViewModel)
     .environment(Router.instance)
-}
-
-#Preview("SingleSettingsTileView") {
-    SingleSettingsTileView(title: "Change Usernames", onTapGesture: {})
 }
 
 struct MyButtonStyle: ButtonStyle {

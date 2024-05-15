@@ -30,20 +30,22 @@ class AccountInformationViewModel {
     var isLoading: Bool = false
     
     func getAuthenticatedUser() {
-        Task {
-            self.isLoading = true
-            
-            do {
-                let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
+        if !self.isLoading {
+            Task {
+                self.isLoading = true
                 
-                self.user = try await UserManager.shared.getUser(userId: authDataResult.email ?? authDataResult.uid)
+                do {
+                    let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
+                    
+                    self.user = try await UserManager.shared.getUser(userId: authDataResult.email ?? authDataResult.uid)
+                    
+                    setProperties()
+                } catch {
+                    logger.log("Error in fetching user: \(error)")
+                }
                 
-                setProperties()
-            } catch {
-                logger.log("Error in fetching user: \(error)")
+                self.isLoading = false
             }
-            
-            self.isLoading = false
         }
     }
     
