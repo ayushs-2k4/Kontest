@@ -66,8 +66,8 @@ struct FilterWebsitesScreen: View {
 
     var body: some View {
         ScrollView {
-            Text("horizontalSizeClass: " + (horizontalSizeClass == .compact ? "compact" : horizontalSizeClass == .regular ? "regular" : "none"))
-            Text("verticalSizeClass: " + (verticalSizeClass == .compact ? "compact" : verticalSizeClass == .regular ? "regular" : "none"))
+//            Text("horizontalSizeClass: " + (horizontalSizeClass == .compact ? "compact" : horizontalSizeClass == .regular ? "regular" : "none"))
+//            Text("verticalSizeClass: " + (verticalSizeClass == .compact ? "compact" : verticalSizeClass == .regular ? "regular" : "none"))
 
             if deviceType == .macOS || horizontalSizeClass == .regular {
                 LazyVGrid(columns: columns,

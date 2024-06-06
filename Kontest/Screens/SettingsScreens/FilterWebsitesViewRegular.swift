@@ -71,7 +71,7 @@ struct FilterWebsitesViewRegular: View {
                 }
             }
             .frame(maxWidth: .infinity)
-            .aspectRatio(2, contentMode: .fit)
+            .aspectRatio(2.5, contentMode: .fit)
             .padding()
             .contentShape(
                 RoundedRectangle(cornerRadius: 10)
