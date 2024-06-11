@@ -54,7 +54,7 @@ struct UpcomingWidgetView: View {
                         }
 
                         if !laterKontests.isEmpty {
-                            CreateSectionView(title: "Later Kontests", kontests: laterKontests, widgetFamily: widgetFamily, kontestStatus: .Later, toShowCalendarButton: toShowCalendarButton)
+                            CreateSectionView(title: "Upcoming Kontests", kontests: laterKontests, widgetFamily: widgetFamily, kontestStatus: .Later, toShowCalendarButton: toShowCalendarButton)
                         }
                     }
                     .frame(height: geometry.size.height, alignment: .top)

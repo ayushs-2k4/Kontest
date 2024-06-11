@@ -47,7 +47,7 @@ class NetworkMonitor {
         currentStatus = getAppNetworkStatus(status: status)
 
         monitor.pathUpdateHandler = { [weak self] path in
-            
+
             guard let self else { return }
 
             guard let interface = NWInterface.InterfaceType.allCases.filter({ path.usesInterfaceType($0) }).first else { return }
@@ -75,10 +75,12 @@ class NetworkMonitor {
             let status = monitor.currentPath.status
             logger.log("status: \("\(status)")")
 
-            currentStatus = getAppNetworkStatus(status: status)
+            await MainActor.run {
+                currentStatus = getAppNetworkStatus(status: status)
+            }
 
             monitor.pathUpdateHandler = { [weak self] path in
-                
+
                 guard let self else { return }
 
                 guard let interface = NWInterface.InterfaceType.allCases.filter({ path.usesInterfaceType($0) }).first else { return }

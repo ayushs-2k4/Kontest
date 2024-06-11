@@ -15,21 +15,22 @@ struct AllKontestsScreen: View {
 
     @Environment(AllKontestsViewModel.self) private var allKontestsViewModel
     @Environment(NetworkMonitor.self) private var networkMonitor
+    @Environment(\.openURL) var openURL
+    @Environment(ErrorState.self) private var errorState
+    @Environment(Router.self) private var router
+
     @State var showRemoveAllNotificationsAlert = false
     @State var showNotificationForAllKontestsAlert = false
     @State private var showAddAllKontestToCalendarAlert = false
-
     @State private var isNoNotificationIconAnimating = false
     @State private var isAddAllKontestsToCalendarIconAnimating = false
     @State private var isRemoveAllKontestsFromCalendarIconAnimating = false
 
+    @FocusState private var isSearchFiedFocused: Bool
+
     let notificationsViewModel = Dependencies.instance.notificationsViewModel
 
     let changeUsernameViewModel = Dependencies.instance.changeUsernameViewModel
-
-    @Environment(ErrorState.self) private var errorState
-
-    @Environment(Router.self) private var router
 
     let userDefaults = UserDefaults(suiteName: Constants.userDefaultsGroupID)
     @State private var text: String = ""
@@ -102,6 +103,7 @@ struct AllKontestsScreen: View {
                         }
                         #if os(macOS)
                         .searchable(text: Bindable(allKontestsViewModel).searchText)
+                        .searchFocused($isSearchFiedFocused)
                         #endif
                     }
                 }
@@ -350,9 +352,14 @@ struct AllKontestsScreen: View {
         Section {
             ForEach(kontests) { kontest in
                 #if os(macOS)
-                Link(destination: URL(string: kontest.url)!, label: {
-                    kontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
-                })
+//                Link(destination: URL(string: kontest.url)!, label: {
+//                    kontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
+//                })
+                kontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        openURL(URL(string: kontest.url)!)
+                    }
                 #else
                 NavigationLink(value: SelectionState.kontestModel(kontest)) {
                     kontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
