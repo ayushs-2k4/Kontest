@@ -33,20 +33,20 @@ struct KontestApp: App {
             if let defaults = UserDefaults(suiteName: Constants.userDefaultsGroupID) {
 //                ContentView(panelSelection: $panelSelection)
 
-                TabView {
-                    Tab("All Kontests", systemImage: "list.bullet") {
+                TabView(selection: $panelSelection) {
+                    Tab("All Kontests", systemImage: "list.bullet", value: .AllKontestScreen) {
                         AllKontestsScreen()
                     }
 
-                    Tab("LeetCode", systemImage: "leetcode") {
+                    Tab("LeetCode", systemImage: "leetcode", value: .LeetCodeGraphView) {
                         LeetcodeGraphView()
                     }
 
-                    Tab("CodeForces", systemImage: "codeforces") {
+                    Tab("CodeForces", systemImage: "codeforces", value: .CodeForcesGraphView) {
                         CodeForcesGraphView()
                     }
 
-                    Tab("CodeChef", systemImage: "codechef") {
+                    Tab("CodeChef", systemImage: "codechef", value: .CodeChefGraphView) {
                         CodeChefGraphView()
                     }
                 }
