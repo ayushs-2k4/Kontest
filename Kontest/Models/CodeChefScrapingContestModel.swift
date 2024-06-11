@@ -21,7 +21,7 @@ struct CodeChefScrapingContestModel: Codable, Identifiable {
     let name: String
     let endDate: String
     let color: String
-    var hasAnimated: Bool = false
+    var hasAnimated: Bool = true
 
     init(id: UUID = UUID(), code: String, year: String, month: String, day: String, reason: String?, penalised_in: String?, rating: String, rank: String, name: String, endDate: String, color: String) {
         self.id = id

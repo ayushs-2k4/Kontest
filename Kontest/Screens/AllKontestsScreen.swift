@@ -352,9 +352,6 @@ struct AllKontestsScreen: View {
         Section {
             ForEach(kontests) { kontest in
                 #if os(macOS)
-//                Link(destination: URL(string: kontest.url)!, label: {
-//                    kontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
-//                })
                 kontestView(kontest: kontest, timelineViewDefaultContext: timelineViewDefaultContext)
                     .contentShape(Rectangle())
                     .onTapGesture {

@@ -31,27 +31,45 @@ struct KontestApp: App {
     var body: some Scene {
         WindowGroup {
             if let defaults = UserDefaults(suiteName: Constants.userDefaultsGroupID) {
-                ContentView(panelSelection: $panelSelection)
-//                LineChartAnimation()
-                    .environment(allKontestsViewModel)
-                    .environment(router)
-                    .environment(networkMonitor)
-                    .environment(errorState)
-                    .sheet(item: $errorState.errorWrapper) { errorWrapper in
-                        ErrorView(errorWrapper: errorWrapper)
-                        #if os(macOS)
-                            .fixedSize()
-                        #endif
+//                ContentView(panelSelection: $panelSelection)
+
+                TabView {
+                    Tab("All Kontests", systemImage: "list.bullet") {
+                        AllKontestsScreen()
                     }
-                    .onAppear(perform: {
-                        #if os(macOS)
-                            disallowTabbingMode()
-                        #endif
-                    })
+
+                    Tab("LeetCode", systemImage: "leetcode") {
+                        LeetcodeGraphView()
+                    }
+
+                    Tab("CodeForces", systemImage: "codeforces") {
+                        CodeForcesGraphView()
+                    }
+
+                    Tab("CodeChef", systemImage: "codechef") {
+                        CodeChefGraphView()
+                    }
+                }
+
+                .environment(allKontestsViewModel)
+                .environment(router)
+                .environment(networkMonitor)
+                .environment(errorState)
+                .sheet(item: $errorState.errorWrapper) { errorWrapper in
+                    ErrorView(errorWrapper: errorWrapper)
+                    #if os(macOS)
+                        .fixedSize()
+                    #endif
+                }
+                .onAppear(perform: {
+                    #if os(macOS)
+                        disallowTabbingMode()
+                    #endif
+                })
                 #if os(macOS)
-                    .frame(minWidth: 900, idealWidth: 1100, minHeight: 500, idealHeight: 600)
+                .frame(minWidth: 900, idealWidth: 1100, minHeight: 500, idealHeight: 600)
                 #endif
-                    .defaultAppStorage(defaults)
+                .defaultAppStorage(defaults)
             } else {
                 Text("Failed to load user defaults")
             }

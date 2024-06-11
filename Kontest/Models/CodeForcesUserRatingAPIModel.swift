@@ -21,7 +21,7 @@ struct CodeForcesuserRatingAPIResultModel: Codable {
     let contestName: String
     let handle: String
     let rank, ratingUpdateTimeSeconds, oldRating, newRating: Int
-    var hasAnimated: Bool = false
+    var hasAnimated: Bool = true
 
     enum CodingKeys: String, CodingKey {
         case contestId
