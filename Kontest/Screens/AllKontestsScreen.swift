@@ -138,7 +138,7 @@ struct AllKontestsScreen: View {
 
                         ToolbarItem(placement: .automatic) { // change the placement here!
                             Button {
-                                LocalNotificationManager.instance.scheduleIntervalNotification()
+                                LocalNotificationManager.instance.scheduleIntervalNotification(timeIntervalInSeconds: 5)
                             } label: {
                                 Text("Schedule 5 seconds Notification")
                             }

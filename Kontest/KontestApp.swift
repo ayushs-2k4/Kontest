@@ -122,7 +122,7 @@ struct KontestApp: App {
 @available(macOS 15.0, *)
 func openAlertWindow(errorWrapper: ErrorWrapper, isPresented: Binding<Bool>) -> some Scene {
     AlertScene(errorWrapper.error is AppError ? (errorWrapper.error as! AppError).title : "Error has occurred", isPresented: isPresented, actions: {
-        Button("Dismiss") {}
+        Button("Dismiss", role: .cancel) {}
 
         if errorWrapper.error is AppError {
             let appError = errorWrapper.error as! AppError

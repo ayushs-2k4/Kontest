@@ -144,7 +144,7 @@ class AllKontestsViewModel {
     private func getAllKontests() async {
         do {
             let fetchedKontests = try await repository.getAllKontests()
-            
+
             print("fetchedKontests: \(fetchedKontests)")
 
             hasFullAccessToCalendar = CalendarUtility.getAuthorizationStatus() == .fullAccess
@@ -264,14 +264,25 @@ class AllKontestsViewModel {
 
     private func checkNotificationAuthorization() {
         Task {
-            let numberOfNotifications = notificationsViewModel.pendingNotifications.count
-            if numberOfNotifications > 0 {
-                let notificationsAuthorizationLevel = await LocalNotificationManager.instance.getNotificationsAuthorizationLevel()
+            let notificationsAuthorizationLevel = await LocalNotificationManager.instance.getNotificationsAuthorizationLevel()
 
-                if notificationsAuthorizationLevel.authorizationStatus == .denied {
+            if notificationsAuthorizationLevel.authorizationStatus == .denied {
+                let numberOfNotifications = notificationsViewModel.pendingNotifications.count
+
+                if numberOfNotifications > 0 {
                     logger.info("notificationsAuthorizationLevel.authorizationStatus: \("\(notificationsAuthorizationLevel.authorizationStatus)")")
 
-                    errorWrapper = ErrorWrapper(error: AppError(title: "Permission not Granted", description: "You have set some notifications, but notification permission is not granted"), guidance: "Please provide Notification Permission in order to get notifications")
+                    errorWrapper = ErrorWrapper(
+                        error: AppError(
+                            title: "Permission not Granted",
+                            description: "You have set some notifications, but notification permission is not granted",
+                            action: {
+                                self.notificationsViewModel.removeAllPendingNotifications()
+                            },
+                            actionLabel: "Remove all notifications"
+                        ),
+                        guidance: "Please provide Notification Permission in order to get notifications"
+                    )
 
                     logger.info("errorWrapper: \("\(String(describing: self.errorWrapper))")")
                 }

@@ -45,7 +45,7 @@ class LocalNotificationManager {
         }
     }
 
-    func scheduleIntervalNotification(id: String = UUID().uuidString) {
+    func scheduleIntervalNotification(id: String = UUID().uuidString, timeIntervalInSeconds: Int = 10) {
         let timedNotificationContent = UNMutableNotificationContent()
         timedNotificationContent.title = "This is my Timed notification"
         timedNotificationContent.subtitle = "This was sooo easy!"
@@ -57,10 +57,10 @@ class LocalNotificationManager {
 //        let userInfo: [AnyHashable: Any] = ["nextViewInterval": "loadingViewInterval"]
 
         // time
-        let timeTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        let timeTrigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(timeIntervalInSeconds), repeats: false)
 
         let timeNotificationRequest = UNNotificationRequest(identifier: id, content: timedNotificationContent, trigger: timeTrigger)
-        logger.info("Scheduled Timed notification of after 5 seconds")
+        logger.info("Scheduled Timed notification of after \(timeIntervalInSeconds) seconds")
 
         center.add(timeNotificationRequest)
     }
