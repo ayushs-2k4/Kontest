@@ -8,7 +8,7 @@
 import Intents
 import WidgetKit
 
-protocol WidgetCache: Codable {
+protocol WidgetCache: Codable, Sendable {
     associatedtype TimelineEntryType: TimelineEntry
 
     var previousEntry: TimelineEntryType? { get set }

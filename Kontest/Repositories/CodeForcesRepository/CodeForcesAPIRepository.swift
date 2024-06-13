@@ -8,7 +8,7 @@
 import Foundation
 import OSLog
 
-class CodeForcesAPIRepository: CodeForcesFetcher {
+final class CodeForcesAPIRepository: CodeForcesFetcher {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "CodeForcesAPIRepository")
 
     func getUserRating(username: String) async throws -> CodeForcesUserRatingAPIDTO {

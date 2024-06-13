@@ -6,10 +6,10 @@
 //
 
 import Foundation
-import UserNotifications
+@preconcurrency import UserNotifications
 
-class MockNotificationsViewModel: NotificationsViewModelProtocol {
-    var pendingNotifications: [UNNotificationRequest] = []
+final class MockNotificationsViewModel: NotificationsViewModelProtocol {
+    let pendingNotifications: [UNNotificationRequest]
     
     init(pendingNotifications: [UNNotificationRequest] = []) {
         self.pendingNotifications = pendingNotifications

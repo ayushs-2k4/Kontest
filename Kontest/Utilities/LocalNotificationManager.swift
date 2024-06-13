@@ -6,7 +6,7 @@
 //
 
 import OSLog
-import UserNotifications
+@preconcurrency import UserNotifications
 
 class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "NotificationDelegate")
@@ -23,7 +23,7 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
     }
 }
 
-class LocalNotificationManager {
+final class LocalNotificationManager: Sendable {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "LocalNotificationManager")
 
     static let instance = LocalNotificationManager() // singleton

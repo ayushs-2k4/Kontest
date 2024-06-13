@@ -10,7 +10,7 @@ import OSLog
 import UserNotifications
 
 @Observable
-class NotificationsViewModel: NotificationsViewModelProtocol {
+final class NotificationsViewModel: NotificationsViewModelProtocol {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "NotificationsViewModel")
 
     var pendingNotifications: [UNNotificationRequest] = []

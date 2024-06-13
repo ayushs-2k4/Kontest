@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol KontestFetcher{
+protocol KontestFetcher: Sendable{
     func getAllKontests() async throws -> [KontestDTO]
 }

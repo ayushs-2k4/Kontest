@@ -30,7 +30,7 @@ func getUserDataFromParsedHTML(stringHTML: String) throws -> String {
     return String(prefinalString)
 }
 
-class CodeChefScrapingAPIRepository {
+final class CodeChefScrapingAPIRepository: Sendable {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "CodeChefAPIRepository")
 
     func getUserKontests(username: String) async throws -> [CodeChefScrapingContestDTO] {

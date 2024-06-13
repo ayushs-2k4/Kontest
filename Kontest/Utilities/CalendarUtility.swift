@@ -6,7 +6,7 @@
 //
 
 import Combine
-import EventKit
+@preconcurrency import EventKit
 import Foundation
 import OSLog
 

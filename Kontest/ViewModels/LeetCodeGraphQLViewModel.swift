@@ -9,7 +9,7 @@ import Foundation
 import OSLog
 
 @Observable
-class LeetCodeGraphQLViewModel {
+final class LeetCodeGraphQLViewModel: Sendable {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "FilterWebsitesViewModel")
 
     let repository = LeetCodeAPIGraphQLRepository()

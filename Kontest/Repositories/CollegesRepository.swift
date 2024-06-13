@@ -5,7 +5,7 @@
 //  Created by Ayush Singhal on 1/16/24.
 //
 
-import FirebaseFirestore
+@preconcurrency import FirebaseFirestore
 import FirebaseFirestoreSwift
 import Foundation
 import OSLog
@@ -26,7 +26,7 @@ struct College: Codable, Hashable {
     }
 }
 
-class CollegesRepository {
+final class CollegesRepository: Sendable {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "CollegesRepository")
 
     private init() {}
@@ -171,7 +171,7 @@ class CollegesRepository {
 
             print(users.count)
 
-            var newUsers = users.map { dbUser in
+            let newUsers = users.map { dbUser in
                 DBUser(
                     userId: dbUser.email,
                     firstName: dbUser.firstName,

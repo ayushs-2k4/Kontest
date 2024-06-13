@@ -10,7 +10,7 @@ import Foundation
 import OSLog
 
 @Observable
-final class AuthenticationEmailViewModel {
+final class AuthenticationEmailViewModel: Sendable {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "AuthenticationEmailViewModel")
 
     var email: String = ""

@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol FilterWebsitesViewModelProtocol{
+protocol FilterWebsitesViewModelProtocol: Sendable {
     func getAllowedWebsites() -> [String]
 }

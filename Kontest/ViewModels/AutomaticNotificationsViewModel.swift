@@ -9,7 +9,7 @@ import Foundation
 import OSLog
 
 @Observable
-class AutomaticNotificationsViewModel {
+final class AutomaticNotificationsViewModel: Sendable {
     static let instance = AutomaticNotificationsViewModel()
 
     private init() {}

@@ -18,15 +18,15 @@ struct KontestApp: App {
     }
 
     @State private var allKontestsViewModel = Dependencies.instance.allKontestsViewModel
-
     @State private var router = Router.instance
     @State private var errorState = ErrorState()
     @State private var panelSelection: Panel? = .AllKontestScreen
-
-    let networkMonitor = NetworkMonitor.shared
-
     @State private var isAlertDisplayed: Bool = false
     @State private var errorWrapper: ErrorWrapper = .init(error: AppError(title: "", description: ""), guidance: "")
+
+    @FocusState private var isSearchFiedFocused: Bool
+
+    let networkMonitor = NetworkMonitor.shared
 
     var body: some Scene {
         WindowGroup {
@@ -35,7 +35,7 @@ struct KontestApp: App {
                     if #available(macOS 15.0, iOS 18.0, *) {
                         TabView(selection: $panelSelection) {
                             Tab("All Kontests", systemImage: "list.bullet", value: .AllKontestScreen) {
-                                AllKontestsScreen()
+                                AllKontestsScreen(isSearchFiedFocused: _isSearchFiedFocused)
                             }
 
                             Tab("LeetCode", systemImage: "leetcode", value: .LeetCodeGraphView) {
@@ -107,11 +107,13 @@ struct KontestApp: App {
             }
         }
         .commands {
-            MyMenu(router: $router, panelSelection: $panelSelection)
+            MyMenu(router: $router, panelSelection: $panelSelection, isSearchFiedFocused: _isSearchFiedFocused)
         }
 
 #if os(macOS)
         if #available(macOS 15.0, *) {
+            aboutWindow()
+
             openAlertWindow(errorWrapper: self.errorWrapper, isPresented: $isAlertDisplayed)
         }
 #endif
@@ -143,6 +145,22 @@ func openAlertWindow(errorWrapper: ErrorWrapper, isPresented: Binding<Bool>) -> 
 #endif
 
 #if os(macOS)
+@available(macOS 15.0, *)
+func aboutWindow() -> some Scene {
+    Window("About Kontest", id: "about") {
+        AboutView()
+            .padding()
+//        .fixedSize()
+            .toolbar(removing: .title)
+            .toolbarBackgroundVisibility(.hidden, for: .windowToolbar)
+            .containerBackground(.thickMaterial, for: .window)
+            .windowMinimizeBehavior(.disabled)
+            .windowResizeBehavior(.disabled)
+    }
+    .windowResizability(.contentSize)
+    .restorationBehavior(.disabled)
+}
+
 @MainActor
 fileprivate func disallowTabbingMode() {
     NSWindow.allowsAutomaticWindowTabbing = false
@@ -151,4 +169,80 @@ fileprivate func disallowTabbingMode() {
 
 extension View {
     func apply<V: View>(@ViewBuilder _ block: (Self) -> V) -> V { block(self) }
+}
+
+#if os(macOS)
+extension Scene {
+    func applyRestorationBehavior() -> some Scene {
+        if #available(macOS 15.0, *) {
+            return self.restorationBehavior(.disabled)
+        } else {
+            return self
+        }
+    }
+}
+#endif
+
+struct AboutView: View {
+    var body: some View {
+        HStack(alignment: .top) {
+            Image(.kontestLogo)
+
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Kontest")
+                    .font(.system(size: 48))
+                    .fontWeight(.bold)
+
+                HStack {
+                    Text("Version 1.0")
+
+                    Image(systemName: "document.on.document")
+                        .onTapGesture {
+                            ClipboardUtility.copyToClipBoard("Version 1.0")
+                        }
+
+                    HStack {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundStyle(.thickMaterial, .green)
+
+                        Text("Up-to-date")
+                    }
+                    .padding(4)
+                    .background(.ultraThinMaterial)
+                    .clipShape(Capsule())
+                    .contentShape(Capsule())
+                }
+                .foregroundStyle(.secondary)
+
+                HStack {
+                    Link(destination: URL(string: "http://github.com/ayushs-2k4/")!) {
+                        Image(.githubLogo)
+                            .resizable()
+                            .aspectRatio(1, contentMode: .fit)
+                            .frame(width: 16, height: 16)
+                    }
+                }
+                .padding(.bottom)
+
+                VStack(alignment: .leading) {
+                    Text("© 2024 Ayush Singhal")
+
+//                    Link(destination: URL(string: "http://github.com/ayushs-2k4/")!) {
+//                        Text("About Team")
+//                            .underline()
+//                    }
+//
+//                    Link(destination: URL(string: "http://github.com/ayushs-2k4/")!) {
+//                        Text("Acknowledgement")
+//                            .underline()
+//                    }
+                }
+                .foregroundStyle(.secondary)
+            }
+        }
+    }
+}
+
+#Preview {
+    AboutView()
 }

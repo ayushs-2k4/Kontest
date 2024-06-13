@@ -26,7 +26,7 @@ struct AllKontestsScreen: View {
     @State private var isAddAllKontestsToCalendarIconAnimating = false
     @State private var isRemoveAllKontestsFromCalendarIconAnimating = false
 
-    @FocusState private var isSearchFiedFocused: Bool
+    @FocusState var isSearchFiedFocused: Bool
 
     let notificationsViewModel = Dependencies.instance.notificationsViewModel
 
@@ -111,6 +111,7 @@ struct AllKontestsScreen: View {
                                 $0
                             }
                         }
+//                        .background(Button("", action: { self.isSearchFiedFocused = true }).keyboardShortcut("f").hidden())
                         #endif
                     }
                 }

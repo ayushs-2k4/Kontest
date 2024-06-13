@@ -9,7 +9,7 @@ import Foundation
 import LeetCodeSchema
 import OSLog
 
-class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
+final class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "LeetCodeAPIGraphQLRepository")
     
     internal func getUserData(username: String, completion: @escaping (LeetCodeUserProfileGraphQLAPIDTO?, Error?) -> Void) {

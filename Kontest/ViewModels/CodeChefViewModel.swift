@@ -9,7 +9,7 @@ import Foundation
 import OSLog
 
 @Observable
-class CodeChefViewModel {
+final class CodeChefViewModel: Sendable {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "CodeChefViewModel")
 
     let codeChefAPIRepository = CodeChefAPIRepository()

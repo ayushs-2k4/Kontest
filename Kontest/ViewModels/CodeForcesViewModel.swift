@@ -9,7 +9,7 @@ import OSLog
 import SwiftUI
 
 @Observable
-class CodeForcesViewModel {
+final class CodeForcesViewModel: Sendable {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "CodeForcesViewModel")
     
     let codeForcesAPIRepository = CodeForcesAPIRepository()

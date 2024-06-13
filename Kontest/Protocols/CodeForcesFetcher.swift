@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol CodeForcesFetcher {
+protocol CodeForcesFetcher: Sendable {
     func getUserRating(username: String) async throws -> CodeForcesUserRatingAPIDTO
     func getUserInfo(username: String) async throws -> CodeForcesUserInfoAPIDTO
 }

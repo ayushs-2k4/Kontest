@@ -10,7 +10,7 @@ import Foundation
 import OSLog
 
 @Observable
-class AllKontestsViewModel {
+final class AllKontestsViewModel: Sendable {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "AllKontestsViewModel")
 
     let repository: KontestFetcher

@@ -25,7 +25,7 @@ enum AppNetworkStatus {
 }
 
 @Observable
-class NetworkMonitor {
+final class NetworkMonitor: Sendable {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "NetworkMonitor")
     static let shared = NetworkMonitor()
     private let monitor: NWPathMonitor

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MockFilterWebsitesViewModel: FilterWebsitesViewModelProtocol {
+final class MockFilterWebsitesViewModel: FilterWebsitesViewModelProtocol {
     let allowedWebsites: [String]
     
     init(allowedWebsites: [String] = ["LeetCode", "CodeChef"]) {

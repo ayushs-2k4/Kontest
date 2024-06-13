@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol LeetCodeGraphQLAPIFetcher {
+protocol LeetCodeGraphQLAPIFetcher: Sendable {
     func getUserData(username: String, completion: @escaping (LeetCodeUserProfileGraphQLAPIDTO?, Error?) -> Void)
 
     func getUserRankingInfo(username: String, completion: @escaping (LeetCodeUserRankingsGraphQLAPIDTO?,Error?) -> Void)

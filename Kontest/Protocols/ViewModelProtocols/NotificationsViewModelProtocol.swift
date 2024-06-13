@@ -8,7 +8,7 @@
 import Foundation
 import UserNotifications
 
-protocol NotificationsViewModelProtocol {
+protocol NotificationsViewModelProtocol: Sendable {
     var pendingNotifications: [UNNotificationRequest] { get }
     
     func getAllPendingNotifications()

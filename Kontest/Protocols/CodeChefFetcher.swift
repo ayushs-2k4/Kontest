@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol CodeChefFetcher{
+protocol CodeChefFetcher: Sendable {
     func getUserData(username: String) async throws -> CodeChefAPIDTO
 }

@@ -5,7 +5,7 @@
 //  Created by Ayush Singhal on 1/14/24.
 //
 
-import FirebaseFirestore
+@preconcurrency import FirebaseFirestore
 import FirebaseFirestoreSwift
 import Foundation
 import OSLog
@@ -28,7 +28,7 @@ struct DBUser: Codable {
     }
 }
 
-final class UserManager {
+final class UserManager: Sendable {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "UserManager")
 
     static let shared = UserManager()

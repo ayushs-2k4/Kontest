@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AllKontestsFakeRepository: KontestFetcher {
+final class AllKontestsFakeRepository: KontestFetcher {
     func getAllKontests() async throws -> [KontestDTO] {
         var kontests: [KontestDTO] = []
 
