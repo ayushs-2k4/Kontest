@@ -103,7 +103,14 @@ struct AllKontestsScreen: View {
                         }
                         #if os(macOS)
                         .searchable(text: Bindable(allKontestsViewModel).searchText)
-                        .searchFocused($isSearchFiedFocused)
+                        .apply {
+                            if #available(macOS 15.0, *) {
+                                $0
+                                    .searchFocused($isSearchFiedFocused)
+                            } else {
+                                $0
+                            }
+                        }
                         #endif
                     }
                 }

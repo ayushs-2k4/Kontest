@@ -15,9 +15,6 @@ struct KontestApp: App {
 
     init() {
         networkMonitor.start(afterSeconds: 0.5)
-
-//        FirebaseApp.configure() // moved to Dependencies, as they are running first than init, and app is crashing on putting this in init()
-//        logger.log("Firebase Configured")
     }
 
     @State private var allKontestsViewModel = Dependencies.instance.allKontestsViewModel
@@ -28,48 +25,83 @@ struct KontestApp: App {
 
     let networkMonitor = NetworkMonitor.shared
 
+    @State private var isAlertDisplayed: Bool = false
+    @State private var errorWrapper: ErrorWrapper = .init(error: AppError(title: "", description: ""), guidance: "")
+
     var body: some Scene {
         WindowGroup {
             if let defaults = UserDefaults(suiteName: Constants.userDefaultsGroupID) {
-//                ContentView(panelSelection: $panelSelection)
+                Group {
+                    if #available(macOS 15.0, iOS 18.0, *) {
+                        TabView(selection: $panelSelection) {
+                            Tab("All Kontests", systemImage: "list.bullet", value: .AllKontestScreen) {
+                                AllKontestsScreen()
+                            }
 
-                TabView(selection: $panelSelection) {
-                    Tab("All Kontests", systemImage: "list.bullet", value: .AllKontestScreen) {
-                        AllKontestsScreen()
-                    }
+                            Tab("LeetCode", systemImage: "leetcode", value: .LeetCodeGraphView) {
+                                LeetcodeGraphView()
+                            }
 
-                    Tab("LeetCode", systemImage: "leetcode", value: .LeetCodeGraphView) {
-                        LeetcodeGraphView()
-                    }
+                            Tab("CodeForces", systemImage: "codeforces", value: .CodeForcesGraphView) {
+                                CodeForcesGraphView()
+                            }
 
-                    Tab("CodeForces", systemImage: "codeforces", value: .CodeForcesGraphView) {
-                        CodeForcesGraphView()
-                    }
-
-                    Tab("CodeChef", systemImage: "codechef", value: .CodeChefGraphView) {
-                        CodeChefGraphView()
+                            Tab("CodeChef", systemImage: "codechef", value: .CodeChefGraphView) {
+                                CodeChefGraphView()
+                            }
+                        }
+                    } else {
+                        ContentView(panelSelection: $panelSelection)
                     }
                 }
-
                 .environment(allKontestsViewModel)
                 .environment(router)
                 .environment(networkMonitor)
                 .environment(errorState)
-                .sheet(item: $errorState.errorWrapper) { errorWrapper in
-                    ErrorView(errorWrapper: errorWrapper)
-                    #if os(macOS)
-                        .fixedSize()
-                    #endif
+                .onChange(of: errorState.errorWrapper) {
+                    if let errorWrapper = errorState.errorWrapper {
+                        self.errorWrapper = errorWrapper
+                        self.isAlertDisplayed = true
+                    }
                 }
-                .onAppear(perform: {
-                    #if os(macOS)
-                        disallowTabbingMode()
-                    #endif
+#if os(iOS)
+//                    .sheet(item: $errorState.errorWrapper) { errorWrapper in
+//                        ErrorView(errorWrapper: errorWrapper)
+//                            .apply {
+//                                if #available(iOS 18.0, *) {
+//                                    $0.presentationSizing(.fitted)
+//                                } else {
+//                                    $0
+//                                }
+//                            }
+//                    }
+                .alert(errorState.errorWrapper?.error is AppError ? (errorWrapper.error as! AppError).title : "Error has occurred", isPresented: $isAlertDisplayed, actions: {
+                    Button("Dismiss") {}
+
+                    if errorWrapper.error is AppError {
+                        let appError = errorWrapper.error as! AppError
+
+                        if let action = appError.action {
+                            Button(appError.actionLabel) {
+                                action()
+                            }
+                        }
+                    }
+                }, message: {
+                    Text(errorWrapper.error.localizedDescription)
+
+                    Text(errorWrapper.guidance)
+                        .font(.caption)
                 })
-                #if os(macOS)
-                .frame(minWidth: 900, idealWidth: 1100, minHeight: 500, idealHeight: 600)
-                #endif
-                .defaultAppStorage(defaults)
+
+#endif
+#if os(macOS)
+                .onAppear(perform: {
+    disallowTabbingMode()
+})
+.frame(minWidth: 900, idealWidth: 1100, minHeight: 500, idealHeight: 600)
+#endif
+.defaultAppStorage(defaults)
             } else {
                 Text("Failed to load user defaults")
             }
@@ -77,11 +109,46 @@ struct KontestApp: App {
         .commands {
             MyMenu(router: $router, panelSelection: $panelSelection)
         }
+
+#if os(macOS)
+        if #available(macOS 15.0, *) {
+            openAlertWindow(errorWrapper: self.errorWrapper, isPresented: $isAlertDisplayed)
+        }
+#endif
     }
 }
 
 #if os(macOS)
-    fileprivate func disallowTabbingMode() {
-        NSWindow.allowsAutomaticWindowTabbing = false
-    }
+@available(macOS 15.0, *)
+func openAlertWindow(errorWrapper: ErrorWrapper, isPresented: Binding<Bool>) -> some Scene {
+    AlertScene(errorWrapper.error is AppError ? (errorWrapper.error as! AppError).title : "Error has occurred", isPresented: isPresented, actions: {
+        Button("Dismiss") {}
+
+        if errorWrapper.error is AppError {
+            let appError = errorWrapper.error as! AppError
+
+            if let action = appError.action {
+                Button(appError.actionLabel) {
+                    action()
+                }
+            }
+        }
+    }, message: {
+        Text(errorWrapper.error.localizedDescription)
+
+        Text(errorWrapper.guidance)
+            .font(.caption)
+    })
+}
 #endif
+
+#if os(macOS)
+@MainActor
+fileprivate func disallowTabbingMode() {
+    NSWindow.allowsAutomaticWindowTabbing = false
+}
+#endif
+
+extension View {
+    func apply<V: View>(@ViewBuilder _ block: (Self) -> V) -> V { block(self) }
+}
