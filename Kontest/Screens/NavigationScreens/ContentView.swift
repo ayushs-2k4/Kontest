@@ -72,8 +72,9 @@ struct iOSVeiw: View {
     }
 }
 
+@available(macOS 15.0, iOS 18.0, *)
 #Preview {
-    @State var panelSelection: Panel? = .AllKontestScreen
+    @Previewable @State var panelSelection: Panel? = .AllKontestScreen
 
     return ContentView(panelSelection: $panelSelection)
         .environment(Dependencies.instance.allKontestsViewModel)

@@ -10,11 +10,11 @@ public import Network
 import OSLog
 
 extension NWInterface.InterfaceType: CaseIterable {
-    public static var allCases: [NWInterface.InterfaceType] = [.other, .wifi, .cellular, .loopback, .wiredEthernet]
+    public static let allCases: [NWInterface.InterfaceType] = [.other, .wifi, .cellular, .loopback, .wiredEthernet]
 }
 
 extension NWPath.Status: CaseIterable {
-    public static var allCases: [NWPath.Status] = [.satisfied, .unsatisfied, .requiresConnection]
+    public static let allCases: [NWPath.Status] = [.satisfied, .unsatisfied, .requiresConnection]
 }
 
 enum AppNetworkStatus {

@@ -486,7 +486,7 @@ enum CalendarUtility {
         }
     }
 
-    static func addCalendarObserver(onChange: @escaping (Notification) -> Void) {
+    static func addCalendarObserver(onChange: @escaping @Sendable (Notification) -> Void) {
         logger.info("Observation of calendar started")
 
         NotificationCenter.default.addObserver(forName: .EKEventStoreChanged, object: nil, queue: nil) { notification in

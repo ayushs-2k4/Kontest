@@ -82,8 +82,9 @@ struct FilterWebsitesViewCompact: View {
     }
 }
 
+@available(macOS 15.0, iOS 18.0, *)
 #Preview {
-    @State var isSelected: Bool = true
+    @Previewable @State var isSelected: Bool = true
 
     return FilterWebsitesViewCompact(
         siteLogo: Image(.hackerRankLogo),

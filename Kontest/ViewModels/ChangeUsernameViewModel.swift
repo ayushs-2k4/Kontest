@@ -8,7 +8,7 @@
 import Foundation
 
 @Observable
-class ChangeUsernameViewModel {
+final class ChangeUsernameViewModel: Sendable {
     var leetcodeUsername: String = ""
     var codeForcesUsername: String = ""
     var codeChefUsername: String = ""
