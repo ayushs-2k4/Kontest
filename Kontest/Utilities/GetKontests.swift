@@ -11,7 +11,7 @@ import OSLog
 class GetKontests {
     private static let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "GetKontests")
 
-    static func getKontests() async -> (fetchedKontests: [KontestModel], error: Error?) {
+    static func getKontests() async -> (fetchedKontests: [KontestModel], error: (any Error)?) {
         let repository = KontestNewRepository()
 
         do {
@@ -47,7 +47,7 @@ class GetKontests {
         laterTodayKontests: [KontestModel],
         tomorrowKontests: [KontestModel],
         laterKontests: [KontestModel],
-        error: Error?
+        error: (any Error)?
     ) {
         let today = Date()
 
@@ -72,7 +72,7 @@ class GetKontests {
 
         let laterKontests = filteredKontests.filter { CalendarUtility.isKontestLater(kontestStartDate: CalendarUtility.getDate(date: $0.start_time) ?? Date()) }
 
-        var ans: ([KontestModel], [KontestModel], [KontestModel], [KontestModel], [KontestModel], [KontestModel], Error?)
+        var ans: ([KontestModel], [KontestModel], [KontestModel], [KontestModel], [KontestModel], [KontestModel], (any Error)?)
         ans = (allKontests, filteredKontests, ongoingKontests, laterTodayKontests, tomorrowKontests, laterKontests, error)
         return ans
     }

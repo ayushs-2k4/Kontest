@@ -5,14 +5,14 @@
 //  Created by Ayush Singhal on 12/08/23.
 //
 
-import Apollo
+@preconcurrency import Apollo
 import Combine
 import Foundation
 
-class DownloadDataWithApollo {
+final class DownloadDataWithApollo: Sendable {
     static let shared = DownloadDataWithApollo()
 
-    private(set) var apollo = ApolloClient(url: URL(string: "https://leetcode.com/graphql?query=")!)
+    let apollo = ApolloClient(url: URL(string: "https://leetcode.com/graphql?query=")!)
 
     private init() {}
 }

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Network
+public import Network
 import OSLog
 
 extension NWInterface.InterfaceType: CaseIterable {

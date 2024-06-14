@@ -9,7 +9,7 @@ import SwiftUI
 import WidgetKit
 
 struct UpcomingWidgetView: View {
-    let error: Error?
+    let error: (any Error)?
     let isDataOld: Bool
     let toShowCalendarButton: Bool
     let allKontests: [KontestModel]

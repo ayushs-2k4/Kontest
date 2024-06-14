@@ -21,7 +21,7 @@ final class CodeForcesViewModel: Sendable {
     
     var attendedKontests: [CodeForcesuserRatingAPIResultModel] = []
     
-    var error: Error?
+    var error: (any Error)?
     
     init(username: String) {
         self.error = nil

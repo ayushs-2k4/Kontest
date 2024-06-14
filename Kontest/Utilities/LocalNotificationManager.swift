@@ -8,7 +8,7 @@
 import OSLog
 @preconcurrency import UserNotifications
 
-class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
+final class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate, Sendable {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "NotificationDelegate")
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
@@ -28,7 +28,7 @@ final class LocalNotificationManager: Sendable {
 
     static let instance = LocalNotificationManager() // singleton
     let center = UNUserNotificationCenter.current()
-    private var delegate: NotificationDelegate = .init()
+    private let delegate: NotificationDelegate = .init()
 
     private init() {
         center.delegate = delegate

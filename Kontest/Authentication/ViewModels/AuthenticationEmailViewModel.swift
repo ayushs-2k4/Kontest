@@ -23,7 +23,7 @@ final class AuthenticationEmailViewModel: Sendable {
 
     var isLoading: Bool = false
 
-    var error: Error?
+    var error: (any Error)?
 
     static let shared = AuthenticationEmailViewModel()
 

@@ -17,12 +17,12 @@ class UpcomingKontestsWidgetCache: WidgetCache {
 
     init() {}
 
-    required init(from decoder: Decoder) throws {
+    required init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         previousEntry = try container.decode(TimelineEntryType.self, forKey: .previousEntry)
     }
 
-    func encode(to encoder: Encoder) throws {
+    func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(previousEntry, forKey: .previousEntry)
     }

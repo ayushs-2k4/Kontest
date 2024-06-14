@@ -9,7 +9,7 @@ import Foundation
 import OSLog
 import SwiftSoup
 
-class KontestNewRepository: KontestFetcher {
+final class KontestNewRepository: KontestFetcher {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "KontestNewRepository")
 
     func getAllKontests() async throws -> [KontestDTO] {

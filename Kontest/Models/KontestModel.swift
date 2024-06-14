@@ -33,7 +33,7 @@ class KontestModel: Codable, Identifiable, Hashable {
         case selectedCalendarName
     }
 
-    required init(from decoder: Decoder) throws {
+    required init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
         id = try container.decodeIfPresent(String.self, forKey: .id) ?? "No ID"
@@ -57,7 +57,7 @@ class KontestModel: Codable, Identifiable, Hashable {
         selectedCalendarName = try container.decodeIfPresent(String.self, forKey: .selectedCalendarName)
     }
 
-    func encode(to encoder: Encoder) throws {
+    func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(name, forKey: .name)
         try container.encode(url, forKey: .url)

@@ -18,7 +18,7 @@ final class LeetCodeGraphQLViewModel: Sendable {
     var leetCodeUserProfileGraphQLAPIModel: LeetCodeUserProfileGraphQLAPIModel?
     var userContestRanking: LeetCodeUserRankingGraphQLAPIModel?
     var userContestRankingHistory: [LeetCodeUserRankingHistoryGraphQLAPIModel?]?
-    var error: Error?
+    var error: (any Error)?
 
     var isLoading: Bool = false
     var isFetchingUserData: Bool = false

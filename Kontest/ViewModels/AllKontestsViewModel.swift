@@ -13,9 +13,9 @@ import OSLog
 final class AllKontestsViewModel: Sendable {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "AllKontestsViewModel")
 
-    let repository: KontestFetcher
-    let notificationsViewModel: NotificationsViewModelProtocol
-    let filterWebsitesViewModel: FilterWebsitesViewModelProtocol
+    let repository: any KontestFetcher
+    let notificationsViewModel: any NotificationsViewModelProtocol
+    let filterWebsitesViewModel: any FilterWebsitesViewModelProtocol
 
     private var timer: AnyCancellable?
 
@@ -43,7 +43,7 @@ final class AllKontestsViewModel: Sendable {
 
     var isLoading = false
 
-    init(notificationsViewModel: NotificationsViewModelProtocol, filterWebsitesViewModel: FilterWebsitesViewModelProtocol, repository: KontestFetcher) {
+    init(notificationsViewModel: any NotificationsViewModelProtocol, filterWebsitesViewModel: any FilterWebsitesViewModelProtocol, repository: any KontestFetcher) {
         self.repository = repository
         self.notificationsViewModel = notificationsViewModel
         self.filterWebsitesViewModel = filterWebsitesViewModel

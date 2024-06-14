@@ -22,7 +22,7 @@ final class CodeChefViewModel: Sendable {
 
     var isLoading = false
 
-    var error: Error?
+    var error: (any Error)?
 
     init(username: String) {
         self.isLoading = true

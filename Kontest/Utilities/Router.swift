@@ -14,7 +14,7 @@ enum SelectionState: Hashable {
 }
 
 @Observable
-class Router {
+final class Router: Sendable {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "Router")
 
     var path = [SelectionState]() {

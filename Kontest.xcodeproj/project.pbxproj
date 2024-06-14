@@ -62,7 +62,6 @@
 		077E6EB12AB4B3220003E897 /* ErrorState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EB02AB4B3220003E897 /* ErrorState.swift */; };
 		07822E552B85EC0800A5731E /* AutomaticNotificationMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07822E542B85EC0800A5731E /* AutomaticNotificationMenu.swift */; };
 		0787AE982AC89C0100F1B80C /* RotatingMapScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0787AE972AC89C0100F1B80C /* RotatingMapScreen.swift */; };
-		0791DA552B51646200A9CA23 /* ClockObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0791DA542B51646200A9CA23 /* ClockObserver.swift */; };
 		079A67132B54473100901C0D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 079A67122B54473100901C0D /* GoogleService-Info.plist */; };
 		079A67162B5447F600901C0D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 079A67152B5447F600901C0D /* FirebaseAnalytics */; };
 		079A67182B5447F600901C0D /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 079A67172B5447F600901C0D /* FirebaseAnalyticsSwift */; };
@@ -255,7 +254,6 @@
 		0784292D2AB5EF660078D836 /* AddToCalendarIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToCalendarIntent.swift; sourceTree = "<group>"; };
 		078429312AB603FB0078D836 /* KontestWidgetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestWidgetModel.swift; sourceTree = "<group>"; };
 		0787AE972AC89C0100F1B80C /* RotatingMapScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingMapScreen.swift; sourceTree = "<group>"; };
-		0791DA542B51646200A9CA23 /* ClockObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockObserver.swift; sourceTree = "<group>"; };
 		079A67122B54473100901C0D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		079A671E2B544CD000901C0D /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
 		079A67202B544D2300901C0D /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
@@ -749,7 +747,6 @@
 				07D7666D2AC84094000A3DFD /* Panel.swift */,
 				07367C472ACA097000A558ED /* DeviceType.swift */,
 				07D9FFCC2AD9A5D000C03A3A /* HapticFeedbackUtility.swift */,
-				0791DA542B51646200A9CA23 /* ClockObserver.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1008,7 +1005,6 @@
 				07ECFB812AA58259008513C6 /* ChangeUsernameViewModel.swift in Sources */,
 				07ECFBB02AA58259008513C6 /* CodeForcesUserRatingAPIDTO.swift in Sources */,
 				07FD85A92AB78D5600D26C4C /* Dependencies.swift in Sources */,
-				0791DA552B51646200A9CA23 /* ClockObserver.swift in Sources */,
 				0787AE982AC89C0100F1B80C /* RotatingMapScreen.swift in Sources */,
 				071915642AB1695E00E1CB56 /* NetworkMonitor.swift in Sources */,
 				0725FB662AC7EA3F00564DE0 /* LeetcodeGraphView.swift in Sources */,
@@ -1285,7 +1281,10 @@
 				SWIFT_OBJC_INTEROP_MODE = objc;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_STRICT_CONCURRENCY = complete;
-				SWIFT_VERSION = 5.0;
+				SWIFT_UPCOMING_FEATURE_CONCISE_MAGIC_FILE = "$(SWIFT_UPCOMING_FEATURE_6_0)";
+				SWIFT_UPCOMING_FEATURE_EXISTENTIAL_ANY = YES;
+				SWIFT_UPCOMING_FEATURE_INTERNAL_IMPORTS_BY_DEFAULT = YES;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -1343,7 +1342,10 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OBJC_INTEROP_MODE = objc;
 				SWIFT_STRICT_CONCURRENCY = complete;
-				SWIFT_VERSION = 5.0;
+				SWIFT_UPCOMING_FEATURE_CONCISE_MAGIC_FILE = "$(SWIFT_UPCOMING_FEATURE_6_0)";
+				SWIFT_UPCOMING_FEATURE_EXISTENTIAL_ANY = YES;
+				SWIFT_UPCOMING_FEATURE_INTERNAL_IMPORTS_BY_DEFAULT = YES;
+				SWIFT_VERSION = 6.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

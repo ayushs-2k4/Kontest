@@ -13,6 +13,6 @@ struct ErrorWrapper: Identifiable, Equatable {
     }
 
     let id = UUID()
-    let error: Error
+    let error: any Error
     let guidance: String
 }

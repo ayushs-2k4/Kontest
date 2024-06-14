@@ -37,11 +37,11 @@ struct CodeForcesProfileView: View {
     let username: String
     let bgGradient: RadialGradient
     let isLoading: Bool
-    let error: Error?
+    let error: (any Error)?
     
     @State private var locationForGrad = 0.8
 
-    init(codeForcesViewModel: CodeForcesViewModel, username: String, bgGradient: RadialGradient, isLoading: Bool, error: Error?) {
+    init(codeForcesViewModel: CodeForcesViewModel, username: String, bgGradient: RadialGradient, isLoading: Bool, error: (any Error)?) {
         self.codeForcesViewModel = codeForcesViewModel
         self.username = username
         self.bgGradient = bgGradient

@@ -37,7 +37,7 @@ struct CodeChefProfileView: View {
     let username: String
     let bgColor: Color
     let isLoading: Bool
-    let error: Error?
+    let error: (any Error)?
     
     @Environment(\.openURL) private var openURL
     @Environment(Router.self) private var router

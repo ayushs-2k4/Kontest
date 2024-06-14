@@ -12,7 +12,7 @@ import OSLog
 final class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "LeetCodeAPIGraphQLRepository")
     
-    internal func getUserData(username: String, completion: @escaping (LeetCodeUserProfileGraphQLAPIDTO?, Error?) -> Void) {
+    internal func getUserData(username: String, completion: @escaping (LeetCodeUserProfileGraphQLAPIDTO?, (any Error)?) -> Void) {
         let query = UserPublicProfileQuery(username: username)
         
         DownloadDataWithApollo.shared.apollo.fetch(query: query) { [weak self] result in
@@ -44,7 +44,7 @@ final class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
         }
     }
     
-    internal func getUserRankingInfo(username: String, completion: @escaping (LeetCodeUserRankingsGraphQLAPIDTO?, Error?) -> Void) {
+    internal func getUserRankingInfo(username: String, completion: @escaping (LeetCodeUserRankingsGraphQLAPIDTO?, (any Error)?) -> Void) {
         let query = UserContestRankingInfoQuery(username: username)
         
         DownloadDataWithApollo.shared.apollo.fetch(query: query) { [weak self] result in

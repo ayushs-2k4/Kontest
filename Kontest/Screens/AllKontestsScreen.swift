@@ -11,8 +11,6 @@ import WidgetKit
 struct AllKontestsScreen: View {
     let isInDevelopmentMode = false
 
-    @ObservedObject var clockObserver = ClockObserver()
-
     @Environment(AllKontestsViewModel.self) private var allKontestsViewModel
     @Environment(NetworkMonitor.self) private var networkMonitor
     @Environment(\.openURL) var openURL
@@ -329,10 +327,6 @@ struct AllKontestsScreen: View {
             } else {
                 NoInternetScreen()
             }
-        }
-        .onChange(of: clockObserver.clockDidChange) {
-            // Perform actions when the clock changes
-            print("Clock changed!")
         }
 
         .onChange(of: networkMonitor.currentStatus) {

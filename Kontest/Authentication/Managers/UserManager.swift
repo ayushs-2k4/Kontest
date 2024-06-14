@@ -110,7 +110,7 @@ final class UserManager: Sendable {
         }
     }
 
-    func updateName(firstName: String, lastName: String, completion: @escaping (Error?) -> ()) {
+    func updateName(firstName: String, lastName: String, completion: @escaping ((any Error)?) -> ()) {
         if AuthenticationManager.shared.isSignedIn() {
             do {
                 let userId = try AuthenticationManager.shared.getAuthenticatedUser().email ?? AuthenticationManager.shared.getAuthenticatedUser().uid
@@ -135,7 +135,7 @@ final class UserManager: Sendable {
         }
     }
 
-    func updateCollege(collegeStateName: String, collegeName: String, completion: @escaping (Error?) -> ()) {
+    func updateCollege(collegeStateName: String, collegeName: String, completion: @escaping ((any Error)?) -> ()) {
         if AuthenticationManager.shared.isSignedIn() {
             do {
                 let userId = try AuthenticationManager.shared.getAuthenticatedUser().email ?? AuthenticationManager.shared.getAuthenticatedUser().uid
