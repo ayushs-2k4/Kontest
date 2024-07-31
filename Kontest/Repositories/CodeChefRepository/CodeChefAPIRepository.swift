@@ -12,7 +12,7 @@ final class CodeChefAPIRepository: CodeChefFetcher {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "CodeChefAPIRepository")
     
     func getUserData(username: String) async throws -> CodeChefAPIDTO {
-        guard let url = URL(string: "https://codechef-api.vercel.app/\(username)") else {
+        guard let url = URL(string: "https://codechef-api.vercel.app/handle/\(username)") else {
             logger.error("Error in making CodeChef url")
             throw URLError(.badURL)
         }

@@ -69,7 +69,17 @@ struct CodeChefProfileView: View {
                 if error == nil, let codeChefProfile {
                     VStack {
                         Text("Current Rating \(codeChefProfile.currentRating)")
-                        Text(codeChefProfile.stars)
+                        let numberOfStars = Int(codeChefProfile.stars.dropLast())
+                                                
+                        if let numberOfStars {
+                            HStack {
+                                ForEach(0 ..< numberOfStars, id: \.self) { _ in
+                                    Text("★")
+                                }
+                            }
+                        } else {
+                            Text(codeChefProfile.stars)
+                        }
                     }
                     #if os(iOS)
                     .font(.footnote)
