@@ -114,6 +114,7 @@
 		07D7666C2AC8407B000A3DFD /* DetailColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7666B2AC8407B000A3DFD /* DetailColumn.swift */; };
 		07D7666E2AC84094000A3DFD /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7666D2AC84094000A3DFD /* Panel.swift */; };
 		07D9FFCD2AD9A5D000C03A3A /* HapticFeedbackUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9FFCC2AD9A5D000C03A3A /* HapticFeedbackUtility.swift */; };
+		07E92C902C5B68FE00E3D6D3 /* KontestNewAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E92C8E2C5B68FE00E3D6D3 /* KontestNewAPIRepository.swift */; };
 		07ECFB802AA58259008513C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 07ECFB352AA58259008513C6 /* README.md */; };
 		07ECFB812AA58259008513C6 /* ChangeUsernameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB382AA58259008513C6 /* ChangeUsernameViewModel.swift */; };
 		07ECFB822AA58259008513C6 /* LeetCodeGraphQLViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB392AA58259008513C6 /* LeetCodeGraphQLViewModel.swift */; };
@@ -285,6 +286,7 @@
 		07D7666B2AC8407B000A3DFD /* DetailColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailColumn.swift; sourceTree = "<group>"; };
 		07D7666D2AC84094000A3DFD /* Panel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Panel.swift; sourceTree = "<group>"; };
 		07D9FFCC2AD9A5D000C03A3A /* HapticFeedbackUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackUtility.swift; sourceTree = "<group>"; };
+		07E92C8E2C5B68FE00E3D6D3 /* KontestNewAPIRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KontestNewAPIRepository.swift; sourceTree = "<group>"; };
 		07EA6F482AB6405A00CD932E /* Kontest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kontest.entitlements; sourceTree = "<group>"; };
 		07EA6F492AB6405F00CD932E /* Upcoming Kontests iOS WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Upcoming Kontests iOS WidgetExtension.entitlements"; sourceTree = "<group>"; };
 		07ECFB352AA58259008513C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -656,6 +658,7 @@
 			children = (
 				07ECFB452AA58259008513C6 /* AllKontestsFakeRepository.swift */,
 				07AA752D2B4FCF7A00DCD75B /* KontestNewRepository.swift */,
+				07E92C8E2C5B68FE00E3D6D3 /* KontestNewAPIRepository.swift */,
 			);
 			path = KontestRepository;
 			sourceTree = "<group>";
@@ -1064,6 +1067,7 @@
 				079CF54E2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift in Sources */,
 				079CF5502B527ECD00BE8E13 /* CodeChefScrapingContestDTO.swift in Sources */,
 				07C993752B8476F7008411D7 /* AutomaticNotificationsViewModel.swift in Sources */,
+				07E92C902C5B68FE00E3D6D3 /* KontestNewAPIRepository.swift in Sources */,
 				07A31F002AAC818D00EBC296 /* FilterWebsiteKey.swift in Sources */,
 				07ECFBC42AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift in Sources */,
 				07ECFBA22AA58259008513C6 /* SingleKontestView.swift in Sources */,
@@ -1389,6 +1393,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1429,6 +1434,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
