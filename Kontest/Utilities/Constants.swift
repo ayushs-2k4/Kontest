@@ -26,38 +26,39 @@ enum Constants {
         case AtCoder
         case CodeChef
         case CodeForces
-
         case CodeForcesGym = "CodeForces::Gym"
-
         case CodingNinjas = "Coding Ninjas"
-
         case CSAcademy = "CS Academy"
-
         case GeeksForGeeks = "Geeks For Geeks"
-
         case HackerEarth
-
         case HackerRank
-
         case LeetCode
-
         case ProjectEuler = "Project Euler"
-
         case TopCoder
-
         case Toph
-
         case YukiCoder = "Yuki Coder"
-
         case CupsOnline = "Cups Online"
+
+        case RoboContext = "Robo Contest"
+        case Ctftime = "CTFtime"
+        case Lightoj = "Light OJ"
+        case UCup
+        case Kaggle
+        case DMOJ
+        case TLX
+        case CodeRun
+        case Eolymp = "eOlymp"
+        case ICPCGlobal
+        case Luogu
+        case Spoj = "SPOJ"
+        case GSU = "GSU"
     }
-    
+
 //    static let automaticNotificationSuffix = "automaticNotificationSuffix"
     static let automaticNotification10MinutesSuffix = "automaticNotification10MinutesSuffix"
     static let automaticNotification30MinutesSuffix = "automaticNotification30MinutesSuffix"
     static let automaticNotification1HourSuffix = "automaticNotification1HourSuffix"
     static let automaticNotification6HoursSuffix = "automaticNotification6HoursSuffix"
-    
-    
+
     static let automaticCalendarEventSuffix = "automaticReminderSuffix"
 }

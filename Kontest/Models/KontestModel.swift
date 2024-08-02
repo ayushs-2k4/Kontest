@@ -160,7 +160,7 @@ extension KontestModel {
 
         case "toph.com":
             Constants.SiteAbbreviations.Toph.rawValue
-            
+
         case "toph.co":
             Constants.SiteAbbreviations.Toph.rawValue
 
@@ -169,6 +169,45 @@ extension KontestModel {
 
         case "cups.online":
             Constants.SiteAbbreviations.CupsOnline.rawValue
+
+        case "robocontest.uz":
+            Constants.SiteAbbreviations.RoboContext.rawValue
+
+        case "ctftime.org":
+            Constants.SiteAbbreviations.Ctftime.rawValue
+
+        case "lightoj.com":
+            Constants.SiteAbbreviations.Lightoj.rawValue
+
+        case "ucup.ac":
+            Constants.SiteAbbreviations.UCup.rawValue
+
+        case "kaggle.com":
+            Constants.SiteAbbreviations.Kaggle.rawValue
+
+        case "dmoj.ca":
+            Constants.SiteAbbreviations.DMOJ.rawValue
+
+        case "tlx.toki.id":
+            Constants.SiteAbbreviations.TLX.rawValue
+
+        case "coderun.yandex.ru":
+            Constants.SiteAbbreviations.CodeRun.rawValue
+
+        case "eolymp.com":
+            Constants.SiteAbbreviations.Eolymp.rawValue
+
+        case "icpc.global":
+            Constants.SiteAbbreviations.ICPCGlobal.rawValue
+
+        case "luogu.com.cn":
+            Constants.SiteAbbreviations.Luogu.rawValue
+
+        case "spoj.com":
+            Constants.SiteAbbreviations.Spoj.rawValue
+            
+        case "dl.gsu.by":
+            Constants.SiteAbbreviations.GSU.rawValue
 
         default:
             site

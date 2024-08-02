@@ -233,6 +233,15 @@ final class AllKontestsViewModel: Sendable {
 
             return isKontestWebsiteInAllowedWebsites
         }
+
+//        toShowKontests = allKontests.filter { konModel in
+//            let isKontestWebsiteInAllowedWebsites = allowedWebsites.contains { allowedWebsite in
+//                konModel.site.lowercased().contains(allowedWebsite.lowercased())
+//            }
+//
+//            return isKontestWebsiteInAllowedWebsites
+//        }
+
         backupKontests = toShowKontests
         splitKontestsIntoDifferentCategories()
     }
