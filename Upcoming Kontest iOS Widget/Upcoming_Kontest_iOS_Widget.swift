@@ -174,7 +174,7 @@ private func getKontestsEntryFromCache(upcomingKontestsWidgetCache: UpcomingKont
 
 struct SimpleEntry: TimelineEntry, Codable {
     let date: Date
-    let error: Error?
+    let error: (any Error)?
     var isDataOld = false
     let allKontests: [KontestModel]
     let filteredKontests: [KontestModel]
@@ -193,7 +193,7 @@ struct SimpleEntry: TimelineEntry, Codable {
         case laterKontests
     }
 
-    init(date: Date, error: Error?, allKontests: [KontestModel], filteredKontests: [KontestModel], ongoingKontests: [KontestModel], laterTodayKontests: [KontestModel], tomorrowKontests: [KontestModel], laterKontests: [KontestModel]) {
+    init(date: Date, error: (any Error)?, allKontests: [KontestModel], filteredKontests: [KontestModel], ongoingKontests: [KontestModel], laterTodayKontests: [KontestModel], tomorrowKontests: [KontestModel], laterKontests: [KontestModel]) {
         self.date = date
         self.error = error
         self.allKontests = allKontests
@@ -204,7 +204,7 @@ struct SimpleEntry: TimelineEntry, Codable {
         self.laterKontests = laterKontests
     }
 
-    init(from decoder: Decoder) throws {
+    init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         date = try container.decode(Date.self, forKey: .date)
         error = nil
