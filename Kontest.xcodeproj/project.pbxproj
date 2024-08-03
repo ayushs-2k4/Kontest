@@ -27,6 +27,7 @@
 		074DD4522AA61570005C16A5 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074DD4512AA61570005C16A5 /* AppError.swift */; };
 		07567EA52AB645E9007EFEE1 /* AddToCalendarIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0784292D2AB5EF660078D836 /* AddToCalendarIntent.swift */; };
 		076134CF2AA86AC300946B02 /* KontestDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076134CE2AA86AC300946B02 /* KontestDetailViewModel.swift */; };
+		076297322C5DFFF700E48937 /* MultipleRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076297312C5DFFF700E48937 /* MultipleRepositories.swift */; };
 		0764FF7D2ABC717E0060AC1F /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CFEBA32AB02DCB00291484 /* WidgetKit.framework */; };
 		0764FF7E2ABC717E0060AC1F /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CFEBA52AB02DCB00291484 /* SwiftUI.framework */; };
 		0764FF812ABC717E0060AC1F /* Upcoming_Kontest_iOS_WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0764FF802ABC717E0060AC1F /* Upcoming_Kontest_iOS_WidgetBundle.swift */; };
@@ -238,6 +239,7 @@
 		074DD4512AA61570005C16A5 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		076016552A87CD52007CE9F5 /* Kontest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kontest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		076134CE2AA86AC300946B02 /* KontestDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestDetailViewModel.swift; sourceTree = "<group>"; };
+		076297312C5DFFF700E48937 /* MultipleRepositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleRepositories.swift; sourceTree = "<group>"; };
 		0764FF7C2ABC717E0060AC1F /* Upcoming Kontest iOS WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Upcoming Kontest iOS WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0764FF802ABC717E0060AC1F /* Upcoming_Kontest_iOS_WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upcoming_Kontest_iOS_WidgetBundle.swift; sourceTree = "<group>"; };
 		0764FF822ABC717E0060AC1F /* Upcoming_Kontest_iOS_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upcoming_Kontest_iOS_Widget.swift; sourceTree = "<group>"; };
@@ -659,6 +661,7 @@
 				07ECFB452AA58259008513C6 /* AllKontestsFakeRepository.swift */,
 				07AA752D2B4FCF7A00DCD75B /* KontestNewRepository.swift */,
 				07E92C8E2C5B68FE00E3D6D3 /* KontestNewAPIRepository.swift */,
+				076297312C5DFFF700E48937 /* MultipleRepositories.swift */,
 			);
 			path = KontestRepository;
 			sourceTree = "<group>";
@@ -1085,6 +1088,7 @@
 				0720B0172B5680F0006721EE /* CollegesRepository.swift in Sources */,
 				079A671F2B544CD000901C0D /* SignUpScreen.swift in Sources */,
 				07D9FFCD2AD9A5D000C03A3A /* HapticFeedbackUtility.swift in Sources */,
+				076297322C5DFFF700E48937 /* MultipleRepositories.swift in Sources */,
 				07ECFB862AA58259008513C6 /* NotificationsViewModel.swift in Sources */,
 				07ECFB942AA58259008513C6 /* CodeChefAPIModel.swift in Sources */,
 				07567EA52AB645E9007EFEE1 /* AddToCalendarIntent.swift in Sources */,

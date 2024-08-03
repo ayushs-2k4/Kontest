@@ -24,7 +24,7 @@ final class Dependencies: Sendable {
 
         self.notificationsViewModel = NotificationsViewModel()
         self.filterWebsitesViewModel = FilterWebsitesViewModel()
-        self.allKontestsViewModel = AllKontestsViewModel(notificationsViewModel: notificationsViewModel, filterWebsitesViewModel: filterWebsitesViewModel, repository: KontestNewRepository())
+        self.allKontestsViewModel = AllKontestsViewModel(notificationsViewModel: notificationsViewModel, filterWebsitesViewModel: filterWebsitesViewModel, repository: MultipleRepositories(repositories: [KontestNewRepository(), KontestNewAPIRepository()]))
         self.changeUsernameViewModel = ChangeUsernameViewModel()
         self.leetCodeGraphQLViewModel = LeetCodeGraphQLViewModel(username: changeUsernameViewModel.leetcodeUsername)
         self.codeChefViewModel = CodeChefViewModel(username: changeUsernameViewModel.codeChefUsername)
