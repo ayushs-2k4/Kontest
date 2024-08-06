@@ -136,10 +136,22 @@ struct AllKontestsScreen: View {
                         }
 
                         ToolbarItem(placement: .automatic) { // change the placement here!
+                            let timeInSeconds = 5
+
                             Button {
-                                LocalNotificationManager.instance.scheduleIntervalNotification(timeIntervalInSeconds: 5)
+                                LocalNotificationManager.instance.scheduleIntervalNotification(id: "This is id for notification with time \(timeInSeconds) seconds", timeIntervalInSeconds: timeInSeconds)
                             } label: {
-                                Text("Schedule 5 seconds Notification")
+                                Text("Schedule \(timeInSeconds) seconds Notification")
+                            }
+                        }
+
+                        ToolbarItem(placement: .automatic) { // change the placement here!
+                            let timeInSeconds = 5
+
+                            Button {
+                                LocalNotificationManager.instance.removeNotification(withID: "This is id for notification with time \(timeInSeconds) seconds")
+                            } label: {
+                                Text("Remove 5 seconds Notification")
                             }
                         }
 

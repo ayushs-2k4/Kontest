@@ -139,7 +139,7 @@ final class NotificationsViewModel: NotificationsViewModelProtocol {
 
     func removePendingNotification(kontest: KontestModel, minutesBefore: Int, hoursBefore: Int, daysBefore: Int) {
         let notificationID = LocalNotificationManager.instance.getNotificationID(kontestID: kontest.id, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
-        LocalNotificationManager.instance.removePendingNotification(identifiers: [notificationID])
+        LocalNotificationManager.instance.removePendingNotifications(identifiers: [notificationID])
         updateIsSetForNotification(kontest: kontest, to: false, minutesBefore: minutesBefore, hoursBefore: hoursBefore, daysBefore: daysBefore)
     }
 

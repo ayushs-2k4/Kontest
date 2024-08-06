@@ -138,8 +138,12 @@ final class LocalNotificationManager: Sendable {
         center.removeAllPendingNotificationRequests()
     }
 
-    func removePendingNotification(identifiers: [String]) {
+    func removePendingNotifications(identifiers: [String]) {
         center.removePendingNotificationRequests(withIdentifiers: identifiers)
+    }
+    
+    func removeNotification(withID id: String) {
+        UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [id])
     }
 
     func shecduleCalendarNotifications(notifications: [NotificationContent]) {
