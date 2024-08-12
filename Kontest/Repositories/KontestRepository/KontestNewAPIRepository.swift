@@ -44,20 +44,31 @@ final class KontestNewAPIRepository: KontestFetcher {
 
             // Ensure URL is valid
             let cloudflareURLString = apiDocument.url
-
+            
+            let version = "v1"
+            let page = 0
+            let perPage = 10000
+            
             guard let cloudflareURL = URL(string: cloudflareURLString) else { throw URLError(.badURL) } // Handle invalid URL error
 //            guard let cloudflareURL = URL(string: "http://localhost:5151") else { throw URLError(.badURL) } // Handle invalid URL error
  
             // Append path to the URL
-            let endpointURL = cloudflareURL.appendingPathComponent("get_kontests")
+            let endpointURL = cloudflareURL
+                .appendingPathComponent("api")
+                .appendingPathComponent(version)
+                .appendingPathComponent("get_kontests")
+                .appending(queryItems: [
+                    .init(name: "page", value: String(page)),
+                    .init(name: "per_page", value: String(perPage))
+                ])
 
             // Download data from the URL
             let data = try await downloadDataWithAsyncAwait(url: endpointURL)
-            logger.info("data: \(String(decoding: data, as: UTF8.self))")
+//            logger.info("data: \(String(decoding: data, as: UTF8.self))")
 
             // Decode the data
             let kontests = try decodeKontests(from: data)
-            logger.info("kontests: \(kontests)")
+//            logger.info("kontests: \(kontests)")
 
             return kontests
 

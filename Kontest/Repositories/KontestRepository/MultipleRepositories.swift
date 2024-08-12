@@ -45,7 +45,7 @@ final class MultipleRepositories: KontestFetcher {
             do {
                 let kontests = try await repository.getAllKontests()
 
-                logger.info("Got kontests from \("\(type(of: repository))"), returning kontests: \(kontests)")
+                logger.info("Got kontests from \("\(type(of: repository))"), returning kontests count: \(kontests.count)")
                 return kontests
             } catch {
                 lastError = error
