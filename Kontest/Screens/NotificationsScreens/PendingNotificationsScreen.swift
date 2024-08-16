@@ -24,6 +24,9 @@ struct PendingNotificationsScreen: View {
                 }
             }
         }
+        .onAppear {
+            notificationsViewModel.getAllPendingNotifications()
+        }
     }
 }
 
