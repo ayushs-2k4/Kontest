@@ -1,5 +1,5 @@
 //
-//  LeetcodeGraphView.swift
+//  LeetcodeChartView.swift
 //  Kontest
 //
 //  Created by Ayush Singhal on 30/09/23.
@@ -9,8 +9,8 @@ import Charts
 import OSLog
 import SwiftUI
 
-struct LeetcodeGraphView: View {
-    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "LeetcodeGraphView")
+struct LeetcodeChartView: View {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "LeetcodeChartView")
 
     let leetcodeGraphQLViewModel: LeetCodeGraphQLViewModel = Dependencies.instance.leetCodeGraphQLViewModel
 
@@ -202,6 +202,6 @@ extension LeetCodeChart {
 }
 
 #Preview {
-    LeetcodeGraphView()
+    LeetcodeChartView()
         .frame(width: 500, height: 300)
 }

@@ -1,5 +1,5 @@
 //
-//  CodeChefGraphView.swift
+//  CodeChefChartView.swift
 //  Kontest
 //
 //  Created by Ayush Singhal on 1/13/24.
@@ -9,7 +9,7 @@ import Charts
 import Foundation
 import SwiftUI
 
-struct CodeChefGraphView: View {
+struct CodeChefChartView: View {
     let codeChefViewModel: CodeChefViewModel = Dependencies.instance.codeChefViewModel
 
     @State private var showAnnotations: Bool = true
@@ -192,6 +192,6 @@ extension CodeChefChart {
 }
 
 #Preview {
-    CodeChefGraphView()
+    CodeChefChartView()
         .frame(width: 500, height: 500)
 }

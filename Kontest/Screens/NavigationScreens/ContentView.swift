@@ -51,19 +51,19 @@ struct iOSVeiw: View {
                 .animation(path.contains(.screen(.SettingsScreen)) ? nil : .default, value: path)
             #endif
 
-            CodeForcesGraphView()
+            CodeForcesChartView()
                 .tabItem {
                     Label("CodeForces Ratings", image: .codeForcesLogoSmall)
                 }
                 .tag(Panel.CodeForcesGraphView)
 
-            LeetcodeGraphView()
+            LeetcodeChartView()
                 .tabItem {
                     Label("LeetCode Ratings", image: .leetCodeLogoSmall)
                 }
                 .tag(Panel.LeetCodeGraphView)
 
-            CodeChefGraphView()
+            CodeChefChartView()
                 .tabItem {
                     Label("CodeChef Ratings", image: .codeChefSmallLogo)
                 }

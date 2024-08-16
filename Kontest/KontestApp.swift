@@ -39,15 +39,15 @@ struct KontestApp: App {
                             }
 
                             Tab("LeetCode", systemImage: "leetcode", value: .LeetCodeGraphView) {
-                                LeetcodeGraphView()
+                                LeetcodeChartView()
                             }
 
                             Tab("CodeForces", systemImage: "codeforces", value: .CodeForcesGraphView) {
-                                CodeForcesGraphView()
+                                CodeForcesChartView()
                             }
 
                             Tab("CodeChef", systemImage: "codechef", value: .CodeChefGraphView) {
-                                CodeChefGraphView()
+                                CodeChefChartView()
                             }
                         }
                     } else {

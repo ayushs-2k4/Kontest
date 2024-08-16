@@ -16,13 +16,13 @@ struct DetailColumn: View {
             AllKontestsScreen()
 
         case .LeetCodeGraphView:
-            LeetcodeGraphView()
+            LeetcodeChartView()
 
         case .CodeForcesGraphView:
-            CodeForcesGraphView()
+            CodeForcesChartView()
 
         case .CodeChefGraphView:
-            CodeChefGraphView()
+            CodeChefChartView()
 
         case nil:
             Text("Nil")

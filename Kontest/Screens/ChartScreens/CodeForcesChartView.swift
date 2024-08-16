@@ -1,5 +1,5 @@
 //
-//  CodeForcesGraphView.swift
+//  CodeForcesChartView.swift
 //  Kontest
 //
 //  Created by Ayush Singhal on 30/09/23.
@@ -8,7 +8,7 @@
 import Charts
 import SwiftUI
 
-struct CodeForcesGraphView: View {
+struct CodeForcesChartView: View {
     let codeForcesViewModel: CodeForcesViewModel = Dependencies.instance.codeForcesViewModel
 
     @State private var showAnnotations: Bool = true
@@ -198,6 +198,6 @@ extension CodeForcesChart {
 }
 
 #Preview {
-    CodeForcesGraphView()
+    CodeForcesChartView()
         .frame(width: 500, height: 500)
 }
