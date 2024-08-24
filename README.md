@@ -20,8 +20,6 @@ Kontest would not be possible without the public knowledge of the community. To 
 -   https://www.swiftbysundell.com
 -   https://www.hackingwithswift.com
 -   https://sarunw.com
--   https://github.com/onmyway133/blog/issues
--   https://github.com/topics/swiftui
 
 ### Tech stacks
   
