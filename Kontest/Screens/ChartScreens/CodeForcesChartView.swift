@@ -179,7 +179,7 @@ struct CodeForcesChart: View {
             .foregroundStyle(Color(nsColor: NSColor.systemBlue))
         #endif
             .chartScrollableAxes(.horizontal)
-            .chartXVisibleDomain(length: 3600 * 24 * 30) // 30 days
+            .chartXVisibleDomain(length: 3600 * 24 * 30 * 2) // 30 * 2 days
             .padding(.horizontal)
             .chartXSelection(value: Bindable(codeForcesViewModel).rawSelectedDate)
             .animation(.default, value: showAnnotations)

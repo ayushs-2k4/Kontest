@@ -183,7 +183,7 @@ struct LeetCodeChart: View {
             .foregroundStyle(Color(nsColor: NSColor.systemYellow))
         #endif
             .chartScrollableAxes(.horizontal)
-            .chartXVisibleDomain(length: 3600 * 24 * 30) // 30 days
+            .chartXVisibleDomain(length: 3600 * 24 * 30 * 2) // 30 * 2 days
             .padding(.horizontal)
             .chartXSelection(value: Bindable(leetCodeGraphQLViewModel).rawSelectedDate)
 //        .chartScrollPosition(x: Bindable(model).chartXScrollPosition)
