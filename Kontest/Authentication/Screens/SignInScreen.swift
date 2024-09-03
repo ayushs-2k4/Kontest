@@ -5,12 +5,12 @@
 //  Created by Ayush Singhal on 1/15/24.
 //
 
-import SwiftUI
 import OSLog
+import SwiftUI
 
 struct SignInScreen: View {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "SignInScreen")
-    
+
     let authenticationEmailViewModel: AuthenticationEmailViewModel = .shared
 
     @State private var isPasswordFieldVisible: Bool = false
@@ -119,9 +119,12 @@ struct SignInScreen: View {
                 .tint(.accent)
                 .keyboardShortcut(.return, modifiers: [])
             }
-
             .padding(.horizontal)
         }
+        .animation(.linear(duration: 0.2), value: isPasswordFieldVisible)
+        .animation(.linear(duration: 0.2), value: authenticationEmailViewModel.error == nil)
+        .offset(y: isPasswordFieldVisible ? 43 : 0)
+        .offset(y: authenticationEmailViewModel.error != nil ? 20 : 0)
         .onAppear {
             self.focusedField = .email
         }
