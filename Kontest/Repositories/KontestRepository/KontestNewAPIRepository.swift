@@ -46,7 +46,7 @@ final class KontestNewAPIRepository: KontestFetcher {
             let cloudflareURLString = apiDocument.url
             
             let version = "v1"
-            let page = 0
+            let page = 1
             let perPage = 10000
             
             guard let cloudflareURL = URL(string: cloudflareURLString) else { throw URLError(.badURL) } // Handle invalid URL error
