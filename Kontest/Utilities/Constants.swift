@@ -11,7 +11,12 @@ enum Constants {
     static let minutesToBeReminderBefore = 10
     static let maximumDurationOfAKontestInMinutes = 12 * 60
     static let minimumDurationOfAKontestInMinutes = 0
-    static let userDefaultsGroupID = "group.com.ayushsinghal.kontest"
+//    #if os(macOS)
+//    static let userDefaultsGroupID = "R2Z9FDM5M6.com.ayushsinghal.kontest"
+//    #else
+//    static let userDefaultsGroupID = "group.com.ayushsinghal.kontest"
+//    #endif
+    static let userDefaultsGroupID = "R2Z9FDM5M6.com.ayushsinghal.kontest"
     static let codeforcesNotAvailableErrorResponseMessage = "Codeforces is temporarily unavailable"
 
     static let maximumDurationOfAKontestInMinutesKey = "maximumDurationOfAKontestInMinutesKey"

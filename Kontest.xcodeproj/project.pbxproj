@@ -250,6 +250,7 @@
 		07740EA42ABF171F00A93EAF /* CalendarPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPopoverView.swift; sourceTree = "<group>"; };
 		077685262B56A50C00A1449F /* AccountInformationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInformationScreen.swift; sourceTree = "<group>"; };
 		077685282B56A60200A1449F /* AccountInformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInformationViewModel.swift; sourceTree = "<group>"; };
+		077921B52C8B989F0021F70B /* Kontest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kontest.entitlements; sourceTree = "<group>"; };
 		077E6EAC2AB4B1D10003E897 /* ErrorWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorWrapper.swift; sourceTree = "<group>"; };
 		077E6EAE2AB4B2120003E897 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		077E6EB02AB4B3220003E897 /* ErrorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorState.swift; sourceTree = "<group>"; };
@@ -289,7 +290,7 @@
 		07D7666D2AC84094000A3DFD /* Panel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Panel.swift; sourceTree = "<group>"; };
 		07D9FFCC2AD9A5D000C03A3A /* HapticFeedbackUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackUtility.swift; sourceTree = "<group>"; };
 		07E92C8E2C5B68FE00E3D6D3 /* KontestNewAPIRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KontestNewAPIRepository.swift; sourceTree = "<group>"; };
-		07EA6F482AB6405A00CD932E /* Kontest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kontest.entitlements; sourceTree = "<group>"; };
+		07EA6F482AB6405A00CD932E /* KontestMacOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KontestMacOS.entitlements; sourceTree = "<group>"; };
 		07EA6F492AB6405F00CD932E /* Upcoming Kontests iOS WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Upcoming Kontests iOS WidgetExtension.entitlements"; sourceTree = "<group>"; };
 		07ECFB352AA58259008513C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		07ECFB382AA58259008513C6 /* ChangeUsernameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeUsernameViewModel.swift; sourceTree = "<group>"; };
@@ -596,9 +597,10 @@
 		07ECFB362AA58259008513C6 /* Kontest */ = {
 			isa = PBXGroup;
 			children = (
+				077921B52C8B989F0021F70B /* Kontest.entitlements */,
 				07BDE0902B546B3C0059A5FA /* Authentication */,
 				079A67122B54473100901C0D /* GoogleService-Info.plist */,
-				07EA6F482AB6405A00CD932E /* Kontest.entitlements */,
+				07EA6F482AB6405A00CD932E /* KontestMacOS.entitlements */,
 				0784292C2AB5EF520078D836 /* Intents */,
 				07710E842AB46220008DE1D6 /* Info.plist */,
 				07ECFB6E2AA58259008513C6 /* DTOs */,
@@ -1383,6 +1385,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Kontest/Kontest.entitlements;
+				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = Kontest/KontestMacOS.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1424,6 +1427,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Kontest/Kontest.entitlements;
+				"CODE_SIGN_ENTITLEMENTS[sdk=macosx*]" = Kontest/KontestMacOS.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
