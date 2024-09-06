@@ -16,8 +16,8 @@ struct Provider: TimelineProvider {
         dto: KontestDTO(
             name: "ProjectEuler+1",
             url: "https://hackerrank.com/contests/projecteuler",
-            start_time: "2023-08-15 18:29:00 UTC",
-            end_time: "2023-08-18 17:43:00 UTC",
+            startTime: "2023-08-15 18:29:00 UTC",
+            endTime: "2023-08-18 17:43:00 UTC",
             duration: "1020.0",
             site: "HackerRank",
             in_24_hours: "No",
@@ -258,7 +258,7 @@ struct Upcoming_Kontest_iOS_Widget: Widget {
 #Preview(as: .systemExtraLarge) {
     Upcoming_Kontest_iOS_Widget()
 } timeline: {
-    let kontestModel = KontestModel.from(dto: KontestDTO(name: "ProjectEuler+1vnajdlkslndadlaCBVkscan,k asKCANskc. a,xd", url: "https://hackerrank.com/contests/projecteuler", start_time: "2023-08-15 18:29:00 UTC", end_time: "2023-08-18 17:43:00 UTC", duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "BEFORE"))
+    let kontestModel = KontestModel.from(dto: KontestDTO(name: "ProjectEuler+1vnajdlkslndadlaCBVkscan,k asKCANskc. a,xd", url: "https://hackerrank.com/contests/projecteuler", startTime: "2023-08-15 18:29:00 UTC", endTime: "2023-08-18 17:43:00 UTC", duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "BEFORE"))
 
     SimpleEntry(
         date: .now,
