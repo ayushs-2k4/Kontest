@@ -13,8 +13,8 @@ import Foundation
 struct KontestDTO: Codable {
     let name: String
     let url: String
-    let start_time: String
-    let end_time: String
+    let startTime: String
+    let endTime: String
     let duration: String
     let site: String
     let in_24_hours: String
@@ -23,8 +23,8 @@ struct KontestDTO: Codable {
     enum CodingKeys: String, CodingKey {
         case name
         case url
-        case start_time
-        case end_time
+        case startTime
+        case endTime
         case duration
         case site
         case in_24_hours
@@ -36,8 +36,8 @@ struct KontestDTO: Codable {
         
         name = try container.decode(String.self, forKey: .name)
         url = try container.decode(String.self, forKey: .url)
-        start_time = try container.decode(String.self, forKey: .start_time)
-        end_time = try container.decode(String.self, forKey: .end_time)
+        startTime = try container.decode(String.self, forKey: .startTime)
+        endTime = try container.decode(String.self, forKey: .endTime)
         
         // Provide default values for missing properties
         duration = (try? container.decode(String.self, forKey: .duration)) ?? ""
@@ -46,11 +46,11 @@ struct KontestDTO: Codable {
         status = (try? container.decode(String.self, forKey: .status)) ?? ""
     }
     
-    init(name: String, url: String, start_time: String, end_time: String, duration: String, site: String, in_24_hours: String, status: String) {
+    init(name: String, url: String, startTime: String, endTime: String, duration: String, site: String, in_24_hours: String, status: String) {
         self.name = name
         self.url = url
-        self.start_time = start_time
-        self.end_time = end_time
+        self.startTime = startTime
+        self.endTime = endTime
         self.duration = duration
         self.site = site
         self.in_24_hours = in_24_hours

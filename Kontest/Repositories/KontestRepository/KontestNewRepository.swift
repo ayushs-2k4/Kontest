@@ -58,8 +58,8 @@ final class KontestNewRepository: KontestFetcher {
                     let konDTO = KontestDTO(
                         name: konName,
                         url: url ?? "",
-                        start_time: startTime ?? "",
-                        end_time: endTime ?? "",
+                        startTime: startTime ?? "",
+                        endTime: endTime ?? "",
                         duration: "",
                         site: location ?? "",
                         in_24_hours: "NO",
