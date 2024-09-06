@@ -54,6 +54,12 @@
 		07740EA52ABF171F00A93EAF /* CalendarPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07740EA42ABF171F00A93EAF /* CalendarPopoverView.swift */; };
 		077685272B56A50C00A1449F /* AccountInformationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077685262B56A50C00A1449F /* AccountInformationScreen.swift */; };
 		077685292B56A60200A1449F /* AccountInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077685282B56A60200A1449F /* AccountInformationViewModel.swift */; };
+		077921B62C8BA6E70021F70B /* MultipleRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076297312C5DFFF700E48937 /* MultipleRepositories.swift */; };
+		077921B72C8BA6E70021F70B /* MultipleRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076297312C5DFFF700E48937 /* MultipleRepositories.swift */; };
+		077921B82C8BA70B0021F70B /* KontestNewAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E92C8E2C5B68FE00E3D6D3 /* KontestNewAPIRepository.swift */; };
+		077921B92C8BA70B0021F70B /* KontestNewAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E92C8E2C5B68FE00E3D6D3 /* KontestNewAPIRepository.swift */; };
+		077921BB2C8BA7430021F70B /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 077921BA2C8BA7430021F70B /* FirebaseFirestore */; };
+		077921BD2C8BA7570021F70B /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 077921BC2C8BA7570021F70B /* FirebaseFirestore */; };
 		0779F4742ABD5B63004E50F6 /* UpcomingKontestsWidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */; };
 		0779F4752ABD5B64004E50F6 /* UpcomingKontestsWidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */; };
 		0779F4762ABD5B71004E50F6 /* WidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE8F2ABAE38900FEA3D7 /* WidgetCache.swift */; };
@@ -383,6 +389,7 @@
 				0764FF7E2ABC717E0060AC1F /* SwiftUI.framework in Frameworks */,
 				07AA75322B501AEB00DCD75B /* SwiftSoup in Frameworks */,
 				0764FFA02ABC72870060AC1F /* Apollo in Frameworks */,
+				077921BD2C8BA7570021F70B /* FirebaseFirestore in Frameworks */,
 				0764FF7D2ABC717E0060AC1F /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,6 +401,7 @@
 				079F68082ABC80C2001B0EFE /* SwiftUI.framework in Frameworks */,
 				07AA75342B501AF200DCD75B /* SwiftSoup in Frameworks */,
 				079F68292ABC819A001B0EFE /* Apollo in Frameworks */,
+				077921BB2C8BA7430021F70B /* FirebaseFirestore in Frameworks */,
 				079F68072ABC80C2001B0EFE /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -870,6 +878,7 @@
 			packageProductDependencies = (
 				0764FF9F2ABC72870060AC1F /* Apollo */,
 				07AA75312B501AEB00DCD75B /* SwiftSoup */,
+				077921BC2C8BA7570021F70B /* FirebaseFirestore */,
 			);
 			productName = "Upcoming Kontest iOS WidgetExtension";
 			productReference = 0764FF7C2ABC717E0060AC1F /* Upcoming Kontest iOS WidgetExtension.appex */;
@@ -891,6 +900,7 @@
 			packageProductDependencies = (
 				079F68282ABC819A001B0EFE /* Apollo */,
 				07AA75332B501AF200DCD75B /* SwiftSoup */,
+				077921BA2C8BA7430021F70B /* FirebaseFirestore */,
 			);
 			productName = "Upcoming Kontest macOS WidgetExtension";
 			productReference = 079F68062ABC80C2001B0EFE /* Upcoming Kontest macOS WidgetExtension.appex */;
@@ -1119,7 +1129,9 @@
 				0764FF962ABC72400060AC1F /* GetKontests.swift in Sources */,
 				0764FF8F2ABC72070060AC1F /* KontestDTO.swift in Sources */,
 				07AA752F2B501A6400DCD75B /* KontestNewRepository.swift in Sources */,
+				077921B62C8BA6E70021F70B /* MultipleRepositories.swift in Sources */,
 				0764FF9C2ABC725B0060AC1F /* KontestFetcher.swift in Sources */,
+				077921B82C8BA70B0021F70B /* KontestNewAPIRepository.swift in Sources */,
 				0764FF982ABC724A0060AC1F /* FilterWebsitesViewModelProtocol.swift in Sources */,
 				0764FF932ABC72230060AC1F /* AppError.swift in Sources */,
 				0764FF912ABC72180060AC1F /* CalendarUtility.swift in Sources */,
@@ -1147,7 +1159,9 @@
 				079F68242ABC8172001B0EFE /* Constants.swift in Sources */,
 				079F68252ABC817A001B0EFE /* KontestDTO.swift in Sources */,
 				079F681C2ABC8140001B0EFE /* KontestModel.swift in Sources */,
+				077921B72C8BA6E70021F70B /* MultipleRepositories.swift in Sources */,
 				07AA75302B501A6400DCD75B /* KontestNewRepository.swift in Sources */,
+				077921B92C8BA70B0021F70B /* KontestNewAPIRepository.swift in Sources */,
 				079F68192ABC8135001B0EFE /* CalendarUtility.swift in Sources */,
 				079F682B2ABC81AD001B0EFE /* DownloadData.swift in Sources */,
 				079F682A2ABC81A5001B0EFE /* KontestFetcher.swift in Sources */,
@@ -1673,6 +1687,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 07ECFBBD2AA582D2008513C6 /* XCRemoteSwiftPackageReference "apollo-ios" */;
 			productName = Apollo;
+		};
+		077921BA2C8BA7430021F70B /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		077921BC2C8BA7570021F70B /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 		079A67152B5447F600901C0D /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
