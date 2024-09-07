@@ -12,7 +12,7 @@ class GetKontests {
     private static let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "GetKontests")
 
     static func getKontests() async -> (fetchedKontests: [KontestModel], error: (any Error)?) {
-        let repository = KontestNewRepository()
+        let repository = MultipleRepositories(repositories: [KontestNewAPIRepository(), KontestNewRepository()])
 
         do {
             let fetchedKontests = try await repository.getAllKontests()

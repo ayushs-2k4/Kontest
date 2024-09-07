@@ -16,8 +16,8 @@ struct Provider: TimelineProvider {
         dto: KontestDTO(
             name: "ProjectEuler+1",
             url: "https://hackerrank.com/contests/projecteuler",
-            start_time: "2023-08-15 18:29:00 UTC",
-            end_time: "2023-08-18 17:43:00 UTC",
+            startTime: "2023-08-15 18:29:00 UTC",
+            endTime: "2023-08-18 17:43:00 UTC",
             duration: "1020.0",
             site: "HackerRank",
             in_24_hours: "No",

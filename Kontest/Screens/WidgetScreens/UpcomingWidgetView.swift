@@ -32,6 +32,23 @@ struct UpcomingWidgetView: View {
         } else {
             if !allKontests.isEmpty && filteredKontests.isEmpty {
                 Text("Change filters to see Kontests")
+                //                Text("allKontests: \(allKontests)")
+                //                Text("filteredKontests: \(filteredKontests)")
+
+//                Text(Constants.userDefaultsGroupID)
+//                let ud = UserDefaults(suiteName: Constants.userDefaultsGroupID)
+//
+//                if let ud {
+//                    Text("ud is not null")
+//                    let key = "This is my key @123"
+//                    Text("key: \(key)")
+//                        .onAppear {
+//                            ud.set(23, forKey: key)
+//                        }
+//                    Text("value: \(ud.integer(forKey: key))")
+//                } else {
+//                    Text("ud is null")
+//                }
             } else if allKontests.isEmpty {
                 Text("No Kontests Scheduled")
             } else {
@@ -129,7 +146,7 @@ struct createSingleKontestView: View {
                                             .fontDesign(.default).monospacedDigit()
                                             .multilineTextAlignment(.trailing)
                                             .contentTransition(.numericText(countsDown: true))
-                                        
+
                                     } else if toShowStartingIn {
                                         let seconds = startDate.timeIntervalSince(Date())
                                         let futureDate = Calendar.current.date(byAdding: .second, value: Int(seconds), to: Date())!
@@ -168,7 +185,7 @@ struct createSingleKontestView: View {
                         }
                     }
                 }
-                
+
                 .minimumScaleFactor(0.1)
 
                 if toShowCalendarButton {
@@ -180,8 +197,6 @@ struct createSingleKontestView: View {
                 }
             }
             .lineLimit(1)
-            
-            
         }
     }
 

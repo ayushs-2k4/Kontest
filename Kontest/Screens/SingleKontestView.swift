@@ -257,23 +257,23 @@ struct SingleKontestView: View {
 
     return List {
         TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
-            SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "ProjectEuler+", url: "https://hackerrank.com/contests/projecteuler", start_time: "2014-07-07T15:38:00.000Z", end_time: "2024-07-30T18:30:00.000Z", duration: "317616720.0", site: "HackerRank", in_24_hours: "No", status: "BEFORE")), timelineViewDefaultContext: timelineViewDefaultContext)
+            SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "ProjectEuler+", url: "https://hackerrank.com/contests/projecteuler", startTime: "2014-07-07T15:38:00.000Z", endTime: "2024-07-30T18:30:00.000Z", duration: "317616720.0", site: "HackerRank", in_24_hours: "No", status: "BEFORE")), timelineViewDefaultContext: timelineViewDefaultContext)
         }
 
         TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
-            SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "1v1 Games by CodeChef", url: "https://www.codechef.com/GAMES", start_time: "2023-8-27 12:30:00 UTC", end_time: "2032-11-10 06:30:00 UTC", duration: "315619200.0", site: "CodeChef", in_24_hours: "No", status: "CODING")), timelineViewDefaultContext: timelineViewDefaultContext)
+            SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "1v1 Games by CodeChef", url: "https://www.codechef.com/GAMES", startTime: "2023-8-27 12:30:00 UTC", endTime: "2032-11-10 06:30:00 UTC", duration: "315619200.0", site: "CodeChef", in_24_hours: "No", status: "CODING")), timelineViewDefaultContext: timelineViewDefaultContext)
         }
 
         TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
-            SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "Weekly Contest 358", url: "https://leetcode.com/contest/weekly-contest-358", start_time: "2023-09-03T02:30:00.000Z", end_time: "2023-10-25T04:00:00.000Z", duration: "5400", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE")), timelineViewDefaultContext: timelineViewDefaultContext)
+            SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "Weekly Contest 358", url: "https://leetcode.com/contest/weekly-contest-358", startTime: "2023-09-03T02:30:00.000Z", endTime: "2023-10-25T04:00:00.000Z", duration: "5400", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE")), timelineViewDefaultContext: timelineViewDefaultContext)
         }
 
         TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
-            SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "Test Contest", url: "https://leetcode.com/contest/weekly-contest-358", start_time: "2023-08-13T02:30:00.000Z", end_time: "2023-08-13T05:00:00.000Z", duration: "1800", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE")), timelineViewDefaultContext: timelineViewDefaultContext)
+            SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "Test Contest", url: "https://leetcode.com/contest/weekly-contest-358", startTime: "2023-08-13T02:30:00.000Z", endTime: "2023-08-13T05:00:00.000Z", duration: "1800", site: "LeetCode", in_24_hours: "Yes", status: "BEFORE")), timelineViewDefaultContext: timelineViewDefaultContext)
         }
 
         TimelineView(.periodic(from: .now, by: 1)) { timelineViewDefaultContext in
-            SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "Starters 100 (Date to be decided)", url: "https://www.codechef.com/START100", start_time: "2023-08-30 14:30:00 UTC", end_time: "2023-08-30 16:30:00 UTC", duration: "7200", site: "CodeChef", in_24_hours: "No", status: "BEFORE")), timelineViewDefaultContext: timelineViewDefaultContext)
+            SingleKontestView(kontest: KontestModel.from(dto: KontestDTO(name: "Starters 100 (Date to be decided)", url: "https://www.codechef.com/START100", startTime: "2023-08-30 14:30:00 UTC", endTime: "2023-08-30 16:30:00 UTC", duration: "7200", site: "CodeChef", in_24_hours: "No", status: "BEFORE")), timelineViewDefaultContext: timelineViewDefaultContext)
         }
     }
     .environment(allKontestsViewModel)

@@ -217,8 +217,8 @@ extension KontestModel {
     static func from(dto: KontestDTO) -> KontestModel {
         let id = generateUniqueID(dto: dto)
 
-        let kontestStartDate = CalendarUtility.getDate(date: dto.start_time)
-        let kontestEndDate = CalendarUtility.getDate(date: dto.end_time)
+        let kontestStartDate = CalendarUtility.getDate(date: dto.startTime)
+        let kontestEndDate = CalendarUtility.getDate(date: dto.endTime)
 
         var status: KontestStatus {
             return getKontestStatus(kontestStartDate: kontestStartDate ?? Date(), kontestEndDate: kontestEndDate ?? Date())
@@ -230,8 +230,8 @@ extension KontestModel {
             id: id,
             name: dto.name,
             url: dto.url,
-            start_time: dto.start_time,
-            end_time: dto.end_time,
+            start_time: dto.startTime,
+            end_time: dto.endTime,
             duration: "\(duration)",
             site: dto.site,
             in_24_hours: dto.in_24_hours,
@@ -241,7 +241,7 @@ extension KontestModel {
     }
 
     private static func generateUniqueID(dto: KontestDTO) -> String {
-        let combinedString = "\(dto.name)\(dto.url)\(dto.start_time)\(dto.end_time)\(dto.duration)\(dto.site)\(dto.in_24_hours)\(dto.status)"
+        let combinedString = "\(dto.name)\(dto.url)\(dto.startTime)\(dto.endTime)\(dto.duration)\(dto.site)\(dto.in_24_hours)\(dto.status)"
 
         if let data = combinedString.data(using: .utf8) {
             let hash = SHA256.hash(data: data)
@@ -435,6 +435,6 @@ extension KontestModel {
     }
 
     static var example: KontestModel {
-        KontestModel.from(dto: KontestDTO(name: "ProjectEuler+1", url: "https://hackerrank.com/contests/projecteuler", start_time: "2023-08-15 18:29:00 UTC", end_time: "2023-08-18 17:43:00 UTC", duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "BEFORE"))
+        KontestModel.from(dto: KontestDTO(name: "ProjectEuler+1", url: "https://hackerrank.com/contests/projecteuler", startTime: "2023-08-15 18:29:00 UTC", endTime: "2023-08-18 17:43:00 UTC", duration: "1020.0", site: "HackerRank", in_24_hours: "No", status: "BEFORE"))
     }
 }
