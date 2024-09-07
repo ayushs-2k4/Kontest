@@ -5,8 +5,8 @@
 //  Created by Ayush Singhal on 21/09/23.
 //
 
-import WidgetKit
 import SwiftUI
+import WidgetKit
 
 @main
 struct Upcoming_Kontest_macOS_WidgetBundle: WidgetBundle {

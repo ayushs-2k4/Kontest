@@ -180,6 +180,9 @@
 		07ECFBC42AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFBC32AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift */; };
 		07ECFBC62AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFBC52AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift */; };
 		07ECFBC82AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFBC72AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift */; };
+		07EF4DED2C8C0D5300FEB239 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 07EF4DEC2C8C0D5300FEB239 /* FirebaseAuth */; };
+		07EF4DEF2C8C0D5800FEB239 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 07EF4DEE2C8C0D5800FEB239 /* FirebaseAuth */; };
+		07EF4DF12C8C0DD500FEB239 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07EF4DF02C8C0DD500FEB239 /* GoogleService-Info.plist */; };
 		07FD85A92AB78D5600D26C4C /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FD85A82AB78D5600D26C4C /* Dependencies.swift */; };
 		07FD85AB2AB804FA00D26C4C /* NotificationsViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FD85AA2AB804FA00D26C4C /* NotificationsViewModelProtocol.swift */; };
 		07FD85AD2AB809BC00D26C4C /* FilterWebsitesViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FD85AC2AB809BC00D26C4C /* FilterWebsitesViewModelProtocol.swift */; };
@@ -354,6 +357,7 @@
 		07ECFBC32AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeUserProfileGraphQLAPIModel.swift; sourceTree = "<group>"; };
 		07ECFBC52AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeUserRankingsGraphQLAPIModel.swift; sourceTree = "<group>"; };
 		07ECFBC72AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeUserRankingsGraphQLAPIDTO.swift; sourceTree = "<group>"; };
+		07EF4DF02C8C0DD500FEB239 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		07FD85A82AB78D5600D26C4C /* Dependencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
 		07FD85AA2AB804FA00D26C4C /* NotificationsViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModelProtocol.swift; sourceTree = "<group>"; };
 		07FD85AC2AB809BC00D26C4C /* FilterWebsitesViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -387,6 +391,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0764FF7E2ABC717E0060AC1F /* SwiftUI.framework in Frameworks */,
+				07EF4DED2C8C0D5300FEB239 /* FirebaseAuth in Frameworks */,
 				07AA75322B501AEB00DCD75B /* SwiftSoup in Frameworks */,
 				0764FFA02ABC72870060AC1F /* Apollo in Frameworks */,
 				077921BD2C8BA7570021F70B /* FirebaseFirestore in Frameworks */,
@@ -399,6 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				079F68082ABC80C2001B0EFE /* SwiftUI.framework in Frameworks */,
+				07EF4DEF2C8C0D5800FEB239 /* FirebaseAuth in Frameworks */,
 				07AA75342B501AF200DCD75B /* SwiftSoup in Frameworks */,
 				079F68292ABC819A001B0EFE /* Apollo in Frameworks */,
 				077921BB2C8BA7430021F70B /* FirebaseFirestore in Frameworks */,
@@ -506,6 +512,7 @@
 				0764FF822ABC717E0060AC1F /* Upcoming_Kontest_iOS_Widget.swift */,
 				0764FF842ABC717F0060AC1F /* Assets.xcassets */,
 				0764FF862ABC717F0060AC1F /* Info.plist */,
+				07EF4DF02C8C0DD500FEB239 /* GoogleService-Info.plist */,
 			);
 			path = "Upcoming Kontest iOS Widget";
 			sourceTree = "<group>";
@@ -879,6 +886,7 @@
 				0764FF9F2ABC72870060AC1F /* Apollo */,
 				07AA75312B501AEB00DCD75B /* SwiftSoup */,
 				077921BC2C8BA7570021F70B /* FirebaseFirestore */,
+				07EF4DEC2C8C0D5300FEB239 /* FirebaseAuth */,
 			);
 			productName = "Upcoming Kontest iOS WidgetExtension";
 			productReference = 0764FF7C2ABC717E0060AC1F /* Upcoming Kontest iOS WidgetExtension.appex */;
@@ -901,6 +909,7 @@
 				079F68282ABC819A001B0EFE /* Apollo */,
 				07AA75332B501AF200DCD75B /* SwiftSoup */,
 				077921BA2C8BA7430021F70B /* FirebaseFirestore */,
+				07EF4DEE2C8C0D5800FEB239 /* FirebaseAuth */,
 			);
 			productName = "Upcoming Kontest macOS WidgetExtension";
 			productReference = 079F68062ABC80C2001B0EFE /* Upcoming Kontest macOS WidgetExtension.appex */;
@@ -986,6 +995,7 @@
 			files = (
 				0764FFA22ABC72BF0060AC1F /* Assets.xcassets in Resources */,
 				0764FF852ABC717F0060AC1F /* Assets.xcassets in Resources */,
+				07EF4DF12C8C0DD500FEB239 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1751,6 +1761,16 @@
 		07ECFBC12AA582E3008513C6 /* LeetCodeSchema */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = LeetCodeSchema;
+		};
+		07EF4DEC2C8C0D5300FEB239 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		07EF4DEE2C8C0D5800FEB239 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
