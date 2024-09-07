@@ -8,7 +8,6 @@
 import OSLog
 import SwiftUI
 import WidgetKit
-import FirebaseCore
 
 struct Provider: TimelineProvider {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "Provider")
@@ -237,10 +236,6 @@ struct Upcoming_Kontests_iOS_WidgetEntryView: View {
 }
 
 struct Upcoming_Kontest_iOS_Widget: Widget {
-    init() {
-        FirebaseApp.configure()
-    }
-    
     let kind: String = "Upcoming_Kontests_iOS_Widget"
 
     var body: some WidgetConfiguration {

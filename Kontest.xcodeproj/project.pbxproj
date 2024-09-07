@@ -56,10 +56,6 @@
 		077685292B56A60200A1449F /* AccountInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077685282B56A60200A1449F /* AccountInformationViewModel.swift */; };
 		077921B62C8BA6E70021F70B /* MultipleRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076297312C5DFFF700E48937 /* MultipleRepositories.swift */; };
 		077921B72C8BA6E70021F70B /* MultipleRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076297312C5DFFF700E48937 /* MultipleRepositories.swift */; };
-		077921B82C8BA70B0021F70B /* KontestNewAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E92C8E2C5B68FE00E3D6D3 /* KontestNewAPIRepository.swift */; };
-		077921B92C8BA70B0021F70B /* KontestNewAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E92C8E2C5B68FE00E3D6D3 /* KontestNewAPIRepository.swift */; };
-		077921BB2C8BA7430021F70B /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 077921BA2C8BA7430021F70B /* FirebaseFirestore */; };
-		077921BD2C8BA7570021F70B /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 077921BC2C8BA7570021F70B /* FirebaseFirestore */; };
 		0779F4742ABD5B63004E50F6 /* UpcomingKontestsWidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */; };
 		0779F4752ABD5B64004E50F6 /* UpcomingKontestsWidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */; };
 		0779F4762ABD5B71004E50F6 /* WidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE8F2ABAE38900FEA3D7 /* WidgetCache.swift */; };
@@ -121,7 +117,7 @@
 		07D7666C2AC8407B000A3DFD /* DetailColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7666B2AC8407B000A3DFD /* DetailColumn.swift */; };
 		07D7666E2AC84094000A3DFD /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7666D2AC84094000A3DFD /* Panel.swift */; };
 		07D9FFCD2AD9A5D000C03A3A /* HapticFeedbackUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9FFCC2AD9A5D000C03A3A /* HapticFeedbackUtility.swift */; };
-		07E92C902C5B68FE00E3D6D3 /* KontestNewAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E92C8E2C5B68FE00E3D6D3 /* KontestNewAPIRepository.swift */; };
+		07E92C902C5B68FE00E3D6D3 /* KontestNewAPIRepository_UsingFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E92C8E2C5B68FE00E3D6D3 /* KontestNewAPIRepository_UsingFirebase.swift */; };
 		07ECFB802AA58259008513C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 07ECFB352AA58259008513C6 /* README.md */; };
 		07ECFB812AA58259008513C6 /* ChangeUsernameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB382AA58259008513C6 /* ChangeUsernameViewModel.swift */; };
 		07ECFB822AA58259008513C6 /* LeetCodeGraphQLViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB392AA58259008513C6 /* LeetCodeGraphQLViewModel.swift */; };
@@ -180,9 +176,9 @@
 		07ECFBC42AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFBC32AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift */; };
 		07ECFBC62AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFBC52AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift */; };
 		07ECFBC82AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFBC72AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift */; };
-		07EF4DED2C8C0D5300FEB239 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 07EF4DEC2C8C0D5300FEB239 /* FirebaseAuth */; };
-		07EF4DEF2C8C0D5800FEB239 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 07EF4DEE2C8C0D5800FEB239 /* FirebaseAuth */; };
-		07EF4DF12C8C0DD500FEB239 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07EF4DF02C8C0DD500FEB239 /* GoogleService-Info.plist */; };
+		07EF4DF32C8C16CE00FEB239 /* KontestNewAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EF4DF22C8C16CE00FEB239 /* KontestNewAPIRepository.swift */; };
+		07EF4DF42C8C16CE00FEB239 /* KontestNewAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EF4DF22C8C16CE00FEB239 /* KontestNewAPIRepository.swift */; };
+		07EF4DF52C8C16CE00FEB239 /* KontestNewAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EF4DF22C8C16CE00FEB239 /* KontestNewAPIRepository.swift */; };
 		07FD85A92AB78D5600D26C4C /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FD85A82AB78D5600D26C4C /* Dependencies.swift */; };
 		07FD85AB2AB804FA00D26C4C /* NotificationsViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FD85AA2AB804FA00D26C4C /* NotificationsViewModelProtocol.swift */; };
 		07FD85AD2AB809BC00D26C4C /* FilterWebsitesViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FD85AC2AB809BC00D26C4C /* FilterWebsitesViewModelProtocol.swift */; };
@@ -298,7 +294,7 @@
 		07D7666B2AC8407B000A3DFD /* DetailColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailColumn.swift; sourceTree = "<group>"; };
 		07D7666D2AC84094000A3DFD /* Panel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Panel.swift; sourceTree = "<group>"; };
 		07D9FFCC2AD9A5D000C03A3A /* HapticFeedbackUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackUtility.swift; sourceTree = "<group>"; };
-		07E92C8E2C5B68FE00E3D6D3 /* KontestNewAPIRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KontestNewAPIRepository.swift; sourceTree = "<group>"; };
+		07E92C8E2C5B68FE00E3D6D3 /* KontestNewAPIRepository_UsingFirebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KontestNewAPIRepository_UsingFirebase.swift; sourceTree = "<group>"; };
 		07EA6F482AB6405A00CD932E /* KontestMacOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KontestMacOS.entitlements; sourceTree = "<group>"; };
 		07EA6F492AB6405F00CD932E /* Upcoming Kontests iOS WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Upcoming Kontests iOS WidgetExtension.entitlements"; sourceTree = "<group>"; };
 		07ECFB352AA58259008513C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -357,7 +353,7 @@
 		07ECFBC32AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeUserProfileGraphQLAPIModel.swift; sourceTree = "<group>"; };
 		07ECFBC52AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeUserRankingsGraphQLAPIModel.swift; sourceTree = "<group>"; };
 		07ECFBC72AA5D93B008513C6 /* LeetCodeUserRankingsGraphQLAPIDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeetCodeUserRankingsGraphQLAPIDTO.swift; sourceTree = "<group>"; };
-		07EF4DF02C8C0DD500FEB239 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		07EF4DF22C8C16CE00FEB239 /* KontestNewAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestNewAPIRepository.swift; sourceTree = "<group>"; };
 		07FD85A82AB78D5600D26C4C /* Dependencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
 		07FD85AA2AB804FA00D26C4C /* NotificationsViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModelProtocol.swift; sourceTree = "<group>"; };
 		07FD85AC2AB809BC00D26C4C /* FilterWebsitesViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -391,10 +387,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0764FF7E2ABC717E0060AC1F /* SwiftUI.framework in Frameworks */,
-				07EF4DED2C8C0D5300FEB239 /* FirebaseAuth in Frameworks */,
 				07AA75322B501AEB00DCD75B /* SwiftSoup in Frameworks */,
 				0764FFA02ABC72870060AC1F /* Apollo in Frameworks */,
-				077921BD2C8BA7570021F70B /* FirebaseFirestore in Frameworks */,
 				0764FF7D2ABC717E0060AC1F /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -404,10 +398,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				079F68082ABC80C2001B0EFE /* SwiftUI.framework in Frameworks */,
-				07EF4DEF2C8C0D5800FEB239 /* FirebaseAuth in Frameworks */,
 				07AA75342B501AF200DCD75B /* SwiftSoup in Frameworks */,
 				079F68292ABC819A001B0EFE /* Apollo in Frameworks */,
-				077921BB2C8BA7430021F70B /* FirebaseFirestore in Frameworks */,
 				079F68072ABC80C2001B0EFE /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -512,7 +504,6 @@
 				0764FF822ABC717E0060AC1F /* Upcoming_Kontest_iOS_Widget.swift */,
 				0764FF842ABC717F0060AC1F /* Assets.xcassets */,
 				0764FF862ABC717F0060AC1F /* Info.plist */,
-				07EF4DF02C8C0DD500FEB239 /* GoogleService-Info.plist */,
 			);
 			path = "Upcoming Kontest iOS Widget";
 			sourceTree = "<group>";
@@ -677,8 +668,9 @@
 			children = (
 				07ECFB452AA58259008513C6 /* AllKontestsFakeRepository.swift */,
 				07AA752D2B4FCF7A00DCD75B /* KontestNewRepository.swift */,
-				07E92C8E2C5B68FE00E3D6D3 /* KontestNewAPIRepository.swift */,
+				07E92C8E2C5B68FE00E3D6D3 /* KontestNewAPIRepository_UsingFirebase.swift */,
 				076297312C5DFFF700E48937 /* MultipleRepositories.swift */,
+				07EF4DF22C8C16CE00FEB239 /* KontestNewAPIRepository.swift */,
 			);
 			path = KontestRepository;
 			sourceTree = "<group>";
@@ -885,8 +877,6 @@
 			packageProductDependencies = (
 				0764FF9F2ABC72870060AC1F /* Apollo */,
 				07AA75312B501AEB00DCD75B /* SwiftSoup */,
-				077921BC2C8BA7570021F70B /* FirebaseFirestore */,
-				07EF4DEC2C8C0D5300FEB239 /* FirebaseAuth */,
 			);
 			productName = "Upcoming Kontest iOS WidgetExtension";
 			productReference = 0764FF7C2ABC717E0060AC1F /* Upcoming Kontest iOS WidgetExtension.appex */;
@@ -908,8 +898,6 @@
 			packageProductDependencies = (
 				079F68282ABC819A001B0EFE /* Apollo */,
 				07AA75332B501AF200DCD75B /* SwiftSoup */,
-				077921BA2C8BA7430021F70B /* FirebaseFirestore */,
-				07EF4DEE2C8C0D5800FEB239 /* FirebaseAuth */,
 			);
 			productName = "Upcoming Kontest macOS WidgetExtension";
 			productReference = 079F68062ABC80C2001B0EFE /* Upcoming Kontest macOS WidgetExtension.appex */;
@@ -995,7 +983,6 @@
 			files = (
 				0764FFA22ABC72BF0060AC1F /* Assets.xcassets in Resources */,
 				0764FF852ABC717F0060AC1F /* Assets.xcassets in Resources */,
-				07EF4DF12C8C0DD500FEB239 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1092,7 +1079,7 @@
 				079CF54E2B52644C00BE8E13 /* CodeChefScrapingAPIRepository.swift in Sources */,
 				079CF5502B527ECD00BE8E13 /* CodeChefScrapingContestDTO.swift in Sources */,
 				07C993752B8476F7008411D7 /* AutomaticNotificationsViewModel.swift in Sources */,
-				07E92C902C5B68FE00E3D6D3 /* KontestNewAPIRepository.swift in Sources */,
+				07E92C902C5B68FE00E3D6D3 /* KontestNewAPIRepository_UsingFirebase.swift in Sources */,
 				07A31F002AAC818D00EBC296 /* FilterWebsiteKey.swift in Sources */,
 				07ECFBC42AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift in Sources */,
 				07ECFBA22AA58259008513C6 /* SingleKontestView.swift in Sources */,
@@ -1108,6 +1095,7 @@
 				07ECFB982AA58259008513C6 /* SettingsScreen.swift in Sources */,
 				07740EA52ABF171F00A93EAF /* CalendarPopoverView.swift in Sources */,
 				0720B0172B5680F0006721EE /* CollegesRepository.swift in Sources */,
+				07EF4DF52C8C16CE00FEB239 /* KontestNewAPIRepository.swift in Sources */,
 				079A671F2B544CD000901C0D /* SignUpScreen.swift in Sources */,
 				07D9FFCD2AD9A5D000C03A3A /* HapticFeedbackUtility.swift in Sources */,
 				076297322C5DFFF700E48937 /* MultipleRepositories.swift in Sources */,
@@ -1141,13 +1129,13 @@
 				07AA752F2B501A6400DCD75B /* KontestNewRepository.swift in Sources */,
 				077921B62C8BA6E70021F70B /* MultipleRepositories.swift in Sources */,
 				0764FF9C2ABC725B0060AC1F /* KontestFetcher.swift in Sources */,
-				077921B82C8BA70B0021F70B /* KontestNewAPIRepository.swift in Sources */,
 				0764FF982ABC724A0060AC1F /* FilterWebsitesViewModelProtocol.swift in Sources */,
 				0764FF932ABC72230060AC1F /* AppError.swift in Sources */,
 				0764FF912ABC72180060AC1F /* CalendarUtility.swift in Sources */,
 				0764FF9B2ABC72590060AC1F /* DownloadData.swift in Sources */,
 				0764FF812ABC717E0060AC1F /* Upcoming_Kontest_iOS_WidgetBundle.swift in Sources */,
 				0779F4762ABD5B71004E50F6 /* WidgetCache.swift in Sources */,
+				07EF4DF32C8C16CE00FEB239 /* KontestNewAPIRepository.swift in Sources */,
 				0779F4742ABD5B63004E50F6 /* UpcomingKontestsWidgetCache.swift in Sources */,
 				0764FF952ABC72360060AC1F /* NetworkMonitor.swift in Sources */,
 				0764FF922ABC721E0060AC1F /* KontestStatus.swift in Sources */,
@@ -1171,13 +1159,13 @@
 				079F681C2ABC8140001B0EFE /* KontestModel.swift in Sources */,
 				077921B72C8BA6E70021F70B /* MultipleRepositories.swift in Sources */,
 				07AA75302B501A6400DCD75B /* KontestNewRepository.swift in Sources */,
-				077921B92C8BA70B0021F70B /* KontestNewAPIRepository.swift in Sources */,
 				079F68192ABC8135001B0EFE /* CalendarUtility.swift in Sources */,
 				079F682B2ABC81AD001B0EFE /* DownloadData.swift in Sources */,
 				079F682A2ABC81A5001B0EFE /* KontestFetcher.swift in Sources */,
 				079F680B2ABC80C2001B0EFE /* Upcoming_Kontest_macOS_WidgetBundle.swift in Sources */,
 				079F68272ABC818E001B0EFE /* AddToCalendarIntent.swift in Sources */,
 				079F681E2ABC8150001B0EFE /* AppError.swift in Sources */,
+				07EF4DF42C8C16CE00FEB239 /* KontestNewAPIRepository.swift in Sources */,
 				0779F4772ABD5B73004E50F6 /* WidgetCache.swift in Sources */,
 				0779F4752ABD5B64004E50F6 /* UpcomingKontestsWidgetCache.swift in Sources */,
 				079F68212ABC8161001B0EFE /* FilterWebsiteKey.swift in Sources */,
@@ -1698,16 +1686,6 @@
 			package = 07ECFBBD2AA582D2008513C6 /* XCRemoteSwiftPackageReference "apollo-ios" */;
 			productName = Apollo;
 		};
-		077921BA2C8BA7430021F70B /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
-		077921BC2C8BA7570021F70B /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
 		079A67152B5447F600901C0D /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -1761,16 +1739,6 @@
 		07ECFBC12AA582E3008513C6 /* LeetCodeSchema */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = LeetCodeSchema;
-		};
-		07EF4DEC2C8C0D5300FEB239 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
-		};
-		07EF4DEE2C8C0D5800FEB239 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
