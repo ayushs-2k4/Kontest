@@ -22,15 +22,18 @@
 		073269EF2AAC4B0C0028476D /* ChangeUsernameScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */; };
 		07367C482ACA097000A558ED /* DeviceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07367C472ACA097000A558ED /* DeviceType.swift */; };
 		073850BF2BE20C7F00EF24D7 /* FilterWebsitesViewCompact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073850BE2BE20C7F00EF24D7 /* FilterWebsitesViewCompact.swift */; };
+		073E75822C916ECB00E5B934 /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073E75812C916ECB00E5B934 /* Fetcher.swift */; };
+		073E75842C916F3300E5B934 /* MultipleRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073E75832C916F3300E5B934 /* MultipleRepositories.swift */; };
+		073E75852C9171E400E5B934 /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073E75812C916ECB00E5B934 /* Fetcher.swift */; };
+		073E75862C9171E400E5B934 /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073E75812C916ECB00E5B934 /* Fetcher.swift */; };
+		073E75882C91766200E5B934 /* MultipleRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073E75832C916F3300E5B934 /* MultipleRepositories.swift */; };
+		073E75892C91766200E5B934 /* MultipleRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073E75832C916F3300E5B934 /* MultipleRepositories.swift */; };
 		0742254B2AC1444500EEB578 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB682AA58259008513C6 /* LocalNotificationManager.swift */; };
 		0742254C2AC1444600EEB578 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB682AA58259008513C6 /* LocalNotificationManager.swift */; };
 		074DD4522AA61570005C16A5 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074DD4512AA61570005C16A5 /* AppError.swift */; };
 		07567EA52AB645E9007EFEE1 /* AddToCalendarIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0784292D2AB5EF660078D836 /* AddToCalendarIntent.swift */; };
-		075ACA2A2C91404500AB222D /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075ACA292C91404500AB222D /* Fetcher.swift */; };
-		075ACA2B2C9140AB00AB222D /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075ACA292C91404500AB222D /* Fetcher.swift */; };
-		075ACA2C2C9140AB00AB222D /* Fetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075ACA292C91404500AB222D /* Fetcher.swift */; };
 		076134CF2AA86AC300946B02 /* KontestDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076134CE2AA86AC300946B02 /* KontestDetailViewModel.swift */; };
-		076297322C5DFFF700E48937 /* MultipleRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076297312C5DFFF700E48937 /* MultipleRepositories.swift */; };
+		076297322C5DFFF700E48937 /* MultipleKontestRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076297312C5DFFF700E48937 /* MultipleKontestRepositories.swift */; };
 		0764FF7D2ABC717E0060AC1F /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CFEBA32AB02DCB00291484 /* WidgetKit.framework */; };
 		0764FF7E2ABC717E0060AC1F /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07CFEBA52AB02DCB00291484 /* SwiftUI.framework */; };
 		0764FF812ABC717E0060AC1F /* Upcoming_Kontest_iOS_WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0764FF802ABC717E0060AC1F /* Upcoming_Kontest_iOS_WidgetBundle.swift */; };
@@ -57,8 +60,8 @@
 		07740EA52ABF171F00A93EAF /* CalendarPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07740EA42ABF171F00A93EAF /* CalendarPopoverView.swift */; };
 		077685272B56A50C00A1449F /* AccountInformationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077685262B56A50C00A1449F /* AccountInformationScreen.swift */; };
 		077685292B56A60200A1449F /* AccountInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077685282B56A60200A1449F /* AccountInformationViewModel.swift */; };
-		077921B62C8BA6E70021F70B /* MultipleRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076297312C5DFFF700E48937 /* MultipleRepositories.swift */; };
-		077921B72C8BA6E70021F70B /* MultipleRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076297312C5DFFF700E48937 /* MultipleRepositories.swift */; };
+		077921B62C8BA6E70021F70B /* MultipleKontestRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076297312C5DFFF700E48937 /* MultipleKontestRepositories.swift */; };
+		077921B72C8BA6E70021F70B /* MultipleKontestRepositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076297312C5DFFF700E48937 /* MultipleKontestRepositories.swift */; };
 		0779F4742ABD5B63004E50F6 /* UpcomingKontestsWidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */; };
 		0779F4752ABD5B64004E50F6 /* UpcomingKontestsWidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */; };
 		0779F4762ABD5B71004E50F6 /* WidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE8F2ABAE38900FEA3D7 /* WidgetCache.swift */; };
@@ -244,11 +247,12 @@
 		073269EE2AAC4B0C0028476D /* ChangeUsernameScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUsernameScreen.swift; sourceTree = "<group>"; };
 		07367C472ACA097000A558ED /* DeviceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceType.swift; sourceTree = "<group>"; };
 		073850BE2BE20C7F00EF24D7 /* FilterWebsitesViewCompact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterWebsitesViewCompact.swift; sourceTree = "<group>"; };
+		073E75812C916ECB00E5B934 /* Fetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetcher.swift; sourceTree = "<group>"; };
+		073E75832C916F3300E5B934 /* MultipleRepositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleRepositories.swift; sourceTree = "<group>"; };
 		074DD4512AA61570005C16A5 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
-		075ACA292C91404500AB222D /* Fetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetcher.swift; sourceTree = "<group>"; };
 		076016552A87CD52007CE9F5 /* Kontest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kontest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		076134CE2AA86AC300946B02 /* KontestDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestDetailViewModel.swift; sourceTree = "<group>"; };
-		076297312C5DFFF700E48937 /* MultipleRepositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleRepositories.swift; sourceTree = "<group>"; };
+		076297312C5DFFF700E48937 /* MultipleKontestRepositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleKontestRepositories.swift; sourceTree = "<group>"; };
 		0764FF7C2ABC717E0060AC1F /* Upcoming Kontest iOS WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Upcoming Kontest iOS WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0764FF802ABC717E0060AC1F /* Upcoming_Kontest_iOS_WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upcoming_Kontest_iOS_WidgetBundle.swift; sourceTree = "<group>"; };
 		0764FF822ABC717E0060AC1F /* Upcoming_Kontest_iOS_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upcoming_Kontest_iOS_Widget.swift; sourceTree = "<group>"; };
@@ -654,6 +658,7 @@
 				07ECFB472AA58259008513C6 /* LeetcodeRepository */,
 				07ECFB4A2AA58259008513C6 /* CodeForcesRepository */,
 				0720B0162B5680F0006721EE /* CollegesRepository.swift */,
+				073E75832C916F3300E5B934 /* MultipleRepositories.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -673,7 +678,7 @@
 				07ECFB452AA58259008513C6 /* AllKontestsFakeRepository.swift */,
 				07AA752D2B4FCF7A00DCD75B /* KontestNewRepository.swift */,
 				07E92C8E2C5B68FE00E3D6D3 /* KontestNewAPIRepository_UsingFirebase.swift */,
-				076297312C5DFFF700E48937 /* MultipleRepositories.swift */,
+				076297312C5DFFF700E48937 /* MultipleKontestRepositories.swift */,
 				07EF4DF22C8C16CE00FEB239 /* KontestNewAPIRepository.swift */,
 			);
 			path = KontestRepository;
@@ -801,7 +806,7 @@
 				07ECFB7A2AA58259008513C6 /* CodeChefFetcher.swift */,
 				07ECFB7B2AA58259008513C6 /* CodeForcesFetcher.swift */,
 				07ECFB7D2AA58259008513C6 /* LeetCodeGraphQLAPIFetcher.swift */,
-				075ACA292C91404500AB222D /* Fetcher.swift */,
+				073E75812C916ECB00E5B934 /* Fetcher.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1103,12 +1108,13 @@
 				07EF4DF52C8C16CE00FEB239 /* KontestNewAPIRepository.swift in Sources */,
 				079A671F2B544CD000901C0D /* SignUpScreen.swift in Sources */,
 				07D9FFCD2AD9A5D000C03A3A /* HapticFeedbackUtility.swift in Sources */,
-				076297322C5DFFF700E48937 /* MultipleRepositories.swift in Sources */,
+				076297322C5DFFF700E48937 /* MultipleKontestRepositories.swift in Sources */,
 				07ECFB862AA58259008513C6 /* NotificationsViewModel.swift in Sources */,
-				075ACA2A2C91404500AB222D /* Fetcher.swift in Sources */,
+				073E75822C916ECB00E5B934 /* Fetcher.swift in Sources */,
 				07ECFB942AA58259008513C6 /* CodeChefAPIModel.swift in Sources */,
 				07567EA52AB645E9007EFEE1 /* AddToCalendarIntent.swift in Sources */,
 				077685272B56A50C00A1449F /* AccountInformationScreen.swift in Sources */,
+				073E75842C916F3300E5B934 /* MultipleRepositories.swift in Sources */,
 				07AA752E2B4FCF7A00DCD75B /* KontestNewRepository.swift in Sources */,
 				07ECFBB22AA58259008513C6 /* LeetCodeUserProfileGraphQLAPIDTO.swift in Sources */,
 				07ECFBA82AA58259008513C6 /* LocalNotificationManager.swift in Sources */,
@@ -1133,13 +1139,14 @@
 				0764FF962ABC72400060AC1F /* GetKontests.swift in Sources */,
 				0764FF8F2ABC72070060AC1F /* KontestDTO.swift in Sources */,
 				07AA752F2B501A6400DCD75B /* KontestNewRepository.swift in Sources */,
-				077921B62C8BA6E70021F70B /* MultipleRepositories.swift in Sources */,
+				077921B62C8BA6E70021F70B /* MultipleKontestRepositories.swift in Sources */,
 				0764FF9C2ABC725B0060AC1F /* KontestFetcher.swift in Sources */,
 				0764FF982ABC724A0060AC1F /* FilterWebsitesViewModelProtocol.swift in Sources */,
 				0764FF932ABC72230060AC1F /* AppError.swift in Sources */,
 				0764FF912ABC72180060AC1F /* CalendarUtility.swift in Sources */,
 				0764FF9B2ABC72590060AC1F /* DownloadData.swift in Sources */,
-				075ACA2B2C9140AB00AB222D /* Fetcher.swift in Sources */,
+				073E75852C9171E400E5B934 /* Fetcher.swift in Sources */,
+				073E75882C91766200E5B934 /* MultipleRepositories.swift in Sources */,
 				0764FF812ABC717E0060AC1F /* Upcoming_Kontest_iOS_WidgetBundle.swift in Sources */,
 				0779F4762ABD5B71004E50F6 /* WidgetCache.swift in Sources */,
 				07EF4DF32C8C16CE00FEB239 /* KontestNewAPIRepository.swift in Sources */,
@@ -1164,13 +1171,14 @@
 				079F68242ABC8172001B0EFE /* Constants.swift in Sources */,
 				079F68252ABC817A001B0EFE /* KontestDTO.swift in Sources */,
 				079F681C2ABC8140001B0EFE /* KontestModel.swift in Sources */,
-				077921B72C8BA6E70021F70B /* MultipleRepositories.swift in Sources */,
+				077921B72C8BA6E70021F70B /* MultipleKontestRepositories.swift in Sources */,
 				07AA75302B501A6400DCD75B /* KontestNewRepository.swift in Sources */,
 				079F68192ABC8135001B0EFE /* CalendarUtility.swift in Sources */,
 				079F682B2ABC81AD001B0EFE /* DownloadData.swift in Sources */,
 				079F682A2ABC81A5001B0EFE /* KontestFetcher.swift in Sources */,
 				079F680B2ABC80C2001B0EFE /* Upcoming_Kontest_macOS_WidgetBundle.swift in Sources */,
-				075ACA2C2C9140AB00AB222D /* Fetcher.swift in Sources */,
+				073E75862C9171E400E5B934 /* Fetcher.swift in Sources */,
+				073E75892C91766200E5B934 /* MultipleRepositories.swift in Sources */,
 				079F68272ABC818E001B0EFE /* AddToCalendarIntent.swift in Sources */,
 				079F681E2ABC8150001B0EFE /* AppError.swift in Sources */,
 				07EF4DF42C8C16CE00FEB239 /* KontestNewAPIRepository.swift in Sources */,

@@ -14,7 +14,13 @@ private struct APIType: Codable {
     let url: String
 }
 
-final class KontestNewAPIRepository: KontestFetcher {
+final class KontestNewAPIRepository: Fetcher, KontestFetcher {
+    func getData() async throws -> [KontestDTO] {
+        return try await getAllKontests()
+    }
+    
+    typealias DataType = KontestDTO
+    
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "KontestNewAPIRepository")
     
     func getAllKontests() async throws -> [KontestDTO] {

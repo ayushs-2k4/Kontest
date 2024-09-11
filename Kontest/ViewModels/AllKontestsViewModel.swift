@@ -13,7 +13,6 @@ import OSLog
 final class AllKontestsViewModel: Sendable {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "AllKontestsViewModel")
 
-    let repository: any KontestFetcher
     let notificationsViewModel: any NotificationsViewModelProtocol
     let filterWebsitesViewModel: any FilterWebsitesViewModelProtocol
 
@@ -42,9 +41,11 @@ final class AllKontestsViewModel: Sendable {
     }
 
     var isLoading = false
+    
+    let repositories: MultipleRepositories<KontestDTO>
 
-    init(notificationsViewModel: any NotificationsViewModelProtocol, filterWebsitesViewModel: any FilterWebsitesViewModelProtocol, repository: any KontestFetcher) {
-        self.repository = repository
+    init(notificationsViewModel: any NotificationsViewModelProtocol, filterWebsitesViewModel: any FilterWebsitesViewModelProtocol, repos: MultipleRepositories<KontestDTO>) {
+        self.repositories = repos
         self.notificationsViewModel = notificationsViewModel
         self.filterWebsitesViewModel = filterWebsitesViewModel
         hasFullAccessToCalendar = UserDefaults(suiteName: Constants.userDefaultsGroupID)!.bool(forKey: "shouldFetchAllEventsFromCalendar")
@@ -143,7 +144,7 @@ final class AllKontestsViewModel: Sendable {
 
     private func getAllKontests() async {
         do {
-            let fetchedKontests = try await repository.getAllKontests()
+            let fetchedKontests = try await repositories.fetchAllData()
 
             print("fetchedKontests: \(fetchedKontests)")
 
