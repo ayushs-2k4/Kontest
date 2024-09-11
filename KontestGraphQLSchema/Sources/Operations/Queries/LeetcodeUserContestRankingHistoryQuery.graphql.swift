@@ -18,11 +18,11 @@ public class LeetcodeUserContestRankingHistoryQuery: GraphQLQuery {
 
   public var __variables: Variables? { ["username": username] }
 
-  public struct Data: LeetCodeSchema.SelectionSet {
+  public struct Data: KontestGraphQLSchema.SelectionSet {
     public let __data: DataDict
     public init(_dataDict: DataDict) { __data = _dataDict }
 
-    public static var __parentType: ApolloAPI.ParentType { LeetCodeSchema.Objects.Query }
+    public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.Query }
     public static var __selections: [ApolloAPI.Selection] { [
       .field("leetcodeQuery", LeetcodeQuery?.self),
     ] }
@@ -32,11 +32,11 @@ public class LeetcodeUserContestRankingHistoryQuery: GraphQLQuery {
     /// LeetcodeQuery
     ///
     /// Parent Type: `LeetcodeQuery`
-    public struct LeetcodeQuery: LeetCodeSchema.SelectionSet {
+    public struct LeetcodeQuery: KontestGraphQLSchema.SelectionSet {
       public let __data: DataDict
       public init(_dataDict: DataDict) { __data = _dataDict }
 
-      public static var __parentType: ApolloAPI.ParentType { LeetCodeSchema.Objects.LeetcodeQuery }
+      public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.LeetcodeQuery }
       public static var __selections: [ApolloAPI.Selection] { [
         .field("__typename", String.self),
         .field("userContestRankingHistory", [UserContestRankingHistory?]?.self, arguments: ["username": .variable("username")]),
@@ -47,11 +47,11 @@ public class LeetcodeUserContestRankingHistoryQuery: GraphQLQuery {
       /// LeetcodeQuery.UserContestRankingHistory
       ///
       /// Parent Type: `UserContestRankingHistory`
-      public struct UserContestRankingHistory: LeetCodeSchema.SelectionSet {
+      public struct UserContestRankingHistory: KontestGraphQLSchema.SelectionSet {
         public let __data: DataDict
         public init(_dataDict: DataDict) { __data = _dataDict }
 
-        public static var __parentType: ApolloAPI.ParentType { LeetCodeSchema.Objects.UserContestRankingHistory }
+        public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.UserContestRankingHistory }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
           .field("attended", Bool?.self),
@@ -76,11 +76,11 @@ public class LeetcodeUserContestRankingHistoryQuery: GraphQLQuery {
         /// LeetcodeQuery.UserContestRankingHistory.Contest
         ///
         /// Parent Type: `Contest`
-        public struct Contest: LeetCodeSchema.SelectionSet {
+        public struct Contest: KontestGraphQLSchema.SelectionSet {
           public let __data: DataDict
           public init(_dataDict: DataDict) { __data = _dataDict }
 
-          public static var __parentType: ApolloAPI.ParentType { LeetCodeSchema.Objects.Contest }
+          public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.Contest }
           public static var __selections: [ApolloAPI.Selection] { [
             .field("__typename", String.self),
             .field("startTime", String?.self),
