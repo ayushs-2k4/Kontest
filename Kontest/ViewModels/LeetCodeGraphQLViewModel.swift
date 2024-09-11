@@ -12,7 +12,7 @@ import OSLog
 final class LeetCodeGraphQLViewModel: Sendable {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "FilterWebsitesViewModel")
 
-    let repository = LeetCodeAPIGraphQLRepository()
+    let repository = LeetCodeNewAPIGraphQLRepository()
     let username: String
 
     var leetCodeUserProfileGraphQLAPIModel: LeetCodeUserProfileGraphQLAPIModel?

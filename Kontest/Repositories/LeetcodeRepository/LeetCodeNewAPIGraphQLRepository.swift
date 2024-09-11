@@ -1,24 +1,25 @@
 //
-//  LeetCodeAPIGraphQLRepository.swift
+//  LeetCodeNewAPIGraphQLRepository.swift
 //  Kontest
 //
-//  Created by Ayush Singhal on 9/11/24.
+//  Created by Ayush Singhal on 04/09/23.
 //
 
 import Foundation
 import LeetCodeSchema
 import OSLog
 
-final class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
-    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "LeetCodeAPIGraphQLRepository")
+final class LeetCodeNewAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "LeetCodeNewAPIGraphQLRepository")
     
     func getUserData(username: String, completion: @escaping (LeetCodeUserProfileGraphQLAPIDTO?, (any Error)?) -> Void) {
-        let query = UserPublicProfileQuery(username: username)
+//        let ogquery = UserPublicProfileQuery(username: username)
+        let query = LeetcodeMatchedUserQuery(username: username)
         
-        DownloadDataWithApollo.shared.apollo.fetch(query: query) { [weak self] result in
+        DownloadDataWithApollo2.getInstance(url: URL(string: "http://localhost:8085/graphql")!).apollo.fetch(query: query) { [weak self] result in
             switch result {
             case .success(let value):
-                let p = value.data?.matchedUser
+                let p = value.data?.leetcodeQuery?.matchedUser
                 
                 if let p {
                     let leetCodeGraphQLAPIDTO = LeetCodeUserProfileGraphQLAPIDTO(
@@ -81,24 +82,25 @@ final class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
                     
                     completion(leetCodeGraphQLAPIDTO, nil)
                 } else {
-                    completion(nil, AppError(title: "Data not found", description: "Data not found in  LeetCodeAPIGraphQLRepository - getUserData"))
+                    completion(nil, AppError(title: "Data not found", description: "Data not found in  LeetCodeNewAPIGraphQLRepository - getUserData"))
                 }
             case .failure(let error):
-                self?.logger.error("Error in LeetCodeAPIGraphQLRepository - getUserData: \(error)")
+                self?.logger.error("Error in LeetCodeNewAPIGraphQLRepository - getUserData: \(error)")
                 completion(nil, error)
             }
         }
     }
     
     func getUserRankingInfo(username: String, completion: @escaping (LeetCodeUserRankingsGraphQLAPIDTO?, (any Error)?) -> Void) {
-        let query = UserContestRankingInfoQuery(username: username)
+//        let ogQuery = UserContestRankingInfoQuery(username: username)
+        let query = LeetcodeUserContestRankingInfoQuery(username: username)
         
-        DownloadDataWithApollo.shared.apollo.fetch(query: query) { [weak self] result in
+        DownloadDataWithApollo2.getInstance(url: URL(string: "http://localhost:8085/graphql")!).apollo.fetch(query: query) { [weak self] result in
             switch result {
             case .success(let value):
-                let userContestRanking = value.data?.userContestRanking
-                let userContestRankingHistory = value.data?.userContestRankingHistory
-                
+                let userContestRanking = value.data?.leetcodeQuery?.userContestRanking
+                let userContestRankingHistory = value.data?.leetcodeQuery?.userContestRankingHistory
+
                 let leetCodeUserRankingsGraphQLAPIDTO = LeetCodeUserRankingsGraphQLAPIDTO(
                     leetCodeUserRankingGraphQLAPIDTO: LeetCodeUserRankingGraphQLAPIDTO(
                         attendedContestsCount: userContestRanking?.attendedContestsCount,
@@ -125,7 +127,7 @@ final class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
                 completion(leetCodeUserRankingsGraphQLAPIDTO, nil)
                 
             case .failure(let error):
-                self?.logger.error("Error in LeetCodeAPIGraphQLRepository - getUserRankingInfo: \(error)")
+                self?.logger.error("Error in LeetCodeNewAPIGraphQLRepository - getUserRankingInfo: \(error)")
                 completion(nil, error)
             }
         }
