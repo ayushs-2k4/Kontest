@@ -20,23 +20,40 @@ final class DownloadDataWithApollo: Sendable {
 final class DownloadDataWithApollo2: Sendable {
     let apollo: ApolloClient
     
-    // Store the last created instance for reuse
-    private static var instanceCache: [URL: DownloadDataWithApollo2] = [:]
+    // Initialize with the ApolloClient
+    init(apollo: ApolloClient) {
+        self.apollo = apollo
+    }
+}
+
+// Define an actor to manage concurrency for cache
+actor DownloadDataWithApollo2Cache {
+    private var instanceCache: [URL: DownloadDataWithApollo2] = [:]
     
-    private init(url: URL) {
-        self.apollo = ApolloClient(url: url)
+    func getInstance(for url: URL) -> DownloadDataWithApollo2? {
+        return instanceCache[url]
     }
     
-    // Factory method to return the cached instance if available, or create a new one
-    static func getInstance(url: URL) -> DownloadDataWithApollo2 {
-        if let cachedInstance = instanceCache[url] {
+    func createInstance(for url: URL) -> DownloadDataWithApollo2 {
+        let newInstance = DownloadDataWithApollo2(apollo: ApolloClient(url: url))
+        instanceCache[url] = newInstance
+        return newInstance
+    }
+}
+
+final class ApolloFactory {
+    // Define a static actor instance to manage cache
+    private static let cache = DownloadDataWithApollo2Cache()
+    
+    // Static method to get or create an instance asynchronously
+    static func getInstance(url: URL) async -> DownloadDataWithApollo2 {
+        if let cachedInstance = await cache.getInstance(for: url) {
             return cachedInstance
         } else {
-            let newInstance = DownloadDataWithApollo2(url: url)
-            instanceCache[url] = newInstance
-            return newInstance
+            return await cache.createInstance(for: url)
         }
     }
+    
 }
 
 func downloadDataWithAsyncAwait(url: URL) async throws -> Data {
