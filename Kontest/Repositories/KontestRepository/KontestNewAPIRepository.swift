@@ -26,7 +26,7 @@ final class KontestNewAPIRepository: Fetcher, KontestFetcher {
     func getAllKontests() async throws -> [KontestDTO] {
         
         do {
-            let mainUrl = URL(string: "https://kontest-api.ayushsinghal.tech")!
+            let mainUrl = URL(string: Constants.Endpoints.kontestsURL)!
             
             let version = "v1"
             let page = 1

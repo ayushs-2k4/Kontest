@@ -65,4 +65,20 @@ enum Constants {
     static let automaticNotification6HoursSuffix = "automaticNotification6HoursSuffix"
 
     static let automaticCalendarEventSuffix = "automaticReminderSuffix"
+    
+    static let mySiteBaseURL: String = "https://kontest-api.ayushsinghal.tech"
+    
+    struct Endpoints {
+        static private let graphql = "/graphql"
+        static private let kontests = "/kontests"
+        
+        // Computed properties to return full URLs
+        static var graphqlURL: String {
+            return "\(mySiteBaseURL)\(graphql)"
+        }
+        
+        static var kontestsURL: String {
+            return "\(mySiteBaseURL)\(kontests)"
+        }
+    }
 }

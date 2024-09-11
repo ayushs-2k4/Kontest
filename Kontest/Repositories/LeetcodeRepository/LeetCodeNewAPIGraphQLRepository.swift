@@ -17,7 +17,7 @@ final class LeetCodeNewAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
         let query = LeetcodeMatchedUserQuery(username: username)
         
         // Create an ApolloClient instance
-        let apolloClient = await ApolloFactory.getInstance(url: URL(string: "http://localhost:8085/graphql")!).apollo
+        let apolloClient = await ApolloFactory.getInstance(url: URL(string: Constants.Endpoints.graphqlURL)!).apollo
         
         // Use `withCheckedThrowingContinuation` to bridge completion handler-based APIs with async/await
         let result: LeetCodeUserProfileGraphQLAPIDTO = try await withCheckedThrowingContinuation { continuation in
@@ -98,7 +98,7 @@ final class LeetCodeNewAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
         let query = LeetcodeUserContestRankingInfoQuery(username: username)
         
         // Create an ApolloClient instance
-        let apolloClient = await ApolloFactory.getInstance(url: URL(string: "http://localhost:8085/graphql")!).apollo
+        let apolloClient = await ApolloFactory.getInstance(url: URL(string: Constants.Endpoints.graphqlURL)!).apollo
         
         let result: LeetCodeUserRankingsGraphQLAPIDTO = try await withCheckedThrowingContinuation { continuation in
             apolloClient.fetch(query: query) { [weak self] result in
