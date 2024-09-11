@@ -37,6 +37,17 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "ProblemSolvedBeatsStats": return LeetCodeSchema.Objects.ProblemSolvedBeatsStats
     case "SubmitStatsGlobal": return LeetCodeSchema.Objects.SubmitStatsGlobal
     case "ACSubmissionNum": return LeetCodeSchema.Objects.ACSubmissionNum
+    case "LeetcodeQuery": return LeetCodeSchema.Objects.LeetcodeQuery
+    case "KontestQuery": return LeetCodeSchema.Objects.KontestQuery
+    case "KontestError": return LeetCodeSchema.Objects.KontestError
+    case "Kontests": return LeetCodeSchema.Objects.Kontests
+    case "Kontest": return LeetCodeSchema.Objects.Kontest
+    case "CodeChefUser": return LeetCodeSchema.Objects.CodeChefUser
+    case "HeatMapEntry": return LeetCodeSchema.Objects.HeatMapEntry
+    case "CodeForcesUser": return LeetCodeSchema.Objects.CodeForcesUser
+    case "CodeForcesUserInfo": return LeetCodeSchema.Objects.CodeForcesUserInfo
+    case "CodeForcesUserRating": return LeetCodeSchema.Objects.CodeForcesUserRating
+    case "CodeForcesUserBasicInfo": return LeetCodeSchema.Objects.CodeForcesUserBasicInfo
     default: return nil
     }
   }

@@ -20,6 +20,8 @@ struct LeetCodeUserProfileGraphQLAPIDTO: Codable {
     let profile: UserProfileDTO?
     let problemsSolvedBeatsStats: [ProblemSolvedBeatsStatsDTO?]?
     let submitStatsGlobal: SubmitStatsGlobalDTO?
+    
+    
 }
 
 struct LanguageProblemCountDTO: Codable {
