@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07060E2F2C936CFF00AAFC3A /* MultipleLeetCodeRepostories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07060E2E2C936CFF00AAFC3A /* MultipleLeetCodeRepostories.swift */; };
 		07183EAC2AB857C6006C92AD /* AllKontestsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EAB2AB857C6006C92AD /* AllKontestsViewModelTests.swift */; };
 		07183EB22AB8587A006C92AD /* MockNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EB12AB8587A006C92AD /* MockNotificationsViewModel.swift */; };
 		07183EB42AB858AE006C92AD /* MockFilterWebsitesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EB32AB858AE006C92AD /* MockFilterWebsitesViewModel.swift */; };
@@ -231,6 +232,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		07060E2E2C936CFF00AAFC3A /* MultipleLeetCodeRepostories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleLeetCodeRepostories.swift; sourceTree = "<group>"; };
 		07183EA22AB85633006C92AD /* KontestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KontestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07183EAB2AB857C6006C92AD /* AllKontestsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllKontestsViewModelTests.swift; sourceTree = "<group>"; };
 		07183EB12AB8587A006C92AD /* MockNotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNotificationsViewModel.swift; sourceTree = "<group>"; };
@@ -691,6 +693,7 @@
 			children = (
 				07ECFB482AA58259008513C6 /* LeetCodeNewAPIGraphQLRepository.swift */,
 				071EB9042C91822B008362E9 /* LeetCodeAPIGraphQLRepository.swift */,
+				07060E2E2C936CFF00AAFC3A /* MultipleLeetCodeRepostories.swift */,
 			);
 			path = LeetcodeRepository;
 			sourceTree = "<group>";
@@ -1118,6 +1121,7 @@
 				07ECFB942AA58259008513C6 /* CodeChefAPIModel.swift in Sources */,
 				07567EA52AB645E9007EFEE1 /* AddToCalendarIntent.swift in Sources */,
 				077685272B56A50C00A1449F /* AccountInformationScreen.swift in Sources */,
+				07060E2F2C936CFF00AAFC3A /* MultipleLeetCodeRepostories.swift in Sources */,
 				073E75842C916F3300E5B934 /* MultipleRepositories.swift in Sources */,
 				07AA752E2B4FCF7A00DCD75B /* KontestNewRepository.swift in Sources */,
 				07ECFBB22AA58259008513C6 /* LeetCodeUserProfileGraphQLAPIDTO.swift in Sources */,

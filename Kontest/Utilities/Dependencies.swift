@@ -13,6 +13,9 @@ final class Dependencies: Sendable {
     let filterWebsitesViewModel: FilterWebsitesViewModel
     let allKontestsViewModel: AllKontestsViewModel
     let changeUsernameViewModel: ChangeUsernameViewModel
+
+    let leetCodeRepository: any LeetCodeGraphQLAPIFetcher = MultipleLeetCodeRepostories(repositories: [LeetCodeNewAPIGraphQLRepository(), LeetCodeAPIGraphQLRepository()])
+
     private(set) var leetCodeGraphQLViewModel: LeetCodeGraphQLViewModel
     private(set) var codeChefViewModel: CodeChefViewModel
     private(set) var codeForcesViewModel: CodeForcesViewModel
@@ -33,13 +36,13 @@ final class Dependencies: Sendable {
             ])
         )
         self.changeUsernameViewModel = ChangeUsernameViewModel()
-        self.leetCodeGraphQLViewModel = LeetCodeGraphQLViewModel(username: changeUsernameViewModel.leetcodeUsername)
+        self.leetCodeGraphQLViewModel = LeetCodeGraphQLViewModel(username: changeUsernameViewModel.leetcodeUsername, repository: leetCodeRepository)
         self.codeChefViewModel = CodeChefViewModel(username: changeUsernameViewModel.codeChefUsername)
         self.codeForcesViewModel = CodeForcesViewModel(username: changeUsernameViewModel.codeForcesUsername)
     }
 
     func changeLeetcodeUsername(leetCodeUsername: String) {
-        leetCodeGraphQLViewModel = LeetCodeGraphQLViewModel(username: leetCodeUsername)
+        leetCodeGraphQLViewModel = LeetCodeGraphQLViewModel(username: leetCodeUsername, repository: leetCodeRepository)
     }
 
     func changeCodeChefUsername(codeChefUsername: String) {
@@ -51,7 +54,7 @@ final class Dependencies: Sendable {
     }
 
     func reloadLeetcodeUsername() {
-        leetCodeGraphQLViewModel = LeetCodeGraphQLViewModel(username: changeUsernameViewModel.leetcodeUsername)
+        leetCodeGraphQLViewModel = LeetCodeGraphQLViewModel(username: changeUsernameViewModel.leetcodeUsername, repository: leetCodeRepository)
     }
 
     func reloadCodeChefUsername() {
