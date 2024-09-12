@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		07060E2F2C936CFF00AAFC3A /* MultipleLeetCodeRepostories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07060E2E2C936CFF00AAFC3A /* MultipleLeetCodeRepostories.swift */; };
+		07060E312C9372A000AAFC3A /* MultipleCodeForcesRepostories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07060E302C9372A000AAFC3A /* MultipleCodeForcesRepostories.swift */; };
+		07060E332C9373E600AAFC3A /* CodeForcesNewAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07060E322C9373E600AAFC3A /* CodeForcesNewAPIRepository.swift */; };
 		07183EAC2AB857C6006C92AD /* AllKontestsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EAB2AB857C6006C92AD /* AllKontestsViewModelTests.swift */; };
 		07183EB22AB8587A006C92AD /* MockNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EB12AB8587A006C92AD /* MockNotificationsViewModel.swift */; };
 		07183EB42AB858AE006C92AD /* MockFilterWebsitesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07183EB32AB858AE006C92AD /* MockFilterWebsitesViewModel.swift */; };
@@ -233,6 +235,8 @@
 
 /* Begin PBXFileReference section */
 		07060E2E2C936CFF00AAFC3A /* MultipleLeetCodeRepostories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleLeetCodeRepostories.swift; sourceTree = "<group>"; };
+		07060E302C9372A000AAFC3A /* MultipleCodeForcesRepostories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleCodeForcesRepostories.swift; sourceTree = "<group>"; };
+		07060E322C9373E600AAFC3A /* CodeForcesNewAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeForcesNewAPIRepository.swift; sourceTree = "<group>"; };
 		07183EA22AB85633006C92AD /* KontestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KontestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		07183EAB2AB857C6006C92AD /* AllKontestsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllKontestsViewModelTests.swift; sourceTree = "<group>"; };
 		07183EB12AB8587A006C92AD /* MockNotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNotificationsViewModel.swift; sourceTree = "<group>"; };
@@ -702,6 +706,8 @@
 			isa = PBXGroup;
 			children = (
 				07ECFB4B2AA58259008513C6 /* CodeForcesAPIRepository.swift */,
+				07060E302C9372A000AAFC3A /* MultipleCodeForcesRepostories.swift */,
+				07060E322C9373E600AAFC3A /* CodeForcesNewAPIRepository.swift */,
 			);
 			path = CodeForcesRepository;
 			sourceTree = "<group>";
@@ -1054,6 +1060,7 @@
 				07ECFBA62AA58259008513C6 /* CalendarUtility.swift in Sources */,
 				07ECFBC62AA59349008513C6 /* LeetCodeUserRankingsGraphQLAPIModel.swift in Sources */,
 				0725FB682AC82F0A00564DE0 /* CodeForcesChartView.swift in Sources */,
+				07060E312C9372A000AAFC3A /* MultipleCodeForcesRepostories.swift in Sources */,
 				076134CF2AA86AC300946B02 /* KontestDetailViewModel.swift in Sources */,
 				07ECFB9A2AA58259008513C6 /* RatingsView.swift in Sources */,
 				07ECFB842AA58259008513C6 /* CodeChefViewModel.swift in Sources */,
@@ -1106,6 +1113,7 @@
 				07ECFBA02AA58259008513C6 /* KontestDetailsScreen.swift in Sources */,
 				077E6EB12AB4B3220003E897 /* ErrorState.swift in Sources */,
 				079A67232B544EAE00901C0D /* AuthenticationEmailViewModel.swift in Sources */,
+				07060E332C9373E600AAFC3A /* CodeForcesNewAPIRepository.swift in Sources */,
 				07ECFBAA2AA58259008513C6 /* Router.swift in Sources */,
 				073269E82AAC42350028476D /* FilterWebsitesViewRegular.swift in Sources */,
 				073850BF2BE20C7F00EF24D7 /* FilterWebsitesViewCompact.swift in Sources */,

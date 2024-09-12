@@ -513,3 +513,38 @@ query AllThings {
 	}
 }
 
+query CodeForcesBasicInfoQuery($username: String!) {
+	getCodeForcesUser(username: $username) {
+		result {
+			basicInfo {
+				contribution
+				lastOnlineTimeSeconds
+				friendOfCount
+				titlePhoto
+				handle
+				avatar
+				registrationTimeSeconds
+				rating
+				maxRating
+				rank
+				maxRank
+			}
+		}
+	}
+}
+
+query CodeForcesRatingsInfoQuery($username: String!) {
+	getCodeForcesUser(username: $username) {
+		result {
+			ratings {
+				contestId
+				contestName
+				handle
+				rank
+				ratingUpdateTimeSeconds
+				oldRating
+				newRating
+			}
+		}
+	}
+}
