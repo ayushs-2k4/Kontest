@@ -53,21 +53,21 @@ public final class CodeChefNewAPIRepository: CodeChefFetcher {
         return result
     }
     
-    func getUserKontests(username: String) async throws -> [CodeChefScrapingContestDTO] {
+    func getUserKontests(username: String) async throws -> [CodeChefContestInfoDTO] {
         // Define the query
         let query = CodeChefUserKontestHistoryQuery(username: username)
         
         // Create an ApolloClient instance
         let apolloClient = await ApolloFactory.getInstance(url: URL(string: Constants.Endpoints.graphqlURL)!).apollo
         
-        let result: [CodeChefScrapingContestDTO] = try await withCheckedThrowingContinuation { continuation in
+        let result: [CodeChefContestInfoDTO] = try await withCheckedThrowingContinuation { continuation in
             apolloClient.fetch(query: query) { result in
                 switch result {
                 case .success(let value):
                     if let p = value.data?.codeChefQuery?.getUserKontestHistory {
-                        let ans = p.compactMap { history -> CodeChefScrapingContestDTO? in
+                        let ans = p.compactMap { history -> CodeChefContestInfoDTO? in
                             if let history = history {
-                                return CodeChefScrapingContestDTO(
+                                return CodeChefContestInfoDTO(
                                     code: history.code,
                                     getyear: history.year,
                                     getmonth: history.month,

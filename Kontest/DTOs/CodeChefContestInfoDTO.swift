@@ -1,5 +1,5 @@
 //
-//  CodeChefScrapingContestDTO.swift
+//  CodeChefContestInfoDTO.swift
 //  Kontest
 //
 //  Created by Ayush Singhal on 1/13/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CodeChefScrapingContestDTO: Codable {
+struct CodeChefContestInfoDTO: Codable {
     let code: String
     let getyear: Int
     let getmonth: Int

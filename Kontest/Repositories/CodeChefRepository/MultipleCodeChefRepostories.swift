@@ -41,7 +41,7 @@ final public class MultipleCodeChefRepostories: CodeChefFetcher {
         }
     }
     
-    func getUserKontests(username: String) async throws -> [CodeChefScrapingContestDTO] {
+    func getUserKontests(username: String) async throws -> [CodeChefContestInfoDTO] {
         var lastError: (any Error)?
         
         for repository in repositories {

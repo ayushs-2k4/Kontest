@@ -58,7 +58,7 @@ final class CodeChefAPIRepository: CodeChefFetcher {
         return String(prefinalString)
     }
     
-    func getUserKontests(username: String) async throws -> [CodeChefScrapingContestDTO] {
+    func getUserKontests(username: String) async throws -> [CodeChefContestInfoDTO] {
         guard let url = URL(string: "https://www.codechef.com/users/\(username)") else {
             logger.error("Error in making CodeChef url")
             throw URLError(.badURL)
@@ -74,7 +74,7 @@ final class CodeChefAPIRepository: CodeChefFetcher {
             
             let finalDataString = try getUserDataFromParsedHTML(stringHTML: stringHTML)
             
-            let allContests = try JSONDecoder().decode([CodeChefScrapingContestDTO].self, from: finalDataString.data(using: .utf8)!)
+            let allContests = try JSONDecoder().decode([CodeChefContestInfoDTO].self, from: finalDataString.data(using: .utf8)!)
             
             return allContests
             

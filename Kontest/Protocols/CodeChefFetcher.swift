@@ -9,5 +9,5 @@ import Foundation
 
 protocol CodeChefFetcher: Sendable {
     func getUserData(username: String) async throws -> CodeChefAPIDTO
-    func getUserKontests(username: String) async throws -> [CodeChefScrapingContestDTO]
+    func getUserKontests(username: String) async throws -> [CodeChefContestInfoDTO]
 }

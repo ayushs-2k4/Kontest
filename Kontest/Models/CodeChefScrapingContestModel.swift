@@ -40,7 +40,7 @@ struct CodeChefScrapingContestModel: Codable, Identifiable {
 }
 
 extension CodeChefScrapingContestModel {
-    static func from(dto: CodeChefScrapingContestDTO) -> CodeChefScrapingContestModel {
+    static func from(dto: CodeChefContestInfoDTO) -> CodeChefScrapingContestModel {
         return CodeChefScrapingContestModel(
             code: dto.code,
             year: dto.getyear,
