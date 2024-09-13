@@ -127,7 +127,9 @@
 		07D7666C2AC8407B000A3DFD /* DetailColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7666B2AC8407B000A3DFD /* DetailColumn.swift */; };
 		07D7666E2AC84094000A3DFD /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7666D2AC84094000A3DFD /* Panel.swift */; };
 		07D9FFCD2AD9A5D000C03A3A /* HapticFeedbackUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D9FFCC2AD9A5D000C03A3A /* HapticFeedbackUtility.swift */; };
+		07E0B2F42C9488AC00D12C2E /* MultipleCodeChefRepostories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E0B2F32C9488AC00D12C2E /* MultipleCodeChefRepostories.swift */; };
 		07E92C902C5B68FE00E3D6D3 /* KontestNewAPIRepository_UsingFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E92C8E2C5B68FE00E3D6D3 /* KontestNewAPIRepository_UsingFirebase.swift */; };
+		07EBCC8E2C93FCFC00F0CE9E /* CodeChefNewAPIRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07EBCC8D2C93FCFC00F0CE9E /* CodeChefNewAPIRepository.swift */; };
 		07ECFB802AA58259008513C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 07ECFB352AA58259008513C6 /* README.md */; };
 		07ECFB812AA58259008513C6 /* ChangeUsernameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB382AA58259008513C6 /* ChangeUsernameViewModel.swift */; };
 		07ECFB822AA58259008513C6 /* LeetCodeGraphQLViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07ECFB392AA58259008513C6 /* LeetCodeGraphQLViewModel.swift */; };
@@ -308,9 +310,11 @@
 		07D7666B2AC8407B000A3DFD /* DetailColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailColumn.swift; sourceTree = "<group>"; };
 		07D7666D2AC84094000A3DFD /* Panel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Panel.swift; sourceTree = "<group>"; };
 		07D9FFCC2AD9A5D000C03A3A /* HapticFeedbackUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticFeedbackUtility.swift; sourceTree = "<group>"; };
+		07E0B2F32C9488AC00D12C2E /* MultipleCodeChefRepostories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleCodeChefRepostories.swift; sourceTree = "<group>"; };
 		07E92C8E2C5B68FE00E3D6D3 /* KontestNewAPIRepository_UsingFirebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KontestNewAPIRepository_UsingFirebase.swift; sourceTree = "<group>"; };
 		07EA6F482AB6405A00CD932E /* KontestMacOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KontestMacOS.entitlements; sourceTree = "<group>"; };
 		07EA6F492AB6405F00CD932E /* Upcoming Kontests iOS WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Upcoming Kontests iOS WidgetExtension.entitlements"; sourceTree = "<group>"; };
+		07EBCC8D2C93FCFC00F0CE9E /* CodeChefNewAPIRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeChefNewAPIRepository.swift; sourceTree = "<group>"; };
 		07ECFB352AA58259008513C6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		07ECFB382AA58259008513C6 /* ChangeUsernameViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeUsernameViewModel.swift; sourceTree = "<group>"; };
 		07ECFB392AA58259008513C6 /* LeetCodeGraphQLViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeetCodeGraphQLViewModel.swift; sourceTree = "<group>"; };
@@ -673,6 +677,8 @@
 			isa = PBXGroup;
 			children = (
 				07ECFB432AA58259008513C6 /* CodeChefAPIRepository.swift */,
+				07EBCC8D2C93FCFC00F0CE9E /* CodeChefNewAPIRepository.swift */,
+				07E0B2F32C9488AC00D12C2E /* MultipleCodeChefRepostories.swift */,
 			);
 			path = CodeChefRepository;
 			sourceTree = "<group>";
@@ -1113,6 +1119,7 @@
 				07ECFBAA2AA58259008513C6 /* Router.swift in Sources */,
 				073269E82AAC42350028476D /* FilterWebsitesViewRegular.swift in Sources */,
 				073850BF2BE20C7F00EF24D7 /* FilterWebsitesViewCompact.swift in Sources */,
+				07E0B2F42C9488AC00D12C2E /* MultipleCodeChefRepostories.swift in Sources */,
 				07ECFB982AA58259008513C6 /* SettingsScreen.swift in Sources */,
 				07740EA52ABF171F00A93EAF /* CalendarPopoverView.swift in Sources */,
 				0720B0172B5680F0006721EE /* CollegesRepository.swift in Sources */,
@@ -1124,6 +1131,7 @@
 				073E75822C916ECB00E5B934 /* Fetcher.swift in Sources */,
 				07ECFB942AA58259008513C6 /* CodeChefAPIModel.swift in Sources */,
 				07567EA52AB645E9007EFEE1 /* AddToCalendarIntent.swift in Sources */,
+				07EBCC8E2C93FCFC00F0CE9E /* CodeChefNewAPIRepository.swift in Sources */,
 				077685272B56A50C00A1449F /* AccountInformationScreen.swift in Sources */,
 				07060E2F2C936CFF00AAFC3A /* MultipleLeetCodeRepostories.swift in Sources */,
 				073E75842C916F3300E5B934 /* MultipleRepositories.swift in Sources */,

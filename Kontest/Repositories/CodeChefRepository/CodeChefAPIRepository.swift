@@ -17,9 +17,17 @@ final class CodeChefAPIRepository: CodeChefFetcher {
             logger.error("Error in making CodeChef url")
             throw URLError(.badURL)
         }
-
+        
         do {
             let data = try await downloadDataWithAsyncAwait(url: url)
+            
+            let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+            if let dictionary = jsonObject as? [String: Any] {
+                print(dictionary)  // Here you have your JSON as a dictionary
+            } else {
+                print("Failed to cast JSON object as dictionary")
+            }
+            
             let fetchedCodeChefProfile = try JSONDecoder().decode(CodeChefAPIDTO.self, from: data)
 
             return fetchedCodeChefProfile

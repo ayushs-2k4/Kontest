@@ -38,11 +38,13 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "SubmitStatsGlobal": return KontestGraphQLSchema.Objects.SubmitStatsGlobal
     case "ACSubmissionNum": return KontestGraphQLSchema.Objects.ACSubmissionNum
     case "LeetcodeQuery": return KontestGraphQLSchema.Objects.LeetcodeQuery
+    case "CodeChefQuery": return KontestGraphQLSchema.Objects.CodeChefQuery
+    case "CodeChefUser": return KontestGraphQLSchema.Objects.CodeChefUser
+    case "CodeChefContest": return KontestGraphQLSchema.Objects.CodeChefContest
     case "KontestQuery": return KontestGraphQLSchema.Objects.KontestQuery
     case "KontestError": return KontestGraphQLSchema.Objects.KontestError
     case "Kontests": return KontestGraphQLSchema.Objects.Kontests
     case "Kontest": return KontestGraphQLSchema.Objects.Kontest
-    case "CodeChefUser": return KontestGraphQLSchema.Objects.CodeChefUser
     case "HeatMapEntry": return KontestGraphQLSchema.Objects.HeatMapEntry
     case "CodeForcesUser": return KontestGraphQLSchema.Objects.CodeForcesUser
     case "CodeForcesUserInfo": return KontestGraphQLSchema.Objects.CodeForcesUserInfo

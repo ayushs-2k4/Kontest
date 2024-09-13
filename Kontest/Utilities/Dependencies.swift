@@ -16,6 +16,7 @@ final class Dependencies: Sendable {
 
     let leetCodeRepository: any LeetCodeGraphQLAPIFetcher = MultipleLeetCodeRepostories(repositories: [LeetCodeNewAPIGraphQLRepository(), LeetCodeAPIGraphQLRepository()])
     let codeForcesRepository: any CodeForcesFetcher = MultipleCodeForcesRepostories(repositories: [CodeForcesNewAPIRepository(), CodeForcesAPIRepository()])
+    let codeChefRepository: any CodeChefFetcher = MultipleCodeChefRepostories(repositories: [CodeChefNewAPIRepository(), CodeChefAPIRepository()])
 
     private(set) var leetCodeGraphQLViewModel: LeetCodeGraphQLViewModel
     private(set) var codeChefViewModel: CodeChefViewModel
@@ -38,7 +39,7 @@ final class Dependencies: Sendable {
         )
         self.changeUsernameViewModel = ChangeUsernameViewModel()
         self.leetCodeGraphQLViewModel = LeetCodeGraphQLViewModel(username: changeUsernameViewModel.leetcodeUsername, repository: leetCodeRepository)
-        self.codeChefViewModel = CodeChefViewModel(username: changeUsernameViewModel.codeChefUsername)
+        self.codeChefViewModel = CodeChefViewModel(username: changeUsernameViewModel.codeChefUsername, codeChefAPIRepository: codeChefRepository)
         self.codeForcesViewModel = CodeForcesViewModel(username: changeUsernameViewModel.codeForcesUsername, repository: codeForcesRepository)
     }
 
@@ -47,7 +48,7 @@ final class Dependencies: Sendable {
     }
 
     func changeCodeChefUsername(codeChefUsername: String) {
-        codeChefViewModel = CodeChefViewModel(username: codeChefUsername)
+        codeChefViewModel = CodeChefViewModel(username: codeChefUsername, codeChefAPIRepository: codeChefRepository)
     }
 
     func changeCodeForcesUsername(codeForcesUsername: String) {
@@ -59,7 +60,7 @@ final class Dependencies: Sendable {
     }
 
     func reloadCodeChefUsername() {
-        codeChefViewModel = CodeChefViewModel(username: changeUsernameViewModel.codeChefUsername)
+        codeChefViewModel = CodeChefViewModel(username: changeUsernameViewModel.codeChefUsername, codeChefAPIRepository: codeChefRepository)
     }
 
     func reloadCodeForcesUsername() {

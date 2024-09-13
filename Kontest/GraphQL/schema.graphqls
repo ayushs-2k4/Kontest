@@ -137,12 +137,33 @@ type ProblemSolvedBeatsStats {
 }
 type Query {
   kontestQuery: KontestQuery
-  " Query to fetch CodeChef user data by username"
-  getCodeChefUser(username: String!): CodeChefUser
+  codeChefQuery: CodeChefQuery
+  
   " Query to fetch CodeForces user data by username"
   getCodeForcesUser(username: String!): CodeForcesUser
+  
   leetcodeQuery: LeetcodeQuery
 }
+
+type CodeChefQuery {
+    getCodeChefUser(username: String!): CodeChefUser
+    getUserKontestHistory(username: String!): [CodeChefContest]
+}
+
+type CodeChefContest {
+    code: String!
+    year: Int!
+    month: Int!
+    day: Int!
+    reason: String
+    penalisedIn: Boolean!
+    rating: Int!
+    rank: Int!
+    name: String!
+    endDate: String!
+    color: String!
+}
+
 type Question {
   acRate: Float
   difficulty: String

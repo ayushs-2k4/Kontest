@@ -351,8 +351,41 @@ query CompleteLeetcodeQuery($username: String!) {
 
 
 
+query CodeChefUserInfoQuery($username: String!) {
+	codeChefQuery {
+		getCodeChefUser(username: $username) {
+			success
+			profile
+			name
+			currentRating
+			highestRating
+			countryFlag
+			countryName
+			globalRank
+			countryRank
+			stars
+		}
+	}
+}
 
 
+query CodeChefUserKontestHistoryQuery($username: String!) {
+	codeChefQuery {
+		getUserKontestHistory(username: $username) {
+			code
+			year
+			month
+			day
+			reason
+			penalisedIn
+			rating
+			rank
+			name
+			endDate
+			color
+		}
+	}
+}
 
 
 
@@ -375,20 +408,35 @@ query AllThings {
 			}
 		}
 	}
-	getCodeChefUser(username: "ayushs_2k4") {
-		countryFlag
-		countryName
-		countryRank
-		currentRating
-		globalRank
-		highestRating
-		name
-		profile
-		stars
-		success
-		heatMap {
-			date
-			value
+	codeChefQuery {
+		getCodeChefUser(username: "ayushs_2k4") {
+			success
+			profile
+			name
+			currentRating
+			highestRating
+			countryFlag
+			countryName
+			globalRank
+			countryRank
+			stars
+			heatMap {
+				date
+				value
+			}
+		}
+		getUserKontestHistory(username: "ayushs_2k4") {
+			code
+			year
+			month
+			day
+			reason
+			penalisedIn
+			rating
+			rank
+			name
+			endDate
+			color
 		}
 	}
 	getCodeForcesUser(username: "ayushsinghals") {

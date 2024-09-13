@@ -7,7 +7,7 @@ public class AllThingsQuery: GraphQLQuery {
   public static let operationName: String = "AllThings"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
     definition: .init(
-      #"query AllThings { kontestQuery { __typename health supportedSites kontests(page: 1, perPage: 10) { __typename ... on Kontests { kontests { __typename endTime location name startTime url } } ... on KontestError { message } } } getCodeChefUser(username: "ayushs_2k4") { __typename countryFlag countryName countryRank currentRating globalRank highestRating name profile stars success heatMap { __typename date value } } getCodeForcesUser(username: "ayushsinghals") { __typename result { __typename ratings { __typename contestId contestName handle newRating oldRating rank ratingUpdateTimeSeconds } basicInfo { __typename avatar contribution friendOfCount handle lastOnlineTimeSeconds maxRank maxRating rank rating registrationTimeSeconds titlePhoto } } } leetcodeQuery { __typename activeDailyCodingChallengeQuestion { __typename date link userStatus question { __typename acRate difficulty freqBar hasSolution hasVideoSolution isFavor isPaidOnly questionFrontendId status title titleSlug topicTags { __typename id name slug } } } matchedUser(username: "ayushs_2k4") { __typename githubUrl linkedinUrl twitterUrl username contestBadge { __typename expired hoverText icon name } languageProblemCount { __typename languageName problemsSolved } problemsSolvedBeatsStats { __typename difficulty percentage } submitStatsGlobal { __typename acSubmissionNum { __typename count difficulty } } profile { __typename aboutMe categoryDiscussCount categoryDiscussCountDiff company countryName jobTitle postViewCount postViewCountDiff ranking realName reputation reputationDiff school skillTags solutionCount solutionCountDiff userAvatar websites } } userContestRanking(username: "ayushs_2k4") { __typename attendedContestsCount globalRanking rating topPercentage totalParticipants badge { __typename name } } userContestRankingHistory(username: "ayushs_2k4") { __typename attended finishTimeInSeconds problemsSolved ranking rating totalProblems trendDirection contest { __typename startTime title } } } }"#
+      #"query AllThings { kontestQuery { __typename health supportedSites kontests(page: 1, perPage: 10) { __typename ... on Kontests { kontests { __typename endTime location name startTime url } } ... on KontestError { message } } } codeChefQuery { __typename getCodeChefUser(username: "ayushs_2k4") { __typename success profile name currentRating highestRating countryFlag countryName globalRank countryRank stars heatMap { __typename date value } } getUserKontestHistory(username: "ayushs_2k4") { __typename code year month day reason penalisedIn rating rank name endDate color } } getCodeForcesUser(username: "ayushsinghals") { __typename result { __typename ratings { __typename contestId contestName handle newRating oldRating rank ratingUpdateTimeSeconds } basicInfo { __typename avatar contribution friendOfCount handle lastOnlineTimeSeconds maxRank maxRating rank rating registrationTimeSeconds titlePhoto } } } leetcodeQuery { __typename activeDailyCodingChallengeQuestion { __typename date link userStatus question { __typename acRate difficulty freqBar hasSolution hasVideoSolution isFavor isPaidOnly questionFrontendId status title titleSlug topicTags { __typename id name slug } } } matchedUser(username: "ayushs_2k4") { __typename githubUrl linkedinUrl twitterUrl username contestBadge { __typename expired hoverText icon name } languageProblemCount { __typename languageName problemsSolved } problemsSolvedBeatsStats { __typename difficulty percentage } submitStatsGlobal { __typename acSubmissionNum { __typename count difficulty } } profile { __typename aboutMe categoryDiscussCount categoryDiscussCountDiff company countryName jobTitle postViewCount postViewCountDiff ranking realName reputation reputationDiff school skillTags solutionCount solutionCountDiff userAvatar websites } } userContestRanking(username: "ayushs_2k4") { __typename attendedContestsCount globalRanking rating topPercentage totalParticipants badge { __typename name } } userContestRankingHistory(username: "ayushs_2k4") { __typename attended finishTimeInSeconds problemsSolved ranking rating totalProblems trendDirection contest { __typename startTime title } } } }"#
     ))
 
   public init() {}
@@ -19,14 +19,13 @@ public class AllThingsQuery: GraphQLQuery {
     public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.Query }
     public static var __selections: [ApolloAPI.Selection] { [
       .field("kontestQuery", KontestQuery?.self),
-      .field("getCodeChefUser", GetCodeChefUser?.self, arguments: ["username": "ayushs_2k4"]),
+      .field("codeChefQuery", CodeChefQuery?.self),
       .field("getCodeForcesUser", GetCodeForcesUser?.self, arguments: ["username": "ayushsinghals"]),
       .field("leetcodeQuery", LeetcodeQuery?.self),
     ] }
 
     public var kontestQuery: KontestQuery? { __data["kontestQuery"] }
-    ///  Query to fetch CodeChef user data by username
-    public var getCodeChefUser: GetCodeChefUser? { __data["getCodeChefUser"] }
+    public var codeChefQuery: CodeChefQuery? { __data["codeChefQuery"] }
     ///  Query to fetch CodeForces user data by username
     public var getCodeForcesUser: GetCodeForcesUser? { __data["getCodeForcesUser"] }
     public var leetcodeQuery: LeetcodeQuery? { __data["leetcodeQuery"] }
@@ -128,58 +127,112 @@ public class AllThingsQuery: GraphQLQuery {
       }
     }
 
-    /// GetCodeChefUser
+    /// CodeChefQuery
     ///
-    /// Parent Type: `CodeChefUser`
-    public struct GetCodeChefUser: KontestGraphQLSchema.SelectionSet {
+    /// Parent Type: `CodeChefQuery`
+    public struct CodeChefQuery: KontestGraphQLSchema.SelectionSet {
       public let __data: DataDict
       public init(_dataDict: DataDict) { __data = _dataDict }
 
-      public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.CodeChefUser }
+      public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.CodeChefQuery }
       public static var __selections: [ApolloAPI.Selection] { [
         .field("__typename", String.self),
-        .field("countryFlag", String.self),
-        .field("countryName", String.self),
-        .field("countryRank", Int.self),
-        .field("currentRating", Int.self),
-        .field("globalRank", Int.self),
-        .field("highestRating", Int.self),
-        .field("name", String.self),
-        .field("profile", String.self),
-        .field("stars", String.self),
-        .field("success", Bool.self),
-        .field("heatMap", [HeatMap].self),
+        .field("getCodeChefUser", GetCodeChefUser?.self, arguments: ["username": "ayushs_2k4"]),
+        .field("getUserKontestHistory", [GetUserKontestHistory?]?.self, arguments: ["username": "ayushs_2k4"]),
       ] }
 
-      public var countryFlag: String { __data["countryFlag"] }
-      public var countryName: String { __data["countryName"] }
-      public var countryRank: Int { __data["countryRank"] }
-      public var currentRating: Int { __data["currentRating"] }
-      public var globalRank: Int { __data["globalRank"] }
-      public var highestRating: Int { __data["highestRating"] }
-      public var name: String { __data["name"] }
-      public var profile: String { __data["profile"] }
-      public var stars: String { __data["stars"] }
-      public var success: Bool { __data["success"] }
-      public var heatMap: [HeatMap] { __data["heatMap"] }
+      public var getCodeChefUser: GetCodeChefUser? { __data["getCodeChefUser"] }
+      public var getUserKontestHistory: [GetUserKontestHistory?]? { __data["getUserKontestHistory"] }
 
-      /// GetCodeChefUser.HeatMap
+      /// CodeChefQuery.GetCodeChefUser
       ///
-      /// Parent Type: `HeatMapEntry`
-      public struct HeatMap: KontestGraphQLSchema.SelectionSet {
+      /// Parent Type: `CodeChefUser`
+      public struct GetCodeChefUser: KontestGraphQLSchema.SelectionSet {
         public let __data: DataDict
         public init(_dataDict: DataDict) { __data = _dataDict }
 
-        public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.HeatMapEntry }
+        public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.CodeChefUser }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
-          .field("date", String.self),
-          .field("value", Int.self),
+          .field("success", Bool.self),
+          .field("profile", String.self),
+          .field("name", String.self),
+          .field("currentRating", Int.self),
+          .field("highestRating", Int.self),
+          .field("countryFlag", String.self),
+          .field("countryName", String.self),
+          .field("globalRank", Int.self),
+          .field("countryRank", Int.self),
+          .field("stars", String.self),
+          .field("heatMap", [HeatMap].self),
         ] }
 
-        public var date: String { __data["date"] }
-        ///  The date of the heat map entry
-        public var value: Int { __data["value"] }
+        public var success: Bool { __data["success"] }
+        public var profile: String { __data["profile"] }
+        public var name: String { __data["name"] }
+        public var currentRating: Int { __data["currentRating"] }
+        public var highestRating: Int { __data["highestRating"] }
+        public var countryFlag: String { __data["countryFlag"] }
+        public var countryName: String { __data["countryName"] }
+        public var globalRank: Int { __data["globalRank"] }
+        public var countryRank: Int { __data["countryRank"] }
+        public var stars: String { __data["stars"] }
+        public var heatMap: [HeatMap] { __data["heatMap"] }
+
+        /// CodeChefQuery.GetCodeChefUser.HeatMap
+        ///
+        /// Parent Type: `HeatMapEntry`
+        public struct HeatMap: KontestGraphQLSchema.SelectionSet {
+          public let __data: DataDict
+          public init(_dataDict: DataDict) { __data = _dataDict }
+
+          public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.HeatMapEntry }
+          public static var __selections: [ApolloAPI.Selection] { [
+            .field("__typename", String.self),
+            .field("date", String.self),
+            .field("value", Int.self),
+          ] }
+
+          public var date: String { __data["date"] }
+          ///  The date of the heat map entry
+          public var value: Int { __data["value"] }
+        }
+      }
+
+      /// CodeChefQuery.GetUserKontestHistory
+      ///
+      /// Parent Type: `CodeChefContest`
+      public struct GetUserKontestHistory: KontestGraphQLSchema.SelectionSet {
+        public let __data: DataDict
+        public init(_dataDict: DataDict) { __data = _dataDict }
+
+        public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.CodeChefContest }
+        public static var __selections: [ApolloAPI.Selection] { [
+          .field("__typename", String.self),
+          .field("code", String.self),
+          .field("year", Int.self),
+          .field("month", Int.self),
+          .field("day", Int.self),
+          .field("reason", String?.self),
+          .field("penalisedIn", Bool.self),
+          .field("rating", Int.self),
+          .field("rank", Int.self),
+          .field("name", String.self),
+          .field("endDate", String.self),
+          .field("color", String.self),
+        ] }
+
+        public var code: String { __data["code"] }
+        public var year: Int { __data["year"] }
+        public var month: Int { __data["month"] }
+        public var day: Int { __data["day"] }
+        public var reason: String? { __data["reason"] }
+        public var penalisedIn: Bool { __data["penalisedIn"] }
+        public var rating: Int { __data["rating"] }
+        public var rank: Int { __data["rank"] }
+        public var name: String { __data["name"] }
+        public var endDate: String { __data["endDate"] }
+        public var color: String { __data["color"] }
       }
     }
 
