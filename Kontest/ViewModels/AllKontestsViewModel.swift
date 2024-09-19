@@ -65,9 +65,9 @@ final class AllKontestsViewModel: Sendable {
 
         Task {
             do {
-                let authenticatedUser = try AuthenticationManager.shared.getAuthenticatedUser()
+                let authenticatedUser = await AuthenticationManager.shared.getAuthenticatedUser()
 
-                if let userEmail = authenticatedUser.email {
+                if let userEmail = authenticatedUser?.email {
                     try await AuthenticationEmailViewModel.shared.setDownloadedUsernamesAsLocalUsernames(userId: userEmail)
                 }
             } catch {}

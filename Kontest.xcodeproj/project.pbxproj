@@ -121,6 +121,8 @@
 		07AA75322B501AEB00DCD75B /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 07AA75312B501AEB00DCD75B /* SwiftSoup */; };
 		07AA75342B501AF200DCD75B /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 07AA75332B501AF200DCD75B /* SwiftSoup */; };
 		07BDE0922B546BDE0059A5FA /* SignInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BDE0912B546BDE0059A5FA /* SignInScreen.swift */; };
+		07BF6EA52C9B516500BE6142 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BF6EA42C9B516500BE6142 /* KeychainHelper.swift */; };
+		07BF6EA72C9B517800BE6142 /* JWTUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BF6EA62C9B517800BE6142 /* JWTUtil.swift */; };
 		07C993752B8476F7008411D7 /* AutomaticNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C993742B8476F7008411D7 /* AutomaticNotificationsViewModel.swift */; };
 		07CF4FD22C9197370076C601 /* KontestGraphQLSchema in Frameworks */ = {isa = PBXBuildFile; productRef = 07CF4FD12C9197370076C601 /* KontestGraphQLSchema */; };
 		07D766692AC8404A000A3DFD /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D766682AC8404A000A3DFD /* Sidebar.swift */; };
@@ -299,6 +301,8 @@
 		07A7501F2AB23CA000FC72A5 /* NoKontestsDueToFiltersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoKontestsDueToFiltersScreen.swift; sourceTree = "<group>"; };
 		07AA752D2B4FCF7A00DCD75B /* KontestNewRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KontestNewRepository.swift; sourceTree = "<group>"; };
 		07BDE0912B546BDE0059A5FA /* SignInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInScreen.swift; sourceTree = "<group>"; };
+		07BF6EA42C9B516500BE6142 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		07BF6EA62C9B517800BE6142 /* JWTUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTUtil.swift; sourceTree = "<group>"; };
 		07C6EE8F2ABAE38900FEA3D7 /* WidgetCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetCache.swift; sourceTree = "<group>"; };
 		07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingKontestsWidgetCache.swift; sourceTree = "<group>"; };
 		07C993742B8476F7008411D7 /* AutomaticNotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticNotificationsViewModel.swift; sourceTree = "<group>"; };
@@ -766,6 +770,8 @@
 		07ECFB642AA58259008513C6 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				07BF6EA62C9B517800BE6142 /* JWTUtil.swift */,
+				07BF6EA42C9B516500BE6142 /* KeychainHelper.swift */,
 				07C6EE922ABAE4D700FEA3D7 /* WidgetCache */,
 				07A31EFF2AAC818D00EBC296 /* FilterWebsiteKey.swift */,
 				07ECFB652AA58259008513C6 /* Constants.swift */,
@@ -1106,9 +1112,11 @@
 				079CF5502B527ECD00BE8E13 /* CodeChefContestInfoDTO.swift in Sources */,
 				07C993752B8476F7008411D7 /* AutomaticNotificationsViewModel.swift in Sources */,
 				07E92C902C5B68FE00E3D6D3 /* KontestNewAPIRepository_UsingFirebase.swift in Sources */,
+				07BF6EA72C9B517800BE6142 /* JWTUtil.swift in Sources */,
 				07A31F002AAC818D00EBC296 /* FilterWebsiteKey.swift in Sources */,
 				07ECFBC42AA583A8008513C6 /* LeetCodeUserProfileGraphQLAPIModel.swift in Sources */,
 				07ECFBA22AA58259008513C6 /* SingleKontestView.swift in Sources */,
+				07BF6EA52C9B516500BE6142 /* KeychainHelper.swift in Sources */,
 				07ECFBA92AA58259008513C6 /* Screen.swift in Sources */,
 				07ECFB9F2AA58259008513C6 /* CodeForcesRatingsView.swift in Sources */,
 				07ECFBAB2AA58259008513C6 /* DownloadData.swift in Sources */,

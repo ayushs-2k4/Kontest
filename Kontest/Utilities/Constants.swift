@@ -12,20 +12,20 @@ enum Constants {
     static let maximumDurationOfAKontestInMinutes = 12 * 60
     static let minimumDurationOfAKontestInMinutes = 0
     #if os(macOS)
-    static let userDefaultsGroupID = "R2Z9FDM5M6.com.ayushsinghal.kontest"
+        static let userDefaultsGroupID = "R2Z9FDM5M6.com.ayushsinghal.kontest"
     #else
-    static let userDefaultsGroupID = "group.com.ayushsinghal.kontest"
+        static let userDefaultsGroupID = "group.com.ayushsinghal.kontest"
     #endif
     static let codeforcesNotAvailableErrorResponseMessage = "Codeforces is temporarily unavailable"
-
+    
     static let maximumDurationOfAKontestInMinutesKey = "maximumDurationOfAKontestInMinutesKey"
     static let minimumDurationOfAKontestInMinutesKey = "minimumDurationOfAKontestInMinutesKey"
-
+    
     static let minimumLimitOfMinutesOfKontest = 0
     static let maximumLimitOfMinutesOfKontest = 12 * 60
-
+    
     static let states: [String] = ["Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Dehradun", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Puducherry", "Punjab", "Punjab and Haryana", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"]
-
+    
     enum SiteAbbreviations: String {
         case AtCoder
         case CodeChef
@@ -42,7 +42,7 @@ enum Constants {
         case Toph
         case YukiCoder = "Yuki Coder"
         case CupsOnline = "Cups Online"
-
+        
         case RoboContext = "Robo Contest"
         case Ctftime = "CTFtime"
         case Lightoj = "Light OJ"
@@ -55,22 +55,24 @@ enum Constants {
         case ICPCGlobal
         case Luogu
         case Spoj = "SPOJ"
-        case GSU = "GSU"
+        case GSU
     }
-
-//    static let automaticNotificationSuffix = "automaticNotificationSuffix"
+    
+    //    static let automaticNotificationSuffix = "automaticNotificationSuffix"
     static let automaticNotification10MinutesSuffix = "automaticNotification10MinutesSuffix"
     static let automaticNotification30MinutesSuffix = "automaticNotification30MinutesSuffix"
     static let automaticNotification1HourSuffix = "automaticNotification1HourSuffix"
     static let automaticNotification6HoursSuffix = "automaticNotification6HoursSuffix"
-
+    
     static let automaticCalendarEventSuffix = "automaticReminderSuffix"
     
     static let mySiteBaseURL: String = "https://kontest-api.ayushsinghal.tech"
     
-    struct Endpoints {
-        static private let graphql = "/graphql"
-        static private let kontests = "/kontests"
+    enum Endpoints {
+        private static let graphql = "/graphql"
+        private static let kontests = "/kontests"
+        private static let auth = "/auth"
+        private static let userService = "/user-service"
         
         // Computed properties to return full URLs
         static var graphqlURL: String {
@@ -80,5 +82,15 @@ enum Constants {
         static var kontestsURL: String {
             return "\(mySiteBaseURL)\(kontests)"
         }
+        
+        static var authenticationURL: String {
+            return "\(mySiteBaseURL)\(auth)"
+        }
+        
+        static var userServiceURL: String {
+            return "\(mySiteBaseURL)\(userService)"
+        }
     }
+    
+    static let keychainServiceName = "com.ayushsinghal.Kontest.keychain"
 }

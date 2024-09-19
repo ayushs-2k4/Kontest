@@ -73,23 +73,24 @@ struct MainChangeUsernameView: View {
                               focusedField: _focusedField,
                               currentField: .CodeChef,
                               onPressingNext: {
-                                  completeForm()
+                                  Task {
+                                      try await completeForm()
+                                  }
                               })
 
         Button("Save") {
-            completeForm()
+            Task {
+                try await completeForm()
+            }
         }
         .keyboardShortcut(.return)
     }
 
-    func completeForm() {
-        UserManager.shared.updateUserUsernames(
-            oldLeetcodeUsername: changeUsernameViewModel.leetcodeUsername,
-            newLeetcodeUsername: leetcodeUsername,
-            oldCodeForcesUsername: changeUsernameViewModel.codeForcesUsername,
-            newCodeForcesUsername: codeForcesUsername,
-            oldCodeChefUsername: changeUsernameViewModel.codeChefUsername,
-            newCodeChefUsername: codeChefUsername
+    func completeForm() async throws {
+        try await UserManager.shared.updateUserDetails(
+            leetcodeUsername: leetcodeUsername,
+            codeForcesUsername: codeForcesUsername,
+            codeChefUsername: codeChefUsername
         )
 
         changeUsernameViewModel.setCodeForcesUsername(newCodeForcesUsername: codeForcesUsername)

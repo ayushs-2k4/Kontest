@@ -50,7 +50,7 @@ final class AuthenticationEmailViewModel: Sendable {
             logger.log("Success in logging in with email - password")
             logger.log("returnedUserData: \("\(returnedUserData)")")
 
-            let uid = returnedUserData.email ?? returnedUserData.uid
+            let uid = returnedUserData.email
 
             try await setDownloadedUsernamesAsLocalUsernames(userId: uid)
 
@@ -113,8 +113,7 @@ final class AuthenticationEmailViewModel: Sendable {
 
             self.isLoading = false
 
-            try UserManager.shared.createNewUser(
-                auth: returnedUserData,
+            try await UserManager.shared.updateUserDetails(
                 firstName: self.firstName,
                 lastName: self.lastName,
                 selectedCollegeState: self.selectedState,
@@ -181,7 +180,7 @@ final class AuthenticationEmailViewModel: Sendable {
     }
 
     func setDownloadedUsernamesAsLocalUsernames(userId: String) async throws {
-        let data = try await UserManager.shared.getUser(userId: userId)
+        let data = try await UserManager.shared.getUser()
 
         let changeUsernameViewModel: ChangeUsernameViewModel = Dependencies.instance.changeUsernameViewModel
         changeUsernameViewModel.setLeetcodeUsername(newLeetcodeUsername: data.leetcodeUsername == "" ? changeUsernameViewModel.leetcodeUsername : data.leetcodeUsername)
