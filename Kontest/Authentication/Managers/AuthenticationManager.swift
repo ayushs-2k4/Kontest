@@ -274,7 +274,7 @@ final class TokenManager: Sendable {
     
     private let jwtTokenKey = "jwtToken"
     private let refreshTokenKey = "refreshToken"
-    private let keychainService = Constants.keychainServiceName
+    private let keychainService = Constants.keychainAuthTokensServiceName
     
     static let shared = TokenManager()
     
@@ -320,7 +320,7 @@ final class TokenManager: Sendable {
     
     func getRefreshTokenLocally() -> String? {
         logger.info("Fetching refresh token from Keychain.")
-        guard let tokenData = KeychainHelper.retrieveData(forService: Constants.keychainServiceName, account: "refreshToken"),
+        guard let tokenData = KeychainHelper.retrieveData(forService: Constants.keychainAuthTokensServiceName, account: "refreshToken"),
               let token = String(data: tokenData, encoding: .utf8)
         else {
             return nil

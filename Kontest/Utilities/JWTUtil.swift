@@ -15,21 +15,21 @@ class JWTUtil {
     // MARK: - Storing JWT Tokens
     
     static func storeAccessToken(_ token: String) -> Bool {
-        return KeychainHelper.storeData(data: token.data(using: .utf8)!, forService: Constants.keychainServiceName, account: accessTokenAccount)
+        return KeychainHelper.storeData(data: token.data(using: .utf8)!, forService: Constants.keychainAuthTokensServiceName, account: accessTokenAccount)
     }
     
     static func storeRefreshToken(_ token: String) -> Bool {
-        return KeychainHelper.storeData(data: token.data(using: .utf8)!, forService: Constants.keychainServiceName, account: refreshTokenAccount)
+        return KeychainHelper.storeData(data: token.data(using: .utf8)!, forService: Constants.keychainAuthTokensServiceName, account: refreshTokenAccount)
     }
     
     // MARK: - Retrieving JWT Tokens
     
     static func retrieveAccessToken() -> String? {
-        return retrieveToken(forService: Constants.keychainServiceName, account: accessTokenAccount)
+        return retrieveToken(forService: Constants.keychainAuthTokensServiceName, account: accessTokenAccount)
     }
     
     static func retrieveRefreshToken() -> String? {
-        return retrieveToken(forService: Constants.keychainServiceName, account: refreshTokenAccount)
+        return retrieveToken(forService: Constants.keychainAuthTokensServiceName, account: refreshTokenAccount)
     }
     
     private static func retrieveToken(forService service: String, account: String) -> String? {
@@ -42,11 +42,11 @@ class JWTUtil {
     // MARK: - Deleting JWT Tokens
     
     static func deleteAccessToken() {
-        KeychainHelper.deleteData(forService: Constants.keychainServiceName, account: accessTokenAccount)
+        KeychainHelper.deleteData(forService: Constants.keychainAuthTokensServiceName, account: accessTokenAccount)
     }
     
     static func deleteRefreshToken() {
-        KeychainHelper.deleteData(forService: Constants.keychainServiceName, account: refreshTokenAccount)
+        KeychainHelper.deleteData(forService: Constants.keychainAuthTokensServiceName, account: refreshTokenAccount)
     }
     
     // MARK: - JWT Decoding (Optional)

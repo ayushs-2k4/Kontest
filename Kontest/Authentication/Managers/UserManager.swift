@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class UserManager: Sendable {
+actor UserManager {
     static var shared = UserManager()
     
     private init() {}
