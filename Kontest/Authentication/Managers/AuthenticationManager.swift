@@ -139,13 +139,12 @@ public final class AuthenticationManager: Sendable {
         }
         
         let decoder = JSONDecoder()
-        let authResponse = try decoder.decode(SignupResponse.self, from: data)
         
         // Sign in after registration
         let loginResponse = try await signIn(email: email, password: password)
         
         logger.info("User registration successful for email: \(email)")
-        return SignupResponse(email: authResponse.email, jwtToken: authResponse.jwtToken, refreshToken: authResponse.refreshToken)
+        return SignupResponse(email: loginResponse.email, jwtToken: loginResponse.jwtToken, refreshToken: loginResponse.refreshToken)
     }
     
     func signOut() async throws {
