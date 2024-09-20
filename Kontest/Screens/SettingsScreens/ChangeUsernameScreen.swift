@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import OSLog
 
 struct ChangeUsernameScreen: View {
     var body: some View {
@@ -22,6 +23,8 @@ struct ChangeUsernameScreen: View {
 }
 
 struct MainChangeUsernameView: View {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "MainChangeUsernameView")
+    
     let changeUsernameViewModel: ChangeUsernameViewModel = Dependencies.instance.changeUsernameViewModel
 
     @State private var leetcodeUsername: String = ""
@@ -80,18 +83,23 @@ struct MainChangeUsernameView: View {
 
         Button("Save") {
             Task {
-                try await completeForm()
+                await completeForm()
             }
         }
         .keyboardShortcut(.return)
     }
 
-    func completeForm() async throws {
-        try await UserManager.shared.updateUserDetails(
-            leetcodeUsername: leetcodeUsername,
-            codeForcesUsername: codeForcesUsername,
-            codeChefUsername: codeChefUsername
-        )
+    func completeForm() async {
+        do {
+            try await UserManager.shared.updateUserDetails(
+                leetcodeUsername: leetcodeUsername,
+                codeForcesUsername: codeForcesUsername,
+                codeChefUsername: codeChefUsername
+            )
+        }
+        catch {
+            logger.error("Error in uploading usernames to server: \(error.localizedDescription)")
+        }
 
         changeUsernameViewModel.setCodeForcesUsername(newCodeForcesUsername: codeForcesUsername)
         changeUsernameViewModel.setLeetcodeUsername(newLeetcodeUsername: leetcodeUsername)
