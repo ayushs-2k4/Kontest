@@ -124,6 +124,7 @@
 		07BF6EA52C9B516500BE6142 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BF6EA42C9B516500BE6142 /* KeychainHelper.swift */; };
 		07BF6EA72C9B517800BE6142 /* JWTUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BF6EA62C9B517800BE6142 /* JWTUtil.swift */; };
 		07C993752B8476F7008411D7 /* AutomaticNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C993742B8476F7008411D7 /* AutomaticNotificationsViewModel.swift */; };
+		07CAB6B92C9D9223001332D0 /* CryptoKitUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CAB6B82C9D9223001332D0 /* CryptoKitUtility.swift */; };
 		07CF4FD22C9197370076C601 /* KontestGraphQLSchema in Frameworks */ = {isa = PBXBuildFile; productRef = 07CF4FD12C9197370076C601 /* KontestGraphQLSchema */; };
 		07D766692AC8404A000A3DFD /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D766682AC8404A000A3DFD /* Sidebar.swift */; };
 		07D7666C2AC8407B000A3DFD /* DetailColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7666B2AC8407B000A3DFD /* DetailColumn.swift */; };
@@ -306,6 +307,7 @@
 		07C6EE8F2ABAE38900FEA3D7 /* WidgetCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetCache.swift; sourceTree = "<group>"; };
 		07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingKontestsWidgetCache.swift; sourceTree = "<group>"; };
 		07C993742B8476F7008411D7 /* AutomaticNotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutomaticNotificationsViewModel.swift; sourceTree = "<group>"; };
+		07CAB6B82C9D9223001332D0 /* CryptoKitUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoKitUtility.swift; sourceTree = "<group>"; };
 		07CFEBA32AB02DCB00291484 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		07CFEBA52AB02DCB00291484 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		07CFEC042AB042F500291484 /* UpcomingWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingWidgetView.swift; sourceTree = "<group>"; };
@@ -792,6 +794,7 @@
 				07D7666D2AC84094000A3DFD /* Panel.swift */,
 				07367C472ACA097000A558ED /* DeviceType.swift */,
 				07D9FFCC2AD9A5D000C03A3A /* HapticFeedbackUtility.swift */,
+				07CAB6B82C9D9223001332D0 /* CryptoKitUtility.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1072,6 +1075,7 @@
 				07060E312C9372A000AAFC3A /* MultipleCodeForcesRepostories.swift in Sources */,
 				076134CF2AA86AC300946B02 /* KontestDetailViewModel.swift in Sources */,
 				07ECFB9A2AA58259008513C6 /* RatingsView.swift in Sources */,
+				07CAB6B92C9D9223001332D0 /* CryptoKitUtility.swift in Sources */,
 				07ECFB842AA58259008513C6 /* CodeChefViewModel.swift in Sources */,
 				07ECFB852AA58259008513C6 /* CodeForcesViewModel.swift in Sources */,
 				07FD85AB2AB804FA00D26C4C /* NotificationsViewModelProtocol.swift in Sources */,

@@ -86,7 +86,12 @@ public final class AuthenticationManager: Sendable {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let body: [String: Any] = ["email": email, "password": password]
+        let body: [String: Any] = [
+            "email": email,
+            "password": password,
+            "device_id": CryptoKitUtility.sha512(for: KeychainHelper.getUniqueDeviceIdentifier())
+        ]
+        
         request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
         
         let (data, response) = try await URLSession.shared.data(for: request)
@@ -126,7 +131,7 @@ public final class AuthenticationManager: Sendable {
         
         request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
         
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (_, response) = try await URLSession.shared.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse else {
             logger.error("Failed to get HTTP response during user registration.")
@@ -137,8 +142,6 @@ public final class AuthenticationManager: Sendable {
             logger.error("User registration failed with status code: \(httpResponse.statusCode)")
             throw handleError(for: httpResponse.statusCode)
         }
-        
-        let decoder = JSONDecoder()
         
         // Sign in after registration
         let loginResponse = try await signIn(email: email, password: password)
