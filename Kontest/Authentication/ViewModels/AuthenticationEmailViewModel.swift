@@ -117,7 +117,10 @@ final class AuthenticationEmailViewModel: Sendable {
                 firstName: self.firstName,
                 lastName: self.lastName,
                 selectedCollegeState: self.selectedState,
-                selectedCollege: self.selectedCollege
+                selectedCollege: self.selectedCollege,
+                leetcodeUsername: Dependencies.instance.changeUsernameViewModel.leetcodeUsername,
+                codeForcesUsername: Dependencies.instance.changeUsernameViewModel.codeForcesUsername,
+                codeChefUsername: Dependencies.instance.changeUsernameViewModel.codeChefUsername
             )
 
             return true
