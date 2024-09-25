@@ -8,7 +8,7 @@
 	</array>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)com.ayushsinghal.Kontest.authTokens</string>
+		<string>$(AppIdentifierPrefix)com.ayushsinghal.Kontest.authenticationTokens</string>
 	</array>
 </dict>
 </plist>

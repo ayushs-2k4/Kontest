@@ -48,6 +48,14 @@ public final class AuthenticationManager: Sendable {
     
     static let shared = AuthenticationManager()
     
+    static private(set) var isAuthenticated: Bool = false
+    
+    private init() {
+        Task {
+            AuthenticationManager.isAuthenticated = await self.checkAuthenticationStatus()
+        }
+    }
+    
     func handleError(for statusCode: Int) -> any Error {
         switch statusCode {
         case 401:
@@ -115,6 +123,9 @@ public final class AuthenticationManager: Sendable {
         TokenManager.shared.storeTokens(jwtToken: loginResponse.jwtToken, refreshToken: loginResponse.refreshToken)
         
         logger.info("Sign-in successful for email: \(email)")
+        
+        AuthenticationManager.isAuthenticated = true
+        
         return loginResponse
     }
     
@@ -154,8 +165,42 @@ public final class AuthenticationManager: Sendable {
         return SignupResponse(email: loginResponse.email, jwtToken: loginResponse.jwtToken, refreshToken: loginResponse.refreshToken)
     }
     
+    func changePassword(newPassword: String) async throws {
+        let jwtToken = await getJWTToken()
+        
+        let url = URL(string: Constants.Endpoints.authenticationURL)!.appendingPathComponent("auth/reset-password")
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let body: [String: Any] = [
+            "newPassword": newPassword
+        ]
+        
+        request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
+        request.setValue(jwtToken, forHTTPHeaderField: "Authorization")
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            logger.error("Failed to get HTTP response during password change.")
+            throw URLError(.badServerResponse)
+        }
+        
+        guard httpResponse.statusCode == 200 else {
+            logger.error("Password change failed with status code: \(httpResponse.statusCode) and response: \(response)")
+            throw handleError(for: httpResponse.statusCode)
+        }
+        
+        logger.info("Password changed")
+    }
+    
     func signOut() async throws {
         TokenManager.shared.clearTokens()
+        
+        AuthenticationManager.isAuthenticated = false
+        
         logger.info("Signed out successfully.")
     }
     
@@ -179,20 +224,26 @@ public final class AuthenticationManager: Sendable {
             if let jwtToken = await TokenManager.shared.getJWTTokenLocally() {
                 if TokenManager.shared.isJWTTokenValidLocally(jwtToken: jwtToken) {
                     logger.info("JWT token is valid.")
-                    return true
+                    
+                    AuthenticationManager.isAuthenticated = true
                 } else {
                     logger.info("JWT token is expired. Attempting to refresh...")
                     try await refreshToken()
-                    return true
+                    
+                    AuthenticationManager.isAuthenticated = true
                 }
             } else {
                 logger.info("No JWT token found.")
-                return false
+                
+                AuthenticationManager.isAuthenticated = false
             }
         } catch {
             logger.error("Error checking authentication status: \(error.localizedDescription)")
-            return false
+            
+            AuthenticationManager.isAuthenticated = false
         }
+        
+        return AuthenticationManager.isAuthenticated
     }
     
     // Function to refresh JWT token

@@ -70,6 +70,7 @@
 		0779F4752ABD5B64004E50F6 /* UpcomingKontestsWidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE932ABAE4EF00FEA3D7 /* UpcomingKontestsWidgetCache.swift */; };
 		0779F4762ABD5B71004E50F6 /* WidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE8F2ABAE38900FEA3D7 /* WidgetCache.swift */; };
 		0779F4772ABD5B73004E50F6 /* WidgetCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C6EE8F2ABAE38900FEA3D7 /* WidgetCache.swift */; };
+		077E0BC32CA42896005536F5 /* ChangePasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E0BC22CA42896005536F5 /* ChangePasswordScreen.swift */; };
 		077E6EAD2AB4B1D10003E897 /* ErrorWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EAC2AB4B1D10003E897 /* ErrorWrapper.swift */; };
 		077E6EAF2AB4B2120003E897 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EAE2AB4B2120003E897 /* ErrorView.swift */; };
 		077E6EB12AB4B3220003E897 /* ErrorState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077E6EB02AB4B3220003E897 /* ErrorState.swift */; };
@@ -276,6 +277,7 @@
 		077685262B56A50C00A1449F /* AccountInformationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInformationScreen.swift; sourceTree = "<group>"; };
 		077685282B56A60200A1449F /* AccountInformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInformationViewModel.swift; sourceTree = "<group>"; };
 		077921B52C8B989F0021F70B /* Kontest.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kontest.entitlements; sourceTree = "<group>"; };
+		077E0BC22CA42896005536F5 /* ChangePasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordScreen.swift; sourceTree = "<group>"; };
 		077E6EAC2AB4B1D10003E897 /* ErrorWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorWrapper.swift; sourceTree = "<group>"; };
 		077E6EAE2AB4B2120003E897 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		077E6EB02AB4B3220003E897 /* ErrorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorState.swift; sourceTree = "<group>"; };
@@ -567,6 +569,7 @@
 			children = (
 				079A671E2B544CD000901C0D /* SignUpScreen.swift */,
 				07BDE0912B546BDE0059A5FA /* SignInScreen.swift */,
+				077E0BC22CA42896005536F5 /* ChangePasswordScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -1143,6 +1146,7 @@
 				073E75822C916ECB00E5B934 /* Fetcher.swift in Sources */,
 				07ECFB942AA58259008513C6 /* CodeChefAPIModel.swift in Sources */,
 				07567EA52AB645E9007EFEE1 /* AddToCalendarIntent.swift in Sources */,
+				077E0BC32CA42896005536F5 /* ChangePasswordScreen.swift in Sources */,
 				07EBCC8E2C93FCFC00F0CE9E /* CodeChefNewAPIRepository.swift in Sources */,
 				077685272B56A50C00A1449F /* AccountInformationScreen.swift in Sources */,
 				07060E2F2C936CFF00AAFC3A /* MultipleLeetCodeRepostories.swift in Sources */,

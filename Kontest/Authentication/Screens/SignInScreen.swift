@@ -44,28 +44,7 @@ struct SignInScreen: View {
             }
 
             if let error = authenticationEmailViewModel.error {
-                HStack {
-                    Spacer()
-
-                    if let appError = error as? AppError {
-                        VStack(alignment: .trailing) {
-                            Text(appError.title)
-                                .foregroundStyle(.red)
-                                .padding(.horizontal)
-
-                            if !appError.description.isEmpty {
-                                Text(appError.description)
-                                    .font(.caption2)
-                                    .foregroundStyle(.red)
-                                    .padding(.horizontal)
-                            }
-                        }
-                    } else {
-                        Text(error.localizedDescription)
-                            .foregroundStyle(.red)
-                            .padding(.horizontal)
-                    }
-                }
+                TextErrorView(error: error)
             }
 
             HStack {
@@ -179,6 +158,35 @@ private struct SignInViewTextField: View {
             RoundedRectangle(cornerRadius: 5)
                 .stroke(Color(.systemGray), lineWidth: 1)
         )
+    }
+}
+
+struct TextErrorView: View {
+    let error: any Error
+    
+    var body: some View {
+        HStack {
+            Spacer()
+
+            if let appError = error as? AppError {
+                VStack(alignment: .trailing) {
+                    Text(appError.title)
+                        .foregroundStyle(.red)
+                        .padding(.horizontal)
+
+                    if !appError.description.isEmpty {
+                        Text(appError.description)
+                            .font(.caption2)
+                            .foregroundStyle(.red)
+                            .padding(.horizontal)
+                    }
+                }
+            } else {
+                Text(error.localizedDescription)
+                    .foregroundStyle(.red)
+                    .padding(.horizontal)
+            }
+        }
     }
 }
 

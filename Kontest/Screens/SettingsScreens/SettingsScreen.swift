@@ -29,7 +29,6 @@ private struct AllSettingsButtonsView: View {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "AllSettingsButtonsView")
 
     @Environment(Router.self) private var router
-    @State private var isAuthenticated: Bool = false
 
     var body: some View {
         Button("Change Usernames") {
@@ -40,16 +39,17 @@ private struct AllSettingsButtonsView: View {
             router.appendScreen(screen: Screen.SettingsScreenType(.FilterWebsitesScreen))
         }
 
-        Button(isAuthenticated ? "Account Information" : "Sign In/ Sign Up") {
-            if isAuthenticated {
+        Button(AuthenticationManager.isAuthenticated ? "Account Information" : "Sign In/ Sign Up") {
+            if AuthenticationManager.isAuthenticated {
                 router.appendScreen(screen: Screen.SettingsScreenType(.AuthenticationScreenType(.AccountInformationScreen)))
             } else {
                 router.appendScreen(screen: Screen.SettingsScreenType(.AuthenticationScreenType(.SignInScreen)))
             }
         }
-        .onAppear {
-            Task {
-                isAuthenticated = await AuthenticationManager.shared.checkAuthenticationStatus()
+        
+        if AuthenticationManager.isAuthenticated {
+            Button("Change Password") {
+                router.appendScreen(screen: Screen.SettingsScreenType(.ChangePasswordScreen))
             }
         }
 

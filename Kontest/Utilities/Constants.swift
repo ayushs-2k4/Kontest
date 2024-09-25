@@ -92,5 +92,5 @@ enum Constants {
         }
     }
     
-    static let keychainAuthTokensServiceName = "com.ayushsinghal.Kontest.authTokens"
+    static let keychainAuthTokensServiceName = "com.ayushsinghal.Kontest.authenticationTokens"
 }

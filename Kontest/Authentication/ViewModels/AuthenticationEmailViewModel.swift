@@ -190,6 +190,29 @@ final class AuthenticationEmailViewModel: Sendable {
         changeUsernameViewModel.setCodeChefUsername(newCodeChefUsername: data.codeChefUsername == "" ? changeUsernameViewModel.codeChefUsername : data.codeChefUsername)
         changeUsernameViewModel.setCodeForcesUsername(newCodeForcesUsername: data.codeForcesUsername == "" ? changeUsernameViewModel.codeForcesUsername : data.codeForcesUsername)
     }
+
+    func setNewPassword() async {
+        if password.isEmpty {
+            self.error = AppError(title: "Password cannot be empty", description: "Password cannot be empty")
+            return
+        }
+        
+        if password != confirmPassword {
+            self.error = AppError(title: "Passwords do not match", description: "Passwords do not match")
+            return
+        }
+
+        if !checkIfPasswordIsCorrect(password: password) {
+            self.error = AppError(title: "Password is not strong enough", description: "Password is not strong enough")
+            return
+        }
+
+        do {
+            try await AuthenticationManager.shared.changePassword(newPassword: password)
+        } catch {
+            self.error = error
+        }
+    }
 }
 
 func checkIfEmailIsCorrect(emailAddress: String) -> Bool {
