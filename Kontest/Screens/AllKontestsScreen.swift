@@ -340,7 +340,6 @@ struct AllKontestsScreen: View {
                 NoInternetScreen()
             }
         }
-
         .onChange(of: networkMonitor.currentStatus) {
             if networkMonitor.currentStatus == .satisfied {
                 allKontestsViewModel.fetchAllKontests()

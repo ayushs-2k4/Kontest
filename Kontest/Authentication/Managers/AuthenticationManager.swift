@@ -80,6 +80,8 @@ public final class AuthenticationManager: Sendable {
     }
     
     func signIn(email: String, password: String) async throws -> LoginResponse {
+        let email = email.lowercased()
+        
         logger.info("Attempting sign-in for email: \(email)")
         let url = URL(string: Constants.Endpoints.authenticationURL)!.appendingPathComponent("auth/login")
         var request = URLRequest(url: url)
@@ -117,6 +119,8 @@ public final class AuthenticationManager: Sendable {
     }
     
     func createNewUser(email: String, password: String) async throws -> SignupResponse {
+        let email = email.lowercased()
+        
         logger.info("Creating new user with email: \(email)")
         let url = URL(string: Constants.Endpoints.authenticationURL)!.appendingPathComponent("auth/register")
         
