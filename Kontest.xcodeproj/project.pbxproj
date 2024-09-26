@@ -86,6 +86,7 @@
 		079A67272B54592100901C0D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 079A67262B54592100901C0D /* FirebaseFirestore */; };
 		079A67292B54592100901C0D /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 079A67282B54592100901C0D /* FirebaseFirestoreSwift */; };
 		079A672D2B545A0000901C0D /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079A672C2B545A0000901C0D /* UserManager.swift */; };
+		079CE9B62CA57AB000D1F697 /* KontestGraphQL in Frameworks */ = {isa = PBXBuildFile; productRef = 079CE9B52CA57AB000D1F697 /* KontestGraphQL */; };
 		079CF5502B527ECD00BE8E13 /* CodeChefContestInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CF54F2B527ECD00BE8E13 /* CodeChefContestInfoDTO.swift */; };
 		079CF5522B527F6700BE8E13 /* CodeChefScrapingContestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CF5512B527F6700BE8E13 /* CodeChefScrapingContestModel.swift */; };
 		079CF5542B52843B00BE8E13 /* CodeChefChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079CF5532B52843B00BE8E13 /* CodeChefChartView.swift */; };
@@ -126,7 +127,6 @@
 		07BF6EA72C9B517800BE6142 /* JWTUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07BF6EA62C9B517800BE6142 /* JWTUtil.swift */; };
 		07C993752B8476F7008411D7 /* AutomaticNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C993742B8476F7008411D7 /* AutomaticNotificationsViewModel.swift */; };
 		07CAB6B92C9D9223001332D0 /* CryptoKitUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CAB6B82C9D9223001332D0 /* CryptoKitUtility.swift */; };
-		07CF4FD22C9197370076C601 /* KontestGraphQLSchema in Frameworks */ = {isa = PBXBuildFile; productRef = 07CF4FD12C9197370076C601 /* KontestGraphQLSchema */; };
 		07D766692AC8404A000A3DFD /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D766682AC8404A000A3DFD /* Sidebar.swift */; };
 		07D7666C2AC8407B000A3DFD /* DetailColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7666B2AC8407B000A3DFD /* DetailColumn.swift */; };
 		07D7666E2AC84094000A3DFD /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D7666D2AC84094000A3DFD /* Panel.swift */; };
@@ -401,8 +401,8 @@
 				07ECFBBF2AA582D2008513C6 /* Apollo in Frameworks */,
 				079A67162B5447F600901C0D /* FirebaseAnalytics in Frameworks */,
 				07AA752C2B4FCD9F00DCD75B /* SwiftSoup in Frameworks */,
-				07CF4FD22C9197370076C601 /* KontestGraphQLSchema in Frameworks */,
 				079A67182B5447F600901C0D /* FirebaseAnalyticsSwift in Frameworks */,
+				079CE9B62CA57AB000D1F697 /* KontestGraphQL in Frameworks */,
 				079A67272B54592100901C0D /* FirebaseFirestore in Frameworks */,
 				079A67292B54592100901C0D /* FirebaseFirestoreSwift in Frameworks */,
 			);
@@ -892,7 +892,7 @@
 				079A671B2B544CA700901C0D /* FirebaseAuth */,
 				079A67262B54592100901C0D /* FirebaseFirestore */,
 				079A67282B54592100901C0D /* FirebaseFirestoreSwift */,
-				07CF4FD12C9197370076C601 /* KontestGraphQLSchema */,
+				079CE9B52CA57AB000D1F697 /* KontestGraphQL */,
 			);
 			productName = "Coding Kontest";
 			productReference = 076016552A87CD52007CE9F5 /* Kontest.app */;
@@ -978,7 +978,7 @@
 				07ECFBBD2AA582D2008513C6 /* XCRemoteSwiftPackageReference "apollo-ios" */,
 				07AA752A2B4FCD9F00DCD75B /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				07CF4FD02C9197370076C601 /* XCLocalSwiftPackageReference "KontestGraphQLSchema" */,
+				079CE9B42CA57AB000D1F697 /* XCLocalSwiftPackageReference "KontestGraphQL" */,
 			);
 			productRefGroup = 076016562A87CD52007CE9F5 /* Products */;
 			projectDirPath = "";
@@ -1699,9 +1699,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		07CF4FD02C9197370076C601 /* XCLocalSwiftPackageReference "KontestGraphQLSchema" */ = {
+		079CE9B42CA57AB000D1F697 /* XCLocalSwiftPackageReference "KontestGraphQL" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = KontestGraphQLSchema;
+			relativePath = KontestGraphQL;
 		};
 /* End XCLocalSwiftPackageReference section */
 
@@ -1763,6 +1763,10 @@
 			package = 079A67142B5447F600901C0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
 		};
+		079CE9B52CA57AB000D1F697 /* KontestGraphQL */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = KontestGraphQL;
+		};
 		079F68282ABC819A001B0EFE /* Apollo */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 07ECFBBD2AA582D2008513C6 /* XCRemoteSwiftPackageReference "apollo-ios" */;
@@ -1782,10 +1786,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 07AA752A2B4FCD9F00DCD75B /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
-		};
-		07CF4FD12C9197370076C601 /* KontestGraphQLSchema */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = KontestGraphQLSchema;
 		};
 		07ECFBBE2AA582D2008513C6 /* Apollo */ = {
 			isa = XCSwiftPackageProductDependency;

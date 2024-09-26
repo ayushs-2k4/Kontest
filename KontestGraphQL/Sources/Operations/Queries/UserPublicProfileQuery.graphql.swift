@@ -18,11 +18,11 @@ public class UserPublicProfileQuery: GraphQLQuery {
 
   public var __variables: Variables? { ["username": username] }
 
-  public struct Data: KontestGraphQLSchema.SelectionSet {
+  public struct Data: KontestGraphQL.SelectionSet {
     public let __data: DataDict
     public init(_dataDict: DataDict) { __data = _dataDict }
 
-    public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.Query }
+    public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.Query }
     public static var __selections: [ApolloAPI.Selection] { [
       .field("matchedUser", MatchedUser?.self, arguments: ["username": .variable("username")]),
     ] }
@@ -32,11 +32,11 @@ public class UserPublicProfileQuery: GraphQLQuery {
     /// MatchedUser
     ///
     /// Parent Type: `MatchedUser`
-    public struct MatchedUser: KontestGraphQLSchema.SelectionSet {
+    public struct MatchedUser: KontestGraphQL.SelectionSet {
       public let __data: DataDict
       public init(_dataDict: DataDict) { __data = _dataDict }
 
-      public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.MatchedUser }
+      public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.MatchedUser }
       public static var __selections: [ApolloAPI.Selection] { [
         .field("__typename", String.self),
         .field("languageProblemCount", [LanguageProblemCount?]?.self),
@@ -63,11 +63,11 @@ public class UserPublicProfileQuery: GraphQLQuery {
       /// MatchedUser.LanguageProblemCount
       ///
       /// Parent Type: `LanguageProblemCount`
-      public struct LanguageProblemCount: KontestGraphQLSchema.SelectionSet {
+      public struct LanguageProblemCount: KontestGraphQL.SelectionSet {
         public let __data: DataDict
         public init(_dataDict: DataDict) { __data = _dataDict }
 
-        public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.LanguageProblemCount }
+        public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.LanguageProblemCount }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
           .field("languageName", String?.self),
@@ -81,11 +81,11 @@ public class UserPublicProfileQuery: GraphQLQuery {
       /// MatchedUser.ContestBadge
       ///
       /// Parent Type: `ContestBadge`
-      public struct ContestBadge: KontestGraphQLSchema.SelectionSet {
+      public struct ContestBadge: KontestGraphQL.SelectionSet {
         public let __data: DataDict
         public init(_dataDict: DataDict) { __data = _dataDict }
 
-        public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.ContestBadge }
+        public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.ContestBadge }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
           .field("name", String?.self),
@@ -103,11 +103,11 @@ public class UserPublicProfileQuery: GraphQLQuery {
       /// MatchedUser.Profile
       ///
       /// Parent Type: `UserProfile`
-      public struct Profile: KontestGraphQLSchema.SelectionSet {
+      public struct Profile: KontestGraphQL.SelectionSet {
         public let __data: DataDict
         public init(_dataDict: DataDict) { __data = _dataDict }
 
-        public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.UserProfile }
+        public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.UserProfile }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
           .field("ranking", Int?.self),
@@ -153,11 +153,11 @@ public class UserPublicProfileQuery: GraphQLQuery {
       /// MatchedUser.ProblemsSolvedBeatsStat
       ///
       /// Parent Type: `ProblemSolvedBeatsStats`
-      public struct ProblemsSolvedBeatsStat: KontestGraphQLSchema.SelectionSet {
+      public struct ProblemsSolvedBeatsStat: KontestGraphQL.SelectionSet {
         public let __data: DataDict
         public init(_dataDict: DataDict) { __data = _dataDict }
 
-        public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.ProblemSolvedBeatsStats }
+        public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.ProblemSolvedBeatsStats }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
           .field("difficulty", String?.self),
@@ -171,11 +171,11 @@ public class UserPublicProfileQuery: GraphQLQuery {
       /// MatchedUser.SubmitStatsGlobal
       ///
       /// Parent Type: `SubmitStatsGlobal`
-      public struct SubmitStatsGlobal: KontestGraphQLSchema.SelectionSet {
+      public struct SubmitStatsGlobal: KontestGraphQL.SelectionSet {
         public let __data: DataDict
         public init(_dataDict: DataDict) { __data = _dataDict }
 
-        public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.SubmitStatsGlobal }
+        public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.SubmitStatsGlobal }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
           .field("acSubmissionNum", [AcSubmissionNum?]?.self),
@@ -186,11 +186,11 @@ public class UserPublicProfileQuery: GraphQLQuery {
         /// MatchedUser.SubmitStatsGlobal.AcSubmissionNum
         ///
         /// Parent Type: `ACSubmissionNum`
-        public struct AcSubmissionNum: KontestGraphQLSchema.SelectionSet {
+        public struct AcSubmissionNum: KontestGraphQL.SelectionSet {
           public let __data: DataDict
           public init(_dataDict: DataDict) { __data = _dataDict }
 
-          public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.ACSubmissionNum }
+          public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.ACSubmissionNum }
           public static var __selections: [ApolloAPI.Selection] { [
             .field("__typename", String.self),
             .field("difficulty", String?.self),

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import KontestGraphQLSchema
+import KontestGraphQL
 import OSLog
 
 public final class CodeChefNewAPIRepository: CodeChefFetcher {
@@ -23,7 +23,7 @@ public final class CodeChefNewAPIRepository: CodeChefFetcher {
             apolloClient.fetch(query: query) { result in
                 switch result {
                 case .success(let value):
-                    let p = value.data?.codeChefQuery?.getCodeChefUser
+                    let p = value.data?.codeChefQuery?.user
                     
                     if let p {
                         let codeChefAPIDTO = CodeChefAPIDTO(
@@ -64,7 +64,7 @@ public final class CodeChefNewAPIRepository: CodeChefFetcher {
             apolloClient.fetch(query: query) { result in
                 switch result {
                 case .success(let value):
-                    if let p = value.data?.codeChefQuery?.getUserKontestHistory {
+                    if let p = value.data?.codeChefQuery?.userKontestHistory {
                         let ans = p.compactMap { history -> CodeChefContestInfoDTO? in
                             if let history = history {
                                 return CodeChefContestInfoDTO(

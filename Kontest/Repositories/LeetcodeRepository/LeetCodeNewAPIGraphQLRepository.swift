@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import KontestGraphQLSchema
+import KontestGraphQL
 import OSLog
 
 final class LeetCodeNewAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {

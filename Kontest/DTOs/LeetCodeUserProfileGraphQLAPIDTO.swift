@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import KontestGraphQLSchema
+import KontestGraphQL
 
 // MARK: - LeetCodeGraphQLAPIDTO
 

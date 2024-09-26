@@ -1,5 +1,5 @@
 {
-  "schemaNamespace" : "KontestGraphQLSchema",
+  "schemaNamespace" : "KontestGraphQL",
   "input" : {
     "operationSearchPaths" : [
       "**/*.graphql"
@@ -14,9 +14,10 @@
       }
     },
     "schemaTypes" : {
-      "path" : "./KontestGraphQLSchema",
+      "path" : "./KontestGraphQL",
       "moduleType" : {
         "swiftPackageManager" : {
+          "name" : "Kontest"
         }
       }
     },

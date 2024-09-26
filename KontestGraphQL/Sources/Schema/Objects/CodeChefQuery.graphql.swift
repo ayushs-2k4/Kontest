@@ -4,8 +4,9 @@
 import ApolloAPI
 
 public extension Objects {
-  static let KontestQuery = Object(
-    typename: "KontestQuery",
+  ///  Type for CodeChef queries
+  static let CodeChefQuery = Object(
+    typename: "CodeChefQuery",
     implementedInterfaces: []
   )
 }

@@ -6,14 +6,14 @@
 //
 
 import Foundation
-import KontestGraphQLSchema
+import KontestGraphQL
 import OSLog
 
 final public class CodeForcesNewAPIRepository: CodeForcesFetcher {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "CodeForcesNewAPIRepository")
     
     func getUserRating(username: String) async throws -> CodeForcesUserRatingAPIDTO {
-        let query = CodeForcesRatingsInfoQuery(username: username)
+        let query = CodeForcesKontestHistoryQuery(username: username)
         
         let apolloClient = await ApolloFactory.getInstance(url: URL(string: Constants.Endpoints.graphqlURL)!).apollo
         
@@ -21,10 +21,10 @@ final public class CodeForcesNewAPIRepository: CodeForcesFetcher {
             apolloClient.fetch(query: query) { result in
                 switch result {
                 case .success(let value):
-                    if let p = value.data?.getCodeForcesUser {
+                    if let p = value.data?.codeForcesQuery {
                         let codeForcesUserRatingAPIDTO: CodeForcesUserRatingAPIDTO = CodeForcesUserRatingAPIDTO(
                             status: "OK",
-                            result: p.result?.ratings?.compactMap(
+                            result: p.userContestHistory?.compactMap(
                                 { rating in
                                     CodeForcesUserRatingAPIResultDTO(
                                         contestId: rating.contestId,
@@ -53,7 +53,7 @@ final public class CodeForcesNewAPIRepository: CodeForcesFetcher {
     }
     
     func getUserInfo(username: String) async throws -> CodeForcesUserInfoAPIDTO {
-        let query = CodeForcesBasicInfoQuery(username: username)
+        let query = CodeForcesUserInfoQuery(username: username)
         
         // Create an ApolloClient instance
         let apolloClient = await ApolloFactory.getInstance(url: URL(string: Constants.Endpoints.graphqlURL)!).apollo
@@ -63,7 +63,7 @@ final public class CodeForcesNewAPIRepository: CodeForcesFetcher {
             apolloClient.fetch(query: query) { result in
                 switch result {
                 case .success(let value):
-                    if let p = value.data?.getCodeForcesUser?.result?.basicInfo {
+                    if let p = value.data?.codeForcesQuery?.user {
                         let codeForcesUserInfoAPIDTO = CodeForcesUserInfoAPIDTO(
                             status: "OK",
                             result: [

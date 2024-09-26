@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import KontestGraphQLSchema
+import KontestGraphQL
 
 struct LeetCodeUserRankingsGraphQLAPIDTO: Codable {
     let leetCodeUserRankingGraphQLAPIDTO: LeetCodeUserRankingGraphQLAPIDTO?

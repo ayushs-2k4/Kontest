@@ -4,8 +4,9 @@
 import ApolloAPI
 
 public extension Objects {
-  static let Kontest = Object(
-    typename: "Kontest",
+  ///  Represents a single contest entry in CodeChef's contest history
+  static let CodeChefContest = Object(
+    typename: "CodeChefContest",
     implementedInterfaces: []
   )
 }

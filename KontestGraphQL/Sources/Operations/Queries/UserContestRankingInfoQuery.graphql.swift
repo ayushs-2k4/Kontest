@@ -18,11 +18,11 @@ public class UserContestRankingInfoQuery: GraphQLQuery {
 
   public var __variables: Variables? { ["username": username] }
 
-  public struct Data: KontestGraphQLSchema.SelectionSet {
+  public struct Data: KontestGraphQL.SelectionSet {
     public let __data: DataDict
     public init(_dataDict: DataDict) { __data = _dataDict }
 
-    public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.Query }
+    public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.Query }
     public static var __selections: [ApolloAPI.Selection] { [
       .field("userContestRanking", UserContestRanking?.self, arguments: ["username": .variable("username")]),
       .field("userContestRankingHistory", [UserContestRankingHistory?]?.self, arguments: ["username": .variable("username")]),
@@ -34,11 +34,11 @@ public class UserContestRankingInfoQuery: GraphQLQuery {
     /// UserContestRanking
     ///
     /// Parent Type: `UserContestRanking`
-    public struct UserContestRanking: KontestGraphQLSchema.SelectionSet {
+    public struct UserContestRanking: KontestGraphQL.SelectionSet {
       public let __data: DataDict
       public init(_dataDict: DataDict) { __data = _dataDict }
 
-      public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.UserContestRanking }
+      public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.UserContestRanking }
       public static var __selections: [ApolloAPI.Selection] { [
         .field("__typename", String.self),
         .field("attendedContestsCount", Int?.self),
@@ -59,11 +59,11 @@ public class UserContestRankingInfoQuery: GraphQLQuery {
       /// UserContestRanking.Badge
       ///
       /// Parent Type: `Badge`
-      public struct Badge: KontestGraphQLSchema.SelectionSet {
+      public struct Badge: KontestGraphQL.SelectionSet {
         public let __data: DataDict
         public init(_dataDict: DataDict) { __data = _dataDict }
 
-        public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.Badge }
+        public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.Badge }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
           .field("name", String?.self),
@@ -76,11 +76,11 @@ public class UserContestRankingInfoQuery: GraphQLQuery {
     /// UserContestRankingHistory
     ///
     /// Parent Type: `UserContestRankingHistory`
-    public struct UserContestRankingHistory: KontestGraphQLSchema.SelectionSet {
+    public struct UserContestRankingHistory: KontestGraphQL.SelectionSet {
       public let __data: DataDict
       public init(_dataDict: DataDict) { __data = _dataDict }
 
-      public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.UserContestRankingHistory }
+      public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.UserContestRankingHistory }
       public static var __selections: [ApolloAPI.Selection] { [
         .field("__typename", String.self),
         .field("attended", Bool?.self),
@@ -105,11 +105,11 @@ public class UserContestRankingInfoQuery: GraphQLQuery {
       /// UserContestRankingHistory.Contest
       ///
       /// Parent Type: `Contest`
-      public struct Contest: KontestGraphQLSchema.SelectionSet {
+      public struct Contest: KontestGraphQL.SelectionSet {
         public let __data: DataDict
         public init(_dataDict: DataDict) { __data = _dataDict }
 
-        public static var __parentType: ApolloAPI.ParentType { KontestGraphQLSchema.Objects.Contest }
+        public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.Contest }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
           .field("title", String?.self),

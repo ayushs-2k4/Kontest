@@ -4,9 +4,9 @@
 import ApolloAPI
 
 public extension Objects {
-  ///  Object representing basic information about a CodeForces user
-  static let CodeForcesUserBasicInfo = Object(
-    typename: "CodeForcesUserBasicInfo",
+  ///  Type for CodeForces queries
+  static let CodeForcesQuery = Object(
+    typename: "CodeForcesQuery",
     implementedInterfaces: []
   )
 }

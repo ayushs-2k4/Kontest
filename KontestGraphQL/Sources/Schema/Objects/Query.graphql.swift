@@ -4,8 +4,9 @@
 import ApolloAPI
 
 public extension Objects {
-  static let KontestError = Object(
-    typename: "KontestError",
+  ///  The main query type for fetching user data from CodeChef and CodeForces
+  static let Query = Object(
+    typename: "Query",
     implementedInterfaces: []
   )
 }

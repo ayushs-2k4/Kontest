@@ -4,8 +4,9 @@
 import ApolloAPI
 
 public extension Objects {
-  static let CodeChefContest = Object(
-    typename: "CodeChefContest",
+  ///  Object representing basic information about a CodeForces user
+  static let CodeForcesUser = Object(
+    typename: "CodeForcesUser",
     implementedInterfaces: []
   )
 }

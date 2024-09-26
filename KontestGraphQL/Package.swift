@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-  name: "KontestGraphQLSchema",
+  name: "KontestGraphQL",
   platforms: [
     .iOS(.v12),
     .macOS(.v10_14),
@@ -11,14 +11,14 @@ let package = Package(
     .watchOS(.v5),
   ],
   products: [
-    .library(name: "KontestGraphQLSchema", targets: ["KontestGraphQLSchema"]),
+    .library(name: "KontestGraphQL", targets: ["KontestGraphQL"]),
   ],
   dependencies: [
     .package(url: "https://github.com/apollographql/apollo-ios.git", from: "1.0.0"),
   ],
   targets: [
     .target(
-      name: "KontestGraphQLSchema",
+      name: "KontestGraphQL",
       dependencies: [
         .product(name: "ApolloAPI", package: "apollo-ios"),
       ],
