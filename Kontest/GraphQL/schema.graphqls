@@ -233,13 +233,13 @@ type MatchedUser {
 }
 
 type Mutation {
+  changePassword(newPassword: String!): String!
   deleteUser(userId: String!): String!
   login(loginUserInput: LoginUserInput!): LoginResponse!
   makeAdmin(userID: String!): String!
   makeNormal(userID: String!): String!
   refresh(refreshTokenInput: RefreshTokenInput!): LoginResponse!
   register(registerUserInput: RegisterUserInput!): String!
-  resetPassword(newPassword: String!): String!
   purge: String
 }
 

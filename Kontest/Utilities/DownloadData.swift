@@ -9,6 +9,22 @@
 import Combine
 import Foundation
 
+struct ApolloCacheKey: Hashable {
+    let url: URL
+    let headers: [String: String]
+
+    // Conformance to Hashable
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(url)
+        headers.forEach { hasher.combine($0.key); hasher.combine($0.value) }
+    }
+
+    // Conformance to Equatable
+    static func ==(lhs: ApolloCacheKey, rhs: ApolloCacheKey) -> Bool {
+        return lhs.url == rhs.url && lhs.headers == rhs.headers
+    }
+}
+
 final class DownloadDataWithApollo: Sendable {
     static let shared = DownloadDataWithApollo()
 
@@ -42,17 +58,17 @@ final class DownloadDataWithApollo2: Sendable {
 
 // Actor to manage cache of DownloadDataWithApollo2 instances
 actor DownloadDataWithApollo2Cache {
-    private var instanceCache: [URL: DownloadDataWithApollo2] = [:]
+    private var instanceCache: [ApolloCacheKey: DownloadDataWithApollo2] = [:]
 
     // Get an instance if available in cache
-    func getInstance(for url: URL) -> DownloadDataWithApollo2? {
-        return instanceCache[url]
+    func getInstance(for key: ApolloCacheKey) -> DownloadDataWithApollo2? {
+        return instanceCache[key]
     }
 
     // Create a new instance and add to cache
-    func createInstance(for url: URL, customHeaders: [String: String]) -> DownloadDataWithApollo2 {
-        let newInstance = DownloadDataWithApollo2.createWithCustomHeaders(url: url, customHeaders: customHeaders)
-        instanceCache[url] = newInstance
+    func createInstance(for key: ApolloCacheKey) -> DownloadDataWithApollo2 {
+        let newInstance = DownloadDataWithApollo2.createWithCustomHeaders(url: key.url, customHeaders: key.headers)
+        instanceCache[key] = newInstance
         return newInstance
     }
 }
@@ -63,12 +79,14 @@ enum ApolloFactory {
 
     // Static method to get or create an instance asynchronously
     static func getInstance(url: URL, customHeaders: [String: String] = [:]) async -> DownloadDataWithApollo2 {
+        let cacheKey = ApolloCacheKey(url: url, headers: customHeaders)
+
         // Check if the instance is already in the cache
-        if let cachedInstance = await cache.getInstance(for: url) {
+        if let cachedInstance = await cache.getInstance(for: cacheKey) {
             return cachedInstance
         } else {
             // Create a new instance if not in cache
-            return await cache.createInstance(for: url, customHeaders: customHeaders)
+            return await cache.createInstance(for: cacheKey)
         }
     }
 }

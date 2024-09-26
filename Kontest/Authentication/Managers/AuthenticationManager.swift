@@ -177,29 +177,39 @@ actor AuthenticationManager: Sendable {
     func changePassword(newPassword: String) async throws {
         let jwtToken = await getJWTToken()
         
-        let url = URL(string: Constants.Endpoints.authenticationURL)!.appendingPathComponent("auth/reset-password")
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "PUT"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let body: [String: Any] = [
-            "newPassword": newPassword
-        ]
-        
-        request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
-        request.setValue(jwtToken, forHTTPHeaderField: "Authorization")
-        
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        guard let httpResponse = response as? HTTPURLResponse else {
-            logger.error("Failed to get HTTP response during password change.")
-            throw URLError(.badServerResponse)
+        guard let jwtToken else {
+            throw AppError(title: "JWT Token is missing", description: "JWT Token is missing")
         }
         
-        guard httpResponse.statusCode == 200 else {
-            logger.error("Password change failed with status code: \(httpResponse.statusCode) and response: \(response)")
-            throw handleError(for: httpResponse.statusCode)
+        let apolloClient = await ApolloFactory.getInstance(url: URL(string: Constants.Endpoints.graphqlURL)!, customHeaders: [
+            "Authorization": "Bearer \(jwtToken)"
+        ]).apollo
+        
+        let response: String = try await withCheckedThrowingContinuation { continuation in
+            let changePasswordMutation = ChangePasswordMutation(newPassword: newPassword)
+            
+            apolloClient.perform(mutation: changePasswordMutation) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    if let str = graphQLResult.data?.changePassword {
+                        self.logger.info("Password change successful: \(str)")
+                        
+                        continuation.resume(returning: str)
+                    }
+                    else if let errors = graphQLResult.errors {
+                        self.logger.error("Password change failed with errors: \(errors.description)")
+                        
+                        continuation.resume(throwing: NSError(domain: "GraphQL", code: -1, userInfo: [NSLocalizedDescriptionKey: errors.description]))
+                    } else {
+                        continuation.resume(throwing: AppError(title: "Password Change Failed", description: "Password Change Failed"))
+                    }
+                    
+                case .failure(let error):
+                    print("Network error: \(error)")
+                    // Resume with a network error
+                    continuation.resume(throwing: error)
+                }
+            }
         }
         
         logger.info("Password changed")

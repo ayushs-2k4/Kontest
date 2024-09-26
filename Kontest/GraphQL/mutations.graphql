@@ -9,3 +9,7 @@ mutation Login($email: String!, $password: String!, $deviceId: String!) {
 mutation Register($email: String!, $password: String!) {
     register(registerUserInput: { email: $email, password: $password})
 }
+
+mutation ChangePassword($newPassword: String!) {
+    changePassword(newPassword: $newPassword)
+}
