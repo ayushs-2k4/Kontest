@@ -246,7 +246,7 @@ actor AuthenticationManager: Sendable {
                     AuthenticationManager.isAuthenticated = true
                 } else {
                     logger.info("JWT token is expired. Attempting to refresh...")
-                    try await TokenManager.shared.refreshToken()
+                    try await TokenManager.shared.refreshTokenIfNeeded()
                     
                     AuthenticationManager.isAuthenticated = true
                 }
@@ -277,7 +277,7 @@ actor AuthenticationManager: Sendable {
         } else {
             logger.info("JWT token is expired. Attempting to refresh...")
             do {
-                try await TokenManager.shared.refreshToken()
+                try await TokenManager.shared.refreshTokenIfNeeded()
                 return await TokenManager.shared.getJWTTokenLocally()
             } catch {
                 logger.error("Failed to refresh token: \(error.localizedDescription)")
@@ -318,6 +318,8 @@ actor TokenManager: Sendable {
     
     static let shared = TokenManager()
     
+    private var currentRefreshTask: Task<Void, any Error>?
+    
     private init() {}
     
     func validateToken() async throws -> Bool {
@@ -329,7 +331,7 @@ actor TokenManager: Sendable {
             return true
         } else {
             // Refresh token if needed
-            try await refreshToken()
+            try await refreshTokenIfNeeded()
             return true
         }
     }
@@ -368,8 +370,26 @@ actor TokenManager: Sendable {
         return token
     }
     
+    // Refresh JWT token, but only allow one refresh at a time
+    func refreshTokenIfNeeded() async throws {
+        // If a refresh is already in progress, wait for its result
+        if let refreshTask = currentRefreshTask {
+            logger.info("Waiting for ongoing token refresh to complete.")
+            try await refreshTask.value
+        } else {
+            // No refresh in progress, start a new refresh
+            logger.info("Starting a new token refresh.")
+            let task = Task {
+                defer { currentRefreshTask = nil } // Clear the task when done
+                try await performTokenRefresh()
+            }
+            currentRefreshTask = task
+            try await task.value
+        }
+    }
+    
     // Function to refresh JWT token
-    func refreshToken() async throws {
+    private func performTokenRefresh() async throws {
         // Retrieve the refresh token from Keychain
         logger.info("Attempting to retrieve refresh token from Keychain...")
         guard let refreshToken = getRefreshTokenLocally() else {
