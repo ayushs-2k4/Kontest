@@ -90,6 +90,8 @@ actor AuthenticationManager: Sendable {
     func signIn(email: String, password: String) async throws -> LoginResponse {
         let email = email.lowercased()
         
+        logger.info("Signing in for email: \(email)")
+        
         let apolloClient = await ApolloFactory.getInstance(url: URL(string: Constants.Endpoints.graphqlURL)!).apollo
         
         let loginResponse: LoginResponse = try await withCheckedThrowingContinuation { continuation in
@@ -136,29 +138,33 @@ actor AuthenticationManager: Sendable {
         let email = email.lowercased()
         
         logger.info("Creating new user with email: \(email)")
-        let url = URL(string: Constants.Endpoints.authenticationURL)!.appendingPathComponent("auth/register")
         
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let apolloClient = await ApolloFactory.getInstance(url: URL(string: Constants.Endpoints.graphqlURL)!).apollo
         
-        let body: [String: Any] = [
-            "email": email,
-            "password": password
-        ]
-        
-        request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
-        
-        let (_, response) = try await URLSession.shared.data(for: request)
-        
-        guard let httpResponse = response as? HTTPURLResponse else {
-            logger.error("Failed to get HTTP response during user registration.")
-            throw URLError(.badServerResponse)
-        }
-        
-        guard httpResponse.statusCode == 201 else {
-            logger.error("User registration failed with status code: \(httpResponse.statusCode)")
-            throw handleError(for: httpResponse.statusCode)
+        let response: String = try await withCheckedThrowingContinuation { continuation in
+            let registrationMutation = RegisterMutation(email: email, password: password)
+            
+            apolloClient.perform(mutation: registrationMutation) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    if let str = graphQLResult.data?.register {
+                        self.logger.info("User registation successful for email: \(email)")
+                    
+                        continuation.resume(returning: str)
+                    } else if let errors = graphQLResult.errors {
+                        self.logger.error("User registration failed for email: \(email) with errors: \(errors.description)")
+                        
+                        continuation.resume(throwing: NSError(domain: "GraphQL", code: -1, userInfo: [NSLocalizedDescriptionKey: errors.description]))
+                    } else {
+                        continuation.resume(throwing: AppError(title: "User registration failed", description: "User registration failed"))
+                    }
+                    
+                case .failure(let error):
+                    print("Network error: \(error)")
+                    // Resume with a network error
+                    continuation.resume(throwing: error)
+                }
+            }
         }
         
         // Sign in after registration

@@ -318,14 +318,3 @@ query CodeForcesKontestHistoryQuery($username: String!) {
         }
     }
 }
-
-
-
-
-mutation Login($email: String!, $password: String!, $deviceId: String!) {
-    login(loginUserInput: { email: $email, password: $password, deviceId: $deviceId }) {
-        jwtToken
-        refreshToken
-        userId
-    }
-}

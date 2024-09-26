@@ -61,6 +61,7 @@
 		0764FF9E2ABC726F0060AC1F /* AddToCalendarIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0784292D2AB5EF660078D836 /* AddToCalendarIntent.swift */; };
 		0764FFA02ABC72870060AC1F /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 0764FF9F2ABC72870060AC1F /* Apollo */; };
 		0764FFA22ABC72BF0060AC1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07ECFB402AA58259008513C6 /* Assets.xcassets */; };
+		076B77A42CA58F2500DBEBE1 /* mutations.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 076B77A32CA58F1E00DBEBE1 /* mutations.graphql */; };
 		07740EA52ABF171F00A93EAF /* CalendarPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07740EA42ABF171F00A93EAF /* CalendarPopoverView.swift */; };
 		077685272B56A50C00A1449F /* AccountInformationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077685262B56A50C00A1449F /* AccountInformationScreen.swift */; };
 		077685292B56A60200A1449F /* AccountInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077685282B56A60200A1449F /* AccountInformationViewModel.swift */; };
@@ -272,6 +273,7 @@
 		0764FF842ABC717F0060AC1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0764FF862ABC717F0060AC1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0764FF8D2ABC71D40060AC1F /* Upcoming Kontest iOS WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Upcoming Kontest iOS WidgetExtension.entitlements"; sourceTree = "<group>"; };
+		076B77A32CA58F1E00DBEBE1 /* mutations.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = mutations.graphql; sourceTree = "<group>"; };
 		07710E842AB46220008DE1D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		07740EA42ABF171F00A93EAF /* CalendarPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPopoverView.swift; sourceTree = "<group>"; };
 		077685262B56A50C00A1449F /* AccountInformationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInformationScreen.swift; sourceTree = "<group>"; };
@@ -819,6 +821,7 @@
 		07ECFB752AA58259008513C6 /* GraphQL */ = {
 			isa = PBXGroup;
 			children = (
+				076B77A32CA58F1E00DBEBE1 /* mutations.graphql */,
 				07ECFB762AA58259008513C6 /* schema.graphqls */,
 				07ECFB772AA58259008513C6 /* queries.graphql */,
 			);
@@ -1006,6 +1009,7 @@
 			files = (
 				07ECFBB52AA58259008513C6 /* queries.graphql in Resources */,
 				07ECFBB42AA58259008513C6 /* schema.graphqls in Resources */,
+				076B77A42CA58F2500DBEBE1 /* mutations.graphql in Resources */,
 				07ECFBBC2AA58259008513C6 /* apollo-codegen-config.json in Resources */,
 				07ECFB892AA58259008513C6 /* Assets.xcassets in Resources */,
 				07ECFB962AA58259008513C6 /* Preview Assets.xcassets in Resources */,
