@@ -6,6 +6,7 @@
 public class RegisterMutation: GraphQLMutation {
   public static let operationName: String = "Register"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
+    operationIdentifier: "b26424187f3f6f01cc1105b146406b40d17d9bf3542a8414b950306262e8fc6f",
     definition: .init(
       #"mutation Register($email: String!, $password: String!) { register(registerUserInput: {email: $email, password: $password}) }"#
     ))

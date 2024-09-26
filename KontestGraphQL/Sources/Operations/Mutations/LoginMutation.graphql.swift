@@ -6,6 +6,7 @@
 public class LoginMutation: GraphQLMutation {
   public static let operationName: String = "Login"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
+    operationIdentifier: "e8cc36a2a6aefb4c34327e2fa15e7ea924733d8af08cc622a40e16994b977910",
     definition: .init(
       #"mutation Login($email: String!, $password: String!, $deviceId: String!) { login(loginUserInput: {email: $email, password: $password, deviceId: $deviceId}) { __typename jwtToken refreshToken userId } }"#
     ))

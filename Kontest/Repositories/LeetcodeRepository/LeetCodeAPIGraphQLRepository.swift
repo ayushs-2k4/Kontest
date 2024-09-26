@@ -15,7 +15,7 @@ final class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
     func getUserData(username: String, completion: @escaping (LeetCodeUserProfileGraphQLAPIDTO?, (any Error)?) -> Void) {
         let query = UserPublicProfileQuery(username: username)
         
-        DownloadDataWithApollo.shared.apollo.fetch(query: query) { [weak self] result in
+        DownloadLeetcodeDataWithApollo.shared.apollo.fetch(query: query) { [weak self] result in
             switch result {
             case .success(let value):
                 let p = value.data?.matchedUser
@@ -93,7 +93,7 @@ final class LeetCodeAPIGraphQLRepository: LeetCodeGraphQLAPIFetcher {
     func getUserRankingInfo(username: String, completion: @escaping (LeetCodeUserRankingsGraphQLAPIDTO?, (any Error)?) -> Void) {
         let query = UserContestRankingInfoQuery(username: username)
         
-        DownloadDataWithApollo.shared.apollo.fetch(query: query) { [weak self] result in
+        DownloadLeetcodeDataWithApollo.shared.apollo.fetch(query: query) { [weak self] result in
             switch result {
             case .success(let value):
                 let userContestRanking = value.data?.userContestRanking

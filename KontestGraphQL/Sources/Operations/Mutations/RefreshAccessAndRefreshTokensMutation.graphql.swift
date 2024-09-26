@@ -6,6 +6,7 @@
 public class RefreshAccessAndRefreshTokensMutation: GraphQLMutation {
   public static let operationName: String = "RefreshAccessAndRefreshTokens"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
+    operationIdentifier: "27128844f5d3a268385034e021e12a75870215fac5d99b8d99b6e953600ee6f0",
     definition: .init(
       #"mutation RefreshAccessAndRefreshTokens($refreshToken: String!) { refreshAccessAndRefreshTokens(refreshTokenInput: {refreshToken: $refreshToken}) { __typename jwtToken refreshToken userId } }"#
     ))

@@ -6,6 +6,7 @@
 public class CodeForcesKontestHistoryQuery: GraphQLQuery {
   public static let operationName: String = "CodeForcesKontestHistoryQuery"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
+    operationIdentifier: "6cae5492033c8f61d4d6d4ad803552879797dd7004f5dbfa66a008a84231d016",
     definition: .init(
       #"query CodeForcesKontestHistoryQuery($username: String!) { codeForcesQuery { __typename userContestHistory(username: $username) { __typename contestId contestName handle newRating oldRating rank ratingUpdateTimeSeconds } } }"#
     ))

@@ -6,8 +6,10 @@
 //
 
 @preconcurrency import Apollo
+import ApolloAPI
 import Combine
 import Foundation
+import OSLog
 
 struct ApolloCacheKey: Hashable {
     let url: URL
@@ -25,8 +27,8 @@ struct ApolloCacheKey: Hashable {
     }
 }
 
-final class DownloadDataWithApollo: Sendable {
-    static let shared = DownloadDataWithApollo()
+final class DownloadLeetcodeDataWithApollo: Sendable {
+    static let shared = DownloadLeetcodeDataWithApollo()
 
     let apollo = ApolloClient(url: URL(string: "https://leetcode.com/graphql?query=")!)
 
@@ -44,15 +46,66 @@ final class DownloadDataWithApollo2: Sendable {
 
     // Create an instance with custom headers
     static func createWithCustomHeaders(url: URL, customHeaders: [String: String]) -> DownloadDataWithApollo2 {
-        let store = ApolloStore()
+        let store = ApolloStore(cache: InMemoryNormalizedCache())
+        let client = URLSessionClient()
+
+        let interceptorProvider = NetworkInterceptorProvider(store: store, client: client)
 
         // Create a custom RequestChainNetworkTransport to add headers to each request
-        let networkTransport = RequestChainNetworkTransport(interceptorProvider: DefaultInterceptorProvider(store: store),
+        let networkTransport = RequestChainNetworkTransport(interceptorProvider: interceptorProvider,
                                                             endpointURL: url,
-                                                            additionalHeaders: customHeaders)
+                                                            additionalHeaders: customHeaders,
+                                                            autoPersistQueries: true)
 
         let apolloClient = ApolloClient(networkTransport: networkTransport, store: store)
         return DownloadDataWithApollo2(apollo: apolloClient)
+    }
+}
+
+struct NetworkInterceptorProvider: InterceptorProvider {
+    // These properties will remain the same throughout the life of the `InterceptorProvider`, even though they
+    // will be handed to different interceptors.
+    private let store: ApolloStore
+    private let client: URLSessionClient
+
+    init(store: ApolloStore, client: URLSessionClient) {
+        self.store = store
+        self.client = client
+    }
+
+    func interceptors<Operation>(for operation: Operation) -> [any Apollo.ApolloInterceptor] where Operation: ApolloAPI.GraphQLOperation {
+        return [
+            MaxRetryInterceptor(),
+            CacheReadInterceptor(store: self.store),
+            NetworkFetchInterceptor(client: self.client),
+            ResponseCodeInterceptor(),
+            JSONResponseParsingInterceptor(),
+            AutomaticPersistedQueryInterceptor(),
+            CacheWriteInterceptor(store: self.store),
+            ApolloLoggingInterceptor()
+        ]
+    }
+}
+
+class ApolloLoggingInterceptor: ApolloInterceptor {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "ApolloLoggingInterceptor")
+
+    var id: String = ""
+
+    func interceptAsync<Operation>(
+        chain: any Apollo.RequestChain,
+        request: Apollo.HTTPRequest<Operation>,
+        response: Apollo.HTTPResponse<Operation>?,
+        completion: @escaping (Result<Apollo.GraphQLResult<Operation.Data>, any Error>) -> Void
+    ) where Operation: ApolloAPI.GraphQLOperation {
+        // Log the request details
+        logger.info("Request ID: \(self.id)")
+        logger.info("Request: \("\(request)")")
+
+        // Check if a persisted query is being used
+        logger.info("operation: \("\(request.operation)")")
+        
+        chain.proceedAsync(request: request, response: response, interceptor: self, completion: completion)
     }
 }
 

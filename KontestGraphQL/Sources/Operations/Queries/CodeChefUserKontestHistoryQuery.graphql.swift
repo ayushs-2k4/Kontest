@@ -6,6 +6,7 @@
 public class CodeChefUserKontestHistoryQuery: GraphQLQuery {
   public static let operationName: String = "CodeChefUserKontestHistoryQuery"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
+    operationIdentifier: "b66b7515e5d12d698a831768ad6242222e443e5663052d762e13b88421921e1c",
     definition: .init(
       #"query CodeChefUserKontestHistoryQuery($username: String!) { codeChefQuery { __typename userKontestHistory(username: $username) { __typename code color day endDate month name penalisedIn rank rating reason year } } }"#
     ))

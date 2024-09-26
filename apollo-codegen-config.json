@@ -1,29 +1,38 @@
 {
-  "schemaNamespace" : "KontestGraphQL",
-  "input" : {
-    "operationSearchPaths" : [
+  "schemaNamespace": "KontestGraphQL",
+  "input": {
+    "operationSearchPaths": [
       "**/*.graphql"
     ],
-    "schemaSearchPaths" : [
+    "schemaSearchPaths": [
       "**/*.graphqls"
     ]
   },
-  "output" : {
-    "testMocks" : {
-      "none" : {
-      }
+  "output": {
+    "testMocks": {
+      "none": {}
     },
-    "schemaTypes" : {
-      "path" : "./KontestGraphQL",
-      "moduleType" : {
-        "swiftPackageManager" : {
-          "name" : "Kontest"
+    "schemaTypes": {
+      "path": "./KontestGraphQL",
+      "moduleType": {
+        "swiftPackageManager": {
+          "name": "Kontest"
         }
       }
     },
-    "operations" : {
-      "inSchemaModule" : {
-      }
+    "operations": {
+      "inSchemaModule": {}
     }
+  },
+  "options": {
+    "operationDocumentFormat": [
+      "definition",
+      "operationId"
+    ]
+  },
+  "operationManifest": {
+    "generateManifestOnCodeGeneration": true,
+    "path": "./operationManifest.json",
+    "version": "persistedQueries"
   }
 }

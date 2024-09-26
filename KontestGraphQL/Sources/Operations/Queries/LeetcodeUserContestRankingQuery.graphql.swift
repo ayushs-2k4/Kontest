@@ -6,6 +6,7 @@
 public class LeetcodeUserContestRankingQuery: GraphQLQuery {
   public static let operationName: String = "LeetcodeUserContestRankingQuery"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
+    operationIdentifier: "088f615729e9a2e250892282d780f783c125e0b460a5d6cbc03344568b808ebe",
     definition: .init(
       #"query LeetcodeUserContestRankingQuery($username: String!) { leetcodeQuery { __typename userContestRanking(username: $username) { __typename attendedContestsCount globalRanking rating topPercentage totalParticipants badge { __typename name } } } }"#
     ))

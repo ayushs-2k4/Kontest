@@ -1,0 +1,102 @@
+{
+  "format": "apollo-persisted-query-manifest",
+  "version": 1,
+  "operations": [
+    {
+      "id": "1ea44845d7b6ba3ab4b34012ba7a0b22c19df69ad40b4681f8e1da98d147f4c4",
+      "body": "query questionOfToday { activeDailyCodingChallengeQuestion { __typename date userStatus link question { __typename acRate difficulty freqBar questionFrontendId isFavor isPaidOnly status title titleSlug hasVideoSolution hasSolution topicTags { __typename name id slug } } } }",
+      "name": "questionOfToday",
+      "type": "query"
+    },
+    {
+      "id": "2fe35cd0c7a15a71648811916b5cedf6f9835c94adf432a813e510a31750a5d6",
+      "body": "query userContestRankingInfo($username: String!) { userContestRanking(username: $username) { __typename attendedContestsCount rating globalRanking totalParticipants topPercentage badge { __typename name } } userContestRankingHistory(username: $username) { __typename attended trendDirection problemsSolved totalProblems finishTimeInSeconds rating ranking contest { __typename title startTime } } }",
+      "name": "userContestRankingInfo",
+      "type": "query"
+    },
+    {
+      "id": "88b699da41589e147d6c0646c7aea5ba73f8f9a5d475f010fdb93d548f84f18c",
+      "body": "query userPublicProfile($username: String!) { matchedUser(username: $username) { __typename languageProblemCount { __typename languageName problemsSolved } contestBadge { __typename name expired hoverText icon } username githubUrl twitterUrl linkedinUrl profile { __typename ranking userAvatar realName aboutMe school websites countryName company jobTitle skillTags postViewCount postViewCountDiff reputation reputationDiff solutionCount solutionCountDiff categoryDiscussCount categoryDiscussCountDiff } problemsSolvedBeatsStats { __typename difficulty percentage } submitStatsGlobal { __typename acSubmissionNum { __typename difficulty count } } } }",
+      "name": "userPublicProfile",
+      "type": "query"
+    },
+    {
+      "id": "3f0337b2f0b6a5683427d79baf159175af4cc4017d3111495146daec96b9491a",
+      "body": "query LeetcodeQuestionOfTheDayQuery { leetcodeQuery { __typename activeDailyCodingChallengeQuestion { __typename date link userStatus question { __typename acRate difficulty freqBar hasSolution hasVideoSolution isFavor isPaidOnly questionFrontendId status title titleSlug topicTags { __typename id name slug } } } } }",
+      "name": "LeetcodeQuestionOfTheDayQuery",
+      "type": "query"
+    },
+    {
+      "id": "69bed7c0c3db77e68b40e07abdba31dca945610caab2907c8fe88a06171991f2",
+      "body": "query LeetcodeMatchedUserQuery($username: String!) { leetcodeQuery { __typename matchedUser(username: $username) { __typename githubUrl linkedinUrl twitterUrl username contestBadge { __typename expired hoverText icon name } languageProblemCount { __typename languageName problemsSolved } problemsSolvedBeatsStats { __typename difficulty percentage } profile { __typename aboutMe categoryDiscussCount categoryDiscussCountDiff company countryName jobTitle postViewCount postViewCountDiff ranking realName reputation reputationDiff school skillTags solutionCount solutionCountDiff userAvatar websites } submitStatsGlobal { __typename acSubmissionNum { __typename count difficulty } } } } }",
+      "name": "LeetcodeMatchedUserQuery",
+      "type": "query"
+    },
+    {
+      "id": "088f615729e9a2e250892282d780f783c125e0b460a5d6cbc03344568b808ebe",
+      "body": "query LeetcodeUserContestRankingQuery($username: String!) { leetcodeQuery { __typename userContestRanking(username: $username) { __typename attendedContestsCount globalRanking rating topPercentage totalParticipants badge { __typename name } } } }",
+      "name": "LeetcodeUserContestRankingQuery",
+      "type": "query"
+    },
+    {
+      "id": "50a2369237ca4c660bd1a9287fdd1a784f5a21ceb452d9895426432a6a96b41e",
+      "body": "query LeetcodeUserContestRankingHistoryQuery($username: String!) { leetcodeQuery { __typename userContestRankingHistory(username: $username) { __typename attended finishTimeInSeconds problemsSolved ranking rating totalProblems trendDirection contest { __typename startTime title } } } }",
+      "name": "LeetcodeUserContestRankingHistoryQuery",
+      "type": "query"
+    },
+    {
+      "id": "012b9755b4e3cb88a79fe687731bba0469bba68ee673bf933fa7a7804975ed29",
+      "body": "query LeetcodeUserContestRankingInfo($username: String!) { leetcodeQuery { __typename userContestRanking(username: $username) { __typename attendedContestsCount rating globalRanking totalParticipants topPercentage badge { __typename name } } userContestRankingHistory(username: $username) { __typename attended trendDirection problemsSolved totalProblems finishTimeInSeconds rating ranking contest { __typename title startTime } } } }",
+      "name": "LeetcodeUserContestRankingInfo",
+      "type": "query"
+    },
+    {
+      "id": "6f332b429dbb6524ae8f10fc81fa19fc358db2b5b7afaff39f53f9bae060572a",
+      "body": "query CodeChefUserInfoQuery($username: String!) { codeChefQuery { __typename user(username: $username) { __typename countryFlag countryName countryRank currentRating globalRank highestRating name profile stars success } } }",
+      "name": "CodeChefUserInfoQuery",
+      "type": "query"
+    },
+    {
+      "id": "b66b7515e5d12d698a831768ad6242222e443e5663052d762e13b88421921e1c",
+      "body": "query CodeChefUserKontestHistoryQuery($username: String!) { codeChefQuery { __typename userKontestHistory(username: $username) { __typename code color day endDate month name penalisedIn rank rating reason year } } }",
+      "name": "CodeChefUserKontestHistoryQuery",
+      "type": "query"
+    },
+    {
+      "id": "c0c7994bab83928248dd4378286d20af7443acd5f267d95c6a118218c1a3b033",
+      "body": "query CodeForcesUserInfoQuery($username: String!) { codeForcesQuery { __typename user(username: $username) { __typename avatar contribution friendOfCount handle lastOnlineTimeSeconds maxRank maxRating rank rating registrationTimeSeconds titlePhoto } } }",
+      "name": "CodeForcesUserInfoQuery",
+      "type": "query"
+    },
+    {
+      "id": "6cae5492033c8f61d4d6d4ad803552879797dd7004f5dbfa66a008a84231d016",
+      "body": "query CodeForcesKontestHistoryQuery($username: String!) { codeForcesQuery { __typename userContestHistory(username: $username) { __typename contestId contestName handle newRating oldRating rank ratingUpdateTimeSeconds } } }",
+      "name": "CodeForcesKontestHistoryQuery",
+      "type": "query"
+    },
+    {
+      "id": "e8cc36a2a6aefb4c34327e2fa15e7ea924733d8af08cc622a40e16994b977910",
+      "body": "mutation Login($email: String!, $password: String!, $deviceId: String!) { login(loginUserInput: {email: $email, password: $password, deviceId: $deviceId}) { __typename jwtToken refreshToken userId } }",
+      "name": "Login",
+      "type": "mutation"
+    },
+    {
+      "id": "b26424187f3f6f01cc1105b146406b40d17d9bf3542a8414b950306262e8fc6f",
+      "body": "mutation Register($email: String!, $password: String!) { register(registerUserInput: {email: $email, password: $password}) }",
+      "name": "Register",
+      "type": "mutation"
+    },
+    {
+      "id": "a89d24a7d0be0c8777d7b17267d026ee9991e454629ed5b40b25704e35a9a2d5",
+      "body": "mutation ChangePassword($newPassword: String!) { changePassword(newPassword: $newPassword) }",
+      "name": "ChangePassword",
+      "type": "mutation"
+    },
+    {
+      "id": "27128844f5d3a268385034e021e12a75870215fac5d99b8d99b6e953600ee6f0",
+      "body": "mutation RefreshAccessAndRefreshTokens($refreshToken: String!) { refreshAccessAndRefreshTokens(refreshTokenInput: {refreshToken: $refreshToken}) { __typename jwtToken refreshToken userId } }",
+      "name": "RefreshAccessAndRefreshTokens",
+      "type": "mutation"
+    }
+  ]
+}

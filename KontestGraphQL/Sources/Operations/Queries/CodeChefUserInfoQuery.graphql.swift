@@ -6,6 +6,7 @@
 public class CodeChefUserInfoQuery: GraphQLQuery {
   public static let operationName: String = "CodeChefUserInfoQuery"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
+    operationIdentifier: "6f332b429dbb6524ae8f10fc81fa19fc358db2b5b7afaff39f53f9bae060572a",
     definition: .init(
       #"query CodeChefUserInfoQuery($username: String!) { codeChefQuery { __typename user(username: $username) { __typename countryFlag countryName countryRank currentRating globalRank highestRating name profile stars success } } }"#
     ))

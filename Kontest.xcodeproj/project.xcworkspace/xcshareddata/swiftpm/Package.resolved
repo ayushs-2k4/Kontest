@@ -1,5 +1,5 @@
 {
-  "originHash" : "3c81d03b03c08dec4c3afe57bb36cbf5f338c5f97e67821a7998a778156cb34e",
+  "originHash" : "38192baa77767eaed5a52af51bfe5e77ab6a91f71fc4fccc1b9376efacaf7d73",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apollographql/apollo-ios.git",
       "state" : {
-        "revision" : "f94d367fcc94a4249c7f4eb4111fbf9d010e3a97",
-        "version" : "1.4.0"
+        "revision" : "fdb97fe7016edc10dd217e530864dd3eee0f114b",
+        "version" : "1.7.0"
       }
     },
     {
@@ -83,15 +83,6 @@
       }
     },
     {
-      "identity" : "inflectorkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/mattt/InflectorKit",
-      "state" : {
-        "revision" : "d8cbcc04972690aaa5fc760a2b9ddb3e9f0decd7",
-        "version" : "1.0.0"
-      }
-    },
-    {
       "identity" : "interop-ios-for-google-sdks",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/interop-ios-for-google-sdks.git",
@@ -132,26 +123,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/stephencelis/SQLite.swift.git",
       "state" : {
-        "revision" : "7a2e3cd27de56f6d396e84f63beefd0267b55ccb",
-        "version" : "0.14.1"
-      }
-    },
-    {
-      "identity" : "swift-argument-parser",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-argument-parser.git",
-      "state" : {
-        "revision" : "8f4d2753f0e4778c76d5f05ad16c74f707390531",
-        "version" : "1.2.3"
-      }
-    },
-    {
-      "identity" : "swift-collections",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-collections",
-      "state" : {
-        "revision" : "937e904258d22af6e447a0b72c0bc67583ef64a2",
-        "version" : "1.0.4"
+        "revision" : "a95fc6df17d108bd99210db5e8a9bac90fe984b8",
+        "version" : "0.15.3"
       }
     },
     {

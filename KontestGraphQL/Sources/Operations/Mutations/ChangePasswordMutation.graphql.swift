@@ -6,6 +6,7 @@
 public class ChangePasswordMutation: GraphQLMutation {
   public static let operationName: String = "ChangePassword"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
+    operationIdentifier: "a89d24a7d0be0c8777d7b17267d026ee9991e454629ed5b40b25704e35a9a2d5",
     definition: .init(
       #"mutation ChangePassword($newPassword: String!) { changePassword(newPassword: $newPassword) }"#
     ))
