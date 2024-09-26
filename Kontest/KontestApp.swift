@@ -54,10 +54,6 @@ struct KontestApp: App {
                         ContentView(panelSelection: $panelSelection)
                     }
                 }
-                .onAppear(perform: {
-                    print("deviceId: \(KeychainHelper.getUniqueDeviceIdentifier())")
-                    print("deviceId sha512: \(CryptoKitUtility.sha512(for: KeychainHelper.getUniqueDeviceIdentifier()))")
-                })
                 .environment(allKontestsViewModel)
                 .environment(router)
                 .environment(networkMonitor)

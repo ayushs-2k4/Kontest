@@ -195,8 +195,7 @@ actor AuthenticationManager: Sendable {
                         self.logger.info("Password change successful: \(str)")
                         
                         continuation.resume(returning: str)
-                    }
-                    else if let errors = graphQLResult.errors {
+                    } else if let errors = graphQLResult.errors {
                         self.logger.error("Password change failed with errors: \(errors.description)")
                         
                         continuation.resume(throwing: NSError(domain: "GraphQL", code: -1, userInfo: [NSLocalizedDescriptionKey: errors.description]))
@@ -247,7 +246,7 @@ actor AuthenticationManager: Sendable {
                     AuthenticationManager.isAuthenticated = true
                 } else {
                     logger.info("JWT token is expired. Attempting to refresh...")
-                    try await refreshToken()
+                    try await TokenManager.shared.refreshToken()
                     
                     AuthenticationManager.isAuthenticated = true
                 }
@@ -264,42 +263,7 @@ actor AuthenticationManager: Sendable {
         
         return AuthenticationManager.isAuthenticated
     }
-    
-    // Function to refresh JWT token
-    private func refreshToken() async throws {
-        logger.info("Refreshing JWT token...")
-        let refreshToken = TokenManager.shared.getRefreshTokenLocally()
         
-        guard let refreshToken = refreshToken else {
-            throw AppError(title: "Refresh Token Missing", description: "No refresh token found in Keychain")
-        }
-        
-        let url = URL(string: Constants.Endpoints.authenticationURL)!.appendingPathComponent("auth/refresh")
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let body: [String: Any] = ["refreshToken": refreshToken]
-        request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
-        
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        guard let httpResponse = response as? HTTPURLResponse else {
-            logger.error("Failed to get HTTP response during refresh token request.")
-            throw URLError(.badServerResponse)
-        }
-        
-        guard httpResponse.statusCode == 200 else {
-            throw handleError(for: httpResponse.statusCode)
-        }
-        
-        let decoder = JSONDecoder()
-        let authResponse = try decoder.decode(LoginResponse.self, from: data)
-        
-        TokenManager.shared.storeTokens(jwtToken: authResponse.jwtToken, refreshToken: authResponse.refreshToken)
-        logger.info("Token refreshed successfully.")
-    }
-    
     public func getJWTToken() async -> String? {
         logger.info("Fetching JWT token...")
         guard let token = await TokenManager.shared.getJWTTokenLocally() else {
@@ -313,7 +277,7 @@ actor AuthenticationManager: Sendable {
         } else {
             logger.info("JWT token is expired. Attempting to refresh...")
             do {
-                try await refreshToken()
+                try await TokenManager.shared.refreshToken()
                 return await TokenManager.shared.getJWTTokenLocally()
             } catch {
                 logger.error("Failed to refresh token: \(error.localizedDescription)")
@@ -404,7 +368,8 @@ final class TokenManager: Sendable {
         return token
     }
     
-    private func refreshToken() async throws {
+    // Function to refresh JWT token
+    func refreshToken() async throws {
         // Retrieve the refresh token from Keychain
         logger.info("Attempting to retrieve refresh token from Keychain...")
         guard let refreshToken = getRefreshTokenLocally() else {
@@ -413,37 +378,37 @@ final class TokenManager: Sendable {
         }
         logger.info("Refresh token retrieved successfully.")
         
-        // Construct the URL for refreshing the token
-        let url = URL(string: Constants.Endpoints.authenticationURL)!.appendingPathComponent("auth/refresh")
-        logger.info("Constructed URL for refreshing token: \(url)")
+        logger.info("Refresh token from Keychain: \(refreshToken)")
         
-        // Create the URL request
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let apolloClient = await ApolloFactory.getInstance(url: URL(string: Constants.Endpoints.graphqlURL)!).apollo
         
-        // Prepare the request body
-        let body: [String: Any] = ["refreshToken": refreshToken]
-        request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
-        logger.info("Request body prepared for token refresh: \(body)")
-        
-        // Perform the network request
-        logger.info("Performing network request to refresh token...")
-        let (data, response) = try await URLSession.shared.data(for: request)
-        logger.info("Network request completed.")
-        
-        // Ensure the response is successful
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-            logger.error("Failed to refresh token. HTTP response status code: \(String(describing: (response as? HTTPURLResponse)?.statusCode))")
-            throw URLError(.badServerResponse)
+        let authResponse: LoginResponse = try await withCheckedThrowingContinuation { continuation in
+            let refreshAccessAndRefreshTokensMutation = RefreshAccessAndRefreshTokensMutation(refreshToken: refreshToken)
+            
+            apolloClient.perform(mutation: refreshAccessAndRefreshTokensMutation) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    if let refreshAndAccessTokens = graphQLResult.data?.refreshAccessAndRefreshTokens {
+                        self.logger.info("Successfully refreshed JWT and Refresh Tokens")
+                        
+                        continuation.resume(returning: LoginResponse(email: refreshAndAccessTokens.userId, jwtToken: refreshAndAccessTokens.jwtToken, refreshToken: refreshAndAccessTokens.refreshToken))
+                    } else if let errors = graphQLResult.errors {
+                        self.logger.error("Refreshing Tokens failed with errors: \(errors.description)")
+                        
+                        continuation.resume(throwing: NSError(domain: "GraphQL", code: -1, userInfo: [NSLocalizedDescriptionKey: errors.description]))
+                    } else {
+                        continuation.resume(throwing: AppError(title: "Refreshing Tokens Failed.", description: "Refreshing Tokens Failed."))
+                    }
+                    
+                case .failure(let error):
+                    print("Network error: \(error)")
+                    // Resume with a network error
+                    continuation.resume(throwing: error)
+                }
+            }
         }
-        logger.info("Token refresh successful. HTTP response status code: \(httpResponse.statusCode)")
         
-        // Decode the new tokens
-        logger.info("Decoding new tokens from response...")
-        let decoder = JSONDecoder()
-        let authResponse = try decoder.decode(LoginResponse.self, from: data)
-        logger.info("New tokens decoded successfully.")
+        logger.info("JWT token: \(authResponse.jwtToken), refresh Token: \(authResponse.refreshToken)")
         
         // Update Keychain with new tokens
         logger.info("Storing new JWT and refresh tokens in Keychain.")

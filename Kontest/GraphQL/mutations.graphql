@@ -13,3 +13,11 @@ mutation Register($email: String!, $password: String!) {
 mutation ChangePassword($newPassword: String!) {
     changePassword(newPassword: $newPassword)
 }
+
+mutation RefreshAccessAndRefreshTokens($refreshToken: String!) {
+    refreshAccessAndRefreshTokens(refreshTokenInput: { refreshToken: $refreshToken }) {
+        jwtToken
+        refreshToken
+        userId
+    }
+}

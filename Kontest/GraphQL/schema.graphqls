@@ -238,7 +238,7 @@ type Mutation {
   login(loginUserInput: LoginUserInput!): LoginResponse!
   makeAdmin(userID: String!): String!
   makeNormal(userID: String!): String!
-  refresh(refreshTokenInput: RefreshTokenInput!): LoginResponse!
+  refreshAccessAndRefreshTokens(refreshTokenInput: RefreshTokenInput!): LoginResponse!
   register(registerUserInput: RegisterUserInput!): String!
   purge: String
 }
