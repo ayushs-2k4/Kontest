@@ -246,7 +246,7 @@ actor AuthenticationManager: Sendable {
                     AuthenticationManager.isAuthenticated = true
                 } else {
                     logger.info("JWT token is expired. Attempting to refresh...")
-                    try await TokenManager.shared.refreshTokenIfNeeded()
+                    try await TokenManager.shared.refreshTokenSafely()
                     
                     AuthenticationManager.isAuthenticated = true
                 }
@@ -277,7 +277,7 @@ actor AuthenticationManager: Sendable {
         } else {
             logger.info("JWT token is expired. Attempting to refresh...")
             do {
-                try await TokenManager.shared.refreshTokenIfNeeded()
+                try await TokenManager.shared.refreshTokenSafely()
                 return await TokenManager.shared.getJWTTokenLocally()
             } catch {
                 logger.error("Failed to refresh token: \(error.localizedDescription)")
@@ -331,7 +331,7 @@ actor TokenManager: Sendable {
             return true
         } else {
             // Refresh token if needed
-            try await refreshTokenIfNeeded()
+            try await refreshTokenSafely()
             return true
         }
     }
@@ -371,7 +371,7 @@ actor TokenManager: Sendable {
     }
     
     // Refresh JWT token, but only allow one refresh at a time
-    func refreshTokenIfNeeded() async throws {
+    func refreshTokenSafely() async throws {
         // If a refresh is already in progress, wait for its result
         if let refreshTask = currentRefreshTask {
             logger.info("Waiting for ongoing token refresh to complete.")
