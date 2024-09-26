@@ -125,7 +125,7 @@ actor AuthenticationManager: Sendable {
         }
         
         // Use TokenManager to store tokens
-        TokenManager.shared.storeTokens(jwtToken: loginResponse.jwtToken, refreshToken: loginResponse.refreshToken)
+        await TokenManager.shared.storeTokens(jwtToken: loginResponse.jwtToken, refreshToken: loginResponse.refreshToken)
         
         logger.info("Sign-in successful for email: \(email)")
         
@@ -215,7 +215,7 @@ actor AuthenticationManager: Sendable {
     }
     
     func signOut() async throws {
-        TokenManager.shared.clearTokens()
+        await TokenManager.shared.clearTokens()
         
         AuthenticationManager.isAuthenticated = false
         
@@ -240,7 +240,7 @@ actor AuthenticationManager: Sendable {
         logger.info("Checking authentication status...")
         do {
             if let jwtToken = await TokenManager.shared.getJWTTokenLocally() {
-                if TokenManager.shared.isJWTTokenValidLocally(jwtToken: jwtToken) {
+                if await TokenManager.shared.isJWTTokenValidLocally(jwtToken: jwtToken) {
                     logger.info("JWT token is valid.")
                     
                     AuthenticationManager.isAuthenticated = true
@@ -271,7 +271,7 @@ actor AuthenticationManager: Sendable {
             return nil
         }
         
-        if TokenManager.shared.isJWTTokenValidLocally(jwtToken: token) {
+        if await TokenManager.shared.isJWTTokenValidLocally(jwtToken: token) {
             logger.info("JWT token is valid.")
             return token
         } else {
@@ -293,7 +293,7 @@ actor AuthenticationManager: Sendable {
             return nil
         }
         
-        if TokenManager.shared.isJWTTokenValidLocally(jwtToken: jwtToken) {
+        if await TokenManager.shared.isJWTTokenValidLocally(jwtToken: jwtToken) {
             let jwtInfo = JWTUtil.decodeJWT(jwtToken)
             guard let email = jwtInfo?["sub"] as? String else {
                 logger.error("Failed to get email from JWT token.")
@@ -301,7 +301,7 @@ actor AuthenticationManager: Sendable {
             }
             
             logger.info("Authenticated user email: \(email)")
-            return LoginResponse(email: email, jwtToken: jwtToken, refreshToken: TokenManager.shared.getRefreshTokenLocally() ?? "")
+            return await LoginResponse(email: email, jwtToken: jwtToken, refreshToken: TokenManager.shared.getRefreshTokenLocally() ?? "")
         } else {
             logger.info("JWT token is expired.")
             return nil
@@ -309,7 +309,7 @@ actor AuthenticationManager: Sendable {
     }
 }
 
-final class TokenManager: Sendable {
+actor TokenManager: Sendable {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "TokenManager")
     
     private let jwtTokenKey = "jwtToken"
@@ -378,8 +378,6 @@ final class TokenManager: Sendable {
         }
         logger.info("Refresh token retrieved successfully.")
         
-        logger.info("Refresh token from Keychain: \(refreshToken)")
-        
         let apolloClient = await ApolloFactory.getInstance(url: URL(string: Constants.Endpoints.graphqlURL)!).apollo
         
         let authResponse: LoginResponse = try await withCheckedThrowingContinuation { continuation in
@@ -407,8 +405,6 @@ final class TokenManager: Sendable {
                 }
             }
         }
-        
-        logger.info("JWT token: \(authResponse.jwtToken), refresh Token: \(authResponse.refreshToken)")
         
         // Update Keychain with new tokens
         logger.info("Storing new JWT and refresh tokens in Keychain.")
