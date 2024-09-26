@@ -22,6 +22,14 @@ struct AccountInformationScreen: View {
     var body: some View {
         VStack {
             VStack {
+                if let email = accountInformationViewModel.user?.email {
+                    Text("Email")
+                    
+                    Spacer()
+                    
+                    Text(email)
+                }
+                
                 HStack {
                     Text("Name")
                     

@@ -11,7 +11,7 @@ import Foundation
 import Foundation
 import OSLog
 
-public struct LoginResponse: Decodable {
+public struct LoginResponse: Decodable, Sendable {
     let email: String
     let jwtToken: String
     let refreshToken: String
@@ -20,9 +20,7 @@ public struct LoginResponse: Decodable {
         case email = "username"
         case jwtToken
         case refreshToken
-    }
-    
-    public static let shared = LoginResponse(email: "", jwtToken: "", refreshToken: "")
+    }    
 }
 
 struct SignupResponse: Decodable {
@@ -43,7 +41,7 @@ struct NetworkError: Error {
     let code: Int
 }
 
-public final class AuthenticationManager: Sendable {
+actor AuthenticationManager: Sendable {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "AuthenticationManager")
     
     static let shared = AuthenticationManager()

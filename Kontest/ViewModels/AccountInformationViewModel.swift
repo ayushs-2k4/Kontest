@@ -35,7 +35,7 @@ class AccountInformationViewModel {
                 self.isLoading = true
                 
                 do {
-                    let authDataResult = try await AuthenticationManager.shared.getAuthenticatedUser()
+                    let authDataResult = await AuthenticationManager.shared.getAuthenticatedUser()
                     
                     self.user = try await UserManager.shared.getUser()
                     
