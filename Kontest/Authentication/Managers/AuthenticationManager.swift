@@ -8,7 +8,9 @@
 import FirebaseAuth
 import Foundation
 
+import ApolloAPI
 import Foundation
+import KontestGraphQL
 import OSLog
 
 public struct LoginResponse: Decodable, Sendable {
@@ -20,7 +22,7 @@ public struct LoginResponse: Decodable, Sendable {
         case email = "username"
         case jwtToken
         case refreshToken
-    }    
+    }
 }
 
 struct SignupResponse: Decodable {
@@ -46,7 +48,7 @@ actor AuthenticationManager: Sendable {
     
     static let shared = AuthenticationManager()
     
-    static private(set) var isAuthenticated: Bool = false
+    private(set) static var isAuthenticated: Bool = false
     
     private init() {
         Task {
@@ -88,34 +90,37 @@ actor AuthenticationManager: Sendable {
     func signIn(email: String, password: String) async throws -> LoginResponse {
         let email = email.lowercased()
         
-        logger.info("Attempting sign-in for email: \(email)")
-        let url = URL(string: Constants.Endpoints.authenticationURL)!.appendingPathComponent("auth/login")
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let apolloClient = await ApolloFactory.getInstance(url: URL(string: Constants.Endpoints.graphqlURL)!).apollo
         
-        let body: [String: Any] = [
-            "email": email,
-            "password": password,
-            "device_id": CryptoKitUtility.sha512(for: KeychainHelper.getUniqueDeviceIdentifier())
-        ]
-        
-        request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
-        
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        guard let httpResponse = response as? HTTPURLResponse else {
-            logger.error("Failed to get HTTP response during sign-in.")
-            throw URLError(.badServerResponse)
+        let loginResponse: LoginResponse = try await withCheckedThrowingContinuation { continuation in
+            let loginMutation = LoginMutation(email: email, password: password, deviceId: CryptoKitUtility.sha512(for: KeychainHelper.getUniqueDeviceIdentifier()))
+
+            apolloClient.perform(mutation: loginMutation) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    if let loginData = graphQLResult.data?.login {
+                        let jwtToken = loginData.jwtToken
+                        let refreshToken = loginData.refreshToken
+                        let userId = loginData.userId
+                        
+                        print("Login succeeded, token: \(jwtToken)")
+                        
+                        let response = LoginResponse(email: email, jwtToken: jwtToken, refreshToken: refreshToken)
+                        continuation.resume(returning: response)
+                            
+                    } else if let errors = graphQLResult.errors {
+                        continuation.resume(throwing: NSError(domain: "GraphQL", code: -1, userInfo: [NSLocalizedDescriptionKey: errors.description]))
+                    } else {
+                        continuation.resume(throwing: AppError(title: "No data and errors", description: "No data and errors"))
+                    }
+                    
+                case .failure(let error):
+                    print("Network error: \(error)")
+                    // Resume with a network error
+                    continuation.resume(throwing: error)
+                }
+            }
         }
-        
-        guard httpResponse.statusCode == 200 else {
-            logger.error("Sign-in failed with status code: \(httpResponse.statusCode)")
-            throw handleError(for: httpResponse.statusCode)
-        }
-        
-        let decoder = JSONDecoder()
-        let loginResponse = try decoder.decode(LoginResponse.self, from: data)
         
         // Use TokenManager to store tokens
         TokenManager.shared.storeTokens(jwtToken: loginResponse.jwtToken, refreshToken: loginResponse.refreshToken)
@@ -123,7 +128,7 @@ actor AuthenticationManager: Sendable {
         logger.info("Sign-in successful for email: \(email)")
         
         AuthenticationManager.isAuthenticated = true
-        
+
         return loginResponse
     }
     

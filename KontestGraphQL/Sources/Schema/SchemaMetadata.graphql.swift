@@ -44,6 +44,8 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "CodeForcesQuery": return KontestGraphQL.Objects.CodeForcesQuery
     case "CodeForcesUser": return KontestGraphQL.Objects.CodeForcesUser
     case "CodeForcesUserRating": return KontestGraphQL.Objects.CodeForcesUserRating
+    case "Mutation": return KontestGraphQL.Objects.Mutation
+    case "LoginResponse": return KontestGraphQL.Objects.LoginResponse
     default: return nil
     }
   }

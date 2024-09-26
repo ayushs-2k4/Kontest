@@ -17,43 +17,60 @@ final class DownloadDataWithApollo: Sendable {
     private init() {}
 }
 
+// A class to manage Apollo client instances with custom headers
 final class DownloadDataWithApollo2: Sendable {
     let apollo: ApolloClient
-    
+
     // Initialize with the ApolloClient
     init(apollo: ApolloClient) {
         self.apollo = apollo
     }
+
+    // Create an instance with custom headers
+    static func createWithCustomHeaders(url: URL, customHeaders: [String: String]) -> DownloadDataWithApollo2 {
+        let store = ApolloStore()
+
+        // Create a custom RequestChainNetworkTransport to add headers to each request
+        let networkTransport = RequestChainNetworkTransport(interceptorProvider: DefaultInterceptorProvider(store: store),
+                                                            endpointURL: url,
+                                                            additionalHeaders: customHeaders)
+
+        let apolloClient = ApolloClient(networkTransport: networkTransport, store: store)
+        return DownloadDataWithApollo2(apollo: apolloClient)
+    }
 }
 
-// Define an actor to manage concurrency for cache
+// Actor to manage cache of DownloadDataWithApollo2 instances
 actor DownloadDataWithApollo2Cache {
     private var instanceCache: [URL: DownloadDataWithApollo2] = [:]
-    
+
+    // Get an instance if available in cache
     func getInstance(for url: URL) -> DownloadDataWithApollo2? {
         return instanceCache[url]
     }
-    
-    func createInstance(for url: URL) -> DownloadDataWithApollo2 {
-        let newInstance = DownloadDataWithApollo2(apollo: ApolloClient(url: url))
+
+    // Create a new instance and add to cache
+    func createInstance(for url: URL, customHeaders: [String: String]) -> DownloadDataWithApollo2 {
+        let newInstance = DownloadDataWithApollo2.createWithCustomHeaders(url: url, customHeaders: customHeaders)
         instanceCache[url] = newInstance
         return newInstance
     }
 }
 
-final class ApolloFactory {
-    // Define a static actor instance to manage cache
+// Factory to manage Apollo instances
+enum ApolloFactory {
     private static let cache = DownloadDataWithApollo2Cache()
-    
+
     // Static method to get or create an instance asynchronously
-    static func getInstance(url: URL) async -> DownloadDataWithApollo2 {
+    static func getInstance(url: URL, customHeaders: [String: String] = [:]) async -> DownloadDataWithApollo2 {
+        // Check if the instance is already in the cache
         if let cachedInstance = await cache.getInstance(for: url) {
             return cachedInstance
         } else {
-            return await cache.createInstance(for: url)
+            // Create a new instance if not in cache
+            return await cache.createInstance(for: url, customHeaders: customHeaders)
         }
     }
-    
 }
 
 func downloadDataWithAsyncAwait(url: URL) async throws -> Data {
