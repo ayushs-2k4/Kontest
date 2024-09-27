@@ -338,6 +338,7 @@ query User {
         codeforcesUsername
         firstName
         lastName
+        email
         leetcodeUsername
         selectedCollege
         selectedCollegeState

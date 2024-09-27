@@ -81,8 +81,8 @@
       "type": "query"
     },
     {
-      "id": "8b3ed07fb178412f6d147622acf8be7d8640ca24f1ed0bfc6bc0e106ae5776d6",
-      "body": "query User { user { __typename codechefUsername codeforcesUsername firstName lastName leetcodeUsername selectedCollege selectedCollegeState } }",
+      "id": "f3974fde4ddf505be1fbe6018f31b80a57b4cd99d79390498efec7b93fcd6a80",
+      "body": "query User { user { __typename codechefUsername codeforcesUsername firstName lastName email leetcodeUsername selectedCollege selectedCollegeState } }",
       "name": "User",
       "type": "query"
     },

@@ -6,7 +6,7 @@
 public class UserQuery: GraphQLQuery {
   public static let operationName: String = "User"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
-    operationIdentifier: "8b3ed07fb178412f6d147622acf8be7d8640ca24f1ed0bfc6bc0e106ae5776d6"
+    operationIdentifier: "f3974fde4ddf505be1fbe6018f31b80a57b4cd99d79390498efec7b93fcd6a80"
   )
 
   public init() {}
@@ -36,6 +36,7 @@ public class UserQuery: GraphQLQuery {
         .field("codeforcesUsername", String?.self),
         .field("firstName", String.self),
         .field("lastName", String.self),
+        .field("email", String?.self),
         .field("leetcodeUsername", String?.self),
         .field("selectedCollege", String?.self),
         .field("selectedCollegeState", String?.self),
@@ -45,6 +46,7 @@ public class UserQuery: GraphQLQuery {
       public var codeforcesUsername: String? { __data["codeforcesUsername"] }
       public var firstName: String { __data["firstName"] }
       public var lastName: String { __data["lastName"] }
+      public var email: String? { __data["email"] }
       public var leetcodeUsername: String? { __data["leetcodeUsername"] }
       public var selectedCollege: String? { __data["selectedCollege"] }
       public var selectedCollegeState: String? { __data["selectedCollegeState"] }

@@ -14,24 +14,24 @@ import KontestGraphQL
 import OSLog
 
 public struct LoginResponse: Decodable, Sendable {
-    let email: String
+    let userId: String
     let jwtToken: String
     let refreshToken: String
     
     enum CodingKeys: String, CodingKey {
-        case email = "username"
+        case userId = "username"
         case jwtToken
         case refreshToken
     }
 }
 
 struct SignupResponse: Decodable {
-    let email: String
+    let userId: String
     let jwtToken: String
     let refreshToken: String
     
     enum CodingKeys: String, CodingKey {
-        case email = "username"
+        case userId = "username"
         case jwtToken
         case refreshToken
     }
@@ -107,7 +107,7 @@ actor AuthenticationManager: Sendable {
                         
                         print("Login succeeded, token: \(jwtToken)")
                         
-                        let response = LoginResponse(email: email, jwtToken: jwtToken, refreshToken: refreshToken)
+                        let response = LoginResponse(userId: email, jwtToken: jwtToken, refreshToken: refreshToken)
                         continuation.resume(returning: response)
                             
                     } else if let errors = graphQLResult.errors {
@@ -171,7 +171,7 @@ actor AuthenticationManager: Sendable {
         let loginResponse = try await signIn(email: email, password: password)
         
         logger.info("User registration successful for email: \(email)")
-        return SignupResponse(email: loginResponse.email, jwtToken: loginResponse.jwtToken, refreshToken: loginResponse.refreshToken)
+        return SignupResponse(userId: loginResponse.userId, jwtToken: loginResponse.jwtToken, refreshToken: loginResponse.refreshToken)
     }
     
     func changePassword(newPassword: String) async throws {
@@ -301,7 +301,7 @@ actor AuthenticationManager: Sendable {
             }
             
             logger.info("Authenticated user email: \(email)")
-            return await LoginResponse(email: email, jwtToken: jwtToken, refreshToken: TokenManager.shared.getRefreshTokenLocally() ?? "")
+            return await LoginResponse(userId: email, jwtToken: jwtToken, refreshToken: TokenManager.shared.getRefreshTokenLocally() ?? "")
         } else {
             logger.info("JWT token is expired.")
             return nil
@@ -409,7 +409,7 @@ actor TokenManager: Sendable {
                     if let refreshAndAccessTokens = graphQLResult.data?.refreshAccessAndRefreshTokens {
                         self.logger.info("Successfully refreshed JWT and Refresh Tokens")
                         
-                        continuation.resume(returning: LoginResponse(email: refreshAndAccessTokens.userId, jwtToken: refreshAndAccessTokens.jwtToken, refreshToken: refreshAndAccessTokens.refreshToken))
+                        continuation.resume(returning: LoginResponse(userId: refreshAndAccessTokens.userId, jwtToken: refreshAndAccessTokens.jwtToken, refreshToken: refreshAndAccessTokens.refreshToken))
                     } else if let errors = graphQLResult.errors {
                         self.logger.error("Refreshing Tokens failed with errors: \(errors.description)")
                         

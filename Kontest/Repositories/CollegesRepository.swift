@@ -186,7 +186,7 @@ final class CollegesRepository: Sendable {
 
             do {
                 for newUser in newUsers {
-                    try Firestore.firestore().collection("users").document(newUser.email).setData(from: newUser) { error in
+                    try Firestore.firestore().collection("users").document(newUser.email!).setData(from: newUser) { error in
                         if let error {
                             self.logger.log("\(error)")
                         }

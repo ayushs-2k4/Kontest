@@ -88,7 +88,7 @@ actor UserManager {
                         let dbUser = DBUser(
                             firstName: user.firstName,
                             lastName: user.lastName,
-                            email: authenticatedUser.email,
+                            email: user.email,
                             selectedCollegeState: user.selectedCollegeState ?? "",
                             selectedCollege: user.selectedCollege ?? "",
                             leetcodeUsername: user.leetcodeUsername ?? "",
@@ -119,10 +119,21 @@ actor UserManager {
 }
 
 struct DBUser: Codable {
-    let firstName, lastName, email, selectedCollegeState, selectedCollege, leetcodeUsername, codeForcesUsername, codeChefUsername: String
+    let firstName, lastName, selectedCollegeState, selectedCollege, leetcodeUsername, codeForcesUsername, codeChefUsername: String
     let dateCreated: Date
+    let email: String?
     
-    init(firstName: String, lastName: String, email: String, selectedCollegeState: String, selectedCollege: String, leetcodeUsername: String, codeForcesUsername: String, codeChefUsername: String, dateCreated: Date) {
+    init(
+        firstName: String,
+        lastName: String,
+        email: String?,
+        selectedCollegeState: String,
+        selectedCollege: String,
+        leetcodeUsername: String,
+        codeForcesUsername: String,
+        codeChefUsername: String,
+        dateCreated: Date
+    ) {
         self.firstName = firstName
         self.lastName = lastName
         self.email = email

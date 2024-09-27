@@ -22,14 +22,6 @@ struct AccountInformationScreen: View {
     var body: some View {
         VStack {
             VStack {
-                if let email = accountInformationViewModel.user?.email {
-                    Text("Email")
-                    
-                    Spacer()
-                    
-                    Text(email)
-                }
-                
                 HStack {
                     Text("Name")
                     
@@ -42,6 +34,18 @@ struct AccountInformationScreen: View {
                         isNameChangeSheetPresented = true
                     }
                 })
+                
+                Rectangle()
+                    .frame(height: 1)
+                    .foregroundStyle(.gray.opacity(0.3))
+                
+                HStack {
+                    Text("Email")
+                        
+                    Spacer()
+                        
+                    Text(accountInformationViewModel.user?.email ?? "No Email Set")
+                }
                 
                 Rectangle()
                     .frame(height: 1)

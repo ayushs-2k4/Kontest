@@ -9,7 +9,7 @@ import Foundation
 import OSLog
 
 @Observable
-class AccountInformationViewModel {
+final class AccountInformationViewModel: Sendable {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "AccountInformationViewModel")
     
     private init() {

@@ -50,7 +50,7 @@ final class AuthenticationEmailViewModel: Sendable {
             logger.log("Success in logging in with email - password")
             logger.log("returnedUserData: \("\(returnedUserData)")")
 
-            let uid = returnedUserData.email
+            let uid = returnedUserData.userId
 
             try await setDownloadedUsernamesAsLocalUsernames(userId: uid)
 

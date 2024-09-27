@@ -308,6 +308,7 @@ type TopicTag {
 type User {
   codechefUsername: String
   codeforcesUsername: String
+  email: String
   firstName: String!
   lastName: String!
   leetcodeUsername: String
