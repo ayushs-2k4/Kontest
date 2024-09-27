@@ -3,6 +3,12 @@
   "version": 1,
   "operations": [
     {
+      "id": "dae7d9b90b7c6b5ee8d5ff3497ff530bffdaa7fe8cbb12299c48a7aa771cc339",
+      "body": "query Kontests($page: Int!, $perPage: Int!, $sites: [String!]) { kontestQuery { __typename kontests(page: $page, perPage: $perPage, sites: $sites) { __typename kontests { __typename endTime location name startTime url } } } }",
+      "name": "Kontests",
+      "type": "query"
+    },
+    {
       "id": "1ea44845d7b6ba3ab4b34012ba7a0b22c19df69ad40b4681f8e1da98d147f4c4",
       "body": "query questionOfToday { activeDailyCodingChallengeQuestion { __typename date userStatus link question { __typename acRate difficulty freqBar questionFrontendId isFavor isPaidOnly status title titleSlug hasVideoSolution hasSolution topicTags { __typename name id slug } } } }",
       "name": "questionOfToday",
@@ -75,14 +81,14 @@
       "type": "query"
     },
     {
-      "id": "e8cc36a2a6aefb4c34327e2fa15e7ea924733d8af08cc622a40e16994b977910",
-      "body": "mutation Login($email: String!, $password: String!, $deviceId: String!) { login(loginUserInput: {email: $email, password: $password, deviceId: $deviceId}) { __typename jwtToken refreshToken userId } }",
+      "id": "8ffdf6e664c5597d8aee6ce08a0b23b83181922b6086a3b46dab39b736f13530",
+      "body": "mutation Login($email: String!, $password: String!, $deviceId: String!) { login( loginUserInput: { email: $email, password: $password, deviceId: $deviceId } ) { __typename jwtToken refreshToken userId } }",
       "name": "Login",
       "type": "mutation"
     },
     {
-      "id": "b26424187f3f6f01cc1105b146406b40d17d9bf3542a8414b950306262e8fc6f",
-      "body": "mutation Register($email: String!, $password: String!) { register(registerUserInput: {email: $email, password: $password}) }",
+      "id": "595434ef2e52cea664427436985a1a6882f52e0d7674845ac8facf243366c4b1",
+      "body": "mutation Register($email: String!, $password: String!) { register(registerUserInput: { email: $email, password: $password }) }",
       "name": "Register",
       "type": "mutation"
     },
@@ -93,8 +99,8 @@
       "type": "mutation"
     },
     {
-      "id": "27128844f5d3a268385034e021e12a75870215fac5d99b8d99b6e953600ee6f0",
-      "body": "mutation RefreshAccessAndRefreshTokens($refreshToken: String!) { refreshAccessAndRefreshTokens(refreshTokenInput: {refreshToken: $refreshToken}) { __typename jwtToken refreshToken userId } }",
+      "id": "269acccc265186e8153d05dbbcc187c50163109243503cc1297db971f5afba1b",
+      "body": "mutation RefreshAccessAndRefreshTokens($refreshToken: String!) { refreshAccessAndRefreshTokens( refreshTokenInput: { refreshToken: $refreshToken } ) { __typename jwtToken refreshToken userId } }",
       "name": "RefreshAccessAndRefreshTokens",
       "type": "mutation"
     }

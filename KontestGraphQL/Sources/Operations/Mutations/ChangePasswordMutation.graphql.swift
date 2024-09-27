@@ -21,7 +21,7 @@ public class ChangePasswordMutation: GraphQLMutation {
     public let __data: DataDict
     public init(_dataDict: DataDict) { __data = _dataDict }
 
-    public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.Mutation }
+    public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.Mutation }
     public static var __selections: [ApolloAPI.Selection] { [
       .field("changePassword", String.self, arguments: ["newPassword": .variable("newPassword")]),
     ] }

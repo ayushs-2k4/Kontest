@@ -21,7 +21,7 @@ public class LeetcodeUserContestRankingInfoQuery: GraphQLQuery {
     public let __data: DataDict
     public init(_dataDict: DataDict) { __data = _dataDict }
 
-    public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.Query }
+    public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.Query }
     public static var __selections: [ApolloAPI.Selection] { [
       .field("leetcodeQuery", LeetcodeQuery?.self),
     ] }
@@ -35,7 +35,7 @@ public class LeetcodeUserContestRankingInfoQuery: GraphQLQuery {
       public let __data: DataDict
       public init(_dataDict: DataDict) { __data = _dataDict }
 
-      public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.LeetcodeQuery }
+      public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.LeetcodeQuery }
       public static var __selections: [ApolloAPI.Selection] { [
         .field("__typename", String.self),
         .field("userContestRanking", UserContestRanking?.self, arguments: ["username": .variable("username")]),
@@ -52,7 +52,7 @@ public class LeetcodeUserContestRankingInfoQuery: GraphQLQuery {
         public let __data: DataDict
         public init(_dataDict: DataDict) { __data = _dataDict }
 
-        public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.UserContestRanking }
+        public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.UserContestRanking }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
           .field("attendedContestsCount", Int?.self),
@@ -77,7 +77,7 @@ public class LeetcodeUserContestRankingInfoQuery: GraphQLQuery {
           public let __data: DataDict
           public init(_dataDict: DataDict) { __data = _dataDict }
 
-          public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.Badge }
+          public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.Badge }
           public static var __selections: [ApolloAPI.Selection] { [
             .field("__typename", String.self),
             .field("name", String?.self),
@@ -94,7 +94,7 @@ public class LeetcodeUserContestRankingInfoQuery: GraphQLQuery {
         public let __data: DataDict
         public init(_dataDict: DataDict) { __data = _dataDict }
 
-        public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.UserContestRankingHistory }
+        public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.UserContestRankingHistory }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
           .field("attended", Bool?.self),
@@ -123,7 +123,7 @@ public class LeetcodeUserContestRankingInfoQuery: GraphQLQuery {
           public let __data: DataDict
           public init(_dataDict: DataDict) { __data = _dataDict }
 
-          public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.Contest }
+          public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.Contest }
           public static var __selections: [ApolloAPI.Selection] { [
             .field("__typename", String.self),
             .field("title", String?.self),

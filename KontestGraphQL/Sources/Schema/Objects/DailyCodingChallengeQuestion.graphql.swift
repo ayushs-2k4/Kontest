@@ -4,7 +4,7 @@
 import ApolloAPI
 
 public extension Objects {
-  static let DailyCodingChallengeQuestion = Object(
+  static let DailyCodingChallengeQuestion = ApolloAPI.Object(
     typename: "DailyCodingChallengeQuestion",
     implementedInterfaces: []
   )

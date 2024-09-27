@@ -178,12 +178,16 @@ type HeatMapEntry {
   value: Int!
 }
 
+type Kontests {
+    kontests: [Kontest!]
+}
+
 type Kontest {
-  endTime: String
-  location: String
-  name: String
-  startTime: String
-  url: String
+    name: String!
+    url: String!
+    startTime: String!
+    endTime: String!
+    location: String!
 }
 
 type KontestQuery {
@@ -192,9 +196,6 @@ type KontestQuery {
   supportedSites: [String]
 }
 
-type Kontests {
-  kontests: [Kontest]
-}
 
 type LanguageProblemCount {
   languageName: String

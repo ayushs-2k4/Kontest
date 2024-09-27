@@ -3,8 +3,6 @@
 
 import ApolloAPI
 
-public typealias ID = String
-
 public protocol SelectionSet: ApolloAPI.SelectionSet & ApolloAPI.RootSelectionSet
 where Schema == KontestGraphQL.SchemaMetadata {}
 
@@ -18,11 +16,14 @@ public protocol MutableInlineFragment: ApolloAPI.MutableSelectionSet & ApolloAPI
 where Schema == KontestGraphQL.SchemaMetadata {}
 
 public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
-  public static let configuration: ApolloAPI.SchemaConfiguration.Type = SchemaConfiguration.self
+  public static let configuration: any ApolloAPI.SchemaConfiguration.Type = SchemaConfiguration.self
 
-  public static func objectType(forTypename typename: String) -> Object? {
+  public static func objectType(forTypename typename: String) -> ApolloAPI.Object? {
     switch typename {
     case "Query": return KontestGraphQL.Objects.Query
+    case "KontestQuery": return KontestGraphQL.Objects.KontestQuery
+    case "Kontests": return KontestGraphQL.Objects.Kontests
+    case "Kontest": return KontestGraphQL.Objects.Kontest
     case "DailyCodingChallengeQuestion": return KontestGraphQL.Objects.DailyCodingChallengeQuestion
     case "Question": return KontestGraphQL.Objects.Question
     case "TopicTag": return KontestGraphQL.Objects.TopicTag

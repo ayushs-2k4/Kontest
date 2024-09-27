@@ -1,3 +1,18 @@
+query Kontests($page: Int!, $perPage: Int!, $sites: [String!]) {
+    kontestQuery {
+        kontests(page: $page, perPage: $perPage, sites: $sites) {
+            kontests {
+                endTime
+                location
+                name
+                startTime
+                url
+            }
+        }
+    }
+}
+
+
 query questionOfToday {
     activeDailyCodingChallengeQuestion {
     date
@@ -266,8 +281,6 @@ query CodeChefUserInfoQuery($username: String!) {
         }
     }
 }
-
-
 
 query CodeChefUserKontestHistoryQuery($username: String!) {
     codeChefQuery {

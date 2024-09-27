@@ -6,7 +6,7 @@
 public class RefreshAccessAndRefreshTokensMutation: GraphQLMutation {
   public static let operationName: String = "RefreshAccessAndRefreshTokens"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
-    operationIdentifier: "27128844f5d3a268385034e021e12a75870215fac5d99b8d99b6e953600ee6f0"
+    operationIdentifier: "269acccc265186e8153d05dbbcc187c50163109243503cc1297db971f5afba1b"
   )
 
   public var refreshToken: String
@@ -21,7 +21,7 @@ public class RefreshAccessAndRefreshTokensMutation: GraphQLMutation {
     public let __data: DataDict
     public init(_dataDict: DataDict) { __data = _dataDict }
 
-    public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.Mutation }
+    public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.Mutation }
     public static var __selections: [ApolloAPI.Selection] { [
       .field("refreshAccessAndRefreshTokens", RefreshAccessAndRefreshTokens.self, arguments: ["refreshTokenInput": ["refreshToken": .variable("refreshToken")]]),
     ] }
@@ -35,7 +35,7 @@ public class RefreshAccessAndRefreshTokensMutation: GraphQLMutation {
       public let __data: DataDict
       public init(_dataDict: DataDict) { __data = _dataDict }
 
-      public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.LoginResponse }
+      public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.LoginResponse }
       public static var __selections: [ApolloAPI.Selection] { [
         .field("__typename", String.self),
         .field("jwtToken", String.self),

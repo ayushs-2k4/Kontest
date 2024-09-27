@@ -6,7 +6,7 @@
 public class LoginMutation: GraphQLMutation {
   public static let operationName: String = "Login"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
-    operationIdentifier: "e8cc36a2a6aefb4c34327e2fa15e7ea924733d8af08cc622a40e16994b977910"
+    operationIdentifier: "8ffdf6e664c5597d8aee6ce08a0b23b83181922b6086a3b46dab39b736f13530"
   )
 
   public var email: String
@@ -33,7 +33,7 @@ public class LoginMutation: GraphQLMutation {
     public let __data: DataDict
     public init(_dataDict: DataDict) { __data = _dataDict }
 
-    public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.Mutation }
+    public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.Mutation }
     public static var __selections: [ApolloAPI.Selection] { [
       .field("login", Login.self, arguments: ["loginUserInput": [
         "email": .variable("email"),
@@ -51,7 +51,7 @@ public class LoginMutation: GraphQLMutation {
       public let __data: DataDict
       public init(_dataDict: DataDict) { __data = _dataDict }
 
-      public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.LoginResponse }
+      public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.LoginResponse }
       public static var __selections: [ApolloAPI.Selection] { [
         .field("__typename", String.self),
         .field("jwtToken", String.self),

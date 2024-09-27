@@ -5,7 +5,7 @@ import ApolloAPI
 
 public extension Objects {
   ///  The main query type for fetching user data from CodeChef and CodeForces
-  static let Query = Object(
+  static let Query = ApolloAPI.Object(
     typename: "Query",
     implementedInterfaces: []
   )

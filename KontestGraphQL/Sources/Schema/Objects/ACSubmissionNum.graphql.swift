@@ -4,7 +4,7 @@
 import ApolloAPI
 
 public extension Objects {
-  static let ACSubmissionNum = Object(
+  static let ACSubmissionNum = ApolloAPI.Object(
     typename: "ACSubmissionNum",
     implementedInterfaces: []
   )

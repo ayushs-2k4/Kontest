@@ -5,7 +5,7 @@ import ApolloAPI
 
 public extension Objects {
   ///  Type for CodeForces queries
-  static let CodeForcesQuery = Object(
+  static let CodeForcesQuery = ApolloAPI.Object(
     typename: "CodeForcesQuery",
     implementedInterfaces: []
   )

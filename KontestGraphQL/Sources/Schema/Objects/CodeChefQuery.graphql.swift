@@ -5,7 +5,7 @@ import ApolloAPI
 
 public extension Objects {
   ///  Type for CodeChef queries
-  static let CodeChefQuery = Object(
+  static let CodeChefQuery = ApolloAPI.Object(
     typename: "CodeChefQuery",
     implementedInterfaces: []
   )

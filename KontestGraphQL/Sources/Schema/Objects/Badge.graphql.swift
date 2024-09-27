@@ -4,7 +4,7 @@
 import ApolloAPI
 
 public extension Objects {
-  static let Badge = Object(
+  static let Badge = ApolloAPI.Object(
     typename: "Badge",
     implementedInterfaces: []
   )

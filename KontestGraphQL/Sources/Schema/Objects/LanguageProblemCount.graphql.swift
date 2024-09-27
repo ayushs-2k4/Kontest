@@ -4,7 +4,7 @@
 import ApolloAPI
 
 public extension Objects {
-  static let LanguageProblemCount = Object(
+  static let LanguageProblemCount = ApolloAPI.Object(
     typename: "LanguageProblemCount",
     implementedInterfaces: []
   )

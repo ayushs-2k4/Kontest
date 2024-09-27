@@ -21,7 +21,7 @@ public class CodeChefUserKontestHistoryQuery: GraphQLQuery {
     public let __data: DataDict
     public init(_dataDict: DataDict) { __data = _dataDict }
 
-    public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.Query }
+    public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.Query }
     public static var __selections: [ApolloAPI.Selection] { [
       .field("codeChefQuery", CodeChefQuery?.self),
     ] }
@@ -36,7 +36,7 @@ public class CodeChefUserKontestHistoryQuery: GraphQLQuery {
       public let __data: DataDict
       public init(_dataDict: DataDict) { __data = _dataDict }
 
-      public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.CodeChefQuery }
+      public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.CodeChefQuery }
       public static var __selections: [ApolloAPI.Selection] { [
         .field("__typename", String.self),
         .field("userKontestHistory", [UserKontestHistory?]?.self, arguments: ["username": .variable("username")]),
@@ -52,7 +52,7 @@ public class CodeChefUserKontestHistoryQuery: GraphQLQuery {
         public let __data: DataDict
         public init(_dataDict: DataDict) { __data = _dataDict }
 
-        public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.CodeChefContest }
+        public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.CodeChefContest }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
           .field("code", String.self),

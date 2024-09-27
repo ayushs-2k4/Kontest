@@ -4,7 +4,7 @@
 import ApolloAPI
 
 public extension Objects {
-  static let TopicTag = Object(
+  static let TopicTag = ApolloAPI.Object(
     typename: "TopicTag",
     implementedInterfaces: []
   )

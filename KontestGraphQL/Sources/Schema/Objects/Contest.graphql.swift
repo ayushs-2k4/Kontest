@@ -4,7 +4,7 @@
 import ApolloAPI
 
 public extension Objects {
-  static let Contest = Object(
+  static let Contest = ApolloAPI.Object(
     typename: "Contest",
     implementedInterfaces: []
   )

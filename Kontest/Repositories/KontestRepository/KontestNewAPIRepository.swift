@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KontestGraphQL
 import OSLog
 
 private struct APIType: Codable {
@@ -24,61 +25,47 @@ final class KontestNewAPIRepository: Fetcher, KontestFetcher {
     private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "KontestNewAPIRepository")
     
     func getAllKontests() async throws -> [KontestDTO] {
+        // Define the query
+        let query = KontestsQuery(page: 1, perPage: 1000, sites: [])
         
-        do {
-            let mainUrl = URL(string: Constants.Endpoints.kontestsURL)!
-            
-            let version = "v1"
-            let page = 1
-            let perPage = 10000
-            
-            let endpointURL = mainUrl
-                .appendingPathComponent("api")
-                .appendingPathComponent(version)
-                .appendingPathComponent("get_kontests")
-                .appending(queryItems: [
-                    .init(name: "page", value: String(page)),
-                    .init(name: "per_page", value: String(perPage))
-                ])
-            
-            // Download data from the URL
-            let data = try await downloadDataWithAsyncAwait(url: endpointURL)
-            
-            // Decode the data
-            let kontests = try decodeKontests(from: data)
-            
-            return kontests
-            
-        } catch {
-            logger.error("Error fetching document or data: \(error)")
-            throw error
-        }
-    }
-    
-    private func decodeKontests(from data: Data) throws -> [KontestDTO] {
-        // Create a JSONDecoder instance
-        let decoder = JSONDecoder()
+        // Create an ApolloClient instance
+        let apolloClient = await ApolloFactory.getInstance(url: URL(string: Constants.Endpoints.graphqlURL)!).apollo
         
-        // Decode the raw JSON data into an array of dictionaries
-        let rawKontests = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] ?? []
-        
-        // Map "location" to "site" and convert the dictionary to Data
-        let modifiedKontests = rawKontests.map { dict -> [String: Any] in
-            var mutableDict = dict
-            if let location = mutableDict["location"] {
-                mutableDict["site"] = location
-                mutableDict.removeValue(forKey: "location")
+        let kontestDTOs: [KontestDTO] = try await withCheckedThrowingContinuation { continuation in
+            apolloClient.fetch(query: query) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    if let kontests = graphQLResult.data?.kontestQuery?.kontests?.kontests {
+                        let kontestDTOs: [KontestDTO] = kontests.map { kontest in
+                            KontestDTO(
+                                name: kontest.name,
+                                url: kontest.url,
+                                startTime: kontest.startTime,
+                                endTime: kontest.endTime,
+                                duration: "",
+                                site: kontest.location,
+                                in_24_hours: "",
+                                status: ""
+                            )
+                        }
+                        
+                        continuation.resume(returning: kontestDTOs)
+                    }
+                    else if let errors = graphQLResult.errors {
+                        self.logger.error("Kontests fetching failed with errors: \(errors.description)")
+                        
+                        continuation.resume(throwing: NSError(domain: "GraphQL", code: -1, userInfo: [NSLocalizedDescriptionKey: errors.description]))
+                    }
+                    else {
+                        continuation.resume(throwing: AppError(title: "Data not found", description: "Data not found in KontestsQuery"))
+                    }
+                    
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
             }
-            return mutableDict
         }
         
-        // Convert the modified dictionaries to Data
-        let modifiedData = try JSONSerialization.data(withJSONObject: modifiedKontests, options: [])
-        
-        // Decode the modified Data into an array of KontestDTO
-        let kontests = try decoder.decode([KontestDTO].self, from: modifiedData)
-        
-        return kontests
+        return kontestDTOs
     }
 }
-

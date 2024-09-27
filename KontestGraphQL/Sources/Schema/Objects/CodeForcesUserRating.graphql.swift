@@ -5,7 +5,7 @@ import ApolloAPI
 
 public extension Objects {
   ///  Object representing a CodeForces user rating update
-  static let CodeForcesUserRating = Object(
+  static let CodeForcesUserRating = ApolloAPI.Object(
     typename: "CodeForcesUserRating",
     implementedInterfaces: []
   )

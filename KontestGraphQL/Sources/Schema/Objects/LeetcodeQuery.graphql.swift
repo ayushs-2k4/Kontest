@@ -4,7 +4,7 @@
 import ApolloAPI
 
 public extension Objects {
-  static let LeetcodeQuery = Object(
+  static let LeetcodeQuery = ApolloAPI.Object(
     typename: "LeetcodeQuery",
     implementedInterfaces: []
   )

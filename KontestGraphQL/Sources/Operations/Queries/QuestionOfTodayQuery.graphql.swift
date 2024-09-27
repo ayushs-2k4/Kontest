@@ -15,7 +15,7 @@ public class QuestionOfTodayQuery: GraphQLQuery {
     public let __data: DataDict
     public init(_dataDict: DataDict) { __data = _dataDict }
 
-    public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.Query }
+    public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.Query }
     public static var __selections: [ApolloAPI.Selection] { [
       .field("activeDailyCodingChallengeQuestion", ActiveDailyCodingChallengeQuestion?.self),
     ] }
@@ -29,7 +29,7 @@ public class QuestionOfTodayQuery: GraphQLQuery {
       public let __data: DataDict
       public init(_dataDict: DataDict) { __data = _dataDict }
 
-      public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.DailyCodingChallengeQuestion }
+      public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.DailyCodingChallengeQuestion }
       public static var __selections: [ApolloAPI.Selection] { [
         .field("__typename", String.self),
         .field("date", String?.self),
@@ -50,7 +50,7 @@ public class QuestionOfTodayQuery: GraphQLQuery {
         public let __data: DataDict
         public init(_dataDict: DataDict) { __data = _dataDict }
 
-        public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.Question }
+        public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.Question }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
           .field("acRate", Double?.self),
@@ -87,7 +87,7 @@ public class QuestionOfTodayQuery: GraphQLQuery {
           public let __data: DataDict
           public init(_dataDict: DataDict) { __data = _dataDict }
 
-          public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.TopicTag }
+          public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.TopicTag }
           public static var __selections: [ApolloAPI.Selection] { [
             .field("__typename", String.self),
             .field("name", String?.self),

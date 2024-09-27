@@ -5,7 +5,7 @@ import ApolloAPI
 
 public extension Objects {
   ///  Object representing a CodeChef user's information
-  static let CodeChefUser = Object(
+  static let CodeChefUser = ApolloAPI.Object(
     typename: "CodeChefUser",
     implementedInterfaces: []
   )

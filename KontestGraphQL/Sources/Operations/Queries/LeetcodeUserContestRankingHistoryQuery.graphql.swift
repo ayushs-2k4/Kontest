@@ -21,7 +21,7 @@ public class LeetcodeUserContestRankingHistoryQuery: GraphQLQuery {
     public let __data: DataDict
     public init(_dataDict: DataDict) { __data = _dataDict }
 
-    public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.Query }
+    public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.Query }
     public static var __selections: [ApolloAPI.Selection] { [
       .field("leetcodeQuery", LeetcodeQuery?.self),
     ] }
@@ -35,7 +35,7 @@ public class LeetcodeUserContestRankingHistoryQuery: GraphQLQuery {
       public let __data: DataDict
       public init(_dataDict: DataDict) { __data = _dataDict }
 
-      public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.LeetcodeQuery }
+      public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.LeetcodeQuery }
       public static var __selections: [ApolloAPI.Selection] { [
         .field("__typename", String.self),
         .field("userContestRankingHistory", [UserContestRankingHistory?]?.self, arguments: ["username": .variable("username")]),
@@ -50,7 +50,7 @@ public class LeetcodeUserContestRankingHistoryQuery: GraphQLQuery {
         public let __data: DataDict
         public init(_dataDict: DataDict) { __data = _dataDict }
 
-        public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.UserContestRankingHistory }
+        public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.UserContestRankingHistory }
         public static var __selections: [ApolloAPI.Selection] { [
           .field("__typename", String.self),
           .field("attended", Bool?.self),
@@ -79,7 +79,7 @@ public class LeetcodeUserContestRankingHistoryQuery: GraphQLQuery {
           public let __data: DataDict
           public init(_dataDict: DataDict) { __data = _dataDict }
 
-          public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.Contest }
+          public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.Contest }
           public static var __selections: [ApolloAPI.Selection] { [
             .field("__typename", String.self),
             .field("startTime", String?.self),

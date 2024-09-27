@@ -6,7 +6,7 @@
 public class RegisterMutation: GraphQLMutation {
   public static let operationName: String = "Register"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
-    operationIdentifier: "b26424187f3f6f01cc1105b146406b40d17d9bf3542a8414b950306262e8fc6f"
+    operationIdentifier: "595434ef2e52cea664427436985a1a6882f52e0d7674845ac8facf243366c4b1"
   )
 
   public var email: String
@@ -29,7 +29,7 @@ public class RegisterMutation: GraphQLMutation {
     public let __data: DataDict
     public init(_dataDict: DataDict) { __data = _dataDict }
 
-    public static var __parentType: ApolloAPI.ParentType { KontestGraphQL.Objects.Mutation }
+    public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.Mutation }
     public static var __selections: [ApolloAPI.Selection] { [
       .field("register", String.self, arguments: ["registerUserInput": [
         "email": .variable("email"),

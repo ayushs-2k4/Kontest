@@ -4,7 +4,7 @@
 import ApolloAPI
 
 public extension Objects {
-  static let MatchedUser = Object(
+  static let MatchedUser = ApolloAPI.Object(
     typename: "MatchedUser",
     implementedInterfaces: []
   )
