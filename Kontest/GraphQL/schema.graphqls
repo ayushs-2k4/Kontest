@@ -236,6 +236,7 @@ type MatchedUser {
 type Mutation {
   changePassword(newPassword: String!): String!
   deleteUser(userId: String!): String!
+  updateUser(updateUserInput: UserInput!): String
   login(loginUserInput: LoginUserInput!): LoginResponse!
   makeAdmin(userID: String!): String!
   makeNormal(userID: String!): String!
@@ -253,6 +254,7 @@ type ProblemSolvedBeatsStats {
 """
 type Query {
   kontestQuery: KontestQuery
+  user: User
 
   """ Query to fetch CodeChef user data by username"""
   codeChefQuery: CodeChefQuery
@@ -303,6 +305,16 @@ type TopicTag {
   slug: String
 }
 
+type User {
+  codechefUsername: String
+  codeforcesUsername: String
+  firstName: String!
+  lastName: String!
+  leetcodeUsername: String
+  selectedCollege: String
+  selectedCollegeState: String
+}
+
 type UserContestRanking {
   attendedContestsCount: Int
   badge: Badge
@@ -321,6 +333,16 @@ type UserContestRankingHistory {
   rating: Float
   totalProblems: Int
   trendDirection: String
+}
+
+input UserInput {
+  codechefUsername: String
+  codeforcesUsername: String
+  firstName: String
+  lastName: String
+  leetcodeUsername: String
+  selectedCollege: String
+  selectedCollegeState: String
 }
 
 type UserProfile {
@@ -343,3 +365,4 @@ type UserProfile {
   userAvatar: String
   websites: [String]
 }
+

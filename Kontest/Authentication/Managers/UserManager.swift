@@ -6,8 +6,12 @@
 //
 
 import Foundation
+import KontestGraphQL
+import OSLog
 
 actor UserManager {
+    private let logger = Logger(subsystem: "com.ayushsinghal.Kontest", category: "UserManager")
+    
     static var shared = UserManager()
     
     private init() {}
@@ -83,49 +87,45 @@ actor UserManager {
             throw AppError(title: "Authenticated user is missing", description: "Authenticated user is missing")
         }
         
-        let url = URL(string: Constants.Endpoints.userServiceURL)!.appending(components: "user", "all-details")
+        let apolloClient = await ApolloFactory.getInstance(url: URL(string: Constants.Endpoints.graphqlURL)!, customHeaders: ["Authorization": "Bearer \(jwtToken)"]).apollo
         
-        // Create the URL request
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
-        
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-            throw URLError(.badServerResponse)
-        }
-        
-        let decodedData = try JSONSerialization.jsonObject(with: data) as! [String: Any]
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS" // For microseconds
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX") // Use POSIX locale for fixed date format
-        dateFormatter.timeZone = TimeZone(abbreviation: "IST")
-        
-        // Ensure that the createdAt string is parsed correctly into a Date object
-        if let dateCreatedString = decodedData["createdAt"] as? String {
-            print("dateCreatedString: \(dateCreatedString)")
+        let user: DBUser = try await withCheckedThrowingContinuation { continuation in
+            let userQuery = UserQuery()
             
-            if let dateCreated = dateFormatter.date(from: dateCreatedString) {
-                // Create the DBUser object
-                return DBUser(
-                    firstName: decodedData["firstName"] as! String,
-                    lastName: decodedData["lastName"] as! String,
-                    email: authenticatedUser.email,
-                    selectedCollegeState: decodedData["selectedCollegeState"] as! String,
-                    selectedCollege: decodedData["selectedCollege"] as! String,
-                    leetcodeUsername: decodedData["leetcodeUsername"] as! String,
-                    codeForcesUsername: decodedData["codeforcesUsername"] as! String,
-                    codeChefUsername: decodedData["codechefUsername"] as! String,
-                    dateCreated: dateCreated // Use the parsed date here
-                )
-            } else {
-                throw AppError(title: "Date Parsing Error", description: "Unable to parse the createdAt field.")
+            apolloClient.fetch(query: userQuery) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    if let user = graphQLResult.data?.user {
+                        let dbUser = DBUser(
+                            firstName: user.firstName,
+                            lastName: user.lastName,
+                            email: authenticatedUser.email,
+                            selectedCollegeState: user.selectedCollegeState ?? "",
+                            selectedCollege: user.selectedCollege ?? "",
+                            leetcodeUsername: user.leetcodeUsername ?? "",
+                            codeForcesUsername: user.codeforcesUsername ?? "",
+                            codeChefUsername: user.codechefUsername ?? "",
+                            dateCreated: .now
+                        )
+                        
+                        continuation.resume(returning: dbUser)
+                    } else if let errors = graphQLResult.errors {
+                        self.logger.error("Error in fetching user: \(errors.description)")
+                        
+                        continuation.resume(throwing: NSError(domain: "GraphQL", code: -1, userInfo: [NSLocalizedDescriptionKey: errors.description]))
+                    } else {
+                        continuation.resume(throwing: AppError(title: "Fetching user Failed.", description: "Fetching user Failed."))
+                    }
+                    
+                case .failure(let error):
+                    print("Network error: \(error)")
+                    // Resume with a network error
+                    continuation.resume(throwing: error)
+                }
             }
-        } else {
-            throw AppError(title: "Invalid Data", description: "createdAt field is missing.")
         }
+        
+        return user
     }
 }
 

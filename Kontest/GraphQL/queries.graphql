@@ -331,3 +331,15 @@ query CodeForcesKontestHistoryQuery($username: String!) {
         }
     }
 }
+
+query User {
+    user {
+        codechefUsername
+        codeforcesUsername
+        firstName
+        lastName
+        leetcodeUsername
+        selectedCollege
+        selectedCollegeState
+    }
+}

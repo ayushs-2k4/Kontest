@@ -81,6 +81,12 @@
       "type": "query"
     },
     {
+      "id": "8b3ed07fb178412f6d147622acf8be7d8640ca24f1ed0bfc6bc0e106ae5776d6",
+      "body": "query User { user { __typename codechefUsername codeforcesUsername firstName lastName leetcodeUsername selectedCollege selectedCollegeState } }",
+      "name": "User",
+      "type": "query"
+    },
+    {
       "id": "8ffdf6e664c5597d8aee6ce08a0b23b83181922b6086a3b46dab39b736f13530",
       "body": "mutation Login($email: String!, $password: String!, $deviceId: String!) { login( loginUserInput: { email: $email, password: $password, deviceId: $deviceId } ) { __typename jwtToken refreshToken userId } }",
       "name": "Login",
@@ -102,6 +108,12 @@
       "id": "269acccc265186e8153d05dbbcc187c50163109243503cc1297db971f5afba1b",
       "body": "mutation RefreshAccessAndRefreshTokens($refreshToken: String!) { refreshAccessAndRefreshTokens( refreshTokenInput: { refreshToken: $refreshToken } ) { __typename jwtToken refreshToken userId } }",
       "name": "RefreshAccessAndRefreshTokens",
+      "type": "mutation"
+    },
+    {
+      "id": "b6b709c4f22d551dee2d48a17c012b99c2dd584d919a4361982ac77e2dd27339",
+      "body": "mutation UpdateUser($codechefUsername: String, $firstName: String, $lastName: String, $leetcodeUsername: String, $codeforcesUsername: String, $selectedCollege: String, $selectedCollegeState: String) { updateUser( updateUserInput: { codechefUsername: $codechefUsername firstName: $firstName lastName: $lastName leetcodeUsername: $leetcodeUsername codeforcesUsername: $codeforcesUsername selectedCollege: $selectedCollege selectedCollegeState: $selectedCollegeState } ) }",
+      "name": "UpdateUser",
       "type": "mutation"
     }
   ]

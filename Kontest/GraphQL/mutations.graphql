@@ -21,3 +21,25 @@ mutation RefreshAccessAndRefreshTokens($refreshToken: String!) {
         userId
     }
 }
+
+mutation UpdateUser(
+    $codechefUsername: String,
+    $firstName: String,
+    $lastName: String,
+    $leetcodeUsername: String,
+    $codeforcesUsername: String,
+    $selectedCollege: String,
+    $selectedCollegeState: String
+) {
+    updateUser(
+        updateUserInput: {
+            codechefUsername: $codechefUsername,
+            firstName: $firstName,
+            lastName: $lastName,
+            leetcodeUsername: $leetcodeUsername,
+            codeforcesUsername: $codeforcesUsername,
+            selectedCollege: $selectedCollege,
+            selectedCollegeState: $selectedCollegeState
+        }
+    )
+}
