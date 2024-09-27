@@ -30,54 +30,43 @@ actor UserManager {
             throw AppError(title: "Authentication Error", description: "Unable to retrieve JWT token.")
         }
         
-        // Construct the URL
-        let url = URL(string: Constants.Endpoints.userServiceURL)!.appendingPathComponent("user/all-details")
+        let apolloClient = await ApolloFactory.getInstance(url: URL(string: Constants.Endpoints.graphqlURL)!, customHeaders: ["Authorization": "Bearer \(jwtToken)"]).apollo
         
-        // Create the URL request
-        var request = URLRequest(url: url)
-        request.httpMethod = "PUT" // Assuming you are using PUT method to update user details
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Bearer \(jwtToken)", forHTTPHeaderField: "Authorization")
-        
-        // Prepare the request body
-        var body: [String: Any] = [:]
-        
-        if let firstName = firstName {
-            body["first_name"] = firstName
-        }
-        if let lastName = lastName {
-            body["last_name"] = lastName
-        }
-        if let selectedCollegeState = selectedCollegeState {
-            body["selected_college_state"] = selectedCollegeState
-        }
-        if let selectedCollege = selectedCollege {
-            body["selected_college"] = selectedCollege
-        }
-        if let leetcodeUsername = leetcodeUsername {
-            body["leetcode_username"] = leetcodeUsername
-        }
-        if let codeForcesUsername = codeForcesUsername {
-            body["codeforces_username"] = codeForcesUsername
-        }
-        if let codeChefUsername = codeChefUsername {
-            body["codechef_username"] = codeChefUsername
-        }
-        
-        request.httpBody = try JSONSerialization.data(withJSONObject: body, options: [])
-        
-        // Perform the network request
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        // Ensure the response is successful
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-            throw URLError(.badServerResponse)
+        let result: String = try await withCheckedThrowingContinuation { continuation in
+            let updateUserMutation = UpdateUserMutation(
+                firstName: firstName != nil ? .some(firstName!) : .null,
+                lastName: lastName != nil ? .some(lastName!) : .null,
+                selectedCollegeState: selectedCollegeState != nil ? .some(selectedCollegeState!) : .null,
+                selectedCollege: selectedCollege != nil ? .some(selectedCollege!) : .null,
+                leetcodeUsername: leetcodeUsername != nil ? .some(leetcodeUsername!) : .null,
+                codechefUsername: codeChefUsername != nil ? .some(codeChefUsername!) : .null,
+                codeforcesUsername: codeForcesUsername != nil ? .some(codeForcesUsername!) : .null
+            )
+            
+            apolloClient.perform(mutation: updateUserMutation) { result in
+                switch result {
+                case .success(let graphQLResult):
+                    if let successMessage = graphQLResult.data?.updateUser {
+                        continuation.resume(returning: successMessage)
+                    } else if let errors = graphQLResult.errors {
+                        self.logger.error("Error in updating user: \(errors.description)")
+                       
+                        continuation.resume(throwing: NSError(domain: "GraphQL", code: -1, userInfo: [NSLocalizedDescriptionKey: errors.description]))
+                    } else {
+                        self.logger.error("Error in updating user: No data returned from GraphQL")
+                        
+                        continuation.resume(throwing: AppError(title: "Updating user Failed.", description: "Updating user Failed."))
+                    }
+                    
+                case .failure(let error):
+                    print("Network error: \(error)")
+                    // Resume with a network error
+                    continuation.resume(throwing: error)
+                }
+            }
         }
         
-        // Handle the response if needed
-        // For example, decode the response if there's any data to process
-        let responseData = String(data: data, encoding: .utf8)
-        print("User details updated successfully. Response: \(responseData ?? "No response data")")
+        logger.info("Result of updating user: \(result)")
     }
     
     func getUser() async throws -> DBUser {

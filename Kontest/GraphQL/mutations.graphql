@@ -23,23 +23,23 @@ mutation RefreshAccessAndRefreshTokens($refreshToken: String!) {
 }
 
 mutation UpdateUser(
-    $codechefUsername: String,
     $firstName: String,
     $lastName: String,
-    $leetcodeUsername: String,
-    $codeforcesUsername: String,
-    $selectedCollege: String,
     $selectedCollegeState: String
+    $selectedCollege: String,
+    $leetcodeUsername: String,
+    $codechefUsername: String,
+    $codeforcesUsername: String,
 ) {
     updateUser(
         updateUserInput: {
-            codechefUsername: $codechefUsername,
             firstName: $firstName,
             lastName: $lastName,
-            leetcodeUsername: $leetcodeUsername,
-            codeforcesUsername: $codeforcesUsername,
-            selectedCollege: $selectedCollege,
             selectedCollegeState: $selectedCollegeState
+            selectedCollege: $selectedCollege,
+            leetcodeUsername: $leetcodeUsername,
+            codechefUsername: $codechefUsername,
+            codeforcesUsername: $codeforcesUsername,
         }
     )
 }

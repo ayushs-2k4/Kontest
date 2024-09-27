@@ -6,43 +6,43 @@
 public class UpdateUserMutation: GraphQLMutation {
   public static let operationName: String = "UpdateUser"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
-    operationIdentifier: "b6b709c4f22d551dee2d48a17c012b99c2dd584d919a4361982ac77e2dd27339"
+    operationIdentifier: "fbf3821569285c737ab1b60ec95caec701820c9e2497af49c157e4192551c43d"
   )
 
-  public var codechefUsername: GraphQLNullable<String>
   public var firstName: GraphQLNullable<String>
   public var lastName: GraphQLNullable<String>
-  public var leetcodeUsername: GraphQLNullable<String>
-  public var codeforcesUsername: GraphQLNullable<String>
-  public var selectedCollege: GraphQLNullable<String>
   public var selectedCollegeState: GraphQLNullable<String>
+  public var selectedCollege: GraphQLNullable<String>
+  public var leetcodeUsername: GraphQLNullable<String>
+  public var codechefUsername: GraphQLNullable<String>
+  public var codeforcesUsername: GraphQLNullable<String>
 
   public init(
-    codechefUsername: GraphQLNullable<String>,
     firstName: GraphQLNullable<String>,
     lastName: GraphQLNullable<String>,
-    leetcodeUsername: GraphQLNullable<String>,
-    codeforcesUsername: GraphQLNullable<String>,
+    selectedCollegeState: GraphQLNullable<String>,
     selectedCollege: GraphQLNullable<String>,
-    selectedCollegeState: GraphQLNullable<String>
+    leetcodeUsername: GraphQLNullable<String>,
+    codechefUsername: GraphQLNullable<String>,
+    codeforcesUsername: GraphQLNullable<String>
   ) {
-    self.codechefUsername = codechefUsername
     self.firstName = firstName
     self.lastName = lastName
-    self.leetcodeUsername = leetcodeUsername
-    self.codeforcesUsername = codeforcesUsername
-    self.selectedCollege = selectedCollege
     self.selectedCollegeState = selectedCollegeState
+    self.selectedCollege = selectedCollege
+    self.leetcodeUsername = leetcodeUsername
+    self.codechefUsername = codechefUsername
+    self.codeforcesUsername = codeforcesUsername
   }
 
   public var __variables: Variables? { [
-    "codechefUsername": codechefUsername,
     "firstName": firstName,
     "lastName": lastName,
-    "leetcodeUsername": leetcodeUsername,
-    "codeforcesUsername": codeforcesUsername,
+    "selectedCollegeState": selectedCollegeState,
     "selectedCollege": selectedCollege,
-    "selectedCollegeState": selectedCollegeState
+    "leetcodeUsername": leetcodeUsername,
+    "codechefUsername": codechefUsername,
+    "codeforcesUsername": codeforcesUsername
   ] }
 
   public struct Data: KontestGraphQL.SelectionSet {
@@ -52,13 +52,13 @@ public class UpdateUserMutation: GraphQLMutation {
     public static var __parentType: any ApolloAPI.ParentType { KontestGraphQL.Objects.Mutation }
     public static var __selections: [ApolloAPI.Selection] { [
       .field("updateUser", String?.self, arguments: ["updateUserInput": [
-        "codechefUsername": .variable("codechefUsername"),
         "firstName": .variable("firstName"),
         "lastName": .variable("lastName"),
-        "leetcodeUsername": .variable("leetcodeUsername"),
-        "codeforcesUsername": .variable("codeforcesUsername"),
+        "selectedCollegeState": .variable("selectedCollegeState"),
         "selectedCollege": .variable("selectedCollege"),
-        "selectedCollegeState": .variable("selectedCollegeState")
+        "leetcodeUsername": .variable("leetcodeUsername"),
+        "codechefUsername": .variable("codechefUsername"),
+        "codeforcesUsername": .variable("codeforcesUsername")
       ]]),
     ] }
 

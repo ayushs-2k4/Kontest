@@ -111,8 +111,8 @@
       "type": "mutation"
     },
     {
-      "id": "b6b709c4f22d551dee2d48a17c012b99c2dd584d919a4361982ac77e2dd27339",
-      "body": "mutation UpdateUser($codechefUsername: String, $firstName: String, $lastName: String, $leetcodeUsername: String, $codeforcesUsername: String, $selectedCollege: String, $selectedCollegeState: String) { updateUser( updateUserInput: { codechefUsername: $codechefUsername firstName: $firstName lastName: $lastName leetcodeUsername: $leetcodeUsername codeforcesUsername: $codeforcesUsername selectedCollege: $selectedCollege selectedCollegeState: $selectedCollegeState } ) }",
+      "id": "fbf3821569285c737ab1b60ec95caec701820c9e2497af49c157e4192551c43d",
+      "body": "mutation UpdateUser($firstName: String, $lastName: String, $selectedCollegeState: String, $selectedCollege: String, $leetcodeUsername: String, $codechefUsername: String, $codeforcesUsername: String) { updateUser( updateUserInput: { firstName: $firstName lastName: $lastName selectedCollegeState: $selectedCollegeState selectedCollege: $selectedCollege leetcodeUsername: $leetcodeUsername codechefUsername: $codechefUsername codeforcesUsername: $codeforcesUsername } ) }",
       "name": "UpdateUser",
       "type": "mutation"
     }
