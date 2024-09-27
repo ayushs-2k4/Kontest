@@ -6,10 +6,8 @@
 public class QuestionOfTodayQuery: GraphQLQuery {
   public static let operationName: String = "questionOfToday"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
-    operationIdentifier: "1ea44845d7b6ba3ab4b34012ba7a0b22c19df69ad40b4681f8e1da98d147f4c4",
-    definition: .init(
-      #"query questionOfToday { activeDailyCodingChallengeQuestion { __typename date userStatus link question { __typename acRate difficulty freqBar questionFrontendId isFavor isPaidOnly status title titleSlug hasVideoSolution hasSolution topicTags { __typename name id slug } } } }"#
-    ))
+    operationIdentifier: "1ea44845d7b6ba3ab4b34012ba7a0b22c19df69ad40b4681f8e1da98d147f4c4"
+  )
 
   public init() {}
 

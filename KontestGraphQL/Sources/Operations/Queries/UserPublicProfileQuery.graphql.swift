@@ -6,10 +6,8 @@
 public class UserPublicProfileQuery: GraphQLQuery {
   public static let operationName: String = "userPublicProfile"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
-    operationIdentifier: "88b699da41589e147d6c0646c7aea5ba73f8f9a5d475f010fdb93d548f84f18c",
-    definition: .init(
-      #"query userPublicProfile($username: String!) { matchedUser(username: $username) { __typename languageProblemCount { __typename languageName problemsSolved } contestBadge { __typename name expired hoverText icon } username githubUrl twitterUrl linkedinUrl profile { __typename ranking userAvatar realName aboutMe school websites countryName company jobTitle skillTags postViewCount postViewCountDiff reputation reputationDiff solutionCount solutionCountDiff categoryDiscussCount categoryDiscussCountDiff } problemsSolvedBeatsStats { __typename difficulty percentage } submitStatsGlobal { __typename acSubmissionNum { __typename difficulty count } } } }"#
-    ))
+    operationIdentifier: "88b699da41589e147d6c0646c7aea5ba73f8f9a5d475f010fdb93d548f84f18c"
+  )
 
   public var username: String
 

@@ -6,10 +6,8 @@
 public class LeetcodeMatchedUserQuery: GraphQLQuery {
   public static let operationName: String = "LeetcodeMatchedUserQuery"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
-    operationIdentifier: "69bed7c0c3db77e68b40e07abdba31dca945610caab2907c8fe88a06171991f2",
-    definition: .init(
-      #"query LeetcodeMatchedUserQuery($username: String!) { leetcodeQuery { __typename matchedUser(username: $username) { __typename githubUrl linkedinUrl twitterUrl username contestBadge { __typename expired hoverText icon name } languageProblemCount { __typename languageName problemsSolved } problemsSolvedBeatsStats { __typename difficulty percentage } profile { __typename aboutMe categoryDiscussCount categoryDiscussCountDiff company countryName jobTitle postViewCount postViewCountDiff ranking realName reputation reputationDiff school skillTags solutionCount solutionCountDiff userAvatar websites } submitStatsGlobal { __typename acSubmissionNum { __typename count difficulty } } } } }"#
-    ))
+    operationIdentifier: "69bed7c0c3db77e68b40e07abdba31dca945610caab2907c8fe88a06171991f2"
+  )
 
   public var username: String
 

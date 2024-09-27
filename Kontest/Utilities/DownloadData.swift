@@ -55,7 +55,10 @@ final class DownloadDataWithApollo2: Sendable {
         let networkTransport = RequestChainNetworkTransport(interceptorProvider: interceptorProvider,
                                                             endpointURL: url,
                                                             additionalHeaders: customHeaders,
-                                                            autoPersistQueries: true)
+                                                            autoPersistQueries: true,
+                                                            useGETForQueries: true
+//                                                            useGETForPersistedQueryRetry: true
+        )
 
         let apolloClient = ApolloClient(networkTransport: networkTransport, store: store)
         return DownloadDataWithApollo2(apollo: apolloClient)

@@ -6,10 +6,8 @@
 public class LeetcodeUserContestRankingInfoQuery: GraphQLQuery {
   public static let operationName: String = "LeetcodeUserContestRankingInfo"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
-    operationIdentifier: "012b9755b4e3cb88a79fe687731bba0469bba68ee673bf933fa7a7804975ed29",
-    definition: .init(
-      #"query LeetcodeUserContestRankingInfo($username: String!) { leetcodeQuery { __typename userContestRanking(username: $username) { __typename attendedContestsCount rating globalRanking totalParticipants topPercentage badge { __typename name } } userContestRankingHistory(username: $username) { __typename attended trendDirection problemsSolved totalProblems finishTimeInSeconds rating ranking contest { __typename title startTime } } } }"#
-    ))
+    operationIdentifier: "012b9755b4e3cb88a79fe687731bba0469bba68ee673bf933fa7a7804975ed29"
+  )
 
   public var username: String
 

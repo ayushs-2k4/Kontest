@@ -116,5 +116,165 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6A63F405-8A06-487D-95ED-050491BF5004"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../../Library/Developer/Xcode/DerivedData/Kontest-habbrqnkmnkwwoegqzvkrciteigi/SourcePackages/checkouts/apollo-ios/Sources/Apollo/JSONRequest.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "init(operation:graphQLEndpoint:contextIdentifier:clientName:clientVersion:additionalHeaders:cachePolicy:context:autoPersistQueries:useGETForQueries:useGETForPersistedQueryRetry:requestBodyCreator:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "91B1C1A8-3A51-4C12-A9D8-34675322CD9A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../../Library/Developer/Xcode/DerivedData/Kontest-habbrqnkmnkwwoegqzvkrciteigi/SourcePackages/checkouts/apollo-ios/Sources/Apollo/JSONRequest.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "init(operation:graphQLEndpoint:contextIdentifier:clientName:clientVersion:additionalHeaders:cachePolicy:context:autoPersistQueries:useGETForQueries:useGETForPersistedQueryRetry:requestBodyCreator:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "461BAD52-EBC3-400A-8A1D-D0FE2F0E7648"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../../Library/Developer/Xcode/DerivedData/Kontest-habbrqnkmnkwwoegqzvkrciteigi/SourcePackages/checkouts/apollo-ios/Sources/Apollo/RequestBodyCreator.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "requestBody(for:sendQueryDocument:autoPersistQuery:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FEFDC945-6A49-44B7-87F9-6A1248AB4E82"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../../Library/Developer/Xcode/DerivedData/Kontest-habbrqnkmnkwwoegqzvkrciteigi/SourcePackages/checkouts/apollo-ios/Sources/Apollo/JSONRequest.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "createBody()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A9645A46-AAE0-48B6-ACAE-440BCDFB06D7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../../Library/Developer/Xcode/DerivedData/Kontest-habbrqnkmnkwwoegqzvkrciteigi/SourcePackages/checkouts/apollo-ios/Sources/Apollo/JSONRequest.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "createBody()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E1F91CA0-B9AC-4633-BF3F-CCE23DAFDFF6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../../Library/Developer/Xcode/DerivedData/Kontest-habbrqnkmnkwwoegqzvkrciteigi/SourcePackages/checkouts/apollo-ios/Sources/Apollo/JSONRequest.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "createBody()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D8E4900D-FA15-4711-A6CD-A14D497E30B4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../../Library/Developer/Xcode/DerivedData/Kontest-habbrqnkmnkwwoegqzvkrciteigi/SourcePackages/checkouts/apollo-ios/Sources/Apollo/JSONRequest.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "createBody()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B4E2D404-E3E1-48CF-98F2-9F99C1341C6C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../../Library/Developer/Xcode/DerivedData/Kontest-habbrqnkmnkwwoegqzvkrciteigi/SourcePackages/checkouts/apollo-ios/Sources/Apollo/JSONRequest.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "createBody()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A61E38B6-9DA3-4689-A418-2339B55879BE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../../Library/Developer/Xcode/DerivedData/Kontest-habbrqnkmnkwwoegqzvkrciteigi/SourcePackages/checkouts/apollo-ios/Sources/Apollo/RequestChainNetworkTransport.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "constructRequest(for:cachePolicy:contextIdentifier:context:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E3636350-5CE6-4821-9F99-EDAC0173F29B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../../Library/Developer/Xcode/DerivedData/Kontest-habbrqnkmnkwwoegqzvkrciteigi/SourcePackages/checkouts/apollo-ios/Sources/Apollo/RequestChainNetworkTransport.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "init(interceptorProvider:endpointURL:additionalHeaders:autoPersistQueries:requestBodyCreator:useGETForQueries:useGETForPersistedQueryRetry:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

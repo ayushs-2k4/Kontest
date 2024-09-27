@@ -6,10 +6,8 @@
 public class LeetcodeQuestionOfTheDayQuery: GraphQLQuery {
   public static let operationName: String = "LeetcodeQuestionOfTheDayQuery"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
-    operationIdentifier: "3f0337b2f0b6a5683427d79baf159175af4cc4017d3111495146daec96b9491a",
-    definition: .init(
-      #"query LeetcodeQuestionOfTheDayQuery { leetcodeQuery { __typename activeDailyCodingChallengeQuestion { __typename date link userStatus question { __typename acRate difficulty freqBar hasSolution hasVideoSolution isFavor isPaidOnly questionFrontendId status title titleSlug topicTags { __typename id name slug } } } } }"#
-    ))
+    operationIdentifier: "3f0337b2f0b6a5683427d79baf159175af4cc4017d3111495146daec96b9491a"
+  )
 
   public init() {}
 

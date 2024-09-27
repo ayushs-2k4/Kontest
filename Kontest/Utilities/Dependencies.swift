@@ -14,7 +14,7 @@ final class Dependencies: Sendable {
     let allKontestsViewModel: AllKontestsViewModel
     let changeUsernameViewModel: ChangeUsernameViewModel
 
-    let leetCodeRepository: any LeetCodeGraphQLAPIFetcher = MultipleLeetCodeRepostories(repositories: [LeetCodeNewAPIGraphQLRepository(), LeetCodeAPIGraphQLRepository()])
+    let leetCodeRepository: any LeetCodeGraphQLAPIFetcher = MultipleLeetCodeRepostories(repositories: [LeetCodeNewAPIGraphQLRepository()])
     let codeForcesRepository: any CodeForcesFetcher = MultipleCodeForcesRepostories(repositories: [CodeForcesNewAPIRepository(), CodeForcesAPIRepository()])
     let codeChefRepository: any CodeChefFetcher = MultipleCodeChefRepostories(repositories: [CodeChefNewAPIRepository(), CodeChefAPIRepository()])
 

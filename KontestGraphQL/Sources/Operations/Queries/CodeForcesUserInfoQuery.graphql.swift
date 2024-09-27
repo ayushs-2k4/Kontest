@@ -6,10 +6,8 @@
 public class CodeForcesUserInfoQuery: GraphQLQuery {
   public static let operationName: String = "CodeForcesUserInfoQuery"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
-    operationIdentifier: "c0c7994bab83928248dd4378286d20af7443acd5f267d95c6a118218c1a3b033",
-    definition: .init(
-      #"query CodeForcesUserInfoQuery($username: String!) { codeForcesQuery { __typename user(username: $username) { __typename avatar contribution friendOfCount handle lastOnlineTimeSeconds maxRank maxRating rank rating registrationTimeSeconds titlePhoto } } }"#
-    ))
+    operationIdentifier: "c0c7994bab83928248dd4378286d20af7443acd5f267d95c6a118218c1a3b033"
+  )
 
   public var username: String
 

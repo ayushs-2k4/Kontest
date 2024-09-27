@@ -6,10 +6,8 @@
 public class UserContestRankingInfoQuery: GraphQLQuery {
   public static let operationName: String = "userContestRankingInfo"
   public static let operationDocument: ApolloAPI.OperationDocument = .init(
-    operationIdentifier: "2fe35cd0c7a15a71648811916b5cedf6f9835c94adf432a813e510a31750a5d6",
-    definition: .init(
-      #"query userContestRankingInfo($username: String!) { userContestRanking(username: $username) { __typename attendedContestsCount rating globalRanking totalParticipants topPercentage badge { __typename name } } userContestRankingHistory(username: $username) { __typename attended trendDirection problemsSolved totalProblems finishTimeInSeconds rating ranking contest { __typename title startTime } } }"#
-    ))
+    operationIdentifier: "2fe35cd0c7a15a71648811916b5cedf6f9835c94adf432a813e510a31750a5d6"
+  )
 
   public var username: String
 
