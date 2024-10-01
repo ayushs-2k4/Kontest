@@ -81,7 +81,7 @@ actor UserManager {
         let user: DBUser = try await withCheckedThrowingContinuation { continuation in
             let userQuery = UserQuery()
             
-            apolloClient.fetch(query: userQuery) { result in
+            apolloClient.fetch(query: userQuery, cachePolicy: .fetchIgnoringCacheCompletely) { result in
                 switch result {
                 case .success(let graphQLResult):
                     if let user = graphQLResult.data?.user {
