@@ -27,7 +27,7 @@ final class AccountInformationViewModel: Sendable {
     var collegeState: String = ""
     var fullCollegeName: String = ""
     
-    var isLoading: Bool = false
+    private(set) var isLoading: Bool = false
     
     func getAuthenticatedUser() {
         if !self.isLoading {

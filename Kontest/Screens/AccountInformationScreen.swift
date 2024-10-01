@@ -80,8 +80,6 @@ struct AccountInformationScreen: View {
                     accountInformationViewModel.clearAllFields()
                     
                     router.goToRootView()
-                } catch {
-                    logger.log("Error in Signing out: \(error)")
                 }
 
                 Task {

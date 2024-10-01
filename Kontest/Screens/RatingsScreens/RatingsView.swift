@@ -14,7 +14,12 @@ struct RatingsView: View {
     let hoveringScaleValue = 1.04
 
     let bgGradient = RadialGradient(
-        gradient: Gradient(stops: [.init(color: Color(red: 159/255, green: 150/255, blue: 137/255), location: 0.0), .init(color: Color(red: 209/255, green: 204/255, blue: 198/255), location: 0.5)]),
+        gradient: Gradient(
+            stops: [
+                .init(color: Color(red: 159/255, green: 150/255, blue: 137/255), location: 0.0),
+                .init(color: Color(red: 209/255, green: 204/255, blue: 198/255), location: 0.5)
+            ]
+        ),
         center: .center,
         startRadius: 10,
         endRadius: 500

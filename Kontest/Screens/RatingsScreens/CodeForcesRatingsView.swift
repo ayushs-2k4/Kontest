@@ -64,9 +64,6 @@ struct CodeForcesProfileView: View {
                     startRadius: 10,
                     endRadius: 500
                 )
-//                .onAppear{
-//                    withAnimation(<#T##animation: Animation?##Animation?#>, <#T##body: () throws -> Result##() throws -> Result#>)
-//                }
             }
 
             if isLoading && error == nil {
