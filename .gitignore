@@ -130,5 +130,7 @@ iOSInjectionProject/
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
+Breakpoints_v2.xcbkptlist
+Kontest.xcodeproj/project.xcworkspace/xcuserdata/ayushsinghal.xcuserdatad/UserInterfaceState.xcuserstate
 
 # End of https://www.toptal.com/developers/gitignore/api/xcode,macos,swift
